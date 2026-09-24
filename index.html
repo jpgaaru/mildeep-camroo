@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Devi Fisheries Limited — Advanced Dashboard</title>
+
+<!-- External Fonts & Scripts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="css/styles.css?v=2.6">
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader"><div class="page-loader-bar"></div></div>
+
+<!-- ============ AUTH SIGN IN SCREEN ============ -->
+<div id="authScreen" class="auth-wrapper">
+  <!-- Auth Top Navigation -->
+  <div class="auth-header">
+    <div class="auth-brand" onclick="navigate('sales','dashboard')" style="cursor:pointer;">
+      <img src="devi-fisheries.png" alt="Devi Fisheries Logo" style="height:38px;object-fit:contain;" />
+      <div class="brand-text">
+        <h1 style="font-size:16px;font-weight:700;color:#0F172A;margin:0;">Devi Fisheries Limited</h1>
+        <p style="font-size:11px;color:#64748B;margin:0;">Powered by Camaroo</p>
+      </div>
+    </div>
+    <div class="auth-nav-actions">
+      <span class="auth-lang-link">
+        <i data-lucide="globe" style="width:16px;height:16px;"></i> EN
+      </span>
+      <a href="#" class="auth-link" onclick="showToast('info','Sign Up','Registration is open for enterprise accounts');return false;">Sign up</a>
+      <button class="btn btn-primary" style="background:#FACC15;color:#422006;font-weight:700;border:1px solid #EAB308;padding:8px 18px;border-radius:8px;" onclick="showToast('info','Demo','Demo access granted. Please sign in below.')">Request Demo</button>
+    </div>
+  </div>
+
+  <!-- Background Decorative Line Art Vector Graphics (Reference Style) -->
+  <div class="auth-bg-decorations">
+    <!-- Left Decorative Line & Box -->
+    <div class="decor-panel panel-left-box">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="1.5"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+    </div>
+    <div class="decor-line decor-line-1">
+      <svg width="180" height="60" viewBox="0 0 180 60" fill="none" stroke="#CBD5E1" stroke-width="1.5"><path d="M10 40 Q 40 10 90 35 T 170 20"/></svg>
+    </div>
+
+    <!-- Right Decorative Illustration (Person with laptop & yellow accent block) -->
+    <div class="decor-illustration-right">
+      <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="150" y="120" width="55" height="85" rx="4" fill="#FACC15"/>
+        <rect x="50" y="110" width="45" height="65" rx="2" fill="#FFFFFF" stroke="#0F172A" stroke-width="2"/>
+        <rect x="15" y="35" width="60" height="35" rx="4" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
+        <line x1="25" y1="48" x2="60" y2="48" stroke="#0F172A" stroke-width="1.5"/>
+        <line x1="25" y1="56" x2="48" y2="56" stroke="#0F172A" stroke-width="1.5"/>
+        <circle cx="85" cy="45" r="13" fill="#0F172A"/>
+        <path d="M72 65 Q 85 55 98 65 L 105 100 L 65 100 Z" fill="#0F172A"/>
+        <path d="M65 100 L 90 100 L 78 140 L 52 135 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="2"/>
+        <path d="M78 140 L 82 158 L 64 162 Z" fill="#0F172A"/>
+        <path d="M98 82 L 125 82 L 112 65 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Centered Login Card -->
+  <div class="auth-card-container">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2 class="auth-title">Agent Login</h2>
+        <p class="auth-subtitle">Hey, Enter your details to get sign in to your account</p>
+      </div>
+
+      <form id="authLoginForm" onsubmit="handleAuthLogin(event)">
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <input type="text" id="authEmail" class="auth-input" placeholder="Enter Email / Phone No" value="admin@devifisheries.com" required />
+            <span class="auth-input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#94A3B8;"></i></span>
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <input type="password" id="authPasscode" class="auth-input" placeholder="Passcode" value="passcode123" required />
+            <button type="button" class="auth-toggle-pwd" id="authTogglePwd" onclick="toggleAuthPasscode()">Hide</button>
+          </div>
+        </div>
+
+        <div class="auth-links-row">
+          <a href="#" class="auth-forgot-link" onclick="showToast('info','Trouble Signing In','Contact IT support at support@devifisheries.com');return false;">Having trouble in sign in?</a>
+        </div>
+
+        <button type="submit" class="auth-submit-btn">Sign in</button>
+
+        <div class="auth-divider">
+          <span>Or Sign in with</span>
+        </div>
+
+        <div class="auth-sso-grid">
+          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Google')">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+            <span>Google</span>
+          </button>
+          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Apple ID')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#0F172A"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.87c.68-.82 1.13-1.96.99-3.11-1 .04-2.18.67-2.88 1.49-.6.7-1.13 1.84-.99 2.97 1.11.09 2.22-.53 2.88-1.35z"/></svg>
+            <span>Apple ID</span>
+          </button>
+          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Facebook')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Facebook</span>
+          </button>
+        </div>
+
+        <div class="auth-card-footer">
+          Don't have an account? <a href="#" onclick="showToast('info','Account Request','Please contact admin@devifisheries.com for new account provision');return false;"><strong>Request Now</strong></a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Copyright -->
+  <div class="auth-footer-text">
+    Copyright @Devi Fisheries 2026 &nbsp;|&nbsp; <a href="#" style="color:inherit;text-decoration:underline;" onclick="showToast('info','Privacy Policy','Privacy policy document opened');return false;">Privacy Policy</a>
+  </div>
+</div>
+
+<div class="app-main">
+  <!-- ============ HEADER ============ -->
+  <header class="app-header">
+    <div class="brand" onclick="navigate('sales','dashboard')">
+      <img src="devi-fisheries.png" alt="Devi Fisheries Logo" style="height:36px;object-fit:contain;" />
+      <div class="brand-text">
+        <h1>Devi Fisheries Limited</h1>
+        <p>Powered by Camaroo</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" title="Refresh (R)" onclick="refreshData()"><i data-lucide="refresh-cw" id="refreshIcon"></i></button>
+      <button class="icon-btn" title="Notifications" onclick="openNotifications()">
+        <i data-lucide="bell"></i><span class="badge-count" id="notifCount">3</span>
+      </button>
+      <button class="icon-btn" title="Settings" onclick="navigate('settings','profile')"><i data-lucide="settings"></i></button>
+      <button class="icon-btn" title="Keyboard shortcuts (?)" onclick="openModal('shortcutsModal')"><i data-lucide="keyboard"></i></button>
+      <a href="design-system.html" class="icon-btn" title="Atomic Design System" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;color:inherit;text-decoration:none;"><i data-lucide="layers"></i></a>
+      <button class="icon-btn" title="Fullscreen (F)" onclick="toggleFullscreen()"><i data-lucide="maximize"></i></button>
+      <button class="icon-btn" title="Sign Out" onclick="handleAuthLogout()" style="color:#DC2626;" id="headerLogoutBtn"><i data-lucide="log-out"></i></button>
+      <div class="user-profile" onclick="openCommandPalette()">
+        <div class="avatar">SA</div>
+        <div class="user-info">
+          <div class="name">Super admin</div>
+          <div class="role">Administrator</div>
+        </div>
+        <i data-lucide="chevron-down"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PRIMARY NAV ============ -->
+  <nav class="primary-nav" id="primaryNav">
+    <div class="nav-item active" tabindex="0" role="tab" data-module="sales" onclick="navigateModule('sales')"><i data-lucide="shopping-cart"></i> Sales</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="purchase" onclick="navigateModule('purchase')"><i data-lucide="package"></i> Purchase</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="preprocessing" onclick="navigateModule('preprocessing')"><i data-lucide="settings-2"></i> Preprocessing</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="qc" onclick="navigateModule('qc')"><i data-lucide="shield-check"></i> Quality Control</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="production" onclick="navigateModule('production')"><i data-lucide="factory"></i> Production</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="coldstore" onclick="navigateModule('coldstore')"><i data-lucide="snowflake"></i> Coldstore</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="inventory" onclick="navigateModule('inventory')"><i data-lucide="warehouse"></i> Inventory</div>
+  </nav>
+
+  <!-- ============ SECONDARY NAV ============ -->
+  <nav class="secondary-nav" id="secondaryNav"></nav>
+
+  <!-- ============ TERTIARY NAV (3RD LAYER NAVIGATION) ============ -->
+  <nav class="tertiary-nav-bar" id="tertiaryNav" style="display:none;"></nav>
+
+  <!-- ============ CONTENT ============ -->
+  <div class="content-area" id="contentArea">
+    <div class="breadcrumb">
+      <a href="#" onclick="navigate('sales','dashboard');return false;">Home</a>
+      <span class="separator">/</span>
+      <a href="#" id="crumbModule" onclick="return false;">Sales</a>
+      <span class="separator">/</span>
+      <span class="current" id="crumbSub">Dashboard</span>
+    </div>
+
+    <!-- ===== SALES > DASHBOARD ===== -->
+    <div class="module-page active" id="page-dashboard">
+      <div class="filter-panel-card" style="margin-top: 12px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid #FEF08A; padding-bottom: 8px;">
+          <span style="font-weight: 700; font-size: 13px; color: #422006; text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 8px;">
+            <i data-lucide="sliders-horizontal" style="width:15px;height:15px;color:#CA8A04;"></i> Sales Filter Parameters
+          </span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;">
+          <div class="filter-group" style="flex: 1.5; min-width: 170px;">
+            <label class="filter-label">Exporter:</label>
+            <select class="filter-select"><option>DEVI FISHERIES LIMITED</option></select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 100px;">
+            <label class="filter-label">Consignee:</label>
+            <select class="filter-select"><option>All</option></select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 100px;">
+            <label class="filter-label">Brand:</label>
+            <select class="filter-select"><option>All</option></select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 100px;">
+            <label class="filter-label">Country:</label>
+            <select class="filter-select"><option>All</option></select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 110px;">
+            <label class="filter-label">Year:</label>
+            <select class="filter-select"><option>Select Year</option><option selected>2026-2027</option></select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 110px;">
+            <label class="filter-label">From Date</label>
+            <input type="text" class="filter-input" value="01/04/2026" />
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 110px;">
+            <label class="filter-label">To Date</label>
+            <input type="text" class="filter-input" value="31/03/2027" />
+          </div>
+          <button class="btn-blue-search" style="padding: 10px 24px; height: 38px; margin-bottom: 2px;" onclick="showToast('success','Search','Filter applied')">Search <i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="kpi-grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Pending Contracts</span>
+            <div class="kpi-icon primary"><i data-lucide="layers"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">555</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">On Water</span>
+            <div class="kpi-icon primary"><i data-lucide="briefcase"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">348</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Delivered</span>
+            <div class="kpi-icon primary"><i data-lucide="shopping-bag"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">624</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Orders</span>
+            <div class="kpi-icon primary"><i data-lucide="shopping-bag"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">1527</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Pending Payments</span>
+            <div class="kpi-icon primary"><i data-lucide="shopping-bag"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">358</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Payments Received</span>
+            <div class="kpi-icon primary"><i data-lucide="shopping-bag"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">614</div>
+        </div>
+      </div>
+
+      <div class="charts-grid charts-row-2" style="margin-top: 20px;">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Invoice Vs Shipments</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'invoiceVsShipmentsSales')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('invoiceVsShipmentsSales', 'Invoice_Vs_Shipments')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 280px;"><canvas id="invoiceVsShipmentsSales"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Plant Wise Orders</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'plantWiseOrdersSales')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('plantWiseOrdersSales', 'Plant_Wise_Orders')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 280px;"><canvas id="plantWiseOrdersSales"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid charts-row-2" style="margin-top: 20px;">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Country Wise Details</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'countryWiseSales')">
+                  <option value="ytd" selected>YTD</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('countryWiseSales', 'Country_Wise_Details')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 300px;"><canvas id="countryWiseSales"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Shipped Containers (Port Wise)</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'shippedContainersPortSales')">
+                  <option value="ytd" selected>YTD</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('shippedContainersPortSales', 'Shipped_Containers_Port_Wise')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 300px;"><canvas id="shippedContainersPortSales"></canvas></div>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top: 20px;">
+        <div class="chart-header">
+          <div class="chart-title">To be shipped Qty vs Shipped Qty</div>
+          <div class="chart-actions">
+            <div class="chart-period-wrap">
+              <i data-lucide="calendar" class="period-icon"></i>
+              <select class="chart-period-select" onchange="handlePeriodChange(this, 'toBeShippedVsShippedQtySales')">
+                <option value="monthly" selected>Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+            <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('toBeShippedVsShippedQtySales', 'To_Be_Shipped_Vs_Shipped_Qty')"><i data-lucide="download"></i></button>
+          </div>
+        </div>
+        <div class="chart-body" style="height: 320px;"><canvas id="toBeShippedVsShippedQtySales"></canvas></div>
+      </div>
+
+      <div class="chart-card" style="margin-top: 20px; padding: 20px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 20px;">
+          <div style="font-weight: 700; font-size: 15px; color: #1E293B; margin-right: 12px;">Freight Rates (Sample data)</div>
+          <div class="filter-group" style="min-width: 160px;">
+            <label class="filter-label">Liner</label>
+            <div class="tag-select-container">
+              <span class="tag-pill">× MAERSK LINE</span>
+              <span class="tag-pill">× MSC LINE</span>
+            </div>
+          </div>
+          <div class="filter-group" style="min-width: 140px;">
+            <label class="filter-label">Destination Port</label>
+            <div class="tag-select-container">
+              <span class="tag-pill">× SAVANNAH</span>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">From Date:</label>
+            <input type="text" class="filter-input" value="24/07/2026" style="width: 120px;" />
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">To Date:</label>
+            <input type="text" class="filter-input" value="24/09/2026" style="width: 120px;" />
+          </div>
+          <button class="btn-blue-search" onclick="showToast('info','Freight','Rates updated')">Search <i data-lucide="arrow-right"></i></button>
+          <div class="chart-actions" style="margin-left: auto;">
+            <div class="chart-period-wrap">
+              <i data-lucide="calendar" class="period-icon"></i>
+              <select class="chart-period-select" onchange="handlePeriodChange(this, 'freightRatesSampleSales')">
+                <option value="monthly" selected>Last 30 Days</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+            <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('freightRatesSampleSales', 'Freight_Rates')"><i data-lucide="download"></i></button>
+          </div>
+        </div>
+        <div class="chart-body" style="height: 300px;"><canvas id="freightRatesSampleSales"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > PRODUCT ===== -->
+    <div class="module-page" id="page-products">
+      <!-- 1. PRODUCT LIST SUBPAGE -->
+      <div id="subtab-productlist" class="product-subpage active">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newProductModal')"><i data-lucide="plus"></i> New Product</button>
+        </div>
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:13px;color:#4B5563;">Show</span>
+              <select class="ant-select" style="width:70px;height:32px;" id="productListPerPage" onchange="renderProductListTable(1)">
+                <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+              </select>
+              <span style="font-size:13px;color:#4B5563;">Records</span>
+            </div>
+            <div class="search-box" style="width:240px;background:#fff;border-radius:20px;">
+              <i data-lucide="search"></i>
+              <input type="text" id="productListSearch" placeholder="Search..." oninput="renderProductListTable(1)" />
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>S.No <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Short Name <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Full Name <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                </tr>
+              </thead>
+              <tbody id="productListTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="productListEntriesInfo">Showing 1 to 10 of 24 entries</span>
+            <div id="productListPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. PREPARATION LIST SUBPAGE -->
+      <div id="subtab-preparationlist" class="product-subpage" style="display:none;">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newPreparationModal')"><i data-lucide="plus"></i> New Preparation</button>
+        </div>
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:13px;color:#4B5563;">Show</span>
+              <select class="ant-select" style="width:70px;height:32px;" id="prepListPerPage" onchange="renderPreparationListTable(1)">
+                <option value="10">10</option><option value="25">25</option>
+              </select>
+              <span style="font-size:13px;color:#4B5563;">Records</span>
+            </div>
+            <div class="search-box" style="width:240px;background:#fff;border-radius:20px;">
+              <i data-lucide="search"></i>
+              <input type="text" id="prepListSearch" placeholder="Search..." oninput="renderPreparationListTable(1)" />
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Preparation Name <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Description <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Short Code <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>HS Code <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Qc Preparation Short Code <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="prepListTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="prepListEntriesInfo">Showing 1 to 9 of 9 entries</span>
+            <div id="prepListPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SPECIES SUBPAGE -->
+      <div id="subtab-species" class="product-subpage" style="display:none;">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('addSpeciesModal')"><i data-lucide="plus"></i> Add Species</button>
+        </div>
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div class="search-box" style="width:220px;background:#fff;">
+                <i data-lucide="search"></i>
+                <input type="text" id="speciesSearch" placeholder="Search..." oninput="renderSpeciesTable()" />
+              </div>
+              <button class="btn btn-default btn-sm" onclick="showToast('info','Search','Additional filters applied')"><i data-lucide="search"></i> More Search</button>
+              <button class="btn btn-default btn-sm" onclick="renderSpeciesTable()"><i data-lucide="refresh-cw"></i> Load All</button>
+            </div>
+            <div>
+              <button class="btn btn-default btn-sm" onclick="downloadExcel('species')"><i data-lucide="download"></i> Download Excel</button>
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>SNO</th>
+                  <th>SpeciesName</th>
+                  <th>Short Code</th>
+                  <th>QC Species Short Code</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="speciesTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="speciesEntriesInfo">Showing 1 to 3 out of 3 entries</span>
+            <div id="speciesPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. GRADES LIST SUBPAGE -->
+      <div id="subtab-gradeslist" class="product-subpage" style="display:none;">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newGradeModal')"><i data-lucide="plus"></i> New Grade</button>
+        </div>
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:13px;color:#4B5563;">Show</span>
+              <select class="ant-select" style="width:70px;height:32px;" id="gradesListPerPage" onchange="renderGradesListTable(1)">
+                <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+              </select>
+              <span style="font-size:13px;color:#4B5563;">Records</span>
+            </div>
+            <div class="search-box" style="width:240px;background:#fff;border-radius:20px;">
+              <i data-lucide="search"></i>
+              <input type="text" id="gradesListSearch" placeholder="Search..." oninput="renderGradesListTable(1)" />
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Type <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Name <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Group <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                </tr>
+              </thead>
+              <tbody id="gradesListTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="gradesListEntriesInfo">Showing 1 to 10 of 103 entries</span>
+            <div id="gradesListPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. PACKING STYLE LIST SUBPAGE -->
+      <div id="subtab-packingstylelist" class="product-subpage" style="display:none;">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newPackingStyleModal')"><i data-lucide="plus"></i> New Packing Style</button>
+        </div>
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:13px;color:#4B5563;">Show</span>
+              <select class="ant-select" style="width:70px;height:32px;" id="packingListPerPage" onchange="renderPackingStyleListTable(1)">
+                <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+              </select>
+              <span style="font-size:13px;color:#4B5563;">Records</span>
+            </div>
+            <div class="search-box" style="width:240px;background:#fff;border-radius:20px;">
+              <i data-lucide="search"></i>
+              <input type="text" id="packingListSearch" placeholder="Search..." oninput="renderPackingStyleListTable(1)" />
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Packing Style <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Gross Weight <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Net Weight <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>UOM <i data-lucide="chevrons-up-down" style="width:12px;"></i></th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="packingListTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="packingListEntriesInfo">Showing 1 to 10 of 115 entries</span>
+            <div id="packingListPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. VARIETY LIST SUBPAGE -->
+      <div id="subtab-varietylist" class="product-subpage" style="display:none;">
+        <div class="variety-filter-panel">
+          <div class="variety-filter-grid">
+            <div class="filter-item">
+              <label>SELECT BRAND :</label>
+              <select class="ant-select" id="varietyBrandFilter">
+                <option value="all">All</option><option value="DUMMY">DUMMY</option><option value="DEVI FRESH">DEVI FRESH</option><option value="OCEAN FRESH">OCEAN FRESH</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label>SPECIES :</label>
+              <select class="ant-select" id="varietySpeciesFilter">
+                <option value="all">All</option><option value="VM">Litopenaeus Vannamei</option><option value="BT">Penaeus Monodon</option><option value="ST">Sea Tiger</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label>TYPE PRODUCT :</label>
+              <select class="ant-select" id="varietyTypeFilter">
+                <option value="all">All</option><option value="RAW">RAW</option><option value="COOKED">COOKED</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label>VARIETY :</label>
+              <select class="ant-select" id="varietyNameFilter">
+                <option value="all">All</option><option value="PD">Peeled & Deveined</option><option value="EZPL">EZ Peel</option><option value="HOSO">Head On</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:12px;">
+            <button class="btn btn-primary" style="background:#5B73E8;padding:8px 24px;" onclick="renderVarietyListTable(1)"><i data-lucide="search"></i> Search &rarr;</button>
+            <button class="btn btn-primary" style="background:#5B73E8;padding:8px 24px;" onclick="openModal('newVarietyModal')"><i data-lucide="plus"></i> New Variety</button>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div class="search-box" style="width:220px;background:#fff;">
+                <i data-lucide="search"></i>
+                <input type="text" id="varietySearch" placeholder="Search..." oninput="renderVarietyListTable(1)" />
+              </div>
+              <button class="btn btn-default btn-sm" onclick="showToast('info','Search','More search criteria loaded')"><i data-lucide="search"></i> More Search</button>
+              <button class="btn btn-default btn-sm" onclick="renderVarietyListTable(1)"><i data-lucide="refresh-cw"></i> Load All</button>
+            </div>
+            <div>
+              <button class="btn btn-default btn-sm" onclick="downloadExcel('variety')"><i data-lucide="download"></i> Download Excel</button>
+            </div>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>S.NO</th><th>Short Name</th><th>Full Name</th><th>Grade</th><th>Freezing Type</th><th>Treatment</th><th>Preparation</th><th>Brand Name</th><th>Packing Style</th><th>Product Description</th><th>Type</th><th>Buyer SUPC</th><th>Our SUPC</th>
+                </tr>
+              </thead>
+              <tbody id="varietyTableBody"></tbody>
+            </table>
+          </div>
+          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:13px;color:#4B5563;" id="varietyEntriesInfo">Showing 1 to 10 of 1512 entries</span>
+            <div id="varietyPagination" style="display:flex;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > BUYERS ===== -->
+    <div class="module-page" id="page-buyers">
+      <div class="page-header">
+        <div><h2 class="page-title">Buyers & Customers</h2><p class="page-subtitle">International customer relationships</p></div>
+        <div class="page-actions">
+          <div class="search-box"><i data-lucide="search"></i><input type="text" placeholder="Search buyers..." /></div>
+          <button class="btn btn-primary" onclick="openModal('newBuyerModal')"><i data-lucide="plus"></i> Add Buyer</button>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Buyers</span><div class="kpi-icon primary"><i data-lucide="users"></i></div></div><div class="kpi-value">87</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +14 this year</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Active</span><div class="kpi-icon success"><i data-lucide="activity"></i></div></div><div class="kpi-value">72</div><div class="kpi-trend trend-neutral">83% active rate</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Revenue</span><div class="kpi-icon success"><i data-lucide="dollar-sign"></i></div></div><div class="kpi-value">$8.7M</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +22%</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Avg Order Value</span><div class="kpi-icon info"><i data-lucide="trending-up"></i></div></div><div class="kpi-value">$6,830</div><div class="kpi-trend trend-up">+5.4%</div></div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-header"><div><div class="data-card-title">All Buyers</div><div class="data-card-subtitle">87 customers across 22 countries</div></div></div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Buyer</th><th>Country</th><th>Contact</th><th>Orders</th><th>Revenue</th><th>Credit Limit</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+            <tbody id="buyersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > SALES (analysis) ===== -->
+    <div class="module-page" id="page-sales">
+      <div class="page-header">
+        <div><h2 class="page-title">Sales Analysis</h2><p class="page-subtitle">Revenue performance and customer insights</p></div>
+        <div class="page-actions"><button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button></div>
+      </div>
+      <div class="charts-grid charts-row-equal">
+        <div class="chart-card"><div class="chart-header"><div class="chart-title">Revenue Trend (12 months)</div></div><div class="chart-body tall"><canvas id="revenueTrend"></canvas></div></div>
+        <div class="chart-card"><div class="chart-header"><div class="chart-title">Customer Acquisition</div></div><div class="chart-body tall"><canvas id="customerAcq"></canvas></div></div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-header"><div class="data-card-title">Top Customers by Revenue</div></div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Customer</th><th>Orders</th><th>Revenue</th><th>Share</th><th>Growth</th></tr></thead>
+            <tbody id="topCustomersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > ORDERS ===== -->
+    <div class="module-page" id="page-orders">
+      <div class="page-header">
+        <div><h2 class="page-title">Order Management</h2><p class="page-subtitle">Track orders through their full lifecycle</p></div>
+        <div class="page-actions">
+          <div class="search-box"><i data-lucide="search"></i><input type="text" placeholder="Search orders..." id="orderSearch" oninput="filterOrders()" /></div>
+          <button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button>
+          <button class="btn btn-primary" onclick="openModal('newOrderModal')"><i data-lucide="plus"></i> New Order</button>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchOrdersView('kanban', this)"><i data-lucide="columns"></i> Kanban</div>
+        <div class="tab" onclick="switchOrdersView('table', this)"><i data-lucide="table"></i> Table</div>
+        <div class="tab" onclick="switchOrdersView('calendar', this)"><i data-lucide="calendar"></i> Calendar</div>
+      </div>
+      <div id="ordersKanbanView" class="tab-panel active"><div class="kanban-board" id="kanbanBoard"></div></div>
+      <div id="ordersTableView" class="tab-panel">
+        <div class="data-card">
+          <div class="data-card-header"><div><div class="data-card-title">All Orders</div><div class="data-card-subtitle"><span id="ordersCount">0</span> orders</div></div>
+          <select class="ant-select" style="width:150px;height:34px;font-size:12px;" onchange="filterOrdersByStatus(this.value)">
+            <option value="all">All Status</option><option value="new">New</option><option value="processing">Processing</option><option value="quality">In QC</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option>
+          </select>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Qty (T)</th><th>Value</th><th>Status</th><th>Ship Date</th><th style="text-align:right;">Actions</th></tr></thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="ordersCalendarView" class="tab-panel"><div class="data-card" style="padding:20px;"><div id="calendarView"></div></div></div>
+    </div>
+
+    <!-- ===== SALES > PAYMENTS ===== -->
+    <div class="module-page" id="page-payments">
+      <div class="page-header">
+        <div><h2 class="page-title">Payment Management</h2><p class="page-subtitle">Receivables, invoicing and payment tracking</p></div>
+        <div class="page-actions"><button class="btn btn-default"><i data-lucide="file-text"></i> Generate Invoice</button><button class="btn btn-primary"><i data-lucide="plus"></i> Record Payment</button></div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Receivables</span><div class="kpi-icon primary"><i data-lucide="wallet"></i></div></div><div class="kpi-value">$1.2M</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 14%</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Paid This Month</span><div class="kpi-icon success"><i data-lucide="check-circle"></i></div></div><div class="kpi-value">$443K</div><div class="kpi-trend trend-up">+18.7%</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Overdue</span><div class="kpi-icon error"><i data-lucide="alert-circle"></i></div></div><div class="kpi-value">$82K</div><div class="kpi-trend trend-down">42 invoices</div></div>
+        <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Avg Days to Pay</span><div class="kpi-icon warning"><i data-lucide="clock"></i></div></div><div class="kpi-value">18</div><div class="kpi-trend trend-up">Improved</div></div>
+      </div>
+      <div class="charts-grid charts-row-equal">
+        <div class="chart-card"><div class="chart-header"><div class="chart-title">Payment Aging Analysis</div></div><div class="chart-body"><canvas id="paymentAging"></canvas></div></div>
+        <div class="chart-card"><div class="chart-header"><div class="chart-title">Cash Flow Trend</div></div><div class="chart-body"><canvas id="cashFlow"></canvas></div></div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > INSURANCE ===== -->
+    <div class="module-page" id="page-insurance">
+      <div class="page-header">
+        <div><h2 class="page-title">Insurance & Compliance</h2><p class="page-subtitle">Marine cargo insurance and regulatory compliance</p></div>
+        <div class="page-actions"><button class="btn btn-primary"><i data-lucide="plus"></i> New Policy</button></div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-header"><div class="data-card-title">Active Policies</div></div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Policy #</th><th>Type</th><th>Insurer</th><th>Coverage</th><th>Premium</th><th>Expiry</th><th>Status</th></tr></thead>
+            <tbody id="insuranceTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SALES > REPORTS ===== -->
+    <div class="module-page" id="page-reports">
+      <div class="page-header"><div><h2 class="page-title">Reports</h2><p class="page-subtitle">Generate and export business reports</p></div></div>
+      <div class="product-grid" id="reportsGrid"></div>
+    </div>
+
+    <!-- ===== PURCHASE ===== -->
+    <div class="module-page" id="page-purchase">
+      <!-- Content rendered by JS components via window.Pages.renderPurchaseDashboard() -->
+    </div>
+
+    <!-- ===== PREPROCESSING ===== -->
+    <div class="module-page" id="page-preprocessing">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Consolidation Report</h2>
+          <p class="page-subtitle">Daily Lot Processing, Peeling & Yield Summary</p>
+        </div>
+      </div>
+
+      <div class="filter-panel-card" style="margin-bottom: 20px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;">
+          <div class="filter-group" style="flex: 1; min-width: 180px;">
+            <label class="filter-label">Receiving Plant :</label>
+            <select class="ant-select"><option value="all">All Plants</option><option value="p1">Plant 1 - Kakinada</option><option value="p2">Plant 2 - Vizag</option></select>
+          </div>
+          <div class="filter-group" style="width: 150px;">
+            <label class="filter-label">From Date :</label>
+            <input type="text" class="filter-input" value="01/09/2026" />
+          </div>
+          <div class="filter-group" style="width: 150px;">
+            <label class="filter-label">To Date :</label>
+            <input type="text" class="filter-input" value="24/09/2026" />
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 160px;">
+            <label class="filter-label">Type :</label>
+            <select class="ant-select"><option value="all">All Types</option><option value="shrimp">Shrimp</option><option value="fish">Fish</option></select>
+          </div>
+          <button class="btn-blue-search" onclick="showToast('info','Preprocessing','Consolidation report loaded')">Search <i data-lucide="arrow-right"></i></button>
+          <button class="btn-orange-download" onclick="downloadExcel('PreprocessingConsolidation')">Download Excel <i data-lucide="download"></i></button>
+        </div>
+      </div>
+
+      <div class="data-card" style="padding: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+          <div style="background: #FEFCE8; border: 1px solid #FEF08A; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #713F12; font-weight: 700;">Total Received Weight</div>
+            <div style="font-size: 24px; font-weight: 800; color: #1E293B; margin-top: 4px;">428,500 Kg</div>
+          </div>
+          <div style="background: #FEFCE8; border: 1px solid #FEF08A; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #713F12; font-weight: 700;">Total Preprocessed Weight</div>
+            <div style="font-size: 24px; font-weight: 800; color: #1E293B; margin-top: 4px;">291,380 Kg</div>
+          </div>
+          <div style="background: #FEFCE8; border: 1px solid #FEF08A; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #713F12; font-weight: 700;">Average Yield %</div>
+            <div style="font-size: 24px; font-weight: 800; color: #1E293B; margin-top: 4px;">68.00 %</div>
+          </div>
+          <div style="background: #FEFCE8; border: 1px solid #FEF08A; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #713F12; font-weight: 700;">Wastage / Shell Weight</div>
+            <div style="font-size: 24px; font-weight: 800; color: #1E293B; margin-top: 4px;">137,120 Kg</div>
+          </div>
+        </div>
+        <div style="text-align:center; padding: 40px; color: #64748B; background:#FAFAFA; border: 1px dashed #CBD5E1; border-radius: 8px;">
+          <i data-lucide="file-spreadsheet" style="width: 48px; height: 48px; color: #94A3B8; margin-bottom: 12px;"></i>
+          <div style="font-size: 16px; font-weight: 600; color: #334155;">Detailed Consolidation Report View Loaded</div>
+          <div style="font-size: 13px; color: #64748B; margin-top: 4px;">Click "Download Excel" to export full raw material yield ledger across all centers and plants.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== QC ===== -->
+    <div class="module-page" id="page-qc">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Quality Control (QC Dashboard New)</h2>
+          <p class="page-subtitle">Inspections, Testing, Lab Availability & Certificate Management</p>
+        </div>
+      </div>
+
+      <!-- QC DASHBOARD PARAMETERS (Filter Panel) -->
+      <div class="filter-panel-card" style="margin-top: 12px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid #FEF08A; padding-bottom: 8px;">
+          <span style="font-weight: 700; font-size: 13px; color: #422006; text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 8px;">
+            <i data-lucide="sliders-horizontal" style="width:15px;height:15px;color:#CA8A04;"></i> QC Dashboard Parameters
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; align-items: flex-end;">
+          <div class="filter-group">
+            <label class="filter-label">Financial Year:</label>
+            <select class="filter-select"><option selected>2026-2027</option><option>2025-2026</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Processing Unit:</label>
+            <select class="filter-select"><option>Select</option><option>Unit 1 (Kakinada)</option><option>Unit 2 (Vizag)</option><option>Unit 3</option><option>Unit 4</option><option>Unit 5</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Lot:</label>
+            <select class="filter-select"><option>Select</option><option>KKD/2627/0204</option><option>RPL/2627/0129</option><option>ODS/2627/0382</option><option>AMP/2627/0831</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Buyer:</label>
+            <select class="filter-select"><option>Select</option><option>DEVI INC</option><option>STANLEY</option><option>MARK FOODS LLC</option><option>C.P. FOOD</option><option>VALENCIA</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Cold Store Location:</label>
+            <select class="filter-select"><option>Select</option><option>Kakinada Plant</option><option>Visakhapatnam</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">QC:</label>
+            <select class="filter-select"><option>Select</option><option>Passed</option><option>Pending</option><option>Hold</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Status:</label>
+            <select class="filter-select"><option>Select</option><option>Active</option><option>Closed</option></select>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 14px;">
+          <button class="btn-blue-search" style="padding: 8px 32px; border-radius: 6px;" onclick="initQCDashboardCharts();renderQCLotsTable(1);renderPOGradeTable(1);showToast('success','QC Filter','Parameters applied')">Search <i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- 6 KPI Cards Matching Reference Screenshot -->
+      <div class="kpi-grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 20px;">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Total Lots Received</span>
+            <div class="kpi-icon primary"><i data-lucide="layers"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">1,269</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">Total Lots Received</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">QC Code Done</span>
+            <div class="kpi-icon success"><i data-lucide="check-circle-2"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">827</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">QC Code Done</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">QC Code Pending</span>
+            <div class="kpi-icon warning"><i data-lucide="clock"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">442</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">QC Code Pending</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Pre-Harvest Screening</span>
+            <div class="kpi-icon info"><i data-lucide="shield-check"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">48.7%</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">Tested / Cleared</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Micro Completed</span>
+            <div class="kpi-icon primary"><i data-lucide="activity"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">269</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">Micro Completed</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Chemical Completed</span>
+            <div class="kpi-icon secondary"><i data-lucide="flask-conical"></i></div>
+          </div>
+          <div class="kpi-value" style="font-size:24px;font-weight:700;margin-top:6px;">151</div>
+          <div style="font-size:11px;color:#713F12;margin-top:2px;">Chemical Completed</div>
+        </div>
+      </div>
+
+      <!-- Charts Row 1 (3 Charts: QC Code Status, Lab Coverage, Production Readiness) -->
+      <div class="charts-grid charts-row-qc-top">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">QC Code Status</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'qcCodeStatusChart')">
+                  <option value="ytd" selected>YTD</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('qcCodeStatusChart', 'QC_Code_Status')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 250px;"><canvas id="qcCodeStatusChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Lab Coverage</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'labCoverageChart')">
+                  <option value="ytd" selected>YTD</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('labCoverageChart', 'Lab_Coverage')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 250px;"><canvas id="labCoverageChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Production Readiness</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'productionReadinessChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('productionReadinessChart', 'Production_Readiness')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 250px;"><canvas id="productionReadinessChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Charts Row 2 (2 Charts: Buyer Pending Risk, Destination Pending Risk) -->
+      <div class="charts-grid charts-row-equal" style="margin-top: 20px;">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Buyer Pending Risk</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'buyerPendingRiskChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('buyerPendingRiskChart', 'Buyer_Pending_Risk')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 270px;"><canvas id="buyerPendingRiskChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Destination Country Wise Risk</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'destinationPendingRiskChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('destinationPendingRiskChart', 'Destination_Pending_Risk')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 270px;"><canvas id="destinationPendingRiskChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Charts Row 3 (3 Charts: Completed vs Pending, Center Wise, Supplier Wise) -->
+      <div class="charts-grid charts-row-3" style="margin-top: 20px;">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">QC Completed vs Pending</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'qcCompletedVsPendingChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('qcCompletedVsPendingChart', 'QC_Completed_Vs_Pending')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 260px;"><canvas id="qcCompletedVsPendingChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Center Wise Quantity</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'centerWiseQuantityChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('centerWiseQuantityChart', 'Center_Wise_Quantity')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 260px;"><canvas id="centerWiseQuantityChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">Supplier Wise Quantity Breakdown</div>
+            <div class="chart-actions">
+              <div class="chart-period-wrap">
+                <i data-lucide="calendar" class="period-icon"></i>
+                <select class="chart-period-select" onchange="handlePeriodChange(this, 'supplierWiseQuantityChart')">
+                  <option value="monthly" selected>Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <button class="chart-action-btn" title="Download Chart & Data" onclick="exportChart('supplierWiseQuantityChart', 'Supplier_Wise_Quantity')"><i data-lucide="download"></i></button>
+            </div>
+          </div>
+          <div class="chart-body" style="height: 260px;"><canvas id="supplierWiseQuantityChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Quick Filter for Lots -->
+      <div style="display: flex; gap: 10px; align-items: flex-end; margin-top: 24px; margin-bottom: 12px;">
+        <div class="filter-group" style="width: 240px;">
+          <label class="filter-label">Lot No:</label>
+          <input type="text" id="qcLotsSearch" class="filter-input" placeholder="Search Lot No..." oninput="renderQCLotsTable(1)" />
+        </div>
+        <button class="btn-blue-search" style="padding: 7px 20px; border-radius: 6px;" onclick="renderQCLotsTable(1)">Search Lots <i data-lucide="search"></i></button>
+      </div>
+
+      <!-- Master Table 1: QC Pending Lots Report / QC Lots Master -->
+      <div class="data-card">
+        <div class="data-card-header" style="background: #FEFCE8; border-bottom: 1px solid #FEF08A; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 13px; color: #713F12; font-weight: 600;">Show</span>
+            <select class="filter-select" style="width: 70px; padding: 4px 8px; font-size: 12px;" onchange="renderQCLotsTable(1, parseInt(this.value))">
+              <option value="10" selected>10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+            <span style="font-size: 13px; color: #713F12; font-weight: 600;">entries</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="comp-action-btn" title="Download Excel" onclick="downloadExcel('QCLots')" style="width: auto; padding: 6px 12px; gap: 6px; font-weight: 600; font-size: 12px;">
+              <i data-lucide="download"></i> Download Excel
+            </button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Lot No</th><th>Supplier</th><th>Center</th><th>Arrival Date</th><th>Total Weight (Kg)</th><th>QC Result</th><th>Antibiotic Status</th>
+              </tr>
+            </thead>
+            <tbody id="qcLotsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="data-card-header" style="background: #FAFAFA; border-top: 1px solid #F1F5F9; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #64748B;" id="qcLotsEntriesInfo">Showing 1 to 10 of 442 entries</span>
+          <div id="qcLotsPagination" style="display: flex; gap: 4px;"></div>
+        </div>
+      </div>
+
+      <!-- Master Table 2: PO Grade Lab Availability / PO Grade Wise Allocation -->
+      <div class="data-card" style="margin-top: 24px;">
+        <div class="data-card-header" style="background: #FEFCE8; border-bottom: 1px solid #FEF08A; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 13px; color: #713F12; font-weight: 600;">Show</span>
+            <select class="filter-select" style="width: 70px; padding: 4px 8px; font-size: 12px;" onchange="renderPOGradeTable(1, parseInt(this.value))">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+            </select>
+            <span style="font-size: 13px; color: #713F12; font-weight: 600;">entries</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="search-box" style="width: 220px; background: #FFFFFF;">
+              <i data-lucide="search"></i>
+              <input type="text" id="poGradeSearch" placeholder="Search PO Grade..." oninput="renderPOGradeTable(1)" />
+            </div>
+            <button class="comp-action-btn" title="Download Excel" onclick="downloadExcel('POGradeLab')" style="width: auto; padding: 6px 12px; gap: 6px; font-weight: 600; font-size: 12px;">
+              <i data-lucide="download"></i> Download Excel
+            </button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>S.No</th><th>PO Number</th><th>Buyer</th><th>Brand</th><th>Ship By</th><th>Country</th><th>Product / Grade</th><th>Packing</th><th>MCS Count</th><th>Assigned Lot</th>
+              </tr>
+            </thead>
+            <tbody id="poGradeTableBody"></tbody>
+          </table>
+        </div>
+        <div class="data-card-header" style="background: #FAFAFA; border-top: 1px solid #F1F5F9; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #64748B;" id="poGradeEntriesInfo">Showing 1 to 25 of 1,859 entries</span>
+          <div id="poGradePagination" style="display: flex; gap: 4px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PRODUCTION ===== -->
+    <div class="module-page" id="page-production">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Production Standard Yields</h2>
+          <p class="page-subtitle">Category & Variety Yield Standard Configuration</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" onclick="showToast('info','Yield Master','Opening Add Yield Dialog')"><i data-lucide="plus"></i> Add Yield Rule</button>
+        </div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="search-box" style="width:220px;background:#fff;">
+              <i data-lucide="search"></i>
+              <input type="text" placeholder="Search standard yields..." oninput="renderProductionStandardYieldsTable()" />
+            </div>
+            <button class="btn-outline-success" onclick="showToast('info','Search','More search loaded')"><i data-lucide="search"></i> More Search</button>
+            <button class="btn-outline-success" onclick="renderProductionStandardYieldsTable()"><i data-lucide="refresh-cw"></i> Load All</button>
+          </div>
+          <div>
+            <button class="btn-outline-success" onclick="downloadExcel('ProductionStandardYields')"><i data-lucide="download"></i> Download Excel</button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>S.NO</th><th>Species</th><th>Type Product</th><th>Variety</th><th>Grade</th><th>Count Range</th><th>Freezing Type</th><th>Treatment</th><th>Type Material</th><th>Target Yield %</th><th>Status</th><th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="standardYieldsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COLDSTORE ===== -->
+    <div class="module-page" id="page-coldstore">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Daily Stock Report</h2>
+          <p class="page-subtitle">Cold Store Inventory & Location Stock Summary</p>
+        </div>
+      </div>
+
+      <!-- Filter Panel (Card with 10 fields) -->
+      <div class="filter-panel-card" style="margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px;">
+          <div class="filter-group">
+            <label class="filter-label">Storage Location</label>
+            <select class="ant-select"><option>All Coldstores</option><option>CS Room 1</option><option>CS Room 2</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Receiving Plant</label>
+            <select class="ant-select"><option>All Plants</option><option>Plant 1</option><option>Plant 2</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Brand Name</label>
+            <select class="ant-select"><option>All Brands</option><option>DEVI FRESH</option><option>OCEAN FRESH</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Species</label>
+            <select class="ant-select"><option>All Species</option><option>VANNAMEI</option><option>MONODON</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Grade</label>
+            <select class="ant-select"><option>All Grades</option><option>26/30</option><option>31/40</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Packing Style</label>
+            <select class="ant-select"><option>All Styles</option><option>1 X 10 KGS</option><option>10 X 2 LBS</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">From Date</label>
+            <input type="text" class="filter-input" value="01/09/2026" />
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">To Date</label>
+            <input type="text" class="filter-input" value="24/09/2026" />
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Stock Status</label>
+            <select class="ant-select"><option>Available</option><option>Reserved</option><option>Dispatched</option></select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Lot No</label>
+            <input type="text" class="filter-input" placeholder="e.g. LOT-2026-0847" />
+          </div>
+        </div>
+        <div style="display:flex; justify-content: flex-end; gap: 12px;">
+          <button class="btn-blue-search" onclick="showToast('info','Coldstore','Daily stock report loaded')">Search <i data-lucide="arrow-right"></i></button>
+          <button class="btn-orange-download" onclick="downloadExcel('ColdstoreDailyStock')">Download Excel <i data-lucide="download"></i></button>
+        </div>
+      </div>
+
+      <div class="data-card" style="padding: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+          <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #64748B; font-weight: 600;">Total Stock Cartons</div>
+            <div style="font-size: 24px; font-weight: 700; color: #1E293B; margin-top: 4px;">148,250 Master Cartons</div>
+          </div>
+          <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #64748B; font-weight: 600;">Total Net Weight</div>
+            <div style="font-size: 24px; font-weight: 700; color: #10B981; margin-top: 4px;">1,482,500 Kg</div>
+          </div>
+          <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #64748B; font-weight: 600;">Total Gross Weight</div>
+            <div style="font-size: 24px; font-weight: 700; color: #3B82F6; margin-top: 4px;">1,630,750 Kg</div>
+          </div>
+          <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px; border-radius: 8px;">
+            <div style="font-size: 12px; color: #64748B; font-weight: 600;">Average Storage Temp</div>
+            <div style="font-size: 24px; font-weight: 700; color: #06B6D4; margin-top: 4px;">-22.4 °C</div>
+          </div>
+        </div>
+        <div style="text-align:center; padding: 40px; color: #64748B; background:#FAFAFA; border: 1px dashed #CBD5E1; border-radius: 8px;">
+          <i data-lucide="archive" style="width: 48px; height: 48px; color: #94A3B8; margin-bottom: 12px;"></i>
+          <div style="font-size: 16px; font-weight: 600; color: #334155;">Daily Variety-Wise Stock Report Active</div>
+          <div style="font-size: 13px; color: #64748B; margin-top: 4px;">Search filters applied. Click "Download Excel" to generate printable warehouse tally sheet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== INVENTORY ===== -->
+    <div class="module-page" id="page-inventory">
+      <div class="page-header">
+        <div>
+          <h2 class="page-title">Indent Page (General Store)</h2>
+          <p class="page-subtitle">General Store Material Requisition & Indent Raising</p>
+        </div>
+      </div>
+
+      <!-- Indent Raised Details Header Form -->
+      <div class="filter-panel-card" style="margin-bottom: 24px;">
+        <div style="font-weight: 700; font-size: 15px; color: #1E293B; margin-bottom: 16px;">Indent Raised Details</div>
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 16px;">
+          <div class="filter-group"><label class="filter-label">Indent No</label><input type="text" class="filter-input" value="IND-GS-2026-089" readonly style="background:#F1F5F9;" /></div>
+          <div class="filter-group"><label class="filter-label">Indent Date</label><input type="text" class="filter-input" value="24/09/2026" /></div>
+          <div class="filter-group"><label class="filter-label">Department</label><select class="ant-select"><option>General Store</option><option>Maintenance</option><option>QC Lab</option></select></div>
+          <div class="filter-group"><label class="filter-label">Raised By</label><input type="text" class="filter-input" value="Store Manager" /></div>
+          <div class="filter-group"><label class="filter-label">Priority</label><select class="ant-select"><option>High</option><option>Medium</option><option>Low</option></select></div>
+          <div class="filter-group"><label class="filter-label">Required Date</label><input type="text" class="filter-input" value="28/09/2026" /></div>
+        </div>
+
+        <!-- Line items table editor -->
+        <div class="data-table-wrap" style="margin-bottom: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>S.No</th><th>Item Name</th><th>Category</th><th>Current Stock</th><th>Required Qty</th><th>UOM</th><th>Remarks</th><th>Attachment</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><input type="text" class="filter-input" value="Master Carton Boxes 10kg" /></td>
+                <td><input type="text" class="filter-input" value="Packaging Material" /></td>
+                <td>1,200</td>
+                <td><input type="number" class="filter-input" value="5000" style="width:90px;" /></td>
+                <td><span class="badge badge-info">NOS</span></td>
+                <td><input type="text" class="filter-input" value="For exports packing" /></td>
+                <td><button class="btn btn-sm btn-icon btn-ghost" title="Attach Document" onclick="showToast('info','Attachment','File upload dialog opened')"><i data-lucide="paperclip"></i></button></td>
+                <td><button class="btn btn-sm btn-icon btn-primary" onclick="showToast('success','Add','Row added')"><i data-lucide="plus"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex; justify-content: flex-end;">
+          <button class="btn-blue-search" onclick="showToast('success','Indent Saved','Indent IND-GS-2026-089 submitted successfully')"><i data-lucide="check"></i> Save Indent</button>
+        </div>
+      </div>
+
+      <!-- Existing Indents Master Section -->
+      <div class="data-card">
+        <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-weight: 700; font-size: 15px; color: #1E293B;">Existing Indents Master</div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="search-box" style="width:220px;background:#fff;">
+              <i data-lucide="search"></i>
+              <input type="text" placeholder="Search indents..." oninput="renderInventoryIndentTable()" />
+            </div>
+            <button class="btn-outline-success" onclick="showToast('info','Search','More search filters loaded')"><i data-lucide="search"></i> More Search</button>
+            <button class="btn-outline-success" onclick="renderInventoryIndentTable()"><i data-lucide="refresh-cw"></i> Load All</button>
+            <button class="btn-outline-success" onclick="downloadExcel('InventoryIndents')"><i data-lucide="download"></i> Download Excel</button>
+          </div>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>S.No</th><th>Document No</th><th>Date</th><th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="existingIndentsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== GENERIC PAGE ===== -->
+    <div class="module-page" id="page-generic">
+      <div class="page-header">
+        <div><h2 class="page-title" id="genericTitle"></h2><p class="page-subtitle" id="genericSubtitle"></p></div>
+        <div class="page-actions" id="genericActions"></div>
+      </div>
+      <div class="kpi-grid" id="genericKpis"></div>
+      <div class="charts-grid" id="genericChartWrap" style="display:none;">
+        <div class="chart-card"><div class="chart-header"><div class="chart-title" id="genericChartTitle"></div></div><div class="chart-body"><canvas id="genericChart"></canvas></div></div>
+      </div>
+      <div id="genericTableWrap"></div>
+    </div>
+
+    <!-- ===== SETTINGS ===== -->
+    <div class="module-page" id="page-settings">
+      <div class="page-header"><div><h2 class="page-title">Settings</h2><p class="page-subtitle">Account and application preferences</p></div></div>
+      <div class="settings-grid">
+        <nav class="settings-nav" id="settingsNav"></nav>
+        <div class="settings-content" id="settingsContent"></div>
+      </div>
+    </div>
+
+    <!-- ===== ACTIVITY ===== -->
+    <div class="module-page" id="page-activity">
+      <div class="page-header"><div><h2 class="page-title">Activity Log</h2><p class="page-subtitle">Audit trail of all system activity</p></div></div>
+      <div class="chart-card"><div id="activityList"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+<div class="modal-overlay" id="compFilterModal" onclick="closeModalOnOverlay(event,'compFilterModal')">
+  <div class="modal" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title" id="compFilterModalTitle"><i data-lucide="filter" style="width:18px;height:18px;margin-right:6px;color:var(--colorPrimary);"></i> Component Filter</h3>
+      <button class="modal-close" onclick="closeModal('compFilterModal')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:var(--colorTextSecondary);margin-bottom:16px;">Customize filter criteria for <strong id="compFilterTargetName">Component</strong></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>From Date</label>
+          <input type="date" class="ant-input" id="compFilterFromDate" value="2026-04-01" />
+        </div>
+        <div class="form-group">
+          <label>To Date</label>
+          <input type="date" class="ant-input" id="compFilterToDate" value="2027-03-31" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Plant / Unit</label>
+          <select class="ant-select" id="compFilterPlant">
+            <option value="all">All Units</option>
+            <option value="unit1">Unit 1(853)</option>
+            <option value="unit2">Unit 2(857)</option>
+            <option value="unit3">Unit 3(990)</option>
+            <option value="unit4">Unit 4(1936)</option>
+            <option value="unit5">Unit 5(1888)</option>
+            <option value="unit6">Unit 6(1978)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Destination / Port</label>
+          <select class="ant-select" id="compFilterPort">
+            <option value="all">All Ports</option>
+            <option value="SAVANNAH">SAVANNAH</option>
+            <option value="LOS ANGELES">LOS ANGELES</option>
+            <option value="NEW YORK">NEW YORK</option>
+            <option value="ZHANJIANG">ZHANJIANG</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Product / Grade</label>
+        <select class="ant-select" id="compFilterGrade">
+          <option value="all">All Grades</option>
+          <option value="16/20">16/20</option>
+          <option value="21/25">21/25</option>
+          <option value="26/30">26/30</option>
+          <option value="31/40">31/40</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer" style="display:flex;justify-content:space-between;">
+      <button class="btn btn-default" onclick="resetComponentFilter()"><i data-lucide="rotate-ccw"></i> Reset</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-default" onclick="closeModal('compFilterModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="applyComponentFilter()"><i data-lucide="check"></i> Apply Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newOrderModal" onclick="closeModalOnOverlay(event,'newOrderModal')">
+  <div class="modal lg">
+    <div class="modal-header"><h3 class="modal-title">Create New Order</h3><button class="modal-close" onclick="closeModal('newOrderModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="form-row"><div class="form-group"><label>Customer <span class="required">*</span></label><select class="ant-select"><option>Select customer</option><option>USA Imports LLC</option><option>EU Trading BV</option><option>Asia Pacific Seafoods</option></select></div><div class="form-group"><label>Order Type</label><select class="ant-select"><option>Standard</option><option>Express</option><option>Bulk</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Product <span class="required">*</span></label><select class="ant-select" id="orderProduct"><option>Frozen Shrimp 26/30</option><option>Fresh Salmon Fillet</option><option>Canned Tuna</option></select></div><div class="form-group"><label>Quantity (Tons) <span class="required">*</span></label><input type="number" class="ant-input" id="orderQuantity" placeholder="0" /></div></div>
+      <div class="form-row"><div class="form-group"><label>Unit Price (USD)</label><input type="number" class="ant-input" value="4500" /></div><div class="form-group"><label>Destination Port</label><select class="ant-select"><option>New York</option><option>Los Angeles</option><option>Rotterdam</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Ship Date</label><input type="date" class="ant-input" value="2026-09-25" /></div><div class="form-group"><label>Payment Terms</label><select class="ant-select"><option>Net 30</option><option>Net 60</option><option>LC at sight</option></select></div></div>
+      <div class="form-group"><label>Notes</label><textarea class="ant-input" rows="3" style="height:auto;padding:10px;"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newOrderModal')">Cancel</button><button class="btn btn-primary" onclick="createOrder()"><i data-lucide="check"></i> Create Order</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newProductModal" onclick="closeModalOnOverlay(event,'newProductModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">Add New Product</h3><button class="modal-close" onclick="closeModal('newProductModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Product Name</label><input type="text" class="ant-input" placeholder="e.g. Frozen Shrimp 26/30" /></div>
+      <div class="form-row"><div class="form-group"><label>SKU</label><input type="text" class="ant-input" placeholder="SHR-26-30" /></div><div class="form-group"><label>Category</label><select class="ant-select"><option>Shrimp</option><option>Fish</option><option>Tuna</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Price (USD/Ton)</label><input type="number" class="ant-input" /></div><div class="form-group"><label>Reorder Level</label><input type="number" class="ant-input" /></div></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newProductModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newProductModal');showToast('success','Created','Product added to catalog')">Create</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newBuyerModal" onclick="closeModalOnOverlay(event,'newBuyerModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">Add New Buyer</h3><button class="modal-close" onclick="closeModal('newBuyerModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="form-row"><div class="form-group"><label>Company Name</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Country</label><select class="ant-select"><option>USA</option><option>UK</option><option>China</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Contact Name</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Email</label><input type="email" class="ant-input" /></div></div>
+      <div class="form-group"><label>Credit Limit (USD)</label><input type="number" class="ant-input" value="50000" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newBuyerModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newBuyerModal');showToast('success','Created','Buyer added')">Create</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newInspectionModal" onclick="closeModalOnOverlay(event,'newInspectionModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">New QC Inspection</h3><button class="modal-close" onclick="closeModal('newInspectionModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Lot Number</label><input type="text" class="ant-input" placeholder="L-2026-XXXX" /></div>
+      <div class="form-row"><div class="form-group"><label>Product</label><select class="ant-select"><option>Frozen Shrimp</option><option>Fresh Salmon</option></select></div><div class="form-group"><label>Inspector</label><select class="ant-select"><option>Rajesh Kumar</option><option>Priya Sharma</option></select></div></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newInspectionModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newInspectionModal');showToast('success','Created','Inspection started')">Start</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newPOModal" onclick="closeModalOnOverlay(event,'newPOModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">New Purchase Order</h3><button class="modal-close" onclick="closeModal('newPOModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Supplier</label><select class="ant-select"><option>Kerala Fishermen Co-op</option><option>Ocean Harvest Ltd</option></select></div>
+      <div class="form-row"><div class="form-group"><label>Product</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Quantity (Kg)</label><input type="number" class="ant-input" /></div></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newPOModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newPOModal');showToast('success','Created','PO created')">Create</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="shortcutsModal" onclick="closeModalOnOverlay(event,'shortcutsModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">Keyboard Shortcuts</h3><button class="modal-close" onclick="closeModal('shortcutsModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="shortcut-row"><span>Open command palette</span><kbd>Ctrl / ⌘ + K</kbd></div>
+      <div class="shortcut-row"><span>New order</span><kbd>N</kbd></div>
+      <div class="shortcut-row"><span>Refresh data</span><kbd>R</kbd></div>
+      <div class="shortcut-row"><span>Toggle fullscreen</span><kbd>F</kbd></div>
+      <div class="shortcut-row"><span>This help dialog</span><kbd>?</kbd></div>
+      <div class="shortcut-row"><span>Close overlays</span><kbd>ESC</kbd></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('shortcutsModal')">Got it</button></div>
+  </div>
+</div>
+
+<!-- ============ PRODUCT SUBPAGE MODALS ============ -->
+<div class="modal-overlay" id="newPreparationModal" onclick="closeModalOnOverlay(event,'newPreparationModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">New Preparation</h3><button class="modal-close" onclick="closeModal('newPreparationModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="filter-item" style="margin-bottom:12px;"><label>Preparation Name</label><input type="text" class="ant-input" placeholder="e.g. FROZEN COOKED SHELL ON" /></div>
+      <div class="filter-item" style="margin-bottom:12px;"><label>Description</label><input type="text" class="ant-input" placeholder="Detailed description..." /></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="filter-item"><label>Short Code</label><input type="text" class="ant-input" placeholder="e.g. CI V EZPL" /></div>
+        <div class="filter-item"><label>HS Code</label><input type="text" class="ant-input" placeholder="0306.17" /></div>
+      </div>
+      <div class="filter-item"><label>QC Preparation Short Code</label><input type="text" class="ant-input" placeholder="QC Code..." /></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newPreparationModal')">Cancel</button><button class="btn btn-primary" onclick="showToast('success','Created','Preparation saved successfully');closeModal('newPreparationModal');">Save Preparation</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addSpeciesModal" onclick="closeModalOnOverlay(event,'addSpeciesModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">Add Species</h3><button class="modal-close" onclick="closeModal('addSpeciesModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="filter-item" style="margin-bottom:12px;"><label>Species Name</label><input type="text" class="ant-input" placeholder="e.g. LITOPENAEUS VANNAMEI" /></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="filter-item"><label>Short Code</label><input type="text" class="ant-input" placeholder="VM" /></div>
+        <div class="filter-item"><label>QC Short Code</label><input type="text" class="ant-input" placeholder="V" /></div>
+      </div>
+      <div class="filter-item"><label>Description</label><input type="text" class="ant-input" placeholder="VANNAMEI WHITE" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('addSpeciesModal')">Cancel</button><button class="btn btn-primary" onclick="showToast('success','Created','Species saved successfully');closeModal('addSpeciesModal');">Save Species</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newGradeModal" onclick="closeModalOnOverlay(event,'newGradeModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">New Grade</h3><button class="modal-close" onclick="closeModal('newGradeModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="filter-item" style="margin-bottom:12px;"><label>Grade Type</label><input type="text" class="ant-input" placeholder="e.g. 26/30" /></div>
+      <div class="filter-item" style="margin-bottom:12px;"><label>Grade Name</label><input type="text" class="ant-input" placeholder="e.g. 26/30" /></div>
+      <div class="filter-item"><label>Grade Group</label><input type="text" class="ant-input" placeholder="e.g. 26/30" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newGradeModal')">Cancel</button><button class="btn btn-primary" onclick="showToast('success','Created','Grade saved successfully');closeModal('newGradeModal');">Save Grade</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newPackingStyleModal" onclick="closeModalOnOverlay(event,'newPackingStyleModal')">
+  <div class="modal">
+    <div class="modal-header"><h3 class="modal-title">New Packing Style</h3><button class="modal-close" onclick="closeModal('newPackingStyleModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="filter-item" style="margin-bottom:12px;"><label>Packing Style Name</label><input type="text" class="ant-input" placeholder="e.g. 10 X 2 LBS" /></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div class="filter-item"><label>Gross Wt</label><input type="number" class="ant-input" placeholder="25" /></div>
+        <div class="filter-item"><label>Net Wt</label><input type="number" class="ant-input" placeholder="20" /></div>
+        <div class="filter-item"><label>UOM</label><select class="ant-select"><option>KGS</option><option>LBS</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newPackingStyleModal')">Cancel</button><button class="btn btn-primary" onclick="showToast('success','Created','Packing style saved successfully');closeModal('newPackingStyleModal');">Save Packing Style</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newVarietyModal" onclick="closeModalOnOverlay(event,'newVarietyModal')">
+  <div class="modal" style="max-width:640px;">
+    <div class="modal-header"><h3 class="modal-title">New Variety</h3><button class="modal-close" onclick="closeModal('newVarietyModal')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="filter-item"><label>Short Name</label><input type="text" class="ant-input" placeholder="PD" /></div>
+        <div class="filter-item"><label>Full Name</label><input type="text" class="ant-input" placeholder="PEELED AND DEVEINED TAIL OFF" /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="filter-item"><label>Grade</label><select class="ant-select"><option>26/30</option><option>31/40</option><option>41/50</option></select></div>
+        <div class="filter-item"><label>Freezing Type</label><select class="ant-select"><option>IQF</option><option>BLOCK</option></select></div>
+        <div class="filter-item"><label>Type</label><select class="ant-select"><option>RAW</option><option>COOKED</option></select></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="filter-item"><label>Brand Name</label><input type="text" class="ant-input" placeholder="DEVI FRESH" /></div>
+        <div class="filter-item"><label>Packing Style</label><select class="ant-select"><option>1 X 10 KGS</option><option>10 X 2 LBS</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newVarietyModal')">Cancel</button><button class="btn btn-primary" onclick="showToast('success','Created','Variety saved successfully');closeModal('newVarietyModal');">Save Variety</button></div>
+  </div>
+</div>
+
+<!-- ============ ORDER DRAWER ============ -->
+<div class="drawer-overlay" id="orderDrawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="orderDrawer">
+  <div class="drawer-header"><div><div class="drawer-title">Order Details</div><div class="drawer-subtitle" id="drawerSubtitle">ORD-2026-0465</div></div><button class="modal-close" onclick="closeDrawer()"><i data-lucide="x"></i></button></div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-footer"><button class="btn btn-default" onclick="closeDrawer()">Close</button><button class="btn btn-primary"><i data-lucide="edit"></i> Edit Order</button></div>
+</div>
+
+<!-- ============ NOTIFICATIONS ============ -->
+<div class="drawer-overlay" id="notifOverlay" onclick="closeNotifications()"></div>
+<div class="notification-drawer" id="notifDrawer">
+  <div class="drawer-header"><div><div class="drawer-title">Notifications</div><div class="drawer-subtitle">3 unread</div></div>
+  <div style="display:flex;gap:6px;"><button class="btn btn-sm btn-ghost" onclick="markAllRead()">Mark all read</button><button class="modal-close" onclick="closeNotifications()"><i data-lucide="x"></i></button></div></div>
+  <div class="notification-list" id="notifList"></div>
+</div>
+
+<!-- ============ COMMAND PALETTE ============ -->
+<div class="cmd-palette-overlay" id="cmdPalette" onclick="closeCommandPalette(event)">
+  <div class="cmd-palette" onclick="event.stopPropagation()">
+    <div class="cmd-palette-search"><i data-lucide="search"></i><input type="text" id="cmdSearch" placeholder="Type a command or search..." oninput="renderCmdPalette(this.value)" /><span style="font-size:11px;color:var(--colorTextTertiary);">ESC</span></div>
+    <div class="cmd-palette-body" id="cmdBody"></div>
+    <div class="cmd-footer"><span><kbd>↑↓</kbd> Navigate</span><span><kbd>↵</kbd> Select</span><span><kbd>ESC</kbd> Close</span></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="context-menu" id="contextMenu"></div>
+<button class="scroll-top" id="scrollTopBtn" title="Back to top" onclick="scrollToTop()"><i data-lucide="arrow-up"></i></button>
+
+<!-- JavaScript Application Modules -->
+<script src="js/components.js?v=2.7"></script>
+<script src="js/pages.js?v=2.7"></script>
+<script src="js/data.js?v=2.6"></script>
+<script src="js/charts.js?v=2.6"></script>
+<script src="js/ui.js?v=2.6"></script>
+<script src="js/app.js?v=2.6"></script>
+<script>
+  window.addEventListener('load', function() {
+    if (typeof initSalesDashboardCharts === 'function') {
+      setTimeout(initSalesDashboardCharts, 100);
+    }
+  });
+</script>
+</body>
+</html>

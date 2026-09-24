@@ -1,0 +1,3329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Devi Fisheries Limited — Advanced Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ================================================================
+   DESIGN TOKENS
+   ================================================================ */
+:root {
+  --colorPrimary: #E6A817;
+  --colorPrimaryHover: #F0C040;
+  --colorPrimaryActive: #B8850D;
+  --colorPrimaryBg: #FFFBE6;
+  --colorPrimaryBorder: #FFE58F;
+  --colorBgLayout: #F7F7F8;
+  --colorBgContainer: #FFFFFF;
+  --colorBorder: #E5E7EB;
+  --colorBorderSecondary: #F3F4F6;
+  --colorText: #111827;
+  --colorTextSecondary: #4B5563;
+  --colorTextTertiary: #9CA3AF;
+  --colorTextQuaternary: #D1D5DB;
+  --colorSuccess: #059669;
+  --colorSuccessBg: #ECFDF5;
+  --colorWarning: #D97706;
+  --colorWarningBg: #FFFBEB;
+  --colorError: #DC2626;
+  --colorErrorBg: #FEF2F2;
+  --colorInfo: #2563EB;
+  --colorInfoBg: #EFF6FF;
+  --colorPurple: #7C3AED;
+  --colorPurpleBg: #F5F3FF;
+  --colorCyan: #0891B2;
+  --colorCyanBg: #ECFEFF;
+  --fontFamily: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+  --borderRadius: 8px;
+  --borderRadiusLG: 12px;
+  --borderRadiusSM: 6px;
+  --borderRadiusXL: 16px;
+  --boxShadow: 0 1px 3px 0 rgba(0,0,0,0.04), 0 1px 2px 0 rgba(0,0,0,0.02);
+  --boxShadowSecondary: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+  --boxShadowLifted: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --boxShadowModal: 0 25px 50px -12px rgba(0,0,0,0.2);
+  --motionDuration: 0.2s;
+  --motionEase: cubic-bezier(0.4, 0, 0.2, 1);
+  --motionEaseBounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ================================================================
+   BASE / RESET
+   ================================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  font-family: var(--fontFamily);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--colorText);
+  background: var(--colorBgLayout);
+  line-height: 1.5;
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--colorPrimary);
+  text-decoration: none;
+}
+::selection {
+  background: var(--colorPrimaryBorder);
+  color: var(--colorText);
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--colorBgLayout); }
+::-webkit-scrollbar-thumb { background: var(--colorTextQuaternary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--colorTextTertiary); }
+.app-main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ================================================================
+   ACCESSIBILITY — FOCUS RINGS
+   ================================================================ */
+.btn:focus-visible,
+.icon-btn:focus-visible,
+.nav-item:focus-visible,
+.sub-nav-item:focus-visible,
+.tab:focus-visible,
+.settings-nav-item:focus-visible,
+.modal-close:focus-visible {
+  outline: 2px solid var(--colorPrimary);
+  outline-offset: 2px;
+  border-radius: var(--borderRadiusSM);
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.app-header {
+  background: var(--colorBgContainer);
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  padding: 0 32px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 100;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #111827 0%, #374151 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colorPrimary);
+  font-weight: 800;
+  font-size: 22px;
+  box-shadow: 0 4px 10px rgba(17,24,39,0.25);
+  transition: transform var(--motionDuration) var(--motionEaseBounce);
+}
+.brand:hover .brand-logo {
+  transform: rotate(4deg) scale(1.05);
+}
+.brand-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.brand-text p {
+  font-size: 12px;
+  color: var(--colorTextTertiary);
+  line-height: 1.3;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--borderRadius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colorTextSecondary);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  position: relative;
+  transition: all var(--motionDuration);
+}
+.icon-btn:hover {
+  background: var(--colorBgLayout);
+  color: var(--colorText);
+  transform: translateY(-1px);
+}
+.icon-btn:active {
+  transform: translateY(0) scale(0.92);
+}
+.icon-btn svg {
+  width: 19px;
+  height: 19px;
+  transition: transform var(--motionDuration);
+}
+.icon-btn:hover svg {
+  transform: rotate(8deg) scale(1.06);
+}
+.badge-count {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  min-width: 17px;
+  height: 17px;
+  background: var(--colorError);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--colorBgContainer);
+  animation: badgePulse 2.4s infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 10px 6px 6px;
+  border-radius: 100px;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  transition: all var(--motionDuration);
+}
+.user-profile:hover {
+  background: var(--colorBgLayout);
+  border-color: var(--colorBorder);
+}
+.user-profile > svg {
+  width: 15px;
+  height: 15px;
+  color: var(--colorTextTertiary);
+  transition: transform var(--motionDuration);
+}
+.user-profile:hover > svg {
+  transform: rotate(180deg);
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--colorPrimary) 0%, var(--colorPrimaryActive) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(230,168,23,0.35);
+}
+.user-info .name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.user-info .role {
+  font-size: 12px;
+  color: var(--colorTextTertiary);
+  line-height: 1.25;
+}
+
+/* ================================================================
+   PRIMARY NAV — ACTIVE = GOLDEN YELLOW TEXT + SLIDING UNDERLINE
+   ================================================================ */
+.primary-nav {
+  background: var(--colorBgContainer);
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  padding: 0 32px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  transition: box-shadow var(--motionDuration);
+}
+.primary-nav.scroll-left {
+  box-shadow: inset 14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.primary-nav.scroll-right {
+  box-shadow: inset -14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.primary-nav.scroll-left.scroll-right {
+  box-shadow: inset 14px 0 14px -14px rgba(0,0,0,0.18),
+              inset -14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--colorTextSecondary);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color var(--motionDuration), background var(--motionDuration);
+  position: relative;
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, var(--colorPrimary), var(--colorPrimaryHover));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.28s var(--motionEase);
+}
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--motionDuration) var(--motionEaseBounce);
+}
+.nav-item:hover {
+  color: var(--colorPrimary);
+  background: rgba(230,168,23,0.04);
+}
+.nav-item:hover svg {
+  transform: translateY(-2px) scale(1.1);
+}
+.nav-item:hover::after {
+  transform: scaleX(0.45);
+}
+.nav-item.active {
+  color: var(--colorPrimary);
+  border-bottom-color: transparent;
+}
+.nav-item.active svg {
+  color: var(--colorPrimary);
+}
+.nav-item.active::after {
+  transform: scaleX(1);
+}
+.nav-item .nav-badge {
+  background: var(--colorErrorBg);
+  color: var(--colorError);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 100px;
+}
+
+/* ================================================================
+   SECONDARY NAV — ACTIVE = GOLDEN TEXT + LIGHT YELLOW PILL
+   (stroke lines fully removed)
+   ================================================================ */
+.secondary-nav {
+  background: var(--colorBgContainer);
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  padding: 6px 32px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  transition: box-shadow var(--motionDuration);
+}
+.secondary-nav.scroll-left {
+  box-shadow: inset 14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.secondary-nav.scroll-right {
+  box-shadow: inset -14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.secondary-nav.scroll-left.scroll-right {
+  box-shadow: inset 14px 0 14px -14px rgba(0,0,0,0.18),
+              inset -14px 0 14px -14px rgba(0,0,0,0.18);
+}
+.sub-nav-item {
+  padding: 10px 22px;
+  margin: 2px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--colorTextSecondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--motionDuration), background var(--motionDuration), transform var(--motionDuration);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  position: relative;
+}
+.sub-nav-item svg {
+  width: 14px;
+  height: 14px;
+}
+.sub-nav-item:hover:not(.active) {
+  color: var(--colorPrimary);
+  background: rgba(230,168,23,0.07);
+  transform: translateY(-1px);
+}
+.sub-nav-item:active {
+  transform: scale(0.96);
+}
+.sub-nav-item.active {
+  color: var(--colorPrimary);
+  background: var(--colorPrimaryBg);
+  font-weight: 700;
+  box-shadow: none;
+  animation: pillPop 0.32s var(--motionEaseBounce);
+}
+@keyframes pillPop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+.sub-nav-badge {
+  background: var(--colorBorderSecondary);
+  color: var(--colorTextSecondary);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 100px;
+  transition: all var(--motionDuration);
+}
+.sub-nav-badge.pulse {
+  animation: badgePulse 2.4s infinite;
+}
+.sub-nav-item.active .sub-nav-badge {
+  background: var(--colorPrimaryBorder);
+  color: var(--colorPrimaryActive);
+}
+
+/* ================================================================
+   CONTENT / BREADCRUMB / PAGES
+   ================================================================ */
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 32px;
+  scroll-behavior: smooth;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--colorTextTertiary);
+  margin-bottom: 18px;
+}
+.breadcrumb a {
+  color: var(--colorTextTertiary);
+  transition: color var(--motionDuration);
+}
+.breadcrumb a:hover {
+  color: var(--colorPrimary);
+}
+.breadcrumb .separator {
+  opacity: 0.6;
+}
+.breadcrumb .current {
+  color: var(--colorText);
+  font-weight: 700;
+}
+.breadcrumb .current.swap {
+  animation: crumbSwap 0.3s var(--motionEase);
+}
+@keyframes crumbSwap {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.module-page {
+  display: none;
+  animation: pageFade 0.3s var(--motionEase);
+}
+.module-page.active {
+  display: block;
+}
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.page-title {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--colorTextSecondary);
+  margin-top: 3px;
+}
+.page-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.search-box {
+  position: relative;
+  width: 260px;
+}
+.search-box input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px 0 36px;
+  background: var(--colorBgContainer);
+  border: 1px solid var(--colorBorder);
+  border-radius: var(--borderRadius);
+  font-family: inherit;
+  font-size: 13px;
+  transition: all var(--motionDuration);
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--colorPrimary);
+  box-shadow: 0 0 0 3px rgba(230,168,23,0.1);
+}
+.search-box svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: var(--colorTextTertiary);
+  transition: color var(--motionDuration);
+}
+.search-box:focus-within svg {
+  color: var(--colorPrimary);
+}
+
+/* ================================================================
+   BUTTONS + RIPPLE + MAGNETIC VARS
+   ================================================================ */
+.btn {
+  height: 37px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--borderRadiusSM);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all var(--motionDuration) var(--motionEase);
+  position: relative;
+  overflow: hidden;
+  transform: translate(var(--mx, 0px), var(--my, 0px)) scale(var(--sc, 1));
+}
+.btn svg {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--motionDuration);
+}
+.btn:hover svg {
+  transform: scale(1.12);
+}
+.btn:active {
+  --sc: 0.96;
+}
+.btn-primary {
+  background: var(--colorPrimary);
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(230,168,23,0.25);
+}
+.btn-primary:hover {
+  background: var(--colorPrimaryHover);
+  box-shadow: 0 6px 14px rgba(230,168,23,0.3);
+  filter: brightness(1.02);
+}
+.btn-default {
+  background: var(--colorBgContainer);
+  color: var(--colorText);
+  border-color: var(--colorBorder);
+}
+.btn-default:hover {
+  border-color: var(--colorPrimary);
+  color: var(--colorPrimary);
+  background: var(--colorPrimaryBg);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--colorTextSecondary);
+}
+.btn-ghost:hover {
+  background: var(--colorBgLayout);
+  color: var(--colorText);
+}
+.btn-danger { background: var(--colorError); color: #fff; }
+.btn-success { background: var(--colorSuccess); color: #fff; }
+.btn-sm { height: 30px; padding: 0 11px; font-size: 12px; }
+.btn-sm svg { width: 13px; height: 13px; }
+.btn-icon { width: 37px; padding: 0; }
+.btn-icon.btn-sm { width: 30px; }
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background-color: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+.btn-default .ripple,
+.btn-ghost .ripple {
+  background-color: rgba(230,168,23,0.2);
+}
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ================================================================
+   FILTER CARD
+   ================================================================ */
+.filter-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  padding: 20px;
+  box-shadow: var(--boxShadow);
+  margin-bottom: 20px;
+  border: 1px solid var(--colorBorderSecondary);
+  transition: border-color var(--motionDuration);
+}
+.filter-card:hover {
+  border-color: var(--colorPrimaryBorder);
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  align-items: end;
+}
+.filter-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorTextSecondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.ant-select, .ant-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: var(--colorText);
+  background: var(--colorBgContainer);
+  border: 1.5px solid var(--colorBorder);
+  border-radius: var(--borderRadiusSM);
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--motionDuration);
+}
+.ant-select:hover, .ant-input:hover {
+  border-color: var(--colorPrimaryHover);
+}
+.ant-select:focus, .ant-input:focus {
+  border-color: var(--colorPrimary);
+  box-shadow: 0 0 0 3px rgba(230,168,23,0.1);
+}
+.filter-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--colorBorderSecondary);
+}
+
+/* ================================================================
+   KPI CARDS + TILT + STAGGER + COUNT-UP
+   ================================================================ */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.kpi-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  padding: 18px;
+  box-shadow: var(--boxShadow);
+  cursor: pointer;
+  border: 1px solid var(--colorBorderSecondary);
+  position: relative;
+  overflow: hidden;
+  perspective: 600px;
+  transform: translateY(var(--ty, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: box-shadow var(--motionDuration), border-color var(--motionDuration), transform 0.12s ease-out;
+}
+.kpi-card:hover {
+  --ty: -3px;
+  box-shadow: var(--boxShadowLifted);
+  border-color: var(--colorPrimaryBorder);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--colorPrimary), var(--colorPrimaryHover));
+  opacity: 0;
+  transition: opacity var(--motionDuration);
+}
+.kpi-card:hover::before {
+  opacity: 1;
+}
+.stagger-in {
+  animation: riseIn 0.45s var(--motionEase) both;
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.kpi-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorTextSecondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.kpi-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--borderRadius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--motionDuration) var(--motionEaseBounce);
+}
+.kpi-card:hover .kpi-icon {
+  transform: scale(1.1) rotate(-4deg);
+}
+.kpi-icon svg { width: 18px; height: 18px; }
+.kpi-icon.primary { background: var(--colorPrimaryBg); color: var(--colorPrimary); }
+.kpi-icon.success { background: var(--colorSuccessBg); color: var(--colorSuccess); }
+.kpi-icon.warning { background: var(--colorWarningBg); color: var(--colorWarning); }
+.kpi-icon.error { background: var(--colorErrorBg); color: var(--colorError); }
+.kpi-icon.info { background: var(--colorInfoBg); color: var(--colorInfo); }
+.kpi-icon.purple { background: var(--colorPurpleBg); color: var(--colorPurple); }
+.kpi-icon.cyan { background: var(--colorCyanBg); color: var(--colorCyan); }
+.kpi-value {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-trend {
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.kpi-trend svg { width: 12px; height: 12px; }
+.trend-up { color: var(--colorSuccess); }
+.trend-down { color: var(--colorError); }
+.trend-neutral { color: var(--colorTextTertiary); }
+.kpi-meta {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  font-size: 11px;
+  color: var(--colorTextSecondary);
+}
+.kpi-meta strong { color: var(--colorText); }
+
+/* ================================================================
+   CHARTS
+   ================================================================ */
+.charts-grid {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.charts-row-2 { grid-template-columns: 2fr 1fr; }
+.charts-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+.charts-row-equal { grid-template-columns: 1fr 1fr; }
+.chart-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  padding: 20px;
+  box-shadow: var(--boxShadow);
+  border: 1px solid var(--colorBorderSecondary);
+  transition: border-color var(--motionDuration), box-shadow var(--motionDuration);
+}
+.chart-card:hover {
+  border-color: var(--colorPrimaryBorder);
+  box-shadow: var(--boxShadowSecondary);
+}
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 10px;
+}
+.chart-title { font-size: 15px; font-weight: 700; }
+.chart-subtitle { font-size: 12px; color: var(--colorTextTertiary); margin-top: 2px; }
+.chart-actions { display: flex; gap: 6px; }
+.chart-body { position: relative; height: 300px; }
+.chart-body.tall { height: 350px; }
+
+/* ================================================================
+   TABLES + ROW ACCENT BAR + COPY FLASH
+   ================================================================ */
+.data-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  box-shadow: var(--boxShadow);
+  border: 1px solid var(--colorBorderSecondary);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.data-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.data-card-title { font-size: 15px; font-weight: 700; }
+.data-card-subtitle { font-size: 12px; color: var(--colorTextSecondary); margin-top: 2px; }
+.data-table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table thead th {
+  background: var(--colorBgLayout);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorTextSecondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--motionDuration);
+}
+.data-table thead th:hover { background: #EFEFF1; }
+.data-table tbody tr {
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  cursor: pointer;
+  transition: background var(--motionDuration);
+  position: relative;
+}
+.data-table tbody tr::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--colorPrimary);
+  transform: scaleY(0);
+  transition: transform var(--motionDuration);
+}
+.data-table tbody tr:hover { background: var(--colorBgLayout); }
+.data-table tbody tr:hover::before { transform: scaleY(1); }
+.data-table tbody tr:last-child { border-bottom: none; }
+.data-table tbody td { padding: 12px 14px; vertical-align: middle; }
+.row-id {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--colorPrimary);
+  font-size: 12px;
+  cursor: copy;
+  transition: color var(--motionDuration);
+}
+.row-id:hover { text-decoration: underline dotted; }
+.row-id.copied {
+  color: var(--colorSuccess);
+  animation: copyFlash 0.7s var(--motionEase);
+}
+@keyframes copyFlash {
+  0% { background: var(--colorSuccessBg); }
+  100% { background: transparent; }
+}
+.row-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* ================================================================
+   BADGES
+   ================================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: transform var(--motionDuration);
+}
+tr:hover .badge,
+.kanban-card:hover .badge {
+  transform: scale(1.05);
+}
+.badge-primary { background: var(--colorPrimaryBg); color: var(--colorPrimaryActive); }
+.badge-success { background: var(--colorSuccessBg); color: var(--colorSuccess); }
+.badge-warning { background: var(--colorWarningBg); color: var(--colorWarning); }
+.badge-error { background: var(--colorErrorBg); color: var(--colorError); }
+.badge-info { background: var(--colorInfoBg); color: var(--colorInfo); }
+.badge-purple { background: var(--colorPurpleBg); color: var(--colorPurple); }
+.badge-gray { background: var(--colorBorderSecondary); color: var(--colorTextSecondary); }
+.badge-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ================================================================
+   TABS (orders view) + KANBAN
+   ================================================================ */
+.tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  margin-bottom: 16px;
+}
+.tab {
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--colorTextSecondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: color var(--motionDuration), background var(--motionDuration);
+}
+.tab svg { width: 13px; height: 13px; }
+.tab:hover {
+  color: var(--colorPrimary);
+  background: var(--colorPrimaryBg);
+}
+.tab.active {
+  color: var(--colorPrimary);
+  border-bottom-color: var(--colorPrimary);
+  font-weight: 600;
+}
+.tab-panel { display: none; }
+.tab-panel.active {
+  display: block;
+  animation: pageFade 0.2s var(--motionEase);
+}
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(265px, 1fr));
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.kanban-column {
+  background: #F0F0F2;
+  border-radius: var(--borderRadiusLG);
+  padding: 12px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  transition: background var(--motionDuration);
+}
+.kanban-column.drag-over {
+  background: var(--colorPrimaryBg);
+  outline: 2px dashed var(--colorPrimary);
+  animation: dragPulse 1s infinite;
+}
+@keyframes dragPulse {
+  0%, 100% { outline-offset: 0; }
+  50% { outline-offset: 4px; }
+}
+.kanban-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 12px;
+  border-bottom: 1px solid var(--colorBorder);
+  margin-bottom: 12px;
+}
+.kanban-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.kanban-dot { width: 8px; height: 8px; border-radius: 50%; }
+.kanban-count {
+  background: var(--colorBgContainer);
+  padding: 2px 9px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorTextSecondary);
+}
+.kanban-cards {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kanban-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadius);
+  padding: 12px;
+  box-shadow: var(--boxShadow);
+  cursor: grab;
+  border: 1px solid var(--colorBorderSecondary);
+  transition: all var(--motionDuration);
+}
+.kanban-card:hover {
+  transform: translateY(-2px) rotate(0.4deg);
+  box-shadow: var(--boxShadowSecondary);
+  border-color: var(--colorPrimaryBorder);
+}
+.kanban-card.dragging { opacity: 0.4; }
+.kanban-card-id {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorPrimary);
+  margin-bottom: 4px;
+}
+.kanban-card-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.kanban-card-meta {
+  display: flex;
+  gap: 9px;
+  font-size: 11px;
+  color: var(--colorTextSecondary);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.kanban-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.kanban-card-meta svg { width: 12px; height: 12px; }
+.kanban-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--colorBorderSecondary);
+}
+.kanban-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--colorPrimary), var(--colorPrimaryActive));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* ================================================================
+   PRODUCTS
+   ================================================================ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 14px;
+}
+.product-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  padding: 16px;
+  box-shadow: var(--boxShadow);
+  border: 1px solid var(--colorBorderSecondary);
+  cursor: pointer;
+  perspective: 600px;
+  transform: translateY(var(--ty, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: box-shadow var(--motionDuration), border-color var(--motionDuration), transform 0.12s ease-out;
+}
+.product-card:hover {
+  --ty: -3px;
+  box-shadow: var(--boxShadowLifted);
+  border-color: var(--colorPrimaryBorder);
+}
+.product-image {
+  height: 130px;
+  border-radius: var(--borderRadius);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  background: linear-gradient(135deg, var(--colorPrimaryBg), #FFF4CC);
+  transition: transform var(--motionDuration) var(--motionEase);
+}
+.product-card:hover .product-image {
+  transform: scale(1.04);
+}
+.product-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.product-sku {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--colorTextTertiary);
+  margin-bottom: 8px;
+}
+.product-price { font-size: 18px; font-weight: 800; color: var(--colorPrimary); }
+.product-unit { font-size: 12px; color: var(--colorTextTertiary); }
+.product-stats {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  font-size: 11px;
+}
+.product-stat { text-align: center; }
+.product-stat-value { font-weight: 700; font-size: 13px; }
+.product-stat-label { color: var(--colorTextTertiary); }
+
+/* ================================================================
+   COLD ROOMS + CRITICAL PULSE
+   ================================================================ */
+.coldroom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.coldroom-card {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  padding: 18px;
+  box-shadow: var(--boxShadow);
+  border: 1px solid var(--colorBorderSecondary);
+  transition: transform var(--motionDuration), box-shadow var(--motionDuration);
+}
+.coldroom-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--boxShadowSecondary);
+}
+.coldroom-card.critical {
+  border-color: var(--colorError);
+  background: linear-gradient(135deg, #fff, #FEF2F2);
+  animation: criticalPulse 2s infinite;
+}
+@keyframes criticalPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.25); }
+  50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
+}
+.coldroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.coldroom-name { font-size: 14px; font-weight: 700; }
+.coldroom-code {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--colorTextTertiary);
+}
+.coldroom-temp {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.coldroom-temp-value {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.coldroom-card.critical .coldroom-temp-value { color: var(--colorError); }
+.coldroom-temp-unit { font-size: 14px; color: var(--colorTextSecondary); }
+.coldroom-target {
+  font-size: 11px;
+  color: var(--colorTextTertiary);
+  margin: 4px 0 12px;
+}
+.coldroom-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  font-size: 11px;
+}
+.coldroom-meta-label { color: var(--colorTextTertiary); }
+.coldroom-meta-value { font-weight: 600; }
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+.status-dot.online { background: var(--colorSuccess); }
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--colorSuccess);
+}
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--colorSuccess);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); }
+}
+
+/* ================================================================
+   PROGRESS + SHIMMER
+   ================================================================ */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--colorBorderSecondary);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--colorPrimary), var(--colorPrimaryHover));
+  border-radius: 100px;
+  transition: width 0.5s var(--motionEase);
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2.2s infinite;
+}
+@keyframes shimmer {
+  to { transform: translateX(100%); }
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--colorTextSecondary);
+  margin-bottom: 4px;
+}
+
+/* ================================================================
+   QC CHECKLIST + CHECK POP
+   ================================================================ */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--colorBorderSecondary);
+  border-radius: var(--borderRadius);
+  cursor: pointer;
+  transition: all var(--motionDuration);
+}
+.checklist-item:hover {
+  border-color: var(--colorPrimaryBorder);
+  background: var(--colorPrimaryBg);
+  transform: translateX(2px);
+}
+.checklist-item.checked {
+  background: var(--colorSuccessBg);
+  border-color: var(--colorSuccess);
+}
+.checklist-check {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--colorBorder);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--motionDuration);
+}
+.checklist-item.checked .checklist-check {
+  background: var(--colorSuccess);
+  border-color: var(--colorSuccess);
+  animation: checkPop 0.28s var(--motionEaseBounce);
+}
+@keyframes checkPop {
+  0% { transform: scale(0.5); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.checklist-check svg { width: 12px; height: 12px; color: #fff; opacity: 0; }
+.checklist-item.checked .checklist-check svg { opacity: 1; }
+.checklist-label { flex: 1; font-size: 13px; font-weight: 500; }
+.checklist-item.checked .checklist-label {
+  text-decoration: line-through;
+  color: var(--colorTextTertiary);
+}
+.checklist-value { font-size: 12px; color: var(--colorTextSecondary); }
+
+/* ================================================================
+   DRAWERS / MODALS
+   ================================================================ */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: none;
+}
+.drawer-overlay.open { display: block; }
+.drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: 620px;
+  max-width: 95vw;
+  height: 100vh;
+  background: var(--colorBgContainer);
+  box-shadow: var(--boxShadowModal);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s var(--motionEase);
+}
+.drawer.open { transform: translateX(0); }
+.drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drawer-title { font-size: 17px; font-weight: 700; }
+.drawer-subtitle { font-size: 12px; color: var(--colorTextTertiary); margin-top: 2px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.drawer-footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--colorBgLayout);
+}
+.drawer-section { margin-bottom: 22px; }
+.drawer-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--colorTextSecondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.drawer-section-title svg { width: 14px; height: 14px; }
+.drawer-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.drawer-info-item {
+  background: var(--colorBgLayout);
+  padding: 10px 12px;
+  border-radius: var(--borderRadius);
+  transition: transform var(--motionDuration);
+}
+.drawer-info-item:hover { transform: translateY(-2px); }
+.drawer-info-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--colorTextTertiary);
+  margin-bottom: 2px;
+}
+.drawer-info-value { font-size: 13px; font-weight: 600; }
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--colorBorderSecondary);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 14px;
+  transition: transform var(--motionDuration);
+}
+.timeline-item:hover { transform: translateX(3px); }
+.timeline-dot {
+  position: absolute;
+  left: -22px; top: 4px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--colorPrimary);
+}
+.timeline-dot.success { border-color: var(--colorSuccess); }
+.timeline-dot.gray { border-color: var(--colorTextQuaternary); background: var(--colorTextQuaternary); }
+.timeline-content {
+  background: var(--colorBgLayout);
+  padding: 10px 14px;
+  border-radius: var(--borderRadius);
+}
+.timeline-title { font-size: 13px; font-weight: 600; }
+.timeline-desc { font-size: 12px; color: var(--colorTextSecondary); }
+.timeline-time { font-size: 11px; color: var(--colorTextTertiary); }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusXL);
+  box-shadow: var(--boxShadowModal);
+  max-width: 620px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalScale 0.3s var(--motionEaseBounce);
+}
+.modal.lg { max-width: 880px; }
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.95) translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-title { font-size: 17px; font-weight: 700; }
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--borderRadius);
+  border: none;
+  background: var(--colorBgLayout);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colorTextSecondary);
+  transition: all var(--motionDuration);
+}
+.modal-close:hover {
+  background: var(--colorErrorBg);
+  color: var(--colorError);
+}
+.modal-close:hover svg { transform: rotate(90deg); }
+.modal-close svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--motionDuration);
+}
+.modal-body { padding: 24px; overflow-y: auto; }
+.modal-footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  background: var(--colorBgLayout);
+}
+.form-group { margin-bottom: 15px; }
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.form-group .required { color: var(--colorError); }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ================================================================
+   NOTIFICATIONS
+   ================================================================ */
+.notification-drawer {
+  position: fixed;
+  top: 0; right: 0;
+  width: 400px;
+  max-width: 95vw;
+  height: 100vh;
+  background: var(--colorBgContainer);
+  box-shadow: var(--boxShadowModal);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s var(--motionEase);
+}
+.notification-drawer.open { transform: translateX(0); }
+.notification-list { flex: 1; overflow-y: auto; padding: 8px; }
+.notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--borderRadius);
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: background var(--motionDuration), transform var(--motionDuration);
+}
+.notification-item:hover {
+  background: var(--colorBgLayout);
+  transform: translateX(3px);
+}
+.notification-item.unread { background: var(--colorPrimaryBg); }
+.notification-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--motionDuration) var(--motionEaseBounce);
+}
+.notification-item:hover .notification-icon { transform: scale(1.1); }
+.notification-icon svg { width: 16px; height: 16px; }
+.notification-icon.success { background: var(--colorSuccessBg); color: var(--colorSuccess); }
+.notification-icon.warning { background: var(--colorWarningBg); color: var(--colorWarning); }
+.notification-icon.error { background: var(--colorErrorBg); color: var(--colorError); }
+.notification-icon.info { background: var(--colorInfoBg); color: var(--colorInfo); }
+.notification-title { font-size: 13px; font-weight: 600; }
+.notification-message { font-size: 12px; color: var(--colorTextSecondary); line-height: 1.4; }
+.notification-time { font-size: 11px; color: var(--colorTextTertiary); margin-top: 3px; }
+
+/* ================================================================
+   COMMAND PALETTE
+   ================================================================ */
+.cmd-palette-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+}
+.cmd-palette-overlay.open { display: flex; }
+.cmd-palette {
+  background: var(--colorBgContainer);
+  width: 620px;
+  max-width: 95vw;
+  max-height: 68vh;
+  border-radius: var(--borderRadiusXL);
+  box-shadow: var(--boxShadowModal);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalScale 0.2s var(--motionEaseBounce);
+}
+.cmd-palette-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+}
+.cmd-palette-search svg { width: 18px; height: 18px; color: var(--colorTextTertiary); }
+.cmd-palette-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+}
+.cmd-palette-body { overflow-y: auto; padding: 8px; }
+.cmd-group-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--colorTextTertiary);
+  padding: 8px 12px 4px;
+}
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--borderRadius);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background var(--motionDuration), transform var(--motionDuration);
+}
+.cmd-item:hover, .cmd-item.active {
+  background: var(--colorPrimaryBg);
+  transform: translateX(3px);
+}
+.cmd-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--borderRadius);
+  background: var(--colorBgLayout);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colorTextSecondary);
+  flex-shrink: 0;
+  transition: all var(--motionDuration);
+}
+.cmd-item-icon svg { width: 16px; height: 16px; }
+.cmd-item.active .cmd-item-icon {
+  background: var(--colorPrimary);
+  color: #fff;
+}
+.cmd-item-title { font-weight: 600; }
+.cmd-item-desc { font-size: 11px; color: var(--colorTextTertiary); }
+.cmd-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--colorBorderSecondary);
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--colorTextTertiary);
+  background: var(--colorBgLayout);
+}
+.cmd-footer kbd {
+  background: #fff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--colorBorder);
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+
+/* ================================================================
+   TOASTS + PROGRESS BAR
+   ================================================================ */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 380px;
+}
+.toast {
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadius);
+  padding: 12px 16px;
+  box-shadow: var(--boxShadowModal);
+  border-left: 4px solid var(--colorPrimary);
+  display: flex;
+  gap: 10px;
+  animation: toastIn 0.3s var(--motionEaseBounce);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  --tc: var(--colorPrimary);
+}
+.toast::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--tc);
+  opacity: 0.3;
+  animation: toastBar var(--dur, 4000ms) linear forwards;
+}
+@keyframes toastBar {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+.toast.success { border-left-color: var(--colorSuccess); --tc: var(--colorSuccess); }
+.toast.error { border-left-color: var(--colorError); --tc: var(--colorError); }
+.toast.warning { border-left-color: var(--colorWarning); --tc: var(--colorWarning); }
+.toast.info { border-left-color: var(--colorInfo); --tc: var(--colorInfo); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: none; }
+}
+.toast.hiding { animation: toastOut 0.3s var(--motionEase) forwards; }
+@keyframes toastOut {
+  to { opacity: 0; transform: translateX(100%); }
+}
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toast-icon svg { width: 14px; height: 14px; }
+.toast.success .toast-icon { background: var(--colorSuccessBg); color: var(--colorSuccess); }
+.toast.error .toast-icon { background: var(--colorErrorBg); color: var(--colorError); }
+.toast.warning .toast-icon { background: var(--colorWarningBg); color: var(--colorWarning); }
+.toast.info .toast-icon { background: var(--colorInfoBg); color: var(--colorInfo); }
+.toast-title { font-size: 13px; font-weight: 700; }
+.toast-message { font-size: 12px; color: var(--colorTextSecondary); }
+
+/* ================================================================
+   CONTEXT MENU
+   ================================================================ */
+.context-menu {
+  position: fixed;
+  background: var(--colorBgContainer);
+  border: 1px solid var(--colorBorder);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--boxShadowModal);
+  padding: 4px;
+  z-index: 2500;
+  min-width: 200px;
+  display: none;
+  animation: modalScale 0.15s var(--motionEase);
+}
+.context-menu.open { display: block; }
+.context-menu-item {
+  padding: 8px 12px;
+  border-radius: var(--borderRadiusSM);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  transition: background var(--motionDuration);
+}
+.context-menu-item:hover { background: var(--colorBgLayout); }
+.context-menu-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--colorTextSecondary);
+  transition: transform var(--motionDuration);
+}
+.context-menu-item:hover svg { transform: scale(1.15) rotate(-6deg); }
+.context-menu-item.danger { color: var(--colorError); }
+.context-menu-item.danger svg { color: var(--colorError); }
+.context-menu-divider {
+  height: 1px;
+  background: var(--colorBorderSecondary);
+  margin: 4px 0;
+}
+
+/* ================================================================
+   SETTINGS / ACTIVITY
+   ================================================================ */
+.settings-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  background: var(--colorBgContainer);
+  border-radius: var(--borderRadiusLG);
+  box-shadow: var(--boxShadow);
+  overflow: hidden;
+  border: 1px solid var(--colorBorderSecondary);
+}
+.settings-nav {
+  background: var(--colorBgLayout);
+  padding: 14px 8px;
+  border-right: 1px solid var(--colorBorderSecondary);
+}
+.settings-nav-item {
+  padding: 10px 14px;
+  border-radius: var(--borderRadius);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--colorTextSecondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+  transition: all var(--motionDuration);
+}
+.settings-nav-item svg { width: 16px; height: 16px; }
+.settings-nav-item:hover {
+  background: #fff;
+  color: var(--colorText);
+  transform: translateX(3px);
+}
+.settings-nav-item.active {
+  background: var(--colorPrimaryBg);
+  color: var(--colorPrimaryActive);
+  font-weight: 600;
+}
+.settings-content { padding: 24px; }
+.settings-section { margin-bottom: 26px; }
+.settings-section-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.settings-section-desc { font-size: 12px; color: var(--colorTextSecondary); margin-bottom: 12px; }
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  gap: 12px;
+  transition: background var(--motionDuration);
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-row-label { font-size: 13px; font-weight: 600; }
+.settings-row-desc { font-size: 11px; color: var(--colorTextTertiary); }
+.toggle {
+  width: 40px;
+  height: 22px;
+  background: var(--colorTextQuaternary);
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--motionDuration);
+}
+.toggle.on { background: var(--colorPrimary); }
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s var(--motionEaseBounce), width 0.15s;
+}
+.toggle.on::after { transform: translateX(18px); }
+.toggle:active::after { width: 22px; }
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  transition: transform var(--motionDuration);
+}
+.activity-item:hover { transform: translateX(3px); }
+.activity-item:last-child { border-bottom: none; }
+.activity-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--colorPrimary), var(--colorPrimaryActive));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.activity-text { font-size: 13px; line-height: 1.5; }
+.activity-text a { color: var(--colorPrimary); font-weight: 600; }
+.activity-time { font-size: 11px; color: var(--colorTextTertiary); margin-top: 2px; }
+
+/* ================================================================
+   PAGE LOADER / SCROLL-TOP / MISC ANIMATIONS
+   ================================================================ */
+.page-loader {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 4000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.page-loader.on { opacity: 1; }
+.page-loader-bar {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, var(--colorPrimary), var(--colorPrimaryHover));
+  animation: loaderSlide 1s var(--motionEase) infinite;
+}
+@keyframes loaderSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+.scroll-top {
+  position: fixed;
+  right: 26px;
+  bottom: 26px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--colorPrimary);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(230,168,23,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+  opacity: 0;
+  transform: translateY(16px) scale(0.8);
+  pointer-events: none;
+  transition: all 0.25s var(--motionEaseBounce);
+}
+.scroll-top.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.scroll-top:hover { background: var(--colorPrimaryHover); }
+.scroll-top svg { width: 18px; height: 18px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--colorBorderSecondary);
+  font-size: 13px;
+}
+.shortcut-row:last-child { border-bottom: none; }
+.shortcut-row kbd {
+  background: var(--colorBgLayout);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--colorBorder);
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1200px) {
+  .kanban-board { grid-template-columns: repeat(3, minmax(250px,1fr)); }
+  .charts-row-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .charts-row-2, .charts-row-equal, .charts-row-3 { grid-template-columns: 1fr; }
+  .kanban-board { grid-template-columns: repeat(2, minmax(230px,1fr)); }
+  .settings-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .app-header, .primary-nav, .secondary-nav { padding-left: 16px; padding-right: 16px; }
+  .content-area { padding: 18px 16px; }
+  .user-info { display: none; }
+}
+@media (max-width: 600px) {
+  .kanban-board { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page-loader" id="pageLoader"><div class="page-loader-bar"></div></div>
+<div class="app-main">
+<!-- ============ HEADER ============ -->
+<header class="app-header">
+<div class="brand" onclick="navigate('sales','dashboard')">
+<div class="brand-logo">D</div>
+<div class="brand-text">
+<h1>Devi Fisheries Limited</h1>
+<p>Powered by Canaro</p>
+</div>
+</div>
+<div class="header-actions">
+<button class="icon-btn" title="Refresh (R)" onclick="refreshData()"><i data-lucide="refresh-cw" id="refreshIcon"></i></button>
+<button class="icon-btn" title="Notifications" onclick="openNotifications()">
+<i data-lucide="bell"></i><span class="badge-count" id="notifCount">3</span>
+</button>
+<button class="icon-btn" title="Settings" onclick="navigate('settings','profile')"><i data-lucide="settings"></i></button>
+<button class="icon-btn" title="Keyboard shortcuts (?)" onclick="openModal('shortcutsModal')"><i data-lucide="keyboard"></i></button>
+<button class="icon-btn" title="Fullscreen (F)" onclick="toggleFullscreen()"><i data-lucide="maximize"></i></button>
+<div class="user-profile" onclick="openCommandPalette()">
+<div class="avatar">SA</div>
+<div class="user-info">
+<div class="name">Super admin</div>
+<div class="role">Administrator</div>
+</div>
+<i data-lucide="chevron-down"></i>
+</div>
+</div>
+</header>
+<!-- ============ PRIMARY NAV ============ -->
+<nav class="primary-nav" id="primaryNav">
+<div class="nav-item active" tabindex="0" role="tab" data-module="sales" onclick="navigateModule('sales')"><i data-lucide="shopping-cart"></i> Sales</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="purchase" onclick="navigateModule('purchase')"><i data-lucide="package"></i> Purchase</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="preprocessing" onclick="navigateModule('preprocessing')"><i data-lucide="settings-2"></i> Preprocessing</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="qc" onclick="navigateModule('qc')"><i data-lucide="shield-check"></i> Quality Control</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="production" onclick="navigateModule('production')"><i data-lucide="factory"></i> Production</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="coldstore" onclick="navigateModule('coldstore')"><i data-lucide="snowflake"></i> Coldstore</div>
+<div class="nav-item" tabindex="0" role="tab" data-module="inventory" onclick="navigateModule('inventory')"><i data-lucide="warehouse"></i> Inventory</div>
+</nav>
+<!-- ============ SECONDARY NAV ============ -->
+<nav class="secondary-nav" id="secondaryNav"></nav>
+<!-- ============ CONTENT ============ -->
+<div class="content-area" id="contentArea">
+<div class="breadcrumb">
+<a href="#" onclick="navigate('sales','dashboard');return false;">Home</a>
+<span class="separator">/</span>
+<a href="#" id="crumbModule" onclick="return false;">Sales</a>
+<span class="separator">/</span>
+<span class="current" id="crumbSub">Dashboard</span>
+</div>
+<!-- ===== SALES > DASHBOARD ===== -->
+<div class="module-page active" id="page-dashboard">
+<div class="page-header">
+<div>
+<h2 class="page-title">Sales Dashboard</h2>
+<p class="page-subtitle">Real-time overview of your fisheries export operations · <span class="live-indicator"><span class="live-dot"></span>LIVE</span></p>
+</div>
+<div class="page-actions">
+<button class="btn btn-ghost" onclick="showToast('info','Share','Dashboard link copied')"><i data-lucide="share-2"></i> Share</button>
+<button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button>
+<button class="btn btn-primary" onclick="openModal('newOrderModal')"><i data-lucide="plus"></i> New Order</button>
+</div>
+</div>
+<div class="filter-card">
+<div class="filter-grid">
+<div class="filter-item"><label>Exporter</label><select class="ant-select"><option>All Exporters</option><option>Devi Fisheries</option><option>Ocean Fresh</option></select></div>
+<div class="filter-item"><label>Consignee</label><select class="ant-select"><option>All Consignees</option><option>USA Imports</option><option>EU Trading</option></select></div>
+<div class="filter-item"><label>Country</label><select class="ant-select"><option>All Countries</option><option>United States</option><option>China</option><option>EU</option></select></div>
+<div class="filter-item"><label>Year</label><select class="ant-select"><option>2026-2027</option><option>2025-2026</option></select></div>
+<div class="filter-item"><label>From Date</label><input type="date" class="ant-input" value="2026-04-01" /></div>
+<div class="filter-item"><label>To Date</label><input type="date" class="ant-input" value="2027-03-31" /></div>
+</div>
+<div class="filter-actions">
+<button class="btn btn-ghost" onclick="showToast('info','Saved','Filter bookmarked')"><i data-lucide="bookmark"></i> Save Filter</button>
+<button class="btn btn-default" onclick="showToast('info','Reset','Filters cleared')"><i data-lucide="rotate-ccw"></i> Reset</button>
+<button class="btn btn-primary" onclick="showToast('success','Applied','Dashboard updated')"><i data-lucide="search"></i> Apply Filters</button>
+</div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card" onclick="openOrderDrawer('ORD-2026-0465')"><div class="kpi-header"><span class="kpi-title">Pending Contracts</span><div class="kpi-icon warning"><i data-lucide="file-text"></i></div></div><div class="kpi-value">465</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 12.5% vs last month</div><div class="kpi-meta"><span><strong>$2.4M</strong> value</span><span><strong>38</strong> urgent</span></div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">On Water</span><div class="kpi-icon primary"><i data-lucide="ship"></i></div></div><div class="kpi-value">362</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 8.3% vs last month</div><div class="kpi-meta"><span><strong>24</strong> vessels</span><span><strong>18</strong> ports</span></div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Delivered</span><div class="kpi-icon success"><i data-lucide="check-circle-2"></i></div></div><div class="kpi-value">447</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 15.2% vs last month</div><div class="kpi-meta"><span><strong>98%</strong> on-time</span></div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Orders</span><div class="kpi-icon primary"><i data-lucide="clipboard-list"></i></div></div><div class="kpi-value" id="kpiOrders">1,274</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 22.1%</div><div class="kpi-meta"><span><strong>$8.7M</strong> revenue</span></div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Pending Payments</span><div class="kpi-icon error"><i data-lucide="credit-card"></i></div></div><div class="kpi-value">$366K</div><div class="kpi-trend trend-down"><i data-lucide="trending-down"></i> 3.4%</div><div class="kpi-meta"><span><strong>42</strong> overdue</span></div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Payments Received</span><div class="kpi-icon success"><i data-lucide="dollar-sign"></i></div></div><div class="kpi-value">$443K</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 18.7%</div><div class="kpi-meta"><span><strong>156</strong> transactions</span></div></div>
+</div>
+<div class="charts-grid charts-row-2">
+<div class="chart-card"><div class="chart-header"><div><div class="chart-title">Invoice Vs Shipments</div><div class="chart-subtitle">Monthly comparison FY 2026-27</div></div><div class="chart-actions"><button class="btn btn-sm btn-ghost"><i data-lucide="bar-chart-2"></i></button><button class="btn btn-sm btn-default"><i data-lucide="download"></i></button></div></div><div class="chart-body"><canvas id="invoiceVsShipments"></canvas></div></div>
+<div class="chart-card"><div class="chart-header"><div><div class="chart-title">Plant Wise Orders</div><div class="chart-subtitle">Distribution across units</div></div></div><div class="chart-body"><canvas id="plantWiseOrders"></canvas></div></div>
+</div>
+<div class="charts-grid charts-row-3">
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Country Wise Details</div></div><div class="chart-body"><canvas id="countryWise"></canvas></div></div>
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Shipped Containers (Port Wise)</div></div><div class="chart-body"><canvas id="portWise"></canvas></div></div>
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Revenue by Product</div></div><div class="chart-body"><canvas id="revenueByProduct"></canvas></div></div>
+</div>
+<div class="charts-grid">
+<div class="chart-card"><div class="chart-header"><div><div class="chart-title">To be shipped Qty vs Shipped Qty</div><div class="chart-subtitle">Tons, by size class</div></div></div><div class="chart-body tall"><canvas id="shippedQty"></canvas></div></div>
+</div>
+</div>
+<!-- ===== SALES > PRODUCT ===== -->
+<div class="module-page" id="page-products">
+<div class="page-header">
+<div><h2 class="page-title">Product Catalog</h2><p class="page-subtitle">Manage products, specifications and pricing</p></div>
+<div class="page-actions">
+<div class="search-box"><i data-lucide="search"></i><input type="text" placeholder="Search products..." /></div>
+<button class="btn btn-primary" onclick="openModal('newProductModal')"><i data-lucide="plus"></i> Add Product</button>
+</div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total SKUs</span><div class="kpi-icon info"><i data-lucide="package"></i></div></div><div class="kpi-value">142</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 12 new</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Active</span><div class="kpi-icon success"><i data-lucide="check"></i></div></div><div class="kpi-value">128</div><div class="kpi-trend trend-neutral">90.1% of total</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Low Stock</span><div class="kpi-icon warning"><i data-lucide="alert-triangle"></i></div></div><div class="kpi-value">8</div><div class="kpi-trend trend-down">Needs reorder</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Out of Stock</span><div class="kpi-icon error"><i data-lucide="x-circle"></i></div></div><div class="kpi-value">3</div><div class="kpi-trend trend-neutral">Unavailable</div></div>
+</div>
+<div class="product-grid" id="productsGrid"></div>
+</div>
+<!-- ===== SALES > BUYERS ===== -->
+<div class="module-page" id="page-buyers">
+<div class="page-header">
+<div><h2 class="page-title">Buyers & Customers</h2><p class="page-subtitle">International customer relationships</p></div>
+<div class="page-actions">
+<div class="search-box"><i data-lucide="search"></i><input type="text" placeholder="Search buyers..." /></div>
+<button class="btn btn-primary" onclick="openModal('newBuyerModal')"><i data-lucide="plus"></i> Add Buyer</button>
+</div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Buyers</span><div class="kpi-icon primary"><i data-lucide="users"></i></div></div><div class="kpi-value">87</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +14 this year</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Active</span><div class="kpi-icon success"><i data-lucide="activity"></i></div></div><div class="kpi-value">72</div><div class="kpi-trend trend-neutral">83% active rate</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Revenue</span><div class="kpi-icon success"><i data-lucide="dollar-sign"></i></div></div><div class="kpi-value">$8.7M</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +22%</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Avg Order Value</span><div class="kpi-icon info"><i data-lucide="trending-up"></i></div></div><div class="kpi-value">$6,830</div><div class="kpi-trend trend-up">+5.4%</div></div>
+</div>
+<div class="data-card">
+<div class="data-card-header"><div><div class="data-card-title">All Buyers</div><div class="data-card-subtitle">87 customers across 22 countries</div></div></div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>Buyer</th><th>Country</th><th>Contact</th><th>Orders</th><th>Revenue</th><th>Credit Limit</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+<tbody id="buyersTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ===== SALES > SALES (analysis) ===== -->
+<div class="module-page" id="page-sales">
+<div class="page-header">
+<div><h2 class="page-title">Sales Analysis</h2><p class="page-subtitle">Revenue performance and customer insights</p></div>
+<div class="page-actions"><button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button></div>
+</div>
+<div class="charts-grid charts-row-equal">
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Revenue Trend (12 months)</div></div><div class="chart-body tall"><canvas id="revenueTrend"></canvas></div></div>
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Customer Acquisition</div></div><div class="chart-body tall"><canvas id="customerAcq"></canvas></div></div>
+</div>
+<div class="data-card">
+<div class="data-card-header"><div class="data-card-title">Top Customers by Revenue</div></div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>#</th><th>Customer</th><th>Orders</th><th>Revenue</th><th>Share</th><th>Growth</th></tr></thead>
+<tbody id="topCustomersBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ===== SALES > ORDERS ===== -->
+<div class="module-page" id="page-orders">
+<div class="page-header">
+<div><h2 class="page-title">Order Management</h2><p class="page-subtitle">Track orders through their full lifecycle</p></div>
+<div class="page-actions">
+<div class="search-box"><i data-lucide="search"></i><input type="text" placeholder="Search orders..." id="orderSearch" oninput="filterOrders()" /></div>
+<button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button>
+<button class="btn btn-primary" onclick="openModal('newOrderModal')"><i data-lucide="plus"></i> New Order</button>
+</div>
+</div>
+<div class="tabs">
+<div class="tab active" onclick="switchOrdersView('kanban', this)"><i data-lucide="columns"></i> Kanban</div>
+<div class="tab" onclick="switchOrdersView('table', this)"><i data-lucide="table"></i> Table</div>
+<div class="tab" onclick="switchOrdersView('calendar', this)"><i data-lucide="calendar"></i> Calendar</div>
+</div>
+<div id="ordersKanbanView" class="tab-panel active"><div class="kanban-board" id="kanbanBoard"></div></div>
+<div id="ordersTableView" class="tab-panel">
+<div class="data-card">
+<div class="data-card-header"><div><div class="data-card-title">All Orders</div><div class="data-card-subtitle"><span id="ordersCount">0</span> orders</div></div>
+<select class="ant-select" style="width:150px;height:34px;font-size:12px;" onchange="filterOrdersByStatus(this.value)">
+<option value="all">All Status</option><option value="new">New</option><option value="processing">Processing</option><option value="quality">In QC</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option>
+</select>
+</div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Qty (T)</th><th>Value</th><th>Status</th><th>Ship Date</th><th style="text-align:right;">Actions</th></tr></thead>
+<tbody id="ordersTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="ordersCalendarView" class="tab-panel"><div class="data-card" style="padding:20px;"><div id="calendarView"></div></div></div>
+</div>
+<!-- ===== SALES > PAYMENTS ===== -->
+<div class="module-page" id="page-payments">
+<div class="page-header">
+<div><h2 class="page-title">Payment Management</h2><p class="page-subtitle">Receivables, invoicing and payment tracking</p></div>
+<div class="page-actions"><button class="btn btn-default"><i data-lucide="file-text"></i> Generate Invoice</button><button class="btn btn-primary"><i data-lucide="plus"></i> Record Payment</button></div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Receivables</span><div class="kpi-icon primary"><i data-lucide="wallet"></i></div></div><div class="kpi-value">$1.2M</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> 14%</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Paid This Month</span><div class="kpi-icon success"><i data-lucide="check-circle"></i></div></div><div class="kpi-value">$443K</div><div class="kpi-trend trend-up">+18.7%</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Overdue</span><div class="kpi-icon error"><i data-lucide="alert-circle"></i></div></div><div class="kpi-value">$82K</div><div class="kpi-trend trend-down">42 invoices</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Avg Days to Pay</span><div class="kpi-icon warning"><i data-lucide="clock"></i></div></div><div class="kpi-value">18</div><div class="kpi-trend trend-up">Improved</div></div>
+</div>
+<div class="charts-grid charts-row-equal">
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Payment Aging Analysis</div></div><div class="chart-body"><canvas id="paymentAging"></canvas></div></div>
+<div class="chart-card"><div class="chart-header"><div class="chart-title">Cash Flow Trend</div></div><div class="chart-body"><canvas id="cashFlow"></canvas></div></div>
+</div>
+</div>
+<!-- ===== SALES > INSURANCE ===== -->
+<div class="module-page" id="page-insurance">
+<div class="page-header">
+<div><h2 class="page-title">Insurance & Compliance</h2><p class="page-subtitle">Marine cargo insurance and regulatory compliance</p></div>
+<div class="page-actions"><button class="btn btn-primary"><i data-lucide="plus"></i> New Policy</button></div>
+</div>
+<div class="data-card">
+<div class="data-card-header"><div class="data-card-title">Active Policies</div></div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>Policy #</th><th>Type</th><th>Insurer</th><th>Coverage</th><th>Premium</th><th>Expiry</th><th>Status</th></tr></thead>
+<tbody id="insuranceTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ===== SALES > REPORTS ===== -->
+<div class="module-page" id="page-reports">
+<div class="page-header"><div><h2 class="page-title">Reports</h2><p class="page-subtitle">Generate and export business reports</p></div></div>
+<div class="product-grid" id="reportsGrid"></div>
+</div>
+<!-- ===== PURCHASE ===== -->
+<div class="module-page" id="page-purchase">
+<div class="page-header">
+<div><h2 class="page-title">Purchase Dashboard</h2><p class="page-subtitle">Raw material procurement overview</p></div>
+<div class="page-actions"><button class="btn btn-primary" onclick="openModal('newPOModal')"><i data-lucide="plus"></i> New PO</button></div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Open POs</span><div class="kpi-icon primary"><i data-lucide="file-text"></i></div></div><div class="kpi-value">18</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +4 this week</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">In Transit</span><div class="kpi-icon info"><i data-lucide="truck"></i></div></div><div class="kpi-value">6</div><div class="kpi-trend trend-neutral">3 arriving today</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Received Today</span><div class="kpi-icon success"><i data-lucide="check-circle"></i></div></div><div class="kpi-value">4</div><div class="kpi-trend trend-up">18.4 Tons</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Spend This Month</span><div class="kpi-icon warning"><i data-lucide="dollar-sign"></i></div></div><div class="kpi-value">$420K</div><div class="kpi-trend trend-down">-6% vs last</div></div>
+</div>
+<div class="data-card">
+<div class="data-card-header"><div class="data-card-title">Recent Purchase Orders</div></div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>PO Number</th><th>Supplier</th><th>Product</th><th>Qty</th><th>Value</th><th>Status</th><th>ETA</th></tr></thead>
+<tbody id="purchaseTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ===== PREPROCESSING ===== -->
+<div class="module-page" id="page-preprocessing">
+<div class="page-header">
+<div><h2 class="page-title">Preprocessing Board</h2><p class="page-subtitle">Lot flow: receiving → grading → sorting → cleaning → packing</p></div>
+<div class="page-actions"><button class="btn btn-primary"><i data-lucide="plus"></i> New Lot</button></div>
+</div>
+<div class="kanban-board" id="preprocessBoard"></div>
+</div>
+<!-- ===== QC ===== -->
+<div class="module-page" id="page-qc">
+<div class="page-header">
+<div><h2 class="page-title">Quality Control</h2><p class="page-subtitle">Inspections, testing and certifications</p></div>
+<div class="page-actions"><button class="btn btn-primary" onclick="openModal('newInspectionModal')"><i data-lucide="plus"></i> New Inspection</button></div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Inspections Today</span><div class="kpi-icon primary"><i data-lucide="clipboard-check"></i></div></div><div class="kpi-value">24</div><div class="kpi-trend trend-up"><i data-lucide="trending-up"></i> +3 vs avg</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Pass Rate</span><div class="kpi-icon success"><i data-lucide="check"></i></div></div><div class="kpi-value">96.8%</div><div class="kpi-trend trend-up">Target: 95%</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Pending QC</span><div class="kpi-icon warning"><i data-lucide="clock"></i></div></div><div class="kpi-value">12</div><div class="kpi-trend trend-neutral">5 urgent</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Failed</span><div class="kpi-icon error"><i data-lucide="x"></i></div></div><div class="kpi-value">3</div><div class="kpi-trend trend-down">Under review</div></div>
+</div>
+<div class="charts-grid charts-row-2">
+<div class="chart-card">
+<div class="chart-header"><div><div class="chart-title">Active Inspection · Lot #L-2026-0847</div><div class="chart-subtitle">Frozen Shrimp 26/30 · 25 Tons · Inspector Rajesh Kumar</div></div><span class="badge badge-warning badge-dot">In Progress</span></div>
+<div class="checklist" id="qcChecklist"></div>
+<div style="margin-top:14px;display:flex;gap:8px;">
+<button class="btn btn-default"><i data-lucide="save"></i> Save Draft</button>
+<button class="btn btn-success" onclick="showToast('success','Submitted','Inspection passed & submitted')"><i data-lucide="check"></i> Pass & Submit</button>
+<button class="btn btn-danger" onclick="showToast('warning','Failed','Rejection report created')"><i data-lucide="x"></i> Fail</button>
+</div>
+</div>
+<div class="chart-card"><div class="chart-header"><div class="chart-title">QC Metrics (4 weeks)</div></div><div class="chart-body"><canvas id="qcMetrics"></canvas></div></div>
+</div>
+</div>
+<!-- ===== PRODUCTION ===== -->
+<div class="module-page" id="page-production">
+<div class="page-header">
+<div><h2 class="page-title">Production Lines</h2><p class="page-subtitle"><span class="live-indicator"><span class="live-dot"></span>LIVE</span> · Real-time line monitoring</p></div>
+</div>
+<div class="kpi-grid" id="productionLines"></div>
+</div>
+<!-- ===== COLDSTORE ===== -->
+<div class="module-page" id="page-coldstore">
+<div class="page-header">
+<div><h2 class="page-title">Cold Storage Monitoring</h2><p class="page-subtitle"><span class="live-indicator"><span class="live-dot"></span>LIVE</span> · Real-time temperature across all rooms</p></div>
+<div class="page-actions"><button class="btn btn-default" onclick="showToast('info','Alerts','Alert rules configured')"><i data-lucide="bell-ring"></i> Alerts</button><button class="btn btn-primary"><i data-lucide="plus"></i> Add Room</button></div>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Total Rooms</span><div class="kpi-icon info"><i data-lucide="box"></i></div></div><div class="kpi-value">12</div><div class="kpi-trend trend-neutral">All active</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Avg Temperature</span><div class="kpi-icon cyan"><i data-lucide="thermometer"></i></div></div><div class="kpi-value">-22.4°C</div><div class="kpi-trend trend-up">Optimal</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Critical Alerts</span><div class="kpi-icon error"><i data-lucide="alert-triangle"></i></div></div><div class="kpi-value">1</div><div class="kpi-trend trend-down">Action needed</div></div>
+<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Capacity Used</span><div class="kpi-icon primary"><i data-lucide="bar-chart-2"></i></div></div><div class="kpi-value">78%</div><div class="kpi-trend trend-neutral">2,400 Tons</div></div>
+</div>
+<div class="coldroom-grid" id="coldroomGrid"></div>
+<div class="chart-card">
+<div class="chart-header"><div><div class="chart-title">Temperature History (24 hours)</div><div class="chart-subtitle">All rooms · auto-refreshing</div></div><span class="live-indicator"><span class="live-dot"></span>LIVE</span></div>
+<div class="chart-body tall"><canvas id="tempHistory"></canvas></div>
+</div>
+</div>
+<!-- ===== INVENTORY ===== -->
+<div class="module-page" id="page-inventory">
+<div class="page-header">
+<div><h2 class="page-title">Inventory Dashboard</h2><p class="page-subtitle">Stock levels and warehouse operations</p></div>
+<div class="page-actions"><button class="btn btn-default"><i data-lucide="arrow-left-right"></i> Stock Transfer</button><button class="btn btn-primary"><i data-lucide="plus"></i> Stock In</button></div>
+</div>
+<div class="data-card">
+<div class="data-card-header"><div><div class="data-card-title">Current Stock</div><div class="data-card-subtitle">142 SKUs tracked</div></div></div>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>SKU</th><th>Product</th><th>Stock (T)</th><th>Reorder Level</th><th>Location</th><th>Expiry</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+<tbody id="inventoryTableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- ===== GENERIC PAGE ===== -->
+<div class="module-page" id="page-generic">
+<div class="page-header">
+<div><h2 class="page-title" id="genericTitle"></h2><p class="page-subtitle" id="genericSubtitle"></p></div>
+<div class="page-actions" id="genericActions"></div>
+</div>
+<div class="kpi-grid" id="genericKpis"></div>
+<div class="charts-grid" id="genericChartWrap" style="display:none;">
+<div class="chart-card"><div class="chart-header"><div class="chart-title" id="genericChartTitle"></div></div><div class="chart-body"><canvas id="genericChart"></canvas></div></div>
+</div>
+<div id="genericTableWrap"></div>
+</div>
+<!-- ===== SETTINGS ===== -->
+<div class="module-page" id="page-settings">
+<div class="page-header"><div><h2 class="page-title">Settings</h2><p class="page-subtitle">Account and application preferences</p></div></div>
+<div class="settings-grid">
+<nav class="settings-nav" id="settingsNav"></nav>
+<div class="settings-content" id="settingsContent"></div>
+</div>
+</div>
+<!-- ===== ACTIVITY ===== -->
+<div class="module-page" id="page-activity">
+<div class="page-header"><div><h2 class="page-title">Activity Log</h2><p class="page-subtitle">Audit trail of all system activity</p></div></div>
+<div class="chart-card"><div id="activityList"></div></div>
+</div>
+</div>
+</div>
+<!-- ============ MODALS ============ -->
+<div class="modal-overlay" id="newOrderModal" onclick="closeModalOnOverlay(event,'newOrderModal')">
+<div class="modal lg">
+<div class="modal-header"><h3 class="modal-title">Create New Order</h3><button class="modal-close" onclick="closeModal('newOrderModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="form-row"><div class="form-group"><label>Customer <span class="required">*</span></label><select class="ant-select"><option>Select customer</option><option>USA Imports LLC</option><option>EU Trading BV</option><option>Asia Pacific Seafoods</option></select></div><div class="form-group"><label>Order Type</label><select class="ant-select"><option>Standard</option><option>Express</option><option>Bulk</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Product <span class="required">*</span></label><select class="ant-select" id="orderProduct"><option>Frozen Shrimp 26/30</option><option>Fresh Salmon Fillet</option><option>Canned Tuna</option></select></div><div class="form-group"><label>Quantity (Tons) <span class="required">*</span></label><input type="number" class="ant-input" id="orderQuantity" placeholder="0" /></div></div>
+<div class="form-row"><div class="form-group"><label>Unit Price (USD)</label><input type="number" class="ant-input" value="4500" /></div><div class="form-group"><label>Destination Port</label><select class="ant-select"><option>New York</option><option>Los Angeles</option><option>Rotterdam</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Ship Date</label><input type="date" class="ant-input" value="2026-09-25" /></div><div class="form-group"><label>Payment Terms</label><select class="ant-select"><option>Net 30</option><option>Net 60</option><option>LC at sight</option></select></div></div>
+<div class="form-group"><label>Notes</label><textarea class="ant-input" rows="3" style="height:auto;padding:10px;"></textarea></div>
+</div>
+<div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newOrderModal')">Cancel</button><button class="btn btn-primary" onclick="createOrder()"><i data-lucide="check"></i> Create Order</button></div>
+</div>
+</div>
+<div class="modal-overlay" id="newProductModal" onclick="closeModalOnOverlay(event,'newProductModal')">
+<div class="modal">
+<div class="modal-header"><h3 class="modal-title">Add New Product</h3><button class="modal-close" onclick="closeModal('newProductModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="form-group"><label>Product Name</label><input type="text" class="ant-input" placeholder="e.g. Frozen Shrimp 26/30" /></div>
+<div class="form-row"><div class="form-group"><label>SKU</label><input type="text" class="ant-input" placeholder="SHR-26-30" /></div><div class="form-group"><label>Category</label><select class="ant-select"><option>Shrimp</option><option>Fish</option><option>Tuna</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Price (USD/Ton)</label><input type="number" class="ant-input" /></div><div class="form-group"><label>Reorder Level</label><input type="number" class="ant-input" /></div></div>
+</div>
+<div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newProductModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newProductModal');showToast('success','Created','Product added to catalog')">Create</button></div>
+</div>
+</div>
+<div class="modal-overlay" id="newBuyerModal" onclick="closeModalOnOverlay(event,'newBuyerModal')">
+<div class="modal">
+<div class="modal-header"><h3 class="modal-title">Add New Buyer</h3><button class="modal-close" onclick="closeModal('newBuyerModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="form-row"><div class="form-group"><label>Company Name</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Country</label><select class="ant-select"><option>USA</option><option>UK</option><option>China</option></select></div></div>
+<div class="form-row"><div class="form-group"><label>Contact Name</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Email</label><input type="email" class="ant-input" /></div></div>
+<div class="form-group"><label>Credit Limit (USD)</label><input type="number" class="ant-input" value="50000" /></div>
+</div>
+<div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newBuyerModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newBuyerModal');showToast('success','Created','Buyer added')">Create</button></div>
+</div>
+</div>
+<div class="modal-overlay" id="newInspectionModal" onclick="closeModalOnOverlay(event,'newInspectionModal')">
+<div class="modal">
+<div class="modal-header"><h3 class="modal-title">New QC Inspection</h3><button class="modal-close" onclick="closeModal('newInspectionModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="form-group"><label>Lot Number</label><input type="text" class="ant-input" placeholder="L-2026-XXXX" /></div>
+<div class="form-row"><div class="form-group"><label>Product</label><select class="ant-select"><option>Frozen Shrimp</option><option>Fresh Salmon</option></select></div><div class="form-group"><label>Inspector</label><select class="ant-select"><option>Rajesh Kumar</option><option>Priya Sharma</option></select></div></div>
+</div>
+<div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newInspectionModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newInspectionModal');showToast('success','Created','Inspection started')">Start</button></div>
+</div>
+</div>
+<div class="modal-overlay" id="newPOModal" onclick="closeModalOnOverlay(event,'newPOModal')">
+<div class="modal">
+<div class="modal-header"><h3 class="modal-title">New Purchase Order</h3><button class="modal-close" onclick="closeModal('newPOModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="form-group"><label>Supplier</label><select class="ant-select"><option>Kerala Fishermen Co-op</option><option>Ocean Harvest Ltd</option></select></div>
+<div class="form-row"><div class="form-group"><label>Product</label><input type="text" class="ant-input" /></div><div class="form-group"><label>Quantity (Kg)</label><input type="number" class="ant-input" /></div></div>
+</div>
+<div class="modal-footer"><button class="btn btn-default" onclick="closeModal('newPOModal')">Cancel</button><button class="btn btn-primary" onclick="closeModal('newPOModal');showToast('success','Created','PO created')">Create</button></div>
+</div>
+</div>
+<div class="modal-overlay" id="shortcutsModal" onclick="closeModalOnOverlay(event,'shortcutsModal')">
+<div class="modal">
+<div class="modal-header"><h3 class="modal-title">Keyboard Shortcuts</h3><button class="modal-close" onclick="closeModal('shortcutsModal')"><i data-lucide="x"></i></button></div>
+<div class="modal-body">
+<div class="shortcut-row"><span>Open command palette</span><kbd>Ctrl / ⌘ + K</kbd></div>
+<div class="shortcut-row"><span>New order</span><kbd>N</kbd></div>
+<div class="shortcut-row"><span>Refresh data</span><kbd>R</kbd></div>
+<div class="shortcut-row"><span>Toggle fullscreen</span><kbd>F</kbd></div>
+<div class="shortcut-row"><span>This help dialog</span><kbd>?</kbd></div>
+<div class="shortcut-row"><span>Close overlays</span><kbd>ESC</kbd></div>
+</div>
+<div class="modal-footer"><button class="btn btn-primary" onclick="closeModal('shortcutsModal')">Got it</button></div>
+</div>
+</div>
+<!-- ============ ORDER DRAWER ============ -->
+<div class="drawer-overlay" id="orderDrawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="orderDrawer">
+<div class="drawer-header"><div><div class="drawer-title">Order Details</div><div class="drawer-subtitle" id="drawerSubtitle">ORD-2026-0465</div></div><button class="modal-close" onclick="closeDrawer()"><i data-lucide="x"></i></button></div>
+<div class="drawer-body" id="drawerBody"></div>
+<div class="drawer-footer"><button class="btn btn-default" onclick="closeDrawer()">Close</button><button class="btn btn-primary"><i data-lucide="edit"></i> Edit Order</button></div>
+</div>
+<!-- ============ NOTIFICATIONS ============ -->
+<div class="drawer-overlay" id="notifOverlay" onclick="closeNotifications()"></div>
+<div class="notification-drawer" id="notifDrawer">
+<div class="drawer-header"><div><div class="drawer-title">Notifications</div><div class="drawer-subtitle">3 unread</div></div>
+<div style="display:flex;gap:6px;"><button class="btn btn-sm btn-ghost" onclick="markAllRead()">Mark all read</button><button class="modal-close" onclick="closeNotifications()"><i data-lucide="x"></i></button></div></div>
+<div class="notification-list" id="notifList"></div>
+</div>
+<!-- ============ COMMAND PALETTE ============ -->
+<div class="cmd-palette-overlay" id="cmdPalette" onclick="closeCommandPalette(event)">
+<div class="cmd-palette" onclick="event.stopPropagation()">
+<div class="cmd-palette-search"><i data-lucide="search"></i><input type="text" id="cmdSearch" placeholder="Type a command or search..." oninput="renderCmdPalette(this.value)" /><span style="font-size:11px;color:var(--colorTextTertiary);">ESC</span></div>
+<div class="cmd-palette-body" id="cmdBody"></div>
+<div class="cmd-footer"><span><kbd>↑↓</kbd> Navigate</span><span><kbd>↵</kbd> Select</span><span><kbd>ESC</kbd> Close</span></div>
+</div>
+</div>
+<div class="toast-container" id="toastContainer"></div>
+<div class="context-menu" id="contextMenu"></div>
+<button class="scroll-top" id="scrollTopBtn" title="Back to top" onclick="scrollToTop()"><i data-lucide="arrow-up"></i></button>
+<script>
+lucide.createIcons();
+
+/* ================= RIPPLE ================= */
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.btn');
+  if (!btn) return;
+  const circle = document.createElement('span');
+  const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+  const radius = diameter / 2;
+  circle.style.width = circle.style.height = `${diameter}px`;
+  circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - radius}px`;
+  circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - radius}px`;
+  circle.classList.add('ripple');
+  const ripple = btn.getElementsByClassName('ripple')[0];
+  if (ripple) ripple.remove();
+  btn.appendChild(circle);
+});
+
+/* ================= STATE & CONFIG ================= */
+const state = { module: 'sales', sub: 'dashboard', charts: {}, cmdIndex: 0, orders: [] };
+const badge = (t, x) => `<span class="badge badge-${t} badge-dot">${x}</span>`;
+const MODULES = {
+sales: { label: 'Sales', subs: [
+{ id: 'dashboard', label: 'Dashboard' }, { id: 'products', label: 'Product' }, { id: 'buyers', label: 'Buyers' },
+{ id: 'sales', label: 'Sales' }, { id: 'orders', label: 'Orders', badge: '12' }, { id: 'payments', label: 'Payments' },
+{ id: 'insurance', label: 'Insurance' }, { id: 'reports', label: 'Reports' } ] },
+purchase: { label: 'Purchase', subs: [
+{ id: 'purchase', label: 'Dashboard' }, { id: 'suppliers', label: 'Suppliers' }, { id: 'purchase-orders', label: 'Purchase Orders' },
+{ id: 'landings', label: 'Landings' }, { id: 'contracts', label: 'Contracts' } ] },
+preprocessing: { label: 'Preprocessing', subs: [
+{ id: 'preprocessing', label: 'Dashboard' }, { id: 'lots', label: 'Lots' }, { id: 'grading', label: 'Grading' }, { id: 'sorting', label: 'Sorting' } ] },
+qc: { label: 'Quality Control', subs: [
+{ id: 'qc', label: 'Dashboard' }, { id: 'inspections', label: 'Inspections', badge: '3' }, { id: 'lab-tests', label: 'Lab Tests' }, { id: 'certificates', label: 'Certificates' } ] },
+production: { label: 'Production', subs: [
+{ id: 'production', label: 'Dashboard' }, { id: 'shifts', label: 'Shifts' }, { id: 'output', label: 'Output' } ] },
+coldstore: { label: 'Coldstore', subs: [
+{ id: 'coldstore', label: 'Dashboard' }, { id: 'rooms', label: 'Rooms' }, { id: 'temperature', label: 'Temperature Log' }, { id: 'stock-aging', label: 'Stock Aging' } ] },
+inventory: { label: 'Inventory', subs: [
+{ id: 'inventory', label: 'Dashboard' }, { id: 'movements', label: 'Movements' }, { id: 'transfers', label: 'Transfers' } ] },
+settings: { label: 'Settings', standalone: true, subs: [
+{ id: 'profile', label: 'Profile' }, { id: 'notifications', label: 'Notifications' }, { id: 'security', label: 'Security' },
+{ id: 'billing', label: 'Billing' }, { id: 'integrations', label: 'Integrations' }, { id: 'team', label: 'Team' } ] },
+activity: { label: 'Activity Log', standalone: true, subs: [
+{ id: 'all', label: 'All Activity' }, { id: 'orders', label: 'Orders' }, { id: 'payments', label: 'Payments' }, { id: 'system', label: 'System' } ] }
+};
+
+/* ================= NAVIGATION ================= */
+function navigateModule(m) { navigate(m, MODULES[m].subs[0].id); }
+function navigate(moduleId, subId) {
+  showPageLoader();
+  state.module = moduleId; state.sub = subId;
+  const mod = MODULES[moduleId];
+  document.querySelectorAll('#primaryNav .nav-item').forEach(n => n.classList.toggle('active', n.dataset.module === moduleId));
+  const nav = document.getElementById('secondaryNav');
+  nav.innerHTML = mod.subs.map(s => `<div class="sub-nav-item ${s.id === subId ? 'active' : ''}" tabindex="0" role="tab" onclick="navigate('${moduleId}','${s.id}')">${s.label}${s.badge ? `<span class="sub-nav-badge pulse">${s.badge}</span>` : ''}</div>`).join('');
+  const crumbMod = document.getElementById('crumbModule');
+  const crumbSub = document.getElementById('crumbSub');
+  crumbMod.textContent = mod.label;
+  crumbSub.textContent = (mod.subs.find(s => s.id === subId) || {}).label || subId;
+  crumbSub.classList.remove('swap');
+  void crumbSub.offsetWidth;
+  crumbSub.classList.add('swap');
+  document.querySelectorAll('.module-page').forEach(p => p.classList.remove('active'));
+  const staticPage = document.getElementById('page-' + subId);
+  let activePage = null;
+  if (staticPage && !GENERIC_PAGES[subId]) { staticPage.classList.add('active'); activePage = staticPage; }
+  else if (staticPage && moduleId === 'settings') { staticPage.classList.add('active'); renderSettingsNav(subId); renderSettings(subId); activePage = staticPage; }
+  else if (staticPage && moduleId === 'activity') { staticPage.classList.add('active'); renderActivity(subId); activePage = staticPage; }
+  else if (GENERIC_PAGES[subId]) { const g = document.getElementById('page-generic'); g.classList.add('active'); renderGenericPage(subId); activePage = g; }
+  else if (staticPage) { staticPage.classList.add('active'); activePage = staticPage; }
+  document.getElementById('contentArea').scrollTop = 0;
+  if (PAGE_INIT[subId]) PAGE_INIT[subId]();
+  if (activePage) hookPageEnter(activePage);
+  lucide.createIcons();
+}
+const PAGE_INIT = {
+  dashboard: initDashboardCharts,
+  products: renderProducts,
+  buyers: renderBuyers,
+  sales: initSalesCharts,
+  orders: () => renderOrdersKanban(),
+  payments: initPaymentCharts,
+  insurance: renderInsurance,
+  reports: renderReports,
+  purchase: renderPurchaseTable,
+  preprocessing: renderPreprocessBoard,
+  qc: () => { renderQCChecklist(); initQCChart(); },
+  production: renderProduction,
+  coldstore: () => { renderColdRooms(); initTempChart(); startTempMonitoring(); },
+  inventory: renderInventory
+};
+
+/* ================= MOCK DATA ================= */
+function generateOrders() {
+  const customers = ['USA Imports LLC','EU Trading BV','Asia Pacific Seafoods','Ocean Fresh GmbH','Nordic Seafoods A/S','Tokyo Fishery Co','Mediterranean Foods','Atlantic Traders'];
+  const products = ['Frozen Shrimp 26/30','Fresh Salmon Fillet','Canned Tuna','Frozen Squid','Lobster Tails','Crab Meat','Mussels','Cuttlefish'];
+  const ports = ['New York','Los Angeles','Rotterdam','Shanghai','Hamburg','Singapore','Dubai','Sydney'];
+  const statuses = ['new','processing','quality','shipped','delivered'];
+  const out = [];
+  for (let i = 0; i < 42; i++) out.push({
+    id: `ORD-2026-${String(i + 400).padStart(4, '0')}`,
+    customer: customers[i % customers.length], product: products[i % products.length],
+    quantity: 5 + Math.floor(Math.random() * 50), value: 10000 + Math.floor(Math.random() * 200000),
+    status: statuses[i % statuses.length], shipDate: new Date(Date.now() + Math.random() * 90 * 86400000),
+    destination: ports[i % ports.length], assignee: ['SA','RK','PS','MK'][i % 4]
+  });
+  return out;
+}
+state.orders = generateOrders();
+const ORDER_STATUS_LABELS = { new: 'New Orders', processing: 'Processing', quality: 'In QC', shipped: 'Shipped', delivered: 'Delivered' };
+const ORDER_STATUS_COLORS = { new: '#2563EB', processing: '#D97706', quality: '#7C3AED', shipped: '#0891B2', delivered: '#059669' };
+const PRODUCTS = [
+  { name: 'Frozen Shrimp 26/30', sku: 'SHR-26-30', price: 4500, stock: 245, emoji: '🦐', sold: 1247, rating: 4.8 },
+  { name: 'Fresh Salmon Fillet', sku: 'SAL-FIL-01', price: 8200, stock: 128, emoji: '🐟', sold: 892, rating: 4.9 },
+  { name: 'Canned Tuna', sku: 'TUN-CAN-01', price: 2100, stock: 542, emoji: '🥫', sold: 3421, rating: 4.5 },
+  { name: 'Frozen Squid', sku: 'SQD-FRZ-01', price: 3800, stock: 87, emoji: '🦑', sold: 567, rating: 4.7 },
+  { name: 'Lobster Tails', sku: 'LOB-TAL-01', price: 18500, stock: 42, emoji: '🦞', sold: 234, rating: 4.9 },
+  { name: 'Crab Meat', sku: 'CRB-MT-01', price: 12500, stock: 65, emoji: '🦀', sold: 412, rating: 4.6 },
+  { name: 'Fresh Mussels', sku: 'MUS-FR-01', price: 2800, stock: 3, emoji: '🦪', sold: 891, rating: 4.4 },
+  { name: 'Cuttlefish', sku: 'CUT-FRZ-01', price: 4200, stock: 156, emoji: '🦑', sold: 623, rating: 4.5 }
+];
+const BUYERS = [
+  { name: 'USA Imports LLC', flag: '🇺🇸', country: 'United States', contact: 'john@usaimports.com', orders: 87, revenue: 2400000, credit: 500000, status: 'active' },
+  { name: 'EU Trading BV', flag: '🇳🇱', country: 'Netherlands', contact: 'peter@eutrading.nl', orders: 52, revenue: 1800000, credit: 300000, status: 'active' },
+  { name: 'Asia Pacific Seafoods', flag: '🇸🇬', country: 'Singapore', contact: 'wei@apseafoods.sg', orders: 41, revenue: 1200000, credit: 250000, status: 'active' },
+  { name: 'Ocean Fresh GmbH', flag: '🇩🇪', country: 'Germany', contact: 'hans@oceanfresh.de', orders: 38, revenue: 980000, credit: 200000, status: 'active' },
+  { name: 'Nordic Seafoods A/S', flag: '🇩🇰', country: 'Denmark', contact: 'lars@nordic.dk', orders: 29, revenue: 720000, credit: 180000, status: 'active' },
+  { name: 'Tokyo Fishery Co', flag: '🇯🇵', country: 'Japan', contact: 'yuki@tokyofish.jp', orders: 45, revenue: 1100000, credit: 220000, status: 'active' },
+  { name: 'Atlantic Traders', flag: '🇬🇧', country: 'UK', contact: 'james@atlantic.uk', orders: 12, revenue: 280000, credit: 100000, status: 'inactive' }
+];
+const COLD_ROOMS = [
+  { id: 'CR-01', name: 'Room Alpha', temp: -22.4, target: -22, humidity: 85, capacity: 82, product: 'Shrimp', status: 'ok' },
+  { id: 'CR-02', name: 'Room Beta', temp: -21.8, target: -22, humidity: 83, capacity: 75, product: 'Salmon', status: 'ok' },
+  { id: 'CR-03', name: 'Room Gamma', temp: -18.2, target: -20, humidity: 88, capacity: 91, product: 'Tuna', status: 'warning' },
+  { id: 'CR-04', name: 'Room Delta', temp: -15.6, target: -22, humidity: 90, capacity: 68, product: 'Squid', status: 'critical' },
+  { id: 'CR-05', name: 'Room Epsilon', temp: -23.1, target: -22, humidity: 82, capacity: 54, product: 'Lobster', status: 'ok' },
+  { id: 'CR-06', name: 'Room Zeta', temp: -22.7, target: -22, humidity: 86, capacity: 79, product: 'Crab', status: 'ok' }
+];
+const QC_CHECKLIST = [
+  { label: 'Visual inspection of packaging', value: 'Pass', checked: true },
+  { label: 'Temperature check at arrival', value: '-22°C', checked: true },
+  { label: 'Weight verification', value: '25.2 Tons', checked: true },
+  { label: 'Microbial sampling', value: 'Pending', checked: false },
+  { label: 'Label compliance check', value: 'Pass', checked: true },
+  { label: 'Certificate of Origin verified', value: 'Pass', checked: false },
+  { label: 'HACCP documentation review', value: 'Pending', checked: false }
+];
+
+/* ================= GENERIC SUB-PAGES ================= */
+const GENERIC_PAGES = {
+suppliers: { title: 'Supplier Management', subtitle: 'Vendor master, ratings and outstanding balances',
+kpis: [ { l: 'Total Suppliers', v: '34', i: 'store', c: 'primary', t: '+4 this quarter', d: 'up' }, { l: 'Active', v: '28', i: 'check-circle', c: 'success', t: '82% active' }, { l: 'On Contract', v: '21', i: 'file-signature', c: 'info', t: '4 expiring soon' }, { l: 'Pending Approval', v: '3', i: 'user-check', c: 'warning', t: 'Needs review', d: 'down' } ],
+table: { title: 'Supplier Directory', columns: ['Supplier ID','Name','Category','Region','Rating','Supply (T)','Outstanding','Status'],
+rows: [
+['<span class="row-id">SUP-001</span>','Kerala Fishermen Co-op','Raw Shrimp','Kochi','★ 4.8','1,240','$42,000', badge('success','Active')],
+['<span class="row-id">SUP-002</span>','Ocean Harvest Ltd','Salmon','Mangalore','★ 4.6','860','$18,500', badge('success','Active')],
+['<span class="row-id">SUP-003</span>','Blue Wave Traders','Tuna','Thoothukudi','★ 4.4','620','$0', badge('success','Active')],
+['<span class="row-id">SUP-004</span>','South India Catch','Mixed Seafood','Chennai','★ 4.2','410','$9,800', badge('warning','On Hold')],
+['<span class="row-id">SUP-005</span>','Coastal Aquafarms','Farmed Shrimp','Kakinada','★ 4.7','980','$26,400', badge('success','Active')],
+['<span class="row-id">SUP-006</span>','Deep Sea Exports','Squid & Cuttlefish','Visakhapatnam','★ 4.0','220','$0', badge('gray','Inactive')] ] } },
+'purchase-orders': { title: 'Purchase Orders', subtitle: 'All POs raised to suppliers',
+kpis: [ { l: 'Open POs', v: '18', i: 'file-text', c: 'primary', t: '+4 this week', d: 'up' }, { l: 'Awaiting Approval', v: '5', i: 'hourglass', c: 'warning', t: '2 urgent' }, { l: 'In Transit', v: '6', i: 'truck', c: 'info', t: '3 arriving today' }, { l: 'Spend This Month', v: '$420K', i: 'dollar-sign', c: 'success', t: '-6% vs last', d: 'down' } ],
+table: { title: 'PO Register', columns: ['PO Number','Supplier','Product','Qty (Kg)','Value','Status','ETA'],
+rows: [
+['<span class="row-id">PO-2026-0104</span>','Kerala Fishermen Co-op','Raw Shrimp','12,000','$54,000', badge('info','In Transit'),'Sep 18, 2026'],
+['<span class="row-id">PO-2026-0105</span>','Ocean Harvest Ltd','Salmon Loins','6,500','$48,750', badge('warning','Approval'),'Sep 20, 2026'],
+['<span class="row-id">PO-2026-0106</span>','Blue Wave Traders','Tuna','9,000','$31,500', badge('success','Received'),'Sep 14, 2026'],
+['<span class="row-id">PO-2026-0107</span>','Coastal Aquafarms','Farmed Shrimp','15,000','$63,000', badge('info','In Transit'),'Sep 22, 2026'],
+['<span class="row-id">PO-2026-0108</span>','South India Catch','Mixed Seafood','4,200','$14,700', badge('gray','Draft'),'—'] ] } },
+landings: { title: 'Vessel Landings', subtitle: 'Catch landed at harbour, priced and QC-cleared',
+kpis: [ { l: 'Landings This Week', v: '12', i: 'anchor', c: 'primary', t: '+3 vs last week', d: 'up' }, { l: 'Total Catch', v: '84 T', i: 'fish', c: 'info', t: 'Across 9 vessels' }, { l: 'Avg Price', v: '$3.85', i: 'tag', c: 'success', t: 'per Kg' }, { l: 'QC Rejected', v: '2', i: 'x-circle', c: 'error', t: '1.9% of catch', d: 'down' } ],
+table: { title: 'Landing Register', columns: ['Landing ID','Vessel','Species','Qty (Kg)','Price/Kg','Date','QC Status'],
+rows: [
+['<span class="row-id">LND-0871</span>','MV Ocean Pearl','White Shrimp','8,400','$4.10','Sep 16, 2026', badge('success','Passed')],
+['<span class="row-id">LND-0872</span>','MV Sea Hawk','Yellowfin Tuna','5,200','$3.60','Sep 16, 2026', badge('success','Passed')],
+['<span class="row-id">LND-0873</span>','MV Coral Star','Squid','3,100','$2.90','Sep 15, 2026', badge('warning','Sampling')],
+['<span class="row-id">LND-0874</span>','MV Blue Fin','Tiger Shrimp','6,800','$4.60','Sep 15, 2026', badge('error','Rejected')],
+['<span class="row-id">LND-0875</span>','MV Ocean Pearl','Cuttlefish','2,400','$3.20','Sep 14, 2026', badge('success','Passed')] ] } },
+contracts: { title: 'Purchase Contracts', subtitle: 'Supplier agreements and validity tracking',
+kpis: [ { l: 'Active Contracts', v: '21', i: 'file-signature', c: 'primary', t: '3 new this month', d: 'up' }, { l: 'Expiring ≤30d', v: '4', i: 'alarm-clock', c: 'warning', t: 'Renewal needed' }, { l: 'Total Value', v: '$2.1M', i: 'dollar-sign', c: 'success', t: 'FY 2026-27' }, { l: 'Breaches', v: '1', i: 'alert-octagon', c: 'error', t: 'Under legal review', d: 'down' } ],
+table: { title: 'Contract Register', columns: ['Contract #','Supplier','Product','Volume (T)','Valid Till','Status'],
+rows: [
+['<span class="row-id">CON-2026-11</span>','Kerala Fishermen Co-op','Raw Shrimp','2,400','Mar 31, 2027', badge('success','Active')],
+['<span class="row-id">CON-2026-12</span>','Ocean Harvest Ltd','Salmon','900','Dec 15, 2026', badge('success','Active')],
+['<span class="row-id">CON-2026-13</span>','Blue Wave Traders','Tuna','1,200','Oct 10, 2026', badge('warning','Expiring')],
+['<span class="row-id">CON-2026-14</span>','Coastal Aquafarms','Farmed Shrimp','3,000','Jun 30, 2027', badge('success','Active')],
+['<span class="row-id">CON-2025-42</span>','South India Catch','Mixed','500','Aug 01, 2026', badge('error','Expired')] ] } },
+lots: { title: 'Lot Management', subtitle: 'Every lot from receiving to dispatch readiness',
+kpis: [ { l: 'Active Lots', v: '46', i: 'layers', c: 'primary', t: '+6 today', d: 'up' }, { l: 'In Grading', v: '12', i: 'scale', c: 'info', t: '3 lines busy' }, { l: 'In Sorting', v: '8', i: 'split', c: 'purple', t: '2 queued' }, { l: 'Ready to Process', v: '26', i: 'check-circle', c: 'success', t: 'Cleared by QC' } ],
+table: { title: 'Lot Register', columns: ['Lot #','Source PO','Species','Qty (Kg)','Received','Stage','Yield %'],
+rows: [
+['<span class="row-id">LOT-0847</span>','PO-2026-0104','White Shrimp','12,000','Sep 16','Grading','—'],
+['<span class="row-id">LOT-0848</span>','PO-2026-0104','White Shrimp','8,400','Sep 16','Sorting','94.2'],
+['<span class="row-id">LOT-0849</span>','PO-2026-0107','Farmed Shrimp','15,000','Sep 15','Received','—'],
+['<span class="row-id">LOT-0850</span>','PO-2026-0106','Tuna','9,000','Sep 14','Cleaning','91.8'],
+['<span class="row-id">LOT-0851</span>','PO-2026-0106','Tuna','6,000','Sep 14','Packing','96.1'] ] } },
+grading: { title: 'Grading Operations', subtitle: 'Grade split (A/B/C) per lot with operator traceability',
+kpis: [ { l: 'Lots Graded Today', v: '9', i: 'scale', c: 'primary', t: '+2 vs avg', d: 'up' }, { l: 'Grade A Share', v: '72%', i: 'award', c: 'success', t: 'Target 70%' }, { l: 'Grade B Share', v: '21%', i: 'medal', c: 'info', t: 'Within range' }, { l: 'Grade C Share', v: '7%', i: 'archive', c: 'warning', t: '-1.2% vs avg', d: 'up' } ],
+table: { title: 'Grading Sheet', columns: ['Lot #','Product','Grade A (Kg)','Grade B (Kg)','Grade C (Kg)','Total','Graded By','Date'],
+rows: [
+['<span class="row-id">LOT-0848</span>','White Shrimp','6,100','1,800','500','8,400','R. Kumar','Sep 16'],
+['<span class="row-id">LOT-0845</span>','Tiger Shrimp','4,900','1,400','300','6,600','P. Sharma','Sep 16'],
+['<span class="row-id">LOT-0844</span>','Tuna Loins','7,200','1,500','300','9,000','R. Kumar','Sep 15'],
+['<span class="row-id">LOT-0843</span>','Squid','2,100','700','300','3,100','M. Khan','Sep 15'] ] } },
+sorting: { title: 'Sorting Lines', subtitle: 'Size-class sorting throughput and queue',
+kpis: [ { l: 'Sorting Lines', v: '6', i: 'split', c: 'primary', t: '4 running' }, { l: 'Throughput', v: '1,240', i: 'gauge', c: 'info', t: 'Kg per hour' }, { l: 'Queue', v: '7 lots', i: 'list-ordered', c: 'warning', t: 'Est. 3.5 hrs' }, { l: 'Avg Efficiency', v: '88%', i: 'trending-up', c: 'success', t: '+4% vs last week', d: 'up' } ],
+table: { title: 'Line Status', columns: ['Line','Lot #','Size Class','Target (Kg)','Done (Kg)','Efficiency','Status'],
+rows: [
+['Line 1','<span class="row-id">LOT-0848</span>','26/30','4,000','3,620','91%', badge('success','Running')],
+['Line 2','<span class="row-id">LOT-0848</span>','31/40','2,500','2,180','87%', badge('success','Running')],
+['Line 3','<span class="row-id">LOT-0845</span>','16/20','3,000','1,240','41%', badge('success','Running')],
+['Line 4','—','—','—','—','—', badge('gray','Idle')],
+['Line 5','<span class="row-id">LOT-0850</span>','Loins','5,000','4,410','88%', badge('success','Running')],
+['Line 6','—','—','—','—','—', badge('warning','Maintenance')] ] } },
+inspections: { title: 'QC Inspections', subtitle: 'Scheduled, in-progress and completed inspections',
+kpis: [ { l: 'Scheduled Today', v: '24', i: 'calendar-check', c: 'primary', t: '+3 vs avg', d: 'up' }, { l: 'Completed', v: '17', i: 'check-circle', c: 'success', t: '71% done' }, { l: 'Passed', v: '16', i: 'badge-check', c: 'success', t: '94% pass rate' }, { l: 'Failed', v: '1', i: 'x-circle', c: 'error', t: 'NCR raised', d: 'down' } ],
+table: { title: 'Inspection Register', columns: ['Inspection ID','Lot #','Product','Type','Inspector','Result','Date'],
+rows: [
+['<span class="row-id">QC-2201</span>','LOT-0847','White Shrimp','Incoming','R. Kumar', badge('warning','In Progress'),'Sep 17'],
+['<span class="row-id">QC-2200</span>','LOT-0848','White Shrimp','In-process','P. Sharma', badge('success','Passed'),'Sep 16'],
+['<span class="row-id">QC-2199</span>','LOT-0845','Tiger Shrimp','Incoming','R. Kumar', badge('success','Passed'),'Sep 16'],
+['<span class="row-id">QC-2198</span>','LOT-0844','Tuna Loins','Final','M. Khan', badge('success','Passed'),'Sep 15'],
+['<span class="row-id">QC-2197</span>','LOT-0842','Squid','Incoming','P. Sharma', badge('error','Failed'),'Sep 15'] ] } },
+'lab-tests': { title: 'Laboratory Tests', subtitle: 'Microbial, chemical and physical test results',
+kpis: [ { l: 'Samples In Lab', v: '14', i: 'flask-conical', c: 'primary', t: '5 awaiting results' }, { l: 'Avg Turnaround', v: '26h', i: 'timer', c: 'info', t: 'Target 24h' }, { l: 'Flags Raised', v: '1', i: 'flag', c: 'error', t: 'Histamine borderline', d: 'down' }, { l: 'Compliance', v: '99.2%', i: 'shield-check', c: 'success', t: 'EU standards' } ],
+table: { title: 'Test Results', columns: ['Test ID','Sample','Parameter','Method','Result','Limit','Status'],
+rows: [
+['<span class="row-id">LAB-5501</span>','LOT-0847','Salmonella','ISO 6579','Not detected','Absent', badge('success','Pass')],
+['<span class="row-id">LAB-5502</span>','LOT-0847','E. coli','ISO 16649','<10 CFU/g','<100', badge('success','Pass')],
+['<span class="row-id">LAB-5503</span>','LOT-0844','Histamine','HPLC','38 ppm','<50 ppm', badge('warning','Watch')],
+['<span class="row-id">LAB-5504</span>','LOT-0842','TVC','ISO 4833','6.2×10⁵','<5×10⁵', badge('error','Fail')],
+['<span class="row-id">LAB-5505</span>','LOT-0848','Sulphites','Titration','62 mg/kg','<150', badge('success','Pass')] ] } },
+certificates: { title: 'Certificates & Compliance', subtitle: 'Statutory and customer-mandated certifications',
+kpis: [ { l: 'Valid Certificates', v: '18', i: 'award', c: 'success', t: 'All majors covered' }, { l: 'Expiring ≤60d', v: '3', i: 'alarm-clock', c: 'warning', t: 'Renewal initiated' }, { l: 'Expired', v: '1', i: 'x-octagon', c: 'error', t: 'Block shipments?', d: 'down' }, { l: 'Audits Scheduled', v: '2', i: 'clipboard-list', c: 'info', t: 'Oct 2026' } ],
+table: { title: 'Certificate Register', columns: ['Certificate','Type','Authority','Issued','Expiry','Status'],
+rows: [
+['HACCP Plan v6','Food Safety','Export Inspection Council','Jan 2026','Dec 2027', badge('success','Valid')],
+['EU Health Cert','Export','EIC / EU TRACES','Mar 2026','Mar 2027', badge('success','Valid')],
+['ISO 22000:2018','Management','TÜV SÜD','Nov 2024','Nov 2026', badge('warning','Expiring')],
+['BRCGS Food v9','Customer','SGS','Oct 2025','Oct 2026', badge('warning','Expiring')],
+['US FDA Registration','Statutory','US FDA','Dec 2023','Dec 2025', badge('error','Expired')] ] } },
+shifts: { title: 'Shift Management', subtitle: 'Rosters, attendance and supervision per line',
+kpis: [ { l: 'Shifts Today', v: '3', i: 'clock', c: 'primary', t: 'A / B / C' }, { l: 'Workers On Roll', v: '148', i: 'users', c: 'info', t: 'Across 6 lines' }, { l: 'Attendance', v: '92%', i: 'user-check', c: 'success', t: '+3% vs last week', d: 'up' }, { l: 'Overtime Hours', v: '36', i: 'hourglass', c: 'warning', t: 'Within policy' } ],
+table: { title: 'Today’s Roster', columns: ['Shift','Time','Lines','Supervisor','Workers','Status'],
+rows: [
+['Shift A','06:00 – 14:00','1, 2, 5','S. Menon','52', badge('success','On Duty')],
+['Shift B','14:00 – 22:00','1, 3, 5, 6','A. Fernandes','58', badge('info','Upcoming')],
+['Shift C','22:00 – 06:00','4','K. Iyer','38', badge('gray','Scheduled')] ] } },
+output: { title: 'Production Output', subtitle: 'Daily finished-goods output vs target',
+kpis: [ { l: 'Output Today', v: '42 T', i: 'factory', c: 'primary', t: 'Target 50 T' }, { l: 'Efficiency', v: '84%', i: 'gauge', c: 'success', t: '+2% vs yesterday', d: 'up' }, { l: 'Rejection', v: '1.8%', i: 'trash-2', c: 'error', t: 'Within 2% limit' }, { l: 'Downtime', v: '46 min', i: 'pause-circle', c: 'warning', t: 'Line 6 maintenance' } ],
+chart: { title: 'Output by Line (Tons, today)', type: 'bar', labels: ['Line 1','Line 2','Line 3','Line 4','Line 5','Line 6'], datasets: [ { label: 'Output', data: [9.5, 8.2, 7.4, 0, 10.6, 6.3], color: '#E6A817' }, { label: 'Target', data: [10, 9, 8, 8, 10, 8], color: '#111827' } ] },
+table: { title: 'Line Output Detail', columns: ['Line','Product','Output (T)','Target (T)','Efficiency','Reject %','Status'],
+rows: [
+['Line 1','Shrimp 26/30','9.5','10','95%','1.2%', badge('success','Running')],
+['Line 2','Shrimp 31/40','8.2','9','91%','1.6%', badge('success','Running')],
+['Line 3','Tiger 16/20','7.4','8','93%','2.0%', badge('success','Running')],
+['Line 4','—','0','8','—','—', badge('gray','Idle')],
+['Line 5','Tuna Loins','10.6','10','106%','0.9%', badge('success','Running')],
+['Line 6','Squid Rings','6.3','8','79%','2.4%', badge('warning','Maintenance')] ] } },
+rooms: { title: 'Cold Rooms', subtitle: 'Room-wise occupancy, product mapping and door status',
+kpis: [ { l: 'Rooms', v: '12', i: 'box', c: 'primary', t: 'All powered' }, { l: 'Occupancy', v: '78%', i: 'bar-chart-2', c: 'info', t: '2,400 of 3,080 T' }, { l: 'Avg Temp', v: '-22.4°C', i: 'thermometer', c: 'cyan', t: 'Set point -22°C' }, { l: 'Door Events 24h', v: '143', i: 'door-open', c: 'warning', t: '2 held open >5m' } ],
+table: { title: 'Room Status', columns: ['Room','Product','Capacity','Temp','Humidity','Door','Status'],
+rows: [
+['CR-01 Alpha','Shrimp','82%','-22.4°C','85%','Closed', badge('success','OK')],
+['CR-02 Beta','Salmon','75%','-21.8°C','83%','Closed', badge('success','OK')],
+['CR-03 Gamma','Tuna','91%','-18.2°C','88%','Closed', badge('warning','Warm')],
+['CR-04 Delta','Squid','68%','-15.6°C','90%','Open', badge('error','Critical')],
+['CR-05 Epsilon','Lobster','54%','-23.1°C','82%','Closed', badge('success','OK')],
+['CR-06 Zeta','Crab','79%','-22.7°C','86%','Closed', badge('success','OK')] ] } },
+temperature: { title: 'Temperature Log', subtitle: 'Sensor-level readings with deviation alerts',
+kpis: [ { l: 'Sensors Online', v: '48', i: 'radio-tower', c: 'success', t: '2 offline' }, { l: 'Avg Deviation', v: '±0.4°C', i: 'activity', c: 'info', t: 'Within ±1°C' }, { l: 'Alerts (24h)', v: '3', i: 'bell-ring', c: 'warning', t: '1 critical' }, { l: 'Logging Interval', v: '5 min', i: 'timer', c: 'primary', t: '4,320 reads/day' } ],
+table: { title: 'Recent Readings', columns: ['Time','Room','Sensor','Temp','Set Point','Deviation','Status'],
+rows: [
+['14:35','CR-04 Delta','S-402','-15.6°C','-22°C','+6.4', badge('error','Critical')],
+['14:35','CR-03 Gamma','S-301','-18.2°C','-20°C','+1.8', badge('warning','Warn')],
+['14:35','CR-01 Alpha','S-101','-22.4°C','-22°C','-0.4', badge('success','OK')],
+['14:30','CR-02 Beta','S-201','-21.8°C','-22°C','+0.2', badge('success','OK')],
+['14:30','CR-05 Epsilon','S-501','-23.1°C','-22°C','-1.1', badge('success','OK')],
+['14:30','CR-06 Zeta','S-601','-22.7°C','-22°C','-0.7', badge('success','OK')] ] } },
+'stock-aging': { title: 'Stock Aging', subtitle: 'FIFO risk view — stock buckets by age',
+kpis: [ { l: 'Total Stock', v: '2,400 T', i: 'boxes', c: 'primary', t: 'All rooms' }, { l: '0–30 Days', v: '62%', i: 'calendar', c: 'success', t: 'Fresh stock' }, { l: '31–60 Days', v: '24%', i: 'calendar-clock', c: 'warning', t: 'Plan dispatch' }, { l: '>60 Days', v: '14%', i: 'alert-triangle', c: 'error', t: 'FIFO action needed', d: 'down' } ],
+chart: { title: 'Aging Buckets by Product (Tons)', type: 'bar', labels: ['Shrimp','Salmon','Tuna','Squid','Crab'], datasets: [ { label: '0-30d', data: [620, 180, 240, 150, 90], color: '#059669' }, { label: '31-60d', data: [310, 90, 110, 60, 40], color: '#FAAD14' }, { label: '60d+', data: [180, 40, 70, 30, 20], color: '#DC2626' } ] },
+table: { title: 'Aging Detail', columns: ['Product','0–30 (T)','31–60 (T)','61–90 (T)','90+ (T)','Oldest Lot','Action'],
+rows: [
+['Shrimp','620','310','140','40','LOT-0612', badge('warning','Dispatch first')],
+['Salmon','180','90','30','10','LOT-0701', badge('success','OK')],
+['Tuna','240','110','50','20','LOT-0588', badge('warning','Review')],
+['Squid','150','60','20','10','LOT-0655', badge('success','OK')],
+['Crab','90','40','15','5','LOT-0720', badge('success','OK')] ] } },
+movements: { title: 'Stock Movements', subtitle: 'Every stock-in, stock-out and adjustment event',
+kpis: [ { l: 'Movements Today', v: '58', i: 'arrow-left-right', c: 'primary', t: '+12 vs avg', d: 'up' }, { l: 'Stock In', v: '32', i: 'download', c: 'success', t: '18.4 T received' }, { l: 'Stock Out', v: '21', i: 'upload', c: 'info', t: '12.1 T dispatched' }, { l: 'Adjustments', v: '5', i: 'sliders-horizontal', c: 'warning', t: '2 need approval' } ],
+table: { title: 'Movement Register', columns: ['Movement ID','Type','SKU','Qty (Kg)','From','To','By','Time'],
+rows: [
+['<span class="row-id">MOV-8801</span>', badge('success','IN'),'SHR-26-30','8,400','Harbour','CR-01','R. Kumar','14:12'],
+['<span class="row-id">MOV-8802</span>', badge('info','OUT'),'SAL-FIL-01','2,200','CR-02','Dispatch Bay','P. Sharma','13:40'],
+['<span class="row-id">MOV-8803</span>', badge('purple','TRANSFER'),'TUN-CAN-01','1,500','CR-03','CR-06','M. Khan','12:55'],
+['<span class="row-id">MOV-8804</span>', badge('warning','ADJUST'),'SQD-FRZ-01','-40','CR-04','—','S. Menon','11:20'],
+['<span class="row-id">MOV-8805</span>', badge('success','IN'),'CRB-MT-01','3,100','Harbour','CR-06','R. Kumar','09:48'] ] } },
+transfers: { title: 'Stock Transfers', subtitle: 'Inter-room and inter-plant transfer requests',
+kpis: [ { l: 'Pending Approval', v: '5', i: 'hourglass', c: 'warning', t: '2 high priority' }, { l: 'In Transit', v: '3', i: 'truck', c: 'info', t: 'Within plant' }, { l: 'Completed Today', v: '4', i: 'check-circle', c: 'success', t: '6.2 T moved' }, { l: 'Rejected', v: '1', i: 'x-circle', c: 'error', t: 'Temp risk', d: 'down' } ],
+table: { title: 'Transfer Requests', columns: ['Transfer #','From','To','SKU','Qty (Kg)','Requested By','Status'],
+rows: [
+['<span class="row-id">TRF-3301</span>','CR-01','CR-04','SHR-26-30','2,000','P. Sharma', badge('warning','Pending')],
+['<span class="row-id">TRF-3302</span>','CR-03','CR-06','TUN-CAN-01','1,500','M. Khan', badge('info','In Transit')],
+['<span class="row-id">TRF-3303</span>','CR-02','Dispatch','SAL-FIL-01','2,200','P. Sharma', badge('success','Completed')],
+['<span class="row-id">TRF-3304</span>','CR-04','CR-01','SQD-FRZ-01','1,800','S. Menon', badge('error','Rejected')],
+['<span class="row-id">TRF-3305</span>','CR-05','CR-02','LOB-TAL-01','600','R. Kumar', badge('warning','Pending')] ] } }
+};
+function renderGenericPage(id) {
+  const cfg = GENERIC_PAGES[id];
+  document.getElementById('genericTitle').textContent = cfg.title;
+  document.getElementById('genericSubtitle').innerHTML = cfg.subtitle;
+  document.getElementById('genericActions').innerHTML = `<button class="btn btn-default" onclick="exportDashboard()"><i data-lucide="download"></i> Export</button><button class="btn btn-primary" onclick="showToast('info','New','Opening create form')"><i data-lucide="plus"></i> New</button>`;
+  document.getElementById('genericKpis').innerHTML = cfg.kpis.map(k => `
+    <div class="kpi-card"><div class="kpi-header"><span class="kpi-title">${k.l}</span><div class="kpi-icon ${k.c}"><i data-lucide="${k.i}"></i></div></div>
+    <div class="kpi-value">${k.v}</div>
+    <div class="kpi-trend ${k.d === 'up' ? 'trend-up' : k.d === 'down' ? 'trend-down' : 'trend-neutral'}">${k.d ? `<i data-lucide="trending-${k.d}"></i>` : ''} ${k.t}</div></div>`).join('');
+  const chartWrap = document.getElementById('genericChartWrap');
+  if (cfg.chart) {
+    chartWrap.style.display = 'grid';
+    document.getElementById('genericChartTitle').textContent = cfg.chart.title;
+    if (state.charts.generic) state.charts.generic.destroy();
+    state.charts.generic = new Chart(document.getElementById('genericChart'), {
+      type: cfg.chart.type,
+      data: { labels: cfg.chart.labels, datasets: cfg.chart.datasets.map(d => ({ label: d.label, data: d.data, backgroundColor: d.color, borderRadius: 6, barPercentage: 0.65 })) },
+      options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#F3F4F6' } } } }
+    });
+  } else chartWrap.style.display = 'none';
+  const t = cfg.table;
+  document.getElementById('genericTableWrap').innerHTML = `
+    <div class="data-card"><div class="data-card-header"><div><div class="data-card-title">${t.title}</div><div class="data-card-subtitle">${t.rows.length} records</div></div></div>
+    <div class="data-table-wrap"><table class="data-table"><thead><tr>${t.columns.map(c => `<th>${c}</th>`).join('')}<th style="text-align:right;">Actions</th></tr></thead>
+    <tbody>${t.rows.map(r => `<tr onclick="showToast('info','Record','Opening details')">${r.map(c => `<td>${c}</td>`).join('')}<td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','View','Opening record')"><i data-lucide="eye"></i></button><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Edit','Opening editor')"><i data-lucide="edit"></i></button></div></td></tr>`).join('')}</tbody></table></div></div>`;
+  lucide.createIcons();
+}
+
+/* ================= RENDERERS ================= */
+function renderProducts() {
+  document.getElementById('productsGrid').innerHTML = PRODUCTS.map(p => {
+    const sb = p.stock < 10 ? 'badge-error' : p.stock < 50 ? 'badge-warning' : 'badge-success';
+    const sl = p.stock < 10 ? 'Low Stock' : p.stock < 50 ? 'Limited' : 'Available';
+    return `<div class="product-card" onclick="showToast('info','Product','Opening ${p.name}')">
+      <div class="product-image">${p.emoji}</div><div class="product-name">${p.name}</div><div class="product-sku">${p.sku}</div>
+      <div class="product-price">$${p.price.toLocaleString()}</div><div class="product-unit">per ton · FOB Kochi</div>
+      <div class="product-stats"><div class="product-stat"><div class="product-stat-value">${p.stock}</div><div class="product-stat-label">Stock (T)</div></div><div class="product-stat"><div class="product-stat-value">${p.sold.toLocaleString()}</div><div class="product-stat-label">Sold</div></div><div class="product-stat"><div class="product-stat-value">★ ${p.rating}</div><div class="product-stat-label">Rating</div></div></div>
+      <div style="margin-top:8px;">${badge(sb.slice(6), sl)}</div></div>`;
+  }).join('');
+}
+function renderBuyers() {
+  document.getElementById('buyersTableBody').innerHTML = BUYERS.map(b => `<tr onclick="showToast('info','Buyer','Opening ${b.name}')">
+    <td><div style="display:flex;align-items:center;gap:9px;"><div class="avatar" style="width:28px;height:28px;font-size:10px;">${b.name.slice(0,2).toUpperCase()}</div><strong>${b.name}</strong></div></td>
+    <td>${b.flag} ${b.country}</td><td>${b.contact}</td><td><strong>${b.orders}</strong></td><td><strong>$${(b.revenue/1e6).toFixed(2)}M</strong></td><td>$${b.credit.toLocaleString()}</td>
+    <td>${badge(b.status === 'active' ? 'success' : 'gray', b.status)}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Email','Composing...')"><i data-lucide="mail"></i></button><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Call','Dialing...')"><i data-lucide="phone"></i></button></div></td></tr>`).join('');
+}
+function renderInsurance() {
+  document.getElementById('insuranceTableBody').innerHTML = `
+    <tr><td><span class="row-id">POL-2026-001</span></td><td>Marine Cargo</td><td>Lloyd's of London</td><td>$5M</td><td>$45,000</td><td>Dec 31, 2026</td><td>${badge('success','Active')}</td></tr>
+    <tr><td><span class="row-id">POL-2026-002</span></td><td>Product Liability</td><td>Allianz</td><td>$2M</td><td>$18,500</td><td>Mar 15, 2027</td><td>${badge('success','Active')}</td></tr>
+    <tr><td><span class="row-id">POL-2026-003</span></td><td>Cold Chain</td><td>Zurich</td><td>$3M</td><td>$28,000</td><td>Jun 30, 2027</td><td>${badge('success','Active')}</td></tr>
+    <tr><td><span class="row-id">POL-2025-014</span></td><td>Workers Comp</td><td>State Farm</td><td>$1M</td><td>$12,000</td><td>Aug 15, 2026</td><td>${badge('warning','Expiring')}</td></tr>`;
+}
+function renderReports() {
+  const rs = [ ['trending-up','Sales Performance','Monthly sales analysis'], ['boxes','Inventory Valuation','Stock value report'], ['users','Customer Analytics','Buyer insights'], ['ship','Shipping Performance','On-time delivery stats'], ['dollar-sign','Financial Summary','P&L and cash flow'], ['shield-check','Quality Metrics','QC pass rates'], ['factory','Production Output','Line efficiency'], ['file-check','Compliance Audit','Regulatory reports'] ];
+  document.getElementById('reportsGrid').innerHTML = rs.map(r => `<div class="product-card" onclick="showToast('info','Report','Generating ${r[1]}...')">
+    <div class="product-image"><i data-lucide="${r[0]}" style="width:46px;height:46px;color:var(--colorPrimary);"></i></div>
+    <div class="product-name">${r[1]}</div><div class="product-sku">${r[2]}</div>
+    <div style="margin-top:10px;"><button class="btn btn-sm btn-primary" style="width:100%;"><i data-lucide="download"></i> Generate PDF</button></div></div>`).join('');
+}
+function renderPurchaseTable() {
+  const sup = ['Kerala Fishermen Co-op','Ocean Harvest Ltd','Blue Wave Traders','South India Catch','Coastal Aquafarms'];
+  const prd = ['Raw Shrimp','Salmon Loins','Tuna','Mixed Seafood','Farmed Shrimp'];
+  const st = [['info','In Transit'],['warning','Approval'],['success','Received'],['gray','Draft']];
+  document.getElementById('purchaseTableBody').innerHTML = Array.from({length: 8}, (_, i) => {
+    const s = st[i % st.length];
+    return `<tr><td><span class="row-id">PO-2026-01${String(i).padStart(2,'0')}</span></td><td>${sup[i%5]}</td><td>${prd[i%5]}</td><td>${(Math.floor(Math.random()*14)+2)*1000} Kg</td><td>$${(Math.floor(Math.random()*50)+8)*1000}</td><td>${badge(s[0], s[1])}</td><td>Sep ${18+i}, 2026</td></tr>`;
+  }).join('');
+}
+function renderPreprocessBoard() {
+  const stages = ['Received','Grading','Sorting','Cleaning','Packaging'];
+  const colors = ['#2563EB','#D97706','#7C3AED','#0891B2','#059669'];
+  document.getElementById('preprocessBoard').innerHTML = stages.map((s, i) => {
+    const n = 2 + (i * 3) % 4;
+    return `<div class="kanban-column"><div class="kanban-header"><div class="kanban-title"><span class="kanban-dot" style="background:${colors[i]}"></span>${s}</div><span class="kanban-count">${n}</span></div>
+      <div class="kanban-cards">${Array.from({length: n}, (_, j) => `<div class="kanban-card" onclick="showToast('info','Lot','Opening LOT-08${40+i}${j}')">
+      <div class="kanban-card-id">LOT-08${40+i}${j}</div><div class="kanban-card-title">${['White Shrimp','Tiger Shrimp','Tuna Loins','Squid'][ (i+j)%4 ]}</div>
+      <div class="kanban-card-meta"><span><i data-lucide="weight"></i>${(Math.floor(Math.random()*9)+2)*1000} kg</span><span><i data-lucide="user"></i>${['RK','PS','MK'][(i+j)%3]}</span></div></div>`).join('')}</div></div>`;
+  }).join('');
+}
+function renderProduction() {
+  const names = ['Shrimp','Salmon','Tuna','Squid','Lobster','Crab'];
+  document.getElementById('productionLines').innerHTML = names.map((n, i) => {
+    const u = 55 + ((i * 13) % 45), running = i !== 3 && i !== 5;
+    return `<div class="kpi-card"><div class="kpi-header"><span class="kpi-title">Line ${i+1} · ${n}</span><div class="kpi-icon ${running ? 'success' : 'warning'}"><i data-lucide="${running ? 'activity' : 'pause'}"></i></div></div>
+      <div class="kpi-value">${running ? u + '%' : '—'}</div><div class="kpi-trend ${running ? 'trend-up' : 'trend-neutral'}">${running ? 'Running' : i === 5 ? 'Maintenance' : 'Idle'}</div>
+      <div style="margin-top:10px;"><div class="progress-label"><span>Output today</span><span>${running ? (u/10).toFixed(1) : 0} T</span></div><div class="progress-bar"><div class="progress-bar-fill" style="width:${running ? u : 0}%;"></div></div></div></div>`;
+  }).join('');
+}
+function renderInventory() {
+  document.getElementById('inventoryTableBody').innerHTML = PRODUCTS.map(p => {
+    const sb = p.stock < 10 ? ['error','Critical'] : p.stock < 50 ? ['warning','Low'] : ['success','OK'];
+    return `<tr><td><span class="row-id">${p.sku}</span></td><td><strong>${p.name}</strong></td><td><strong>${p.stock}</strong></td><td>20</td><td>CR-0${(p.stock%6)+1}</td><td>Mar 15, 2027</td><td>${badge(sb[0], sb[1])}</td>
+      <td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost"><i data-lucide="edit"></i></button><button class="btn btn-sm btn-icon btn-ghost"><i data-lucide="history"></i></button></div></td></tr>`;
+  }).join('');
+}
+function renderColdRooms() {
+  document.getElementById('coldroomGrid').innerHTML = COLD_ROOMS.map(r => `
+    <div class="coldroom-card ${r.status === 'critical' ? 'critical' : ''}">
+      <div class="coldroom-header"><div><div class="coldroom-name">${r.name}</div><div class="coldroom-code">${r.id} · ${r.product}</div></div>
+      ${badge(r.status === 'critical' ? 'error' : r.status === 'warning' ? 'warning' : 'success', r.status === 'critical' ? 'Critical' : r.status === 'warning' ? 'Warning' : 'OK')}</div>
+      <div class="coldroom-temp"><div class="coldroom-temp-value">${r.temp.toFixed(1)}</div><div class="coldroom-temp-unit">°C</div></div>
+      <div class="coldroom-target">Target ${r.target}°C · Humidity ${r.humidity}%</div>
+      <div style="margin-bottom:10px;"><div class="progress-label"><span>Capacity</span><span>${r.capacity}%</span></div><div class="progress-bar"><div class="progress-bar-fill" style="width:${r.capacity}%;"></div></div></div>
+      <div class="coldroom-meta"><div><div class="coldroom-meta-label">Compressor</div><div class="coldroom-meta-value"><span class="status-dot online"></span>Running</div></div><div><div class="coldroom-meta-label">Door</div><div class="coldroom-meta-value">${r.status === 'critical' ? 'Open' : 'Closed'}</div></div><div><div class="coldroom-meta-label">Last Check</div><div class="coldroom-meta-value">2m ago</div></div><div><div class="coldroom-meta-label">Alerts</div><div class="coldroom-meta-value">${r.status === 'critical' ? '1 active' : 'None'}</div></div></div>
+    </div>`).join('');
+}
+let tempInterval = null;
+function startTempMonitoring() {
+  if (tempInterval) clearInterval(tempInterval);
+  tempInterval = setInterval(() => {
+    if (state.sub !== 'coldstore') { clearInterval(tempInterval); tempInterval = null; return; }
+    COLD_ROOMS.forEach(r => { r.temp = Math.max(-25, Math.min(-12, r.temp + (Math.random() - 0.5) * 0.4)); });
+    renderColdRooms();
+  }, 3000);
+}
+function renderQCChecklist() {
+  document.getElementById('qcChecklist').innerHTML = QC_CHECKLIST.map((c, i) => `
+    <div class="checklist-item ${c.checked ? 'checked' : ''}" onclick="QC_CHECKLIST[${i}].checked=!QC_CHECKLIST[${i}].checked;renderQCChecklist();">
+      <div class="checklist-check"><i data-lucide="check"></i></div><div class="checklist-label">${c.label}</div><div class="checklist-value">${c.value}</div></div>`).join('');
+}
+
+/* ================= ORDERS ================= */
+function renderOrdersKanban() {
+  const board = document.getElementById('kanbanBoard');
+  board.innerHTML = '';
+  Object.keys(ORDER_STATUS_LABELS).forEach(status => {
+    const orders = state.orders.filter(o => o.status === status);
+    const col = document.createElement('div');
+    col.className = 'kanban-column';
+    col.addEventListener('dragover', e => { e.preventDefault(); col.classList.add('drag-over'); });
+    col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    col.addEventListener('drop', e => {
+      e.preventDefault(); col.classList.remove('drag-over');
+      const o = state.orders.find(x => x.id === e.dataTransfer.getData('orderId'));
+      if (o) { o.status = status; renderOrdersKanban(); renderOrdersTable(); showToast('success', 'Order Updated', `${o.id} → ${ORDER_STATUS_LABELS[status]}`); }
+    });
+    col.innerHTML = `<div class="kanban-header"><div class="kanban-title"><span class="kanban-dot" style="background:${ORDER_STATUS_COLORS[status]}"></span>${ORDER_STATUS_LABELS[status]}</div><span class="kanban-count">${orders.length}</span></div><div class="kanban-cards"></div>`;
+    const wrap = col.querySelector('.kanban-cards');
+    orders.forEach(o => {
+      const card = document.createElement('div');
+      card.className = 'kanban-card'; card.draggable = true;
+      card.addEventListener('dragstart', e => { e.dataTransfer.setData('orderId', o.id); card.classList.add('dragging'); });
+      card.addEventListener('dragend', () => card.classList.remove('dragging'));
+      card.onclick = () => openOrderDrawer(o.id);
+      card.innerHTML = `<div class="kanban-card-id">${o.id}</div><div class="kanban-card-title">${o.customer}</div>
+        <div class="kanban-card-meta"><span><i data-lucide="package"></i>${o.product.split(' ')[0]}</span><span><i data-lucide="weight"></i>${o.quantity}T</span><span><i data-lucide="dollar-sign"></i>$${(o.value/1000).toFixed(1)}K</span></div>
+        <div class="kanban-card-footer"><div class="kanban-avatar">${o.assignee}</div>${badge('primary', o.destination)}</div>`;
+      wrap.appendChild(card);
+    });
+    board.appendChild(col);
+  });
+  lucide.createIcons();
+}
+function renderOrdersTable() {
+  const map = { new: ['info','New'], processing: ['warning','Processing'], quality: ['purple','In QC'], shipped: ['primary','Shipped'], delivered: ['success','Delivered'] };
+  document.getElementById('ordersCount').textContent = state.orders.length;
+  document.getElementById('ordersTableBody').innerHTML = state.orders.slice(0, 15).map(o => `<tr onclick="openOrderDrawer('${o.id}')">
+    <td><span class="row-id">${o.id}</span></td><td>${o.customer}</td><td>${o.product}</td><td>${o.quantity}</td><td>$${o.value.toLocaleString()}</td>
+    <td>${badge(map[o.status][0], map[o.status][1])}</td><td>${o.shipDate.toLocaleDateString()}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();openOrderDrawer('${o.id}')"><i data-lucide="eye"></i></button><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Edit','Opening editor')"><i data-lucide="edit"></i></button></div></td></tr>`).join('');
+}
+function switchOrdersView(v, el) {
+  document.querySelectorAll('#page-orders .tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#page-orders .tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('orders' + v[0].toUpperCase() + v.slice(1) + 'View').classList.add('active');
+  if (v === 'kanban') renderOrdersKanban();
+  if (v === 'table') renderOrdersTable();
+  if (v === 'calendar') renderCalendar();
+  lucide.createIcons();
+}
+function renderCalendar() {
+  const today = new Date();
+  const mn = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dim = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  const fd = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  let h = `<h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">${mn[today.getMonth()]} ${today.getFullYear()}</h3><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;">`;
+  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => h += `<div style="padding:8px;text-align:center;font-size:11px;font-weight:700;color:var(--colorTextTertiary);">${d}</div>`);
+  for (let i = 0; i < fd; i++) h += '<div></div>';
+  for (let d = 1; d <= dim; d++) {
+    const isT = d === today.getDate();
+    const os = state.orders.filter(o => o.shipDate.getDate() === d && o.shipDate.getMonth() === today.getMonth());
+    h += `<div style="padding:8px;min-height:78px;background:${isT ? 'var(--colorPrimaryBg)' : 'var(--colorBgLayout)'};border-radius:var(--borderRadius);border:${isT ? '2px solid var(--colorPrimary)' : '1px solid var(--colorBorderSecondary)'};">
+      <div style="font-weight:${isT ? 700 : 500};color:${isT ? 'var(--colorPrimaryActive)' : 'var(--colorText)'};margin-bottom:4px;">${d}</div>
+      ${os.slice(0, 2).map(o => `<div style="font-size:10px;padding:2px 4px;background:var(--colorPrimaryBg);color:var(--colorPrimaryActive);border-radius:3px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${o.id.slice(-4)}</div>`).join('')}
+      ${os.length > 2 ? `<div style="font-size:10px;color:var(--colorTextTertiary);">+${os.length - 2} more</div>` : ''}</div>`;
+  }
+  document.getElementById('calendarView').innerHTML = h + '</div>';
+}
+function filterOrders() {
+  const q = document.getElementById('orderSearch').value.toLowerCase();
+  state.orders = q ? generateOrders().filter(o => (o.id + o.customer + o.product).toLowerCase().includes(q)) : generateOrders();
+  renderOrdersKanban(); renderOrdersTable();
+}
+function filterOrdersByStatus(s) {
+  state.orders = s === 'all' ? generateOrders() : generateOrders().filter(o => o.status === s);
+  renderOrdersKanban(); renderOrdersTable();
+}
+function openOrderDrawer(id) {
+  const o = state.orders.find(x => x.id === id); if (!o) return;
+  document.getElementById('drawerSubtitle').textContent = o.id;
+  document.getElementById('drawerBody').innerHTML = `
+    <div class="drawer-section"><div class="drawer-section-title"><i data-lucide="info"></i> Order Information</div>
+    <div class="drawer-info-grid">
+    <div class="drawer-info-item"><div class="drawer-info-label">Customer</div><div class="drawer-info-value">${o.customer}</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Product</div><div class="drawer-info-value">${o.product}</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Quantity</div><div class="drawer-info-value">${o.quantity} Tons</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Value</div><div class="drawer-info-value">$${o.value.toLocaleString()}</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Destination</div><div class="drawer-info-value">${o.destination}</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Ship Date</div><div class="drawer-info-value">${o.shipDate.toLocaleDateString()}</div></div>
+    </div></div>
+    <div class="drawer-section"><div class="drawer-section-title"><i data-lucide="activity"></i> Order Timeline</div>
+    <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot success"></div><div class="timeline-content"><div class="timeline-title">Order Created</div><div class="timeline-desc">By Super Admin via web portal</div><div class="timeline-time">Sep 10, 2026 · 10:23 AM</div></div></div>
+    <div class="timeline-item"><div class="timeline-dot success"></div><div class="timeline-content"><div class="timeline-title">Customer Confirmed</div><div class="timeline-desc">${o.customer} accepted terms</div><div class="timeline-time">Sep 10, 2026 · 2:45 PM</div></div></div>
+    <div class="timeline-item"><div class="timeline-dot ${o.status !== 'new' ? 'success' : 'gray'}"></div><div class="timeline-content"><div class="timeline-title">Processing Started</div><div class="timeline-desc">Assigned to Plant Unit-3</div><div class="timeline-time">Sep 11, 2026 · 9:00 AM</div></div></div>
+    <div class="timeline-item"><div class="timeline-dot ${['quality','shipped','delivered'].includes(o.status) ? 'success' : 'gray'}"></div><div class="timeline-content"><div class="timeline-title">Quality Check Passed</div><div class="timeline-desc">Inspector: Rajesh Kumar · Grade A</div><div class="timeline-time">Sep 13, 2026 · 4:15 PM</div></div></div>
+    <div class="timeline-item"><div class="timeline-dot ${['shipped','delivered'].includes(o.status) ? 'success' : 'gray'}"></div><div class="timeline-content"><div class="timeline-title">Shipment Dispatched</div><div class="timeline-desc">Container MAEU-4521897</div><div class="timeline-time">Sep 15, 2026 · 6:30 AM</div></div></div>
+    <div class="timeline-item"><div class="timeline-dot ${o.status === 'delivered' ? 'success' : 'gray'}"></div><div class="timeline-content"><div class="timeline-title">Delivered</div><div class="timeline-desc">Received at destination port</div><div class="timeline-time">Pending</div></div></div>
+    </div></div>
+    <div class="drawer-section"><div class="drawer-section-title"><i data-lucide="file-text"></i> Documents</div>
+    ${[['file-text','Commercial Invoice','INV-' + o.id.slice(-4) + '.pdf · 142 KB'],['file-text','Bill of Lading','BOL-' + o.id.slice(-4) + '.pdf · 210 KB'],['shield-check','Certificate of Origin','COO-' + o.id.slice(-4) + '.pdf · 89 KB']].map(d => `
+    <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--colorBgLayout);border-radius:var(--borderRadius);cursor:pointer;margin-bottom:6px;" onclick="showToast('info','Download','${d[1]} downloading')">
+    <i data-lucide="${d[0]}" style="width:16px;height:16px;color:var(--colorPrimary);"></i>
+    <div style="flex:1;font-size:12px;"><div style="font-weight:600;">${d[1]}</div><div style="color:var(--colorTextTertiary);font-size:11px;">${d[2]}</div></div>
+    <i data-lucide="download" style="width:14px;height:14px;color:var(--colorTextTertiary);"></i></div>`).join('')}</div>`;
+  document.getElementById('orderDrawerOverlay').classList.add('open');
+  document.getElementById('orderDrawer').classList.add('open');
+  lucide.createIcons();
+}
+function closeDrawer() { document.getElementById('orderDrawerOverlay').classList.remove('open'); document.getElementById('orderDrawer').classList.remove('open'); }
+
+/* ================= SETTINGS & ACTIVITY ================= */
+function renderSettingsNav(active) {
+  document.getElementById('settingsNav').innerHTML = MODULES.settings.subs.map(s => `<div class="settings-nav-item ${s.id === active ? 'active' : ''}" onclick="navigate('settings','${s.id}')"><i data-lucide="${{profile:'user',notifications:'bell',security:'shield',billing:'credit-card',integrations:'link',team:'users'}[s.id]}"></i> ${s.label}</div>`).join('');
+}
+function renderSettings(tab) {
+  const S = {
+    profile: `<div class="settings-section"><div class="settings-section-title">Profile Information</div><div class="settings-section-desc">Your personal and contact details</div>
+      <div class="form-row"><div class="form-group"><label>Full Name</label><input type="text" class="ant-input" value="Super Admin" /></div><div class="form-group"><label>Email</label><input type="email" class="ant-input" value="admin@devifisheries.com" /></div></div>
+      <div class="form-row"><div class="form-group"><label>Phone</label><input type="text" class="ant-input" value="+91 98765 43210" /></div><div class="form-group"><label>Role</label><input type="text" class="ant-input" value="Administrator" disabled /></div></div></div>
+      <div class="settings-section"><div class="settings-section-title">Company</div>
+      <div class="form-group"><label>Company Name</label><input type="text" class="ant-input" value="Devi Fisheries Limited" /></div>
+      <div class="form-row"><div class="form-group"><label>GST Number</label><input type="text" class="ant-input" value="32AABCD1234E1Z5" /></div><div class="form-group"><label>IEC Code</label><input type="text" class="ant-input" value="0715001234" /></div></div></div>
+      <button class="btn btn-primary" onclick="showToast('success','Saved','Profile updated')"><i data-lucide="save"></i> Save Changes</button>`,
+    notifications: `<div class="settings-section"><div class="settings-section-title">Email Notifications</div>
+      ${[['Order Updates','When order status changes',1],['Payment Receipts','Payment confirmations',1],['QC Alerts','Quality failures',1],['Marketing','Product updates',0]].map(r => `<div class="settings-row"><div><div class="settings-row-label">${r[0]}</div><div class="settings-row-desc">${r[1]}</div></div><div class="toggle ${r[2] ? 'on' : ''}" onclick="this.classList.toggle('on')"></div></div>`).join('')}</div>
+      <div class="settings-section"><div class="settings-section-title">Push Notifications</div>
+      ${[['Temperature Alerts','Critical cold storage alerts',1],['Shipment Tracking','Live status updates',1]].map(r => `<div class="settings-row"><div><div class="settings-row-label">${r[0]}</div><div class="settings-row-desc">${r[1]}</div></div><div class="toggle ${r[2] ? 'on' : ''}" onclick="this.classList.toggle('on')"></div></div>`).join('')}</div>`,
+    security: `<div class="settings-section"><div class="settings-section-title">Password</div>
+      <div class="form-group"><label>Current Password</label><input type="password" class="ant-input" /></div>
+      <div class="form-row"><div class="form-group"><label>New Password</label><input type="password" class="ant-input" /></div><div class="form-group"><label>Confirm Password</label><input type="password" class="ant-input" /></div></div>
+      <button class="btn btn-primary" onclick="showToast('success','Updated','Password changed')"><i data-lucide="key"></i> Update Password</button></div>
+      <div class="settings-section"><div class="settings-section-title">Sessions</div>
+      <div class="settings-row"><div><div class="settings-row-label">Chrome · Windows</div><div class="settings-row-desc">Current session · Kochi, India</div></div>${badge('success','Active')}</div>
+      <div class="settings-row"><div><div class="settings-row-label">Safari · iPhone</div><div class="settings-row-desc">Last active 2 hours ago</div></div><button class="btn btn-sm btn-ghost" onclick="showToast('warning','Revoked','Session terminated')">Revoke</button></div></div>`,
+    billing: `<div class="settings-section"><div class="settings-section-title">Current Plan</div>
+      <div style="background:linear-gradient(135deg,var(--colorPrimaryBg),#FFF4CC);padding:20px;border-radius:var(--borderRadiusLG);border:1px solid var(--colorPrimaryBorder);">
+      <div style="font-size:14px;font-weight:700;">Enterprise Plan</div>
+      <div style="font-size:26px;font-weight:800;color:var(--colorPrimary);">$499<span style="font-size:12px;color:var(--colorTextTertiary);">/month</span></div>
+      <div style="font-size:12px;color:var(--colorTextSecondary);margin-top:4px;">Renews on October 15, 2026</div></div></div>
+      <div class="settings-section"><div class="settings-section-title">Payment Method</div>
+      <div class="settings-row"><div><div class="settings-row-label">Visa ending in 4242</div><div class="settings-row-desc">Expires 12/2028</div></div><button class="btn btn-sm btn-default">Update</button></div></div>`,
+    integrations: `<div class="settings-section"><div class="settings-section-title">Connected Services</div>
+      ${[['📦','SAP ERP','Sync orders & inventory','Connected'],['🚢','Maersk API','Live shipment tracking','Connected'],['💳','Stripe','Payment processing','Connected'],['📊','Salesforce CRM','Customer management',null],['📬','Mailchimp','Email marketing',null]].map(r => `<div class="settings-row"><div><div class="settings-row-label">${r[0]} ${r[1]}</div><div class="settings-row-desc">${r[2]}</div></div>${r[3] ? badge('success', r[3]) : `<button class="btn btn-sm btn-primary" onclick="showToast('success','Connected','${r[1]} linked')">Connect</button>`}</div>`).join('')}</div>`,
+    team: `<div class="settings-section"><div class="settings-section-title">Team Members</div>
+      ${[['SA','Super Admin','admin@devifisheries.com · Owner','primary','Admin'],['RK','Rajesh Kumar','rajesh@devifisheries.com · QC Manager','info','Editor'],['PS','Priya Sharma','priya@devifisheries.com · Operations','info','Editor'],['MK','Mohan Kumar','mohan@devifisheries.com · Finance','gray','Viewer']].map(m => `<div class="settings-row"><div style="display:flex;align-items:center;gap:10px;"><div class="avatar" style="width:32px;height:32px;font-size:11px;">${m[0]}</div><div><div class="settings-row-label">${m[1]}</div><div class="settings-row-desc">${m[2]}</div></div></div>${badge(m[3], m[4])}</div>`).join('')}</div>
+      <button class="btn btn-primary" onclick="showToast('info','Invite','Invite dialog opened')"><i data-lucide="user-plus"></i> Invite Team Member</button>`
+  };
+  document.getElementById('settingsContent').innerHTML = S[tab] || S.profile;
+  lucide.createIcons();
+}
+function renderActivity(filter) {
+  const acts = [
+    ['SA','Super Admin','created order','ORD-2026-0465','2 minutes ago','orders'],
+    ['RK','Rajesh Kumar','approved QC inspection for','LOT-2026-0847','15 minutes ago','orders'],
+    ['MK','Mohan Kumar','received payment from','USA Imports LLC ($45,000)','2 hours ago','payments'],
+    ['PS','Priya Sharma','updated shipment tracking for','SHP-2026-003','1 hour ago','orders'],
+    ['RK','Rajesh Kumar','flagged cold room CR-04 for','temperature anomaly','5 hours ago','system'],
+    ['SA','Super Admin','added new buyer','Nordic Seafoods A/S','3 hours ago','orders'],
+    ['MK','Mohan Kumar','reconciled invoice','INV-2026-0418','8 hours ago','payments'],
+    ['PS','Priya Sharma','generated report','Monthly Sales Summary','1 day ago','system']
+  ];
+  const list = filter === 'all' ? acts : acts.filter(a => a[5] === filter);
+  document.getElementById('activityList').innerHTML = list.map(a => `<div class="activity-item">
+    <div class="activity-avatar">${a[0]}</div>
+    <div style="flex:1;"><div class="activity-text"><strong>${a[1]}</strong> ${a[2]} <a href="#" onclick="return false;">${a[3]}</a></div><div class="activity-time">${a[4]}</div></div></div>`).join('') || '<div style="padding:20px;color:var(--colorTextTertiary);font-size:13px;">No activity in this category.</div>';
+}
+
+/* ================= CHARTS ================= */
+Chart.defaults.font.family = "'Sora', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.display = false;
+Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(17,24,39,0.95)';
+Chart.defaults.plugins.tooltip.padding = 10;
+Chart.defaults.plugins.tooltip.cornerRadius = 8;
+const CB = '#111827', CG = '#E6A817', CA = '#FAAD14', CY = '#9CA3AF';
+const months = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+const mk = (id, cfg) => { if (!state.charts[id] && document.getElementById(id)) state.charts[id] = new Chart(document.getElementById(id), cfg); };
+function initDashboardCharts() {
+  mk('invoiceVsShipments', { type: 'bar', data: { labels: months, datasets: [ { label: 'Invoices', data: [170,160,185,200,110,0,0,0,0,0,0,0], backgroundColor: CY, borderRadius: 6, barPercentage: 0.6 }, { label: 'Shipments', data: [175,165,190,210,100,0,0,0,0,0,0,0], backgroundColor: CG, borderRadius: 6, barPercentage: 0.6 } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, max: 250, grid: { color: '#F3F4F6' } } } } });
+  mk('plantWiseOrders', { type: 'bar', data: { labels: ['U-1','U-2','U-3','U-4','U-5','U-6','U-7','All'], datasets: [ { label: 'Total', data: [7,4,3,10,80,180,320,1200], backgroundColor: CB, borderRadius: 6, barPercentage: 0.7 }, { label: 'Shipped', data: [5,3,2,8,60,150,280,800], backgroundColor: CG, borderRadius: 6, barPercentage: 0.7 } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#F3F4F6' } } } } });
+  mk('countryWise', { type: 'doughnut', data: { labels: ['USA','China','Belgium','Russia','Canada','Others'], datasets: [{ data: [75,16,3,2,1,3], backgroundColor: [CB,CG,'#4B5563',CA,'#6B7280',CY], borderWidth: 2, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 9, padding: 8, font: { size: 10 } } } } } });
+  mk('portWise', { type: 'doughnut', data: { labels: ['Savannah','LA','Shanghai','NY','Others'], datasets: [{ data: [225,131,118,112,414], backgroundColor: [CG,CB,'#4B5563',CA,CY], borderWidth: 2, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 9, padding: 8, font: { size: 10 } } } } } });
+  mk('revenueByProduct', { type: 'doughnut', data: { labels: ['Shrimp','Salmon','Tuna','Squid','Others'], datasets: [{ data: [45,25,15,10,5], backgroundColor: [CG,CB,CA,'#4B5563',CY], borderWidth: 2, borderColor: '#fff' }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 9, padding: 8, font: { size: 10 } } } } } });
+  mk('shippedQty', { type: 'bar', data: { labels: ['800026','4/6','6/8','8/12','13/15','16/22','18/22','20/44','22/32','22/52','30/52'], datasets: [ { label: 'To be shipped', data: [5000,20000,30000,50000,80000,150000,100000,200000,250000,300000,800000], backgroundColor: CB, borderRadius: 4, barPercentage: 0.7 }, { label: 'Shipped', data: [2000,10000,15000,30000,50000,100000,80000,150000,200000,250000,600000], backgroundColor: CG, borderRadius: 4, barPercentage: 0.7 } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#F3F4F6' }, ticks: { callback: v => (v/1e6).toFixed(1) + 'M' } } } } });
+}
+function initSalesCharts() {
+  mk('revenueTrend', { type: 'line', data: { labels: months, datasets: [{ label: 'Revenue ($K)', data: [450,520,610,580,640,720,780,820,890,940,980,1020], borderColor: CG, backgroundColor: 'rgba(230,168,23,0.1)', tension: 0.4, fill: true, pointRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: '#F3F4F6' } }, x: { grid: { display: false } } } } });
+  mk('customerAcq', { type: 'bar', data: { labels: months, datasets: [{ label: 'New Customers', data: [3,5,4,6,8,7,9,11,10,12,14,15], backgroundColor: CG, borderRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: '#F3F4F6' } }, x: { grid: { display: false } } } } });
+  document.getElementById('topCustomersBody').innerHTML = BUYERS.slice(0, 6).map((b, i) => `<tr><td><strong>${i+1}</strong></td><td>${b.flag} <strong>${b.name}</strong></td><td>${b.orders}</td><td><strong>$${(b.revenue/1e6).toFixed(2)}M</strong></td><td>${(b.revenue/87e5*100).toFixed(1)}%</td><td>${badge('success','+' + (8 + i * 3) + '%')}</td></tr>`).join('');
+}
+function initPaymentCharts() {
+  mk('paymentAging', { type: 'bar', data: { labels: ['0-30','31-60','61-90','90+'], datasets: [{ data: [245,112,58,82], backgroundColor: ['#059669','#FAAD14','#D97706','#DC2626'], borderRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { grid: { color: '#F3F4F6' } }, y: { grid: { display: false } } } } });
+  mk('cashFlow', { type: 'line', data: { labels: months, datasets: [{ label: 'Cash Flow ($K)', data: [320,380,410,390,440,470,510,540,580,620,650,680], borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: '#F3F4F6' } }, x: { grid: { display: false } } } } });
+}
+function initQCChart() {
+  mk('qcMetrics', { type: 'line', data: { labels: ['W1','W2','W3','W4'], datasets: [ { label: 'Pass Rate %', data: [95,96,97,96.8], borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.1)', tension: 0.4, fill: true }, { label: 'Inspections', data: [18,22,25,24], borderColor: CG, tension: 0.4, yAxisID: 'y1' } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 90, max: 100, grid: { color: '#F3F4F6' } }, y1: { position: 'right', beginAtZero: true, grid: { display: false } }, x: { grid: { display: false } } } } });
+}
+function initTempChart() {
+  mk('tempHistory', { type: 'line', data: { labels: Array.from({length: 24}, (_, i) => i + ':00'), datasets: [ { label: 'CR-01', data: Array.from({length: 24}, () => -22 + (Math.random() - 0.5)), borderColor: CG, tension: 0.35, pointRadius: 0 }, { label: 'CR-03', data: Array.from({length: 24}, () => -19 + (Math.random() - 0.5) * 2), borderColor: CA, tension: 0.35, pointRadius: 0 }, { label: 'CR-04', data: Array.from({length: 24}, (_, i) => -20 + i * 0.2), borderColor: '#DC2626', tension: 0.35, pointRadius: 0 } ] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top', align: 'end', labels: { boxWidth: 10, usePointStyle: true, font: { size: 10 } } } }, scales: { y: { grid: { color: '#F3F4F6' }, ticks: { callback: v => v + '°C' } }, x: { grid: { display: false } } } } });
+}
+
+/* ================= OVERLAYS / UTILS ================= */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function closeModalOnOverlay(e, id) { if (e.target === e.currentTarget) closeModal(id); }
+function createOrder() {
+  const q = document.getElementById('orderQuantity').value || 25, p = document.getElementById('orderProduct').value;
+  closeModal('newOrderModal');
+  showToast('success', 'Order Created', `New order: ${q} tons of ${p}`);
+  const k = document.getElementById('kpiOrders'); if (k) k.textContent = (parseInt(k.textContent.replace(/,/g, '')) + 1).toLocaleString();
+}
+function showToast(type, title, msg, dur = 4000) {
+  const icons = { success: 'check-circle', error: 'alert-circle', warning: 'alert-triangle', info: 'info' };
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.style.setProperty('--dur', dur + 'ms');
+  t.innerHTML = `<div class="toast-icon"><i data-lucide="${icons[type]}"></i></div><div><div class="toast-title">${title}</div><div class="toast-message">${msg}</div></div>`;
+  t.onclick = () => { t.classList.add('hiding'); setTimeout(() => t.remove(), 300); };
+  document.getElementById('toastContainer').appendChild(t);
+  lucide.createIcons();
+  setTimeout(() => { t.classList.add('hiding'); setTimeout(() => t.remove(), 300); }, dur);
+}
+function openNotifications() {
+  document.getElementById('notifOverlay').classList.add('open');
+  document.getElementById('notifDrawer').classList.add('open');
+  const n = [ ['warning','thermometer','Critical Temperature Alert','Cold Room CR-04 exceeded -15°C threshold. Current: -15.6°C','2 min ago',1],
+  ['success','check-circle','Order Delivered','ORD-2026-0425 delivered at Shanghai port','15 min ago',1],
+  ['info','ship','Shipment Update','SHP-2026-001 reached 65% of journey to New York','1 hour ago',1],
+  ['success','dollar-sign','Payment Received','$45,000 from USA Imports LLC','2 hours ago',0],
+  ['error','alert-triangle','QC Inspection Failed','LOT-2026-0832 rejected — microbial contamination','3 hours ago',0] ];
+  document.getElementById('notifList').innerHTML = n.map(x => `<div class="notification-item ${x[5] ? 'unread' : ''}" onclick="showToast('info','Notification','${x[2]}')">
+    <div class="notification-icon ${x[0]}"><i data-lucide="${x[1]}"></i></div>
+    <div style="flex:1;"><div class="notification-title">${x[2]}</div><div class="notification-message">${x[3]}</div><div class="notification-time">${x[4]}</div></div></div>`).join('');
+  lucide.createIcons();
+}
+function closeNotifications() { document.getElementById('notifOverlay').classList.remove('open'); document.getElementById('notifDrawer').classList.remove('open'); }
+function markAllRead() { document.getElementById('notifCount').style.display = 'none'; showToast('success', 'Done', 'All notifications marked as read'); }
+const CMD_ITEMS = [
+  { g: 'Navigate', i: 'layout-dashboard', t: 'Sales Dashboard', d: 'KPIs and charts', a: () => navigate('sales','dashboard') },
+  { g: 'Navigate', i: 'shopping-bag', t: 'Orders', d: 'Kanban, table, calendar', a: () => navigate('sales','orders') },
+  { g: 'Navigate', i: 'package', t: 'Products', d: 'Product catalog', a: () => navigate('sales','products') },
+  { g: 'Navigate', i: 'users', t: 'Buyers', d: 'Customer master', a: () => navigate('sales','buyers') },
+  { g: 'Navigate', i: 'store', t: 'Purchase Orders', d: 'Procurement register', a: () => navigate('purchase','purchase-orders') },
+  { g: 'Navigate', i: 'shield-check', t: 'QC Inspections', d: 'Inspection register', a: () => navigate('qc','inspections') },
+  { g: 'Navigate', i: 'snowflake', t: 'Cold Rooms', d: 'Room status', a: () => navigate('coldstore','rooms') },
+  { g: 'Navigate', i: 'thermometer', t: 'Temperature Log', d: 'Sensor readings', a: () => navigate('coldstore','temperature') },
+  { g: 'Navigate', i: 'boxes', t: 'Stock Movements', d: 'In / out / transfers', a: () => navigate('inventory','movements') },
+  { g: 'Navigate', i: 'settings', t: 'Settings', d: 'Preferences', a: () => navigate('settings','profile') },
+  { g: 'Actions', i: 'plus', t: 'Create New Order', d: 'Open order form', a: () => openModal('newOrderModal') },
+  { g: 'Actions', i: 'plus', t: 'Add Product', d: 'New SKU', a: () => openModal('newProductModal') },
+  { g: 'Actions', i: 'bell', t: 'View Notifications', d: 'Open notification center', a: () => openNotifications() },
+  { g: 'Actions', i: 'download', t: 'Export Dashboard', d: 'Download PDF', a: () => exportDashboard() },
+  { g: 'Actions', i: 'refresh-cw', t: 'Refresh Data', d: 'Reload all widgets', a: () => refreshData() }
+];
+function openCommandPalette() { document.getElementById('cmdPalette').classList.add('open'); document.getElementById('cmdSearch').value = ''; state.cmdIndex = 0; renderCmdPalette(''); setTimeout(() => document.getElementById('cmdSearch').focus(), 60); }
+function closeCommandPalette(e) { if (!e || e.target === e.currentTarget) document.getElementById('cmdPalette').classList.remove('open'); }
+function cmdFiltered(q) { return q ? CMD_ITEMS.filter(i => (i.t + i.d).toLowerCase().includes(q.toLowerCase())) : CMD_ITEMS; }
+function renderCmdPalette(q) {
+  const items = cmdFiltered(q), groups = {};
+  items.forEach(i => (groups[i.g] = groups[i.g] || []).push(i));
+  let idx = 0, html = '';
+  Object.entries(groups).forEach(([g, list]) => {
+    html += `<div class="cmd-group-title">${g}</div>`;
+    list.forEach(i => { html += `<div class="cmd-item ${idx === state.cmdIndex ? 'active' : ''}" onclick="executeCmd(${idx})"><div class="cmd-item-icon"><i data-lucide="${i.i}"></i></div><div style="flex:1;"><div class="cmd-item-title">${i.t}</div><div class="cmd-item-desc">${i.d}</div></div></div>`; idx++; });
+  });
+  document.getElementById('cmdBody').innerHTML = html || '<div style="padding:20px;text-align:center;color:var(--colorTextTertiary);font-size:13px;">No results found</div>';
+  lucide.createIcons();
+}
+function executeCmd(i) { const f = cmdFiltered(document.getElementById('cmdSearch').value); if (f[i]) { f[i].a(); closeCommandPalette(); } }
+document.addEventListener('contextmenu', e => {
+  const card = e.target.closest('.kpi-card, .chart-card, .data-table tbody tr, .kanban-card, .product-card, .coldroom-card');
+  if (!card) return;
+  e.preventDefault();
+  const m = document.getElementById('contextMenu');
+  m.innerHTML = `<div class="context-menu-item" onclick="showToast('info','View','Opening details')"><i data-lucide="eye"></i> View Details</div>
+    <div class="context-menu-item" onclick="showToast('info','Edit','Opening editor')"><i data-lucide="edit"></i> Edit</div>
+    <div class="context-menu-item" onclick="showToast('info','Duplicate','Record duplicated')"><i data-lucide="copy"></i> Duplicate</div>
+    <div class="context-menu-divider"></div>
+    <div class="context-menu-item" onclick="exportDashboard()"><i data-lucide="download"></i> Export</div>
+    <div class="context-menu-item" onclick="showToast('info','Share','Link copied')"><i data-lucide="share-2"></i> Share</div>
+    <div class="context-menu-divider"></div>
+    <div class="context-menu-item danger" onclick="showToast('warning','Deleted','Record deleted')"><i data-lucide="trash-2"></i> Delete</div>`;
+  m.style.left = Math.min(e.pageX, innerWidth - 220) + 'px';
+  m.style.top = Math.min(e.pageY, innerHeight - 300) + 'px';
+  m.classList.add('open');
+  lucide.createIcons();
+});
+document.addEventListener('click', () => document.getElementById('contextMenu').classList.remove('open'));
+function refreshData() { const i = document.getElementById('refreshIcon'); i.classList.add('animate-spin'); setTimeout(() => { i.classList.remove('animate-spin'); showToast('success', 'Refreshed', 'All data updated'); }, 1100); }
+function exportDashboard() { showToast('info', 'Export', 'Preparing PDF...'); setTimeout(() => showToast('success', 'Done', 'Dashboard exported'), 1400); }
+function toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+function scrollToTop() { document.getElementById('contentArea').scrollTo({ top: 0, behavior: 'smooth' }); }
+
+/* ================= MICRO-INTERACTIONS ENGINE ================= */
+function showPageLoader() {
+  const l = document.getElementById('pageLoader');
+  l.classList.add('on');
+  clearTimeout(l._t);
+  l._t = setTimeout(() => l.classList.remove('on'), 450);
+}
+function applyStagger(page) {
+  const els = page.querySelectorAll('.kpi-card, .chart-card, .product-card, .coldroom-card, .data-card');
+  els.forEach((el, i) => {
+    el.style.animationDelay = (i * 45) + 'ms';
+    el.classList.remove('stagger-in');
+    void el.offsetWidth;
+    el.classList.add('stagger-in');
+  });
+}
+function animateValue(el) {
+  const raw = el.dataset.raw || el.textContent.trim();
+  el.dataset.raw = raw;
+  const m = raw.match(/^([^0-9\-]*)(-?[0-9][0-9,\.]*)(.*)$/);
+  if (!m) return;
+  const prefix = m[1], numStr = m[2], suffix = m[3];
+  const target = parseFloat(numStr.replace(/,/g, ''));
+  if (isNaN(target)) return;
+  const decimals = (numStr.split('.')[1] || '').length;
+  const hadComma = numStr.includes(',');
+  const from = target * 0.5;
+  const dur = 650;
+  const t0 = performance.now();
+  const fmt = v => {
+    const n = Number(v.toFixed(decimals));
+    return hadComma ? n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) : n.toFixed(decimals);
+  };
+  function frame(t) {
+    const p = Math.min(1, (t - t0) / dur);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + fmt(from + (target - from) * e) + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+    else el.textContent = raw;
+  }
+  requestAnimationFrame(frame);
+}
+function countUp(page) {
+  page.querySelectorAll('.kpi-value').forEach(animateValue);
+}
+function bindTilt(page) {
+  page.querySelectorAll('.kpi-card, .product-card').forEach(c => {
+    if (c.dataset.tilt) return;
+    c.dataset.tilt = '1';
+    c.addEventListener('mousemove', e => {
+      const r = c.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      c.style.setProperty('--ry', (px * 5) + 'deg');
+      c.style.setProperty('--rx', (-py * 5) + 'deg');
+    });
+    c.addEventListener('mouseleave', () => {
+      c.style.setProperty('--ry', '0deg');
+      c.style.setProperty('--rx', '0deg');
+    });
+  });
+}
+function bindMagnetic(page) {
+  page.querySelectorAll('.btn-primary').forEach(b => {
+    if (b.dataset.mag) return;
+    b.dataset.mag = '1';
+    b.addEventListener('mousemove', e => {
+      const r = b.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      b.style.setProperty('--mx', (px * 4) + 'px');
+      b.style.setProperty('--my', (py * 3) + 'px');
+    });
+    b.addEventListener('mouseleave', () => {
+      b.style.setProperty('--mx', '0px');
+      b.style.setProperty('--my', '0px');
+    });
+  });
+}
+function hookPageEnter(page) {
+  applyStagger(page);
+  countUp(page);
+  bindTilt(page);
+  bindMagnetic(page);
+}
+/* click-to-copy row ids */
+document.addEventListener('click', e => {
+  const rid = e.target.closest('.row-id');
+  if (!rid) return;
+  e.stopPropagation();
+  if (navigator.clipboard) navigator.clipboard.writeText(rid.textContent);
+  rid.classList.add('copied');
+  setTimeout(() => rid.classList.remove('copied'), 700);
+});
+/* keyboard activation for tab divs */
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.nav-item, .sub-nav-item')) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+/* nav scroll shadows */
+['primaryNav', 'secondaryNav'].forEach(id => {
+  const nav = document.getElementById(id);
+  const update = () => {
+    nav.classList.toggle('scroll-left', nav.scrollLeft > 4);
+    nav.classList.toggle('scroll-right', nav.scrollLeft < nav.scrollWidth - nav.clientWidth - 4);
+  };
+  nav.addEventListener('scroll', update);
+  update();
+});
+/* scroll-to-top visibility */
+document.getElementById('contentArea').addEventListener('scroll', function () {
+  document.getElementById('scrollTopBtn').classList.toggle('show', this.scrollTop > 300);
+});
+
+/* ================= GLOBAL KEYS ================= */
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openCommandPalette(); }
+  if (e.key === 'Escape') { closeCommandPalette(); closeDrawer(); closeNotifications(); document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); }
+  if (!e.target.matches('input,textarea,select')) {
+    if (e.key === 'n') { e.preventDefault(); openModal('newOrderModal'); }
+    if (e.key === 'r') { e.preventDefault(); refreshData(); }
+    if (e.key === 'f') { e.preventDefault(); toggleFullscreen(); }
+    if (e.key === '?') { e.preventDefault(); openModal('shortcutsModal'); }
+  }
+  if (document.getElementById('cmdPalette').classList.contains('open')) {
+    const n = cmdFiltered(document.getElementById('cmdSearch').value).length;
+    if (e.key === 'ArrowDown') { e.preventDefault(); state.cmdIndex = Math.min(state.cmdIndex + 1, n - 1); renderCmdPalette(document.getElementById('cmdSearch').value); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); state.cmdIndex = Math.max(state.cmdIndex - 1, 0); renderCmdPalette(document.getElementById('cmdSearch').value); }
+    if (e.key === 'Enter') { e.preventDefault(); executeCmd(state.cmdIndex); }
+  }
+});
+
+/* ================= BOOT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  navigate('sales', 'dashboard');
+  showToast('success', 'Welcome back', 'Dashboard loaded · 3 pending alerts');
+});
+</script>
+</body>
+</html>
