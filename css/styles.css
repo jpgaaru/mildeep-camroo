@@ -21,8 +21,8 @@
   --colorWarningBg: #FFFBEB;
   --colorError: #DC2626;
   --colorErrorBg: #FEF2F2;
-  --colorInfo: #2563EB;
-  --colorInfoBg: #EFF6FF;
+  --colorInfo: #CA8A04;
+  --colorInfoBg: #FEFCE8;
   --colorPurple: #7C3AED;
   --colorPurpleBg: #F5F3FF;
   --colorCyan: #0891B2;
@@ -507,8 +507,8 @@ a {
   transition: border-color 0.15s ease;
 }
 .filter-select:focus, .filter-input:focus {
-  border-color: #4F46E5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: #EAB308;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.15);
 }
 
 .tag-select-container {

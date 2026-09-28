@@ -348,7 +348,7 @@ function renderReports() {
       <div class="product-card" style="padding:20px;display:flex;flex-direction:column;justify-content:space-between;" onclick="showToast('info','Report','Generating ${r.title}...')">
         <div>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="width:42px;height:42px;border-radius:10px;background:#EEF2FF;color:#4F46E5;display:flex;align-items:center;justify-content:center;">
+            <div style="width:42px;height:42px;border-radius:10px;background:#FEFCE8;color:#CA8A04;display:flex;align-items:center;justify-content:center;">
               <i data-lucide="${r.icon}"></i>
             </div>
             <span class="badge badge-info" style="font-size:10px;">${r.code.split('-')[0]}</span>

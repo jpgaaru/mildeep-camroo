@@ -470,10 +470,10 @@
       <!-- 1. PRODUCT LIST SUBPAGE -->
       <div id="subtab-productlist" class="product-subpage active">
         <div style="display:flex;justify-content:center;margin-bottom:20px;">
-          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newProductModal')"><i data-lucide="plus"></i> New Product</button>
+          <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('newProductModal')"><i data-lucide="plus"></i> New Product</button>
         </div>
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="font-size:13px;color:#4B5563;">Show</span>
               <select class="ant-select" style="width:70px;height:32px;" id="productListPerPage" onchange="renderProductListTable(1)">
@@ -498,7 +498,7 @@
               <tbody id="productListTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="productListEntriesInfo">Showing 1 to 10 of 24 entries</span>
             <div id="productListPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -508,10 +508,10 @@
       <!-- 2. PREPARATION LIST SUBPAGE -->
       <div id="subtab-preparationlist" class="product-subpage" style="display:none;">
         <div style="display:flex;justify-content:center;margin-bottom:20px;">
-          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newPreparationModal')"><i data-lucide="plus"></i> New Preparation</button>
+          <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('newPreparationModal')"><i data-lucide="plus"></i> New Preparation</button>
         </div>
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="font-size:13px;color:#4B5563;">Show</span>
               <select class="ant-select" style="width:70px;height:32px;" id="prepListPerPage" onchange="renderPreparationListTable(1)">
@@ -540,7 +540,7 @@
               <tbody id="prepListTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="prepListEntriesInfo">Showing 1 to 9 of 9 entries</span>
             <div id="prepListPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -553,7 +553,7 @@
           <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('addSpeciesModal')"><i data-lucide="plus"></i> Add Species</button>
         </div>
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;gap:10px;align-items:center;">
               <div class="search-box" style="width:220px;background:#fff;">
                 <i data-lucide="search"></i>
@@ -581,7 +581,7 @@
               <tbody id="speciesTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="speciesEntriesInfo">Showing 1 to 3 out of 3 entries</span>
             <div id="speciesPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -591,10 +591,10 @@
       <!-- 4. GRADES LIST SUBPAGE -->
       <div id="subtab-gradeslist" class="product-subpage" style="display:none;">
         <div style="display:flex;justify-content:center;margin-bottom:20px;">
-          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newGradeModal')"><i data-lucide="plus"></i> New Grade</button>
+          <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('newGradeModal')"><i data-lucide="plus"></i> New Grade</button>
         </div>
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="font-size:13px;color:#4B5563;">Show</span>
               <select class="ant-select" style="width:70px;height:32px;" id="gradesListPerPage" onchange="renderGradesListTable(1)">
@@ -620,7 +620,7 @@
               <tbody id="gradesListTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="gradesListEntriesInfo">Showing 1 to 10 of 103 entries</span>
             <div id="gradesListPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -630,10 +630,10 @@
       <!-- 5. PACKING STYLE LIST SUBPAGE -->
       <div id="subtab-packingstylelist" class="product-subpage" style="display:none;">
         <div style="display:flex;justify-content:center;margin-bottom:20px;">
-          <button class="btn btn-primary" style="background:#5B73E8;padding:10px 24px;border-radius:8px;" onclick="openModal('newPackingStyleModal')"><i data-lucide="plus"></i> New Packing Style</button>
+          <button class="btn btn-primary" style="padding:10px 24px;border-radius:8px;" onclick="openModal('newPackingStyleModal')"><i data-lucide="plus"></i> New Packing Style</button>
         </div>
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="font-size:13px;color:#4B5563;">Show</span>
               <select class="ant-select" style="width:70px;height:32px;" id="packingListPerPage" onchange="renderPackingStyleListTable(1)">
@@ -661,7 +661,7 @@
               <tbody id="packingListTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="packingListEntriesInfo">Showing 1 to 10 of 115 entries</span>
             <div id="packingListPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -698,13 +698,13 @@
             </div>
           </div>
           <div style="display:flex;justify-content:center;gap:12px;">
-            <button class="btn btn-primary" style="background:#5B73E8;padding:8px 24px;" onclick="renderVarietyListTable(1)"><i data-lucide="search"></i> Search &rarr;</button>
-            <button class="btn btn-primary" style="background:#5B73E8;padding:8px 24px;" onclick="openModal('newVarietyModal')"><i data-lucide="plus"></i> New Variety</button>
+            <button class="btn btn-primary" style="padding:8px 24px;" onclick="renderVarietyListTable(1)"><i data-lucide="search"></i> Search &rarr;</button>
+            <button class="btn btn-primary" style="padding:8px 24px;" onclick="openModal('newVarietyModal')"><i data-lucide="plus"></i> New Variety</button>
           </div>
         </div>
 
         <div class="data-card">
-          <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;gap:10px;align-items:center;">
               <div class="search-box" style="width:220px;background:#fff;">
                 <i data-lucide="search"></i>
@@ -727,7 +727,7 @@
               <tbody id="varietyTableBody"></tbody>
             </table>
           </div>
-          <div class="data-card-header" style="background:#EEF2FF;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
+          <div class="data-card-header" style="background:#FEFCE8;border-top:1px solid #FEF08A;padding:12px 20px;border-radius:0 0 10px 10px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:#4B5563;" id="varietyEntriesInfo">Showing 1 to 10 of 1512 entries</span>
             <div id="varietyPagination" style="display:flex;gap:4px;"></div>
           </div>
@@ -1267,7 +1267,7 @@
       </div>
 
       <div class="data-card">
-        <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+        <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
           <div style="display:flex;gap:10px;align-items:center;">
             <div class="search-box" style="width:220px;background:#fff;">
               <i data-lucide="search"></i>
@@ -1430,7 +1430,7 @@
 
       <!-- Existing Indents Master Section -->
       <div class="data-card">
-        <div class="data-card-header" style="background:#EEF2FF;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
+        <div class="data-card-header" style="background:#FEFCE8;border-bottom:1px solid #FEF08A;padding:14px 20px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;">
           <div style="font-weight: 700; font-size: 15px; color: #1E293B;">Existing Indents Master</div>
           <div style="display:flex;gap:10px;align-items:center;">
             <div class="search-box" style="width:220px;background:#fff;">
