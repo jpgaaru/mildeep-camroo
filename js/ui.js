@@ -218,7 +218,7 @@ function renderUnderConstructionPage(subId, tertId) {
       <h2 style="font-size: 26px; font-weight: 800; color: #0F172A; margin-bottom: 8px; letter-spacing: -0.02em;">Oops, We're Under Construction!</h2>
       
       <p style="font-size: 14px; color: #64748B; max-width: 540px; line-height: 1.6; margin-bottom: 24px;">
-        The enterprise module <span style="background:#FEFCE8;color:#713F12;padding:2px 10px;border-radius:6px;border:1px solid #FEF08A;font-weight:700;">${titleText}</span> is currently being engineered according to standard workflow specifications.
+        The enterprise module <span style="background:#F4F4F5;color:#09090B;padding:2px 10px;border-radius:6px;border:1px solid #E4E4E7;font-weight:700;">${titleText}</span> is currently being engineered according to standard workflow specifications.
       </p>
 
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
@@ -1154,21 +1154,21 @@ function renderQCLotsTable(page = 1, customPerPage = null) {
   if (tbody) {
     tbody.innerHTML = items.map(r => `
       <tr onclick="showToast('info','QC Lot','Viewing ${r.lotNo}')">
-        <td><span class="row-id" style="color:#713F12;font-weight:700;">${r.lotNo}</span></td>
+        <td><span class="row-id" style="color:#09090B;font-weight:700;">${r.lotNo}</span></td>
         <td><strong>${r.supplier}</strong></td>
         <td>${r.center}</td>
         <td>${r.arrivalDate}</td>
         <td><strong>${r.totalWeight}</strong></td>
         <td>
           ${r.result === 'PASS' 
-            ? `<span class="badge" style="background:#FEFCE8;color:#713F12;border:1px solid #FEF08A;font-weight:700;">PASS</span>`
+            ? `<span class="badge" style="background:#F4F4F5;color:#09090B;border:1px solid #E4E4E7;font-weight:700;">PASS</span>`
             : r.result === 'Negative' 
             ? `<span class="badge" style="background:#0F172A;color:#FFFFFF;border:1px solid #1E293B;font-weight:600;">Negative</span>`
             : `<span style="color:#94A3B8;font-weight:500;">--</span>`}
         </td>
         <td>
           ${r.positive === 'NO' 
-            ? `<span class="badge" style="background:#FEFCE8;color:#854D0E;border:1px solid #FEF08A;font-weight:600;">NO</span>`
+            ? `<span class="badge" style="background:#FAFAFA;color:#52525B;border:1px solid #E4E4E7;font-weight:600;">NO</span>`
             : `<span class="badge" style="background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0;font-weight:500;">${r.positive}</span>`}
         </td>
       </tr>
@@ -1215,9 +1215,9 @@ function renderPOGradeTable(page = 1, customPerPage = null) {
     tbody.innerHTML = items.map(r => {
       const isAllocated = r.assigned !== '--' && parseInt(r.assigned) > 0;
       return `
-        <tr style="${isAllocated ? 'background:#FEFCE8;font-weight:500;' : ''}" onclick="showToast('info','PO Grade','${r.po}')">
+        <tr style="${isAllocated ? 'background:#F8FAFC;font-weight:500;' : ''}" onclick="showToast('info','PO Grade','${r.po}')">
           <td><strong>${r.sno}</strong></td>
-          <td><span class="row-id" style="color:#713F12;font-weight:700;">${r.po}</span></td>
+          <td><span class="row-id" style="color:#09090B;font-weight:700;">${r.po}</span></td>
           <td><strong>${r.buyer}</strong></td>
           <td>${r.brand}</td>
           <td>${r.shipBy}</td>

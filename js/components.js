@@ -13,9 +13,9 @@ window.UI.Icon = (name, className = '', style = '') =>
   `<i data-lucide="${name}" class="${className}" style="${style}"></i>`;
 
 window.UI.Badge = (text, variant = 'default') => {
-  const bgColors = { default: '#FEFCE8', success: '#FEF9C3', warning: '#FEF3C7', error: '#FEF2F2' };
-  const textColors = { default: '#713F12', success: '#854D0E', warning: '#92400E', error: '#991B1B' };
-  const borderColors = { default: '#FEF08A', success: '#FDE047', warning: '#FCD34D', error: '#FCA5A5' };
+  const bgColors = { default: '#F4F4F5', success: '#F0FDF4', warning: '#FFFBEB', error: '#FEF2F2' };
+  const textColors = { default: '#09090B', success: '#166534', warning: '#92400E', error: '#991B1B' };
+  const borderColors = { default: '#E4E4E7', success: '#BBF7D0', warning: '#FCD34D', error: '#FCA5A5' };
   return `<span style="background: ${bgColors[variant] || bgColors.default}; color: ${textColors[variant] || textColors.default}; border: 1px solid ${borderColors[variant] || borderColors.default}; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;">${text}</span>`;
 };
 

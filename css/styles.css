@@ -911,9 +911,9 @@ a {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  border: 1px solid #FEF08A;
-  background: #FEFCE8;
-  color: #713F12;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  color: #334155;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -924,9 +924,9 @@ a {
 .kpi-action-btn:hover,
 .chart-action-btn:hover,
 .comp-action-btn:hover {
-  background: #FACC15;
-  color: #422006;
-  border-color: #EAB308;
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
   transform: translateY(-1px);
 }
 .kpi-action-btn svg,
@@ -948,20 +948,45 @@ a {
   transform: scale(1.1) rotate(-4deg);
 }
 .kpi-icon svg { width: 18px; height: 18px; }
-.kpi-icon.primary { background: #FEFCE8; color: #CA8A04; border: 1px solid #FEF08A; }
-.kpi-icon.success { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
-.kpi-icon.warning { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
-.kpi-icon.error { background: #FFF1F2; color: #991B1B; border: 1px solid #FECDD3; }
-.kpi-icon.info { background: #FEFCE8; color: #A16207; border: 1px solid #FEF08A; }
-.kpi-icon.purple { background: #FEFCE8; color: #CA8A04; border: 1px solid #FEF08A; }
-.kpi-icon.cyan { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
+.kpi-icon.primary { background: #18181B; color: #FFFFFF; border: 1px solid #000000; }
+.kpi-icon.success { background: #0F172A; color: #FFFFFF; border: 1px solid #000000; }
+.kpi-icon.warning { background: #27272A; color: #FFFFFF; border: 1px solid #000000; }
+.kpi-icon.error { background: #7F1D1D; color: #FFFFFF; border: 1px solid #991B1B; }
+.kpi-icon.info { background: #3F3F46; color: #FFFFFF; border: 1px solid #18181B; }
+.kpi-icon.purple { background: #18181B; color: #FFFFFF; border: 1px solid #000000; }
+.kpi-icon.cyan { background: #27272A; color: #FFFFFF; border: 1px solid #000000; }
 .kpi-value {
   font-size: 26px;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 4px;
-  font-variant-numeric: tabular-nums;
+}
+
+/* Black & White UI Metric Card Component */
+.metric-card-bw {
+  background: #FFFFFF;
+  border: 1px solid #18181B;
+  border-top: 3px solid #000000;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+.metric-card-bw:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.metric-card-bw .metric-label {
+  font-size: 11px;
+  color: #52525B;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.metric-card-bw .metric-value {
+  font-size: 24px;
+  font-weight: 900;
+  color: #000000;
+  margin-top: 4px;
+  letter-spacing: -0.5px;
 }
 .kpi-trend {
   font-size: 11px;
