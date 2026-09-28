@@ -10,6 +10,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    brand: {
+                        50: '#fefce8',
+                        100: '#fef9c3',
+                        200: '#fef08a',
+                        300: '#fde047',
+                        400: '#facc15',
+                        500: '#eab308', // Primary Golden Yellow
+                        600: '#ca8a04',
+                        700: '#a16207',
+                        800: '#854d0e',
+                        900: '#713f12',
+                    }
+                }
+            }
+        }
+    }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
@@ -21,111 +47,145 @@
 <div class="page-loader" id="pageLoader"><div class="page-loader-bar"></div></div>
 
 <!-- ============ AUTH SIGN IN SCREEN ============ -->
-<div id="authScreen" class="auth-wrapper">
-  <!-- Auth Top Navigation -->
-  <div class="auth-header">
-    <div class="auth-brand" onclick="navigate('sales','dashboard')" style="cursor:pointer;">
-      <img src="mildeep-logo.svg" alt="Mildeep Logo" style="height:42px;object-fit:contain;" />
-      <div class="brand-text">
-        <h1 style="font-size:16px;font-weight:700;color:#0F172A;margin:0;">Mildeep</h1>
-        <p style="font-size:11px;color:#64748B;margin:0;">Powered by Camaroo</p>
-      </div>
-    </div>
-    <div class="auth-nav-actions">
-      <span class="auth-lang-link">
-        <i data-lucide="globe" style="width:16px;height:16px;"></i> EN
-      </span>
-      <a href="#" class="auth-link" onclick="showToast('info','Sign Up','Registration is open for enterprise accounts');return false;">Sign up</a>
-      <button class="btn btn-primary" style="background:#FACC15;color:#422006;font-weight:700;border:1px solid #EAB308;padding:8px 18px;border-radius:8px;" onclick="showToast('info','Demo','Demo access granted. Please sign in below.')">Request Demo</button>
-    </div>
-  </div>
+<div id="authScreen" class="fixed inset-0 z-[5000] bg-slate-50 text-slate-800 overflow-y-auto">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        
+        <!-- LEFT HALF: Unsplash Image with Overlay & Camroo SVG Logo -->
+        <div class="relative w-full md:w-1/2 min-h-[350px] md:min-h-screen bg-slate-900 flex flex-col justify-between p-8 md:p-12 overflow-hidden">
+            <!-- Background Image -->
+            <img 
+                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=1600" 
+                alt="Yellow boat near dock in water" 
+                class="absolute inset-0 w-full h-full object-cover object-center opacity-85"
+            />
+            
+            <!-- Dark Gradient Overlay for Readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/40 to-slate-950/30"></div>
 
-  <!-- Background Decorative Line Art Vector Graphics (Reference Style) -->
-  <div class="auth-bg-decorations">
-    <!-- Left Decorative Line & Box -->
-    <div class="decor-panel panel-left-box">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="1.5"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
-    </div>
-    <div class="decor-line decor-line-1">
-      <svg width="180" height="60" viewBox="0 0 180 60" fill="none" stroke="#CBD5E1" stroke-width="1.5"><path d="M10 40 Q 40 10 90 35 T 170 20"/></svg>
-    </div>
+            <!-- Top Left White Camroo SVG Logo -->
+            <div class="relative z-10">
+                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1298.6 251.6" class="h-10 md:h-12 w-auto fill-white drop-shadow-md">
+                    <path d="M997.8,208h-14c0-.3-.4-.8-1.1-.9-19.8-2.6-37-11.9-50.3-26.5-13.5-14.9-20-33.1-19.7-53.1.4-23.7,10.9-44,29-58.7,31.2-25.3,75.2-23.9,104.7,3.3s22.2,29.2,24.3,48.2c5,45.2-28.3,83.6-73,87.5ZM992.4,157.1c9.9-.4,19.5-5.6,24.2-13.8,5.1-8.7,4.9-20.7-.2-29.3-5.1-8.6-15.6-12.8-24.9-12.7s-18.9,4.7-23.9,13.1c-5.6,9.3-4.8,20.9,0,30.3,5.9,7.4,14.3,12.8,24.9,12.4Z"/>
+                    <path d="M519.9,108.8c-4.2,4.1-5.1,10.8-5.1,16.1l-.5,62.1c0,6.2-2.8,13-8.8,15.2-10.3,3.8-22.3,3.8-32.6,0s-8.8-9.1-8.8-15.2l-.5-63c0-5.8-2-11.9-6.3-15.7-6.2-5.5-16.9-5.4-22.6.5s-5.8,11.2-5.8,17.5l-.4,60.7c0,5.1-1.9,12-6.9,14.3-10.8,5-24.2,5-35.3.6s-8-8.6-8-14v-117c0-8,5.8-14.4,13.2-15.7,9.1-1.7,18.5-1.8,27.1,1.4,6.8,2.5,9.1,10.3,9,17.2,5.7-6.8,11.2-14.5,20.1-17.5,21.6-7.5,45.1,2.4,56.2,22.3,9.3-12.5,21.2-20.8,35.6-24.3,24.6-3.4,46.6,11.3,54.8,34.4,3.6,10.9,5.6,21.9,5.6,33.8v65.1c-.1,6.2-3.4,12.8-9.1,14.9-9.2,3.4-18.8,3-28.3,1.2-7.1-1.4-12.4-7.1-12.4-14.8l-.7-64.4c0-6-1.8-12-6.3-16s-17-5.8-23.2.3Z"/>
+                    <path d="M770.4,192.1c-1.2,13.5-21.8,13.7-36.4,11.1s-11.3-6-12.3-13.5c-15.8,19.3-47.3,18.8-67.6,4.4s-20.5-17.6-26.9-29.9c-19.7-37.3-4.6-81.6,32.6-102.5s46-10.1,61.6,8c1.3-7.2,5.4-12.5,12.5-14.1,9.4-2.1,20.1-2.3,29.3,1.4,5.7,2.3,8.2,9.7,8.2,16l.3,106.7-1.1,12.4ZM715.6,116.5c-5.7-9.5-14.9-13.6-25.8-11.9-8.9,1.3-16.8,8.3-19.8,18.1-3.4,11,1.9,22.3,11.3,28s21.9,4.8,29.8-3c8.8-8.6,10.8-20.5,4.4-31.2Z"/>
+                    <path d="M305.3,189.6c-13.4,17.7-42.8,18.5-61.5,8-35.9-20.2-51.9-62.6-34.4-100,7-15.1,18.6-26.7,32.5-35.3,20.9-12,48.3-11.2,63.2,7.7,1-7.1,5.1-12.7,12.1-14.4,9.5-2.3,20.7-2.6,30,1.5s7.8,10.1,7.8,15.9v114.5c0,8.9-5.6,15.1-13.9,16.2-7.5,1-14.8.8-22.2-.3s-12.4-5.8-13.6-13.8ZM292.2,149.9c13.3-9.8,14.4-26.3,3.6-38.2-8.8-9.8-24.7-10.1-34.5-1.1-9.6,8.9-11.6,23.3-3.4,33.7,8,10.2,23.1,13.8,34.3,5.6Z"/>
+                    <path d="M1172.6,207h-16.4c-21.7-1.8-40.7-13.3-54.3-29.9-12.1-14.8-17.2-32.5-16.5-51.5s10.3-40.4,26.3-54.6c30.2-26.7,74.9-27,105.3-.5s27.6,37.3,26.7,62.2c-1.4,38.8-32.3,71.3-71.1,74.3ZM1165,157.1c10.4-.3,18.4-5.9,24.1-13.2,4.5-9.3,5.3-20.6-.1-29.8-5.1-8.5-15.3-13-24.8-12.9s-19,4.5-24,12.9c-5.6,9.3-5.5,22.1.6,31.1,5.1,7.6,14.6,12.1,24.2,11.8Z"/>
+                    <path d="M144.8,151.6c8.1-4.5,14.4-10.3,23.1-4.6,12.9,8.4,27,26.1,16.3,38-14.2,15.8-34.6,22.1-55.7,21.2-14.3-.6-26.6-5.1-38.8-12.5-19.9-12-33.2-31.9-35.3-55.4-1.2-6.4-1.2-12.5,0-18.9,2.2-23.1,15.6-42.5,35.1-54.6,30.1-18.8,66.1-16,93.3,6.7,12.4,10.3.5,30.2-12,40.2s-19.4-1.3-27.1-5.3c-11.7-6.1-26.6-1.9-34.1,9.2-5.2,7.6-5.4,18.6-.9,26.7,7.3,12.9,23.6,16.3,36.2,9.4Z"/>
+                    <path d="M844.8,186.6c0,6.3-2.4,13-7.9,15.3-9.8,4.2-20.9,3.9-31.1,1.3-6.2-1.6-11.3-7-11.3-13.9v-117.2c0-5.3,2.2-12.3,7.2-14.5,10.8-5,24.2-4.6,35.1-.6s6.6,7.8,7.9,12.2c16.9-16.7,32.6-20.3,54.5-12.6,15.9,5.6,12.7,30.5,1.7,44s-12.6,6.7-19.1,4.1-16.1-5-24.2-1.4c-5.8,2.6-12.2,7.6-12.2,14.4l-.5,68.9Z"/>
+                </svg>
+            </div>
 
-    <!-- Right Decorative Illustration (Person with laptop & yellow accent block) -->
-    <div class="decor-illustration-right">
-      <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="150" y="120" width="55" height="85" rx="4" fill="#FACC15"/>
-        <rect x="50" y="110" width="45" height="65" rx="2" fill="#FFFFFF" stroke="#0F172A" stroke-width="2"/>
-        <rect x="15" y="35" width="60" height="35" rx="4" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5"/>
-        <line x1="25" y1="48" x2="60" y2="48" stroke="#0F172A" stroke-width="1.5"/>
-        <line x1="25" y1="56" x2="48" y2="56" stroke="#0F172A" stroke-width="1.5"/>
-        <circle cx="85" cy="45" r="13" fill="#0F172A"/>
-        <path d="M72 65 Q 85 55 98 65 L 105 100 L 65 100 Z" fill="#0F172A"/>
-        <path d="M65 100 L 90 100 L 78 140 L 52 135 Z" fill="#FFFFFF" stroke="#0F172A" stroke-width="2"/>
-        <path d="M78 140 L 82 158 L 64 162 Z" fill="#0F172A"/>
-        <path d="M98 82 L 125 82 L 112 65 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
-      </svg>
-    </div>
-  </div>
+            <!-- Bottom Caption -->
+            <div class="relative z-10 my-auto md:my-0 pt-12 md:pt-0">
+                <blockquote class="max-w-lg">
+                    <p class="text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                        Sustainably harvesting fresh aquatic goods for global standards.
+                    </p>
+                    <footer class="mt-4 text-brand-200 text-sm font-medium">
+                        &mdash; Mildeep Fisheries Portal
+                    </footer>
+                </blockquote>
+            </div>
 
-  <!-- Centered Login Card -->
-  <div class="auth-card-container">
-    <div class="auth-card">
-      <div class="auth-card-header">
-        <h2 class="auth-title">Agent Login</h2>
-        <p class="auth-subtitle">Hey, Enter your details to get sign in to your account</p>
-      </div>
-
-      <form id="authLoginForm" onsubmit="handleAuthLogin(event)">
-        <div class="auth-form-group">
-          <div class="auth-input-wrapper">
-            <input type="text" id="authEmail" class="auth-input" placeholder="Enter Email / Phone No" value="admin@devifisheries.com" required />
-            <span class="auth-input-icon"><i data-lucide="mail" style="width:16px;height:16px;color:#94A3B8;"></i></span>
-          </div>
+            <!-- Footer Badge -->
+            <div class="relative z-10 hidden md:block pt-6 border-t border-white/10">
+                <p class="text-xs text-slate-300">
+                    &copy; 2026 Mildeep Fisheries. All rights reserved.
+                </p>
+            </div>
         </div>
 
-        <div class="auth-form-group">
-          <div class="auth-input-wrapper">
-            <input type="password" id="authPasscode" class="auth-input" placeholder="Passcode" value="passcode123" required />
-            <button type="button" class="auth-toggle-pwd" id="authTogglePwd" onclick="toggleAuthPasscode()">Hide</button>
-          </div>
+        <!-- RIGHT HALF: Sign In Form -->
+        <div class="w-full md:w-1/2 bg-white flex items-center justify-center p-8 sm:p-12 lg:p-16">
+            <div class="w-full max-w-md space-y-8">
+                
+                <!-- Form Header -->
+                <div>
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 bg-brand-100 text-brand-800 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        <span>Secure Portal</span>
+                    </div>
+                    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Sign In</h1>
+                    <p class="text-slate-500 text-sm mt-2">
+                        Welcome back! Please enter your details to access your dashboard.
+                    </p>
+                </div>
+
+                <!-- Alert Box -->
+                <div id="alertBox" class="hidden p-4 rounded-xl text-sm font-medium transition-all"></div>
+
+                <!-- Login Form -->
+                <form id="authLoginForm" class="space-y-5" onsubmit="handleAuthLogin(event)">
+                    
+                    <!-- Username / Email Input -->
+                    <div>
+                        <label for="username" class="block text-xs font-bold uppercase text-slate-600 tracking-wider mb-2">
+                            Username or Email
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="authEmail" 
+                                required
+                                value="admin@mildeep.com"
+                                class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:bg-white focus:outline-none transition-all text-sm font-medium text-slate-800 placeholder-slate-400"
+                                placeholder="Enter your username or email"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <label for="password" class="block text-xs font-bold uppercase text-slate-600 tracking-wider">
+                                Password
+                            </label>
+                            <a href="#" class="text-xs font-semibold text-brand-600 hover:text-brand-700 hover:underline" onclick="showToast('info','Support','Contact admin@mildeep.com for passcode reset');return false;">
+                                Forgot Password?
+                            </a>
+                        </div>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="authPasscode" 
+                                required
+                                value="passcode123"
+                                class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:bg-white focus:outline-none transition-all text-sm font-medium text-slate-800 placeholder-slate-400"
+                                placeholder="••••••••"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Remember Me Option -->
+                    <div class="flex items-center justify-between pt-1">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" checked class="w-4 h-4 text-brand-500 border-slate-300 rounded focus:ring-brand-400">
+                            <span class="text-xs text-slate-600 font-medium">Keep me signed in</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        id="submitBtn"
+                        class="w-full py-4 px-6 bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-brand-400/25 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-brand-400/40 transform hover:-translate-y-0.5"
+                    >
+                        <span>Sign In to Dashboard</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Help / Support Footer -->
+                <div class="pt-6 border-t border-slate-100 text-center text-xs text-slate-500">
+                    Need technical assistance? <a href="#" class="text-brand-600 font-semibold hover:underline" onclick="showToast('info','System Admin','Support desk: admin@mildeep.com');return false;">Contact System Admin</a>
+                </div>
+
+            </div>
         </div>
 
-        <div class="auth-links-row">
-          <a href="#" class="auth-forgot-link" onclick="showToast('info','Trouble Signing In','Contact IT support at support@devifisheries.com');return false;">Having trouble in sign in?</a>
-        </div>
-
-        <button type="submit" class="auth-submit-btn">Sign in</button>
-
-        <div class="auth-divider">
-          <span>Or Sign in with</span>
-        </div>
-
-        <div class="auth-sso-grid">
-          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Google')">
-            <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-            <span>Google</span>
-          </button>
-          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Apple ID')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#0F172A"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.87c.68-.82 1.13-1.96.99-3.11-1 .04-2.18.67-2.88 1.49-.6.7-1.13 1.84-.99 2.97 1.11.09 2.22-.53 2.88-1.35z"/></svg>
-            <span>Apple ID</span>
-          </button>
-          <button type="button" class="auth-sso-btn" onclick="quickLoginSSO('Facebook')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <span>Facebook</span>
-          </button>
-        </div>
-
-        <div class="auth-card-footer">
-          Don't have an account? <a href="#" onclick="showToast('info','Account Request','Please contact admin@devifisheries.com for new account provision');return false;"><strong>Request Now</strong></a>
-        </div>
-      </form>
     </div>
-  </div>
-
-  <!-- Bottom Copyright -->
-  <div class="auth-footer-text">
-    Copyright @Mildeep 2026 &nbsp;|&nbsp; <a href="#" style="color:inherit;text-decoration:underline;" onclick="showToast('info','Privacy Policy','Privacy policy document opened');return false;">Privacy Policy</a>
-  </div>
 </div>
 
 <div class="app-main">
