@@ -545,10 +545,10 @@ const GENERIC_PAGES = {
     title: 'Purchase Orders',
     subtitle: 'All POs raised to suppliers',
     kpis: [
-      { l: 'Open POs', v: '18', i: 'file-text', c: 'primary', t: '+4 this week', d: 'up' },
-      { l: 'Awaiting Approval', v: '5', i: 'hourglass', c: 'warning', t: '2 urgent' },
+      { l: 'Open POs', v: '18', i: 'file-spreadsheet', c: 'primary', t: '+4 this week', d: 'up' },
+      { l: 'Awaiting Approval', v: '5', i: 'clock', c: 'warning', t: '2 urgent' },
       { l: 'In Transit', v: '6', i: 'truck', c: 'info', t: '3 arriving today' },
-      { l: 'Spend This Month', v: '$420K', i: 'dollar-sign', c: 'success', t: '-6% vs last', d: 'down' }
+      { l: 'Spend This Month', v: '$420K', i: 'wallet', c: 'success', t: '-6% vs last', d: 'down' }
     ],
     table: {
       title: 'PO Register',
@@ -589,8 +589,8 @@ const GENERIC_PAGES = {
     kpis: [
       { l: 'Active Contracts', v: '21', i: 'file-signature', c: 'primary', t: '3 new this month', d: 'up' },
       { l: 'Expiring ≤30d', v: '4', i: 'alarm-clock', c: 'warning', t: 'Renewal needed' },
-      { l: 'Total Value', v: '$2.1M', i: 'dollar-sign', c: 'success', t: 'FY 2026-27' },
-      { l: 'Breaches', v: '1', i: 'alert-octagon', c: 'error', t: 'Under legal review', d: 'down' }
+      { l: 'Total Value', v: '$2.1M', i: 'circle-dollar-sign', c: 'success', t: 'FY 2026-27' },
+      { l: 'Breaches', v: '1', i: 'shield-alert', c: 'error', t: 'Under legal review', d: 'down' }
     ],
     table: {
       title: 'Contract Register',
@@ -608,7 +608,7 @@ const GENERIC_PAGES = {
     title: 'Lot Management',
     subtitle: 'Every lot from receiving to dispatch readiness',
     kpis: [
-      { l: 'Active Lots', v: '46', i: 'layers', c: 'primary', t: '+6 today', d: 'up' },
+      { l: 'Active Lots', v: '46', i: 'boxes', c: 'primary', t: '+6 today', d: 'up' },
       { l: 'In Grading', v: '12', i: 'scale', c: 'info', t: '3 lines busy' },
       { l: 'In Sorting', v: '8', i: 'split', c: 'purple', t: '2 queued' },
       { l: 'Ready to Process', v: '26', i: 'check-circle', c: 'success', t: 'Cleared by QC' }
@@ -632,7 +632,7 @@ const GENERIC_PAGES = {
       { l: 'Lots Graded Today', v: '9', i: 'scale', c: 'primary', t: '+2 vs avg', d: 'up' },
       { l: 'Grade A Share', v: '72%', i: 'award', c: 'success', t: 'Target 70%' },
       { l: 'Grade B Share', v: '21%', i: 'medal', c: 'info', t: 'Within range' },
-      { l: 'Grade C Share', v: '7%', i: 'archive', c: 'warning', t: '-1.2% vs avg', d: 'up' }
+      { l: 'Grade C Share', v: '7%', i: 'box', c: 'warning', t: '-1.2% vs avg', d: 'up' }
     ],
     table: {
       title: 'Grading Sheet',
@@ -694,7 +694,7 @@ const GENERIC_PAGES = {
     kpis: [
       { l: 'Samples In Lab', v: '14', i: 'flask-conical', c: 'primary', t: '5 awaiting results' },
       { l: 'Avg Turnaround', v: '26h', i: 'timer', c: 'info', t: 'Target 24h' },
-      { l: 'Flags Raised', v: '1', i: 'flag', c: 'error', t: 'Histamine borderline', d: 'down' },
+      { l: 'Flags Raised', v: '1', i: 'alert-circle', c: 'error', t: 'Histamine borderline', d: 'down' },
       { l: 'Compliance', v: '99.2%', i: 'shield-check', c: 'success', t: 'EU standards' }
     ],
     table: {
@@ -713,9 +713,9 @@ const GENERIC_PAGES = {
     title: 'Certificates & Compliance',
     subtitle: 'Statutory and customer-mandated certifications',
     kpis: [
-      { l: 'Valid Certificates', v: '18', i: 'award', c: 'success', t: 'All majors covered' },
+      { l: 'Valid Certificates', v: '18', i: 'file-check-2', c: 'success', t: 'All majors covered' },
       { l: 'Expiring ≤60d', v: '3', i: 'alarm-clock', c: 'warning', t: 'Renewal initiated' },
-      { l: 'Expired', v: '1', i: 'x-octagon', c: 'error', t: 'Block shipments?', d: 'down' },
+      { l: 'Expired', v: '1', i: 'file-warning', c: 'error', t: 'Block shipments?', d: 'down' },
       { l: 'Audits Scheduled', v: '2', i: 'clipboard-list', c: 'info', t: 'Oct 2026' }
     ],
     table: {
@@ -737,7 +737,7 @@ const GENERIC_PAGES = {
       { l: 'Shifts Today', v: '3', i: 'clock', c: 'primary', t: 'A / B / C' },
       { l: 'Workers On Roll', v: '148', i: 'users', c: 'info', t: 'Across 6 lines' },
       { l: 'Attendance', v: '92%', i: 'user-check', c: 'success', t: '+3% vs last week', d: 'up' },
-      { l: 'Overtime Hours', v: '36', i: 'hourglass', c: 'warning', t: 'Within policy' }
+      { l: 'Overtime Hours', v: '36', i: 'clock-9', c: 'warning', t: 'Within policy' }
     ],
     table: {
       title: 'Today’s Roster',
@@ -784,8 +784,8 @@ const GENERIC_PAGES = {
     title: 'Cold Rooms',
     subtitle: 'Room-wise occupancy, product mapping and door status',
     kpis: [
-      { l: 'Rooms', v: '12', i: 'box', c: 'primary', t: 'All powered' },
-      { l: 'Occupancy', v: '78%', i: 'bar-chart-2', c: 'info', t: '2,400 of 3,080 T' },
+      { l: 'Rooms', v: '12', i: 'warehouse', c: 'primary', t: 'All powered' },
+      { l: 'Occupancy', v: '78%', i: 'pie-chart', c: 'info', t: '2,400 of 3,080 T' },
       { l: 'Avg Temp', v: '-22.4°C', i: 'thermometer', c: 'cyan', t: 'Set point -22°C' },
       { l: 'Door Events 24h', v: '143', i: 'door-open', c: 'warning', t: '2 held open >5m' }
     ],
@@ -807,7 +807,7 @@ const GENERIC_PAGES = {
     subtitle: 'Sensor-level readings with deviation alerts',
     kpis: [
       { l: 'Sensors Online', v: '48', i: 'radio-tower', c: 'success', t: '2 offline' },
-      { l: 'Avg Deviation', v: '±0.4°C', i: 'activity', c: 'info', t: 'Within ±1°C' },
+      { l: 'Avg Deviation', v: '±0.4°C', i: 'line-chart', c: 'info', t: 'Within ±1°C' },
       { l: 'Alerts (24h)', v: '3', i: 'bell-ring', c: 'warning', t: '1 critical' },
       { l: 'Logging Interval', v: '5 min', i: 'timer', c: 'primary', t: '4,320 reads/day' }
     ],
@@ -828,7 +828,7 @@ const GENERIC_PAGES = {
     title: 'Stock Aging',
     subtitle: 'FIFO risk view — stock buckets by age',
     kpis: [
-      { l: 'Total Stock', v: '2,400 T', i: 'boxes', c: 'primary', t: 'All rooms' },
+      { l: 'Total Stock', v: '2,400 T', i: 'package', c: 'primary', t: 'All rooms' },
       { l: '0–30 Days', v: '62%', i: 'calendar', c: 'success', t: 'Fresh stock' },
       { l: '31–60 Days', v: '24%', i: 'calendar-clock', c: 'warning', t: 'Plan dispatch' },
       { l: '>60 Days', v: '14%', i: 'alert-triangle', c: 'error', t: 'FIFO action needed', d: 'down' }
@@ -849,7 +849,7 @@ const GENERIC_PAGES = {
       rows: [
         ['Shrimp','620','310','140','40','LOT-0612', badge('warning','Dispatch first')],
         ['Salmon','180','90','30','10','LOT-0701', badge('success','OK')],
-        ['Tuna','240','110','50','20','LOT-0588', badge('warning','Review')],
+        ['Tuna','240','110','50','20','LOT-0588', badge('review','Review')],
         ['Squid','150','60','20','10','LOT-0655', badge('success','OK')],
         ['Crab','90','40','15','5','LOT-0720', badge('success','OK')]
       ]
@@ -860,8 +860,8 @@ const GENERIC_PAGES = {
     subtitle: 'Every stock-in, stock-out and adjustment event',
     kpis: [
       { l: 'Movements Today', v: '58', i: 'arrow-left-right', c: 'primary', t: '+12 vs avg', d: 'up' },
-      { l: 'Stock In', v: '32', i: 'download', c: 'success', t: '18.4 T received' },
-      { l: 'Stock Out', v: '21', i: 'upload', c: 'info', t: '12.1 T dispatched' },
+      { l: 'Stock In', v: '32', i: 'arrow-down-left', c: 'success', t: '18.4 T received' },
+      { l: 'Stock Out', v: '21', i: 'arrow-up-right', c: 'info', t: '12.1 T dispatched' },
       { l: 'Adjustments', v: '5', i: 'sliders-horizontal', c: 'warning', t: '2 need approval' }
     ],
     table: {
