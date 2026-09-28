@@ -129,7 +129,7 @@ const PAGE_INIT = {
 /* ================= AUTHENTICATION & SESSION MANAGEMENT ================= */
 function handleAuthLogin(e) {
   if (e) e.preventDefault();
-  const email = document.getElementById('authEmail')?.value || 'admin@devifisheries.com';
+  const email = document.getElementById('authEmail')?.value || 'Mildeep@admin.com';
   showPageLoader();
   setTimeout(() => {
     state.isAuthenticated = true;
