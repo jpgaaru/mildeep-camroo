@@ -126,16 +126,113 @@ const PAGE_INIT = {
   reports: renderReports
 };
 
+/* ================= BRAND & MULTI-TENANCY MANAGEMENT ================= */
+const BRANDS = {
+  mildeep: {
+    name: 'Mildeep',
+    subtitle: 'Powered by Camaroo',
+    logo: 'mildeep-logo.svg',
+    email: 'Mildeep@admin.com',
+    passcode: 'Qwerty123',
+    portalTitle: 'Mildeep Fisheries Portal',
+    themeClass: 'theme-mildeep',
+    authLogoSvg: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1298.6 251.6" class="h-10 md:h-12 w-auto fill-white drop-shadow-md">
+      <path d="M997.8,208h-14c0-.3-.4-.8-1.1-.9-19.8-2.6-37-11.9-50.3-26.5-13.5-14.9-20-33.1-19.7-53.1.4-23.7,10.9-44,29-58.7,31.2-25.3,75.2-23.9,104.7,3.3s22.2,29.2,24.3,48.2c5,45.2-28.3,83.6-73,87.5ZM992.4,157.1c9.9-.4,19.5-5.6,24.2-13.8,5.1-8.7,4.9-20.7-.2-29.3-5.1-8.6-15.6-12.8-24.9-12.7s-18.9,4.7-23.9,13.1c-5.6,9.3-4.8,20.9,0,30.3,5.9,7.4,14.3,12.8,24.9,12.4Z"/>
+      <path d="M519.9,108.8c-4.2,4.1-5.1,10.8-5.1,16.1l-.5,62.1c0,6.2-2.8,13-8.8,15.2-10.3,3.8-22.3,3.8-32.6,0s-8.8-9.1-8.8-15.2l-.5-63c0-5.8-2-11.9-6.3-15.7-6.2-5.5-16.9-5.4-22.6.5s-5.8,11.2-5.8,17.5l-.4,60.7c0,5.1-1.9,12-6.9,14.3-10.8,5-24.2,5-35.3.6s-8-8.6-8-14v-117c0-8,5.8-14.4,13.2-15.7,9.1-1.7,18.5-1.8,27.1,1.4,6.8,2.5,9.1,10.3,9,17.2,5.7-6.8,11.2-14.5,20.1-17.5,21.6-7.5,45.1,2.4,56.2,22.3,9.3-12.5,21.2-20.8,35.6-24.3,24.6-3.4,46.6,11.3,54.8,34.4,3.6,10.9,5.6,21.9,5.6,33.8v65.1c-.1,6.2-3.4,12.8-9.1,14.9-9.2,3.4-18.8,3-28.3,1.2-7.1-1.4-12.4-7.1-12.4-14.8l-.7-64.4c0-6-1.8-12-6.3-16s-17-5.8-23.2.3Z"/>
+      <path d="M770.4,192.1c-1.2,13.5-21.8,13.7-36.4,11.1s-11.3-6-12.3-13.5c-15.8,19.3-47.3,18.8-67.6,4.4s-20.5-17.6-26.9-29.9c-19.7-37.3-4.6-81.6,32.6-102.5s46-10.1,61.6,8c1.3-7.2,5.4-12.5,12.5-14.1,9.4-2.1,20.1-2.3,29.3,1.4,5.7,2.3,8.2,9.7,8.2,16l.3,106.7-1.1,12.4ZM715.6,116.5c-5.7-9.5-14.9-13.6-25.8-11.9-8.9,1.3-16.8,8.3-19.8,18.1-3.4,11,1.9,22.3,11.3,28s21.9,4.8,29.8-3c8.8-8.6,10.8-20.5,4.4-31.2Z"/>
+      <path d="M305.3,189.6c-13.4,17.7-42.8,18.5-61.5,8-35.9-20.2-51.9-62.6-34.4-100,7-15.1,18.6-26.7,32.5-35.3,20.9-12,48.3-11.2,63.2,7.7,1-7.1,5.1-12.7,12.1-14.4,9.5-2.3,20.7-2.6,30,1.5s7.8,10.1,7.8,15.9v114.5c0,8.9-5.6,15.1-13.9,16.2-7.5,1-14.8.8-22.2-.3s-12.4-5.8-13.6-13.8ZM292.2,149.9c13.3-9.8,14.4-26.3,3.6-38.2-8.8-9.8-24.7-10.1-34.5-1.1-9.6,8.9-11.6,23.3-3.4,33.7,8,10.2,23.1,13.8,34.3,5.6Z"/>
+      <path d="M1172.6,207h-16.4c-21.7-1.8-40.7-13.3-54.3-29.9-12.1-14.8-17.2-32.5-16.5-51.5s10.3-40.4,26.3-54.6c30.2-26.7,74.9-27,105.3-.5s27.6,37.3,26.7,62.2c-1.4,38.8-32.3,71.3-71.1,74.3ZM1165,157.1c10.4-.3,18.4-5.9,24.1-13.2,4.5-9.3,5.3-20.6-.1-29.8-5.1-8.5-15.3-13-24.8-12.9s-19,4.5-24,12.9c-5.6,9.3-5.5,22.1.6,31.1,5.1,7.6,14.6,12.1,24.2,11.8Z"/>
+      <path d="M144.8,151.6c8.1-4.5,14.4-10.3,23.1-4.6,12.9,8.4,27,26.1,16.3,38-14.2,15.8-34.6,22.1-55.7,21.2-14.3-.6-26.6-5.1-38.8-12.5-19.9-12-33.2-31.9-35.3-55.4-1.2-6.4-1.2-12.5,0-18.9,2.2-23.1,15.6-42.5,35.1-54.6,30.1-18.8,66.1-16,93.3,6.7,12.4,10.3.5,30.2-12,40.2s-19.4-1.3-27.1-5.3c-11.7-6.1-26.6-1.9-34.1,9.2-5.2,7.6-5.4,18.6-.9,26.7,7.3,12.9,23.6,16.3,36.2,9.4Z"/>
+      <path d="M844.8,186.6c0,6.3-2.4,13-7.9,15.3-9.8,4.2-20.9,3.9-31.1,1.3-6.2-1.6-11.3-7-11.3-13.9v-117.2c0-5.3,2.2-12.3,7.2-14.5,10.8-5,24.2-4.6,35.1-.6s6.6,7.8,7.9,12.2c16.9-16.7,32.6-20.3,54.5-12.6,15.9,5.6,12.7,30.5,1.7,44s-12.6,6.7-19.1,4.1-16.1-5-24.2-1.4c-5.8,2.6-12.2,7.6-12.2,14.4l-.5,68.9Z"/>
+    </svg>`
+  },
+  devifisheries: {
+    name: 'Devi Fisheries',
+    subtitle: 'Enterprise Seafood Management',
+    logo: 'devi-fisheries-logo.svg',
+    email: 'devifisheries@admin.com',
+    passcode: 'Qwerty123',
+    portalTitle: 'Devi Fisheries Enterprise Portal',
+    themeClass: 'theme-devifisheries',
+    authLogoSvg: `<img src="devi-fisheries-logo.svg" alt="Devi Fisheries Logo" class="h-16 md:h-20 w-auto drop-shadow-lg bg-white/95 p-3 rounded-2xl" />`
+  }
+};
+
+function switchLoginBrand(brandKey) {
+  const brand = BRANDS[brandKey] || BRANDS.mildeep;
+  state.brand = brandKey;
+  
+  const emailInput = document.getElementById('authEmail');
+  const pwdInput = document.getElementById('authPasscode');
+  if (emailInput) emailInput.value = brand.email;
+  if (pwdInput) pwdInput.value = brand.passcode;
+  
+  const logoContainer = document.getElementById('authLogoContainer');
+  if (logoContainer) logoContainer.innerHTML = brand.authLogoSvg;
+  
+  const portalFooter = document.getElementById('authPortalFooter');
+  if (portalFooter) portalFooter.textContent = `— ${brand.portalTitle}`;
+  
+  const tabMildeep = document.getElementById('brandTabMildeep');
+  const tabDevi = document.getElementById('brandTabDevi');
+  const submitBtn = document.getElementById('submitBtn');
+  
+  if (brandKey === 'devifisheries') {
+    if (tabMildeep) tabMildeep.className = 'flex-1 py-2.5 px-4 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-900 flex items-center justify-center space-x-2 cursor-pointer';
+    if (tabDevi) tabDevi.className = 'flex-1 py-2.5 px-4 text-xs font-bold rounded-lg transition-all shadow-sm bg-white text-slate-900 border border-slate-200/80 flex items-center justify-center space-x-2 cursor-pointer';
+    if (submitBtn) submitBtn.className = 'w-full py-4 px-6 bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white font-bold rounded-xl shadow-lg shadow-sky-600/25 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-sky-600/40 transform hover:-translate-y-0.5';
+  } else {
+    if (tabMildeep) tabMildeep.className = 'flex-1 py-2.5 px-4 text-xs font-bold rounded-lg transition-all shadow-sm bg-white text-slate-900 border border-slate-200/80 flex items-center justify-center space-x-2 cursor-pointer';
+    if (tabDevi) tabDevi.className = 'flex-1 py-2.5 px-4 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-900 flex items-center justify-center space-x-2 cursor-pointer';
+    if (submitBtn) submitBtn.className = 'w-full py-4 px-6 bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-brand-400/25 transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-brand-400/40 transform hover:-translate-y-0.5';
+  }
+}
+
+function applyBrand(brandKey) {
+  const brand = BRANDS[brandKey] || BRANDS.mildeep;
+  state.brand = brandKey;
+  localStorage.setItem('mildeep_active_brand', brandKey);
+  
+  document.body.classList.remove('theme-mildeep', 'theme-devifisheries');
+  document.body.classList.add(brand.themeClass);
+  
+  const headerLogo = document.getElementById('headerBrandLogo');
+  const headerTitle = document.getElementById('headerBrandTitle');
+  const headerSub = document.getElementById('headerBrandSubtitle');
+  
+  if (headerLogo) headerLogo.src = brand.logo;
+  if (headerTitle) headerTitle.textContent = brand.name;
+  if (headerSub) headerSub.textContent = brand.subtitle;
+  
+  document.title = `${brand.name} - Enterprise Seafood Portal`;
+}
+
+function initBrand() {
+  const savedBrand = localStorage.getItem('mildeep_active_brand') || 'mildeep';
+  applyBrand(savedBrand);
+  switchLoginBrand(savedBrand);
+}
+
 /* ================= AUTHENTICATION & SESSION MANAGEMENT ================= */
 function handleAuthLogin(e) {
   if (e) e.preventDefault();
   const email = document.getElementById('authEmail')?.value || 'Mildeep@admin.com';
+  
+  let selectedBrand = 'mildeep';
+  if (email.toLowerCase().includes('devi')) {
+    selectedBrand = 'devifisheries';
+  } else if (state.brand) {
+    selectedBrand = state.brand;
+  }
+  
+  applyBrand(selectedBrand);
+  
   showPageLoader();
   setTimeout(() => {
     state.isAuthenticated = true;
     const authScreen = document.getElementById('authScreen');
     if (authScreen) authScreen.classList.add('hidden');
-    showToast('success', 'Welcome Back', `Logged in successfully as Super Admin (${email})`);
+    showToast('success', 'Welcome Back', `Logged in to ${BRANDS[selectedBrand].name} Portal as Super Admin (${email})`);
     navigate('sales', 'dashboard');
   }, 350);
 }

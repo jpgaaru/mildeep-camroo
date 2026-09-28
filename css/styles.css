@@ -42,6 +42,66 @@
 }
 
 /* ================================================================
+   BRAND THEMES (MILDEEP VS DEVI FISHERIES)
+   ================================================================ */
+body.theme-mildeep {
+  --colorPrimary: #FACC15;
+  --colorPrimaryHover: #EAB308;
+  --colorPrimaryActive: #CA8A04;
+  --colorPrimaryBg: #FEFCE8;
+  --colorPrimaryBorder: #FEF08A;
+  --colorInfo: #CA8A04;
+  --colorInfoBg: #FEFCE8;
+}
+
+body.theme-devifisheries {
+  --colorPrimary: #005DA5;
+  --colorPrimaryHover: #1D9EDA;
+  --colorPrimaryActive: #004077;
+  --colorPrimaryBg: #F0F9FF;
+  --colorPrimaryBorder: #BAE6FD;
+  --colorInfo: #0284C7;
+  --colorInfoBg: #F0F9FF;
+}
+
+body.theme-devifisheries .nav-item.active {
+  background: linear-gradient(135deg, #005DA5 0%, #1D9EDA 100%) !important;
+  color: #FFFFFF !important;
+}
+
+body.theme-devifisheries .nav-item.active i {
+  color: #FFFFFF !important;
+}
+
+body.theme-devifisheries .sub-nav-item.active {
+  color: #005DA5 !important;
+  border-bottom-color: #005DA5 !important;
+}
+
+body.theme-devifisheries .btn-primary {
+  background: linear-gradient(135deg, #005DA5 0%, #1D9EDA 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+body.theme-devifisheries .btn-primary:hover {
+  background: linear-gradient(135deg, #004077 0%, #005DA5 100%) !important;
+}
+
+body.theme-devifisheries .data-card-header {
+  background: #F0F9FF !important;
+  border-bottom: 1px solid #BAE6FD !important;
+}
+
+body.theme-devifisheries .metric-card-bw {
+  border-left: 4px solid #005DA5 !important;
+}
+
+body.theme-devifisheries .metric-card-bw:hover {
+  border-color: #1D9EDA !important;
+}
+
+/* ================================================================
    BASE / RESET
    ================================================================ */
 * {

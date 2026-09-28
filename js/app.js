@@ -109,6 +109,7 @@ document.addEventListener('keydown', e => {
 
 /* ================= BOOT SEQUENCE ================= */
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof initBrand === 'function') initBrand();
   if (window.lucide) lucide.createIcons();
   navigate('sales', 'dashboard');
 });
