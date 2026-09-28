@@ -64,17 +64,49 @@ body.theme-devifisheries {
   --colorInfoBg: #F0F9FF;
 }
 
-body.theme-devifisheries .nav-item.active {
-  background: linear-gradient(135deg, #005DA5 0%, #1D9EDA 100%) !important;
-  color: #FFFFFF !important;
+body.theme-devifisheries .primary-nav {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #BAE6FD !important;
 }
 
-body.theme-devifisheries .nav-item.active i {
-  color: #FFFFFF !important;
+body.theme-devifisheries .nav-item {
+  color: #475569 !important;
+}
+
+body.theme-devifisheries .nav-item svg {
+  color: #64748B !important;
+  stroke: #64748B !important;
+}
+
+body.theme-devifisheries .nav-item.active {
+  color: #005DA5 !important;
+  background: #F0F9FF !important;
+  font-weight: 700 !important;
+}
+
+body.theme-devifisheries .nav-item.active svg {
+  color: #005DA5 !important;
+  stroke: #005DA5 !important;
+}
+
+body.theme-devifisheries .nav-item.active::after {
+  background: linear-gradient(90deg, #005DA5, #1D9EDA) !important;
+  transform: scaleX(1) !important;
+}
+
+body.theme-devifisheries .nav-item:hover {
+  color: #005DA5 !important;
+  background: #F0F9FF !important;
+}
+
+body.theme-devifisheries .nav-item:hover svg {
+  color: #005DA5 !important;
+  stroke: #005DA5 !important;
 }
 
 body.theme-devifisheries .sub-nav-item.active {
   color: #005DA5 !important;
+  background: #F0F9FF !important;
   border-bottom-color: #005DA5 !important;
 }
 
@@ -88,9 +120,23 @@ body.theme-devifisheries .btn-primary:hover {
   background: linear-gradient(135deg, #004077 0%, #005DA5 100%) !important;
 }
 
-body.theme-devifisheries .data-card-header {
+body.theme-devifisheries .data-card-header,
+body.theme-devifisheries [style*="background:#FEFCE8"],
+body.theme-devifisheries [style*="background: #FEFCE8"] {
   background: #F0F9FF !important;
-  border-bottom: 1px solid #BAE6FD !important;
+  border-color: #BAE6FD !important;
+}
+
+body.theme-devifisheries [style*="border-bottom: 1px solid #FEF08A"],
+body.theme-devifisheries [style*="border-bottom:1px solid #FEF08A"],
+body.theme-devifisheries [style*="border-top:1px solid #FEF08A"] {
+  border-color: #BAE6FD !important;
+}
+
+body.theme-devifisheries [style*="color:#CA8A04"],
+body.theme-devifisheries [style*="color: #CA8A04"],
+body.theme-devifisheries [style*="color: #422006"] {
+  color: #005DA5 !important;
 }
 
 body.theme-devifisheries .metric-card-bw {

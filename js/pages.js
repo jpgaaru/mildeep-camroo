@@ -31,9 +31,9 @@ window.Pages.renderPurchaseDashboard = () => {
   const html = `
     <!-- Filter Bar (Manually rendered for now, but could be a Molecule) -->
     <div class="filter-panel-card" style="margin-top: 12px; margin-bottom: 20px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid #FEF08A; padding-bottom: 8px;">
-        <span style="font-weight: 700; font-size: 13px; color: #422006; text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 8px;">
-          ${window.UI.Icon('sliders-horizontal', '', 'width:15px;height:15px;color:#CA8A04;')} Purchase Filter Parameters
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--colorPrimaryBorder); padding-bottom: 8px;">
+        <span style="font-weight: 700; font-size: 13px; color: var(--colorText); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 8px;">
+          ${window.UI.Icon('sliders-horizontal', '', 'width:15px;height:15px;color:var(--colorPrimaryActive);')} Purchase Filter Parameters
         </span>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;">
@@ -41,7 +41,7 @@ window.Pages.renderPurchaseDashboard = () => {
         ${window.UI.FilterSelect('Year:', ['2026', '2025', '2024'], 'purchaseYearFilter')}
         ${window.UI.FilterSelect('Month:', ['September', 'August', 'July', 'June', 'May', 'April', 'March', 'February', 'January', 'December', 'November', 'October'], 'purchaseMonthFilter')}
         
-        <button class="btn btn-primary" style="background: #FACC15; color: #422006; font-weight: 700; border: 1px solid #EAB308; padding: 10px 24px; border-radius: 8px; height: 38px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s ease;" onclick="initPurchaseDashboardCharts();showToast('info','Purchase','Filters applied')">
+        <button class="btn-blue-search" style="padding: 10px 24px; height: 38px;" onclick="initPurchaseDashboardCharts();showToast('info','Purchase','Filters applied')">
           Search ${window.UI.Icon('arrow-right', '', 'width:16px;height:16px;')}
         </button>
       </div>
