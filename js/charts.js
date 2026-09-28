@@ -550,13 +550,13 @@ function initSalesDashboardCharts() {
         { 
           label: 'HAPAG LLOYD - 7164', 
           data: [6251, 7164, 7164, 7164, 7164, 7151, 7164], 
-          borderColor: '#CA8A04', 
+          borderColor: pal.primaryDark, 
           backgroundColor: 'transparent', 
           tension: 0.35, 
           pointRadius: 4,
           pointHoverRadius: 7,
           pointBackgroundColor: '#FFFFFF',
-          pointBorderColor: '#CA8A04',
+          pointBorderColor: pal.primaryDark,
           pointBorderWidth: 2
         },
         { 
@@ -607,6 +607,7 @@ function initSalesDashboardCharts() {
 }
 
 function initPurchaseDashboardCharts() {
+  const pal = getBrandChartPalette();
   const purchaseDates = ['01-09-26', '02-09-26', '03-09-26', '04-09-26', '05-09-26', '06-09-26', '07-09-26', '08-09-26', '09-09-26', '10-09-26', '11-09-26', '12-09-26', '14-09-26', '15-09-26', '16-09-26', '17-09-26', '18-09-26', '19-09-26', '20-09-26', '21-09-26'];
   const dailyPurchaseData = [25.0, 170.0, 172.0, 148.0, 140.0, 122.0, 152.0, 128.0, 160.0, 128.0, 132.0, 120.0, 128.0, 60.0, 100.0, 124.0, 132.0, 146.0, 145.0, 42.0];
 
@@ -618,8 +619,8 @@ function initPurchaseDashboardCharts() {
       datasets: [{
         label: 'Purchase Volume (T)',
         data: dailyPurchaseData,
-        backgroundColor: '#FACC15',
-        hoverBackgroundColor: '#EAB308',
+        backgroundColor: pal.primary,
+        hoverBackgroundColor: pal.primaryHover,
         borderRadius: 4,
         barPercentage: 0.6
       }]
@@ -716,7 +717,7 @@ function initPurchaseDashboardCharts() {
       labels: ['Site Weightment', 'Plant Weightment'],
       datasets: [{
         data: [2239.35, 315.04],
-        backgroundColor: ['#FACC15', '#0F172A'],
+        backgroundColor: [pal.primary, '#0F172A'],
         borderWidth: 2,
         borderColor: '#FFFFFF',
         hoverOffset: 6
@@ -757,9 +758,7 @@ function initPurchaseDashboardCharts() {
       ],
       datasets: [{ 
         data: [44, 42, 26, 24, 24, 23, 643], 
-        backgroundColor: [
-          '#FACC15', '#0F172A', '#EAB308', '#27272A', '#CA8A04', '#52525B', '#FEF08A'
-        ],
+        backgroundColor: pal.donutColors,
         borderWidth: 2,
         borderColor: '#FFFFFF',
         hoverOffset: 6
@@ -787,11 +786,12 @@ function initPurchaseDashboardCharts() {
 }
 
 function initQCDashboardCharts() {
+  const pal = getBrandChartPalette();
   mk('qcCodeStatusChart', {
     type: 'doughnut',
     data: {
       labels: ['Completed (65.2%)', 'Pending (34.8%)'],
-      datasets: [{ data: [65.2, 34.8], backgroundColor: ['#FACC15', '#0F172A'], borderWidth: 3, borderColor: '#fff' }]
+      datasets: [{ data: [65.2, 34.8], backgroundColor: [pal.primary, '#0F172A'], borderWidth: 3, borderColor: '#fff' }]
     },
     options: {
       responsive: true,
@@ -805,7 +805,7 @@ function initQCDashboardCharts() {
     type: 'doughnut',
     data: {
       labels: ['Internal (20.0%)', 'External (13.2%)', 'No Lab (66.8%)'],
-      datasets: [{ data: [20.0, 13.2, 66.8], backgroundColor: ['#0F172A', '#FACC15', '#52525B'], borderWidth: 3, borderColor: '#fff' }]
+      datasets: [{ data: [20.0, 13.2, 66.8], backgroundColor: ['#0F172A', pal.primary, '#52525B'], borderWidth: 3, borderColor: '#fff' }]
     },
     options: {
       responsive: true,
@@ -821,7 +821,7 @@ function initQCDashboardCharts() {
       labels: ['0-49%', '50-79%', '80-99%', '100%+'],
       datasets: [
         { label: 'Unassigned', data: [380, 90, 80, 50], backgroundColor: '#0F172A', borderRadius: 4 },
-        { label: 'Assigned', data: [720, 180, 170, 190], backgroundColor: '#FACC15', borderRadius: 4 }
+        { label: 'Assigned', data: [720, 180, 170, 190], backgroundColor: pal.primary, borderRadius: 4 }
       ]
     },
     options: {
@@ -835,7 +835,7 @@ function initQCDashboardCharts() {
     type: 'bar',
     data: {
       labels: ['DEVI INC', 'STANLEY', 'EAST WEST CO. LTD', 'MARK FOODS LLC', 'C.P. FOOD', 'VALENCIA', 'ZHEJIANG YIWU', 'NORDIC', 'ZHANJIANG ZHANXIN', 'ESCAL S.A.'],
-      datasets: [{ label: 'Risk Count', data: [380, 240, 190, 140, 100, 50, 50, 50, 50, 30], backgroundColor: '#713F12', borderRadius: 4 }]
+      datasets: [{ label: 'Risk Count', data: [380, 240, 190, 140, 100, 50, 50, 50, 50, 30], backgroundColor: pal.primaryDark, borderRadius: 4 }]
     },
     options: {
       responsive: true,
@@ -849,7 +849,7 @@ function initQCDashboardCharts() {
     type: 'bar',
     data: {
       labels: ['U.S.A.', 'RUSSIA', 'CHINA', 'BELGIUM', 'CANADA', 'NEW ZEALAND', 'IRELAND', 'BAHAMAS', 'FRANCE', 'UNITED KINGDOM'],
-      datasets: [{ label: 'Risk Count', data: [940, 180, 160, 110, 40, 30, 20, 20, 15, 10], backgroundColor: '#CA8A04', borderRadius: 4 }]
+      datasets: [{ label: 'Risk Count', data: [940, 180, 160, 110, 40, 30, 20, 20, 15, 10], backgroundColor: pal.primaryDark, borderRadius: 4 }]
     },
     options: {
       responsive: true,
@@ -864,7 +864,7 @@ function initQCDashboardCharts() {
     data: {
       labels: ['Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026', 'Aug 2026', 'Sep 2026'],
       datasets: [
-        { label: 'QC Completed', data: [160, 150, 170, 180, 150, 120], backgroundColor: '#FACC15', borderRadius: 4, barPercentage: 0.5 },
+        { label: 'QC Completed', data: [160, 150, 170, 180, 150, 120], backgroundColor: pal.primary, borderRadius: 4, barPercentage: 0.5 },
         { label: 'QC Pending', data: [20, 18, 22, 16, 25, 30], backgroundColor: '#0F172A', borderRadius: 4, barPercentage: 0.5 }
       ]
     },
@@ -881,7 +881,7 @@ function initQCDashboardCharts() {
     data: {
       labels: ['KAKINADA LOCAL', 'AMALAPURAM', 'ORISSA', 'SRIKAKULAM', 'MALIKIPURAM'],
       datasets: [
-        { label: 'Positive', data: [680, 520, 910, 480, 390], backgroundColor: '#FACC15', borderRadius: 4, barPercentage: 0.5 },
+        { label: 'Positive', data: [680, 520, 910, 480, 390], backgroundColor: pal.primary, borderRadius: 4, barPercentage: 0.5 },
         { label: 'Negative', data: [12, 8, 15, 6, 4], backgroundColor: '#0F172A', borderRadius: 4, barPercentage: 0.5 }
       ]
     },
@@ -898,7 +898,7 @@ function initQCDashboardCharts() {
     data: {
       labels: ['ASHODA ENTER...', 'PERICHERLA AVIN...', 'K.S.V.RAYAPA RAJU', 'MAASATALAFISHC...', 'SWARGADHAM FISH...'],
       datasets: [
-        { label: 'Positive', data: [20, 100, 5, 140, 150], backgroundColor: '#FACC15', borderRadius: 4, barPercentage: 0.5 },
+        { label: 'Positive', data: [20, 100, 5, 140, 150], backgroundColor: pal.primary, borderRadius: 4, barPercentage: 0.5 },
         { label: 'Negative', data: [1, 2, 0, 3, 2], backgroundColor: '#0F172A', borderRadius: 4, barPercentage: 0.5 }
       ]
     },

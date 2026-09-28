@@ -323,7 +323,7 @@ function renderUnderConstructionPage(subId, tertId) {
       </p>
 
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <button class="btn btn-primary" style="background: #FACC15; color: #422006; font-weight: 700; border: 1px solid #EAB308; padding: 10px 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(250,204,21,0.3);" onclick="navigate('sales', 'dashboard')">
+        <button class="btn btn-primary" style="padding: 10px 24px; border-radius: 8px; font-weight: 700;" onclick="navigate('sales', 'dashboard')">
           <i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i> Return to Sales Dashboard
         </button>
         <button class="btn btn-default" style="padding: 10px 24px; border-radius: 8px; font-weight: 600;" onclick="showToast('info', 'Feature Access Logged', 'Priority access requested for ${subLabel}')">
@@ -449,7 +449,7 @@ function renderReports() {
       <div class="product-card" style="padding:20px;display:flex;flex-direction:column;justify-content:space-between;" onclick="showToast('info','Report','Generating ${r.title}...')">
         <div>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="width:42px;height:42px;border-radius:10px;background:#FEFCE8;color:#CA8A04;display:flex;align-items:center;justify-content:center;">
+            <div style="width:42px;height:42px;border-radius:10px;background:var(--colorPrimaryLight, #FEFCE8);color:var(--colorPrimaryActive, #CA8A04);display:flex;align-items:center;justify-content:center;">
               <i data-lucide="${r.icon}"></i>
             </div>
             <span class="badge badge-info" style="font-size:10px;">${r.code.split('-')[0]}</span>
@@ -1288,7 +1288,7 @@ function renderQCLotsTable(page = 1, customPerPage = null) {
     if (endPage - startPage < maxButtons - 1) startPage = Math.max(1, endPage - maxButtons + 1);
 
     for (let p = startPage; p <= endPage; p++) {
-      btns += `<button class="btn btn-sm ${p === validPage ? 'btn-primary' : 'btn-default'}" style="${p === validPage ? 'background:#FACC15;color:#422006;font-weight:700;border-color:#EAB308;' : ''}" onclick="renderQCLotsTable(${p})">${p}</button>`;
+      btns += `<button class="btn btn-sm ${p === validPage ? 'btn-primary' : 'btn-default'}" style="${p === validPage ? 'font-weight:700;' : ''}" onclick="renderQCLotsTable(${p})">${p}</button>`;
     }
     btns += `<button class="btn btn-sm btn-default" ${validPage === totalPages ? 'disabled' : ''} onclick="renderQCLotsTable(${validPage + 1})">Next</button>`;
     pag.innerHTML = btns;
@@ -1328,7 +1328,7 @@ function renderPOGradeTable(page = 1, customPerPage = null) {
           <td><strong>${r.mcs}</strong></td>
           <td>
             ${isAllocated 
-              ? `<span class="badge" style="background:#FACC15;color:#422006;border:1px solid #EAB308;font-weight:700;">${r.assigned} Allocated</span>`
+              ? `<span class="badge badge-primary" style="font-weight:700;">${r.assigned} Allocated</span>`
               : `<span style="color:#94A3B8;">${r.assigned}</span>`}
           </td>
         </tr>
@@ -1348,7 +1348,7 @@ function renderPOGradeTable(page = 1, customPerPage = null) {
     if (endPage - startPage < maxButtons - 1) startPage = Math.max(1, endPage - maxButtons + 1);
 
     for (let p = startPage; p <= endPage; p++) {
-      btns += `<button class="btn btn-sm ${p === validPage ? 'btn-primary' : 'btn-default'}" style="${p === validPage ? 'background:#FACC15;color:#422006;font-weight:700;border-color:#EAB308;' : ''}" onclick="renderPOGradeTable(${p})">${p}</button>`;
+      btns += `<button class="btn btn-sm ${p === validPage ? 'btn-primary' : 'btn-default'}" style="${p === validPage ? 'font-weight:700;' : ''}" onclick="renderPOGradeTable(${p})">${p}</button>`;
     }
     btns += `<button class="btn btn-sm btn-default" ${validPage === totalPages ? 'disabled' : ''} onclick="renderPOGradeTable(${validPage + 1})">Next</button>`;
     pag.innerHTML = btns;
@@ -1391,9 +1391,9 @@ function renderInventoryIndentTable() {
         <td>${r.date}</td>
         <td>
           <div class="row-actions">
-            <button class="btn btn-sm btn-icon btn-ghost" style="color:#CA8A04;" onclick="showToast('info','Edit','Editing Indent ${r.docNo}')"><i data-lucide="pencil"></i></button>
+            <button class="btn btn-sm btn-icon btn-ghost" style="color:var(--colorPrimaryActive, #CA8A04);" onclick="showToast('info','Edit','Editing Indent ${r.docNo}')"><i data-lucide="pencil"></i></button>
             <button class="btn btn-sm btn-icon btn-ghost" style="color:#DC2626;" onclick="showToast('warning','Delete','Deleting Indent ${r.docNo}')"><i data-lucide="trash-2"></i></button>
-            <button class="btn btn-sm btn-icon btn-ghost" style="color:#CA8A04;" onclick="showToast('info','View','Viewing Indent ${r.docNo}')"><i data-lucide="eye"></i></button>
+            <button class="btn btn-sm btn-icon btn-ghost" style="color:var(--colorPrimaryActive, #CA8A04);" onclick="showToast('info','View','Viewing Indent ${r.docNo}')"><i data-lucide="eye"></i></button>
           </div>
         </td>
       </tr>
