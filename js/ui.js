@@ -393,8 +393,8 @@ function renderProducts() {
     return `<div class="product-card" onclick="showToast('info','Product','Opening ${p.name}')">
       <div class="product-image"><img src="${p.img}" alt="${p.name}" class="product-img-real" loading="lazy" /></div>
       <div class="product-name">${p.name}</div><div class="product-sku">${p.sku}</div>
-      <div class="product-price">$${p.price.toLocaleString()}</div><div class="product-unit">per ton · FOB Kochi</div>
-      <div class="product-stats"><div class="product-stat"><div class="product-stat-value">${p.stock}</div><div class="product-stat-label">Stock (T)</div></div><div class="product-stat"><div class="product-stat-value">${p.sold.toLocaleString()}</div><div class="product-stat-label">Sold</div></div><div class="product-stat"><div class="product-stat-value">★ ${p.rating}</div><div class="product-stat-label">Rating</div></div></div>
+      <div class="product-price">$${p.price.toLocaleString('en-IN')}</div><div class="product-unit">per ton · FOB Kochi</div>
+      <div class="product-stats"><div class="product-stat"><div class="product-stat-value">${p.stock}</div><div class="product-stat-label">Stock (T)</div></div><div class="product-stat"><div class="product-stat-value">${p.sold.toLocaleString('en-IN')}</div><div class="product-stat-label">Sold</div></div><div class="product-stat"><div class="product-stat-value">★ ${p.rating}</div><div class="product-stat-label">Rating</div></div></div>
       <div style="margin-top:8px;">${badge(sb.slice(6), sl)}</div></div>`;
   }).join('');
 }
@@ -402,7 +402,7 @@ function renderProducts() {
 function renderBuyers() {
   document.getElementById('buyersTableBody').innerHTML = BUYERS.map(b => `<tr onclick="showToast('info','Buyer','Opening ${b.name}')">
     <td><div style="display:flex;align-items:center;gap:9px;"><div class="avatar" style="width:28px;height:28px;font-size:10px;">${b.name.slice(0,2).toUpperCase()}</div><strong>${b.name}</strong></div></td>
-    <td>${b.flag} ${b.country}</td><td>${b.contact}</td><td><strong>${b.orders}</strong></td><td><strong>$${(b.revenue/1e6).toFixed(2)}M</strong></td><td>$${b.credit.toLocaleString()}</td>
+    <td>${b.flag} ${b.country}</td><td>${b.contact}</td><td><strong>${b.orders}</strong></td><td><strong>$${(b.revenue/1e6).toFixed(2)}M</strong></td><td>$${b.credit.toLocaleString('en-IN')}</td>
     <td>${badge(b.status === 'active' ? 'success' : 'gray', b.status)}</td>
     <td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Email','Composing...')"><i data-lucide="mail"></i></button><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Call','Dialing...')"><i data-lucide="phone"></i></button></div></td></tr>`).join('');
 }
@@ -577,7 +577,7 @@ function renderOrdersTable() {
   const map = { new: ['info','New'], processing: ['warning','Processing'], quality: ['purple','In QC'], shipped: ['primary','Shipped'], delivered: ['success','Delivered'] };
   document.getElementById('ordersCount').textContent = state.orders.length;
   document.getElementById('ordersTableBody').innerHTML = state.orders.slice(0, 15).map(o => `<tr onclick="openOrderDrawer('${o.id}')">
-    <td><span class="row-id">${o.id}</span></td><td>${o.customer}</td><td>${o.product}</td><td>${o.quantity}</td><td>$${o.value.toLocaleString()}</td>
+    <td><span class="row-id">${o.id}</span></td><td>${o.customer}</td><td>${o.product}</td><td>${o.quantity}</td><td>$${o.value.toLocaleString('en-IN')}</td>
     <td>${badge(map[o.status][0], map[o.status][1])}</td><td>${o.shipDate.toLocaleDateString()}</td>
     <td><div class="row-actions"><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();openOrderDrawer('${o.id}')"><i data-lucide="eye"></i></button><button class="btn btn-sm btn-icon btn-ghost" onclick="event.stopPropagation();showToast('info','Edit','Opening editor')"><i data-lucide="edit"></i></button></div></td></tr>`).join('');
 }
@@ -632,7 +632,7 @@ function openOrderDrawer(id) {
     <div class="drawer-info-item"><div class="drawer-info-label">Customer</div><div class="drawer-info-value">${o.customer}</div></div>
     <div class="drawer-info-item"><div class="drawer-info-label">Product</div><div class="drawer-info-value">${o.product}</div></div>
     <div class="drawer-info-item"><div class="drawer-info-label">Quantity</div><div class="drawer-info-value">${o.quantity} Tons</div></div>
-    <div class="drawer-info-item"><div class="drawer-info-label">Value</div><div class="drawer-info-value">$${o.value.toLocaleString()}</div></div>
+    <div class="drawer-info-item"><div class="drawer-info-label">Value</div><div class="drawer-info-value">$${o.value.toLocaleString('en-IN')}</div></div>
     <div class="drawer-info-item"><div class="drawer-info-label">Destination</div><div class="drawer-info-value">${o.destination}</div></div>
     <div class="drawer-info-item"><div class="drawer-info-label">Ship Date</div><div class="drawer-info-value">${o.shipDate.toLocaleDateString()}</div></div>
     </div></div>
@@ -858,14 +858,14 @@ function animateValue(el) {
   const t0 = performance.now();
   const fmt = v => {
     const n = Number(v.toFixed(decimals));
-    return hadComma ? n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) : n.toFixed(decimals);
+    return hadComma ? n.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) : n.toFixed(decimals);
   };
   function frame(t) {
     const p = Math.min(1, (t - t0) / dur);
     const e = 1 - Math.pow(1 - p, 3);
     el.textContent = prefix + fmt(from + (target - from) * e) + suffix;
     if (p < 1) requestAnimationFrame(frame);
-    else el.textContent = raw;
+    else el.textContent = prefix + fmt(target) + suffix;
   }
   requestAnimationFrame(frame);
 }

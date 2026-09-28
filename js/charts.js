@@ -512,7 +512,7 @@ function initSalesDashboardCharts() {
           border: { display: false }, 
           ticks: { 
             font: { family: "'Sora', sans-serif", size: 11 },
-            callback: v => (v >= 1000 ? (v/1000).toLocaleString() + 'k' : v)
+            callback: v => (v >= 1000 ? (v/1000).toLocaleString('en-IN') + 'k' : v)
           } 
         }
       }
@@ -601,7 +601,7 @@ function initSalesDashboardCharts() {
           border: { display: false }, 
           ticks: { 
             font: { family: "'Sora', sans-serif", size: 11 },
-            callback: v => '$' + v.toLocaleString()
+            callback: v => '$' + v.toLocaleString('en-IN')
           } 
         }
       }
