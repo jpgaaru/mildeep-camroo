@@ -1290,9 +1290,9 @@ function renderInventoryIndentTable() {
         <td>${r.date}</td>
         <td>
           <div class="row-actions">
-            <button class="btn btn-sm btn-icon btn-ghost" style="color:#3B82F6;" onclick="showToast('info','Edit','Editing Indent ${r.docNo}')"><i data-lucide="pencil"></i></button>
-            <button class="btn btn-sm btn-icon btn-ghost" style="color:#EF4444;" onclick="showToast('warning','Delete','Deleting Indent ${r.docNo}')"><i data-lucide="trash-2"></i></button>
-            <button class="btn btn-sm btn-icon btn-ghost" style="color:#3B82F6;" onclick="showToast('info','View','Viewing Indent ${r.docNo}')"><i data-lucide="eye"></i></button>
+            <button class="btn btn-sm btn-icon btn-ghost" style="color:#CA8A04;" onclick="showToast('info','Edit','Editing Indent ${r.docNo}')"><i data-lucide="pencil"></i></button>
+            <button class="btn btn-sm btn-icon btn-ghost" style="color:#DC2626;" onclick="showToast('warning','Delete','Deleting Indent ${r.docNo}')"><i data-lucide="trash-2"></i></button>
+            <button class="btn btn-sm btn-icon btn-ghost" style="color:#CA8A04;" onclick="showToast('info','View','Viewing Indent ${r.docNo}')"><i data-lucide="eye"></i></button>
           </div>
         </td>
       </tr>
