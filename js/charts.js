@@ -265,8 +265,24 @@ function initTempChart() {
   });
 }
 
-/* ================= QA SCREENSHOT CHARTS — SHADCN UI YELLOW THEME ================= */
+function getBrandChartPalette() {
+  const isDevi = (typeof state !== 'undefined' && state.brand === 'devifisheries');
+  return {
+    primary: isDevi ? '#005DA5' : '#FACC15',
+    primaryHover: isDevi ? '#1D9EDA' : '#EAB308',
+    primaryDark: isDevi ? '#004077' : '#CA8A04',
+    primaryLight: isDevi ? '#E0F2FE' : '#FEF08A',
+    primaryBg: isDevi ? 'rgba(0, 93, 165, 0.12)' : 'rgba(250, 204, 21, 0.12)',
+    donutColors: isDevi 
+      ? ['#005DA5', '#0F172A', '#1D9EDA', '#334155', '#38BDF8', '#0369A1', '#1E293B', '#BAE6FD']
+      : ['#FACC15', '#0F172A', '#CA8A04', '#3F3F46', '#FDE047', '#713F12', '#1E293B', '#FEF08A']
+  };
+}
+
+/* ================= QA SCREENSHOT CHARTS — SHADCN UI THEME ================= */
 function initSalesDashboardCharts() {
+  const pal = getBrandChartPalette();
+
   // 1. Invoice Vs Shipments (Shadcn Bar Chart)
   mk('invoiceVsShipmentsSales', {
     type: 'bar',
@@ -285,8 +301,8 @@ function initSalesDashboardCharts() {
         { 
           label: 'Shipments', 
           data: [175, 165, 190, 210, 150, 105, 12, 10, 8, 12, 16, 20], 
-          backgroundColor: '#FACC15',
-          hoverBackgroundColor: '#EAB308',
+          backgroundColor: pal.primary,
+          hoverBackgroundColor: pal.primaryHover,
           borderRadius: 6, 
           barPercentage: 0.55,
           categoryPercentage: 0.75
@@ -335,8 +351,8 @@ function initSalesDashboardCharts() {
         { 
           label: 'Shipped', 
           data: [32, 15, 140, 210, 410, 180, 1120], 
-          backgroundColor: '#FACC15', 
-          hoverBackgroundColor: '#EAB308',
+          backgroundColor: pal.primary, 
+          hoverBackgroundColor: pal.primaryHover,
           borderRadius: 6, 
           barPercentage: 0.65,
           categoryPercentage: 0.8
@@ -344,10 +360,10 @@ function initSalesDashboardCharts() {
         { 
           label: 'Pending', 
           data: [12, 5, 40, 70, 110, 60, 407], 
-          backgroundColor: '#FEF08A', 
-          borderColor: '#EAB308',
+          backgroundColor: pal.primaryLight, 
+          borderColor: pal.primaryHover,
           borderWidth: 1,
-          hoverBackgroundColor: '#FDE047',
+          hoverBackgroundColor: pal.primaryHover,
           borderRadius: 6, 
           barPercentage: 0.65,
           categoryPercentage: 0.8
@@ -385,16 +401,7 @@ function initSalesDashboardCharts() {
       labels: ['U.S.A.: 735 (75.62%)', 'CHINA: 145 (14.92%)', 'BELGIUM: 39 (4.01%)', 'RUSSIA: 22 (2.26%)', 'CANADA: 7 (0.72%)', 'UNITED KINGDOM: 7 (0.72%)', 'FRANCE: 7 (0.72%)', 'OTHERS: 5 (0.51%)'],
       datasets: [{
         data: [735, 145, 39, 22, 7, 7, 7, 5],
-        backgroundColor: [
-          '#FACC15', // U.S.A (Vibrant Golden Yellow)
-          '#0F172A', // CHINA (Jet Slate Black)
-          '#CA8A04', // BELGIUM (Amber Gold)
-          '#3F3F46', // RUSSIA (Charcoal Zinc)
-          '#FDE047', // CANADA (Light Pastel Yellow)
-          '#713F12', // UK (Deep Warm Brown-Yellow)
-          '#1E293B', // FRANCE (Dark Slate)
-          '#FEF08A'  // OTHERS (Soft Cream)
-        ],
+        backgroundColor: pal.donutColors,
         borderWidth: 2,
         borderColor: '#FFFFFF',
         hoverOffset: 6
@@ -427,17 +434,7 @@ function initSalesDashboardCharts() {
       labels: ['SAVANNAH: 271', 'LOS ANGELES: 147', 'NEW YORK: 131', 'ZHANJIANG: 131', 'BALTIMORE: 84', 'ANTWERP: 39', 'NEWARK: 38', 'SEATTLE: 24', 'OTHERS: 85'],
       datasets: [{
         data: [271, 147, 131, 131, 84, 39, 38, 24, 85],
-        backgroundColor: [
-          '#FACC15', // SAVANNAH (Vibrant Golden Yellow)
-          '#0F172A', // LOS ANGELES (Jet Black)
-          '#EAB308', // NEW YORK (Rich Golden Yellow)
-          '#27272A', // ZHANJIANG (Dark Zinc Black)
-          '#CA8A04', // BALTIMORE (Amber Gold)
-          '#FDE047', // ANTWERP (Light Yellow)
-          '#52525B', // NEWARK (Medium Charcoal)
-          '#854D0E', // SEATTLE (Deep Ochre Yellow)
-          '#FEF08A'  // OTHERS (Soft Cream)
-        ],
+        backgroundColor: pal.donutColors,
         borderWidth: 2,
         borderColor: '#FFFFFF',
         hoverOffset: 6
@@ -480,8 +477,8 @@ function initSalesDashboardCharts() {
         { 
           label: 'Shipped Qty - Tons', 
           data: [150, 90, 180, 600, 480, 2450, 310, 220, 1820, 580, 3420, 620, 260, 380, 140, 1150, 940, 390, 240, 110], 
-          backgroundColor: '#FACC15', 
-          hoverBackgroundColor: '#EAB308',
+          backgroundColor: pal.primary, 
+          hoverBackgroundColor: pal.primaryHover,
           borderRadius: 4,
           barPercentage: 0.6
         }
@@ -528,14 +525,14 @@ function initSalesDashboardCharts() {
         { 
           label: 'MAERSK LINE - 8958', 
           data: [6958, 8958, 8958, 8958, 9958, 10958, 7164], 
-          borderColor: '#FACC15', 
-          backgroundColor: 'rgba(250, 204, 21, 0.12)', 
+          borderColor: pal.primary, 
+          backgroundColor: pal.primaryBg, 
           fill: true,
           tension: 0.35, 
           pointRadius: 4,
           pointHoverRadius: 7,
           pointBackgroundColor: '#FFFFFF',
-          pointBorderColor: '#FACC15',
+          pointBorderColor: pal.primary,
           pointBorderWidth: 2
         },
         { 

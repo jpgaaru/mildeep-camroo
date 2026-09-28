@@ -205,6 +205,10 @@ function applyBrand(brandKey) {
   if (headerSub) headerSub.textContent = brand.subtitle;
   
   document.title = `${brand.name} - Enterprise Seafood Portal`;
+
+  if (typeof initSalesDashboardCharts === 'function') {
+    setTimeout(initSalesDashboardCharts, 50);
+  }
 }
 
 function initBrand() {

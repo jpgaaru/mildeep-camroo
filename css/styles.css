@@ -443,7 +443,7 @@ a {
    ================================================================ */
 .tertiary-nav-bar {
   background: var(--colorBgContainer);
-  border-bottom: 1px solid #FEF08A; /* Warm yellow brand divider */
+  border-bottom: 1px solid var(--colorPrimaryBorder);
   padding: 6px 32px;
   display: flex;
   gap: 6px;
@@ -458,7 +458,7 @@ a {
   margin: 2px 0;
   font-size: 13.5px;
   font-weight: 500;
-  color: #713F12; /* Yellow-900 muted warm brown */
+  color: var(--colorTextSecondary);
   cursor: pointer;
   white-space: nowrap;
   display: flex;
@@ -474,9 +474,9 @@ a {
 }
 
 .tertiary-nav-item:hover:not(.active) {
-  color: #422006;
-  background: #FEFCE8; /* Soft warm yellow-50 */
-  border-color: #FEF08A;
+  color: var(--colorText);
+  background: var(--colorPrimaryBg);
+  border-color: var(--colorPrimaryBorder);
   transform: translateY(-1px);
 }
 
@@ -485,18 +485,22 @@ a {
 }
 
 .tertiary-nav-item.active {
-  color: #422006;
-  background: #FACC15; /* Signature rich golden yellow */
+  color: var(--colorText);
+  background: var(--colorPrimary);
   font-weight: 700;
-  border-color: #EAB308;
-  box-shadow: 0 1px 3px rgba(250, 204, 21, 0.25);
+  border-color: var(--colorPrimaryHover);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.theme-devifisheries .tertiary-nav-item.active {
+  color: #FFFFFF !important;
 }
 
 /* QA Screenshot Helper Buttons & Control Bars */
 .btn-outline-success {
   background: #FFFFFF;
-  border: 1px solid #EAB308;
-  color: #422006;
+  border: 1px solid var(--colorPrimaryBorder);
+  color: var(--colorText);
   font-weight: 600;
   font-size: 13px;
   border-radius: 8px;
@@ -508,30 +512,35 @@ a {
   cursor: pointer;
 }
 .btn-outline-success:hover {
-  background: #FEFCE8;
-  color: #0F172A;
-  border-color: #CA8A04;
+  background: var(--colorPrimaryBg);
+  color: var(--colorText);
+  border-color: var(--colorPrimaryHover);
 }
 
 .btn-blue-search, .btn-orange-download {
-  background: #FACC15;
-  color: #422006;
+  background: var(--colorPrimary);
+  color: var(--colorText);
   font-weight: 700;
   font-size: 13px;
   border-radius: 8px;
   padding: 8px 24px;
-  border: 1px solid #EAB308;
+  border: 1px solid var(--colorPrimaryHover);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(234, 179, 8, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
 .btn-blue-search:hover, .btn-orange-download:hover {
-  background: #EAB308;
+  background: var(--colorPrimaryHover);
   transform: translateY(-1px);
+}
+
+body.theme-devifisheries .btn-blue-search,
+body.theme-devifisheries .btn-orange-download {
+  color: #FFFFFF !important;
 }
 
 .filter-panel-card {
