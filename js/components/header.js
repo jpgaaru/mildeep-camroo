@@ -15,38 +15,43 @@ export const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#E2E8F0] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
-        <!-- Left: Welcome Text -->
-        <div class="flex items-center gap-1.5 text-xs sm:text-sm text-[#64748B]">
-          <span>Welcome,</span>
-          <span class="font-semibold text-[#0F172A] text-sm sm:text-base">${ERP_DATA.currentUser.name}</span>
+      <header class="bg-white border-b border-[#EDEDED] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
+        <!-- Left: Organization / Welcome Text -->
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#64748B]">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F8F8F8] border border-[#EDEDED] font-semibold text-[#0A1B39] text-xs">
+            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+            Devi Fisheries Plant #1
+          </span>
+          <span class="hidden md:inline text-xs text-[#94A3B8]">·</span>
+          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0A1B39] font-bold">${ERP_DATA.currentUser.name}</strong></span>
         </div>
 
-        <!-- Center: Global Inline Search (Direct typing, no popup modal) -->
+        <!-- Center: Global Inline Search (Watermelon input style) -->
         <div class="relative mx-3" id="header-search-container">
-          <div class="w-52 sm:w-64 relative flex items-center">
-            <svg class="w-4 h-4 text-[#94A3B8] absolute left-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="w-56 sm:w-72 relative flex items-center">
+            <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input 
               type="text" 
               id="header-global-search-input" 
-              placeholder="Search ERP records..." 
+              placeholder="Search catalog, lots, bills..." 
               autocomplete="off"
-              class="w-full pl-8 pr-7 py-1.5 bg-[#F8FAFC] hover:bg-[#F1F5F9] focus:bg-white text-[#0F172A] placeholder-[#94A3B8] border border-[#E2E8F0] focus:border-[#0284C7] rounded-xl text-xs transition-colors focus:outline-none"
+              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#0284C7] rounded-lg text-xs transition-colors focus:outline-none"
             />
+            <span class="absolute right-2.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#EDEDED] text-[#64748B] pointer-events-none">⌘K</span>
             <button 
               type="button" 
               id="header-search-clear-btn" 
-              class="hidden absolute right-2 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
+              class="hidden absolute right-8 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
               title="Clear Search"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
 
-          <!-- Live Inline Search Dropdown (Appears directly under the input, no popup modal) -->
+          <!-- Live Inline Search Dropdown -->
           <div 
             id="header-search-dropdown" 
-            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#E2E8F0] rounded-xl z-50 overflow-hidden shadow-xl"
+            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#EDEDED] rounded-xl z-50 overflow-hidden shadow-lg"
             style="max-width: calc(100vw - 32px);"
           >
             <div id="header-search-results-content" class="max-h-96 overflow-y-auto p-2.5 text-xs"></div>
@@ -56,15 +61,15 @@ export const Header = {
         <!-- Right: Actions, Notifications & Profile -->
         <div class="flex items-center gap-2">
           <!-- Help Icon Button -->
-          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#0284C7] hover:bg-[#F8FAFC] rounded-full transition-colors flex items-center justify-center cursor-pointer border border-[#E2E8F0]" title="Help & Compliance Manual">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#0284C7] hover:bg-[#F8F8F8] rounded-lg transition-colors flex items-center justify-center cursor-pointer border border-[#EDEDED]" title="Help & Compliance Manual">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </button>
 
           <!-- Notifications -->
           <div class="relative">
-            <button id="header-notifications-btn" class="p-2 text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] rounded-full relative transition-colors cursor-pointer border border-[#E2E8F0]" title="Notifications">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-              <span class="absolute top-1 right-1 w-2 h-2 bg-[#EF4444] rounded-full ring-2 ring-white"></span>
+            <button id="header-notifications-btn" class="p-2 text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] rounded-lg relative transition-colors cursor-pointer border border-[#EDEDED]" title="Notifications">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5150] rounded-full ring-2 ring-white"></span>
             </button>
             <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-[#E2E8F0] py-2 z-50 text-xs">
               <div class="px-3 py-1.5 font-bold text-[#0F172A] border-b border-[#F1F5F9] flex justify-between items-center">

@@ -2,55 +2,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Pastel Executive Color Palette (WCAG 2.1 AA/AAA Compliant) */
-  --ds-background-neutral: #F2F5F9; /* Soothing Pastel Ice Mist canvas */
-  --ds-background-neutral-subtle: #FFFFFF;
-  --ds-background-neutral-hover: #EBF1F7;
-  --ds-background-neutral-active: #E0E9F2;
-  
+  /* Watermelon UI Theme Tokens (registry.watermelon.sh/r/library-dashboard.json) */
+  --background: #FFFFFF;
+  --foreground: #0A1B39;
+  --card: #FFFFFF;
+  --card-foreground: #0A1B39;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A1B39;
+  --primary: #0284C7;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F7F7;
+  --secondary-foreground: #242424;
+  --muted: #F8F8F8;
+  --muted-foreground: #64748B;
+  --accent: #EDF3FC;
+  --accent-foreground: #0A1B39;
+  --destructive: #FF5150;
+  --destructive-foreground: #FFFFFF;
+  --border: #EDEDED;
+  --input: #F7F7F7;
+  --ring: #0284C7;
+  --radius: 0.5rem;
+
+  /* Legacy aliases mapped directly to Watermelon UI tokens */
+  --ds-background-neutral: #FFFFFF;
+  --ds-background-neutral-subtle: #FAFAFA;
+  --ds-background-neutral-hover: #F8F8F8;
+  --ds-background-neutral-active: #EDF3FC;
   --ds-surface: #FFFFFF;
   --ds-surface-overlay: #FFFFFF;
   --ds-surface-raised: #FFFFFF;
-  --ds-surface-sunken: #F5F8FC;
-  
-  /* WCAG AAA High-Contrast Typography on Pastel Surfaces */
-  --ds-text: #0F172A; /* 16.1:1 AAA contrast */
-  --ds-text-subtle: #334155; /* 9.4:1 AAA contrast */
-  --ds-text-subtlest: #475569; /* 6.6:1 AA/AAA contrast */
+  --ds-surface-sunken: #F8F8F8;
+  --ds-text: #0A1B39;
+  --ds-text-subtle: #475569;
+  --ds-text-subtlest: #64748B;
   --ds-text-inverse: #FFFFFF;
-  
-  /* Soft Pastel Borders */
-  --ds-border: #DDE5ED;
-  --ds-border-subtle: #EAF0F6;
-  --ds-border-bold: #94A3B8;
+  --ds-border: #EDEDED;
+  --ds-border-subtle: #F1F5F9;
+  --ds-border-bold: #CBD5E1;
   --ds-border-focused: #0284C7;
-  
-  /* Brand: Marine & Pastel Sky */
-  --ds-brand-primary: #0369A1; /* 5.96:1 contrast with white text */
-  --ds-brand-primary-hover: #075985; /* 7.95:1 AAA */
+  --ds-brand-primary: #0284C7;
+  --ds-brand-primary-hover: #0369A1;
   --ds-brand-primary-active: #0C4A6E;
-  --ds-brand-subtle: #E0F2FE; /* Pastel Powder Sky */
-  
-  /* Pastel Status Badges with Certified WCAG AAA Text Contrast */
-  --ds-success: #065F46;
-  --ds-success-subtle: #DCFCE7; /* Pastel Mint */
-  --ds-success-text: #065F46; /* 7.5:1 AAA */
-  
-  --ds-warning: #78350F;
-  --ds-warning-subtle: #FEF3C7; /* Pastel Buttercream */
-  --ds-warning-text: #78350F; /* 8.1:1 AAA */
-  
-  --ds-danger: #881337;
-  --ds-danger-subtle: #FFE4E6; /* Pastel Rose */
-  --ds-danger-text: #881337; /* 9.1:1 AAA */
-  
-  --ds-info: #075985;
-  --ds-info-subtle: #E0F2FE; /* Pastel Powder Sky */
-  --ds-info-text: #075985; /* 7.2:1 AAA */
-  
-  --ds-purple: #4C1D95;
-  --ds-purple-subtle: #EDE9FE; /* Pastel Lavender */
-  --ds-purple-text: #4C1D95; /* 9.1:1 AAA */
+  --ds-brand-subtle: #EDF3FC;
+  --ds-success: #10B981;
+  --ds-success-subtle: #ECFDF5;
+  --ds-success-text: #047857;
+  --ds-warning: #F59E0B;
+  --ds-warning-subtle: #FFFBEB;
+  --ds-warning-text: #B45309;
+  --ds-danger: #FF5150;
+  --ds-danger-subtle: #FEF2F2;
+  --ds-danger-text: #DC2626;
+  --ds-info: #0284C7;
+  --ds-info-subtle: #EDF3FC;
+  --ds-info-text: #0284C7;
+}
+
+/* Strict Light Mode Enforcement - Ignore dark mode overrides */
+.theme-dark, html.theme-dark, body.theme-dark {
+  background-color: #FFFFFF !important;
+  color: #0A1B39 !important;
 }
 
 /* Flat Design: Zero drop shadows and zero gradients */

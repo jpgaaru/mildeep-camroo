@@ -49,55 +49,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Pastel Executive Color Palette (WCAG 2.1 AA/AAA Compliant) */
-  --ds-background-neutral: #F2F5F9; /* Soothing Pastel Ice Mist canvas */
-  --ds-background-neutral-subtle: #FFFFFF;
-  --ds-background-neutral-hover: #EBF1F7;
-  --ds-background-neutral-active: #E0E9F2;
-  
+  /* Watermelon UI Theme Tokens (registry.watermelon.sh/r/library-dashboard.json) */
+  --background: #FFFFFF;
+  --foreground: #0A1B39;
+  --card: #FFFFFF;
+  --card-foreground: #0A1B39;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A1B39;
+  --primary: #0284C7;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F7F7;
+  --secondary-foreground: #242424;
+  --muted: #F8F8F8;
+  --muted-foreground: #64748B;
+  --accent: #EDF3FC;
+  --accent-foreground: #0A1B39;
+  --destructive: #FF5150;
+  --destructive-foreground: #FFFFFF;
+  --border: #EDEDED;
+  --input: #F7F7F7;
+  --ring: #0284C7;
+  --radius: 0.5rem;
+
+  /* Legacy aliases mapped directly to Watermelon UI tokens */
+  --ds-background-neutral: #FFFFFF;
+  --ds-background-neutral-subtle: #FAFAFA;
+  --ds-background-neutral-hover: #F8F8F8;
+  --ds-background-neutral-active: #EDF3FC;
   --ds-surface: #FFFFFF;
   --ds-surface-overlay: #FFFFFF;
   --ds-surface-raised: #FFFFFF;
-  --ds-surface-sunken: #F5F8FC;
-  
-  /* WCAG AAA High-Contrast Typography on Pastel Surfaces */
-  --ds-text: #0F172A; /* 16.1:1 AAA contrast */
-  --ds-text-subtle: #334155; /* 9.4:1 AAA contrast */
-  --ds-text-subtlest: #475569; /* 6.6:1 AA/AAA contrast */
+  --ds-surface-sunken: #F8F8F8;
+  --ds-text: #0A1B39;
+  --ds-text-subtle: #475569;
+  --ds-text-subtlest: #64748B;
   --ds-text-inverse: #FFFFFF;
-  
-  /* Soft Pastel Borders */
-  --ds-border: #DDE5ED;
-  --ds-border-subtle: #EAF0F6;
-  --ds-border-bold: #94A3B8;
+  --ds-border: #EDEDED;
+  --ds-border-subtle: #F1F5F9;
+  --ds-border-bold: #CBD5E1;
   --ds-border-focused: #0284C7;
-  
-  /* Brand: Marine & Pastel Sky */
-  --ds-brand-primary: #0369A1; /* 5.96:1 contrast with white text */
-  --ds-brand-primary-hover: #075985; /* 7.95:1 AAA */
+  --ds-brand-primary: #0284C7;
+  --ds-brand-primary-hover: #0369A1;
   --ds-brand-primary-active: #0C4A6E;
-  --ds-brand-subtle: #E0F2FE; /* Pastel Powder Sky */
-  
-  /* Pastel Status Badges with Certified WCAG AAA Text Contrast */
-  --ds-success: #065F46;
-  --ds-success-subtle: #DCFCE7; /* Pastel Mint */
-  --ds-success-text: #065F46; /* 7.5:1 AAA */
-  
-  --ds-warning: #78350F;
-  --ds-warning-subtle: #FEF3C7; /* Pastel Buttercream */
-  --ds-warning-text: #78350F; /* 8.1:1 AAA */
-  
-  --ds-danger: #881337;
-  --ds-danger-subtle: #FFE4E6; /* Pastel Rose */
-  --ds-danger-text: #881337; /* 9.1:1 AAA */
-  
-  --ds-info: #075985;
-  --ds-info-subtle: #E0F2FE; /* Pastel Powder Sky */
-  --ds-info-text: #075985; /* 7.2:1 AAA */
-  
-  --ds-purple: #4C1D95;
-  --ds-purple-subtle: #EDE9FE; /* Pastel Lavender */
-  --ds-purple-text: #4C1D95; /* 9.1:1 AAA */
+  --ds-brand-subtle: #EDF3FC;
+  --ds-success: #10B981;
+  --ds-success-subtle: #ECFDF5;
+  --ds-success-text: #047857;
+  --ds-warning: #F59E0B;
+  --ds-warning-subtle: #FFFBEB;
+  --ds-warning-text: #B45309;
+  --ds-danger: #FF5150;
+  --ds-danger-subtle: #FEF2F2;
+  --ds-danger-text: #DC2626;
+  --ds-info: #0284C7;
+  --ds-info-subtle: #EDF3FC;
+  --ds-info-text: #0284C7;
+}
+
+/* Strict Light Mode Enforcement - Ignore dark mode overrides */
+.theme-dark, html.theme-dark, body.theme-dark {
+  background-color: #FFFFFF !important;
+  color: #0A1B39 !important;
 }
 
 /* Flat Design: Zero drop shadows and zero gradients */
@@ -4155,16 +4167,16 @@ const Sidebar = {
       // Collapsed Icon-Only Floated Sidebar Mode (Width: 68px, Rounded Corners)
       container.innerHTML = `
         <div class="relative h-full w-full">
-          <aside id="erp-sidebar" class="bg-[#0F172A] text-[#94A3B8] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#1E293B] rounded-2xl overflow-hidden">
+          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#EDEDED] rounded-2xl overflow-hidden shadow-sm">
             <!-- Collapsed Logo Icon Header -->
-            <div class="h-14 px-2 py-2 flex items-center justify-center border-b border-[#1E293B] bg-[#0B0F19] shrink-0" title="Devi Fisheries ERP">
-              <div class="w-9 h-9 rounded-lg bg-[#0284C7] border border-[#38BDF8]/30 flex items-center justify-center font-black text-white text-xs">
+            <div class="h-14 px-2 py-2 flex items-center justify-center border-b border-[#EDEDED] bg-[#FAFAFA] shrink-0" title="Devi Fisheries ERP">
+              <div class="w-9 h-9 rounded-lg bg-[#0284C7] flex items-center justify-center font-black text-white text-xs shadow-xs">
                 DFL
               </div>
             </div>
 
             <!-- Navigation Scrollable Icons Area -->
-            <div class="flex-1 overflow-y-auto py-3 px-2 space-y-2 overflow-x-visible bg-[#0F172A]" id="sidebar-nav-groups">
+            <div class="flex-1 overflow-y-auto py-3 px-2 space-y-2 overflow-x-visible bg-white" id="sidebar-nav-groups">
               ${this.renderCollapsedNavHierarchy()}
             </div>
 
@@ -4178,7 +4190,7 @@ const Sidebar = {
             class="absolute -right-3 top-4 w-6 h-6 rounded-full bg-white border border-[#CBD5E1] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7] flex items-center justify-center z-50 cursor-pointer shadow-xs transition-colors" 
             title="Expand Sidebar"
           >
-            <svg class="w-3.5 h-3.5 rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+            <svg class="w-3.5 h-3.5 rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
           </button>
         </div>
       `;
@@ -4186,20 +4198,20 @@ const Sidebar = {
       // Expanded Full Floated Sidebar Mode (Width: 272px, Rounded Corners)
       container.innerHTML = `
         <div class="relative h-full w-full">
-          <aside id="erp-sidebar" class="bg-[#0F172A] text-[#94A3B8] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#1E293B] rounded-2xl overflow-hidden">
+          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#EDEDED] rounded-2xl overflow-hidden shadow-sm">
             <!-- Logo Branding Header -->
-            <div class="h-14 px-4 py-2 flex items-center justify-between border-b border-[#1E293B] bg-[#0B0F19] shrink-0">
+            <div class="h-14 px-4 py-2 flex items-center justify-between border-b border-[#EDEDED] bg-[#FAFAFA] shrink-0">
               <div class="flex items-center gap-2.5">
-                <img src="${LOGO_WHITE}" alt="Devi Fisheries" class="h-8 w-auto max-w-[125px] object-contain shrink-0" />
+                <img src="${LOGO_COLOR}" alt="Devi Fisheries" class="h-8 w-auto max-w-[125px] object-contain shrink-0" />
                 <div class="flex flex-col">
-                  <span class="text-xs font-bold text-white tracking-wide leading-tight">Devi Fisheries Limited</span>
-                  <span class="text-[9px] font-semibold text-[#38BDF8] tracking-wider uppercase leading-tight mt-0.5">Powered By Camaroo</span>
+                  <span class="text-xs font-bold text-[#0A1B39] tracking-wide leading-tight">Devi Fisheries Limited</span>
+                  <span class="text-[9px] font-bold text-[#0284C7] tracking-wider uppercase leading-tight mt-0.5">Powered By Camaroo</span>
                 </div>
               </div>
             </div>
 
             <!-- Navigation Scrollable Area -->
-            <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1 bg-[#0F172A]" id="sidebar-nav-groups">
+            <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1 bg-white" id="sidebar-nav-groups">
               ${this.renderNavHierarchy()}
             </div>
 
@@ -4213,7 +4225,7 @@ const Sidebar = {
             class="absolute -right-3 top-4 w-6 h-6 rounded-full bg-white border border-[#CBD5E1] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7] flex items-center justify-center z-50 cursor-pointer shadow-xs transition-colors" 
             title="Collapse Sidebar"
           >
-            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
           </button>
         </div>
       `;
@@ -4228,32 +4240,32 @@ const Sidebar = {
 
     if (isCollapsed) {
       return `
-        <div class="p-2 border-t border-[#1E293B] bg-[#0B0F19] shrink-0 flex justify-center">
+        <div class="p-2 border-t border-[#EDEDED] bg-[#FAFAFA] shrink-0 flex justify-center">
           <a 
             href="#/setup/client-master-setup/company-setup" 
             id="sidebar-bottom-settings-btn" 
-            class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors cursor-pointer ${isSetupActive ? 'bg-[#0284C7] text-white' : 'text-[#94A3B8] hover:text-white hover:bg-white/5'}" 
+            class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors cursor-pointer ${isSetupActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8]'}" 
             title="Settings"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </a>
         </div>
       `;
     }
 
     return `
-      <div class="p-2.5 border-t border-[#1E293B] bg-[#0B0F19] shrink-0">
+      <div class="p-2.5 border-t border-[#EDEDED] bg-[#FAFAFA] shrink-0">
         <a 
           href="#/setup/client-master-setup/company-setup" 
           id="sidebar-bottom-settings-btn" 
-          class="w-full h-9 flex items-center justify-between px-3 rounded-lg text-xs font-bold transition-colors cursor-pointer ${isSetupActive ? 'bg-[#0284C7] text-white' : 'text-[#94A3B8] hover:text-white hover:bg-white/5 font-semibold'}" 
+          class="w-full h-9 flex items-center justify-between px-3 rounded-lg text-xs transition-colors cursor-pointer ${isSetupActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] font-medium'}" 
           title="Settings"
         >
           <div class="flex items-center gap-2.5 truncate">
-            <svg class="w-4 h-4 shrink-0 ${isSetupActive ? 'text-white' : 'text-[#64748B]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <svg class="w-4 h-4 shrink-0 ${isSetupActive ? 'text-[#0284C7]' : 'text-[#64748B]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <span class="text-xs tracking-tight truncate">Settings</span>
           </div>
-          ${isSetupActive ? `<span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>` : ''}
+          ${isSetupActive ? `<span class="w-1.5 h-1.5 rounded-full bg-[#0284C7] shrink-0"></span>` : ''}
         </a>
       </div>
     `;
@@ -4277,7 +4289,7 @@ const Sidebar = {
                 <div class="nav-submenu-block">
                   <a 
                     href="${defaultHash}" 
-                    class="block px-3 py-1.5 rounded-lg text-xs transition-colors ${isSubActive ? 'bg-white text-[#0F172A] font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-white/5 font-medium'}"
+                    class="block px-3 py-1.5 rounded-lg text-xs transition-colors ${isSubActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] font-medium'}"
                   >
                     <span class="truncate block">${sub.title}</span>
                   </a>
@@ -4292,14 +4304,14 @@ const Sidebar = {
         <div class="nav-module-group mb-1">
           <button 
             data-module-id="${mod.id}" 
-            class="sidebar-mod-btn w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${isExpanded ? 'bg-[#0284C7] text-white font-bold' : 'text-[#CBD5E1] hover:bg-white/5 hover:text-white'}"
+            class="sidebar-mod-btn w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${isExpanded ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#475569] hover:bg-[#F8F8F8] hover:text-[#0A1B39]'}"
           >
             <div class="flex items-center gap-2.5 truncate">
-              <span class="w-4 h-4 flex items-center justify-center shrink-0 ${isExpanded ? 'text-white' : 'text-[#94A3B8]'}">${mod.icon}</span>
+              <span class="w-4 h-4 flex items-center justify-center shrink-0 ${isExpanded ? 'text-[#0284C7]' : 'text-[#64748B]'}">${mod.icon}</span>
               <span class="text-xs tracking-tight truncate">${mod.title}</span>
             </div>
             <div class="flex items-center gap-1 shrink-0">
-              <svg class="w-3.5 h-3.5 transform transition-transform duration-200 ${isExpanded ? 'rotate-180 text-white' : 'text-[#64748B]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="w-3.5 h-3.5 transform transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#0284C7]' : 'text-[#94A3B8]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
             </div>
           </button>
           ${submenusHtml}
@@ -4320,17 +4332,17 @@ const Sidebar = {
           <!-- Icon Button -->
           <button 
             data-module-id="${mod.id}" 
-            class="sidebar-mod-btn w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer ${isCurrentMod ? 'bg-white text-[#0F172A] ring-2 ring-[#0284C7] font-bold' : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'}"
+            class="sidebar-mod-btn w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer ${isCurrentMod ? 'bg-[#EDF3FC] text-[#0284C7] ring-1 ring-[#0284C7] font-bold' : 'text-[#64748B] hover:bg-[#F8F8F8] hover:text-[#0A1B39]'}"
             title="${mod.title}"
           >
             <span class="w-4 h-4 flex items-center justify-center">${mod.icon}</span>
           </button>
 
           <!-- Floating Flyout Menu on Hover -->
-          <div class="absolute left-full top-0 ml-3 w-60 bg-[#0F172A] border border-[#1E293B] rounded-xl p-2.5 hidden group-hover:block z-50 transition-all pointer-events-auto">
+          <div class="absolute left-full top-0 ml-3 w-60 bg-white border border-[#EDEDED] rounded-xl p-2.5 hidden group-hover:block z-50 transition-all pointer-events-auto shadow-lg">
             <!-- Module Title in Flyout -->
-            <div class="flex items-center gap-2 px-2.5 py-1.5 border-b border-[#1E293B] mb-1.5 text-white font-bold text-xs">
-              <span class="text-[#38BDF8]">${mod.icon}</span>
+            <div class="flex items-center gap-2 px-2.5 py-1.5 border-b border-[#EDEDED] mb-1.5 text-[#0A1B39] font-bold text-xs">
+              <span class="text-[#0284C7]">${mod.icon}</span>
               <span class="tracking-wide">${mod.title}</span>
             </div>
 
@@ -4780,38 +4792,43 @@ const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#E2E8F0] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
-        <!-- Left: Welcome Text -->
-        <div class="flex items-center gap-1.5 text-xs sm:text-sm text-[#64748B]">
-          <span>Welcome,</span>
-          <span class="font-semibold text-[#0F172A] text-sm sm:text-base">${ERP_DATA.currentUser.name}</span>
+      <header class="bg-white border-b border-[#EDEDED] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
+        <!-- Left: Organization / Welcome Text -->
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#64748B]">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F8F8F8] border border-[#EDEDED] font-semibold text-[#0A1B39] text-xs">
+            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+            Devi Fisheries Plant #1
+          </span>
+          <span class="hidden md:inline text-xs text-[#94A3B8]">·</span>
+          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0A1B39] font-bold">${ERP_DATA.currentUser.name}</strong></span>
         </div>
 
-        <!-- Center: Global Inline Search (Direct typing, no popup modal) -->
+        <!-- Center: Global Inline Search (Watermelon input style) -->
         <div class="relative mx-3" id="header-search-container">
-          <div class="w-52 sm:w-64 relative flex items-center">
-            <svg class="w-4 h-4 text-[#94A3B8] absolute left-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="w-56 sm:w-72 relative flex items-center">
+            <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input 
               type="text" 
               id="header-global-search-input" 
-              placeholder="Search ERP records..." 
+              placeholder="Search catalog, lots, bills..." 
               autocomplete="off"
-              class="w-full pl-8 pr-7 py-1.5 bg-[#F8FAFC] hover:bg-[#F1F5F9] focus:bg-white text-[#0F172A] placeholder-[#94A3B8] border border-[#E2E8F0] focus:border-[#0284C7] rounded-xl text-xs transition-colors focus:outline-none"
+              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#0284C7] rounded-lg text-xs transition-colors focus:outline-none"
             />
+            <span class="absolute right-2.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#EDEDED] text-[#64748B] pointer-events-none">⌘K</span>
             <button 
               type="button" 
               id="header-search-clear-btn" 
-              class="hidden absolute right-2 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
+              class="hidden absolute right-8 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
               title="Clear Search"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
 
-          <!-- Live Inline Search Dropdown (Appears directly under the input, no popup modal) -->
+          <!-- Live Inline Search Dropdown -->
           <div 
             id="header-search-dropdown" 
-            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#E2E8F0] rounded-xl z-50 overflow-hidden shadow-xl"
+            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#EDEDED] rounded-xl z-50 overflow-hidden shadow-lg"
             style="max-width: calc(100vw - 32px);"
           >
             <div id="header-search-results-content" class="max-h-96 overflow-y-auto p-2.5 text-xs"></div>
@@ -4821,15 +4838,15 @@ const Header = {
         <!-- Right: Actions, Notifications & Profile -->
         <div class="flex items-center gap-2">
           <!-- Help Icon Button -->
-          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#0284C7] hover:bg-[#F8FAFC] rounded-full transition-colors flex items-center justify-center cursor-pointer border border-[#E2E8F0]" title="Help & Compliance Manual">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#0284C7] hover:bg-[#F8F8F8] rounded-lg transition-colors flex items-center justify-center cursor-pointer border border-[#EDEDED]" title="Help & Compliance Manual">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </button>
 
           <!-- Notifications -->
           <div class="relative">
-            <button id="header-notifications-btn" class="p-2 text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] rounded-full relative transition-colors cursor-pointer border border-[#E2E8F0]" title="Notifications">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-              <span class="absolute top-1 right-1 w-2 h-2 bg-[#EF4444] rounded-full ring-2 ring-white"></span>
+            <button id="header-notifications-btn" class="p-2 text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] rounded-lg relative transition-colors cursor-pointer border border-[#EDEDED]" title="Notifications">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5150] rounded-full ring-2 ring-white"></span>
             </button>
             <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-[#E2E8F0] py-2 z-50 text-xs">
               <div class="px-3 py-1.5 font-bold text-[#0F172A] border-b border-[#F1F5F9] flex justify-between items-center">
@@ -6524,49 +6541,65 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- 4 Color-Coded Main KPI Cards from Screenshot 1 -->
+        <!-- Watermelon UI Metric Cards (Clean Light Mode) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <!-- 1. Total Quantity (Blue) -->
-          <div class="bg-white border border-[#BAE6FD] rounded-xl p-4 flex items-center justify-between">
+          <!-- 1. Total Quantity -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#0284C7]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#17191c] uppercase tracking-wider">TOTAL QUANTITY</span>
-              <div class="text-2xl font-black text-[#172B4D] mt-1 ">142,500 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">TOTAL QUANTITY</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
+                <span>↑ 8.4%</span>
+                <span class="text-[#94A3B8] font-normal">vs last week</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#BAE6FD]/60 flex items-center justify-center text-[#0284C7]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#EDF3FC] flex items-center justify-center text-[#0284C7] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
             </div>
           </div>
 
-          <!-- 2. Head On Qty (Green) -->
-          <div class="bg-white border border-[#ABF5D1] rounded-xl p-4 flex items-center justify-between">
+          <!-- 2. Head On Qty -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#10B981]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#006644] uppercase tracking-wider">HEAD ON QTY</span>
-              <div class="text-2xl font-black text-[#172B4D] mt-1 ">142,500 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">HEAD ON QTY</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
+                <span>↑ 100%</span>
+                <span class="text-[#94A3B8] font-normal">weighbridge verified</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#ABF5D1]/60 flex items-center justify-center text-[#006644]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#ECFDF5] flex items-center justify-center text-[#10B981] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
             </div>
           </div>
 
-          <!-- 3. Damage Weight (Red) -->
-          <div class="bg-white border border-[#FFBDAD] rounded-xl p-4 flex items-center justify-between">
+          <!-- 3. Damage Weight -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#FF5150]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#BF2600] uppercase tracking-wider">DAMAGE WEIGHT</span>
-              <div class="text-2xl font-black text-[#BF2600] mt-1 ">1,250 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">DAMAGE WEIGHT</span>
+              <div class="text-2xl font-black text-[#FF5150] mt-1 tracking-tight">1,250 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#FF5150]">
+                <span>0.88%</span>
+                <span class="text-[#94A3B8] font-normal">tolerance limit: 1.5%</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FFBDAD]/60 flex items-center justify-center text-[#BF2600]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#FEF2F2] flex items-center justify-center text-[#FF5150] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
             </div>
           </div>
 
-          <!-- 4. Pending Production (Yellow) -->
-          <div class="bg-white border border-[#FFE380] rounded-xl p-4 flex items-center justify-between">
+          <!-- 4. Pending Production -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#F59E0B]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#8f4d00] uppercase tracking-wider">PENDING PRODUCTION</span>
-              <div class="text-2xl font-black text-[#8f4d00] mt-1 ">48,200 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">PENDING PRODUCTION</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">48,200 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#F59E0B]">
+                <span>33.8%</span>
+                <span class="text-[#94A3B8] font-normal">queued in staging</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FFE380]/60 flex items-center justify-center text-[#8f4d00]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#FFFBEB] flex items-center justify-center text-[#F59E0B] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
           </div>
         </div>

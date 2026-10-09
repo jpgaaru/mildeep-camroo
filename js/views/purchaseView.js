@@ -365,49 +365,65 @@ export const PurchaseView = {
           </div>
         </div>
 
-        <!-- 4 Color-Coded Main KPI Cards from Screenshot 1 -->
+        <!-- Watermelon UI Metric Cards (Clean Light Mode) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <!-- 1. Total Quantity (Blue) -->
-          <div class="bg-white border border-[#BAE6FD] rounded-xl p-4 flex items-center justify-between">
+          <!-- 1. Total Quantity -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#0284C7]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#17191c] uppercase tracking-wider">TOTAL QUANTITY</span>
-              <div class="text-2xl font-black text-[#172B4D] mt-1 ">142,500 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">TOTAL QUANTITY</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
+                <span>↑ 8.4%</span>
+                <span class="text-[#94A3B8] font-normal">vs last week</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#BAE6FD]/60 flex items-center justify-center text-[#0284C7]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#EDF3FC] flex items-center justify-center text-[#0284C7] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
             </div>
           </div>
 
-          <!-- 2. Head On Qty (Green) -->
-          <div class="bg-white border border-[#ABF5D1] rounded-xl p-4 flex items-center justify-between">
+          <!-- 2. Head On Qty -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#10B981]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#006644] uppercase tracking-wider">HEAD ON QTY</span>
-              <div class="text-2xl font-black text-[#172B4D] mt-1 ">142,500 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">HEAD ON QTY</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
+                <span>↑ 100%</span>
+                <span class="text-[#94A3B8] font-normal">weighbridge verified</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#ABF5D1]/60 flex items-center justify-center text-[#006644]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#ECFDF5] flex items-center justify-center text-[#10B981] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
             </div>
           </div>
 
-          <!-- 3. Damage Weight (Red) -->
-          <div class="bg-white border border-[#FFBDAD] rounded-xl p-4 flex items-center justify-between">
+          <!-- 3. Damage Weight -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#FF5150]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#BF2600] uppercase tracking-wider">DAMAGE WEIGHT</span>
-              <div class="text-2xl font-black text-[#BF2600] mt-1 ">1,250 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">DAMAGE WEIGHT</span>
+              <div class="text-2xl font-black text-[#FF5150] mt-1 tracking-tight">1,250 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#FF5150]">
+                <span>0.88%</span>
+                <span class="text-[#94A3B8] font-normal">tolerance limit: 1.5%</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FFBDAD]/60 flex items-center justify-center text-[#BF2600]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#FEF2F2] flex items-center justify-center text-[#FF5150] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
             </div>
           </div>
 
-          <!-- 4. Pending Production (Yellow) -->
-          <div class="bg-white border border-[#FFE380] rounded-xl p-4 flex items-center justify-between">
+          <!-- 4. Pending Production -->
+          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#F59E0B]/40 transition-colors">
             <div>
-              <span class="text-xs font-bold text-[#8f4d00] uppercase tracking-wider">PENDING PRODUCTION</span>
-              <div class="text-2xl font-black text-[#8f4d00] mt-1 ">48,200 <span class="text-sm font-normal text-[#5E6C84]">Kg</span></div>
+              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">PENDING PRODUCTION</span>
+              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">48,200 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
+              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#F59E0B]">
+                <span>33.8%</span>
+                <span class="text-[#94A3B8] font-normal">queued in staging</span>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FFE380]/60 flex items-center justify-center text-[#8f4d00]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="w-10 h-10 rounded-lg bg-[#FFFBEB] flex items-center justify-center text-[#F59E0B] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
           </div>
         </div>
