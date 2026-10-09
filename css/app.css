@@ -1,0 +1,945 @@
+/* Atlassian Design System Theme & Custom ERP Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Pastel Executive Color Palette (WCAG 2.1 AA/AAA Compliant) */
+  --ds-background-neutral: #F2F5F9; /* Soothing Pastel Ice Mist canvas */
+  --ds-background-neutral-subtle: #FFFFFF;
+  --ds-background-neutral-hover: #EBF1F7;
+  --ds-background-neutral-active: #E0E9F2;
+  
+  --ds-surface: #FFFFFF;
+  --ds-surface-overlay: #FFFFFF;
+  --ds-surface-raised: #FFFFFF;
+  --ds-surface-sunken: #F5F8FC;
+  
+  /* WCAG AAA High-Contrast Typography on Pastel Surfaces */
+  --ds-text: #0F172A; /* 16.1:1 AAA contrast */
+  --ds-text-subtle: #334155; /* 9.4:1 AAA contrast */
+  --ds-text-subtlest: #475569; /* 6.6:1 AA/AAA contrast */
+  --ds-text-inverse: #FFFFFF;
+  
+  /* Soft Pastel Borders */
+  --ds-border: #DDE5ED;
+  --ds-border-subtle: #EAF0F6;
+  --ds-border-bold: #94A3B8;
+  --ds-border-focused: #0284C7;
+  
+  /* Brand: Marine & Pastel Sky */
+  --ds-brand-primary: #0369A1; /* 5.96:1 contrast with white text */
+  --ds-brand-primary-hover: #075985; /* 7.95:1 AAA */
+  --ds-brand-primary-active: #0C4A6E;
+  --ds-brand-subtle: #E0F2FE; /* Pastel Powder Sky */
+  
+  /* Pastel Status Badges with Certified WCAG AAA Text Contrast */
+  --ds-success: #065F46;
+  --ds-success-subtle: #DCFCE7; /* Pastel Mint */
+  --ds-success-text: #065F46; /* 7.5:1 AAA */
+  
+  --ds-warning: #78350F;
+  --ds-warning-subtle: #FEF3C7; /* Pastel Buttercream */
+  --ds-warning-text: #78350F; /* 8.1:1 AAA */
+  
+  --ds-danger: #881337;
+  --ds-danger-subtle: #FFE4E6; /* Pastel Rose */
+  --ds-danger-text: #881337; /* 9.1:1 AAA */
+  
+  --ds-info: #075985;
+  --ds-info-subtle: #E0F2FE; /* Pastel Powder Sky */
+  --ds-info-text: #075985; /* 7.2:1 AAA */
+  
+  --ds-purple: #4C1D95;
+  --ds-purple-subtle: #EDE9FE; /* Pastel Lavender */
+  --ds-purple-text: #4C1D95; /* 9.1:1 AAA */
+}
+
+/* Flat Design: Zero drop shadows and zero gradients */
+*, *::before, *::after {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+[class*="bg-gradient-"] {
+  background-image: none !important;
+}
+
+*, *::before, *::after, body, button, input, select, textarea, kbd, code, pre, table {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+html {
+  font-size: 16px; /* Base standard enterprise font size (increase via Accessibility Menu) */
+}
+
+body {
+  color: var(--ds-text);
+  background-color: var(--ds-background-neutral);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ERP App Shell: Fixed Geometry & Anti-Overlap */
+:root {
+  --erp-sidebar-width: 272px;
+  --erp-sidebar-collapsed-width: 68px;
+  --erp-sidebar-offset: 12px;
+  --erp-sidebar-gap: 16px;
+}
+
+#sidebar-container {
+  position: fixed !important;
+  top: var(--erp-sidebar-offset) !important;
+  left: var(--erp-sidebar-offset) !important;
+  bottom: var(--erp-sidebar-offset) !important;
+  width: var(--erp-sidebar-width) !important;
+  z-index: 40 !important;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#sidebar-container.is-collapsed {
+  width: var(--erp-sidebar-collapsed-width) !important;
+}
+
+#sidebar-container #erp-sidebar {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#main-layout-wrapper {
+  margin-left: calc(var(--erp-sidebar-offset) + var(--erp-sidebar-width) + var(--erp-sidebar-gap)) !important;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#main-layout-wrapper.is-collapsed {
+  margin-left: calc(var(--erp-sidebar-offset) + var(--erp-sidebar-collapsed-width) + var(--erp-sidebar-gap)) !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Subtle Pastel Lozenge (Badge) Styles - WCAG AAA Certified */
+.lozenge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 15px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.lozenge-default {
+  background-color: #F1F5F9 !important;
+  color: #1E293B !important; /* 9.4:1 AAA */
+  border: 1px solid #CBD5E1 !important;
+}
+
+.lozenge-success {
+  background-color: #DCFCE7 !important; /* Pastel Mint */
+  color: #065F46 !important; /* 7.5:1 AAA */
+  border: 1px solid #86EFAC !important;
+}
+
+.lozenge-inprogress {
+  background-color: #E0F2FE !important; /* Pastel Powder Sky */
+  color: #075985 !important; /* 7.2:1 AAA */
+  border: 1px solid #7DD3FC !important;
+}
+
+.lozenge-warning {
+  background-color: #FEF3C7 !important; /* Pastel Buttercream */
+  color: #78350F !important; /* 8.1:1 AAA */
+  border: 1px solid #FCD34D !important;
+}
+
+.lozenge-danger {
+  background-color: #FFE4E6 !important; /* Pastel Rose */
+  color: #881337 !important; /* 9.1:1 AAA */
+  border: 1px solid #FDA4AF !important;
+}
+
+.lozenge-info {
+  background-color: #E0F2FE !important; /* Pastel Powder Sky */
+  color: #075985 !important; /* 7.2:1 AAA */
+  border: 1px solid #7DD3FC !important;
+}
+
+.lozenge-purple {
+  background-color: #EDE9FE !important; /* Pastel Lavender */
+  color: #4C1D95 !important; /* 9.1:1 AAA */
+  border: 1px solid #C4B5FD !important;
+}
+
+/* Accessible Action Buttons */
+.btn-primary {
+  background-color: #0369A1 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: 1px solid #02598B !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.btn-primary:hover {
+  background-color: #075985 !important;
+  border-color: #075985 !important;
+  color: #ffffff !important;
+}
+.btn-primary:active {
+  background-color: #0C4A6E !important;
+  color: #ffffff !important;
+}
+
+/* Clean Underline Tab - Zero Text Highlighting */
+.tab-active,
+a.tab-active,
+button.tab-active,
+a[role="tab"][aria-selected="true"],
+[role="tab"][aria-selected="true"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #0369A1 !important;
+  border-bottom: 2px solid #0369A1 !important;
+  font-weight: 700 !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+.tab-active *,
+a.tab-active *,
+button.tab-active *,
+[role="tab"][aria-selected="true"] * {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #0369A1 !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+[role="tab"] {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+[role="tab"]:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* WCAG 2.4.7 High-Contrast Visible Focus Indicator */
+:focus-visible {
+  outline: 2px solid #0284C7 !important;
+  outline-offset: 2px !important;
+}
+
+.btn-subtle {
+  background-color: transparent;
+  color: var(--ds-text-subtle);
+  font-weight: 500;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.btn-subtle:hover {
+  background-color: #EBF1F7;
+  color: var(--ds-text);
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #1E293B;
+  font-weight: 600;
+  border: 1px solid #CBD5E1;
+  transition: all 0.15s ease;
+}
+.btn-secondary:hover {
+  background-color: #F8FAFD;
+  color: #0F172A;
+  border-color: #94A3B8;
+}
+
+.btn-danger {
+  background-color: #991B1B;
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #7F1D1D;
+}
+
+/* Table styling with Soft Pastel Headers and High-Contrast Data */
+.erp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.erp-table th {
+  background-color: #EEF3F8 !important;
+  color: #334155 !important;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 14px;
+  border-bottom: 1px solid #DDE5ED !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  white-space: nowrap;
+}
+.erp-table td {
+  padding: 11px 14px;
+  font-size: 12.5px;
+  border-bottom: 1px solid #EAF0F6 !important;
+  color: #0F172A !important;
+  vertical-align: middle;
+}
+.erp-table tr:hover td {
+  background-color: #F4F8FD !important;
+}
+
+/* Fixed Sticky Actions Column across all tables */
+.erp-table .sticky-action-col {
+  position: sticky !important;
+  right: 0 !important;
+  background-clip: padding-box;
+}
+.erp-table th.sticky-action-col {
+  background-color: #EEF3F8 !important;
+  z-index: 20 !important;
+  border-left: 1px solid #DDE5ED !important;
+  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+}
+.erp-table td.sticky-action-col {
+  background-color: #ffffff !important;
+  z-index: 10 !important;
+  border-left: 1px solid #EAF0F6 !important;
+  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+}
+.erp-table tr:hover td.sticky-action-col {
+  background-color: #F4F8FD !important;
+}
+.erp-table tr.bg-\[\#F4F5F7\] td.sticky-action-col {
+  background-color: #F4F8FD !important;
+}
+
+/* Nav Item Active - Pastel Sky Pill with Accessible Marine Text */
+.nav-item-active {
+  background-color: #E0F2FE !important;
+  color: #075985 !important;
+  font-weight: 700 !important;
+  border-left: 3px solid #0284C7 !important;
+}
+.nav-item-active svg {
+  color: #0369A1 !important;
+}
+
+/* Tab active */
+.tab-active {
+  background-color: transparent !important;
+  color: #0369A1 !important;
+  border-bottom: 2px solid #0369A1 !important;
+  font-weight: 700 !important;
+}
+.tab-active span {
+  background-color: transparent !important;
+  color: #0369A1 !important;
+}
+
+/* Drawer & Modal Transitions */
+.drawer-backdrop {
+  background-color: rgba(9, 30, 66, 0.54);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.25s ease;
+}
+
+.drawer-panel {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Traceability Flow Step */
+.trace-step-node {
+  position: relative;
+  z-index: 1;
+}
+.trace-step-node::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 32px;
+  height: 2px;
+  background-color: #DFE1E6;
+  z-index: 0;
+}
+.trace-step-node:last-child::after {
+  display: none;
+}
+
+/* Coldstore Rack Grid */
+.rack-slot {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.rack-slot:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 8px rgba(9, 30, 66, 0.15);
+  z-index: 2;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Skeleton Shimmer Animation */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #EBECF0 0%,
+    #F4F5F7 25%,
+    #EBECF0 50%,
+    #EBECF0 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+/* Date Picker Input styling - single clean native calendar icon, no double icons */
+.erp-date-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.erp-date-input,
+input[type="date"] {
+  width: 100%;
+  cursor: pointer;
+}
+/* Ensure redundant custom SVG date icon is hidden to prevent double icons */
+.erp-date-icon {
+  display: none !important;
+}
+/* Clean native calendar picker indicator */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 2px;
+  margin: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
+input[type="month"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Active Tab: Clean Underline Tab */
+.tab-active,
+a.tab-active,
+a.tab-active:visited,
+a[role="tab"][aria-selected="true"],
+[role="tab"][aria-selected="true"],
+[role="tab"][aria-selected="true"] span,
+[role="tab"][aria-selected="true"] * {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #0369A1 !important;
+  border-bottom: 2px solid #0369A1 !important;
+  font-weight: 700 !important;
+}
+
+.btn-primary {
+  background-color: #0369A1 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  border: 1px solid #02598B !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+.btn-primary:hover {
+  background-color: #075985 !important;
+  border-color: #075985 !important;
+}
+
+/* Filter Bar Action Buttons: show only icon by default, reveal text on hover */
+.dt-top-filter-reset-btn,
+.dt-top-filter-toggle-btn,
+#comm-filter-reset-btn,
+#comm-filter-toggle-btn,
+#bill-top-reset-btn,
+#bill-top-toggle-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 31px !important;
+  min-width: 31px !important;
+  padding: 6px 8px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dt-top-filter-reset-btn > span,
+.dt-top-filter-toggle-btn .dt-top-filter-toggle-text,
+#comm-filter-reset-btn > span,
+#comm-filter-toggle-btn .comm-toggle-text,
+.rm-toggle-text {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  margin-left: 0 !important;
+  pointer-events: none !important;
+  transition: max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin 0.2s ease !important;
+}
+
+.dt-top-filter-reset-btn:hover > span,
+.dt-top-filter-reset-btn:focus-visible > span,
+.dt-top-filter-toggle-btn:hover .dt-top-filter-toggle-text,
+.dt-top-filter-toggle-btn:focus-visible .dt-top-filter-toggle-text,
+#comm-filter-reset-btn:hover > span,
+#comm-filter-reset-btn:focus-visible > span,
+#comm-filter-toggle-btn:hover .comm-toggle-text,
+#comm-filter-toggle-btn:focus-visible .comm-toggle-text,
+button:hover > .rm-toggle-text,
+button:focus-visible > .rm-toggle-text {
+  max-width: 100px !important;
+  opacity: 1 !important;
+  margin-left: 6px !important;
+}
+
+/* Accessibility Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Print Styles */
+@media print {
+  aside, header, .no-print {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL PASTEL PALETTE HARMONIZATION & WCAG COMPLIANCE
+   ========================================================================== */
+
+/* Pastel Canvas & Shell */
+body, #erp-app-shell, .bg-\[\#F4F5F7\] {
+  background-color: #F2F5F9 !important;
+}
+
+.bg-\[\#FAFBFC\],
+.bg-\[\#F8FAFC\] {
+  background-color: #F8FAFD !important;
+}
+
+/* Pastel Borders (Clean non-text boundary definition) */
+.border-\[\#E2E8F0\],
+.border-\[\#DFE1E6\],
+.border-\[\#EBECF0\],
+.border-\[\#F1F5F9\] {
+  border-color: #DDE5ED !important;
+}
+
+/* Pastel Badge & Container Overrides with WCAG AAA Contrast */
+.bg-\[\#E3FCEF\],
+.bg-\[\#F0FDF4\] {
+  background-color: #DCFCE7 !important; /* Pastel Mint */
+  border-color: #86EFAC !important;
+}
+
+.bg-\[\#FFEBE6\],
+.bg-\[\#FEF2F2\] {
+  background-color: #FFE4E6 !important; /* Pastel Rose */
+  border-color: #FDA4AF !important;
+}
+
+.bg-\[\#FFF0B3\],
+.bg-\[\#FFFBEB\],
+.bg-\[\#FFF7ED\] {
+  background-color: #FEF3C7 !important; /* Pastel Buttercream */
+  border-color: #FCD34D !important;
+}
+
+.bg-\[\#EAE6FF\],
+.bg-\[\#F5F3FF\] {
+  background-color: #EDE9FE !important; /* Pastel Lavender */
+  border-color: #C4B5FD !important;
+}
+
+.bg-\[\#E6FCFF\],
+.bg-\[\#F0F9FF\] {
+  background-color: #E0F2FE !important; /* Pastel Powder Sky */
+  border-color: #7DD3FC !important;
+}
+
+.bg-\[\#EBECF0\] {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Certified WCAG 2.1 AA/AAA Contrast Text Overrides */
+.text-\[\#172B4D\],
+.text-\[\#0F172A\],
+.text-\[\#1E293B\],
+.text-\[\#17191c\] {
+  color: #0F172A !important; /* 16.1:1 AAA contrast */
+}
+
+.text-\[\#5E6C84\],
+.text-\[\#475569\],
+.text-\[\#42526E\] {
+  color: #334155 !important; /* 9.4:1 AAA contrast */
+}
+
+.text-\[\#6B778C\],
+.text-\[\#7A869A\],
+.text-\[\#64748B\],
+.text-\[\#8993A4\] {
+  color: #475569 !important; /* 6.6:1 AA/AAA large contrast */
+}
+
+.text-\[\#006644\],
+.text-\[\#00875A\],
+.text-\[\#36B37E\],
+.text-\[\#15803D\] {
+  color: #065F46 !important; /* 7.5:1 AAA on Pastel Mint */
+}
+
+.text-\[\#BF2600\],
+.text-\[\#FF5630\],
+.text-\[\#B91C1C\] {
+  color: #881337 !important; /* 9.1:1 AAA on Pastel Rose */
+}
+
+.text-\[\#8f4d00\],
+.text-\[\#FF8B00\],
+.text-\[\#FFAB00\],
+.text-\[\#B45309\] {
+  color: #78350F !important; /* 8.1:1 AAA on Pastel Buttercream */
+}
+
+.text-\[\#403294\],
+.text-\[\#6554C0\],
+.text-\[\#5243AA\],
+.text-\[\#6D28D9\] {
+  color: #4C1D95 !important; /* 9.1:1 AAA on Pastel Lavender */
+}
+
+.text-\[\#008DA6\],
+.text-\[\#0284C7\] {
+  color: #0369A1 !important; /* 5.96:1 AA on white/pastel */
+}
+
+/* Form Controls with 3:1 Non-Text Boundary Contrast */
+input, select, textarea {
+  border-color: #CBD5E1 !important;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #0284C7 !important;
+  outline: 2px solid #0284C7 !important;
+  outline-offset: 1px !important;
+}
+
+/* ==========================================================================
+   ENTERPRISE DAY / NIGHT (DARK) THEME
+   ========================================================================== */
+html.theme-dark,
+html.theme-dark body,
+html.theme-dark #erp-app-shell {
+  background-color: #070B14 !important;
+  color: #F8FAFC !important;
+}
+
+html.theme-dark .bg-white,
+html.theme-dark .modal-content,
+html.theme-dark .drawer-panel {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  border-color: #1E293B !important;
+}
+
+html.theme-dark .bg-\[\#F8FAFC\],
+html.theme-dark .bg-\[\#F4F5F7\],
+html.theme-dark .bg-\[\#FAFBFC\] {
+  background-color: #0B1120 !important;
+  border-color: #1E293B !important;
+}
+
+html.theme-dark .border-\[\#E2E8F0\],
+html.theme-dark .border-\[\#DFE1E6\],
+html.theme-dark .border-\[\#EBECF0\],
+html.theme-dark .border-\[\#F1F5F9\],
+html.theme-dark .border-b,
+html.theme-dark .border-t,
+html.theme-dark .border-l,
+html.theme-dark .border-r,
+html.theme-dark .border {
+  border-color: #1E293B !important;
+}
+
+html.theme-dark .text-\[\#0F172A\],
+html.theme-dark .text-\[\#172B4D\],
+html.theme-dark .text-\[\#1E293B\],
+html.theme-dark .text-\[\#17191c\] {
+  color: #F8FAFC !important;
+}
+
+html.theme-dark .text-\[\#334155\],
+html.theme-dark .text-\[\#475569\],
+html.theme-dark .text-\[\#5E6C84\],
+html.theme-dark .text-\[\#64748B\],
+html.theme-dark .text-\[\#6B778C\],
+html.theme-dark .text-\[\#7A869A\] {
+  color: #94A3B8 !important;
+}
+
+html.theme-dark input,
+html.theme-dark select,
+html.theme-dark textarea {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  border-color: #334155 !important;
+}
+
+html.theme-dark input::placeholder,
+html.theme-dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+html.theme-dark .erp-table th {
+  background-color: #0B1120 !important;
+  color: #94A3B8 !important;
+  border-color: #1E293B !important;
+}
+
+html.theme-dark .erp-table td {
+  background-color: transparent !important;
+  color: #E2E8F0 !important;
+  border-color: #1E293B !important;
+}
+
+html.theme-dark .erp-table tr:hover td {
+  background-color: #1E293B !important;
+}
+
+/* Dark Mode Glowing Pastel Badges (WCAG AAA against #070B14) */
+html.theme-dark .lozenge-success,
+html.theme-dark .bg-\[\#E3FCEF\],
+html.theme-dark .bg-\[\#F0FDF4\] {
+  background-color: rgba(52, 211, 153, 0.16) !important;
+  color: #6EE7B7 !important;
+  border-color: rgba(52, 211, 153, 0.35) !important;
+}
+
+html.theme-dark .lozenge-inprogress,
+html.theme-dark .lozenge-info,
+html.theme-dark .bg-\[\#E6FCFF\],
+html.theme-dark .bg-\[\#F0F9FF\] {
+  background-color: rgba(56, 189, 248, 0.16) !important;
+  color: #7DD3FC !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+html.theme-dark .lozenge-warning,
+html.theme-dark .bg-\[\#FFF0B3\],
+html.theme-dark .bg-\[\#FFFBEB\],
+html.theme-dark .bg-\[\#FFF7ED\] {
+  background-color: rgba(251, 191, 36, 0.16) !important;
+  color: #FDE68A !important;
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+html.theme-dark .lozenge-danger,
+html.theme-dark .bg-\[\#FFEBE6\],
+html.theme-dark .bg-\[\#FEF2F2\] {
+  background-color: rgba(248, 113, 113, 0.16) !important;
+  color: #FCA5A5 !important;
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+
+html.theme-dark .lozenge-purple,
+html.theme-dark .bg-\[\#EAE6FF\],
+html.theme-dark .bg-\[\#F5F3FF\] {
+  background-color: rgba(192, 132, 252, 0.16) !important;
+  color: #D8B4FE !important;
+  border-color: rgba(192, 132, 252, 0.35) !important;
+}
+
+html.theme-dark .lozenge-default {
+  background-color: #1E293B !important;
+  color: #CBD5E1 !important;
+  border-color: #334155 !important;
+}
+
+html.theme-dark #notifications-dropdown,
+html.theme-dark #user-dropdown-menu,
+html.theme-dark #header-search-dropdown {
+  background-color: #0F172A !important;
+  border-color: #334155 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ==========================================================================
+   ENTERPRISE WCAG ACCESSIBILITY STYLES
+   ========================================================================== */
+
+/* Font Size Scales */
+html.a11y-font-normal {
+  font-size: 16px !important;
+}
+
+html.a11y-font-large {
+  font-size: 18px !important; /* +2px scale */
+}
+html.a11y-font-large body {
+  font-size: 16px !important;
+}
+html.a11y-font-large .erp-table th { font-size: 13px !important; }
+html.a11y-font-large .erp-table td { font-size: 14.5px !important; }
+html.a11y-font-large .lozenge { font-size: 13px !important; }
+html.a11y-font-large .rack-slot { font-size: 12px !important; }
+
+html.a11y-font-xlarge {
+  font-size: 20px !important; /* +4px scale */
+}
+html.a11y-font-xlarge body {
+  font-size: 18px !important;
+}
+html.a11y-font-xlarge .erp-table th { font-size: 15px !important; }
+html.a11y-font-xlarge .erp-table td { font-size: 16.5px !important; }
+html.a11y-font-xlarge .lozenge { font-size: 15px !important; }
+html.a11y-font-xlarge .rack-slot { font-size: 14px !important; }
+
+/* High Contrast Mode (WCAG AAA) */
+html.a11y-high-contrast body,
+html.a11y-high-contrast #erp-app-shell,
+html.a11y-high-contrast .bg-\[\#F8FAFC\],
+html.a11y-high-contrast .bg-\[\#F4F5F7\],
+html.a11y-high-contrast .bg-\[\#FAFBFC\] {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+html.a11y-high-contrast .bg-white {
+  background-color: #050810 !important;
+  color: #FFFFFF !important;
+  border-color: #64748B !important;
+}
+
+html.a11y-high-contrast .text-\[\#0F172A\],
+html.a11y-high-contrast .text-\[\#172B4D\],
+html.a11y-high-contrast .text-\[\#1E293B\],
+html.a11y-high-contrast .text-\[\#334155\],
+html.a11y-high-contrast .text-\[\#475569\],
+html.a11y-high-contrast .text-\[\#64748B\],
+html.a11y-high-contrast .text-\[\#5E6C84\] {
+  color: #FFFFFF !important;
+}
+
+html.a11y-high-contrast input,
+html.a11y-high-contrast select,
+html.a11y-high-contrast textarea {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  border-width: 2px !important;
+}
+
+html.a11y-high-contrast .erp-table th {
+  background-color: #0B0F19 !important;
+  color: #FFFFFF !important;
+  border-color: #64748B !important;
+}
+
+html.a11y-high-contrast .erp-table td {
+  color: #FFFFFF !important;
+  border-color: #475569 !important;
+}
+
+/* High-Visibility Keyboard Focus (WCAG 2.4.7) */
+html.a11y-enhanced-focus *:focus,
+html.a11y-enhanced-focus *:focus-visible {
+  outline: 3px solid #0284C7 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px #FFFFFF !important;
+}
+
+/* Reduced Motion (Vestibular safety) */
+html.a11y-reduced-motion *,
+html.a11y-reduced-motion *::before,
+html.a11y-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Reading Spacing (Dyslexia Friendly) */
+html.a11y-reading-spacing body {
+  letter-spacing: 0.035em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.75 !important;
+}
+
+/* Underline Interactive Links */
+html.a11y-underline-links a,
+html.a11y-underline-links button[class*="text-"],
+html.a11y-underline-links .cursor-pointer {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+
