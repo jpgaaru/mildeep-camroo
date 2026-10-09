@@ -415,11 +415,11 @@ const MODULES = {
     ]
   },
   styleguide: {
-    label: 'Design System & Style Guide',
+    label: 'Design System',
     subs: [
       { 
         id: 'styleguide', 
-        label: 'Style Guide & Components',
+        label: 'Design System',
         tertiary: [
           { id: 'foundations', label: 'Foundations & Tokens' },
           { id: 'components', label: 'UI Components' },

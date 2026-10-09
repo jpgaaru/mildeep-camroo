@@ -243,7 +243,7 @@
     <div class="nav-item" tabindex="0" role="tab" data-module="production" onclick="navigateModule('production')"><i data-lucide="factory"></i> Production</div>
     <div class="nav-item" tabindex="0" role="tab" data-module="coldstore" onclick="navigateModule('coldstore')"><i data-lucide="snowflake"></i> Coldstore</div>
     <div class="nav-item" tabindex="0" role="tab" data-module="inventory" onclick="navigateModule('inventory')"><i data-lucide="warehouse"></i> Inventory</div>
-    <div class="nav-item" tabindex="0" role="tab" data-module="styleguide" onclick="navigateModule('styleguide')" style="margin-left:auto;"><i data-lucide="palette"></i> Style Guide</div>
+    <div class="nav-item" tabindex="0" role="tab" data-module="styleguide" onclick="navigateModule('styleguide')" style="margin-left:auto;"><i data-lucide="palette"></i> Design System</div>
   </nav>
 
   <!-- ============ SECONDARY NAV ============ -->
@@ -1757,6 +1757,13 @@
   </style>
   <div class="sg-layout">
     <div class="sg-sidebar">
+      <div style="padding:0 20px 14px 20px;border-bottom:1px solid var(--colorBorderSecondary);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:var(--colorPrimary);color:#422006;font-weight:800;font-size:12px;">DS</span>
+        <div>
+          <div style="font-size:12px;font-weight:800;color:var(--colorText);letter-spacing:-0.01em;">Design System</div>
+          <div style="font-size:10px;color:var(--colorTextTertiary);font-weight:600;">v2.7 · Live Spec</div>
+        </div>
+      </div>
       <div class="sg-sidebar-title">Foundations</div>
       <div class="sg-sidebar-link sg-active" onclick="sgNav('colors')" id="sgl-colors"><i data-lucide="droplets"></i> Colors</div>
       <div class="sg-sidebar-link" onclick="sgNav('typography')" id="sgl-typography"><i data-lucide="type"></i> Typography</div>
