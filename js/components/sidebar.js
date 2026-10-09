@@ -617,6 +617,9 @@ export const Sidebar = {
           ${isSetupActive ? `<span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>` : ''}
         </a>
       </div>
+    `;
+  },
+
   renderNavHierarchy() {
     // Settings is moved to bottom of sidebar, so filter it out from the main scrollable list
     const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup');
