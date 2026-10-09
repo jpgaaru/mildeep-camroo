@@ -1725,49 +1725,56 @@
 <div class="module-page" id="page-styleguide-styleguide">
   <style>
     .sg-layout{display:flex;gap:0;height:calc(100vh - 140px);overflow:hidden;margin:-26px -32px;}
-    .sg-sidebar{width:240px;flex-shrink:0;background:var(--colorBgContainer);border-right:1px solid var(--colorBorder);overflow-y:auto;padding:20px 12px;user-select:none;}
-    .sg-group{margin-bottom:6px;}
+    .sg-sidebar{
+      width:240px;flex-shrink:0;background:var(--colorBgContainer);
+      border-right:1px solid var(--colorBorder);overflow-y:auto;
+      padding:24px 16px;user-select:none;
+    }
+    .sg-sidebar-header{
+      padding:0 8px 18px 8px;margin-bottom:12px;
+      border-bottom:1px solid var(--colorBorderSecondary);
+    }
+    .sg-section-tag{
+      font-size:10px;font-weight:700;color:var(--colorTextTertiary);
+      letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;
+    }
+    .sg-sidebar-title-main{
+      font-size:14px;font-weight:700;color:var(--colorText);
+    }
+    .sg-group{margin-bottom:4px;}
     .sg-group-header{
       display:flex;align-items:center;justify-content:space-between;
-      padding:10px 14px;border-radius:8px;font-size:13.5px;font-weight:600;
+      padding:9px 12px;border-radius:8px;font-size:13.5px;font-weight:500;
       color:var(--colorText);cursor:pointer;transition:background 0.15s ease,color 0.15s ease;
     }
     .sg-group-header:hover{background:var(--colorBgLayout);}
-    .sg-group-header-left{display:flex;align-items:center;gap:10px;}
-    .sg-group-header-left svg{width:16px;height:16px;color:var(--colorTextSecondary);transition:color 0.15s;}
+    .sg-group-header-left{display:flex;align-items:center;gap:12px;}
+    .sg-group-header-left svg{
+      width:17px;height:17px;color:var(--colorTextSecondary);
+      stroke-width:1.8;transition:color 0.15s ease;
+    }
     .sg-group-header:hover .sg-group-header-left svg{color:var(--colorText);}
     .sg-chevron{
       width:14px;height:14px;color:var(--colorTextTertiary);
-      transition:transform 0.22s cubic-bezier(0.4,0,0.2,1),color 0.15s;
+      transition:transform 0.2s cubic-bezier(0.4,0,0.2,1),color 0.15s ease;
     }
     .sg-group.open .sg-chevron{transform:rotate(180deg);color:var(--colorTextSecondary);}
     .sg-sub-menu{
-      padding-left:14px;margin-left:14px;margin-top:2px;
-      border-left:1.5px solid var(--colorBorderSecondary);
-      display:flex;flex-direction:column;gap:2px;
+      padding:2px 0 6px 38px;
+      display:flex;flex-direction:column;gap:1px;
       max-height:0;overflow:hidden;opacity:0;
-      transition:max-height 0.28s cubic-bezier(0.4,0,0.2,1),opacity 0.2s ease,margin 0.2s ease;
+      transition:max-height 0.25s cubic-bezier(0.4,0,0.2,1),opacity 0.2s ease;
     }
-    .sg-group.open .sg-sub-menu{max-height:300px;opacity:1;margin-top:4px;margin-bottom:6px;}
+    .sg-group.open .sg-sub-menu{max-height:300px;opacity:1;}
     .sg-sub-link{
-      display:flex;align-items:center;gap:8px;
-      padding:7px 12px;border-radius:6px;font-size:13px;font-weight:500;
-      color:var(--colorTextSecondary);cursor:pointer;transition:all 0.15s ease;
+      padding:7px 10px;border-radius:6px;font-size:13px;font-weight:400;
+      color:var(--colorTextSecondary);cursor:pointer;transition:color 0.15s ease,background 0.15s ease;
     }
-    .sg-sub-link:hover{background:var(--colorBgLayout);color:var(--colorText);}
+    .sg-sub-link:hover{color:var(--colorText);background:var(--colorBgLayout);}
     .sg-sub-link.sg-active{
-      background:var(--colorPrimaryBg);color:var(--colorPrimary);
-      font-weight:700;
+      color:var(--colorPrimaryActive);font-weight:600;
+      background:var(--colorPrimaryBg);
     }
-    .sg-sub-link.sg-active svg{color:var(--colorPrimary);}
-    .sg-sub-link svg{width:13px;height:13px;color:var(--colorTextTertiary);transition:color 0.15s;}
-    .sg-single-link{
-      display:flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:8px;font-size:13.5px;font-weight:600;
-      color:var(--colorText);cursor:pointer;transition:background 0.15s ease;
-    }
-    .sg-single-link:hover{background:var(--colorBgLayout);}
-    .sg-single-link svg{width:16px;height:16px;color:var(--colorTextSecondary);}
     .sg-content{flex:1;overflow-y:auto;padding:32px 40px;}
     .sg-section{display:none;}
     .sg-section.sg-active{display:block;animation:pageFade .25s ease;}
@@ -1793,28 +1800,25 @@
   </style>
   <div class="sg-layout">
     <div class="sg-sidebar">
-      <div style="padding:4px 12px 14px 12px;border-bottom:1px solid var(--colorBorderSecondary);margin-bottom:12px;display:flex;align-items:center;gap:10px;">
-        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--colorPrimary);color:#422006;font-weight:800;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1);">DS</span>
-        <div>
-          <div style="font-size:13px;font-weight:800;color:var(--colorText);letter-spacing:-0.01em;">Design System</div>
-          <div style="font-size:10.5px;color:var(--colorTextTertiary);font-weight:600;">v2.7 · Live Spec</div>
-        </div>
+      <div class="sg-sidebar-header">
+        <div class="sg-section-tag">Menu</div>
+        <div class="sg-sidebar-title-main">Design System</div>
       </div>
 
       <!-- Group 1: Foundations -->
       <div class="sg-group open" id="sgg-foundations">
         <div class="sg-group-header" onclick="toggleSgGroup('sgg-foundations')">
           <div class="sg-group-header-left">
-            <i data-lucide="layers"></i>
+            <i data-lucide="folder"></i>
             <span>Foundations</span>
           </div>
           <i data-lucide="chevron-down" class="sg-chevron"></i>
         </div>
         <div class="sg-sub-menu">
-          <div class="sg-sub-link sg-active" onclick="sgNav('colors')" id="sgl-colors"><i data-lucide="droplets"></i> Colors</div>
-          <div class="sg-sub-link" onclick="sgNav('typography')" id="sgl-typography"><i data-lucide="type"></i> Typography</div>
-          <div class="sg-sub-link" onclick="sgNav('spacing')" id="sgl-spacing"><i data-lucide="move-horizontal"></i> Spacing &amp; Radius</div>
-          <div class="sg-sub-link" onclick="sgNav('shadows')" id="sgl-shadows"><i data-lucide="box"></i> Shadows &amp; Motion</div>
+          <div class="sg-sub-link sg-active" onclick="sgNav('colors')" id="sgl-colors">Colors</div>
+          <div class="sg-sub-link" onclick="sgNav('typography')" id="sgl-typography">Typography</div>
+          <div class="sg-sub-link" onclick="sgNav('spacing')" id="sgl-spacing">Spacing &amp; Radius</div>
+          <div class="sg-sub-link" onclick="sgNav('shadows')" id="sgl-shadows">Shadows &amp; Motion</div>
         </div>
       </div>
 
@@ -1822,18 +1826,18 @@
       <div class="sg-group open" id="sgg-components">
         <div class="sg-group-header" onclick="toggleSgGroup('sgg-components')">
           <div class="sg-group-header-left">
-            <i data-lucide="layout-grid"></i>
+            <i data-lucide="box"></i>
             <span>Components</span>
           </div>
           <i data-lucide="chevron-down" class="sg-chevron"></i>
         </div>
         <div class="sg-sub-menu">
-          <div class="sg-sub-link" onclick="sgNav('buttons')" id="sgl-buttons"><i data-lucide="mouse-pointer-click"></i> Buttons</div>
-          <div class="sg-sub-link" onclick="sgNav('badges')" id="sgl-badges"><i data-lucide="tag"></i> Badges</div>
-          <div class="sg-sub-link" onclick="sgNav('inputs')" id="sgl-inputs"><i data-lucide="text-cursor-input"></i> Inputs &amp; Forms</div>
-          <div class="sg-sub-link" onclick="sgNav('cards')" id="sgl-cards"><i data-lucide="layout-dashboard"></i> Cards &amp; Metrics</div>
-          <div class="sg-sub-link" onclick="sgNav('navigation')" id="sgl-navigation"><i data-lucide="navigation"></i> Navigation</div>
-          <div class="sg-sub-link" onclick="sgNav('tables')" id="sgl-tables"><i data-lucide="table-2"></i> Tables</div>
+          <div class="sg-sub-link" onclick="sgNav('buttons')" id="sgl-buttons">Buttons</div>
+          <div class="sg-sub-link" onclick="sgNav('badges')" id="sgl-badges">Badges</div>
+          <div class="sg-sub-link" onclick="sgNav('inputs')" id="sgl-inputs">Inputs &amp; Forms</div>
+          <div class="sg-sub-link" onclick="sgNav('cards')" id="sgl-cards">Cards &amp; Metrics</div>
+          <div class="sg-sub-link" onclick="sgNav('navigation')" id="sgl-navigation">Navigation</div>
+          <div class="sg-sub-link" onclick="sgNav('tables')" id="sgl-tables">Tables</div>
         </div>
       </div>
 
@@ -1841,14 +1845,14 @@
       <div class="sg-group open" id="sgg-brand">
         <div class="sg-group-header" onclick="toggleSgGroup('sgg-brand')">
           <div class="sg-group-header-left">
-            <i data-lucide="sparkles"></i>
+            <i data-lucide="palette"></i>
             <span>Brand Themes</span>
           </div>
           <i data-lucide="chevron-down" class="sg-chevron"></i>
         </div>
         <div class="sg-sub-menu">
-          <div class="sg-sub-link" onclick="sgNav('brands')" id="sgl-brands"><i data-lucide="palette"></i> Multi-Tenancy</div>
-          <div class="sg-sub-link" onclick="sgNav('icons')" id="sgl-icons"><i data-lucide="smile"></i> Lucide Icons</div>
+          <div class="sg-sub-link" onclick="sgNav('brands')" id="sgl-brands">Multi-Tenancy</div>
+          <div class="sg-sub-link" onclick="sgNav('icons')" id="sgl-icons">Lucide Icons</div>
         </div>
       </div>
     </div>
