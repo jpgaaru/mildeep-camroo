@@ -414,6 +414,20 @@ const MODULES = {
       }
     ]
   },
+  styleguide: {
+    label: 'Design System & Style Guide',
+    subs: [
+      { 
+        id: 'styleguide', 
+        label: 'Style Guide & Components',
+        tertiary: [
+          { id: 'foundations', label: 'Foundations & Tokens' },
+          { id: 'components', label: 'UI Components' },
+          { id: 'brandthemes', label: 'Brand Themes' }
+        ]
+      }
+    ]
+  },
   settings: {
     label: 'Settings',
     standalone: true,

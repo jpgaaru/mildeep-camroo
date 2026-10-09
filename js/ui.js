@@ -68,7 +68,8 @@ function navigate(moduleId, subId) {
     qc: ['qcdashboard'],
     production: ['proddevelopment'],
     coldstore: ['coldstoredevelopment'],
-    inventory: ['invgeneralstore']
+    inventory: ['invgeneralstore'],
+    styleguide: ['styleguide']
   };
 
   const isBuilt = BUILT_PAGES[moduleId] && BUILT_PAGES[moduleId].includes(subId);
@@ -82,6 +83,7 @@ function navigate(moduleId, subId) {
     if (moduleId === 'production' && subId === 'proddevelopment') targetPageId = 'page-production';
     if (moduleId === 'coldstore' && subId === 'coldstoredevelopment') targetPageId = 'page-coldstore';
     if (moduleId === 'inventory' && subId === 'invgeneralstore') targetPageId = 'page-inventory';
+    if (moduleId === 'styleguide' && subId === 'styleguide') targetPageId = 'page-styleguide-styleguide';
 
     const pageEl = document.getElementById(targetPageId);
     if (pageEl) {
@@ -123,7 +125,15 @@ const PAGE_INIT = {
   orders: () => renderOrdersKanban(),
   payments: initPaymentCharts,
   insurance: renderInsurance,
-  reports: renderReports
+  reports: renderReports,
+  styleguide: () => {
+    if (window.lucide) lucide.createIcons();
+    if (typeof sgNav === 'function') {
+      const activeSec = document.querySelector('.sg-section.sg-active');
+      const secId = activeSec ? activeSec.id.replace('sg-', '') : 'colors';
+      sgNav(secId);
+    }
+  }
 };
 
 /* ================= BRAND & MULTI-TENANCY MANAGEMENT ================= */
