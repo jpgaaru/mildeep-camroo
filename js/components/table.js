@@ -256,6 +256,14 @@ export class DataTable {
             <div class="flex items-center gap-3 flex-wrap">
               ${this.tableTitle ? `<h3 class="font-bold text-[#0F172A] text-sm">${this.tableTitle}</h3>` : ''}
               
+              <!-- Quick Search Input (AquaPulse Architecture) -->
+              ${this.searchable !== false ? `
+              <div class="relative flex items-center">
+                <svg class="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="dt-search-input" value="${this.searchTerm || ''}" placeholder="Search table records..." class="h-[32px] w-44 sm:w-56 pl-8 pr-2.5 text-xs bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:bg-white focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" />
+              </div>
+              ` : ''}
+
               <div id="dt-filter-container" class="flex items-center gap-2"></div>
             </div>
 

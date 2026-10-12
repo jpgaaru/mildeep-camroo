@@ -5733,6 +5733,14 @@ class DataTable {
             <div class="flex items-center gap-3 flex-wrap">
               ${this.tableTitle ? `<h3 class="font-bold text-[#0F172A] text-sm">${this.tableTitle}</h3>` : ''}
               
+              <!-- Quick Search Input (AquaPulse Architecture) -->
+              ${this.searchable !== false ? `
+              <div class="relative flex items-center">
+                <svg class="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="dt-search-input" value="${this.searchTerm || ''}" placeholder="Search table records..." class="h-[32px] w-44 sm:w-56 pl-8 pr-2.5 text-xs bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:bg-white focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" />
+              </div>
+              ` : ''}
+
               <div id="dt-filter-container" class="flex items-center gap-2"></div>
             </div>
 
@@ -9417,11 +9425,11 @@ const PurchaseView = {
             </div>
           </div>
 
-          <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs">
-            <div class="flex items-center justify-between mb-2">
+          <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
+            <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="font-bold text-sm text-[#172B4D]">Pending Production Details</h3>
-                <p class="text-xs text-[#6B778C]">Remaining unpeeled and un-frozen production across plants</p>
+                <h3 class="font-bold text-sm text-[#0F172A]">Pending Production Details</h3>
+                <p class="text-xs text-[#64748B] mt-0.5">Remaining unpeeled and un-frozen production across plants</p>
               </div>
             </div>
             <div class="h-56">
@@ -9430,20 +9438,20 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Section 3 from Screenshot 3: Time Vs Price Analysis + Abstract Cards -->
-        <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs space-y-4">
+        <!-- Section 3: Time Vs Price Analysis + Abstract Cards -->
+        <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs space-y-4">
           <div class="flex items-center justify-between flex-wrap gap-2">
             <div>
-              <h3 class="font-bold text-base text-[#172B4D]">Time Vs Price Analysis</h3>
-              <p class="text-xs text-[#6B778C]">Daily trend curves across count sizes (80, 90, 100 counts/kg)</p>
+              <h3 class="font-bold text-base text-[#0F172A]">Time Vs Price Analysis</h3>
+              <p class="text-xs text-[#64748B] mt-0.5">Daily trend curves across count sizes (80, 90, 100 counts/kg)</p>
             </div>
             
-            <!-- Count Size Pills from Screenshot 3 -->
-            <div class="flex items-center gap-1 overflow-x-auto text-[11px]  py-1">
+            <!-- Count Size Pills -->
+            <div class="flex items-center gap-1.5 overflow-x-auto text-[11px] py-1">
               ${['20', '20.5', '21', '22', '23', '24', '24.5', '25', '26', '27', '28', '29', '30', '31', '32', '32.5', '33', '34'].map(cnt => `
-                <button class="px-2 py-0.5 rounded border border-[#DFE1E6] bg-[#FAFBFC] hover:bg-[#F0F9FF] text-[#172B4D]">${cnt}</button>
+                <button class="px-2.5 py-1 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#334155] font-semibold transition-colors">${cnt}</button>
               `).join('')}
-              <button class="btn-primary px-3 py-1 rounded text-xs ml-2 font-semibold">View current prices</button>
+              <button class="btn-primary px-3 py-1 rounded-lg text-xs ml-2 font-bold cursor-pointer">View current prices</button>
             </div>
           </div>
 
@@ -9451,45 +9459,45 @@ const PurchaseView = {
             <canvas id="chart-time-vs-price"></canvas>
           </div>
 
-          <!-- Bottom Split Cards from Screenshot 3: Purchase Abstract & RM Arrival Summary -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-3 border-t border-[#EBECF0]">
+          <!-- Bottom Split Cards: Purchase Abstract & RM Arrival Summary -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-3 border-t border-[#F1F5F9]">
             <!-- Purchase Abstract Card -->
-            <div class="bg-[#FAFBFC] p-4 rounded-lg border border-[#DFE1E6]">
-              <h4 class="font-bold text-xs text-[#172B4D] uppercase tracking-wider mb-3">Purchase Abstract</h4>
+            <div class="mcard bg-[#F8FAFC] p-4.5 rounded-xl border border-[#E2E8F0]">
+              <h4 class="font-bold text-xs text-[#0F172A] uppercase tracking-wider mb-3">Purchase Abstract</h4>
               <div class="grid grid-cols-2 gap-2 text-xs">
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">HONV QTY</span>
-                  <div class=" font-bold text-sm text-[#17191c] mt-0.5">138,500 KG</div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">HONV QTY</span>
+                  <div class="font-extrabold text-sm text-[#0F172A] mt-0.5 tabular-nums">138,500 KG</div>
                 </div>
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">HONV VALUE</span>
-                  <div class=" font-bold text-sm text-[#006644] mt-0.5">₹ 5,26,30,000</div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">HONV VALUE</span>
+                  <div class="font-extrabold text-sm text-[#056A38] mt-0.5 tabular-nums">₹ 5,26,30,000</div>
                 </div>
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">HONBT QTY</span>
-                  <div class=" font-bold text-sm text-[#6554C0] mt-0.5">4,000 KG</div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">HONBT QTY</span>
+                  <div class="font-extrabold text-sm text-[#006C7A] mt-0.5 tabular-nums">4,000 KG</div>
                 </div>
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">HONBT VALUE</span>
-                  <div class=" font-bold text-sm text-[#006644] mt-0.5">₹ 24,80,000</div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">HONBT VALUE</span>
+                  <div class="font-extrabold text-sm text-[#056A38] mt-0.5 tabular-nums">₹ 24,80,000</div>
                 </div>
               </div>
             </div>
 
             <!-- RM Arrival Summary Card -->
-            <div class="bg-[#FAFBFC] p-4 rounded-lg border border-[#DFE1E6]">
-              <h4 class="font-bold text-xs text-[#172B4D] uppercase tracking-wider mb-3">RM Arrival Summary</h4>
+            <div class="mcard bg-[#F8FAFC] p-4.5 rounded-xl border border-[#E2E8F0]">
+              <h4 class="font-bold text-xs text-[#0F172A] uppercase tracking-wider mb-3">RM Arrival Summary</h4>
               <div class="grid grid-cols-2 gap-2 text-xs">
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">TOTAL QTY (KG)</span>
-                  <div class=" font-bold text-base text-[#17191c] mt-0.5">142,500 KG</div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">TOTAL QTY (KG)</span>
+                  <div class="font-extrabold text-base text-[#0F172A] mt-0.5 tabular-nums">142,500 KG</div>
                 </div>
-                <div class="bg-white p-2.5 rounded border border-[#EBECF0]">
-                  <span class="text-[#6B778C] text-[11px]">TOTAL VALUE (INR / USD)</span>
-                  <div class=" font-bold text-base text-[#006644] mt-0.5">₹ 5.51 Cr <span class="text-xs text-[#5E6C84]">($664k)</span></div>
+                <div class="bg-white p-3 rounded-lg border border-[#E2E8F0]">
+                  <span class="text-[#64748B] text-[11px] font-medium">TOTAL VALUE (INR / USD)</span>
+                  <div class="font-extrabold text-base text-[#056A38] mt-0.5 tabular-nums">₹ 5.51 Cr <span class="text-xs text-[#64748B] font-normal">($664k)</span></div>
                 </div>
               </div>
-              <div class="mt-3 p-2 bg-[#F0F9FF] text-[#0369A1] rounded text-[11px] flex justify-between items-center font-medium">
+              <div class="mt-3 p-2.5 bg-[#F0FAFC] border border-[#B2ECF3] text-[#006C7A] rounded-lg text-xs flex justify-between items-center font-medium">
                 <span>Avg Processing Yield: <strong>69.37%</strong></span>
                 <span>Active Supplier Centers: <strong>6 Units</strong></span>
               </div>
@@ -9498,13 +9506,13 @@ const PurchaseView = {
         </div>
 
         <!-- Section 4: Top 10 Centers by Total Quantity Table -->
-        <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs">
+        <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
           <div class="flex items-center justify-between mb-3">
             <div>
-              <h3 class="font-bold text-sm text-[#172B4D]">Quantity by Center</h3>
-              <p class="text-[11px] text-[#6B778C]">Top procurement centers ranked by intake volume</p>
+              <h3 class="font-bold text-sm text-[#0F172A]">Quantity by Center</h3>
+              <p class="text-xs text-[#64748B] mt-0.5">Top procurement centers ranked by intake volume</p>
             </div>
-            <a href="#/purchase/operations/rm-arrivals" class="text-xs font-semibold text-[#17191c] hover:underline font-bold">View All Arrivals →</a>
+            <a href="#/purchase/operations/rm-arrivals" class="text-xs font-bold text-[#006C7A] hover:underline flex items-center gap-1">View All Arrivals →</a>
           </div>
           <div id="rm-top-centers-table"></div>
         </div>
@@ -9512,7 +9520,7 @@ const PurchaseView = {
       </div>
     `;
 
-    // Render all real-world charts
+    // Render all real-world charts with AquaPulse Teal & California Sunset palette
     setTimeout(() => {
       // 1. Sum of QTY by SPECIES
       Charts.renderBarChart(
@@ -9521,8 +9529,8 @@ const PurchaseView = {
         [{
           label: 'Quantity (KG)',
           data: [138500, 4000],
-          backgroundColor: '#5C6BC0',
-          borderRadius: 4
+          backgroundColor: '#006C7A',
+          borderRadius: 6
         }],
         {
           scales: {
@@ -9549,8 +9557,8 @@ const PurchaseView = {
         [{
           label: 'Intake Quantity (KG)',
           data: [40000, 27000, 22500, 20000, 16000, 13200],
-          backgroundColor: '#80DEEA',
-          borderRadius: 4
+          backgroundColor: '#00A4B7',
+          borderRadius: 6
         }],
         {
           scales: {
@@ -9563,39 +9571,39 @@ const PurchaseView = {
         }
       );
 
-      // 3. Production Composition Multi-Series
+      // 3. Production Composition Multi-Series (AquaPulse Teal Scale)
       Charts.renderBarChart(
         'chart-production-composition',
         ['Intake Batch #1', 'Intake Batch #2', 'Intake Batch #3', 'Intake Batch #4', 'Intake Batch #5'],
         [
-          { label: 'HeadOn Qty (T)', data: [45, 38, 42, 35, 40], backgroundColor: '#2196F3' },
-          { label: 'Grading Qty (T)', data: [43, 37, 40, 34, 38], backgroundColor: '#4CAF50' },
-          { label: 'VaOut Qty (T)', data: [28, 24, 27, 22, 26], backgroundColor: '#FF9800' },
-          { label: 'SoakOut Qty (T)', data: [29, 25, 28, 23, 27], backgroundColor: '#E91E63' },
-          { label: 'Freezing Qty (T)', data: [29, 25, 28, 23, 27], backgroundColor: '#9C27B0' }
+          { label: 'HeadOn Qty (T)', data: [45, 38, 42, 35, 40], backgroundColor: '#006C7A' },
+          { label: 'Grading Qty (T)', data: [43, 37, 40, 34, 38], backgroundColor: '#00A4B7' },
+          { label: 'VaOut Qty (T)', data: [28, 24, 27, 22, 26], backgroundColor: '#1ABDD2' },
+          { label: 'SoakOut Qty (T)', data: [29, 25, 28, 23, 27], backgroundColor: '#4FCFE0' },
+          { label: 'Freezing Qty (T)', data: [29, 25, 28, 23, 27], backgroundColor: '#84DFEB' }
         ]
       );
 
-      // 4. Pending Production Across Plants
+      // 4. Pending Production Across Plants (Warm Amber)
       Charts.renderBarChart(
         'chart-pending-production-plants',
         ['DFL Unit-5', 'DFL Unit-3', 'DFL Unit-6', 'DFL Unit-4', 'DFL Unit-2', 'DFL Unit-1'],
         [{
           label: 'Pending Unprocessed (Tons)',
           data: [14.2, 10.5, 8.8, 6.2, 5.0, 3.5],
-          backgroundColor: '#FFAB00',
-          borderRadius: 4
+          backgroundColor: '#D97706',
+          borderRadius: 6
         }]
       );
 
-      // 5. Time Vs Price Spline Chart from Screenshot 3
+      // 5. Time Vs Price Spline Chart (AquaPulse Lines)
       Charts.renderLineChart(
         'chart-time-vs-price',
         ['2026-09-05', '2026-09-06', '2026-09-10', '2026-09-11', '2026-09-13', '2026-09-16', '2026-09-17', '2026-09-18', '2026-09-20', '2026-09-24', '2026-09-26', '2026-09-27', '2026-10-04'],
         [
-          { label: 'Count 80 (₹/KG)', data: [310, 305, 310, 315, 300, 310, 310, 310, 310, 310, 310, 310, 320], borderColor: '#2196F3', fill: false },
-          { label: 'Count 90 (₹/KG)', data: [280, 280, 280, 280, 280, 285, 285, 285, 280, 285, 285, 285, 290], borderColor: '#4CAF50', fill: false },
-          { label: 'Count 100 (₹/KG)', data: [270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 280], borderColor: '#FF9800', fill: false }
+          { label: 'Count 80 (₹/KG)', data: [310, 305, 310, 315, 300, 310, 310, 310, 310, 310, 310, 310, 320], borderColor: '#006C7A', fill: false },
+          { label: 'Count 90 (₹/KG)', data: [280, 280, 280, 280, 280, 285, 285, 285, 280, 285, 285, 285, 290], borderColor: '#00A4B7', fill: false },
+          { label: 'Count 100 (₹/KG)', data: [270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 280], borderColor: '#D97706', fill: false }
         ],
         {
           scales: {
@@ -10192,7 +10200,7 @@ const PurchaseView = {
       // 5. Clean up old charts before rendering new ones
       destroyCharts();
 
-      // Chart A: Daily Purchase Analytics Bar Chart
+      // Chart A: Daily Purchase Analytics Bar Chart (AquaPulse Architecture)
       const dailyCanvas = document.getElementById('comm-daily-purchase-canvas');
       if (dailyCanvas && typeof Chart !== 'undefined') {
         activeCharts.daily = new Chart(dailyCanvas, {
@@ -10201,8 +10209,9 @@ const PurchaseView = {
             labels: d.dailyLabels,
             datasets: [{
               data: d.dailyData,
-              backgroundColor: '#5C6BC0',
-              borderRadius: 2,
+              backgroundColor: '#006C7A',
+              hoverBackgroundColor: '#005662',
+              borderRadius: 6,
               barThickness: 34
             }]
           },
@@ -10212,10 +10221,13 @@ const PurchaseView = {
             plugins: {
               legend: { display: false },
               tooltip: {
-                backgroundColor: '#172B4D',
-                titleFont: { size: 11, family: 'Inter' },
-                bodyFont: { size: 10, family: 'Inter' },
-                padding: 6,
+                backgroundColor: '#0F172A',
+                titleColor: '#FFFFFF',
+                bodyColor: '#F8FAFC',
+                titleFont: { size: 11, family: 'Inter', weight: 'bold' },
+                bodyFont: { size: 11, family: 'Inter' },
+                padding: 10,
+                cornerRadius: 8,
                 callbacks: {
                   label: (ctx) => `Intake: ${ctx.parsed.y.toFixed(2)} T`
                 }
@@ -10224,25 +10236,25 @@ const PurchaseView = {
             scales: {
               x: {
                 grid: { display: false },
-                ticks: { font: { size: 10, family: 'Inter' }, color: '#6B778C' }
+                ticks: { font: { size: 10.5, family: 'Inter' }, color: '#64748B' }
               },
               y: {
                 beginAtZero: true,
                 max: 200,
                 ticks: {
                   stepSize: 40,
-                  font: { size: 10, family: 'Inter' },
-                  color: '#6B778C',
+                  font: { size: 10.5, family: 'Inter' },
+                  color: '#64748B',
                   callback: (v) => v.toFixed(2)
                 },
-                grid: { color: '#F4F5F7' }
+                grid: { color: '#F1F5F9' }
               }
             }
           }
         });
       }
 
-      // Chart B: Headless Details Bar Chart
+      // Chart B: Headless Details Bar Chart (AquaPulse Teal)
       const headlessCanvas = document.getElementById('comm-headless-canvas');
       if (headlessCanvas && typeof Chart !== 'undefined') {
         const headlessLabels = [
@@ -10256,9 +10268,10 @@ const PurchaseView = {
             labels: headlessLabels,
             datasets: [{
               data: d.headlessBars,
-              backgroundColor: '#5C6BC0',
-              barThickness: 4,
-              borderRadius: 1
+              backgroundColor: '#00A4B7',
+              hoverBackgroundColor: '#006C7A',
+              barThickness: 5,
+              borderRadius: 3
             }]
           },
           options: {
@@ -10267,10 +10280,13 @@ const PurchaseView = {
             plugins: {
               legend: { display: false },
               tooltip: {
-                backgroundColor: '#172B4D',
-                titleFont: { size: 11, family: 'Inter' },
-                bodyFont: { size: 10, family: 'Inter' },
-                padding: 6,
+                backgroundColor: '#0F172A',
+                titleColor: '#FFFFFF',
+                bodyColor: '#F8FAFC',
+                titleFont: { size: 11, family: 'Inter', weight: 'bold' },
+                bodyFont: { size: 11, family: 'Inter' },
+                padding: 10,
+                cornerRadius: 8,
                 callbacks: {
                   label: (ctx) => `Grade ${ctx.label}: ${ctx.parsed.y} T`
                 }
@@ -10290,17 +10306,17 @@ const PurchaseView = {
         });
       }
 
-      // Chart C: Purchase Quantity Donut Chart
+      // Chart C: Purchase Quantity Donut Chart (AquaPulse Dual Teal)
       const donutCanvas = document.getElementById('comm-purchase-qty-canvas');
       if (donutCanvas && typeof Chart !== 'undefined') {
         activeCharts.donut = new Chart(donutCanvas, {
           type: 'doughnut',
           data: {
-            labels: ['Site Weightment', 'Plant WeightMent'],
+            labels: ['Site Weightment', 'Plant Weightment'],
             datasets: [{
               data: [d.siteWeightmentVal, d.plantWeightmentVal],
-              backgroundColor: ['#E91E63', '#E65100'],
-              hoverBackgroundColor: ['#D81B60', '#DD2C00'],
+              backgroundColor: ['#006C7A', '#00A4B7'],
+              hoverBackgroundColor: ['#005662', '#1ABDD2'],
               borderWidth: 2,
               borderColor: '#FFFFFF'
             }]
@@ -10308,14 +10324,17 @@ const PurchaseView = {
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '66%',
+            cutout: '68%',
             plugins: {
               legend: { display: false },
               tooltip: {
-                backgroundColor: '#172B4D',
-                titleFont: { size: 11, family: 'Inter' },
-                bodyFont: { size: 10, family: 'Inter' },
-                padding: 6,
+                backgroundColor: '#0F172A',
+                titleColor: '#FFFFFF',
+                bodyColor: '#F8FAFC',
+                titleFont: { size: 11, family: 'Inter', weight: 'bold' },
+                bodyFont: { size: 11, family: 'Inter' },
+                padding: 10,
+                cornerRadius: 8,
                 callbacks: {
                   label: (ctx) => `${ctx.label}: ${ctx.parsed} T`
                 }
@@ -10330,14 +10349,19 @@ const PurchaseView = {
       if (suppliersCanvas && typeof Chart !== 'undefined') {
         const suppLabels = d.suppliersList.map(s => `${s.name} (${s.lots} Lots)`);
         const suppLotsData = d.suppliersList.map(s => s.lots);
+        const aquaPieColors = [
+          '#006C7A', '#00A4B7', '#1ABDD2', '#4FCFE0', '#84DFEB', '#056A38', '#0EA5E9', '#D97706',
+          '#6366F1', '#8B5CF6', '#EC4899', '#14B8A6', '#F59E0B', '#10B981', '#3B82F6', '#A855F7',
+          '#06B6D4', '#84CC16', '#F97316', '#64748B', '#0284C7', '#059669', '#7C3AED', '#DB2777'
+        ];
         activeCharts.suppliers = new Chart(suppliersCanvas, {
           type: 'pie',
           data: {
             labels: suppLabels,
             datasets: [{
               data: suppLotsData,
-              backgroundColor: pieColors.slice(0, suppLotsData.length),
-              borderWidth: 1,
+              backgroundColor: aquaPieColors.slice(0, suppLotsData.length),
+              borderWidth: 1.5,
               borderColor: '#FFFFFF'
             }]
           },
@@ -10347,10 +10371,13 @@ const PurchaseView = {
             plugins: {
               legend: { display: false },
               tooltip: {
-                backgroundColor: '#172B4D',
-                titleFont: { size: 11, family: 'Inter' },
-                bodyFont: { size: 10, family: 'Inter' },
-                padding: 6,
+                backgroundColor: '#0F172A',
+                titleColor: '#FFFFFF',
+                bodyColor: '#F8FAFC',
+                titleFont: { size: 11, family: 'Inter', weight: 'bold' },
+                bodyFont: { size: 11, family: 'Inter' },
+                padding: 10,
+                cornerRadius: 8,
                 callbacks: {
                   label: (ctx) => ctx.label
                 }
@@ -10464,33 +10491,35 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Search / Filter Fields (matching bookings list UI) -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="lot-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="lot-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="lot-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+              <button type="button" id="lot-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="lot-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="lot-top-toggle-text">Hide Filter</span>
               </button>
             </div>
           </div>
 
-          <!-- Collapsible Filter Inputs Grid (5 columns) -->
-          <div id="lot-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <!-- Collapsible Filter Inputs Grid -->
+          <div id="lot-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">PURCHASE STATION</label>
-              <select id="lot-station-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PURCHASE STATION</label>
+              <select id="lot-station-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Purchase Station</option>
                 <option value="SKM">Srikakulam Station (SKM)</option>
                 <option value="RPL">Rajahmundry Plant (RPL)</option>
@@ -10501,8 +10530,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SPECIES</label>
-              <select id="lot-species-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
+              <select id="lot-species-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Species (Select)</option>
                 <option value="Vannamei">Vannamei (VM)</option>
                 <option value="Black Tiger">Black Tiger (BT)</option>
@@ -10511,8 +10540,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">MONTH</label>
-              <select id="lot-month-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">MONTH</label>
+              <select id="lot-month-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Months</option>
                 <option value="October" selected>October</option>
                 <option value="September">September</option>
@@ -10530,8 +10559,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">YEAR</label>
-              <select id="lot-year-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">YEAR</label>
+              <select id="lot-year-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Years</option>
                 <option value="2026" selected>2026</option>
                 <option value="2025">2025</option>
@@ -10540,7 +10569,7 @@ const PurchaseView = {
             </div>
 
             <div class="flex items-end">
-              <button type="button" id="lot-search-btn" class="dt-top-filter-search-btn btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button type="button" id="lot-search-btn" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -10709,22 +10738,24 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Search / Filter Fields: Select Purchase, Select Arrival Plant, Date -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Fields (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="booking-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="booking-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="booking-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+              <button type="button" id="booking-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="booking-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="booking-top-toggle-text">Hide Filter</span>
               </button>
@@ -10732,10 +10763,10 @@ const PurchaseView = {
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="booking-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <div id="booking-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT PURCHASE</label>
-              <select id="booking-top-purchase-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT PURCHASE</label>
+              <select id="booking-top-purchase-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Purchases (Select)</option>
                 <option value="Direct Farmer Procurement">Direct Farmer Procurement</option>
                 <option value="Hatchery Buyback Contract">Hatchery Buyback Contract</option>
@@ -10746,8 +10777,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT ARRIVAL PLANT</label>
-              <select id="booking-top-plant-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT ARRIVAL PLANT</label>
+              <select id="booking-top-plant-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Arrival Plants (Select)</option>
                 <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
@@ -10759,14 +10790,14 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <div class="flex items-end">
-              <button type="button" id="booking-top-search-btn" class="dt-top-filter-search-btn btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button type="button" id="booking-top-search-btn" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span>Search</span>
               </button>
@@ -10793,7 +10824,7 @@ const PurchaseView = {
       const avgRate = totalWeight > 0 ? (totalValue / totalWeight) : 0;
 
       totalsContainer.innerHTML = `
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
             <div class="flex items-center gap-2">
               <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
@@ -11030,22 +11061,24 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Search / Filter Fields: Date, Company, Species, Plant, Center, Weight, Amount, Average Rate -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="rm-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="rm-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="rm-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+              <button type="button" id="rm-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="rm-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="rm-top-toggle-text">Hide Filter</span>
               </button>
@@ -11053,17 +11086,17 @@ const PurchaseView = {
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="rm-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <div id="rm-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">COMPANY</label>
-              <select id="rm-top-company-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">COMPANY</label>
+              <select id="rm-top-company-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Companies</option>
                 <option value="DEVI FISHERIES LIMITED" selected>DEVI FISHERIES LIMITED</option>
                 <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
@@ -11072,8 +11105,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SPECIES</label>
-              <select id="rm-top-species-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
+              <select id="rm-top-species-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">Select Species</option>
                 <option value="Vannamei (VM)">Vannamei (VM)</option>
                 <option value="Black Tiger (BT)">Black Tiger (BT)</option>
@@ -11082,8 +11115,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">PLANT</label>
-              <select id="rm-top-plant-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
+              <select id="rm-top-plant-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">Select Plant</option>
                 <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
@@ -11095,8 +11128,8 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">CENTER</label>
-              <select id="rm-top-center-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
+              <select id="rm-top-center-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">Select Center</option>
                 <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
                 <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
@@ -11108,22 +11141,22 @@ const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">WEIGHT</label>
-              <input type="text" id="rm-top-weight-input" placeholder="Enter Weight" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">WEIGHT</label>
+              <input type="text" id="rm-top-weight-input" placeholder="Enter Weight" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">AMOUNT</label>
-              <input type="text" id="rm-top-amount-input" placeholder="Enter Amount" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">AMOUNT</label>
+              <input type="text" id="rm-top-amount-input" placeholder="Enter Amount" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">AVERAGE RATE</label>
-              <input type="text" id="rm-top-avgrate-input" placeholder="Enter Average Rate" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">AVERAGE RATE</label>
+              <input type="text" id="rm-top-avgrate-input" placeholder="Enter Average Rate" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
             </div>
 
             <div class="flex items-end">
-              <button type="button" id="rm-top-search-btn" class="dt-top-filter-search-btn btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button type="button" id="rm-top-search-btn" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -11149,7 +11182,7 @@ const PurchaseView = {
       const avgRate = totalWeight > 0 ? (totalAmount / totalWeight) : 0;
 
       totalsContainer.innerHTML = `
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
             <div class="flex items-center gap-2">
               <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
@@ -11444,7 +11477,7 @@ const PurchaseView = {
       const avgRate = totalWeight > 0 ? (totalAmt / totalWeight) : 0;
 
       totalsContainer.innerHTML = `
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
             <div class="flex items-center gap-2">
               <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
@@ -11998,34 +12031,35 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Search / Filter Fields Card (5 Fields) -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="ctx-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="ctx-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="ctx-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+              <button type="button" id="ctx-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="ctx-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="ctx-top-toggle-text">Hide Filter</span>
               </button>
             </div>
           </div>
 
-          <!-- Collapsible Filter Inputs Grid (Max 5 Columns) -->
-          <div id="ctx-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
-            <!-- 1. Select Center -->
+          <!-- Collapsible Filter Inputs Grid -->
+          <div id="ctx-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT CENTER</label>
-              <select id="ctx-top-center-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT CENTER</label>
+              <select id="ctx-top-center-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Centers</option>
                 <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
                 <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
@@ -12036,10 +12070,9 @@ const PurchaseView = {
               </select>
             </div>
 
-            <!-- 2. Select Type -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT TYPE</label>
-              <select id="ctx-top-type-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT TYPE</label>
+              <select id="ctx-top-type-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Types</option>
                 <option value="PURCHASE_PAYABLE">Purchase Payable</option>
                 <option value="ADVANCE_PAID">Advance Paid</option>
@@ -12050,47 +12083,35 @@ const PurchaseView = {
               </select>
             </div>
 
-            <!-- 3. Select Supplier -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT SUPPLIER</label>
-              <select id="ctx-top-supplier-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT SUPPLIER</label>
+              <select id="ctx-top-supplier-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Suppliers</option>
-                <option value="Sri Sai Aqua Farms">Sri Sai Aqua Farms</option>
-                <option value="Krishna Delta Prawn Harvesters">Krishna Delta Prawn Harvesters</option>
-                <option value="Konaseema Marine Harvesters">Konaseema Marine Harvesters</option>
-                <option value="Nellore Brackish Aqua Cultivators">Nellore Brackish Aqua Cultivators</option>
                 <option value="Godavari Coastal Aqua Farms">Godavari Coastal Aqua Farms</option>
                 <option value="Sagar Marine Hatcheries">Sagar Marine Hatcheries</option>
-                <option value="East Coast Aqua Society">East Coast Aqua Society</option>
-                <option value="Coastal Andhra Aquatics">Coastal Andhra Aquatics</option>
+                <option value="Krishna Delta Prawn Harvesters">Krishna Delta Prawn Harvesters</option>
+                <option value="Konaseema Marine Harvesters Syndicate">Konaseema Marine Harvesters</option>
+                <option value="Nellore Brackish Aqua Cultivators">Nellore Brackish Aqua Cultivators</option>
+                <option value="Sri Sai Aqua Farms">Sri Sai Aqua Farms</option>
               </select>
             </div>
 
-            <!-- 4. Select Agent -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT AGENT</label>
-              <select id="ctx-top-agent-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option value="ALL">All Agents</option>
-                <option value="Direct Farmer">Direct Farmer</option>
-                <option value="Coastal Marine Agency">Coastal Marine Agency</option>
-                <option value="Sagar Marine Brokers">Sagar Marine Brokers</option>
-                <option value="Delta Seafood Associates">Delta Seafood Associates</option>
-                <option value="Nellore Aqua Syndicate">Nellore Aqua Syndicate</option>
-                <option value="East Coast Brokers">East Coast Brokers</option>
-              </select>
-            </div>
-
-            <!-- 5. Date -->
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">DATE</label>
-              <div class="erp-date-wrapper w-full">
-                <input type="date" id="ctx-top-date" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
+              <div class="erp-date-wrapper">
+                <input type="date" id="ctx-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
-            <!-- 6. Search Action Button (Second Row) -->
+            <div>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
+              <div class="erp-date-wrapper">
+                <input type="date" id="ctx-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+              </div>
+            </div>
+
             <div class="flex items-end">
-              <button type="button" id="ctx-top-search-btn" class="btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]" title="Apply Filters">
+              <button type="button" id="ctx-top-search-btn" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -12330,34 +12351,35 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Search / Filter Fields Card (8 Fields, Max 5 Columns) -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="pay-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="pay-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="pay-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+              <button type="button" id="pay-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="pay-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="pay-top-toggle-text">Hide Filter</span>
               </button>
             </div>
           </div>
 
-          <!-- Collapsible Filter Inputs Grid (Max 5 Columns) -->
-          <div id="pay-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
-            <!-- 1. Select Center -->
+          <!-- Collapsible Filter Inputs Grid -->
+          <div id="pay-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT CENTER</label>
-              <select id="pay-top-center-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT CENTER</label>
+              <select id="pay-top-center-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Centers</option>
                 <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
                 <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
@@ -12368,10 +12390,9 @@ const PurchaseView = {
               </select>
             </div>
 
-            <!-- 2. Select Type -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT TYPE</label>
-              <select id="pay-top-type-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT TYPE</label>
+              <select id="pay-top-type-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Types</option>
                 <option value="PURCHASE_PAYABLE">Purchase Payable</option>
                 <option value="ADVANCE_PAID">Advance Paid</option>
@@ -12381,81 +12402,35 @@ const PurchaseView = {
               </select>
             </div>
 
-            <!-- 3. Select Supplier -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT SUPPLIER</label>
-              <select id="pay-top-supplier-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT SUPPLIER</label>
+              <select id="pay-top-supplier-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Suppliers</option>
-                <option value="Sri Sai Aqua Farms">Sri Sai Aqua Farms</option>
-                <option value="Krishna Delta Prawn Harvesters">Krishna Delta Prawn Harvesters</option>
-                <option value="Konaseema Marine Harvesters">Konaseema Marine Harvesters</option>
-                <option value="Nellore Brackish Aqua Cultivators">Nellore Brackish Aqua Cultivators</option>
                 <option value="Godavari Coastal Aqua Farms">Godavari Coastal Aqua Farms</option>
                 <option value="Sagar Marine Hatcheries">Sagar Marine Hatcheries</option>
-                <option value="East Coast Aqua Society">East Coast Aqua Society</option>
-                <option value="Coastal Andhra Aquatics">Coastal Andhra Aquatics</option>
+                <option value="Krishna Delta Prawn Harvesters">Krishna Delta Prawn Harvesters</option>
+                <option value="Konaseema Marine Harvesters Syndicate">Konaseema Marine Harvesters</option>
+                <option value="Nellore Brackish Aqua Cultivators">Nellore Brackish Aqua Cultivators</option>
+                <option value="Sri Sai Aqua Farms">Sri Sai Aqua Farms</option>
               </select>
             </div>
 
-            <!-- 4. Select Agent -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT AGENT</label>
-              <select id="pay-top-agent-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option value="ALL">All Agents</option>
-                <option value="Direct Farmer">Direct Farmer</option>
-                <option value="Coastal Marine Agency">Coastal Marine Agency</option>
-                <option value="Sagar Marine Brokers">Sagar Marine Brokers</option>
-                <option value="Delta Seafood Associates">Delta Seafood Associates</option>
-                <option value="Nellore Aqua Syndicate">Nellore Aqua Syndicate</option>
-                <option value="East Coast Brokers">East Coast Brokers</option>
-              </select>
-            </div>
-
-            <!-- 5. Select Arrival Plant -->
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT ARRIVAL PLANT</label>
-              <select id="pay-top-plant-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option value="ALL">All Arrival Plants</option>
-                <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
-                <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
-                <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
-                <option value="DFL UNIT-4 (PND)">DFL UNIT-4 (PND)</option>
-                <option value="DFL UNIT-5 (JPT)">DFL UNIT-5 (JPT)</option>
-                <option value="DFL UNIT-6 (JPT-II)">DFL UNIT-6 (JPT-II)</option>
-              </select>
-            </div>
-
-            <!-- 6. Select Payment Mode -->
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT PAYMENT MODE</label>
-              <select id="pay-top-mode-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option value="ALL">All Payment Modes</option>
-                <option value="RTGS">RTGS / Bank Wire</option>
-                <option value="NEFT">NEFT</option>
-                <option value="Direct Bank Transfer">Direct Bank Transfer</option>
-                <option value="Cheque">Cheque Disbursement</option>
-              </select>
-            </div>
-
-            <!-- 7. From Date -->
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">FROM DATE</label>
-              <div class="erp-date-wrapper w-full">
-                <input type="date" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
+              <div class="erp-date-wrapper">
+                <input type="date" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
-            <!-- 8. To Date -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">TO DATE</label>
-              <div class="erp-date-wrapper w-full">
-                <input type="date" id="pay-top-to-date" value="2026-10-07" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
+              <div class="erp-date-wrapper">
+                <input type="date" id="pay-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
-            <!-- 9. Search Action Button (Second Row) -->
             <div class="flex items-end">
-              <button type="button" id="pay-top-search-btn" class="btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]" title="Apply Filters">
+              <button type="button" id="pay-top-search-btn" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
