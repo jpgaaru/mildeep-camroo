@@ -69,6 +69,7 @@ export const TabBar = {
           >
             ${submenu.tabs.map(tab => {
               const isActive = tab.id === currentTabId;
+              const iconHtml = tab.icon ? `<span class="inline-flex items-center ${isActive ? 'text-[#006C7A]' : 'text-[#64748B]'} mr-2">${tab.icon}</span>` : '';
               return `
                 <a 
                   id="tab-${tab.id}"
@@ -77,8 +78,9 @@ export const TabBar = {
                   aria-selected="${isActive ? 'true' : 'false'}"
                   tabindex="${isActive ? '0' : '-1'}"
                   aria-controls="panel-${tab.id}"
-                  class="${isActive ? 'active tab-active' : ''}"
+                  class="${isActive ? 'active tab-active' : ''} inline-flex items-center"
                 >
+                  ${iconHtml}
                   <span>${tab.label}</span>
                 </a>
               `;

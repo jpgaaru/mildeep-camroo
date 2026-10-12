@@ -39,10 +39,13 @@ export const Breadcrumbs = {
     }
 
     const html = `
-      <nav class="flex items-center gap-1.5 text-xs select-none flex-wrap" aria-label="Breadcrumb">
+      <nav class="flex items-center gap-1 text-xs select-none flex-wrap" aria-label="Breadcrumb">
+        <span class="inline-flex items-center text-[#64748B] mr-1 shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        </span>
         ${crumbs.map((c, idx) => {
           const isLast = idx === crumbs.length - 1;
-          const separator = !isLast ? `<span class="text-[#CBD5E1] font-semibold text-xs mx-1">/</span>` : '';
+          const separator = !isLast ? `<span class="text-[#94A3B8] font-normal text-xs mx-1">›</span>` : '';
           
           if (c.active || isLast || !c.hash) {
             return `<span class="font-bold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;

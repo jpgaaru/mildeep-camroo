@@ -172,7 +172,7 @@ export const App = {
       'purchase': {
         'dashboard': {
           title: 'Purchase Dashboard',
-          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution'
+          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution.'
         },
         'operations': {
           title: 'Purchase Operations',

@@ -273,76 +273,74 @@ export const PurchaseView = {
         <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
-            <div class="flex items-center gap-2.5">
-              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#0F172A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
               <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
-            <div class="flex items-center gap-2">
-              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); Toast.show('Filters reset', 'info');" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Reset</span>
-              </button>
-
-              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
-                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <div class="flex items-center gap-2 text-xs font-semibold text-[#64748B]">
+              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); const d = document.querySelectorAll('#rm-filter-body input'); d.forEach(i => i.value=''); Toast.show('Filters reset', 'info');" class="hover:text-[#006C7A] transition-colors cursor-pointer" title="Reset all filters">Reset</button>
+              <span class="text-[#CBD5E1]">|</span>
+              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; ic.classList.add('rotate-180'); } else { t.innerText='Hide Filter'; ic.classList.remove('rotate-180'); }" class="flex items-center gap-1 hover:text-[#006C7A] transition-colors cursor-pointer" title="Hide Filter">
                 <span class="rm-toggle-text">Hide Filter</span>
+                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
               </button>
             </div>
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="rm-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Species (Select)</option>
-                <option selected>Vannamei (VM)</option>
-                <option>Black Tiger (BT)</option>
-                <option>Asian Seabass</option>
-              </select>
-            </div>
+          <div id="rm-filter-body" class="dt-top-filter-body mt-4 transition-all duration-200">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-xs">
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Species (Select)</option>
+                  <option selected>Vannamei (VM)</option>
+                  <option>Black Tiger (BT)</option>
+                  <option>Asian Seabass</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Centers (Select)</option>
-                <option>Bhimavaram Center #1</option>
-                <option>Kakinada Sea Intake #2</option>
-                <option>Amalapuram Harvesters #4</option>
-              </select>
-            </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Centers (Select)</option>
+                  <option>Bhimavaram Center #1</option>
+                  <option>Kakinada Sea Intake #2</option>
+                  <option>Amalapuram Harvesters #4</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Plants (Select)</option>
-                <option>DFL UNIT-5 (JPT)</option>
-                <option>DFL UNIT-3 (PSP)</option>
-                <option>DFL UNIT-6 (JPT-II)</option>
-                <option>DFL UNIT-4 (PND)</option>
-              </select>
-            </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Plants (Select)</option>
+                  <option>DFL UNIT-5 (JPT)</option>
+                  <option>DFL UNIT-3 (PSP)</option>
+                  <option>DFL UNIT-6 (JPT-II)</option>
+                  <option>DFL UNIT-4 (PND)</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
-              <div class="erp-date-wrapper">
-                <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date" />
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
-              <div class="erp-date-wrapper">
-                <input type="text" readonly inputmode="none" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date" />
-              </div>
-            </div>
-
-            <div class="flex items-end">
-              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
+            <!-- Search Action Row -->
+            <div class="flex justify-end mt-4">
+              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>

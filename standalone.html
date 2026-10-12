@@ -3207,7 +3207,7 @@ select,
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 12px center !important;
   background-size: 15px 15px !important;
@@ -3268,7 +3268,7 @@ input[type="date"] {
   cursor: pointer !important;
   padding-left: 12px !important;
   padding-right: 36px !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 12px center !important;
   background-size: 16px 16px !important;
@@ -6536,8 +6536,18 @@ const NAV_HIERARCHY = [
         title: "Dashboard",
         defaultTab: "rm-dashboard",
         tabs: [
-          { id: "rm-dashboard", label: "Raw Material Dashboard", hash: "#/purchase/dashboard/rm-dashboard" },
-          { id: "commercial-dashboard", label: "Commercial Dashboard", hash: "#/purchase/dashboard/commercial-dashboard" }
+          { 
+            id: "rm-dashboard", 
+            label: "Raw Material Dashboard", 
+            hash: "#/purchase/dashboard/rm-dashboard",
+            icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a9 9 0 0 1 9 9c0 3.87-2.69 7.14-6.36 8.48A9 9 0 0 1 3 12a9 9 0 0 1 9-10z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a9 9 0 0 1-9-9c0-3.87 2.69-7.14 6.36-8.48A9 9 0 0 1 21 12a9 9 0 0 1-9 10z"/></svg>`
+          },
+          { 
+            id: "commercial-dashboard", 
+            label: "Commercial Dashboard", 
+            hash: "#/purchase/dashboard/commercial-dashboard",
+            icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+          }
         ]
       },
       {
@@ -7474,6 +7484,7 @@ const TabBar = {
           >
             ${submenu.tabs.map(tab => {
               const isActive = tab.id === currentTabId;
+              const iconHtml = tab.icon ? `<span class="inline-flex items-center ${isActive ? 'text-[#006C7A]' : 'text-[#64748B]'} mr-2">${tab.icon}</span>` : '';
               return `
                 <a 
                   id="tab-${tab.id}"
@@ -7482,8 +7493,9 @@ const TabBar = {
                   aria-selected="${isActive ? 'true' : 'false'}"
                   tabindex="${isActive ? '0' : '-1'}"
                   aria-controls="panel-${tab.id}"
-                  class="${isActive ? 'active tab-active' : ''}"
+                  class="${isActive ? 'active tab-active' : ''} inline-flex items-center"
                 >
+                  ${iconHtml}
                   <span>${tab.label}</span>
                 </a>
               `;
@@ -7620,10 +7632,13 @@ const Breadcrumbs = {
     }
 
     const html = `
-      <nav class="flex items-center gap-1.5 text-xs select-none flex-wrap" aria-label="Breadcrumb">
+      <nav class="flex items-center gap-1 text-xs select-none flex-wrap" aria-label="Breadcrumb">
+        <span class="inline-flex items-center text-[#64748B] mr-1 shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        </span>
         ${crumbs.map((c, idx) => {
           const isLast = idx === crumbs.length - 1;
-          const separator = !isLast ? `<span class="text-[#CBD5E1] font-semibold text-xs mx-1">/</span>` : '';
+          const separator = !isLast ? `<span class="text-[#94A3B8] font-normal text-xs mx-1">›</span>` : '';
           
           if (c.active || isLast || !c.hash) {
             return `<span class="font-bold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;
@@ -7656,118 +7671,32 @@ const Header = {
 
     container.innerHTML = `
       <header class="bg-white border-b border-[#E2E8F0] h-16 px-6 flex items-center justify-between select-none rounded-t-2xl">
-        <!-- Left: Organization / Welcome Text -->
-        <div class="flex items-center gap-2.5 text-xs">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0FAFC] border border-[#B2ECF3] font-bold text-[#006C7A] text-xs">
-            <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            Devi Fisheries Plant #1
-          </span>
-          <span class="hidden md:inline text-xs text-[#CBD5E1] font-semibold">·</span>
-          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0F172A] font-bold">${ERP_DATA.currentUser.name}</strong></span>
-        </div>
-
-        <!-- Center: Global Inline Search (AquaPulse Search Molecule) -->
-        <div class="relative mx-3" id="header-search-container">
-          <div class="w-60 sm:w-80 md:w-96 relative flex items-center">
-            <i data-lucide="search" class="w-4 h-4 text-[#94A3B8] absolute left-3.5 pointer-events-none"></i>
-            <input 
-              type="text" 
-              id="header-global-search-input" 
-              placeholder="Search catalog, lots, bills... (⌘K)" 
-              autocomplete="off"
-              class="w-full pl-10 pr-12 py-2 bg-[#F8FAFC] hover:bg-[#F1F5F9] focus:bg-white text-[#0F172A] placeholder-[#94A3B8] border border-[#E2E8F0] focus:border-[#006C7A] rounded-full text-xs transition-all focus:outline-none focus:ring-2 focus:ring-[#B2ECF3]"
-            />
-            <span class="absolute right-3 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#E2E8F0] text-[#64748B] font-semibold pointer-events-none">⌘K</span>
-            <button 
-              type="button" 
-              id="header-search-clear-btn" 
-              class="hidden absolute right-9 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
-              title="Clear Search"
-            >
-              <i data-lucide="x" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-          <!-- Live Inline Search Dropdown -->
-          <div 
-            id="header-search-dropdown" 
-            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#E2E8F0] rounded-xl z-50 overflow-hidden shadow-lg"
-            style="max-width: calc(100vw - 32px);"
-          >
-            <div id="header-search-results-content" class="max-h-96 overflow-y-auto p-2.5 text-xs"></div>
-          </div>
-        </div>
-
-        <!-- Right: Actions, Notifications & Profile -->
-        <div class="flex items-center gap-2.5">
-          <!-- AquaPulse Design System Link Pill -->
+        <!-- Left: AquaPulse DS Logo Link Pill -->
+        <div class="flex items-center gap-3">
           <a 
             href="/designsystem" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-bold transition-all border border-[#005662] shadow-xs cursor-pointer"
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer"
             title="Open AquaPulse Design System & Interactive Telemetry"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#4FCFE0]"></span>
+            <svg class="w-4 h-4 text-[#4FCFE0]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
             <span>AquaPulse DS</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-90"></i>
+            <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
+        </div>
 
-          <!-- Help Icon Button -->
-          <button id="header-help-btn" class="w-9 h-9 rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#006C7A] hover:bg-[#F0FAFC] hover:border-[#84DFEB] flex items-center justify-center transition-all cursor-pointer" title="Help & Compliance Manual">
-            <i data-lucide="help-circle" class="w-4 h-4"></i>
-          </button>
-
-          <!-- Notifications -->
-          <div class="relative">
-            <button id="header-notifications-btn" class="w-9 h-9 rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] flex items-center justify-center relative transition-all cursor-pointer" title="Notifications">
-              <i data-lucide="bell" class="w-4 h-4"></i>
-              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5150] rounded-full ring-2 ring-white"></span>
-            </button>
-            <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-[#E2E8F0] py-2 z-50 text-xs shadow-lg">
-              <div class="px-3 py-1.5 font-bold text-[#0F172A] border-b border-[#F1F5F9] flex justify-between items-center">
-                <span>Notifications (3 New)</span>
-                <span class="text-[10px] text-[#006C7A] cursor-pointer hover:underline font-semibold">Mark all read</span>
-              </div>
-              <div class="divide-y divide-[#F1F5F9] max-h-64 overflow-y-auto">
-                <div class="p-3 hover:bg-[#F8FAFC] cursor-pointer">
-                  <div class="flex items-center gap-1.5 text-[#006C7A] font-semibold text-[11px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A]"></span> RM Arrival #RMA-2026-00341
-                  </div>
-                  <div class="text-[#475569] mt-0.5">Godavari Coastal 2,980 KG Vannamei Shrimp staged at Dock #1 awaiting QC approval.</div>
-                  <div class="text-[10px] text-[#94A3B8] mt-1">20 minutes ago</div>
-                </div>
-                <div class="p-3 hover:bg-[#F8FAFC] cursor-pointer">
-                  <div class="flex items-center gap-1.5 text-[#15803D] font-semibold text-[11px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#15803D]"></span> QC Antibiotic Clearance
-                  </div>
-                  <div class="text-[#475569] mt-0.5">LOT-2026-00128 Seabass passed all rapid nitrofurans & organoleptic panels.</div>
-                  <div class="text-[10px] text-[#94A3B8] mt-1">1 hour ago</div>
-                </div>
-                <div class="p-3 hover:bg-[#F8FAFC] cursor-pointer">
-                  <div class="flex items-center gap-1.5 text-[#6D28D9] font-semibold text-[11px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#6D28D9]"></span> Export Vessel Gate-In
-                  </div>
-                  <div class="text-[#475569] mt-0.5">Container ONEU-440912-8 (14 MT Black Tiger) cleared customs for Tokyo.</div>
-                  <div class="text-[10px] text-[#94A3B8] mt-1">3 hours ago</div>
-                </div>
-              </div>
+        <!-- Right: Welcome Admin & Profile -->
+        <div class="relative flex items-center gap-3">
+          <button id="user-menu-btn" class="flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-right outline-none">
+            <div class="hidden sm:block text-right">
+              <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, Admin</div>
+              <div class="text-[11px] text-[#64748B] leading-tight font-medium">Procurement Manager</div>
             </div>
-          </div>
-
-          <!-- Vertical Separator -->
-          <div class="h-6 w-px bg-[#E2E8F0] mx-1"></div>
-
-          <!-- User Profile Dropdown -->
-          <div class="relative">
-            <button id="user-menu-btn" class="flex items-center gap-2.5 px-2 py-1 rounded-full hover:bg-[#F8FAFC] transition-colors cursor-pointer outline-none">
-              <img src="${ERP_DATA.currentUser.avatar}" alt="Avatar" class="w-7 h-7 rounded-full object-cover ring-1 ring-[#E2E8F0]" />
-              <div class="hidden lg:flex flex-col text-left">
-                <span class="text-xs font-bold text-[#0F172A] leading-tight">${ERP_DATA.currentUser.name}</span>
-                <span class="text-[10px] text-[#64748B] leading-tight font-medium" id="user-role-badge">${ERP_DATA.currentUser.role}</span>
-              </div>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-[#64748B]"></i>
-            </button>
+            <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </div>
+          </button>
 
             <!-- User Menu Popup -->
             <div id="user-dropdown-menu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl border border-[#DFE1E6] py-2 z-[60] text-xs">
@@ -9681,76 +9610,74 @@ const PurchaseView = {
         <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
-            <div class="flex items-center gap-2.5">
-              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#0F172A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
               <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
-            <div class="flex items-center gap-2">
-              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); Toast.show('Filters reset', 'info');" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Reset</span>
-              </button>
-
-              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
-                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <div class="flex items-center gap-2 text-xs font-semibold text-[#64748B]">
+              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); const d = document.querySelectorAll('#rm-filter-body input'); d.forEach(i => i.value=''); Toast.show('Filters reset', 'info');" class="hover:text-[#006C7A] transition-colors cursor-pointer" title="Reset all filters">Reset</button>
+              <span class="text-[#CBD5E1]">|</span>
+              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; ic.classList.add('rotate-180'); } else { t.innerText='Hide Filter'; ic.classList.remove('rotate-180'); }" class="flex items-center gap-1 hover:text-[#006C7A] transition-colors cursor-pointer" title="Hide Filter">
                 <span class="rm-toggle-text">Hide Filter</span>
+                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
               </button>
             </div>
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="rm-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Species (Select)</option>
-                <option selected>Vannamei (VM)</option>
-                <option>Black Tiger (BT)</option>
-                <option>Asian Seabass</option>
-              </select>
-            </div>
+          <div id="rm-filter-body" class="dt-top-filter-body mt-4 transition-all duration-200">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-xs">
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Species (Select)</option>
+                  <option selected>Vannamei (VM)</option>
+                  <option>Black Tiger (BT)</option>
+                  <option>Asian Seabass</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Centers (Select)</option>
-                <option>Bhimavaram Center #1</option>
-                <option>Kakinada Sea Intake #2</option>
-                <option>Amalapuram Harvesters #4</option>
-              </select>
-            </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Centers (Select)</option>
+                  <option>Bhimavaram Center #1</option>
+                  <option>Kakinada Sea Intake #2</option>
+                  <option>Amalapuram Harvesters #4</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
-              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                <option>All Plants (Select)</option>
-                <option>DFL UNIT-5 (JPT)</option>
-                <option>DFL UNIT-3 (PSP)</option>
-                <option>DFL UNIT-6 (JPT-II)</option>
-                <option>DFL UNIT-4 (PND)</option>
-              </select>
-            </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
+                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option>All Plants (Select)</option>
+                  <option>DFL UNIT-5 (JPT)</option>
+                  <option>DFL UNIT-3 (PSP)</option>
+                  <option>DFL UNIT-6 (JPT-II)</option>
+                  <option>DFL UNIT-4 (PND)</option>
+                </select>
+              </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
-              <div class="erp-date-wrapper">
-                <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date" />
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
-              <div class="erp-date-wrapper">
-                <input type="text" readonly inputmode="none" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date" />
-              </div>
-            </div>
-
-            <div class="flex items-end">
-              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
+            <!-- Search Action Row -->
+            <div class="flex justify-end mt-4">
+              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -23801,7 +23728,7 @@ const App = {
       'purchase': {
         'dashboard': {
           title: 'Purchase Dashboard',
-          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution'
+          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution.'
         },
         'operations': {
           title: 'Purchase Operations',
