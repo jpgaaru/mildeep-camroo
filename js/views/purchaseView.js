@@ -303,7 +303,7 @@ export const PurchaseView = {
                 <span>Reset</span>
               </button>
 
-              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-3'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-3'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
+              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-3', 'border-b', 'border-[#F1F5F9]'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
                 <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="rm-toggle-text">Hide Filter</span>
               </button>
@@ -1503,12 +1503,12 @@ export const PurchaseView = {
             if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
             if (t) t.innerText = 'Show Filter';
             if (ic) ic.classList.add('-rotate-90');
-            toggleBtn.className = 'text-xs font-semibold text-[#5E6C84] bg-[#FAFBFC] hover:bg-[#EBECF0] px-3 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer';
+            toggleBtn.className = 'text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer';
           } else {
             if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
             if (t) t.innerText = 'Hide Filter';
             if (ic) ic.classList.remove('-rotate-90');
-            toggleBtn.className = 'text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-3 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer';
+            toggleBtn.className = 'text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer';
           }
         }
       });
@@ -1723,15 +1723,15 @@ export const PurchaseView = {
           if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
           if (toggleText) toggleText.innerText = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }
@@ -2033,15 +2033,15 @@ export const PurchaseView = {
           if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
           if (toggleText) toggleText.innerText = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }
@@ -2408,15 +2408,15 @@ export const PurchaseView = {
           if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
           if (toggleText) toggleText.innerText = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }
@@ -3048,16 +3048,16 @@ export const PurchaseView = {
           if (toggleText) toggleText.innerText = 'Show Filter';
           toggleBtn.title = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           toggleBtn.title = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }
@@ -3367,15 +3367,15 @@ export const PurchaseView = {
           if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
           if (toggleText) toggleText.innerText = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }
@@ -3702,15 +3702,15 @@ export const PurchaseView = {
           if (h) { h.classList.remove('pb-1'); h.classList.add('pb-0'); }
           if (toggleText) toggleText.innerText = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (h) { h.classList.add('pb-1'); h.classList.remove('pb-0'); }
           if (toggleText) toggleText.innerText = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }

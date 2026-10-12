@@ -234,8 +234,8 @@ export const App = {
 
           <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
           <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-            <!-- Fixed / Sticky Top Header & Breadcrumbs Wrapper -->
-            <div class="sticky top-3 z-30 mr-3 mt-3 rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
+            <!-- Top Header & Breadcrumbs Wrapper (Clean Flow Geometry) -->
+            <div class="mr-3 mt-3 rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
               <div id="header-container" class="bg-white rounded-t-2xl"></div>
               <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
               <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">

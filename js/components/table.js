@@ -534,15 +534,15 @@ export class DataTable {
           if (toggleText) toggleText.innerText = 'Show Filter';
           toggleBtn.title = 'Show Filter';
           if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.classList.remove('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.add('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.remove('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.add('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         } else {
           filterBody.classList.remove('hidden');
           if (toggleText) toggleText.innerText = 'Hide Filter';
           toggleBtn.title = 'Hide Filter';
           if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.classList.add('bg-[#F0F9FF]/80', 'text-[#0284C7]', 'border-[#BAE6FD]');
-          toggleBtn.classList.remove('bg-[#FAFBFC]', 'text-[#5E6C84]', 'border-[#DFE1E6]');
+          toggleBtn.classList.add('bg-[#F0FAFC]', 'text-[#006C7A]', 'border-[#B2ECF3]');
+          toggleBtn.classList.remove('bg-white', 'text-[#64748B]', 'border-[#CBD5E1]');
         }
       });
     }

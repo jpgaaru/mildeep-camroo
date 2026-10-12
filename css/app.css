@@ -662,7 +662,12 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 /* Filter Bar Action Buttons — Clean AquaPulse Interactive Controls */
 .dt-top-filter-reset-btn,
 #comm-filter-reset-btn,
-#bill-top-reset-btn {
+#bill-top-reset-btn,
+#booking-top-reset-btn,
+#rm-top-reset-btn,
+#lot-top-reset-btn,
+#ctx-top-reset-btn,
+#pay-top-reset-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -680,7 +685,12 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 }
 .dt-top-filter-reset-btn:hover,
 #comm-filter-reset-btn:hover,
-#bill-top-reset-btn:hover {
+#bill-top-reset-btn:hover,
+#booking-top-reset-btn:hover,
+#rm-top-reset-btn:hover,
+#lot-top-reset-btn:hover,
+#ctx-top-reset-btn:hover,
+#pay-top-reset-btn:hover {
   background-color: #F8FAFC !important;
   color: #0F172A !important;
   border-color: #94A3B8 !important;
@@ -688,7 +698,12 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 
 .dt-top-filter-toggle-btn,
 #comm-filter-toggle-btn,
-#bill-top-toggle-btn {
+#bill-top-toggle-btn,
+#booking-top-toggle-btn,
+#rm-top-toggle-btn,
+#lot-top-toggle-btn,
+#ctx-top-toggle-btn,
+#pay-top-toggle-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -706,7 +721,12 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 }
 .dt-top-filter-toggle-btn:hover,
 #comm-filter-toggle-btn:hover,
-#bill-top-toggle-btn:hover {
+#bill-top-toggle-btn:hover,
+#booking-top-toggle-btn:hover,
+#rm-top-toggle-btn:hover,
+#lot-top-toggle-btn:hover,
+#ctx-top-toggle-btn:hover,
+#pay-top-toggle-btn:hover {
   background-color: #E0F7FA !important;
   border-color: #84DFEB !important;
   color: #005662 !important;
