@@ -535,7 +535,7 @@ export const Sidebar = {
             <div class="f-sb-logo"><i data-lucide="waves"></i></div>
             <div class="f-sb-brand-info">
               <div class="f-sb-title">Devi Fisheries</div>
-              <div class="f-sb-sub">AquaPulse ERP</div>
+              <div class="f-sb-subtitle">AquaPulse ERP</div>
             </div>
           </a>
           <button class="f-sb-toggle" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}">
@@ -562,12 +562,12 @@ export const Sidebar = {
 
         <!-- Floating Sidebar Footer Profile -->
         <div class="f-sb-footer" title="Devi Fisheries #1 — Plant Admin">
-          <div class="av sm" style="background:var(--teal-050);border:1px solid var(--teal-200);display:grid;place-items:center;width:34px;height:34px;border-radius:var(--r-10);flex-shrink:0;">
-            <span style="font-weight:700;font-size:12px;color:var(--teal-900);">DF</span>
+          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;">
+            <span style="font-weight:800;font-size:12px;color:#006C7A;">DF</span>
           </div>
           <div class="f-sb-user-text">
-            <div style="font-size:var(--t-xs);font-weight:700;color:var(--ink);">Devi Fisheries #1</div>
-            <div style="font-size:11px;color:var(--muted)">Plant Admin</div>
+            <span class="f-sb-user-name">Devi Fisheries #1</span>
+            <span class="f-sb-user-role">Plant Admin</span>
           </div>
         </div>
       </aside>

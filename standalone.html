@@ -1266,15 +1266,15 @@ select.input:focus { border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--
 }
 .f-sidebar {
   width: 270px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-20);
-  box-shadow: var(--sh-1);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
   overflow: visible;
   position: relative;
-  transition: width 0.3s var(--ease);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
 }
 .f-sidebar.collapsed { width: 76px; }
@@ -1284,7 +1284,7 @@ select.input:focus { border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #E2E8F0;
   gap: 10px;
   position: relative;
   min-height: 66px;
@@ -1296,48 +1296,50 @@ select.input:focus { border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--
   overflow: hidden;
   text-decoration: none;
   min-width: 0;
-  transition: all 0.25s var(--ease);
+  transition: all 0.25s ease;
 }
 .f-sb-logo {
   width: 38px;
   height: 38px;
-  border-radius: var(--r-12);
-  background: var(--teal-600);
-  color: var(--black);
+  border-radius: 12px;
+  background: #00A4B7;
+  color: #FFFFFF !important;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 164, 183, 0.25);
-  transition: all 0.25s var(--ease);
+  box-shadow: 0 2px 8px rgba(0, 164, 183, 0.35);
+  transition: all 0.25s ease;
 }
-.f-sb-logo svg { width: 20px; height: 20px; }
+.f-sb-logo svg, .f-sb-logo i { width: 20px; height: 20px; color: #FFFFFF !important; stroke: #FFFFFF !important; }
 .f-sb-brand-info {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: opacity 0.2s var(--ease);
+  transition: opacity 0.2s ease;
 }
-.f-sb-title { font-size: var(--t-sm); font-weight: 700; color: var(--ink); white-space: nowrap; line-height: 1.2; }
-.f-sb-sub { font-size: 11px; color: var(--teal-800); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.f-sb-title { font-size: 14px; font-weight: 700; color: #0F172A; white-space: nowrap; line-height: 1.2; }
+.f-sb-subtitle { display: block; font-size: 10px; color: #006C7A; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; margin-top: 1px; }
 
 .f-sb-toggle {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: var(--white);
-  color: var(--muted);
+  border: 1px solid #CBD5E1;
+  background: #FFFFFF;
+  color: #475569;
   display: grid;
   place-items: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.2s var(--ease);
-  box-shadow: var(--sh-1);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  outline: none;
 }
+.f-sb-toggle:focus { outline: none; }
 .f-sb-toggle:hover {
-  background: var(--teal-050);
-  color: var(--teal-900);
-  border-color: var(--teal-300);
+  background: #F0FAFC;
+  color: #006C7A;
+  border-color: #84DFEB;
 }
 .f-sidebar.collapsed .f-sb-header {
   padding: 14px 8px;
@@ -1384,73 +1386,148 @@ select.input:focus { border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--
 .f-sb-flyout-title {
   font-size: 11px;
   font-weight: 700;
-  color: var(--ink);
+  color: #0F172A;
   padding: 4px 8px 6px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #E2E8F0;
   margin-bottom: 4px;
 }
-.f-sb-sec { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 10px 10px 4px; white-space: nowrap; }
+.f-sb-sec {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+  padding: 12px 12px 4px;
+  white-space: nowrap;
+}
 
 .f-sb-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 12px; border-radius: var(--r-12);
-  font-size: var(--t-sm); font-weight: 600; color: var(--muted);
-  cursor: pointer; text-decoration: none; transition: all 0.15s;
-  white-space: nowrap; position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  position: relative;
+  outline: none;
 }
-.f-sb-link svg { width: 17px; height: 17px; flex-shrink: 0; }
-.f-sb-link:hover { background: var(--soft); color: var(--ink); }
-.f-sb-link.active { background: var(--black); color: var(--white); }
-.f-sb-link.active svg { color: var(--teal-400); }
-.f-sb-badge { margin-left: auto; font-size: 11px; font-weight: 700; background: var(--teal-050); color: var(--teal-990); padding: 1px 7px; border-radius: var(--pill); }
+.f-sb-link:focus { outline: none; }
+.f-sb-link:focus-visible { outline: 2px solid #006C7A; outline-offset: 1px; }
+.f-sb-link svg, .f-sb-link i { width: 17px; height: 17px; flex-shrink: 0; color: #64748B; transition: color 0.15s ease; }
+.f-sb-link:hover { background: #F1F5F9; color: #0F172A; }
+.f-sb-link:hover svg, .f-sb-link:hover i { color: #0F172A; }
+.f-sb-link.active { background: #F0FAFC; color: #006C7A; font-weight: 700; border: 1px solid #B2ECF3; }
+.f-sb-link.active svg, .f-sb-link.active i { color: #006C7A; }
+.f-sb-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  background: #F0FAFC;
+  color: #006C7A;
+  border: 1px solid #B2ECF3;
+  padding: 1px 7px;
+  border-radius: 9999px;
+}
 
 .f-sb-grp { display: flex; flex-direction: column; position: relative; }
 .f-sb-grp-btn {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 12px; border-radius: var(--r-12);
-  font-size: var(--t-sm); font-weight: 600; color: var(--muted);
-  cursor: pointer; border: none; background: none; width: 100%;
-  text-align: left; transition: all 0.15s; white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  outline: none;
 }
-.f-sb-grp-btn svg:first-child { width: 17px; height: 17px; flex-shrink: 0; }
-.f-sb-grp-btn:hover { background: var(--soft); color: var(--ink); }
-.f-sb-grp.open .f-sb-grp-btn { color: var(--ink); font-weight: 700; }
-.f-sb-chev { margin-left: auto; width: 14px; height: 14px; transition: transform 0.2s; color: var(--faint); }
-.f-sb-grp.open .f-sb-chev { transform: rotate(180deg); color: var(--teal-800); }
+.f-sb-grp-btn:focus { outline: none; }
+.f-sb-grp-btn:focus-visible { outline: 2px solid #006C7A; outline-offset: 1px; }
+.f-sb-grp-btn svg:first-child, .f-sb-grp-btn i:first-child {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: #64748B;
+  transition: color 0.15s ease;
+}
+.f-sb-grp-btn:hover { background: #F1F5F9; color: #0F172A; }
+.f-sb-grp-btn:hover svg:first-child, .f-sb-grp-btn:hover i:first-child { color: #0F172A; }
+.f-sb-grp.open .f-sb-grp-btn {
+  color: #006C7A;
+  font-weight: 700;
+  background: #F0FAFC;
+  border: 1px solid #B2ECF3;
+}
+.f-sb-grp.open .f-sb-grp-btn svg:first-child, .f-sb-grp.open .f-sb-grp-btn i:first-child {
+  color: #006C7A;
+}
+.f-sb-chev {
+  margin-left: auto;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+  color: #94A3B8;
+}
+.f-sb-grp.open .f-sb-chev { transform: rotate(180deg); color: #006C7A; }
 
 .f-sb-sub {
   display: none;
-  padding: 4px 0 6px 36px;
+  padding: 4px 6px 6px 20px;
   flex-direction: column;
   gap: 2px;
 }
 .f-sb-grp.open .f-sb-sub { display: flex; }
 .f-sb-sub-link {
   padding: 7px 10px;
-  font-size: var(--t-xs);
+  font-size: 12px;
   font-weight: 500;
-  color: var(--muted);
-  border-radius: var(--r-8);
+  color: #475569;
+  border-radius: 8px;
   text-decoration: none;
-  transition: all 0.15s;
-  display: flex; align-items: center; gap: 8px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  outline: none;
 }
-.f-sb-sub-link:hover { color: var(--ink); background: var(--soft); }
+.f-sb-sub-link:focus { outline: none; }
+.f-sb-sub-link:hover { color: #0F172A; background: #F1F5F9; }
 .f-sb-sub-link.active {
-  color: var(--teal-900);
+  color: #006C7A;
   font-weight: 700;
-  background: var(--teal-050);
+  background: #F0FAFC;
+  border: 1px solid #B2ECF3;
 }
 .f-sb-sub-link::before {
-  content: ""; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--line-strong); transition: all 0.15s;
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
 }
+.f-sb-sub-link:hover::before { background: #94A3B8; }
 .f-sb-sub-link.active::before {
-  background: var(--teal-600);
+  background: #006C7A;
+  box-shadow: 0 0 0 2px #B2ECF3;
 }
 
 .f-sidebar.collapsed .f-sb-title,
-.f-sidebar.collapsed .f-sb-sub,
+.f-sidebar.collapsed .f-sb-subtitle,
 .f-sidebar.collapsed .f-sb-sec,
 .f-sidebar.collapsed .f-sb-link span,
 .f-sidebar.collapsed .f-sb-badge,
@@ -1464,25 +1541,47 @@ select.input:focus { border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--
 .f-sidebar.collapsed .f-sb-grp:hover .f-sb-sub {
   display: flex !important;
   position: absolute;
-  left: calc(100% + 8px); top: 0;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-14);
-  box-shadow: var(--sh-3);
-  padding: 8px; min-width: 200px;
+  left: calc(100% + 8px);
+  top: 0;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  min-width: 200px;
   z-index: 90;
 }
 
 .f-sb-footer {
-  padding: 14px 12px;
-  border-top: 1px solid var(--line);
+  padding: 12px 14px;
+  border-top: 1px solid #E2E8F0;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: padding 0.25s var(--ease);
+  background: #FAFBFC;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: padding 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.f-sb-user-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.f-sb-user-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0F172A;
+  white-space: nowrap;
+}
+.f-sb-user-role {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
+  white-space: nowrap;
 }
 .f-sidebar.collapsed .f-sb-footer {
-  padding: 14px 8px;
+  padding: 12px 8px;
   justify-content: center;
 }
 .f-sidebar.collapsed .f-sb-footer .av {
@@ -2320,7 +2419,7 @@ tr.detail-row.open { display: table-row; }
   --primary-foreground: #FFFFFF;
   --secondary: #F7F7F7;
   --secondary-foreground: #242424;
-  --muted: #F8F8F8;
+  --muted: #64748B;
   --muted-foreground: #64748B;
   --accent: #F0FAFC;
   --accent-foreground: #006C7A;
@@ -6449,7 +6548,7 @@ const Sidebar = {
             <div class="f-sb-logo"><i data-lucide="waves"></i></div>
             <div class="f-sb-brand-info">
               <div class="f-sb-title">Devi Fisheries</div>
-              <div class="f-sb-sub">AquaPulse ERP</div>
+              <div class="f-sb-subtitle">AquaPulse ERP</div>
             </div>
           </a>
           <button class="f-sb-toggle" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}">
@@ -6476,12 +6575,12 @@ const Sidebar = {
 
         <!-- Floating Sidebar Footer Profile -->
         <div class="f-sb-footer" title="Devi Fisheries #1 — Plant Admin">
-          <div class="av sm" style="background:var(--teal-050);border:1px solid var(--teal-200);display:grid;place-items:center;width:34px;height:34px;border-radius:var(--r-10);flex-shrink:0;">
-            <span style="font-weight:700;font-size:12px;color:var(--teal-900);">DF</span>
+          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;">
+            <span style="font-weight:800;font-size:12px;color:#006C7A;">DF</span>
           </div>
           <div class="f-sb-user-text">
-            <div style="font-size:var(--t-xs);font-weight:700;color:var(--ink);">Devi Fisheries #1</div>
-            <div style="font-size:11px;color:var(--muted)">Plant Admin</div>
+            <span class="f-sb-user-name">Devi Fisheries #1</span>
+            <span class="f-sb-user-role">Plant Admin</span>
           </div>
         </div>
       </aside>
