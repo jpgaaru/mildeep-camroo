@@ -39,15 +39,15 @@ export const Breadcrumbs = {
     }
 
     const html = `
-      <nav class="flex items-center gap-1.5 text-xs py-1 select-none flex-wrap" aria-label="Breadcrumb">
+      <nav class="flex items-center gap-1.5 text-xs select-none flex-wrap" aria-label="Breadcrumb">
         ${crumbs.map((c, idx) => {
           const isLast = idx === crumbs.length - 1;
-          const separator = !isLast ? `<span class="text-[#CBD5E1] font-bold text-[10px] mx-0.5">/</span>` : '';
+          const separator = !isLast ? `<span class="text-[#CBD5E1] font-semibold text-xs mx-1">/</span>` : '';
           
           if (c.active || isLast || !c.hash) {
-            return `<span class="font-semibold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;
+            return `<span class="font-bold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;
           } else {
-            return `<a href="${c.hash}" class="text-[#6e6e73] hover:text-[#006c7a] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
+            return `<a href="${c.hash}" class="text-[#64748B] hover:text-[#006C7A] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
           }
         }).join('')}
       </nav>

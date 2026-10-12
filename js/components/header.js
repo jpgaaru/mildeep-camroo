@@ -15,43 +15,43 @@ export const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#e8e8ed] h-16 px-5 flex items-center justify-between select-none rounded-t-2xl">
+      <header class="bg-white border-b border-[#E2E8F0] h-16 px-6 flex items-center justify-between select-none rounded-t-2xl">
         <!-- Left: Organization / Welcome Text -->
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#6e6e73]">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fafc] border border-[#b2ecf3] font-bold text-[#006c7a] text-xs">
-            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+        <div class="flex items-center gap-2.5 text-xs">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F0FAFC] border border-[#B2ECF3] font-bold text-[#006C7A] text-xs">
+            <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
             Devi Fisheries Plant #1
           </span>
-          <span class="hidden md:inline text-xs text-[#d2d2d7]">·</span>
-          <span class="hidden md:inline text-xs text-[#6e6e73]">Welcome, <strong class="text-[#111113] font-bold">${ERP_DATA.currentUser.name}</strong></span>
+          <span class="hidden md:inline text-xs text-[#CBD5E1] font-semibold">·</span>
+          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0F172A] font-bold">${ERP_DATA.currentUser.name}</strong></span>
         </div>
 
         <!-- Center: Global Inline Search (AquaPulse Search Molecule) -->
         <div class="relative mx-3" id="header-search-container">
-          <div class="w-60 sm:w-80 relative flex items-center">
-            <svg class="w-4 h-4 text-[#98989d] absolute left-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="w-60 sm:w-80 md:w-96 relative flex items-center">
+            <i data-lucide="search" class="w-4 h-4 text-[#94A3B8] absolute left-3.5 pointer-events-none"></i>
             <input 
               type="text" 
               id="header-global-search-input" 
               placeholder="Search catalog, lots, bills... (⌘K)" 
               autocomplete="off"
-              class="w-full pl-10 pr-12 py-2 bg-[#f5f5f7] hover:bg-[#e8e8ed]/60 focus:bg-white text-[#111113] placeholder-[#98989d] border border-[#d2d2d7] focus:border-[#006c7a] rounded-full text-xs transition-all focus:outline-none focus:ring-2 focus:ring-[#b2ecf3]"
+              class="w-full pl-10 pr-12 py-2 bg-[#F8FAFC] hover:bg-[#F1F5F9] focus:bg-white text-[#0F172A] placeholder-[#94A3B8] border border-[#E2E8F0] focus:border-[#006C7A] rounded-full text-xs transition-all focus:outline-none focus:ring-2 focus:ring-[#B2ECF3]"
             />
-            <span class="absolute right-3 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#e8e8ed] text-[#6e6e73] pointer-events-none">⌘K</span>
+            <span class="absolute right-3 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#E2E8F0] text-[#64748B] font-semibold pointer-events-none">⌘K</span>
             <button 
               type="button" 
               id="header-search-clear-btn" 
-              class="hidden absolute right-9 text-[#98989d] hover:text-[#111113] cursor-pointer"
+              class="hidden absolute right-9 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
               title="Clear Search"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
             </button>
           </div>
 
           <!-- Live Inline Search Dropdown -->
           <div 
             id="header-search-dropdown" 
-            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#EDEDED] rounded-xl z-50 overflow-hidden shadow-lg"
+            class="hidden absolute left-0 top-full mt-1.5 w-80 sm:w-[480px] bg-white border border-[#E2E8F0] rounded-xl z-50 overflow-hidden shadow-lg"
             style="max-width: calc(100vw - 32px);"
           >
             <div id="header-search-results-content" class="max-h-96 overflow-y-auto p-2.5 text-xs"></div>
@@ -59,40 +59,40 @@ export const Header = {
         </div>
 
         <!-- Right: Actions, Notifications & Profile -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <!-- AquaPulse Design System Link Pill -->
           <a 
             href="/designsystem" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-semibold transition-all cursor-pointer border border-[#005662]"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-bold transition-all border border-[#005662] shadow-xs cursor-pointer"
             title="Open AquaPulse Design System & Interactive Telemetry"
           >
             <span class="w-1.5 h-1.5 rounded-full bg-[#4FCFE0]"></span>
             <span>AquaPulse DS</span>
-            <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-90"></i>
           </a>
 
           <!-- Help Icon Button -->
-          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#006C7A] hover:bg-[#F8F8F8] rounded-lg transition-colors flex items-center justify-center cursor-pointer border border-[#EDEDED]" title="Help & Compliance Manual">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <button id="header-help-btn" class="w-9 h-9 rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#006C7A] hover:bg-[#F0FAFC] hover:border-[#84DFEB] flex items-center justify-center transition-all cursor-pointer" title="Help & Compliance Manual">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
           </button>
 
           <!-- Notifications -->
           <div class="relative">
-            <button id="header-notifications-btn" class="p-2 text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] rounded-lg relative transition-colors cursor-pointer border border-[#EDEDED]" title="Notifications">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <button id="header-notifications-btn" class="w-9 h-9 rounded-xl border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] flex items-center justify-center relative transition-all cursor-pointer" title="Notifications">
+              <i data-lucide="bell" class="w-4 h-4"></i>
               <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5150] rounded-full ring-2 ring-white"></span>
             </button>
-            <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-[#E2E8F0] py-2 z-50 text-xs">
+            <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl border border-[#E2E8F0] py-2 z-50 text-xs shadow-lg">
               <div class="px-3 py-1.5 font-bold text-[#0F172A] border-b border-[#F1F5F9] flex justify-between items-center">
                 <span>Notifications (3 New)</span>
-                <span class="text-[10px] text-[#0284C7] cursor-pointer hover:underline font-semibold">Mark all read</span>
+                <span class="text-[10px] text-[#006C7A] cursor-pointer hover:underline font-semibold">Mark all read</span>
               </div>
               <div class="divide-y divide-[#F1F5F9] max-h-64 overflow-y-auto">
                 <div class="p-3 hover:bg-[#F8FAFC] cursor-pointer">
-                  <div class="flex items-center gap-1.5 text-[#0284C7] font-semibold text-[11px]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#0284C7]"></span> RM Arrival #RMA-2026-00341
+                  <div class="flex items-center gap-1.5 text-[#006C7A] font-semibold text-[11px]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A]"></span> RM Arrival #RMA-2026-00341
                   </div>
                   <div class="text-[#475569] mt-0.5">Godavari Coastal 2,980 KG Vannamei Shrimp staged at Dock #1 awaiting QC approval.</div>
                   <div class="text-[10px] text-[#94A3B8] mt-1">20 minutes ago</div>
@@ -115,16 +115,18 @@ export const Header = {
             </div>
           </div>
 
+          <!-- Vertical Separator -->
+          <div class="h-6 w-px bg-[#E2E8F0] mx-1"></div>
 
           <!-- User Profile Dropdown -->
-          <div class="relative pl-1 border-l border-[#E2E8F0]">
-            <button id="user-menu-btn" class="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-[#F8FAFC] transition-colors cursor-pointer">
+          <div class="relative">
+            <button id="user-menu-btn" class="flex items-center gap-2.5 px-2 py-1 rounded-full hover:bg-[#F8FAFC] transition-colors cursor-pointer outline-none">
               <img src="${ERP_DATA.currentUser.avatar}" alt="Avatar" class="w-7 h-7 rounded-full object-cover ring-1 ring-[#E2E8F0]" />
               <div class="hidden lg:flex flex-col text-left">
-                <span class="text-xs font-semibold text-[#0F172A] leading-tight">${ERP_DATA.currentUser.name}</span>
-                <span class="text-[10px] text-[#64748B] leading-tight" id="user-role-badge">${ERP_DATA.currentUser.role}</span>
+                <span class="text-xs font-bold text-[#0F172A] leading-tight">${ERP_DATA.currentUser.name}</span>
+                <span class="text-[10px] text-[#64748B] leading-tight font-medium" id="user-role-badge">${ERP_DATA.currentUser.role}</span>
               </div>
-              <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-[#64748B]"></i>
             </button>
 
             <!-- User Menu Popup -->
@@ -189,6 +191,10 @@ export const Header = {
     `;
 
     this.bindEvents();
+
+    if (typeof window !== 'undefined' && window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
   },
 
   bindEvents() {
