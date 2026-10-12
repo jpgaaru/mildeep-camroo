@@ -3,7 +3,7 @@
 import { NAV_HIERARCHY } from './sidebar.js';
 
 export const TabBar = {
-  render(containerId, activeHash) {
+  render(containerId, activeHash, options = {}) {
     const container = document.getElementById(containerId);
     if (!container) return null;
 
@@ -26,38 +26,113 @@ export const TabBar = {
     if (!submenu) return null;
 
     const currentTabId = tabId || submenu.defaultTab;
+    const isPill = options && options.variant === 'pill';
 
-    container.innerHTML = `
-      <nav aria-label="${submenu.title} tabs navigation" class="tabs-card mb-5">
-        <div 
-          role="tablist" 
-          aria-label="${submenu.title} views" 
-          id="${containerId}-tablist"
-          class="tabs-line w-full"
-        >
-          ${submenu.tabs.map(tab => {
-            const isActive = tab.id === currentTabId;
-            return `
-              <a 
-                id="tab-${tab.id}"
-                role="tab"
-                href="${tab.hash}" 
-                aria-selected="${isActive ? 'true' : 'false'}"
-                tabindex="${isActive ? '0' : '-1'}"
-                aria-controls="panel-${tab.id}"
-                class="${isActive ? 'active tab-active' : ''}"
-              >
-                <span>${tab.label}</span>
-              </a>
-            `;
-          }).join('')}
-        </div>
-      </nav>
-    `;
+    if (isPill) {
+      // Pill segment for compact controls
+      container.innerHTML = `
+        <nav aria-label="${submenu.title} compact navigation" class="mb-5">
+          <div 
+            role="tablist" 
+            aria-label="${submenu.title} views" 
+            id="${containerId}-tablist"
+            class="tabs"
+          >
+            ${submenu.tabs.map(tab => {
+              const isActive = tab.id === currentTabId;
+              return `
+                <a 
+                  id="tab-${tab.id}"
+                  role="tab"
+                  href="${tab.hash}" 
+                  aria-selected="${isActive ? 'true' : 'false'}"
+                  tabindex="${isActive ? '0' : '-1'}"
+                  aria-controls="panel-${tab.id}"
+                  class="${isActive ? 'active' : ''}"
+                >
+                  <span>${tab.label}</span>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        </nav>
+      `;
+    } else {
+      // Underline tabs for full page section switching
+      container.innerHTML = `
+        <nav aria-label="${submenu.title} tabs navigation" class="mb-5 border-b border-[#E2E8F0]">
+          <div 
+            role="tablist" 
+            aria-label="${submenu.title} views" 
+            id="${containerId}-tablist"
+            class="tabs-line"
+          >
+            ${submenu.tabs.map(tab => {
+              const isActive = tab.id === currentTabId;
+              return `
+                <a 
+                  id="tab-${tab.id}"
+                  role="tab"
+                  href="${tab.hash}" 
+                  aria-selected="${isActive ? 'true' : 'false'}"
+                  tabindex="${isActive ? '0' : '-1'}"
+                  aria-controls="panel-${tab.id}"
+                  class="${isActive ? 'active tab-active' : ''}"
+                >
+                  <span>${tab.label}</span>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        </nav>
+      `;
+    }
 
     this.bindKeyboardNav(containerId);
 
     return { module, submenu, currentTabId };
+  },
+
+  // Standalone helper to render compact pill segmented controls for filters or sub-views
+  renderPills(containerId, items = [], activeId = '', onSelect = null) {
+    const container = document.getElementById(containerId);
+    if (!container) return null;
+
+    container.innerHTML = `
+      <div class="tabs" role="tablist">
+        ${items.map(item => {
+          const isActive = item.id === activeId;
+          return `
+            <button 
+              type="button"
+              role="tab"
+              data-id="${item.id}"
+              aria-selected="${isActive ? 'true' : 'false'}"
+              class="${isActive ? 'active' : ''}"
+            >
+              <span>${item.label}</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    if (typeof onSelect === 'function') {
+      const buttons = container.querySelectorAll('button[role="tab"]');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = btn.getAttribute('data-id');
+          buttons.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          onSelect(targetId);
+        });
+      });
+    }
   },
 
   bindKeyboardNav(containerId) {

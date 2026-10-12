@@ -19,8 +19,8 @@
 .tabs-card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 0 20px;
+  border-radius: 12px;
+  padding: 0 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   margin-bottom: 20px;
   display: flex;
@@ -29,44 +29,119 @@
   overflow-x: auto;
 }
 
-.tabs { display: inline-flex; gap: 4px; padding: 4px; background: #F1F5F9; border-radius: 9999px; }
-.tabs button, .tabs a { height: 36px; padding: 0 18px; border: none; border-radius: 9999px; background: transparent; color: #64748B; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.18s ease; outline: none; }
-.tabs button:hover, .tabs a:hover { color: #0F172A; }
-.tabs button.active, .tabs a.active, .tabs a[aria-selected="true"], .tabs button[aria-selected="true"] { background: #FFFFFF; color: #006C7A; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-
-.tabs-line { display: flex; align-items: center; gap: 24px; border-bottom: 1px solid transparent; overflow-x: auto; user-select: none; }
-.tabs-line button, .tabs-line a {
+/* Pill Segment for Compact Controls (.tabs) */
+.tabs {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 4px 12px;
-  border: none;
+  gap: 4px;
+  padding: 4px;
+  background: #F1F5F9;
+  border-radius: 9999px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tabs button,
+.tabs a,
+.tabs [role="tab"] {
+  height: 34px;
+  padding: 0 16px;
+  border: none !important;
+  border-bottom: none !important;
+  border-radius: 9999px;
   background: transparent;
   color: #64748B;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  border-bottom: 2.5px solid transparent;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s ease;
+  outline: none;
+  white-space: nowrap;
+  margin-bottom: 0 !important;
+}
+.tabs button:hover,
+.tabs a:hover,
+.tabs [role="tab"]:hover {
+  color: #0F172A;
+}
+.tabs button.active,
+.tabs a.active,
+.tabs a[aria-selected="true"],
+.tabs button[aria-selected="true"],
+.tabs [role="tab"].active,
+.tabs [role="tab"][aria-selected="true"] {
+  background: #FFFFFF !important;
+  color: #006C7A !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  border: none !important;
+  border-bottom: none !important;
+}
+.tabs a span,
+.tabs button span,
+.tabs [role="tab"] span,
+.tabs * {
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Underline for Full Page Section Switching (.tabs-line) */
+.tabs-line {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-bottom: 1px solid #E2E8F0;
+  width: 100%;
+  overflow-x: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tabs-line button,
+.tabs-line a,
+.tabs-line [role="tab"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px 13px;
+  border: none !important;
+  background: transparent !important;
+  color: #64748B;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent !important;
   margin-bottom: -1px;
   text-decoration: none;
   white-space: nowrap;
   outline: none;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
-.tabs-line button:hover, .tabs-line a:hover {
+.tabs-line button:hover,
+.tabs-line a:hover,
+.tabs-line [role="tab"]:hover {
   color: #0F172A;
-  border-bottom-color: #CBD5E1;
+  border-bottom-color: #CBD5E1 !important;
 }
 .tabs-line button.active,
 .tabs-line a.active,
 .tabs-line a[aria-selected="true"],
-.tabs-line button[aria-selected="true"] {
+.tabs-line button[aria-selected="true"],
+.tabs-line [role="tab"].active,
+.tabs-line [role="tab"][aria-selected="true"],
+.tabs-line a.tab-active {
   color: #006C7A !important;
   font-weight: 700 !important;
   border-bottom-color: #006C7A !important;
 }
-.tabs-line a span, .tabs-line button span {
+.tabs-line a span,
+.tabs-line button span,
+.tabs-line [role="tab"] span,
+.tabs-line * {
   border-bottom: none !important;
+  text-decoration: none !important;
 }
 
 /* ==========================================================

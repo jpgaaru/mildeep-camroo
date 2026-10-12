@@ -99,27 +99,115 @@
       opacity: 1 !important;
     }
 
-    /* Active Tab: Clean Underline Tab - Single Bottom Line */
-    .tab-active,
-    a.tab-active,
-    a.tab-active:visited,
-    a[role="tab"][aria-selected="true"],
-    [role="tab"][aria-selected="true"] {
-      background-color: transparent !important;
+    /* ==========================================================
+       AquaPulse Design System — Navigation Tabs
+       1. Underline Tabs (.tabs-line) for Full Page Section Switching
+       2. Pill Segment Tabs (.tabs) for Compact Controls
+       ========================================================== */
+    .tabs-line {
+      display: flex !important;
+      align-items: center !important;
+      gap: 28px !important;
+      border-bottom: 1px solid #E2E8F0 !important;
+      width: 100% !important;
+      overflow-x: auto !important;
+    }
+    .tabs-line a,
+    .tabs-line button,
+    .tabs-line [role="tab"] {
+      padding: 10px 4px 13px !important;
+      border: none !important;
       background: transparent !important;
-      color: #006C7A !important;
-      border-bottom: 2.5px solid #006C7A !important;
-      font-weight: 700 !important;
+      color: #64748B !important;
+      font-size: 13.5px !important;
+      font-weight: 600 !important;
+      border-bottom: 2.5px solid transparent !important;
+      margin-bottom: -1px !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
       user-select: none !important;
       -webkit-user-select: none !important;
+      transition: color 0.15s ease, border-color 0.15s ease !important;
     }
-    [role="tab"] span,
-    [role="tab"] * {
+    .tabs-line a:hover,
+    .tabs-line button:hover,
+    .tabs-line [role="tab"]:hover {
+      color: #0F172A !important;
+      border-bottom-color: #CBD5E1 !important;
+    }
+    .tabs-line a.active,
+    .tabs-line a.tab-active,
+    .tabs-line a[aria-selected="true"],
+    .tabs-line button.active,
+    .tabs-line button[aria-selected="true"],
+    .tabs-line [role="tab"].active,
+    .tabs-line [role="tab"][aria-selected="true"] {
+      color: #006C7A !important;
+      font-weight: 700 !important;
+      border-bottom: 2.5px solid #006C7A !important;
+      background: transparent !important;
+    }
+    .tabs-line a span,
+    .tabs-line button span,
+    .tabs-line [role="tab"] span,
+    .tabs-line * {
+      border-bottom: none !important;
+      text-decoration: none !important;
+    }
+
+    /* Pill Segment Tabs (.tabs) */
+    .tabs {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 4px !important;
+      background: #F1F5F9 !important;
+      border-radius: 9999px !important;
+    }
+    .tabs a,
+    .tabs button,
+    .tabs [role="tab"] {
+      height: 34px !important;
+      padding: 0 16px !important;
+      border: none !important;
+      border-bottom: none !important;
+      border-radius: 9999px !important;
+      background: transparent !important;
+      color: #64748B !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      white-space: nowrap !important;
+      margin-bottom: 0 !important;
+    }
+    .tabs a:hover,
+    .tabs button:hover,
+    .tabs [role="tab"]:hover {
+      color: #0F172A !important;
+    }
+    .tabs a.active,
+    .tabs a[aria-selected="true"],
+    .tabs button.active,
+    .tabs button[aria-selected="true"],
+    .tabs [role="tab"].active,
+    .tabs [role="tab"][aria-selected="true"] {
+      background: #FFFFFF !important;
+      color: #006C7A !important;
+      font-weight: 700 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+      border: none !important;
       border-bottom: none !important;
     }
-    [role="tab"] {
-      user-select: none !important;
-      -webkit-user-select: none !important;
+    .tabs a span,
+    .tabs button span,
+    .tabs [role="tab"] span,
+    .tabs * {
+      border-bottom: none !important;
+      text-decoration: none !important;
     }
     [role="tab"]:focus:not(:focus-visible) {
       outline: none !important;
