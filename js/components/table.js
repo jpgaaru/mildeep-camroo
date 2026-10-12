@@ -55,6 +55,7 @@ export class DataTable {
     this.sortDirection = 'asc';
     this.selectedKeys = new Set();
     this.hiddenColumns = new Set();
+    this.density = 'standard';
 
     this.render();
   }
@@ -161,22 +162,24 @@ export class DataTable {
     let topFilterHTML = '';
     if (!this.hideTopFilterBar) {
       topFilterHTML = `
-        <!-- Collapsible Top Filter Header Card -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Collapsible Top Filter Header Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">${this.topFilterTitle || 'Search & Filters'}</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-2.5 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
+              <button type="button" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text">Hide Filter</span>
               </button>
@@ -184,10 +187,10 @@ export class DataTable {
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <div class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT CENTER</label>
-              <select class="dt-top-center-select w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT CENTER</label>
+              <select class="dt-top-center-select w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Centers (Select)</option>
                 <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
                 <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
@@ -199,8 +202,8 @@ export class DataTable {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT SUPPLIER</label>
-              <select class="dt-top-supplier-select w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT SUPPLIER</label>
+              <select class="dt-top-supplier-select w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Suppliers (Select)</option>
                 <option value="Godavari Coastal Aqua Farms">Godavari Coastal Aqua Farms</option>
                 <option value="Sagar Marine Hatcheries">Sagar Marine Hatcheries</option>
@@ -212,8 +215,8 @@ export class DataTable {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT ARRIVAL PLANT</label>
-              <select class="dt-top-plant-select w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT ARRIVAL PLANT</label>
+              <select class="dt-top-plant-select w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Arrival Plants (Select)</option>
                 <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
@@ -225,14 +228,14 @@ export class DataTable {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="dt-top-date-input erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="date" value="2026-10-06" class="dt-top-date-input erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
               </div>
             </div>
 
             <div class="flex items-end">
-              <button type="button" class="dt-top-filter-search-btn btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button type="button" class="dt-top-filter-search-btn btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span>Search</span>
               </button>
@@ -246,55 +249,62 @@ export class DataTable {
       <div class="flex flex-col">
         ${topFilterHTML}
 
-        <!-- Table Card Container -->
-        <div class="bg-white rounded-lg border border-[#DFE1E6] shadow-sm flex flex-col overflow-hidden">
-          <!-- Table Control Toolbar (Column visibility, Download, Copy, Search) -->
-          <div class="px-4 py-2.5 border-b border-[#DFE1E6] bg-[#FAFBFC] flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5 flex-wrap">
-              ${this.tableTitle ? `<h3 class="font-bold text-[#172B4D] text-xs">${this.tableTitle}</h3>` : ''}
+        <!-- Table Card Container (AquaPulse Table Panel) -->
+        <div class="table-panel bg-white rounded-2xl border border-[#E2E8F0] shadow-xs flex flex-col overflow-hidden">
+          <!-- Table Control Toolbar (Density Switcher, Excel, PDF, Column visibility, Search) -->
+          <div class="px-5 py-3 border-b border-[#E2E8F0] bg-[#FFFFFF] flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              ${this.tableTitle ? `<h3 class="font-bold text-[#0F172A] text-sm">${this.tableTitle}</h3>` : ''}
               
               <div id="dt-filter-container" class="flex items-center gap-2"></div>
             </div>
 
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <!-- Row Density Segmented Switcher (AquaPulse Architecture) -->
+              <div class="segmented-control inline-flex items-center p-0.5 bg-[#F1F5F9] rounded-lg text-xs font-semibold text-[#64748B]">
+                <button type="button" class="dt-density-btn px-2.5 py-1 rounded-md transition-all ${this.density === 'compact' ? 'bg-white text-[#006C7A] shadow-xs font-bold' : 'hover:text-[#0F172A]'}" data-density="compact">Compact</button>
+                <button type="button" class="dt-density-btn px-2.5 py-1 rounded-md transition-all ${(!this.density || this.density === 'standard') ? 'bg-white text-[#006C7A] shadow-xs font-bold' : 'hover:text-[#0F172A]'}" data-density="standard">Standard</button>
+                <button type="button" class="dt-density-btn px-2.5 py-1 rounded-md transition-all ${this.density === 'spacious' ? 'bg-white text-[#006C7A] shadow-xs font-bold' : 'hover:text-[#0F172A]'}" data-density="spacious">Spacious</button>
+              </div>
+
               <!-- Copy Button -->
               ${this.showCopy ? `
-              <button type="button" id="dt-copy-btn" class="btn-secondary px-2.5 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 hover:bg-[#EBECF0] transition-colors cursor-pointer shadow-2xs" title="Copy table data to clipboard">
-                <svg class="w-3.5 h-3.5 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <button type="button" id="dt-copy-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] transition-colors cursor-pointer shadow-2xs" title="Copy table data to clipboard">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 <span>Copy</span>
               </button>
               ` : ''}
 
               <!-- Excel Download Button -->
-              <button type="button" id="dt-export-btn" class="btn-secondary px-2.5 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 hover:bg-[#EBECF0] transition-colors cursor-pointer shadow-2xs" title="Download Excel / CSV">
-                <svg class="w-3.5 h-3.5 text-[#006644]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <button type="button" id="dt-export-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#EAFaf1] text-[#056A38] border border-[#A8E7C3] hover:bg-[#D4F5E3] transition-colors cursor-pointer shadow-2xs" title="Download Excel / CSV">
+                <svg class="w-3.5 h-3.5 text-[#056A38]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 <span>Excel</span>
               </button>
 
               <!-- PDF Download Button -->
-              <button type="button" id="dt-pdf-btn" class="btn-secondary px-2.5 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 hover:bg-[#EBECF0] transition-colors cursor-pointer shadow-2xs" title="Download / Print PDF Document">
-                <svg class="w-3.5 h-3.5 text-[#BF2600]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <button type="button" id="dt-pdf-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#FEEFF1] text-[#B5152B] border border-[#F9B0BE] hover:bg-[#FDD8DE] transition-colors cursor-pointer shadow-2xs" title="Download / Print PDF Document">
+                <svg class="w-3.5 h-3.5 text-[#B5152B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 <span>PDF</span>
               </button>
 
               <!-- Column Section / Visibility Dropdown -->
               <div class="relative">
-                <button type="button" id="dt-columns-btn" class="btn-secondary px-2.5 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 hover:bg-[#EBECF0] transition-colors cursor-pointer shadow-2xs" title="Customize Visible Columns">
-                  <svg class="w-3.5 h-3.5 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <button type="button" id="dt-columns-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-[#334155] border border-[#CBD5E1] hover:bg-[#F8FAFC] hover:border-[#94A3B8] transition-colors cursor-pointer shadow-2xs" title="Customize Visible Columns">
+                  <svg class="w-3.5 h-3.5 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                   <span>Column visibility</span>
                 </button>
 
-                <div id="dt-columns-dropdown" class="hidden absolute right-0 mt-1.5 w-60 bg-white rounded-lg shadow-2xl border border-[#DFE1E6] py-2 z-50 text-xs select-none">
-                  <div class="px-3 py-1.5 font-bold text-[#172B4D] border-b border-[#EBECF0] flex justify-between items-center">
+                <div id="dt-columns-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-[#E2E8F0] py-2 z-50 text-xs select-none">
+                  <div class="px-3.5 py-2 font-bold text-[#0F172A] border-b border-[#F1F5F9] flex justify-between items-center">
                     <span>Select Visible Columns</span>
-                    <button type="button" id="dt-cols-reset-btn" class="text-[10px] text-[#0284C7] hover:underline font-semibold cursor-pointer">Show All</button>
+                    <button type="button" id="dt-cols-reset-btn" class="text-[11px] text-[#006C7A] hover:underline font-bold cursor-pointer">Show All</button>
                   </div>
                   <div class="px-2 py-1.5 max-h-64 overflow-y-auto space-y-1">
                     ${this.columns.map(col => `
-                      <label class="flex items-center gap-2 px-2 py-1 rounded hover:bg-[#F4F5F7] cursor-pointer text-[#172B4D] transition-colors">
+                      <label class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg hover:bg-[#F8FAFC] cursor-pointer text-[#1E293B] transition-colors">
                         <input 
                           type="checkbox" 
-                          class="dt-col-toggle-checkbox rounded border-[#DFE1E6] text-[#0284C7] focus:ring-0 cursor-pointer" 
+                          class="dt-col-toggle-checkbox rounded border-[#CBD5E1] text-[#006C7A] focus:ring-0 cursor-pointer" 
                           data-field="${col.field}" 
                           ${!this.hiddenColumns.has(col.field) ? 'checked' : ''} 
                         />
@@ -308,14 +318,14 @@ export class DataTable {
           </div>
 
           <!-- Selected Rows Bulk Bar -->
-          <div id="dt-bulk-bar" class="hidden px-4 py-2 bg-[#F0F9FF] border-b border-[#BAE6FD] items-center justify-between text-xs text-[#0369A1]">
-            <span id="dt-selected-count">0 items selected</span>
+          <div id="dt-bulk-bar" class="hidden px-5 py-2.5 bg-[#F0FAFC] border-b border-[#B2ECF3] items-center justify-between text-xs text-[#005662]">
+            <span id="dt-selected-count" class="font-bold">0 items selected</span>
             <div id="dt-bulk-actions" class="flex items-center gap-2"></div>
           </div>
 
           <!-- Table Container -->
           <div class="overflow-x-auto min-h-[220px]">
-            <table class="erp-table">
+            <table class="erp-table ${'tbl-' + (this.density || 'standard')}">
               <thead>
                 <tr id="dt-thead-row"></tr>
               </thead>
@@ -324,7 +334,7 @@ export class DataTable {
           </div>
 
           <!-- Pagination Toolbar -->
-          <div class="p-3 border-t border-[#DFE1E6] bg-[#FAFBFC] flex items-center justify-between text-xs text-[#5E6C84]" id="dt-pagination-container">
+          <div class="px-5 py-3 border-t border-[#E2E8F0] bg-[#FFFFFF] flex items-center justify-between text-xs text-[#64748B]" id="dt-pagination-container">
           </div>
         </div>
       </div>
@@ -664,6 +674,26 @@ export class DataTable {
         window.print();
       });
     }
+
+    // Row Density Segmented Switcher
+    const densityBtns = this.container.querySelectorAll('.dt-density-btn');
+    const tableEl = this.container.querySelector('table');
+    densityBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const d = btn.getAttribute('data-density');
+        this.density = d;
+        if (tableEl) {
+          tableEl.classList.remove('tbl-compact', 'tbl-standard', 'tbl-spacious');
+          tableEl.classList.add(`tbl-${d}`);
+        }
+        densityBtns.forEach(b => {
+          b.classList.remove('bg-white', 'text-[#006C7A]', 'shadow-xs', 'font-bold');
+          b.classList.add('hover:text-[#0F172A]');
+        });
+        btn.classList.add('bg-white', 'text-[#006C7A]', 'shadow-xs', 'font-bold');
+        btn.classList.remove('hover:text-[#0F172A]');
+      });
+    });
 
     // Delegated Sort Click Header
     const theadRow = this.container.querySelector('#dt-thead-row');

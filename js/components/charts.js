@@ -1,4 +1,17 @@
-// Chart.js Helper Helpers for ERP Dashboards
+// Chart.js Helper Helpers for ERP Dashboards (AquaPulse Architecture)
+
+export const CHART_PALETTE = {
+  tealPrimary: '#00A4B7',
+  tealDark: '#006C7A',
+  tealDeep: '#005662',
+  tealLight: '#4FCFE0',
+  tealSoft: '#84DFEB',
+  tealTonal: ['#006C7A', '#00A4B7', '#1ABDD2', '#4FCFE0', '#84DFEB'],
+  emerald: '#056A38',
+  amber: '#D97706',
+  ruby: '#B5152B',
+  slate: '#475569'
+};
 
 export const Charts = {
   instances: {},
@@ -19,11 +32,12 @@ export const Charts = {
       type: 'line',
       data: {
         labels,
-        datasets: datasets.map(d => ({
+        datasets: datasets.map((d, idx) => ({
           tension: 0.35,
-          borderWidth: 2,
+          borderWidth: 2.5,
           pointRadius: 3,
-          pointHoverRadius: 5,
+          pointHoverRadius: 6,
+          borderColor: d.borderColor || CHART_PALETTE.tealTonal[idx % CHART_PALETTE.tealTonal.length],
           ...d
         }))
       },
@@ -35,26 +49,32 @@ export const Charts = {
             position: 'top',
             labels: {
               boxWidth: 12,
-              font: { size: 11, family: 'Inter' },
-              color: '#42526E'
+              font: { size: 11.5, weight: '600' },
+              color: '#475569',
+              padding: 12
             }
           },
           tooltip: {
-            backgroundColor: '#172B4D',
-            titleFont: { size: 12, family: 'Inter', weight: 'bold' },
-            bodyFont: { size: 11, family: 'Inter' },
-            padding: 8,
-            cornerRadius: 4
+            backgroundColor: '#0F172A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#F8FAFC',
+            titleFont: { size: 12, weight: 'bold' },
+            bodyFont: { size: 11 },
+            padding: 10,
+            cornerRadius: 8,
+            boxPadding: 4,
+            borderWidth: 1,
+            borderColor: '#334155'
           }
         },
         scales: {
           x: {
-            grid: { color: '#EBECF0' },
-            ticks: { color: '#6B778C', font: { size: 10, family: 'Inter' } }
+            grid: { display: false },
+            ticks: { color: '#64748B', font: { size: 10.5 } }
           },
           y: {
-            grid: { color: '#EBECF0' },
-            ticks: { color: '#6B778C', font: { size: 10, family: 'Inter' } }
+            grid: { color: '#F1F5F9' },
+            ticks: { color: '#64748B', font: { size: 10.5 } }
           }
         },
         ...options
@@ -72,7 +92,14 @@ export const Charts = {
 
     const chart = new Chart(ctx, {
       type: 'bar',
-      data: { labels, datasets },
+      data: {
+        labels,
+        datasets: datasets.map((d, idx) => ({
+          borderRadius: 6,
+          backgroundColor: d.backgroundColor || CHART_PALETTE.tealTonal[idx % CHART_PALETTE.tealTonal.length],
+          ...d
+        }))
+      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -81,24 +108,31 @@ export const Charts = {
             position: 'top',
             labels: {
               boxWidth: 12,
-              font: { size: 11, family: 'Inter' },
-              color: '#42526E'
+              font: { size: 11.5, weight: '600' },
+              color: '#475569',
+              padding: 12
             }
           },
           tooltip: {
-            backgroundColor: '#172B4D',
-            padding: 8,
-            cornerRadius: 4
+            backgroundColor: '#0F172A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#F8FAFC',
+            titleFont: { size: 12, weight: 'bold' },
+            bodyFont: { size: 11 },
+            padding: 10,
+            cornerRadius: 8,
+            borderWidth: 1,
+            borderColor: '#334155'
           }
         },
         scales: {
           x: {
             grid: { display: false },
-            ticks: { color: '#6B778C', font: { size: 10 } }
+            ticks: { color: '#64748B', font: { size: 10.5 } }
           },
           y: {
-            grid: { color: '#EBECF0' },
-            ticks: { color: '#6B778C', font: { size: 10 } }
+            grid: { color: '#F1F5F9' },
+            ticks: { color: '#64748B', font: { size: 10.5 } }
           }
         },
         ...options
@@ -120,7 +154,7 @@ export const Charts = {
         labels,
         datasets: [{
           data,
-          backgroundColor: bgColors || ['#006c7a', '#00a4b7', '#1abdd2', '#4fcfe0', '#056a38'],
+          backgroundColor: bgColors || CHART_PALETTE.tealTonal,
           borderWidth: 2,
           borderColor: '#FFFFFF'
         }]
@@ -128,15 +162,25 @@ export const Charts = {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: '70%',
+        cutout: '72%',
         plugins: {
           legend: {
             position: 'right',
             labels: {
               boxWidth: 10,
-              font: { size: 11, family: 'Inter' },
-              color: '#42526E'
+              font: { size: 11.5, weight: '600' },
+              color: '#475569',
+              padding: 10
             }
+          },
+          tooltip: {
+            backgroundColor: '#0F172A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#F8FAFC',
+            padding: 10,
+            cornerRadius: 8,
+            borderWidth: 1,
+            borderColor: '#334155'
           }
         },
         ...options

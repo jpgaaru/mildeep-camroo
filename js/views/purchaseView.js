@@ -279,30 +279,31 @@ export const PurchaseView = {
   // =========================================================================
   renderRMDashboard(container) {
     container.innerHTML = `
-      <div class="space-y-4 animate-fade-in">
-        <!-- Top Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Raw Material Dashboard</h1>
-          </div>
+      <div class="space-y-5 animate-fade-in">
+        <!-- Top Page Title Header (AquaPulse Architecture) -->
+        <div class="mb-4">
+          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Raw Material Dashboard</h1>
+          <p class="text-xs text-[#64748B] mt-0.5">Live procurement arrivals, telemetry metrics, and plant processing distribution</p>
         </div>
         
-        <!-- Main Dashboard Header Card with Collapsible Filters -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); Toast.show('Filters reset', 'info');" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); Toast.show('Filters reset', 'info');" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-1'); h.classList.add('pb-0'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#5E6C84] bg-[#FAFBFC] hover:bg-[#EBECF0] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-1'); h.classList.remove('pb-0'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-2.5 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-2.5 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
+              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); const h = b ? b.previousElementSibling : null; b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; this.title='Show Filter'; ic.classList.add('-rotate-90'); if(h){ h.classList.remove('pb-3'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#64748B] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; } else { t.innerText='Hide Filter'; this.title='Hide Filter'; ic.classList.remove('-rotate-90'); if(h){ h.classList.add('pb-3'); } this.className='dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer'; }" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
                 <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="rm-toggle-text">Hide Filter</span>
               </button>
@@ -310,10 +311,10 @@ export const PurchaseView = {
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="rm-filter-body" class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <div id="rm-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SPECIES</label>
-              <select class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
+              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option>All Species (Select)</option>
                 <option selected>Vannamei (VM)</option>
                 <option>Black Tiger (BT)</option>
@@ -322,8 +323,8 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">CENTER</label>
-              <select class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
+              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option>All Centers (Select)</option>
                 <option>Bhimavaram Center #1</option>
                 <option>Kakinada Sea Intake #2</option>
@@ -332,8 +333,8 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">PLANT</label>
-              <select class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
+              <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option>All Plants (Select)</option>
                 <option>DFL UNIT-5 (JPT)</option>
                 <option>DFL UNIT-3 (PSP)</option>
@@ -343,21 +344,21 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">FROM DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-05" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="date" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
               </div>
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">TO DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
               </div>
             </div>
 
             <div class="flex items-end">
-              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -366,104 +367,108 @@ export const PurchaseView = {
         </div>
 
         <!-- AquaPulse Stat Tiles (High-Precision Telemetry Grid) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
           <!-- 1. Total Quantity -->
-          <div class="stat-tile">
-            <div class="stat-tile-top">
-              <span class="stat-tile-label">TOTAL QUANTITY</span>
-              <div class="stat-tile-icon bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3]">
+          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-center justify-between gap-2.5">
+              <span class="w-8 h-8 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
-              </div>
+              </span>
+              <span class="inline-flex items-center gap-1 font-bold text-[#056A38] bg-[#EAFaf1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#A8E7C3]">↑ 8.4%</span>
             </div>
-            <div class="stat-tile-val-wrap">
-              <span class="stat-tile-val">142,500</span>
-              <span class="stat-tile-unit">Kg</span>
+            <div class="mt-3">
+              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">142,500 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
+              <div class="text-xs font-semibold text-[#64748B] mt-0.5">TOTAL QUANTITY</div>
             </div>
-            <div class="stat-tile-footer">
-              <span class="inline-flex items-center gap-1 font-bold text-[#056a38] bg-[#eafaf1] px-2 py-0.5 rounded-full text-[10px] border border-[#a8e7c3]">↑ 8.4%</span>
-              <span class="text-[#98989d] text-[11px] font-medium">vs last week</span>
+            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
+              <span>vs last week</span>
+              <b class="text-[#0F172A] font-semibold">+11,040 Kg</b>
             </div>
           </div>
 
           <!-- 2. Head On Qty -->
-          <div class="stat-tile">
-            <div class="stat-tile-top">
-              <span class="stat-tile-label">HEAD ON QTY</span>
-              <div class="stat-tile-icon bg-[#eafaf1] text-[#056a38] border border-[#a8e7c3]">
+          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-center justify-between gap-2.5">
+              <span class="w-8 h-8 rounded-lg bg-[#EAFaf1] border border-[#A8E7C3] flex items-center justify-center text-[#056A38]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-              </div>
+              </span>
+              <span class="inline-flex items-center gap-1 font-bold text-[#056A38] bg-[#EAFaf1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#A8E7C3]">✓ 100%</span>
             </div>
-            <div class="stat-tile-val-wrap">
-              <span class="stat-tile-val">142,500</span>
-              <span class="stat-tile-unit">Kg</span>
+            <div class="mt-3">
+              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">142,500 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
+              <div class="text-xs font-semibold text-[#64748B] mt-0.5">HEAD ON QTY</div>
             </div>
-            <div class="stat-tile-footer">
-              <span class="inline-flex items-center gap-1 font-bold text-[#056a38] bg-[#eafaf1] px-2 py-0.5 rounded-full text-[10px] border border-[#a8e7c3]">✓ 100%</span>
-              <span class="text-[#98989d] text-[11px] font-medium">weighbridge verified</span>
+            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
+              <span>Weighbridge status</span>
+              <b class="text-[#056A38] font-semibold">Verified</b>
             </div>
           </div>
 
           <!-- 3. Damage Weight -->
-          <div class="stat-tile">
-            <div class="stat-tile-top">
-              <span class="stat-tile-label">DAMAGE WEIGHT</span>
-              <div class="stat-tile-icon bg-[#feeff1] text-[#b5152b] border border-[#f9b0be]">
+          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-center justify-between gap-2.5">
+              <span class="w-8 h-8 rounded-lg bg-[#FEEFF1] border border-[#F9B0BE] flex items-center justify-center text-[#B5152B]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-              </div>
+              </span>
+              <span class="inline-flex items-center gap-1 font-bold text-[#B5152B] bg-[#FEEFF1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#F9B0BE]">0.88%</span>
             </div>
-            <div class="stat-tile-val-wrap">
-              <span class="stat-tile-val text-[#b5152b]">1,250</span>
-              <span class="stat-tile-unit">Kg</span>
+            <div class="mt-3">
+              <div class="text-2xl font-extrabold text-[#B5152B] tracking-tight tabular-nums">1,250 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
+              <div class="text-xs font-semibold text-[#64748B] mt-0.5">DAMAGE WEIGHT</div>
             </div>
-            <div class="stat-tile-footer">
-              <span class="inline-flex items-center gap-1 font-bold text-[#b5152b] bg-[#feeff1] px-2 py-0.5 rounded-full text-[10px] border border-[#f9b0be]">0.88%</span>
-              <span class="text-[#98989d] text-[11px] font-medium">tolerance: 1.5%</span>
+            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
+              <span>Tolerance limit</span>
+              <b class="text-[#0F172A] font-semibold">&lt; 1.50%</b>
             </div>
           </div>
 
           <!-- 4. Pending Production -->
-          <div class="stat-tile">
-            <div class="stat-tile-top">
-              <span class="stat-tile-label">PENDING PRODUCTION</span>
-              <div class="stat-tile-icon bg-[#fff9e6] text-[#824d00] border border-[#f7da94]">
+          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+            <div class="flex items-center justify-between gap-2.5">
+              <span class="w-8 h-8 rounded-lg bg-[#FFF9E6] border border-[#F7DA94] flex items-center justify-center text-[#824D00]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              </div>
+              </span>
+              <span class="inline-flex items-center gap-1 font-bold text-[#824D00] bg-[#FFF9E6] px-2 py-0.5 rounded-full text-[10.5px] border border-[#F7DA94]">33.8%</span>
             </div>
-            <div class="stat-tile-val-wrap">
-              <span class="stat-tile-val">48,200</span>
-              <span class="stat-tile-unit">Kg</span>
+            <div class="mt-3">
+              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">48,200 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
+              <div class="text-xs font-semibold text-[#64748B] mt-0.5">PENDING PRODUCTION</div>
             </div>
-            <div class="stat-tile-footer">
-              <span class="inline-flex items-center gap-1 font-bold text-[#824d00] bg-[#fff9e6] px-2 py-0.5 rounded-full text-[10px] border border-[#f7da94]">33.8%</span>
-              <span class="text-[#98989d] text-[11px] font-medium">queued in staging</span>
+            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
+              <span>Processing stage</span>
+              <b class="text-[#0F172A] font-semibold">Staging Bay</b>
             </div>
           </div>
         </div>
 
-        <!-- Section 1 Charts from Screenshot 1: Sum of QTY by SPECIES & Sum of QTY by PLANT -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          <div class="lg:col-span-4 bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs">
-            <h3 class="font-bold text-sm text-[#172B4D] mb-3">Sum of QTY by SPECIES</h3>
+        <!-- Section 1 Charts: Sum of QTY by SPECIES & Sum of QTY by PLANT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-5">
+          <div class="lg:col-span-4 bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-sm text-[#0F172A]">Sum of QTY by SPECIES</h3>
+            </div>
             <div class="h-64">
               <canvas id="chart-sum-qty-species"></canvas>
             </div>
           </div>
 
-          <div class="lg:col-span-8 bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs">
-            <h3 class="font-bold text-sm text-[#172B4D] mb-3">Sum of QTY by PLANT</h3>
+          <div class="lg:col-span-8 bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-sm text-[#0F172A]">Sum of QTY by PLANT</h3>
+            </div>
             <div class="h-64">
               <canvas id="chart-sum-qty-plant"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Section 2 Charts from Screenshot 2: Production Details & Pending Production Details -->
-        <div class="grid grid-cols-1 gap-4">
-          <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-xs">
-            <div class="flex items-center justify-between mb-2">
+        <!-- Section 2 Charts: Production Details & Pending Production Details -->
+        <div class="grid grid-cols-1 gap-5 mb-5">
+          <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
+            <div class="flex items-center justify-between mb-3">
               <div>
-                <h3 class="font-bold text-sm text-[#172B4D]">Production Details</h3>
-                <p class="text-xs text-[#6B778C]">Production quantity and composition by category</p>
+                <h3 class="font-bold text-sm text-[#0F172A]">Production Details</h3>
+                <p class="text-xs text-[#64748B] mt-0.5">Production quantity and composition by category</p>
               </div>
             </div>
             <div class="h-56">
@@ -923,43 +928,44 @@ export const PurchaseView = {
       '#FFAB91', '#4FC3F7', '#A5D6A7', '#FFE082', '#CE93D8', '#80DEEA', '#F48FB1', '#9FA8DA'
     ];
 
-    // Render Clean Container Layout matching Screenshot Exactly
+    // Render Clean Container Layout matching AquaPulse 2026 Design System
     container.innerHTML = `
-      <div class="space-y-4 animate-fade-in text-[#172B4D]">
+      <div class="space-y-5 animate-fade-in text-[#0F172A]">
         <!-- Top Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Commercial Dashboard</h1>
-          </div>
+        <div class="mb-4">
+          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Commercial Dashboard</h1>
+          <p class="text-xs text-[#64748B] mt-0.5">Procurement stations, daily intake telemetry, and supplier distribution</p>
         </div>
 
-        <!-- Collapsible Search & Filters Card -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Collapsible Search & Filters Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="comm-filter-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              <button type="button" id="comm-filter-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="comm-filter-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-2.5 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
-                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              <button type="button" id="comm-filter-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
+                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="comm-toggle-text">Hide Filter</span>
               </button>
             </div>
           </div>
 
           <!-- Collapsible Filter Inputs Grid -->
-          <div id="comm-filter-body" class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <div id="comm-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">PURCHASE STATION</label>
-              <select id="comm-station-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PURCHASE STATION</label>
+              <select id="comm-station-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Purchase Station</option>
                 <option value="SKM">Srikakulam Station (SKM)</option>
                 <option value="RPL">Rajahmundry Plant (RPL)</option>
@@ -970,8 +976,8 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">YEAR</label>
-              <select id="comm-year-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">YEAR</label>
+              <select id="comm-year-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="2026">2026</option>
                 <option value="2025">2025</option>
                 <option value="2024">2024</option>
@@ -979,8 +985,8 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">MONTH</label>
-              <select id="comm-month-filter" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">MONTH</label>
+              <select id="comm-month-filter" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="October">October</option>
                 <option value="September">September</option>
                 <option value="August">August</option>
@@ -997,22 +1003,22 @@ export const PurchaseView = {
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">FROM DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">TO DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <!-- Search Button -->
             <div class="flex items-end">
-              <button type="button" id="comm-search-btn" class="btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <button type="button" id="comm-search-btn" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span>Search</span>
               </button>
@@ -1021,145 +1027,145 @@ export const PurchaseView = {
         </div>
 
         <!-- Main Dashboard Content Grid -->
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
           <!-- Left Main Area (KPIs + Daily Bar + Headless Details) -->
-          <div class="xl:col-span-8 space-y-4">
+          <div class="xl:col-span-8 space-y-5">
             <!-- 6 KPI Dashlet Cards Grid (2 rows x 3 columns) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              <!-- Total Lots (Blue) -->
-              <div class="bg-white border border-[#BAE6FD] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#17191c] uppercase tracking-wider">TOTAL LOTS</span>
-                  <div class="text-2xl font-black text-[#172B4D] mt-1" id="comm-kpi-total-lots">152</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Total Lots (Blue/Teal) -->
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#64748B] uppercase tracking-wider">TOTAL LOTS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#BAE6FD]/60 flex items-center justify-center text-[#0284C7]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#0F172A] mt-2 tabular-nums" id="comm-kpi-total-lots">152</div>
               </div>
 
               <!-- AB+ Lots (Green) -->
-              <div class="bg-white border border-[#ABF5D1] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#006644] uppercase tracking-wider">AB+ LOTS</span>
-                  <div class="text-2xl font-black text-[#172B4D] mt-1" id="comm-kpi-ab-lots">0</div>
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#056A38] uppercase tracking-wider">AB+ LOTS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#EAFaf1] border border-[#A8E7C3] flex items-center justify-center text-[#056A38]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v4H3V3zm2 4v13a1 1 0 001 1h12a1 1 0 001-1V7M9 11v6m6-6v6"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#ABF5D1]/60 flex items-center justify-center text-[#006644]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v4H3V3zm2 4v13a1 1 0 001 1h12a1 1 0 001-1V7M9 11v6m6-6v6"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#0F172A] mt-2 tabular-nums" id="comm-kpi-ab-lots">0</div>
               </div>
 
               <!-- Return Lots (Red) -->
-              <div class="bg-white border border-[#FFBDAD] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#BF2600] uppercase tracking-wider">RETURN LOTS</span>
-                  <div class="text-2xl font-black text-[#BF2600] mt-1" id="comm-kpi-return-lots">0</div>
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#B5152B] uppercase tracking-wider">RETURN LOTS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#FEEFF1] border border-[#F9B0BE] flex items-center justify-center text-[#B5152B]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#FFBDAD]/60 flex items-center justify-center text-[#BF2600]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#B5152B] mt-2 tabular-nums" id="comm-kpi-return-lots">0</div>
               </div>
 
               <!-- Border Counts (Purple) -->
-              <div class="bg-white border border-[#C0B6F2] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#5243AA] uppercase tracking-wider">BORDER COUNTS</span>
-                  <div class="text-2xl font-black text-[#172B4D] mt-1" id="comm-kpi-border-counts">85</div>
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#6D28D9] uppercase tracking-wider">BORDER COUNTS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-center text-[#6D28D9]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#C0B6F2]/60 flex items-center justify-center text-[#5243AA]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#0F172A] mt-2 tabular-nums" id="comm-kpi-border-counts">85</div>
               </div>
 
               <!-- Grading Pendings (Amber/Yellow) -->
-              <div class="bg-white border border-[#FFE380] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#8F4D00] uppercase tracking-wider">GRADING PENDINGS</span>
-                  <div class="text-2xl font-black text-[#8F4D00] mt-1" id="comm-kpi-grading-pendings">133</div>
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#824D00] uppercase tracking-wider">GRADING PENDINGS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#FFF9E6] border border-[#F7DA94] flex items-center justify-center text-[#824D00]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#FFE380]/60 flex items-center justify-center text-[#8F4D00]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#0F172A] mt-2 tabular-nums" id="comm-kpi-grading-pendings">133</div>
               </div>
 
-              <!-- Bill Pendings (Cyan/Teal) -->
-              <div class="bg-white border border-[#B6F0FF] rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span class="text-xs font-bold text-[#008DA6] uppercase tracking-wider">BILL PENDINGS</span>
-                  <div class="text-2xl font-black text-[#008DA6] mt-1" id="comm-kpi-bill-pendings">69</div>
+              <!-- Bill Pendings (Teal) -->
+              <div class="mcard bg-white p-4.5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-[#006C7A] uppercase tracking-wider">BILL PENDINGS</span>
+                  <div class="w-8 h-8 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </div>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-[#B6F0FF]/60 flex items-center justify-center text-[#008DA6]">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                </div>
+                <div class="text-2xl font-extrabold text-[#006C7A] mt-2 tabular-nums" id="comm-kpi-bill-pendings">69</div>
               </div>
             </div>
 
             <!-- Daily Purchase Analytics Bar Chart -->
-            <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-2xs">
-              <h3 class="font-bold text-sm text-[#172B4D] mb-3">Daily Purchase Analytics</h3>
-              <div class="h-[210px] w-full">
+            <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
+              <h3 class="font-bold text-sm text-[#0F172A] mb-3">Daily Purchase Analytics</h3>
+              <div class="h-[220px] w-full">
                 <canvas id="comm-daily-purchase-canvas"></canvas>
               </div>
             </div>
 
             <!-- Headless Details Bar Chart with Checkbox Legend -->
-            <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-2xs">
+            <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs">
               <div class="flex items-center justify-between mb-2">
-                <h3 class="font-bold text-sm text-[#172B4D]">Headless Details - <span id="comm-headless-total">207.34</span> T</h3>
+                <h3 class="font-bold text-sm text-[#0F172A]">Headless Details - <span id="comm-headless-total" class="tabular-nums">207.34</span> T</h3>
               </div>
-              <div class="h-[190px] w-full">
+              <div class="h-[200px] w-full">
                 <canvas id="comm-headless-canvas"></canvas>
               </div>
-              <div class="mt-3 pt-3 border-t border-[#F4F5F7] flex flex-wrap items-center justify-around gap-4 text-xs font-semibold text-[#172B4D]">
+              <div class="mt-4 pt-3 border-t border-[#F1F5F9] flex flex-wrap items-center justify-around gap-4 text-xs font-semibold text-[#0F172A]">
                 <label class="inline-flex items-center gap-2 cursor-pointer select-none">
-                  <input type="checkbox" id="comm-chk-hon-qty" checked class="w-4 h-4 rounded text-[#0284C7] focus:ring-[#0284C7] border-[#DFE1E6]" />
-                  <span>Hon Qty- <span id="comm-val-hon-qty">293.35</span> T</span>
+                  <input type="checkbox" id="comm-chk-hon-qty" checked class="w-4 h-4 rounded text-[#006C7A] focus:ring-[#006C7A] border-[#CBD5E1]" />
+                  <span>Hon Qty- <span id="comm-val-hon-qty" class="tabular-nums">293.35</span> T</span>
                 </label>
                 <label class="inline-flex items-center gap-2 cursor-pointer select-none">
-                  <input type="checkbox" id="comm-chk-hon-packed" checked class="w-4 h-4 rounded text-[#0284C7] focus:ring-[#0284C7] border-[#DFE1E6]" />
-                  <span>Hon Packed- <span id="comm-val-hon-packed">0</span> T</span>
+                  <input type="checkbox" id="comm-chk-hon-packed" checked class="w-4 h-4 rounded text-[#006C7A] focus:ring-[#006C7A] border-[#CBD5E1]" />
+                  <span>Hon Packed- <span id="comm-val-hon-packed" class="tabular-nums">0</span> T</span>
                 </label>
                 <label class="inline-flex items-center gap-2 cursor-pointer select-none">
-                  <input type="checkbox" id="comm-chk-avg-yield" checked class="w-4 h-4 rounded text-[#0284C7] focus:ring-[#0284C7] border-[#DFE1E6]" />
-                  <span>Avg Yield- <span id="comm-val-avg-yield">70.68</span> %</span>
+                  <input type="checkbox" id="comm-chk-avg-yield" checked class="w-4 h-4 rounded text-[#006C7A] focus:ring-[#006C7A] border-[#CBD5E1]" />
+                  <span>Avg Yield- <span id="comm-val-avg-yield" class="tabular-nums">70.68</span> %</span>
                 </label>
               </div>
             </div>
           </div>
 
           <!-- Right Column (Purchase Quantity Donut + Suppliers Pie) -->
-          <div class="xl:col-span-4 space-y-4">
+          <div class="xl:col-span-4 space-y-5">
             <!-- Purchase Quantity Card with Donut Chart -->
-            <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-2xs flex flex-col justify-between">
-              <h3 class="font-bold text-sm text-[#172B4D] mb-1">Purchase Quantity - <span id="comm-purchase-qty-title">293.35</span> T</h3>
+            <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs flex flex-col justify-between">
+              <h3 class="font-bold text-sm text-[#0F172A] mb-1">Purchase Quantity - <span id="comm-purchase-qty-title" class="tabular-nums">293.35</span> T</h3>
               <div class="h-[210px] w-full flex items-center justify-center my-1">
                 <canvas id="comm-purchase-qty-canvas"></canvas>
               </div>
-              <div class="mt-2 pt-3 border-t border-[#F4F5F7] grid grid-cols-2 text-center">
+              <div class="mt-3 pt-3 border-t border-[#F1F5F9] grid grid-cols-2 text-center">
                 <div class="flex flex-col items-center">
-                  <div class="flex items-center gap-1.5 text-xs text-[#6B778C] font-medium">
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#E91E63]"></span>
+                  <div class="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#006C7A]"></span>
                     <span>Site Weightment</span>
                   </div>
-                  <span class="text-xs font-bold text-[#172B4D] mt-1" id="comm-site-weightment">208.13T</span>
+                  <span class="text-xs font-bold text-[#0F172A] mt-1 tabular-nums" id="comm-site-weightment">208.13T</span>
                 </div>
                 <div class="flex flex-col items-center">
-                  <div class="flex items-center gap-1.5 text-xs text-[#6B778C] font-medium">
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#E65100]"></span>
+                  <div class="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#00A4B7]"></span>
                     <span>Plant Weightment</span>
                   </div>
-                  <span class="text-xs font-bold text-[#172B4D] mt-1" id="comm-plant-weightment">85.22T</span>
+                  <span class="text-xs font-bold text-[#0F172A] mt-1 tabular-nums" id="comm-plant-weightment">85.22T</span>
                 </div>
               </div>
             </div>
 
             <!-- Suppliers Supplied Lots Card with Multi-slice Pie Chart -->
-            <div class="bg-white p-4 rounded-xl border border-[#DFE1E6] shadow-2xs flex flex-col justify-between">
-              <h3 class="font-bold text-sm text-[#172B4D] mb-1">Suppliers Supplied Lots - <span id="comm-supp-lots">152</span> Lots / <span id="comm-supp-count">55</span> Suppliers</h3>
+            <div class="bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs flex flex-col justify-between">
+              <h3 class="font-bold text-sm text-[#0F172A] mb-1">Suppliers Supplied Lots - <span id="comm-supp-lots" class="tabular-nums">152</span> Lots / <span id="comm-supp-count" class="tabular-nums">55</span> Suppliers</h3>
               <div class="h-[260px] w-full flex items-center justify-center my-1">
                 <canvas id="comm-suppliers-canvas"></canvas>
               </div>
               <!-- Supplier Breakdown List with Color Indicators -->
-              <div class="mt-2 pt-2 border-t border-[#F4F5F7] max-h-[105px] overflow-y-auto space-y-1 pr-1" id="comm-supplier-breakdown">
+              <div class="mt-3 pt-3 border-t border-[#F1F5F9] max-h-[110px] overflow-y-auto space-y-1.5 pr-1" id="comm-supplier-breakdown">
                 <!-- Rendered dynamically -->
               </div>
             </div>
@@ -2670,40 +2676,43 @@ export const PurchaseView = {
   // =========================================================================
   renderSupplierBills(container) {
     container.innerHTML = `
-      <div class="space-y-4 animate-fade-in">
-        <!-- Page Title Header -->
-        <div class="mb-3">
-          <h1 class="text-xl font-extrabold text-[#172B4D]">Supplier Bill Summary</h1>
+      <div class="space-y-5 animate-fade-in">
+        <!-- Page Title Header (AquaPulse Architecture) -->
+        <div class="mb-4">
+          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Supplier Bill Summary</h1>
+          <p class="text-xs text-[#64748B] mt-0.5">Procurement settlement, supplier reconciliation, and payment status verification</p>
         </div>
 
-        <!-- Search / Filter Fields Card -->
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-4 transition-all duration-200">
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-              <h3 class="text-xs font-bold text-[#172B4D]">Search &amp; Filters</h3>
+        <!-- Search / Filter Fields Card (AquaPulse Architecture) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
+          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              </div>
+              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
             </div>
 
             <!-- Filter Controls: Reset & Toggle Open/Close -->
             <div class="flex items-center gap-2">
-              <button type="button" id="bill-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#5E6C84] hover:text-[#172B4D] hover:bg-[#F4F5F7] px-2.5 py-1.5 rounded border border-[#DFE1E6] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
-                <svg class="w-3.5 h-3.5 text-[#6B778C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <button type="button" id="bill-top-reset-btn" class="dt-top-filter-reset-btn text-xs font-semibold text-[#64748B] hover:text-[#0F172A] bg-white hover:bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer" title="Reset all filters">
+                <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>Reset</span>
               </button>
 
-              <button type="button" id="bill-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#0284C7] bg-[#F0F9FF]/80 hover:bg-[#F0F9FF] px-2.5 py-1.5 rounded border border-[#BAE6FD] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
+              <button type="button" id="bill-top-toggle-btn" class="dt-top-filter-toggle-btn text-xs font-semibold text-[#006C7A] bg-[#F0FAFC] hover:bg-[#E0F7FA] px-3 py-1.5 rounded-lg border border-[#B2ECF3] flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer" title="Hide Filter">
                 <svg class="w-3.5 h-3.5 dt-top-filter-toggle-icon transform transition-transform duration-200" id="bill-top-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 <span class="dt-top-filter-toggle-text" id="bill-top-toggle-text">Hide Filter</span>
               </button>
             </div>
           </div>
 
-          <!-- Collapsible Filter Inputs Grid (Max 5 Columns) -->
-          <div id="bill-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          <!-- Collapsible Filter Inputs Grid -->
+          <div id="bill-top-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs transition-all duration-200">
             <!-- 1. Select Purchase -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT PURCHASE</label>
-              <select id="bill-top-purchase-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT PURCHASE</label>
+              <select id="bill-top-purchase-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Purchases</option>
                 <option value="Direct Farmer Procurement">Direct Farmer Procurement</option>
                 <option value="Hatchery Buyback Contract">Hatchery Buyback Contract</option>
@@ -2715,8 +2724,8 @@ export const PurchaseView = {
 
             <!-- 2. Select Arrival Plant -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT ARRIVAL PLANT</label>
-              <select id="bill-top-plant-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT ARRIVAL PLANT</label>
+              <select id="bill-top-plant-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Arrival Plants</option>
                 <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
@@ -2729,24 +2738,24 @@ export const PurchaseView = {
 
             <!-- 3. From Date -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">FROM DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <!-- 4. To Date -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">TO DATE</label>
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="date" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
               </div>
             </div>
 
             <!-- 5. Select Supplier -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT SUPPLIER</label>
-              <select id="bill-top-supplier-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT SUPPLIER</label>
+              <select id="bill-top-supplier-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Suppliers</option>
                 <option value="Godavari Coastal Aqua Farms">Godavari Coastal Aqua Farms</option>
                 <option value="Sagar Marine Hatcheries & Cultivators">Sagar Marine Hatcheries</option>
@@ -2761,8 +2770,8 @@ export const PurchaseView = {
 
             <!-- 6. Select Agent -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SELECT AGENT</label>
-              <select id="bill-top-agent-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SELECT AGENT</label>
+              <select id="bill-top-agent-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="ALL">All Agents</option>
                 <option value="Coastal Marine Agency">Coastal Marine Agency</option>
                 <option value="Sagar Marine Brokers">Sagar Marine Brokers</option>
@@ -2775,8 +2784,8 @@ export const PurchaseView = {
 
             <!-- 7. Status -->
             <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">STATUS</label>
-              <select id="bill-top-status-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+              <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">STATUS</label>
+              <select id="bill-top-status-select" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
                 <option value="Pending" selected>Pending</option>
                 <option value="ALL">All Status</option>
                 <option value="Approved">Approved</option>
@@ -2788,7 +2797,7 @@ export const PurchaseView = {
 
             <!-- 8. Search Action Button -->
             <div class="flex items-end">
-              <button type="button" id="bill-top-search-btn" class="btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]" title="Apply Filters">
+              <button type="button" id="bill-top-search-btn" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer w-full sm:w-auto" title="Apply Filters">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
@@ -2801,22 +2810,22 @@ export const PurchaseView = {
       </div>
     `;
 
-    // Helper: Determine Status Lozenge Styling
+    // Helper: Determine Status Lozenge Styling (AquaPulse Architecture)
     const getStatusLozenge = (status) => {
       const s = String(status || '').toLowerCase();
       if (s.includes('paid') && !s.includes('partially')) {
-        return `<span class="inline-flex items-center justify-center w-full px-2 py-0.5 rounded text-[11px] font-bold bg-[#E3FCEF] text-[#006644] border border-[#ABF5D1]">Paid</span>`;
+        return `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#EAFaf1] text-[#056A38] border border-[#A8E7C3]">Paid</span>`;
       }
       if (s.includes('approved')) {
-        return `<span class="inline-flex items-center justify-center w-full px-2 py-0.5 rounded text-[11px] font-bold bg-[#F0F9FF] text-[#0284C7] border border-[#BAE6FD]">Approved</span>`;
+        return `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">Approved</span>`;
       }
       if (s.includes('overdue')) {
-        return `<span class="inline-flex items-center justify-center w-full px-2 py-0.5 rounded text-[11px] font-bold bg-[#FFEBE6] text-[#BF2600] border border-[#FFBDAD]">Overdue</span>`;
+        return `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FEEFF1] text-[#B5152B] border border-[#F9B0BE]">Overdue</span>`;
       }
       if (s.includes('partially')) {
-        return `<span class="inline-flex items-center justify-center w-full px-2 py-0.5 rounded text-[11px] font-bold bg-[#FFF0B3] text-[#8F4D00] border border-[#FFE380]">Partially Paid</span>`;
+        return `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FFF9E6] text-[#824D00] border border-[#F7DA94]">Partially Paid</span>`;
       }
-      return `<span class="inline-flex items-center justify-center w-full px-2 py-0.5 rounded text-[11px] font-bold bg-[#FFF0B3] text-[#8F4D00] border border-[#FFE380]">Pending</span>`;
+      return `<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FFF9E6] text-[#824D00] border border-[#F7DA94]">Pending</span>`;
     };
 
     // Initial Filter: Status is 'Pending' by default as requested
