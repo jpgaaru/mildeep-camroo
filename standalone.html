@@ -3186,13 +3186,22 @@ select,
 .dt-top-center-select,
 .dt-top-supplier-select,
 .dt-density-select,
-.dt-page-size-select {
+.dt-page-size-select,
+.dt-top-filter-body select,
+#bill-top-filter-body select,
+#rm-filter-body select,
+#comm-filter-body select,
+#booking-top-filter-body select,
+#lot-top-filter-body select,
+#ctx-top-filter-body select,
+#pay-top-filter-body select {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #0F172A !important;
   background-color: #FFFFFF !important;
   border: 1px solid #CBD5E1 !important;
   border-radius: 8px !important;
   font-size: 13px !important;
+  height: 38px !important;
   outline: none !important;
   cursor: pointer !important;
   appearance: none !important;
@@ -3202,19 +3211,36 @@ select,
   background-repeat: no-repeat !important;
   background-position: right 12px center !important;
   background-size: 15px 15px !important;
+  padding-left: 12px !important;
   padding-right: 36px !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 select:hover,
 .dt-top-center-select:hover,
-.dt-top-supplier-select:hover {
+.dt-top-supplier-select:hover,
+.dt-top-filter-body select:hover,
+#bill-top-filter-body select:hover,
+#rm-filter-body select:hover,
+#comm-filter-body select:hover,
+#booking-top-filter-body select:hover,
+#lot-top-filter-body select:hover,
+#ctx-top-filter-body select:hover,
+#pay-top-filter-body select:hover {
   border-color: #94A3B8 !important;
 }
 
 select:focus,
 .dt-top-center-select:focus,
-.dt-top-supplier-select:focus {
+.dt-top-supplier-select:focus,
+.dt-top-filter-body select:focus,
+#bill-top-filter-body select:focus,
+#rm-filter-body select:focus,
+#comm-filter-body select:focus,
+#booking-top-filter-body select:focus,
+#lot-top-filter-body select:focus,
+#ctx-top-filter-body select:focus,
+#pay-top-filter-body select:focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
 }
@@ -3228,8 +3254,10 @@ select:focus,
 }
 
 .erp-date-input,
+input.erp-date-input,
 input[type="date"] {
   width: 100% !important;
+  height: 38px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #0F172A !important;
   background-color: #FFFFFF !important;
@@ -3238,41 +3266,40 @@ input[type="date"] {
   font-size: 13px !important;
   outline: none !important;
   cursor: pointer !important;
+  padding-left: 12px !important;
+  padding-right: 36px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px 16px !important;
+  user-select: none !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 .erp-date-input:hover,
+input.erp-date-input:hover,
 input[type="date"]:hover {
   border-color: #94A3B8 !important;
 }
 
 .erp-date-input:focus,
+input.erp-date-input:focus,
 input[type="date"]:focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
 }
 
-/* Clean Custom Teal Calendar Picker Indicator */
+/* Suppress all native browser calendar picker indicators completely */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="datetime-local"]::-webkit-calendar-picker-indicator,
-input[type="month"]::-webkit-calendar-picker-indicator {
-  cursor: pointer !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 16px 16px !important;
-  opacity: 1 !important;
-  width: 22px !important;
-  height: 22px !important;
-  margin-right: 2px !important;
-  transition: transform 0.15s ease, opacity 0.15s ease !important;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover,
-input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
-input[type="month"]::-webkit-calendar-picker-indicator:hover {
-  transform: scale(1.1) !important;
-  opacity: 0.85 !important;
+input[type="month"]::-webkit-calendar-picker-indicator,
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 
@@ -3382,14 +3409,14 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
   margin-bottom: 6px !important;
 }
 
-.dt-top-filter-body select,
-.dt-top-filter-body input,
-#bill-top-filter-body select,
-#bill-top-filter-body input,
-#rm-filter-body select,
-#rm-filter-body input,
-#comm-filter-body select,
-#comm-filter-body input {
+.dt-top-filter-body input:not(.erp-date-input),
+#bill-top-filter-body input:not(.erp-date-input),
+#rm-filter-body input:not(.erp-date-input),
+#comm-filter-body input:not(.erp-date-input),
+#booking-top-filter-body input:not(.erp-date-input),
+#lot-top-filter-body input:not(.erp-date-input),
+#ctx-top-filter-body input:not(.erp-date-input),
+#pay-top-filter-body input:not(.erp-date-input) {
   height: 38px !important;
   padding: 0 12px !important;
   font-size: 13px !important;
@@ -3401,14 +3428,14 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
   outline: none !important;
 }
 
-.dt-top-filter-body select:focus,
-.dt-top-filter-body input:focus,
-#bill-top-filter-body select:focus,
-#bill-top-filter-body input:focus,
-#rm-filter-body select:focus,
-#rm-filter-body input:focus,
-#comm-filter-body select:focus,
-#comm-filter-body input:focus {
+.dt-top-filter-body input:not(.erp-date-input):focus,
+#bill-top-filter-body input:not(.erp-date-input):focus,
+#rm-filter-body input:not(.erp-date-input):focus,
+#comm-filter-body input:not(.erp-date-input):focus,
+#booking-top-filter-body input:not(.erp-date-input):focus,
+#lot-top-filter-body input:not(.erp-date-input):focus,
+#ctx-top-filter-body input:not(.erp-date-input):focus,
+#pay-top-filter-body input:not(.erp-date-input):focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.18) !important;
 }
@@ -5833,7 +5860,7 @@ class DataTable {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="dt-top-date-input erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-06" class="dt-top-date-input erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
 
@@ -6518,7 +6545,7 @@ const NAV_HIERARCHY = [
         title: "Operations",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Booking", hash: "#/purchase/operations/bookings" },
+          { id: "bookings", label: "Bookings", hash: "#/purchase/operations/bookings" },
           { id: "rm-arrivals", label: "Raw Material Arrivals", hash: "#/purchase/operations/rm-arrivals" },
           { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
           { id: "lot-tracking", label: "Lot Tracking", hash: "#/purchase/operations/lot-tracking" }
@@ -8937,8 +8964,9 @@ const CalendarPicker = {
 
     const popover = document.createElement('div');
     popover.id = 'aquapulse-calendar-popover';
-    popover.className = 'fixed z-50 hidden bg-white rounded-2xl border border-[#CBD5E1] shadow-xl p-4 w-72 select-none text-xs font-sans animate-fade-in';
-    popover.style.boxShadow = '0 10px 25px -5px rgba(0, 108, 122, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)';
+    popover.className = 'fixed hidden bg-white rounded-2xl border border-[#CBD5E1] shadow-2xl p-4 w-72 select-none text-xs font-sans animate-fade-in';
+    popover.style.zIndex = '99999';
+    popover.style.boxShadow = '0 10px 30px -5px rgba(0, 108, 122, 0.18), 0 8px 12px -6px rgba(0, 0, 0, 0.08)';
     document.body.appendChild(popover);
     this.popover = popover;
   },
@@ -8946,19 +8974,21 @@ const CalendarPicker = {
   bindGlobalListeners() {
     // Intercept clicks on any date input or date wrapper
     document.addEventListener('click', (e) => {
-      const dateInput = e.target.closest('input[type="date"], .erp-date-input');
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
       const dateWrapper = e.target.closest('.erp-date-wrapper');
 
       if (dateInput) {
         e.preventDefault();
+        e.stopPropagation();
         this.open(dateInput);
         return;
       }
 
       if (dateWrapper) {
-        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input');
+        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input, [data-calendar]');
         if (inp) {
           e.preventDefault();
+          e.stopPropagation();
           this.open(inp);
           return;
         }
@@ -8967,6 +8997,15 @@ const CalendarPicker = {
       // Close when clicking outside
       if (this.popover && !this.popover.contains(e.target)) {
         this.close();
+      }
+    });
+
+    // Intercept focus to prevent keyboard popping up on mobile/desktop
+    document.addEventListener('focusin', (e) => {
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
+      if (dateInput && dateInput !== this.activeInput) {
+        e.preventDefault();
+        this.open(dateInput);
       }
     });
 
@@ -8981,17 +9020,45 @@ const CalendarPicker = {
         this.positionPopover();
       }
     });
+    window.addEventListener('scroll', () => {
+      if (this.activeInput && !this.popover.classList.contains('hidden')) {
+        this.positionPopover();
+      }
+    }, true);
   },
 
   open(inputElement) {
     if (!this.popover) this.createPopover();
     this.activeInput = inputElement;
 
+    // Safety guard: neutralize native browser date picker
+    if (inputElement.type === 'date') {
+      try {
+        inputElement.type = 'text';
+      } catch (err) {
+        // Some older engines restrict type mutation
+      }
+    }
+    inputElement.readOnly = true;
+    inputElement.inputMode = 'none';
+
     // Parse current value
-    const val = inputElement.value;
-    if (val && !isNaN(Date.parse(val))) {
-      this.selectedDate = new Date(val + 'T00:00:00');
-      this.currentDate = new Date(val + 'T00:00:00');
+    const val = (inputElement.value || '').trim();
+    if (val) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+        this.selectedDate = new Date(val + 'T00:00:00');
+        this.currentDate = new Date(val + 'T00:00:00');
+      } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(val)) {
+        const [d, m, y] = val.split('/');
+        this.selectedDate = new Date(`${y}-${m}-${d}T00:00:00`);
+        this.currentDate = new Date(`${y}-${m}-${d}T00:00:00`);
+      } else if (!isNaN(Date.parse(val))) {
+        this.selectedDate = new Date(val);
+        this.currentDate = new Date(val);
+      } else {
+        this.selectedDate = new Date();
+        this.currentDate = new Date();
+      }
     } else {
       this.selectedDate = new Date();
       this.currentDate = new Date();
@@ -9671,14 +9738,14 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date" />
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date" />
               </div>
             </div>
 
@@ -10324,14 +10391,14 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -10854,10 +10921,20 @@ const PurchaseView = {
   renderLotTracking(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Lot Tracking</h1>
+        <!-- Header with Title and Action -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Lot Tracking &amp; Genealogy
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">End-to-end aquaculture lot lifecycle, farm source origin, and processing stage tracking</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Register New Lot</span>
+            </button>
           </div>
         </div>
 
@@ -11088,6 +11165,11 @@ const PurchaseView = {
         Toast.show('Filters have been reset. Displaying all lots.', 'info');
       });
     }
+
+    const createLotBtn = document.getElementById('btn-create-lot-modal');
+    if (createLotBtn) {
+      createLotBtn.addEventListener('click', () => PurchaseView.openCreateLotModal(tableInstance));
+    }
   },
 
   // =========================================================================
@@ -11096,11 +11178,20 @@ const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Booking</span>
-          </button>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Procurement Bookings
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Farmer advance bookings, transport allocations, and expected harvest schedules</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create Booking</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
@@ -11157,7 +11248,7 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date...">
               </div>
             </div>
 
@@ -11413,11 +11504,20 @@ const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create RM Arrival</span>
-          </button>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Raw Material Intake
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Weighbridge gate arrivals, plant receiving inspection, and batch QC verification</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create RM Arrival</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->
@@ -11449,7 +11549,7 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date...">
               </div>
             </div>
 
@@ -11803,14 +11903,18 @@ const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Header with Title and Create Button -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Arrivals Register</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Arrivals Register
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Center harvest catch intake, crate weighment logs, and count verification</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-record" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Arrival</span>
+              <span>Create Arrival Record</span>
             </button>
           </div>
         </div>
@@ -12011,9 +12115,20 @@ const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
         <!-- Page Title Header (AquaPulse Architecture) -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Supplier Bill Summary</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Procurement settlement, supplier reconciliation, and payment status verification</p>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Supplier Bill Summary
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Procurement billing settlements, supplier reconciliation, and payment approval workflows</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create Supplier Bill</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Fields Card (AquaPulse Architecture) -->
@@ -12073,7 +12188,7 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
@@ -12081,7 +12196,7 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -12369,6 +12484,11 @@ const PurchaseView = {
         }
       });
     }
+
+    const createBillBtn = document.getElementById('btn-create-supplier-bill');
+    if (createBillBtn) {
+      createBillBtn.addEventListener('click', () => PurchaseView.openCreateBillModal(billsTable));
+    }
   },
 
   // =========================================================================
@@ -12378,12 +12498,16 @@ const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Commercial Transactions</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Commercial Transactions
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Direct farmer payables, logistics charges, agent broker commissions, and TDS entries</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-add-commercial-txn" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add Transaction</span>
             </button>
@@ -12458,14 +12582,14 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="ctx-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="ctx-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="ctx-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="ctx-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -12704,9 +12828,13 @@ const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Payments</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Payment Summary
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Disbursement accounts, settled vouchers, pending vendor disbursements, and banking logs</span>
           </div>
         </div>
 
@@ -12777,14 +12905,14 @@ const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="pay-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="pay-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -13030,12 +13158,17 @@ const PurchaseView = {
   renderBillDatePayment(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Payment Vouchers</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Payment Vouchers
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Vendor disbursement vouchers, bank UTR references, and NEFT/RTGS settlement verification</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-record-new-payment" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs">
+            <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Record Payment Voucher</span>
             </button>
           </div>
@@ -13106,7 +13239,7 @@ const PurchaseView = {
                 <div>
                   <label class="block text-xs font-semibold text-[#172B4D] mb-1">Payment Date</label>
                   <div class="erp-date-wrapper">
-                    <input type="date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                    <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg cursor-pointer" placeholder="Select date..." />
                   </div>
                 </div>
               </div>
@@ -13372,7 +13505,7 @@ const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-new-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="rm-new-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
             <div>
@@ -13542,7 +13675,7 @@ const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-edit-date" value="${editDateVal}" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="rm-edit-date" value="${editDateVal}" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
             <div>
@@ -13763,14 +13896,14 @@ const PurchaseView = {
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Bill Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="arr-bill-date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="arr-bill-date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select bill date..." />
                 </div>
               </div>
 
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Arrival Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="arr-arrival-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="arr-arrival-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select arrival date..." />
                 </div>
               </div>
 
@@ -14164,14 +14297,14 @@ const PurchaseView = {
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Bill Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="edit-arrec-bill-date" value="${editBillDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="edit-arrec-bill-date" value="${editBillDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select bill date..." />
                 </div>
               </div>
 
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Arrival Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="edit-arrec-arrival-date" value="${editArrDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="edit-arrec-arrival-date" value="${editArrDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select arrival date..." />
                 </div>
               </div>
 
@@ -14715,7 +14848,7 @@ const PurchaseView = {
                   Booking Date
                 </label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="newbkg-date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#DFE1E6] rounded-lg focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="newbkg-date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select booking date..." />
                 </div>
               </div>
 
@@ -14982,7 +15115,7 @@ const PurchaseView = {
                   Booking Date
                 </label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="editbkg-date" value="${(booking.bookingDate || booking.expectedDate || '2026-10-06').includes('/') ? (booking.bookingDate || booking.expectedDate).split('/').reverse().join('-') : (booking.bookingDate || booking.expectedDate || '2026-10-06')}" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#DFE1E6] rounded-lg focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="editbkg-date" value="${(booking.bookingDate || booking.expectedDate || '2026-10-06').includes('/') ? (booking.bookingDate || booking.expectedDate).split('/').reverse().join('-') : (booking.bookingDate || booking.expectedDate || '2026-10-06')}" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select booking date..." />
                 </div>
               </div>
 
@@ -15321,7 +15454,7 @@ const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Due Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="newbill-due" value="2026-10-25" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="newbill-due" value="2026-10-25" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg cursor-pointer" placeholder="Select due date..." />
               </div>
             </div>
           </div>
@@ -23595,18 +23728,12 @@ const App = {
   bindDatePickerHelper() {
     document.addEventListener('click', (e) => {
       const wrapper = e.target.closest('.erp-date-wrapper');
-      if (wrapper && e.target.tagName !== 'INPUT') {
-        const input = wrapper.querySelector('input[type="date"]');
+      if (wrapper) {
+        const input = wrapper.querySelector('.erp-date-input, input[type="date"], [data-calendar]');
         if (input) {
-          if (typeof input.showPicker === 'function') {
-            try {
-              input.showPicker();
-            } catch (_) {
-              input.focus();
-            }
-          } else {
-            input.focus();
-          }
+          e.preventDefault();
+          e.stopPropagation();
+          CalendarPicker.open(input);
         }
       }
     });

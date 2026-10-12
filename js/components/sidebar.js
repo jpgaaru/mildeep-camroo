@@ -21,7 +21,7 @@ export const NAV_HIERARCHY = [
         title: "Operations",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Booking", hash: "#/purchase/operations/bookings" },
+          { id: "bookings", label: "Bookings", hash: "#/purchase/operations/bookings" },
           { id: "rm-arrivals", label: "Raw Material Arrivals", hash: "#/purchase/operations/rm-arrivals" },
           { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
           { id: "lot-tracking", label: "Lot Tracking", hash: "#/purchase/operations/lot-tracking" }

@@ -656,13 +656,22 @@ select,
 .dt-top-center-select,
 .dt-top-supplier-select,
 .dt-density-select,
-.dt-page-size-select {
+.dt-page-size-select,
+.dt-top-filter-body select,
+#bill-top-filter-body select,
+#rm-filter-body select,
+#comm-filter-body select,
+#booking-top-filter-body select,
+#lot-top-filter-body select,
+#ctx-top-filter-body select,
+#pay-top-filter-body select {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #0F172A !important;
   background-color: #FFFFFF !important;
   border: 1px solid #CBD5E1 !important;
   border-radius: 8px !important;
   font-size: 13px !important;
+  height: 38px !important;
   outline: none !important;
   cursor: pointer !important;
   appearance: none !important;
@@ -672,19 +681,36 @@ select,
   background-repeat: no-repeat !important;
   background-position: right 12px center !important;
   background-size: 15px 15px !important;
+  padding-left: 12px !important;
   padding-right: 36px !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 select:hover,
 .dt-top-center-select:hover,
-.dt-top-supplier-select:hover {
+.dt-top-supplier-select:hover,
+.dt-top-filter-body select:hover,
+#bill-top-filter-body select:hover,
+#rm-filter-body select:hover,
+#comm-filter-body select:hover,
+#booking-top-filter-body select:hover,
+#lot-top-filter-body select:hover,
+#ctx-top-filter-body select:hover,
+#pay-top-filter-body select:hover {
   border-color: #94A3B8 !important;
 }
 
 select:focus,
 .dt-top-center-select:focus,
-.dt-top-supplier-select:focus {
+.dt-top-supplier-select:focus,
+.dt-top-filter-body select:focus,
+#bill-top-filter-body select:focus,
+#rm-filter-body select:focus,
+#comm-filter-body select:focus,
+#booking-top-filter-body select:focus,
+#lot-top-filter-body select:focus,
+#ctx-top-filter-body select:focus,
+#pay-top-filter-body select:focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
 }
@@ -698,8 +724,10 @@ select:focus,
 }
 
 .erp-date-input,
+input.erp-date-input,
 input[type="date"] {
   width: 100% !important;
+  height: 38px !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #0F172A !important;
   background-color: #FFFFFF !important;
@@ -708,41 +736,40 @@ input[type="date"] {
   font-size: 13px !important;
   outline: none !important;
   cursor: pointer !important;
+  padding-left: 12px !important;
+  padding-right: 36px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px 16px !important;
+  user-select: none !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 .erp-date-input:hover,
+input.erp-date-input:hover,
 input[type="date"]:hover {
   border-color: #94A3B8 !important;
 }
 
 .erp-date-input:focus,
+input.erp-date-input:focus,
 input[type="date"]:focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
 }
 
-/* Clean Custom Teal Calendar Picker Indicator */
+/* Suppress all native browser calendar picker indicators completely */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="datetime-local"]::-webkit-calendar-picker-indicator,
-input[type="month"]::-webkit-calendar-picker-indicator {
-  cursor: pointer !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'/%3E%3Cline x1='16' x2='16' y1='2' y2='6'/%3E%3Cline x1='8' x2='8' y1='2' y2='6'/%3E%3Cline x1='3' x2='21' y1='10' y2='10'/%3E%3Cpath d='M8 14h.01'/%3E%3Cpath d='M12 14h.01'/%3E%3Cpath d='M16 14h.01'/%3E%3Cpath d='M8 18h.01'/%3E%3Cpath d='M12 18h.01'/%3E%3Cpath d='M16 18h.01'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: 16px 16px !important;
-  opacity: 1 !important;
-  width: 22px !important;
-  height: 22px !important;
-  margin-right: 2px !important;
-  transition: transform 0.15s ease, opacity 0.15s ease !important;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover,
-input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
-input[type="month"]::-webkit-calendar-picker-indicator:hover {
-  transform: scale(1.1) !important;
-  opacity: 0.85 !important;
+input[type="month"]::-webkit-calendar-picker-indicator,
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 
@@ -852,14 +879,14 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
   margin-bottom: 6px !important;
 }
 
-.dt-top-filter-body select,
-.dt-top-filter-body input,
-#bill-top-filter-body select,
-#bill-top-filter-body input,
-#rm-filter-body select,
-#rm-filter-body input,
-#comm-filter-body select,
-#comm-filter-body input {
+.dt-top-filter-body input:not(.erp-date-input),
+#bill-top-filter-body input:not(.erp-date-input),
+#rm-filter-body input:not(.erp-date-input),
+#comm-filter-body input:not(.erp-date-input),
+#booking-top-filter-body input:not(.erp-date-input),
+#lot-top-filter-body input:not(.erp-date-input),
+#ctx-top-filter-body input:not(.erp-date-input),
+#pay-top-filter-body input:not(.erp-date-input) {
   height: 38px !important;
   padding: 0 12px !important;
   font-size: 13px !important;
@@ -871,14 +898,14 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
   outline: none !important;
 }
 
-.dt-top-filter-body select:focus,
-.dt-top-filter-body input:focus,
-#bill-top-filter-body select:focus,
-#bill-top-filter-body input:focus,
-#rm-filter-body select:focus,
-#rm-filter-body input:focus,
-#comm-filter-body select:focus,
-#comm-filter-body input:focus {
+.dt-top-filter-body input:not(.erp-date-input):focus,
+#bill-top-filter-body input:not(.erp-date-input):focus,
+#rm-filter-body input:not(.erp-date-input):focus,
+#comm-filter-body input:not(.erp-date-input):focus,
+#booking-top-filter-body input:not(.erp-date-input):focus,
+#lot-top-filter-body input:not(.erp-date-input):focus,
+#ctx-top-filter-body input:not(.erp-date-input):focus,
+#pay-top-filter-body input:not(.erp-date-input):focus {
   border-color: #006C7A !important;
   box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.18) !important;
 }

@@ -20,8 +20,9 @@ export const CalendarPicker = {
 
     const popover = document.createElement('div');
     popover.id = 'aquapulse-calendar-popover';
-    popover.className = 'fixed z-50 hidden bg-white rounded-2xl border border-[#CBD5E1] shadow-xl p-4 w-72 select-none text-xs font-sans animate-fade-in';
-    popover.style.boxShadow = '0 10px 25px -5px rgba(0, 108, 122, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)';
+    popover.className = 'fixed hidden bg-white rounded-2xl border border-[#CBD5E1] shadow-2xl p-4 w-72 select-none text-xs font-sans animate-fade-in';
+    popover.style.zIndex = '99999';
+    popover.style.boxShadow = '0 10px 30px -5px rgba(0, 108, 122, 0.18), 0 8px 12px -6px rgba(0, 0, 0, 0.08)';
     document.body.appendChild(popover);
     this.popover = popover;
   },
@@ -29,19 +30,21 @@ export const CalendarPicker = {
   bindGlobalListeners() {
     // Intercept clicks on any date input or date wrapper
     document.addEventListener('click', (e) => {
-      const dateInput = e.target.closest('input[type="date"], .erp-date-input');
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
       const dateWrapper = e.target.closest('.erp-date-wrapper');
 
       if (dateInput) {
         e.preventDefault();
+        e.stopPropagation();
         this.open(dateInput);
         return;
       }
 
       if (dateWrapper) {
-        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input');
+        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input, [data-calendar]');
         if (inp) {
           e.preventDefault();
+          e.stopPropagation();
           this.open(inp);
           return;
         }
@@ -50,6 +53,15 @@ export const CalendarPicker = {
       // Close when clicking outside
       if (this.popover && !this.popover.contains(e.target)) {
         this.close();
+      }
+    });
+
+    // Intercept focus to prevent keyboard popping up on mobile/desktop
+    document.addEventListener('focusin', (e) => {
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
+      if (dateInput && dateInput !== this.activeInput) {
+        e.preventDefault();
+        this.open(dateInput);
       }
     });
 
@@ -64,17 +76,45 @@ export const CalendarPicker = {
         this.positionPopover();
       }
     });
+    window.addEventListener('scroll', () => {
+      if (this.activeInput && !this.popover.classList.contains('hidden')) {
+        this.positionPopover();
+      }
+    }, true);
   },
 
   open(inputElement) {
     if (!this.popover) this.createPopover();
     this.activeInput = inputElement;
 
+    // Safety guard: neutralize native browser date picker
+    if (inputElement.type === 'date') {
+      try {
+        inputElement.type = 'text';
+      } catch (err) {
+        // Some older engines restrict type mutation
+      }
+    }
+    inputElement.readOnly = true;
+    inputElement.inputMode = 'none';
+
     // Parse current value
-    const val = inputElement.value;
-    if (val && !isNaN(Date.parse(val))) {
-      this.selectedDate = new Date(val + 'T00:00:00');
-      this.currentDate = new Date(val + 'T00:00:00');
+    const val = (inputElement.value || '').trim();
+    if (val) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+        this.selectedDate = new Date(val + 'T00:00:00');
+        this.currentDate = new Date(val + 'T00:00:00');
+      } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(val)) {
+        const [d, m, y] = val.split('/');
+        this.selectedDate = new Date(`${y}-${m}-${d}T00:00:00`);
+        this.currentDate = new Date(`${y}-${m}-${d}T00:00:00`);
+      } else if (!isNaN(Date.parse(val))) {
+        this.selectedDate = new Date(val);
+        this.currentDate = new Date(val);
+      } else {
+        this.selectedDate = new Date();
+        this.currentDate = new Date();
+      }
     } else {
       this.selectedDate = new Date();
       this.currentDate = new Date();

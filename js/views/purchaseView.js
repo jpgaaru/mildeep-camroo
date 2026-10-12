@@ -330,14 +330,14 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date" />
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date" />
               </div>
             </div>
 
@@ -983,14 +983,14 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="comm-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="comm-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -1513,10 +1513,20 @@ export const PurchaseView = {
   renderLotTracking(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Lot Tracking</h1>
+        <!-- Header with Title and Action -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Lot Tracking &amp; Genealogy
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">End-to-end aquaculture lot lifecycle, farm source origin, and processing stage tracking</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Register New Lot</span>
+            </button>
           </div>
         </div>
 
@@ -1747,6 +1757,11 @@ export const PurchaseView = {
         Toast.show('Filters have been reset. Displaying all lots.', 'info');
       });
     }
+
+    const createLotBtn = document.getElementById('btn-create-lot-modal');
+    if (createLotBtn) {
+      createLotBtn.addEventListener('click', () => PurchaseView.openCreateLotModal(tableInstance));
+    }
   },
 
   // =========================================================================
@@ -1755,11 +1770,20 @@ export const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Booking</span>
-          </button>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Procurement Bookings
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Farmer advance bookings, transport allocations, and expected harvest schedules</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create Booking</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
@@ -1816,7 +1840,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="booking-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date...">
               </div>
             </div>
 
@@ -2072,11 +2096,20 @@ export const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create RM Arrival</span>
-          </button>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Raw Material Intake
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Weighbridge gate arrivals, plant receiving inspection, and batch QC verification</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create RM Arrival</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->
@@ -2108,7 +2141,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="rm-top-date-input" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date...">
               </div>
             </div>
 
@@ -2462,14 +2495,18 @@ export const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Header with Title and Create Button -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Arrivals Register</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Arrivals Register
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Center harvest catch intake, crate weighment logs, and count verification</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-record" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Arrival</span>
+              <span>Create Arrival Record</span>
             </button>
           </div>
         </div>
@@ -2670,9 +2707,20 @@ export const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
         <!-- Page Title Header (AquaPulse Architecture) -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Supplier Bill Summary</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Procurement settlement, supplier reconciliation, and payment status verification</p>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Supplier Bill Summary
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Procurement billing settlements, supplier reconciliation, and payment approval workflows</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Create Supplier Bill</span>
+            </button>
+          </div>
         </div>
 
         <!-- Search / Filter Fields Card (AquaPulse Architecture) -->
@@ -2732,7 +2780,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="bill-top-from-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
@@ -2740,7 +2788,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="bill-top-to-date" value="2026-10-07" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -3028,6 +3076,11 @@ export const PurchaseView = {
         }
       });
     }
+
+    const createBillBtn = document.getElementById('btn-create-supplier-bill');
+    if (createBillBtn) {
+      createBillBtn.addEventListener('click', () => PurchaseView.openCreateBillModal(billsTable));
+    }
   },
 
   // =========================================================================
@@ -3037,12 +3090,16 @@ export const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Commercial Transactions</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Commercial Transactions
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Direct farmer payables, logistics charges, agent broker commissions, and TDS entries</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-add-commercial-txn" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add Transaction</span>
             </button>
@@ -3117,14 +3174,14 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="ctx-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="ctx-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="ctx-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="ctx-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -3363,9 +3420,13 @@ export const PurchaseView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
         <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Payments</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Payment Summary
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Disbursement accounts, settled vouchers, pending vendor disbursements, and banking logs</span>
           </div>
         </div>
 
@@ -3436,14 +3497,14 @@ export const PurchaseView = {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="pay-top-from-date" value="2026-10-01" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="From Date">
               </div>
             </div>
 
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="pay-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()">
+                <input type="text" readonly inputmode="none" id="pay-top-to-date" value="2026-10-06" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="To Date">
               </div>
             </div>
 
@@ -3689,12 +3750,17 @@ export const PurchaseView = {
   renderBillDatePayment(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Payment Vouchers</h1>
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
+              Payment Vouchers
+            </span>
+            <span class="text-xs text-[#64748B] hidden sm:inline">Vendor disbursement vouchers, bank UTR references, and NEFT/RTGS settlement verification</span>
           </div>
           <div class="flex items-center gap-2">
-            <button id="btn-record-new-payment" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs">
+            <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Record Payment Voucher</span>
             </button>
           </div>
@@ -3765,7 +3831,7 @@ export const PurchaseView = {
                 <div>
                   <label class="block text-xs font-semibold text-[#172B4D] mb-1">Payment Date</label>
                   <div class="erp-date-wrapper">
-                    <input type="date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                    <input type="text" readonly inputmode="none" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg cursor-pointer" placeholder="Select date..." />
                   </div>
                 </div>
               </div>
@@ -4031,7 +4097,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-new-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="rm-new-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
             <div>
@@ -4201,7 +4267,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="rm-edit-date" value="${editDateVal}" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="rm-edit-date" value="${editDateVal}" class="erp-date-input w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
             <div>
@@ -4422,14 +4488,14 @@ export const PurchaseView = {
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Bill Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="arr-bill-date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="arr-bill-date" value="2026-10-05" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select bill date..." />
                 </div>
               </div>
 
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Arrival Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="arr-arrival-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="arr-arrival-date" value="2026-10-06" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select arrival date..." />
                 </div>
               </div>
 
@@ -4823,14 +4889,14 @@ export const PurchaseView = {
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Bill Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="edit-arrec-bill-date" value="${editBillDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="edit-arrec-bill-date" value="${editBillDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select bill date..." />
                 </div>
               </div>
 
               <div>
                 <label class="block text-xs font-semibold text-[#172B4D] mb-1">Arrival Date</label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="edit-arrec-arrival-date" value="${editArrDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="edit-arrec-arrival-date" value="${editArrDateVal}" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select arrival date..." />
                 </div>
               </div>
 
@@ -5374,7 +5440,7 @@ export const PurchaseView = {
                   Booking Date
                 </label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="newbkg-date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#DFE1E6] rounded-lg focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="newbkg-date" value="2026-10-06" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select booking date..." />
                 </div>
               </div>
 
@@ -5641,7 +5707,7 @@ export const PurchaseView = {
                   Booking Date
                 </label>
                 <div class="erp-date-wrapper">
-                  <input type="date" id="editbkg-date" value="${(booking.bookingDate || booking.expectedDate || '2026-10-06').includes('/') ? (booking.bookingDate || booking.expectedDate).split('/').reverse().join('-') : (booking.bookingDate || booking.expectedDate || '2026-10-06')}" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#DFE1E6] rounded-lg focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                  <input type="text" readonly inputmode="none" id="editbkg-date" value="${(booking.bookingDate || booking.expectedDate || '2026-10-06').includes('/') ? (booking.bookingDate || booking.expectedDate).split('/').reverse().join('-') : (booking.bookingDate || booking.expectedDate || '2026-10-06')}" class="erp-date-input w-full text-xs px-2.5 py-2 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] cursor-pointer" placeholder="Select booking date..." />
                 </div>
               </div>
 
@@ -5980,7 +6046,7 @@ export const PurchaseView = {
             <div>
               <label class="block text-xs font-semibold text-[#172B4D] mb-1">Due Date</label>
               <div class="erp-date-wrapper">
-                <input type="date" id="newbill-due" value="2026-10-25" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#DFE1E6] rounded" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" id="newbill-due" value="2026-10-25" class="erp-date-input w-full text-xs px-3 py-1.5 bg-white border border-[#CBD5E1] rounded-lg cursor-pointer" placeholder="Select due date..." />
               </div>
             </div>
           </div>

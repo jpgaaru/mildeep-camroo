@@ -230,7 +230,7 @@ export class DataTable {
             <div>
               <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">DATE</label>
               <div class="erp-date-wrapper">
-                <input type="date" value="2026-10-06" class="dt-top-date-input erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]" onclick="this.showPicker ? this.showPicker() : this.focus()" />
+                <input type="text" readonly inputmode="none" value="2026-10-06" class="dt-top-date-input erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="Select date..." />
               </div>
             </div>
 

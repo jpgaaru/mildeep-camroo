@@ -99,18 +99,12 @@ export const App = {
   bindDatePickerHelper() {
     document.addEventListener('click', (e) => {
       const wrapper = e.target.closest('.erp-date-wrapper');
-      if (wrapper && e.target.tagName !== 'INPUT') {
-        const input = wrapper.querySelector('input[type="date"]');
+      if (wrapper) {
+        const input = wrapper.querySelector('.erp-date-input, input[type="date"], [data-calendar]');
         if (input) {
-          if (typeof input.showPicker === 'function') {
-            try {
-              input.showPicker();
-            } catch (_) {
-              input.focus();
-            }
-          } else {
-            input.focus();
-          }
+          e.preventDefault();
+          e.stopPropagation();
+          CalendarPicker.open(input);
         }
       }
     });
