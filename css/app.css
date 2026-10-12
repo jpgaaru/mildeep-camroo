@@ -9,26 +9,26 @@
   --card-foreground: #0A1B39;
   --popover: #FFFFFF;
   --popover-foreground: #0A1B39;
-  --primary: #0284C7;
+  --primary: #006C7A;
   --primary-foreground: #FFFFFF;
   --secondary: #F7F7F7;
   --secondary-foreground: #242424;
   --muted: #F8F8F8;
   --muted-foreground: #64748B;
-  --accent: #EDF3FC;
-  --accent-foreground: #0A1B39;
+  --accent: #F0FAFC;
+  --accent-foreground: #006C7A;
   --destructive: #FF5150;
   --destructive-foreground: #FFFFFF;
   --border: #EDEDED;
   --input: #F7F7F7;
-  --ring: #0284C7;
+  --ring: #006C7A;
   --radius: 0.5rem;
 
-  /* Legacy aliases mapped directly to Watermelon UI tokens */
+  /* AquaPulse Design System Tokens */
   --ds-background-neutral: #FFFFFF;
   --ds-background-neutral-subtle: #FAFAFA;
   --ds-background-neutral-hover: #F8F8F8;
-  --ds-background-neutral-active: #EDF3FC;
+  --ds-background-neutral-active: #F0FAFC;
   --ds-surface: #FFFFFF;
   --ds-surface-overlay: #FFFFFF;
   --ds-surface-raised: #FFFFFF;
@@ -40,11 +40,11 @@
   --ds-border: #EDEDED;
   --ds-border-subtle: #F1F5F9;
   --ds-border-bold: #CBD5E1;
-  --ds-border-focused: #0284C7;
-  --ds-brand-primary: #0284C7;
-  --ds-brand-primary-hover: #0369A1;
-  --ds-brand-primary-active: #0C4A6E;
-  --ds-brand-subtle: #EDF3FC;
+  --ds-border-focused: #006C7A;
+  --ds-brand-primary: #006C7A;
+  --ds-brand-primary-hover: #005662;
+  --ds-brand-primary-active: #00404A;
+  --ds-brand-subtle: #F0FAFC;
   --ds-success: #10B981;
   --ds-success-subtle: #ECFDF5;
   --ds-success-text: #047857;
@@ -54,9 +54,9 @@
   --ds-danger: #FF5150;
   --ds-danger-subtle: #FEF2F2;
   --ds-danger-text: #DC2626;
-  --ds-info: #0284C7;
-  --ds-info-subtle: #EDF3FC;
-  --ds-info-text: #0284C7;
+  --ds-info: #008292;
+  --ds-info-subtle: #F0FAFC;
+  --ds-info-text: #006C7A;
 }
 
 /* Strict Light Mode Enforcement - Ignore dark mode overrides */
@@ -199,19 +199,19 @@ body {
 
 /* Accessible Action Buttons */
 .btn-primary {
-  background-color: #0369A1 !important;
+  background-color: #006C7A !important;
   color: #ffffff !important;
   font-weight: 700 !important;
-  border: 1px solid #02598B !important;
+  border: 1px solid #005662 !important;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 .btn-primary:hover {
-  background-color: #075985 !important;
-  border-color: #075985 !important;
+  background-color: #005662 !important;
+  border-color: #005662 !important;
   color: #ffffff !important;
 }
 .btn-primary:active {
-  background-color: #0C4A6E !important;
+  background-color: #00404A !important;
   color: #ffffff !important;
 }
 
@@ -223,8 +223,8 @@ a[role="tab"][aria-selected="true"],
 [role="tab"][aria-selected="true"] {
   background-color: transparent !important;
   background: transparent !important;
-  color: #0369A1 !important;
-  border-bottom: 2px solid #0369A1 !important;
+  color: #006C7A !important;
+  border-bottom: 2px solid #006C7A !important;
   font-weight: 700 !important;
   user-select: none !important;
   -webkit-user-select: none !important;
@@ -489,23 +489,27 @@ a[role="tab"][aria-selected="true"],
 [role="tab"][aria-selected="true"] * {
   background-color: transparent !important;
   background: transparent !important;
-  color: #0369A1 !important;
-  border-bottom: 2px solid #0369A1 !important;
+  color: #006C7A !important;
+  border-bottom: 2px solid #006C7A !important;
   font-weight: 700 !important;
 }
 
 .btn-primary {
-  background-color: #0369A1 !important;
+  background-color: #006C7A !important;
   background-image: none !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
-  border: 1px solid #02598B !important;
+  border: 1px solid #005662 !important;
   border-radius: 6px !important;
   box-shadow: none !important;
 }
 .btn-primary:hover {
-  background-color: #075985 !important;
-  border-color: #075985 !important;
+  background-color: #005662 !important;
+  border-color: #005662 !important;
+}
+.btn-primary:active {
+  background-color: #00404A !important;
+  border-color: #00404A !important;
 }
 
 /* Filter Bar Action Buttons: show only icon by default, reveal text on hover */

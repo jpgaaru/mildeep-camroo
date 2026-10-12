@@ -1,6 +1,12 @@
 {
   "outputDirectory": ".",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/designsystem", "destination": "/designsystem.html" },
+    { "source": "/designsystem/", "destination": "/designsystem.html" },
+    { "source": "/design-system", "destination": "/designsystem.html" },
+    { "source": "/aquaops", "destination": "/designsystem.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

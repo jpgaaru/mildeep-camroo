@@ -35,7 +35,7 @@ export const Header = {
               id="header-global-search-input" 
               placeholder="Search catalog, lots, bills..." 
               autocomplete="off"
-              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#0284C7] rounded-lg text-xs transition-colors focus:outline-none"
+              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#006C7A] rounded-lg text-xs transition-colors focus:outline-none"
             />
             <span class="absolute right-2.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#EDEDED] text-[#64748B] pointer-events-none">⌘K</span>
             <button 
@@ -60,8 +60,21 @@ export const Header = {
 
         <!-- Right: Actions, Notifications & Profile -->
         <div class="flex items-center gap-2">
+          <!-- AquaPulse Design System Link Pill -->
+          <a 
+            href="/designsystem" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-semibold transition-all cursor-pointer border border-[#005662]"
+            title="Open AquaPulse Design System & Interactive Telemetry"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-[#4FCFE0]"></span>
+            <span>AquaPulse DS</span>
+            <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
           <!-- Help Icon Button -->
-          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#0284C7] hover:bg-[#F8F8F8] rounded-lg transition-colors flex items-center justify-center cursor-pointer border border-[#EDEDED]" title="Help & Compliance Manual">
+          <button id="header-help-btn" class="p-2 text-[#64748B] hover:text-[#006C7A] hover:bg-[#F8F8F8] rounded-lg transition-colors flex items-center justify-center cursor-pointer border border-[#EDEDED]" title="Help & Compliance Manual">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </button>
 
