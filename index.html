@@ -68,14 +68,19 @@
   <!-- Lottie Animation Web Player CDN -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-  <!-- Custom Atlassian Design System Tokens & ERP Styles -->
+  <!-- AquaPulse Design System Architecture -->
+  <link rel="stylesheet" href="aquaops-ds/tokens/tokens.css" />
+  <link rel="stylesheet" href="aquaops-ds/components/atoms/atoms.css" />
+  <link rel="stylesheet" href="aquaops-ds/components/molecules/molecules.css" />
+  <link rel="stylesheet" href="aquaops-ds/components/organisms/organisms.css" />
+
+  <!-- Lucide Vector Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom ERP Styles -->
   <link rel="stylesheet" href="css/app.css" />
   <style>
-    /* Strict Flat Design - Zero Drop Shadows and Zero Gradients */
-    *, *::before, *::after {
-      box-shadow: none !important;
-      text-shadow: none !important;
-    }
+    /* Clean micro-elevation: enable subtle shadows */
     [class*="bg-gradient-"] {
       background-image: none !important;
     }

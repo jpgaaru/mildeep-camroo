@@ -47,7 +47,7 @@ export const Breadcrumbs = {
           if (c.active || isLast || !c.hash) {
             return `<span class="font-semibold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;
           } else {
-            return `<a href="${c.hash}" class="text-[#64748B] hover:text-[#0284C7] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
+            return `<a href="${c.hash}" class="text-[#6e6e73] hover:text-[#006c7a] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
           }
         }).join('')}
       </nav>

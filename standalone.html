@@ -113,9 +113,8 @@
   color: #0A1B39 !important;
 }
 
-/* Flat Design: Zero drop shadows and zero gradients */
+/* Flat Design: Zero text shadows and zero gradients */
 *, *::before, *::after {
-  box-shadow: none !important;
   text-shadow: none !important;
 }
 [class*="bg-gradient-"] {
@@ -342,28 +341,28 @@ button.tab-active *,
   border-spacing: 0;
 }
 .erp-table th {
-  background-color: #EEF3F8 !important;
-  color: #334155 !important;
+  background-color: var(--canvas) !important;
+  color: var(--muted) !important;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 10px 14px;
-  border-bottom: 1px solid #DDE5ED !important;
+  letter-spacing: 0.06em;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line) !important;
   position: sticky;
   top: 0;
   z-index: 10;
   white-space: nowrap;
 }
 .erp-table td {
-  padding: 11px 14px;
-  font-size: 12.5px;
-  border-bottom: 1px solid #EAF0F6 !important;
-  color: #0F172A !important;
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--ink) !important;
   vertical-align: middle;
 }
 .erp-table tr:hover td {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 
 /* Fixed Sticky Actions Column across all tables */
@@ -373,22 +372,22 @@ button.tab-active *,
   background-clip: padding-box;
 }
 .erp-table th.sticky-action-col {
-  background-color: #EEF3F8 !important;
+  background-color: var(--canvas) !important;
   z-index: 20 !important;
-  border-left: 1px solid #DDE5ED !important;
-  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+  border-left: 1px solid var(--line) !important;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.04);
 }
 .erp-table td.sticky-action-col {
   background-color: #ffffff !important;
   z-index: 10 !important;
-  border-left: 1px solid #EAF0F6 !important;
-  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+  border-left: 1px solid var(--line) !important;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.04);
 }
 .erp-table tr:hover td.sticky-action-col {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 .erp-table tr.bg-\[\#F4F5F7\] td.sticky-action-col {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 
 /* Nav Item Active - Pastel Sky Pill with Accessible Marine Text */
@@ -3620,7 +3619,7 @@ function renderEmptyState({
     <div class="space-y-4 animate-fade-in">
 
       <!-- Under Construction Card -->
-      <div class="bg-white rounded-2xl border border-[#DFE1E6] p-10 sm:p-12 text-center shadow-xs animate-fade-in flex flex-col items-center justify-center max-w-3xl mx-auto my-4 min-h-[420px]">
+      <div class="bg-white rounded-3xl border border-[#e8e8ed] p-10 sm:p-12 text-center shadow-sm animate-fade-in flex flex-col items-center justify-center max-w-3xl mx-auto my-4 min-h-[420px]">
         <!-- Prominent Lottie Player -->
         <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
           <lottie-player 
@@ -3634,19 +3633,19 @@ function renderEmptyState({
 
           <!-- Smooth SVG Construction Illustration Fallback (Works offline instantly) -->
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-30">
-            <svg class="w-48 h-48 text-[#FFAB00] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-48 h-48 text-[#006c7a] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
             </svg>
           </div>
         </div>
 
         <!-- Clean Minimal Status Badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#FFF0B3] text-[#8f4d00] font-bold text-xs rounded-full mt-2 mb-2 uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-[#FFAB00] animate-ping"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#fff9e6] text-[#824d00] border border-[#f7da94] font-bold text-xs rounded-full mt-2 mb-2 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-[#f59e0b] animate-ping"></span>
           Under Construction
         </div>
 
-        <p class="text-sm text-[#5E6C84] max-w-md leading-relaxed mt-1">
+        <p class="text-sm text-[#6e6e73] max-w-md leading-relaxed mt-1">
           This module is currently in development and staging.
         </p>
       </div>
@@ -4172,10 +4171,10 @@ const Sidebar = {
       // Collapsed Icon-Only Floated Sidebar Mode (Width: 68px, Rounded Corners)
       container.innerHTML = `
         <div class="relative h-full w-full">
-          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#EDEDED] rounded-2xl overflow-hidden shadow-sm">
+          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#e8e8ed] rounded-2xl overflow-visible shadow-sm">
             <!-- Collapsed Logo Icon Header -->
-            <div class="h-14 px-2 py-2 flex items-center justify-center border-b border-[#EDEDED] bg-[#FAFAFA] shrink-0" title="Devi Fisheries ERP">
-              <div class="w-9 h-9 rounded-lg bg-[#0284C7] flex items-center justify-center font-black text-white text-xs shadow-xs">
+            <div class="h-16 px-2 py-2 flex items-center justify-center border-b border-[#e8e8ed] bg-white shrink-0" title="Devi Fisheries ERP">
+              <div class="w-10 h-10 rounded-xl bg-[#006c7a] flex items-center justify-center font-black text-white text-xs shadow-sm ring-2 ring-[#b2ecf3]">
                 DFL
               </div>
             </div>
@@ -4192,10 +4191,10 @@ const Sidebar = {
           <!-- Toggle Button: Half inside, half outside right edge -->
           <button 
             id="sidebar-edge-toggle-btn" 
-            class="absolute -right-3 top-4 w-6 h-6 rounded-full bg-white border border-[#CBD5E1] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7] flex items-center justify-center z-50 cursor-pointer shadow-xs transition-colors" 
+            class="absolute -right-3.5 top-5 w-7 h-7 rounded-full bg-white border border-[#d2d2d7] text-[#6e6e73] hover:text-[#006c7a] hover:bg-[#f0fafc] hover:border-[#84dfeb] flex items-center justify-center z-50 cursor-pointer shadow-md transition-all" 
             title="Expand Sidebar"
           >
-            <svg class="w-3.5 h-3.5 rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+            <svg class="w-3.5 h-3.5 rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
         </div>
       `;
@@ -4203,16 +4202,22 @@ const Sidebar = {
       // Expanded Full Floated Sidebar Mode (Width: 272px, Rounded Corners)
       container.innerHTML = `
         <div class="relative h-full w-full">
-          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#EDEDED] rounded-2xl overflow-hidden shadow-sm">
+          <aside id="erp-sidebar" class="bg-white text-[#64748B] w-full h-full flex flex-col transition-all duration-300 select-none border border-[#e8e8ed] rounded-2xl overflow-visible shadow-sm">
             <!-- Logo Branding Header -->
-            <div class="h-14 px-4 py-2 flex items-center justify-between border-b border-[#EDEDED] bg-[#FAFAFA] shrink-0">
+            <div class="h-16 px-4 py-2 flex items-center justify-between border-b border-[#e8e8ed] bg-white shrink-0">
               <div class="flex items-center gap-2.5">
-                <img src="${LOGO_COLOR}" alt="Devi Fisheries" class="h-8 w-auto max-w-[125px] object-contain shrink-0" />
+                <div class="w-9 h-9 rounded-xl bg-[#006c7a] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-sm ring-1 ring-[#b2ecf3]">
+                  DFL
+                </div>
                 <div class="flex flex-col">
-                  <span class="text-xs font-bold text-[#0A1B39] tracking-wide leading-tight">Devi Fisheries Limited</span>
-                  <span class="text-[9px] font-bold text-[#0284C7] tracking-wider uppercase leading-tight mt-0.5">Powered By Camaroo</span>
+                  <span class="text-xs font-bold text-[#111113] tracking-tight leading-tight">Devi Fisheries</span>
+                  <span class="text-[10px] font-bold text-[#006c7a] tracking-wider uppercase leading-tight mt-0.5">AquaPulse Platform</span>
                 </div>
               </div>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#eafaf1] text-[#056a38] border border-[#a8e7c3]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                Live
+              </span>
             </div>
 
             <!-- Navigation Scrollable Area -->
@@ -4227,10 +4232,10 @@ const Sidebar = {
           <!-- Toggle Button: Half inside, half outside right edge -->
           <button 
             id="sidebar-edge-toggle-btn" 
-            class="absolute -right-3 top-4 w-6 h-6 rounded-full bg-white border border-[#CBD5E1] text-[#475569] hover:text-[#0284C7] hover:border-[#0284C7] flex items-center justify-center z-50 cursor-pointer shadow-xs transition-colors" 
+            class="absolute -right-3.5 top-5 w-7 h-7 rounded-full bg-white border border-[#d2d2d7] text-[#6e6e73] hover:text-[#006c7a] hover:bg-[#f0fafc] hover:border-[#84dfeb] flex items-center justify-center z-50 cursor-pointer shadow-md transition-all" 
             title="Collapse Sidebar"
           >
-            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
         </div>
       `;
@@ -4245,12 +4250,12 @@ const Sidebar = {
 
     if (isCollapsed) {
       return `
-        <div class="p-2 border-t border-[#EDEDED] bg-[#FAFAFA] shrink-0 flex justify-center">
+        <div class="p-2 border-t border-[#e8e8ed] bg-white shrink-0 flex justify-center">
           <a 
             href="#/setup/client-master-setup/company-setup" 
             id="sidebar-bottom-settings-btn" 
-            class="w-9 h-9 flex items-center justify-center rounded-lg transition-colors cursor-pointer ${isSetupActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8]'}" 
-            title="Settings"
+            class="w-10 h-10 flex items-center justify-center rounded-xl transition-all cursor-pointer ${isSetupActive ? 'bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3] font-bold' : 'text-[#6e6e73] hover:text-[#111113] hover:bg-[#f5f5f7]'}" 
+            title="Settings & System Configurations"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </a>
@@ -4259,18 +4264,18 @@ const Sidebar = {
     }
 
     return `
-      <div class="p-2.5 border-t border-[#EDEDED] bg-[#FAFAFA] shrink-0">
+      <div class="p-2.5 border-t border-[#e8e8ed] bg-white shrink-0">
         <a 
           href="#/setup/client-master-setup/company-setup" 
           id="sidebar-bottom-settings-btn" 
-          class="w-full h-9 flex items-center justify-between px-3 rounded-lg text-xs transition-colors cursor-pointer ${isSetupActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] font-medium'}" 
-          title="Settings"
+          class="w-full h-10 flex items-center justify-between px-3 rounded-xl text-xs transition-all cursor-pointer ${isSetupActive ? 'bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3] font-bold' : 'text-[#6e6e73] hover:text-[#111113] hover:bg-[#f5f5f7] font-semibold'}" 
+          title="Settings & System Configurations"
         >
           <div class="flex items-center gap-2.5 truncate">
-            <svg class="w-4 h-4 shrink-0 ${isSetupActive ? 'text-[#0284C7]' : 'text-[#64748B]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            <span class="text-xs tracking-tight truncate">Settings</span>
+            <svg class="w-4 h-4 shrink-0 ${isSetupActive ? 'text-[#006c7a]' : 'text-[#6e6e73]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span class="text-xs tracking-tight truncate">System Settings</span>
           </div>
-          ${isSetupActive ? `<span class="w-1.5 h-1.5 rounded-full bg-[#0284C7] shrink-0"></span>` : ''}
+          ${isSetupActive ? `<span class="w-1.5 h-1.5 rounded-full bg-[#006c7a] shrink-0"></span>` : ''}
         </a>
       </div>
     `;
@@ -4285,7 +4290,7 @@ const Sidebar = {
       let submenusHtml = '';
       if (isExpanded) {
         submenusHtml = `
-          <div class="mt-1 pl-7 pr-1 py-1 space-y-0.5">
+          <div class="mt-1 pl-6 pr-1 py-1 space-y-1">
             ${mod.submenus.map(sub => {
               const isSubActive = sub.id === this.activeSubmenuId;
               const defaultHash = sub.tabs[0]?.hash || `/#/${mod.id}/${sub.id}`;
@@ -4294,8 +4299,9 @@ const Sidebar = {
                 <div class="nav-submenu-block">
                   <a 
                     href="${defaultHash}" 
-                    class="block px-3 py-1.5 rounded-lg text-xs transition-colors ${isSubActive ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#64748B] hover:text-[#0A1B39] hover:bg-[#F8F8F8] font-medium'}"
+                    class="flex items-center px-3 py-1.5 rounded-lg text-xs transition-all ${isSubActive ? 'bg-[#006c7a] text-white font-bold shadow-xs' : 'text-[#6e6e73] hover:text-[#111113] hover:bg-[#f5f5f7] font-medium'}"
                   >
+                    <span class="w-1.5 h-1.5 rounded-full mr-2 shrink-0 ${isSubActive ? 'bg-[#4fcfe0]' : 'bg-[#d2d2d7]'}"></span>
                     <span class="truncate block">${sub.title}</span>
                   </a>
                 </div>
@@ -4309,14 +4315,14 @@ const Sidebar = {
         <div class="nav-module-group mb-1">
           <button 
             data-module-id="${mod.id}" 
-            class="sidebar-mod-btn w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${isExpanded ? 'bg-[#EDF3FC] text-[#0284C7] font-bold' : 'text-[#475569] hover:bg-[#F8F8F8] hover:text-[#0A1B39]'}"
+            class="sidebar-mod-btn w-full px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${isExpanded ? 'bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3] font-bold shadow-xs' : 'text-[#42526e] hover:bg-[#f5f5f7] hover:text-[#111113]'}"
           >
             <div class="flex items-center gap-2.5 truncate">
-              <span class="w-4 h-4 flex items-center justify-center shrink-0 ${isExpanded ? 'text-[#0284C7]' : 'text-[#64748B]'}">${mod.icon}</span>
+              <span class="w-4 h-4 flex items-center justify-center shrink-0 ${isExpanded ? 'text-[#006c7a]' : 'text-[#6e6e73]'}">${mod.icon}</span>
               <span class="text-xs tracking-tight truncate">${mod.title}</span>
             </div>
             <div class="flex items-center gap-1 shrink-0">
-              <svg class="w-3.5 h-3.5 transform transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#0284C7]' : 'text-[#94A3B8]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="w-3.5 h-3.5 transform transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#006c7a]' : 'text-[#98989d]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
           </button>
           ${submenusHtml}
@@ -4337,17 +4343,17 @@ const Sidebar = {
           <!-- Icon Button -->
           <button 
             data-module-id="${mod.id}" 
-            class="sidebar-mod-btn w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer ${isCurrentMod ? 'bg-[#EDF3FC] text-[#0284C7] ring-1 ring-[#0284C7] font-bold' : 'text-[#64748B] hover:bg-[#F8F8F8] hover:text-[#0A1B39]'}"
+            class="sidebar-mod-btn w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer ${isCurrentMod ? 'bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3] font-bold shadow-xs' : 'text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#111113]'}"
             title="${mod.title}"
           >
             <span class="w-4 h-4 flex items-center justify-center">${mod.icon}</span>
           </button>
 
           <!-- Floating Flyout Menu on Hover -->
-          <div class="absolute left-full top-0 ml-3 w-60 bg-white border border-[#EDEDED] rounded-xl p-2.5 hidden group-hover:block z-50 transition-all pointer-events-auto shadow-lg">
+          <div class="absolute left-full top-0 ml-3 w-60 bg-white border border-[#e8e8ed] rounded-2xl p-2.5 hidden group-hover:block z-50 transition-all pointer-events-auto shadow-xl">
             <!-- Module Title in Flyout -->
-            <div class="flex items-center gap-2 px-2.5 py-1.5 border-b border-[#EDEDED] mb-1.5 text-[#0A1B39] font-bold text-xs">
-              <span class="text-[#0284C7]">${mod.icon}</span>
+            <div class="flex items-center gap-2 px-2.5 py-1.5 border-b border-[#e8e8ed] mb-1.5 text-[#111113] font-bold text-xs">
+              <span class="text-[#006c7a]">${mod.icon}</span>
               <span class="tracking-wide">${mod.title}</span>
             </div>
 
@@ -4359,8 +4365,9 @@ const Sidebar = {
                 return `
                   <a 
                     href="${defaultHash}" 
-                    class="flex items-center px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${isSubActive ? 'bg-[#0284C7] text-white font-bold' : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'}"
+                    class="flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${isSubActive ? 'bg-[#006c7a] text-white font-bold shadow-xs' : 'text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#111113]'}"
                   >
+                    <span class="w-1.5 h-1.5 rounded-full mr-2 shrink-0 ${isSubActive ? 'bg-[#4fcfe0]' : 'bg-[#d2d2d7]'}"></span>
                     <span>${sub.title}</span>
                   </a>
                 `;
@@ -4667,7 +4674,7 @@ const TabBar = {
                 aria-selected="${isActive ? 'true' : 'false'}"
                 tabindex="${isActive ? '0' : '-1'}"
                 aria-controls="panel-${tab.id}"
-                class="select-none px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${isActive ? 'tab-active border-[#0369A1] text-[#0369A1] font-bold bg-transparent' : 'border-transparent text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'}"
+                class="select-none px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${isActive ? 'tab-active border-[#006c7a] text-[#006c7a] font-bold bg-transparent' : 'border-transparent text-[#6e6e73] hover:text-[#111113] hover:border-[#d2d2d7] bg-transparent'}"
               >
                 <span class="select-none">${tab.label}</span>
               </a>
@@ -4770,7 +4777,7 @@ const Breadcrumbs = {
           if (c.active || isLast || !c.hash) {
             return `<span class="font-semibold text-[#0F172A] truncate max-w-xs">${c.label}</span> ${separator}`;
           } else {
-            return `<a href="${c.hash}" class="text-[#64748B] hover:text-[#0284C7] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
+            return `<a href="${c.hash}" class="text-[#6e6e73] hover:text-[#006c7a] font-medium transition-colors truncate max-w-xs">${c.label}</a> ${separator}`;
           }
         }).join('')}
       </nav>
@@ -4797,36 +4804,36 @@ const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#EDEDED] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
+      <header class="bg-white border-b border-[#e8e8ed] h-16 px-5 flex items-center justify-between select-none rounded-t-2xl">
         <!-- Left: Organization / Welcome Text -->
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#64748B]">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F8F8F8] border border-[#EDEDED] font-semibold text-[#0A1B39] text-xs">
-            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#6e6e73]">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fafc] border border-[#b2ecf3] font-bold text-[#006c7a] text-xs">
+            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
             Devi Fisheries Plant #1
           </span>
-          <span class="hidden md:inline text-xs text-[#94A3B8]">·</span>
-          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0A1B39] font-bold">${ERP_DATA.currentUser.name}</strong></span>
+          <span class="hidden md:inline text-xs text-[#d2d2d7]">·</span>
+          <span class="hidden md:inline text-xs text-[#6e6e73]">Welcome, <strong class="text-[#111113] font-bold">${ERP_DATA.currentUser.name}</strong></span>
         </div>
 
-        <!-- Center: Global Inline Search (Watermelon input style) -->
+        <!-- Center: Global Inline Search (AquaPulse Search Molecule) -->
         <div class="relative mx-3" id="header-search-container">
-          <div class="w-56 sm:w-72 relative flex items-center">
-            <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="w-60 sm:w-80 relative flex items-center">
+            <svg class="w-4 h-4 text-[#98989d] absolute left-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input 
               type="text" 
               id="header-global-search-input" 
-              placeholder="Search catalog, lots, bills..." 
+              placeholder="Search catalog, lots, bills... (⌘K)" 
               autocomplete="off"
-              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#006C7A] rounded-lg text-xs transition-colors focus:outline-none"
+              class="w-full pl-10 pr-12 py-2 bg-[#f5f5f7] hover:bg-[#e8e8ed]/60 focus:bg-white text-[#111113] placeholder-[#98989d] border border-[#d2d2d7] focus:border-[#006c7a] rounded-full text-xs transition-all focus:outline-none focus:ring-2 focus:ring-[#b2ecf3]"
             />
-            <span class="absolute right-2.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#EDEDED] text-[#64748B] pointer-events-none">⌘K</span>
+            <span class="absolute right-3 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#e8e8ed] text-[#6e6e73] pointer-events-none">⌘K</span>
             <button 
               type="button" 
               id="header-search-clear-btn" 
-              class="hidden absolute right-8 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
+              class="hidden absolute right-9 text-[#98989d] hover:text-[#111113] cursor-pointer"
               title="Clear Search"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
 
@@ -5270,7 +5277,7 @@ const Charts = {
         labels,
         datasets: [{
           data,
-          backgroundColor: bgColors || ['#0284C7', '#36B37E', '#0EA5E9', '#6554C0', '#00B8D9'],
+          backgroundColor: bgColors || ['#006c7a', '#00a4b7', '#1abdd2', '#4fcfe0', '#056a38'],
           borderWidth: 2,
           borderColor: '#FFFFFF'
         }]
@@ -6559,65 +6566,77 @@ const PurchaseView = {
           </div>
         </div>
 
-        <!-- Watermelon UI Metric Cards (Clean Light Mode) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- AquaPulse Stat Tiles (High-Precision Telemetry Grid) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- 1. Total Quantity -->
-          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#0284C7]/40 transition-colors">
-            <div>
-              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">TOTAL QUANTITY</span>
-              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
-              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
-                <span>↑ 8.4%</span>
-                <span class="text-[#94A3B8] font-normal">vs last week</span>
+          <div class="stat-tile">
+            <div class="stat-tile-top">
+              <span class="stat-tile-label">TOTAL QUANTITY</span>
+              <div class="stat-tile-icon bg-[#f0fafc] text-[#006c7a] border border-[#b2ecf3]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
               </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#EDF3FC] flex items-center justify-center text-[#0284C7] shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            <div class="stat-tile-val-wrap">
+              <span class="stat-tile-val">142,500</span>
+              <span class="stat-tile-unit">Kg</span>
+            </div>
+            <div class="stat-tile-footer">
+              <span class="inline-flex items-center gap-1 font-bold text-[#056a38] bg-[#eafaf1] px-2 py-0.5 rounded-full text-[10px] border border-[#a8e7c3]">↑ 8.4%</span>
+              <span class="text-[#98989d] text-[11px] font-medium">vs last week</span>
             </div>
           </div>
 
           <!-- 2. Head On Qty -->
-          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#10B981]/40 transition-colors">
-            <div>
-              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">HEAD ON QTY</span>
-              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">142,500 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
-              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#10B981]">
-                <span>↑ 100%</span>
-                <span class="text-[#94A3B8] font-normal">weighbridge verified</span>
+          <div class="stat-tile">
+            <div class="stat-tile-top">
+              <span class="stat-tile-label">HEAD ON QTY</span>
+              <div class="stat-tile-icon bg-[#eafaf1] text-[#056a38] border border-[#a8e7c3]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
               </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#ECFDF5] flex items-center justify-center text-[#10B981] shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+            <div class="stat-tile-val-wrap">
+              <span class="stat-tile-val">142,500</span>
+              <span class="stat-tile-unit">Kg</span>
+            </div>
+            <div class="stat-tile-footer">
+              <span class="inline-flex items-center gap-1 font-bold text-[#056a38] bg-[#eafaf1] px-2 py-0.5 rounded-full text-[10px] border border-[#a8e7c3]">✓ 100%</span>
+              <span class="text-[#98989d] text-[11px] font-medium">weighbridge verified</span>
             </div>
           </div>
 
           <!-- 3. Damage Weight -->
-          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#FF5150]/40 transition-colors">
-            <div>
-              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">DAMAGE WEIGHT</span>
-              <div class="text-2xl font-black text-[#FF5150] mt-1 tracking-tight">1,250 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
-              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#FF5150]">
-                <span>0.88%</span>
-                <span class="text-[#94A3B8] font-normal">tolerance limit: 1.5%</span>
+          <div class="stat-tile">
+            <div class="stat-tile-top">
+              <span class="stat-tile-label">DAMAGE WEIGHT</span>
+              <div class="stat-tile-icon bg-[#feeff1] text-[#b5152b] border border-[#f9b0be]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
               </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FEF2F2] flex items-center justify-center text-[#FF5150] shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div class="stat-tile-val-wrap">
+              <span class="stat-tile-val text-[#b5152b]">1,250</span>
+              <span class="stat-tile-unit">Kg</span>
+            </div>
+            <div class="stat-tile-footer">
+              <span class="inline-flex items-center gap-1 font-bold text-[#b5152b] bg-[#feeff1] px-2 py-0.5 rounded-full text-[10px] border border-[#f9b0be]">0.88%</span>
+              <span class="text-[#98989d] text-[11px] font-medium">tolerance: 1.5%</span>
             </div>
           </div>
 
           <!-- 4. Pending Production -->
-          <div class="bg-white border border-[#EDEDED] rounded-xl p-4 flex items-center justify-between shadow-xs hover:border-[#F59E0B]/40 transition-colors">
-            <div>
-              <span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">PENDING PRODUCTION</span>
-              <div class="text-2xl font-black text-[#0A1B39] mt-1 tracking-tight">48,200 <span class="text-xs font-semibold text-[#64748B]">Kg</span></div>
-              <div class="mt-1 flex items-center gap-1 text-[11px] font-semibold text-[#F59E0B]">
-                <span>33.8%</span>
-                <span class="text-[#94A3B8] font-normal">queued in staging</span>
+          <div class="stat-tile">
+            <div class="stat-tile-top">
+              <span class="stat-tile-label">PENDING PRODUCTION</span>
+              <div class="stat-tile-icon bg-[#fff9e6] text-[#824d00] border border-[#f7da94]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
             </div>
-            <div class="w-10 h-10 rounded-lg bg-[#FFFBEB] flex items-center justify-center text-[#F59E0B] shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="stat-tile-val-wrap">
+              <span class="stat-tile-val">48,200</span>
+              <span class="stat-tile-unit">Kg</span>
+            </div>
+            <div class="stat-tile-footer">
+              <span class="inline-flex items-center gap-1 font-bold text-[#824d00] bg-[#fff9e6] px-2 py-0.5 rounded-full text-[10px] border border-[#f7da94]">33.8%</span>
+              <span class="text-[#98989d] text-[11px] font-medium">queued in staging</span>
             </div>
           </div>
         </div>

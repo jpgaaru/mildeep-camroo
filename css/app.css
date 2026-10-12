@@ -65,9 +65,8 @@
   color: #0A1B39 !important;
 }
 
-/* Flat Design: Zero drop shadows and zero gradients */
+/* Flat Design: Zero text shadows and zero gradients */
 *, *::before, *::after {
-  box-shadow: none !important;
   text-shadow: none !important;
 }
 [class*="bg-gradient-"] {
@@ -294,28 +293,28 @@ button.tab-active *,
   border-spacing: 0;
 }
 .erp-table th {
-  background-color: #EEF3F8 !important;
-  color: #334155 !important;
+  background-color: var(--canvas) !important;
+  color: var(--muted) !important;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 10px 14px;
-  border-bottom: 1px solid #DDE5ED !important;
+  letter-spacing: 0.06em;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line) !important;
   position: sticky;
   top: 0;
   z-index: 10;
   white-space: nowrap;
 }
 .erp-table td {
-  padding: 11px 14px;
-  font-size: 12.5px;
-  border-bottom: 1px solid #EAF0F6 !important;
-  color: #0F172A !important;
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--ink) !important;
   vertical-align: middle;
 }
 .erp-table tr:hover td {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 
 /* Fixed Sticky Actions Column across all tables */
@@ -325,22 +324,22 @@ button.tab-active *,
   background-clip: padding-box;
 }
 .erp-table th.sticky-action-col {
-  background-color: #EEF3F8 !important;
+  background-color: var(--canvas) !important;
   z-index: 20 !important;
-  border-left: 1px solid #DDE5ED !important;
-  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+  border-left: 1px solid var(--line) !important;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.04);
 }
 .erp-table td.sticky-action-col {
   background-color: #ffffff !important;
   z-index: 10 !important;
-  border-left: 1px solid #EAF0F6 !important;
-  box-shadow: -4px 0 6px -2px rgba(9, 30, 66, 0.08);
+  border-left: 1px solid var(--line) !important;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.04);
 }
 .erp-table tr:hover td.sticky-action-col {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 .erp-table tr.bg-\[\#F4F5F7\] td.sticky-action-col {
-  background-color: #F4F8FD !important;
+  background-color: var(--soft) !important;
 }
 
 /* Nav Item Active - Pastel Sky Pill with Accessible Marine Text */

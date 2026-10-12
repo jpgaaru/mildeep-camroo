@@ -45,7 +45,7 @@ export const TabBar = {
                 aria-selected="${isActive ? 'true' : 'false'}"
                 tabindex="${isActive ? '0' : '-1'}"
                 aria-controls="panel-${tab.id}"
-                class="select-none px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${isActive ? 'tab-active border-[#0369A1] text-[#0369A1] font-bold bg-transparent' : 'border-transparent text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'}"
+                class="select-none px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${isActive ? 'tab-active border-[#006c7a] text-[#006c7a] font-bold bg-transparent' : 'border-transparent text-[#6e6e73] hover:text-[#111113] hover:border-[#d2d2d7] bg-transparent'}"
               >
                 <span class="select-none">${tab.label}</span>
               </a>

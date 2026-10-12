@@ -15,36 +15,36 @@ export const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#EDEDED] h-14 px-5 flex items-center justify-between select-none rounded-t-2xl">
+      <header class="bg-white border-b border-[#e8e8ed] h-16 px-5 flex items-center justify-between select-none rounded-t-2xl">
         <!-- Left: Organization / Welcome Text -->
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#64748B]">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#F8F8F8] border border-[#EDEDED] font-semibold text-[#0A1B39] text-xs">
-            <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-[#6e6e73]">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fafc] border border-[#b2ecf3] font-bold text-[#006c7a] text-xs">
+            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
             Devi Fisheries Plant #1
           </span>
-          <span class="hidden md:inline text-xs text-[#94A3B8]">·</span>
-          <span class="hidden md:inline text-xs text-[#64748B]">Welcome, <strong class="text-[#0A1B39] font-bold">${ERP_DATA.currentUser.name}</strong></span>
+          <span class="hidden md:inline text-xs text-[#d2d2d7]">·</span>
+          <span class="hidden md:inline text-xs text-[#6e6e73]">Welcome, <strong class="text-[#111113] font-bold">${ERP_DATA.currentUser.name}</strong></span>
         </div>
 
-        <!-- Center: Global Inline Search (Watermelon input style) -->
+        <!-- Center: Global Inline Search (AquaPulse Search Molecule) -->
         <div class="relative mx-3" id="header-search-container">
-          <div class="w-56 sm:w-72 relative flex items-center">
-            <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="w-60 sm:w-80 relative flex items-center">
+            <svg class="w-4 h-4 text-[#98989d] absolute left-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             <input 
               type="text" 
               id="header-global-search-input" 
-              placeholder="Search catalog, lots, bills..." 
+              placeholder="Search catalog, lots, bills... (⌘K)" 
               autocomplete="off"
-              class="w-full pl-9 pr-12 py-1.5 bg-[#F8F8F8] hover:bg-[#F2F2F2] focus:bg-white text-[#0A1B39] placeholder-[#94A3B8] border border-[#EDEDED] focus:border-[#006C7A] rounded-lg text-xs transition-colors focus:outline-none"
+              class="w-full pl-10 pr-12 py-2 bg-[#f5f5f7] hover:bg-[#e8e8ed]/60 focus:bg-white text-[#111113] placeholder-[#98989d] border border-[#d2d2d7] focus:border-[#006c7a] rounded-full text-xs transition-all focus:outline-none focus:ring-2 focus:ring-[#b2ecf3]"
             />
-            <span class="absolute right-2.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#EDEDED] text-[#64748B] pointer-events-none">⌘K</span>
+            <span class="absolute right-3 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#e8e8ed] text-[#6e6e73] pointer-events-none">⌘K</span>
             <button 
               type="button" 
               id="header-search-clear-btn" 
-              class="hidden absolute right-8 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer"
+              class="hidden absolute right-9 text-[#98989d] hover:text-[#111113] cursor-pointer"
               title="Clear Search"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
 
