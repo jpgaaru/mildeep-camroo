@@ -5,6 +5,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const tokensCss = fs.readFileSync(path.join(__dirname, 'aquaops-ds', 'tokens', 'tokens.css'), 'utf-8');
+const atomsCss = fs.readFileSync(path.join(__dirname, 'aquaops-ds', 'components', 'atoms', 'atoms.css'), 'utf-8');
+const moleculesCss = fs.readFileSync(path.join(__dirname, 'aquaops-ds', 'components', 'molecules', 'molecules.css'), 'utf-8');
+const organismsCss = fs.readFileSync(path.join(__dirname, 'aquaops-ds', 'components', 'organisms', 'organisms.css'), 'utf-8');
 const css = fs.readFileSync(path.join(__dirname, 'css', 'app.css'), 'utf-8');
 const logos = fs.readFileSync(path.join(__dirname, 'js', 'data', 'logos.js'), 'utf-8');
 const mockData = fs.readFileSync(path.join(__dirname, 'js', 'data', 'mockData.js'), 'utf-8');
@@ -130,7 +134,12 @@ const html = `<!DOCTYPE html>
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    ${tokensCss}
+    ${atomsCss}
+    ${moleculesCss}
+    ${organismsCss}
     ${css}
   </style>
 </head>

@@ -116,7 +116,30 @@
   transform: rotate(180deg);
 }
 
-.f-sb-nav { padding: 12px 10px; display: flex; flex-direction: column; gap: 3px; }
+.f-sb-nav {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: visible;
+  min-height: 0;
+}
+.f-sidebar.collapsed .f-sb-nav {
+  overflow: visible !important;
+}
+.f-sidebar:not(.collapsed) .f-sb-flyout-title {
+  display: none !important;
+}
+.f-sb-flyout-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 4px 8px 6px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
 .f-sb-sec { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 10px 10px 4px; white-space: nowrap; }
 
 .f-sb-link {

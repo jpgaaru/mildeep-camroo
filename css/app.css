@@ -91,9 +91,9 @@ body {
 
 /* ERP App Shell: Fixed Geometry & Anti-Overlap */
 :root {
-  --erp-sidebar-width: 272px;
-  --erp-sidebar-collapsed-width: 68px;
-  --erp-sidebar-offset: 12px;
+  --erp-sidebar-width: 270px;
+  --erp-sidebar-collapsed-width: 76px;
+  --erp-sidebar-offset: 14px;
   --erp-sidebar-gap: 16px;
 }
 
