@@ -28,12 +28,12 @@ export const TabBar = {
     const currentTabId = tabId || submenu.defaultTab;
 
     container.innerHTML = `
-      <nav aria-label="${submenu.title} tabs navigation" class="mb-4">
+      <nav aria-label="${submenu.title} tabs navigation" class="tabs-card mb-5">
         <div 
           role="tablist" 
           aria-label="${submenu.title} views" 
           id="${containerId}-tablist"
-          class="flex items-center gap-2 overflow-x-auto bg-white px-3 pt-1 border-b border-[#DDE5ED] rounded-xl"
+          class="tabs-line w-full"
         >
           ${submenu.tabs.map(tab => {
             const isActive = tab.id === currentTabId;
@@ -45,9 +45,9 @@ export const TabBar = {
                 aria-selected="${isActive ? 'true' : 'false'}"
                 tabindex="${isActive ? '0' : '-1'}"
                 aria-controls="panel-${tab.id}"
-                class="select-none px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${isActive ? 'tab-active border-[#006c7a] text-[#006c7a] font-bold bg-transparent' : 'border-transparent text-[#6e6e73] hover:text-[#111113] hover:border-[#d2d2d7] bg-transparent'}"
+                class="${isActive ? 'active tab-active' : ''}"
               >
-                <span class="select-none">${tab.label}</span>
+                <span>${tab.label}</span>
               </a>
             `;
           }).join('')}

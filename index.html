@@ -99,21 +99,23 @@
       opacity: 1 !important;
     }
 
-    /* Active Tab: Clean Underline Tab - Zero Text Highlighting */
+    /* Active Tab: Clean Underline Tab - Single Bottom Line */
     .tab-active,
     a.tab-active,
     a.tab-active:visited,
     a[role="tab"][aria-selected="true"],
-    [role="tab"][aria-selected="true"],
-    [role="tab"][aria-selected="true"] span,
-    [role="tab"][aria-selected="true"] * {
+    [role="tab"][aria-selected="true"] {
       background-color: transparent !important;
       background: transparent !important;
       color: #006C7A !important;
-      border-bottom: 2px solid #006C7A !important;
+      border-bottom: 2.5px solid #006C7A !important;
       font-weight: 700 !important;
       user-select: none !important;
       -webkit-user-select: none !important;
+    }
+    [role="tab"] span,
+    [role="tab"] * {
+      border-bottom: none !important;
     }
     [role="tab"] {
       user-select: none !important;
