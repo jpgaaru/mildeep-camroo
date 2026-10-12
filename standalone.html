@@ -2758,8 +2758,15 @@ body {
   border-bottom: 1px solid #E2E8F0 !important;
   width: 100% !important;
   overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
   user-select: none !important;
   -webkit-user-select: none !important;
+}
+.tabs-line::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .tabs-line a,
@@ -7332,7 +7339,7 @@ const TabBar = {
     } else {
       // Underline tabs for full page section switching
       container.innerHTML = `
-        <nav aria-label="${submenu.title} tabs navigation" class="mb-5 border-b border-[#E2E8F0]">
+        <nav aria-label="${submenu.title} tabs navigation" class="mb-0">
           <div 
             role="tablist" 
             aria-label="${submenu.title} views" 
@@ -9175,17 +9182,7 @@ const PurchaseView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Render On-Screen Tabs Header (omitted for Payments submenu as requested)
-    const isPayments = (activeHash || '').includes('/payments') || subPage === 'payment-summary' || subPage === 'bill-date-payment';
-
-    container.innerHTML = `
-      ${!isPayments ? '<div id="purchase-tab-bar-container"></div>' : ''}
-      <div id="purchase-subpage-content"></div>
-    `;
-
-    if (!isPayments) {
-      TabBar.render('purchase-tab-bar-container', activeHash);
-    }
+    container.innerHTML = `<div id="purchase-subpage-content"></div>`;
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Display instant Skeleton Shimmer Placeholder matching the target tab
@@ -9249,12 +9246,6 @@ const PurchaseView = {
   renderRMDashboard(container) {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
-        <!-- Top Page Title Header (AquaPulse Architecture) -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Raw Material Dashboard</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Live procurement arrivals, telemetry metrics, and plant processing distribution</p>
-        </div>
-        
         <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -9900,12 +9891,6 @@ const PurchaseView = {
     // Render Clean Container Layout matching AquaPulse 2026 Design System
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in text-[#0F172A]">
-        <!-- Top Page Title Header -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Commercial Dashboard</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Procurement stations, daily intake telemetry, and supplier distribution</p>
-        </div>
-
         <!-- Collapsible Search & Filters Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -10746,16 +10731,11 @@ const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Bookings</h1>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-booking" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Booking</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Booking</span>
+          </button>
         </div>
 
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
@@ -11068,17 +11048,11 @@ const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title and Create Button -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Raw Material Arrivals</h1>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-modal" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create RM Arrival</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create RM Arrival</span>
+          </button>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->
@@ -23166,6 +23140,7 @@ const SetupView = {
 
 
 
+
 // Views
 
 
@@ -23327,6 +23302,92 @@ const App = {
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
 
+    // Section Titles and Subtitles Metadata (Matching AquaPulse Design System)
+    const SECTION_METADATA = {
+      'purchase': {
+        'dashboard': {
+          title: 'Purchase Dashboard',
+          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution'
+        },
+        'operations': {
+          title: 'Purchase Operations',
+          subtitle: 'Farmer procurement bookings, dock weighment arrivals, and lot intake tracking'
+        },
+        'transactions-bills': {
+          title: 'Transactions & Bills',
+          subtitle: 'Commercial accounts payable, broker settlements, and supplier bills'
+        },
+        'payments': {
+          title: 'Payments & Disbursements',
+          subtitle: 'Bank wire vouchers, vendor payment status, and statutory disbursements'
+        }
+      },
+      'preprocessing': {
+        'dashboard': {
+          title: 'Pre-Processing Floor',
+          subtitle: 'De-heading, grading, peeling lines, and yield recovery telemetry'
+        }
+      },
+      'quality': {
+        'dashboard': {
+          title: 'Quality Assurance & Lab',
+          subtitle: 'Antibiotic screenings, microbiological testing, and HACCP compliance'
+        }
+      },
+      'production': {
+        'dashboard': {
+          title: 'Production & Freezing',
+          subtitle: 'IQF, blast freezing, glazing lines, and master carton packaging'
+        }
+      },
+      'coldstore': {
+        'dashboard': {
+          title: 'Cold Storage Management',
+          subtitle: 'Deep freeze chambers, pallet rack locations, and FIFO temperature telemetry'
+        }
+      },
+      'inventory': {
+        'dashboard': {
+          title: 'Inventory & Stock Ledger',
+          subtitle: 'Raw material stores, consumables, packaging stock, and real-time ledger'
+        }
+      },
+      'sales': {
+        'dashboard': {
+          title: 'Sales & Export Shipments',
+          subtitle: 'International buyers, sales contracts, port dock dispatch, and container manifests'
+        }
+      },
+      'reports': {
+        'reports': {
+          title: 'Enterprise Analytics & Reports',
+          subtitle: 'Comprehensive financial, operational, and regulatory reporting abstracts'
+        }
+      },
+      'setup': {
+        'master-data': {
+          title: 'Master Settings & Profiles',
+          subtitle: 'Plant configuration, supplier master registry, species pricing, and system parameters'
+        }
+      }
+    };
+
+    const secMeta = SECTION_METADATA[modObj.id]?.[subObj.id] || {
+      title: `${modObj.title} ${subObj.title}`,
+      subtitle: 'Aquaculture operations, live metrics, and records'
+    };
+
+    const titleEl = document.getElementById('section-title-container');
+    if (titleEl) {
+      titleEl.innerHTML = `
+        <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">${secMeta.title}</h1>
+        <p class="text-xs text-[#64748B] mt-0.5">${secMeta.subtitle}</p>
+      `;
+    }
+
+    // Render Sticky Underline Navigation Tabs directly under the Title
+    TabBar.render('global-tab-bar-container', resolvedHash);
+
     const mainContainer = 'main-content-container';
 
     switch (modObj.id) {
@@ -23391,17 +23452,26 @@ const App = {
 
           <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
           <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-            <!-- Top Header & Breadcrumbs Wrapper (Clean Flow Geometry) -->
-            <div class="mr-3 mt-3 rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
-              <div id="header-container" class="bg-white rounded-t-2xl"></div>
-              <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
-              <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
-                <div id="breadcrumbs-container"></div>
+            <!-- Sticky Top Navigation & Tabs Area -->
+            <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC] pt-3 mr-3 pb-1 space-y-3">
+              <!-- Card 1: Top Header & Breadcrumbs Card -->
+              <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
+                <div id="header-container" class="bg-white rounded-t-2xl"></div>
+                <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
+                <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
+                  <div id="breadcrumbs-container"></div>
+                </div>
+              </div>
+
+              <!-- Card 2: Section Header & Underline Tabs Menu (Sticky) -->
+              <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-5 pb-0 shadow-xs">
+                <div id="section-title-container" class="mb-3"></div>
+                <div id="global-tab-bar-container"></div>
               </div>
             </div>
 
             <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-            <main id="main-content-container" class="p-6 flex-1 w-full"></main>
+            <main id="main-content-container" class="px-0 pt-3 pb-8 flex-1 w-full mr-3"></main>
           </div>
         </div>
       `;

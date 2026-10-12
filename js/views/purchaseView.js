@@ -206,17 +206,7 @@ export const PurchaseView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Render On-Screen Tabs Header (omitted for Payments submenu as requested)
-    const isPayments = (activeHash || '').includes('/payments') || subPage === 'payment-summary' || subPage === 'bill-date-payment';
-
-    container.innerHTML = `
-      ${!isPayments ? '<div id="purchase-tab-bar-container"></div>' : ''}
-      <div id="purchase-subpage-content"></div>
-    `;
-
-    if (!isPayments) {
-      TabBar.render('purchase-tab-bar-container', activeHash);
-    }
+    container.innerHTML = `<div id="purchase-subpage-content"></div>`;
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Display instant Skeleton Shimmer Placeholder matching the target tab
@@ -280,12 +270,6 @@ export const PurchaseView = {
   renderRMDashboard(container) {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
-        <!-- Top Page Title Header (AquaPulse Architecture) -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Raw Material Dashboard</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Live procurement arrivals, telemetry metrics, and plant processing distribution</p>
-        </div>
-        
         <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -931,12 +915,6 @@ export const PurchaseView = {
     // Render Clean Container Layout matching AquaPulse 2026 Design System
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in text-[#0F172A]">
-        <!-- Top Page Title Header -->
-        <div class="mb-4">
-          <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">Commercial Dashboard</h1>
-          <p class="text-xs text-[#64748B] mt-0.5">Procurement stations, daily intake telemetry, and supplier distribution</p>
-        </div>
-
         <!-- Collapsible Search & Filters Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -1777,16 +1755,11 @@ export const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Bookings</h1>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-booking" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Booking</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Booking</span>
+          </button>
         </div>
 
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
@@ -2099,17 +2072,11 @@ export const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title and Create Button -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <div>
-            <h1 class="text-xl font-extrabold text-[#172B4D]">Raw Material Arrivals</h1>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-modal" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create RM Arrival</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create RM Arrival</span>
+          </button>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->

@@ -6,6 +6,7 @@ import { Modal } from './components/modal.js';
 import { Header } from './components/header.js';
 import { Sidebar, NAV_HIERARCHY } from './components/sidebar.js';
 import { Breadcrumbs } from './components/breadcrumbs.js';
+import { TabBar } from './components/tabBar.js';
 import { TourGuide } from './components/tourGuide.js';
 import { Accessibility } from './components/accessibility.js';
 
@@ -170,6 +171,92 @@ export const App = {
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
 
+    // Section Titles and Subtitles Metadata (Matching AquaPulse Design System)
+    const SECTION_METADATA = {
+      'purchase': {
+        'dashboard': {
+          title: 'Purchase Dashboard',
+          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution'
+        },
+        'operations': {
+          title: 'Purchase Operations',
+          subtitle: 'Farmer procurement bookings, dock weighment arrivals, and lot intake tracking'
+        },
+        'transactions-bills': {
+          title: 'Transactions & Bills',
+          subtitle: 'Commercial accounts payable, broker settlements, and supplier bills'
+        },
+        'payments': {
+          title: 'Payments & Disbursements',
+          subtitle: 'Bank wire vouchers, vendor payment status, and statutory disbursements'
+        }
+      },
+      'preprocessing': {
+        'dashboard': {
+          title: 'Pre-Processing Floor',
+          subtitle: 'De-heading, grading, peeling lines, and yield recovery telemetry'
+        }
+      },
+      'quality': {
+        'dashboard': {
+          title: 'Quality Assurance & Lab',
+          subtitle: 'Antibiotic screenings, microbiological testing, and HACCP compliance'
+        }
+      },
+      'production': {
+        'dashboard': {
+          title: 'Production & Freezing',
+          subtitle: 'IQF, blast freezing, glazing lines, and master carton packaging'
+        }
+      },
+      'coldstore': {
+        'dashboard': {
+          title: 'Cold Storage Management',
+          subtitle: 'Deep freeze chambers, pallet rack locations, and FIFO temperature telemetry'
+        }
+      },
+      'inventory': {
+        'dashboard': {
+          title: 'Inventory & Stock Ledger',
+          subtitle: 'Raw material stores, consumables, packaging stock, and real-time ledger'
+        }
+      },
+      'sales': {
+        'dashboard': {
+          title: 'Sales & Export Shipments',
+          subtitle: 'International buyers, sales contracts, port dock dispatch, and container manifests'
+        }
+      },
+      'reports': {
+        'reports': {
+          title: 'Enterprise Analytics & Reports',
+          subtitle: 'Comprehensive financial, operational, and regulatory reporting abstracts'
+        }
+      },
+      'setup': {
+        'master-data': {
+          title: 'Master Settings & Profiles',
+          subtitle: 'Plant configuration, supplier master registry, species pricing, and system parameters'
+        }
+      }
+    };
+
+    const secMeta = SECTION_METADATA[modObj.id]?.[subObj.id] || {
+      title: `${modObj.title} ${subObj.title}`,
+      subtitle: 'Aquaculture operations, live metrics, and records'
+    };
+
+    const titleEl = document.getElementById('section-title-container');
+    if (titleEl) {
+      titleEl.innerHTML = `
+        <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">${secMeta.title}</h1>
+        <p class="text-xs text-[#64748B] mt-0.5">${secMeta.subtitle}</p>
+      `;
+    }
+
+    // Render Sticky Underline Navigation Tabs directly under the Title
+    TabBar.render('global-tab-bar-container', resolvedHash);
+
     const mainContainer = 'main-content-container';
 
     switch (modObj.id) {
@@ -234,17 +321,26 @@ export const App = {
 
           <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
           <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-            <!-- Top Header & Breadcrumbs Wrapper (Clean Flow Geometry) -->
-            <div class="mr-3 mt-3 rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
-              <div id="header-container" class="bg-white rounded-t-2xl"></div>
-              <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
-              <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
-                <div id="breadcrumbs-container"></div>
+            <!-- Sticky Top Navigation & Tabs Area -->
+            <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC] pt-3 mr-3 pb-1 space-y-3">
+              <!-- Card 1: Top Header & Breadcrumbs Card -->
+              <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
+                <div id="header-container" class="bg-white rounded-t-2xl"></div>
+                <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
+                <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
+                  <div id="breadcrumbs-container"></div>
+                </div>
+              </div>
+
+              <!-- Card 2: Section Header & Underline Tabs Menu (Sticky) -->
+              <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-5 pb-0 shadow-xs">
+                <div id="section-title-container" class="mb-3"></div>
+                <div id="global-tab-bar-container"></div>
               </div>
             </div>
 
             <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-            <main id="main-content-container" class="p-6 flex-1 w-full"></main>
+            <main id="main-content-container" class="px-0 pt-3 pb-8 flex-1 w-full mr-3"></main>
           </div>
         </div>
       `;

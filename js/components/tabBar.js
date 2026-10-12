@@ -60,7 +60,7 @@ export const TabBar = {
     } else {
       // Underline tabs for full page section switching
       container.innerHTML = `
-        <nav aria-label="${submenu.title} tabs navigation" class="mb-5 border-b border-[#E2E8F0]">
+        <nav aria-label="${submenu.title} tabs navigation" class="mb-0">
           <div 
             role="tablist" 
             aria-label="${submenu.title} views" 
