@@ -1,0 +1,323 @@
+/**
+ * AquaOps Design System — Interactive Component Space & React Code Viewer
+ * Provides interactive Preview / React Code tabs, split-view, and 1-click clipboard copy
+ */
+
+.ds-view-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-16);
+  padding: 12px 20px;
+  margin: 20px 0 28px;
+  box-shadow: var(--sh-1);
+  flex-wrap: wrap;
+}
+
+.ds-view-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ds-view-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-view-title svg {
+  width: 16px;
+  height: 16px;
+  color: var(--teal-800);
+}
+
+.ds-mode-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: var(--soft);
+  padding: 3px;
+  border-radius: var(--pill);
+  border: 1px solid var(--line);
+  gap: 2px;
+}
+
+.ds-mode-btn {
+  padding: 6px 14px;
+  border-radius: var(--pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.18s ease;
+}
+
+.ds-mode-btn:hover {
+  color: var(--ink);
+}
+
+.ds-mode-btn.active {
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.ds-view-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ds-search-box svg {
+  position: absolute;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.ds-search-input {
+  height: 34px;
+  width: 220px;
+  padding: 0 12px 0 32px;
+  border-radius: var(--pill);
+  border: 1px solid var(--line);
+  background: var(--soft);
+  font-size: 12px;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+
+.ds-search-input:focus {
+  outline: none;
+  border-color: var(--teal-600);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 164, 183, 0.15);
+  width: 260px;
+}
+
+/* ==========================================================
+   COMPONENT BOX & CODE VIEWER PANEL
+   ========================================================== */
+
+.ds-comp-box {
+  border: 1px solid var(--line);
+  border-radius: var(--r-16);
+  background: #ffffff;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ds-comp-box:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.ds-comp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--line);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ds-comp-tabs {
+  display: inline-flex;
+  align-items: center;
+  background: #EDF2F7;
+  padding: 2.5px;
+  border-radius: 8px;
+  gap: 2px;
+}
+
+.ds-tab-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.ds-tab-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.ds-tab-btn:hover {
+  color: #0F172A;
+}
+
+.ds-tab-btn.active {
+  background: #FFFFFF;
+  color: #006C7A;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ds-comp-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ds-copy-btn svg {
+  width: 13px;
+  height: 13px;
+  color: #006C7A;
+  transition: transform 0.15s ease;
+}
+
+.ds-copy-btn:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+  color: #0F172A;
+}
+
+.ds-copy-btn:active {
+  transform: scale(0.97);
+}
+
+.ds-copy-btn.copied {
+  background: #DCFCE7;
+  border-color: #86EFAC;
+  color: #166534;
+}
+
+.ds-copy-btn.copied svg {
+  color: #16A34A;
+}
+
+/* Component Content Panels */
+.ds-comp-preview {
+  padding: 24px;
+  background: #FFFFFF;
+  min-height: 90px;
+}
+
+.ds-comp-code {
+  display: none;
+  background: #0B132B;
+  border-top: 1px solid #1E293B;
+  position: relative;
+}
+
+.ds-comp-box.show-code .ds-comp-code {
+  display: block;
+}
+
+.ds-comp-box.code-only .ds-comp-preview {
+  display: none;
+}
+
+.ds-comp-box.code-only .ds-comp-code {
+  display: block;
+}
+
+.ds-comp-box.split-view .ds-comp-preview {
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+
+.ds-comp-box.split-view .ds-comp-code {
+  display: block;
+}
+
+.ds-code-pre {
+  margin: 0;
+  padding: 18px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.65;
+  color: #E2E8F0;
+  overflow-x: auto;
+  max-height: 440px;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0B132B;
+}
+
+.ds-code-pre::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.ds-code-pre::-webkit-scrollbar-track {
+  background: #0B132B;
+}
+
+.ds-code-pre::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+/* Syntax Highlighting Tokens */
+.kwd { color: #C084FC; font-weight: 600; } /* Keywords: import, export, const, return */
+.tag { color: #38BDF8; font-weight: 600; } /* JSX Tags: <Button>, <div> */
+.prop { color: #FCD34D; }                  /* Props: className, onClick, variant */
+.str { color: #4ADE80; }                   /* Strings: "primary", "md" */
+.fn { color: #60A5FA; font-weight: 600; }  /* Functions */
+.num { color: #F472B6; }                   /* Numbers */
+.cmt { color: #64748B; font-style: italic; } /* Comments */
+.punct { color: #94A3B8; }                 /* Braces, commas, angle brackets */
+
+@media (max-width: 768px) {
+  .ds-view-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ds-view-bar-left, .ds-view-bar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .ds-search-input {
+    width: 100%;
+  }
+  .ds-search-input:focus {
+    width: 100%;
+  }
+}
