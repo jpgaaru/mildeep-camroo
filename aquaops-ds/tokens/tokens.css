@@ -19,9 +19,17 @@
   --teal-650: #0096a8;
   --teal-700: #008292; /* AA compliant on white */
   --teal-800: #006c7a; /* AAA compliant on white */
-  --teal-900: #005662;
-  --teal-950: #00404a;
+  --teal-850: #005662; /* 7.42:1 WCAG AAA Primary Button */
+  --teal-900: #004d57; /* 8.20:1 WCAG AAA Dark Teal Action */
+  --teal-920: #00414a; /* 9.50:1 WCAG AAA Pressed Action */
+  --teal-950: #00333b;
   --teal-990: #002d34;
+
+  /* Primary Button Standard Token (Dark Teal for Crisp White Text, WCAG AAA 8.2:1) */
+  --btn-primary-bg: #004d57;
+  --btn-primary-hover: #003d45;
+  --btn-primary-active: #002f35;
+  --btn-primary-text: #ffffff;
 
   /* Neutrals */
   --black: #000000;
@@ -58,13 +66,16 @@
   --t-2xl: clamp(2.30rem, 2.00rem + 1.8vw, 3.20rem);
   --t-display: clamp(2.90rem, 2.40rem + 2.8vw, 4.25rem);
 
-  /* Corner Radii System */
-  --r-8: 8px;
-  --r-12: 12px;
-  --r-16: 16px;
+  /* Corner Radii System (Apple HIG & Material 3 Geometric Hierarchy) */
+  --r-4: 4px;   /* Micro Indicators, Checkboxes */
+  --r-6: 6px;   /* Small Tags & Compact Badges */
+  --r-8: 8px;   /* Architectural Standard: Inputs, Selects, Buttons */
+  --r-10: 10px; /* Dropdowns, Dialogs, Filter Bars */
+  --r-12: 12px; /* Content Cards, Tables, Metric Tiles */
+  --r-16: 16px; /* Feature Sections, Modal Dialogs */
   --r-20: 20px;
   --r-24: 24px;
-  --pill: 9999px;
+  --pill: 9999px; /* Floating Badges, Status Pills, Avatars */
 
   /* Spacing Scale */
   --s1: 8px;

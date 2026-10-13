@@ -162,28 +162,29 @@
    ========================================================== */
 .rich-select { position: relative; width: 100%; }
 .rs-trigger {
-  height: 48px; width: 100%; padding: 0 16px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  border: 1px solid var(--line-strong); border-radius: var(--r-12);
+  height: 42px; width: 100%; padding: 0 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  border: 1px solid #CBD5E1; border-radius: var(--r-8);
   background: var(--white); cursor: pointer; user-select: none;
-  font-size: var(--t-sm); font-weight: 500; transition: all 0.2s var(--ease);
+  font-size: 13.5px; font-weight: 500; transition: all 0.16s var(--ease);
+  color: #0F172A;
 }
-.rs-trigger:hover { border-color: var(--faint); }
+.rs-trigger:hover { border-color: #94A3B8; }
 .rs-trigger:focus-visible {
-  outline: 2px solid var(--teal-600);
+  outline: 2px solid #004d57;
   outline-offset: 2px;
-  border-color: var(--teal-600);
+  border-color: #004d57;
 }
 .rich-select.open .rs-trigger {
-  border-color: var(--teal-600);
-  box-shadow: 0 0 0 3px var(--teal-100);
+  border-color: #004d57;
+  box-shadow: 0 0 0 3px rgba(0, 77, 87, 0.14);
 }
 .rs-current {
   display: flex; align-items: center; gap: 10px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   min-width: 0;
 }
-.rs-current svg, .rs-current > i { width: 16px; height: 16px; color: var(--teal-700); flex-shrink: 0; }
+.rs-current svg, .rs-current > i { width: 16px; height: 16px; color: #004d57; flex-shrink: 0; }
 .rs-chev {
   width: 15px; height: 15px; color: var(--muted);
   transition: transform 0.25s var(--ease); flex-shrink: 0;
@@ -191,9 +192,9 @@
 .rich-select.open .rs-chev { transform: rotate(180deg); }
 
 .rs-menu {
-  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
-  background: var(--white); border: 1px solid var(--line);
-  border-radius: var(--r-16); box-shadow: var(--sh-menu);
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: var(--white); border: 1px solid #E2E8F0;
+  border-radius: var(--r-10); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   display: none; z-index: 100; overflow: hidden;
   animation: rsSpring var(--dur-normal) var(--ease-out-expo);
   transform-origin: top center;
