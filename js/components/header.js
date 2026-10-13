@@ -20,16 +20,21 @@ export const Header = {
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
-      <header class="bg-white h-14 px-6 flex items-center justify-end select-none rounded-2xl">
-        <!-- Right: Dedicated Notification Page Button + Welcome Manikanta & Profile -->
-        <div class="relative flex items-center gap-3.5">
+      <header class="bg-white h-14 px-6 flex items-center justify-between select-none rounded-2xl">
+        <!-- Left: Bold Big Welcome Text -->
+        <div class="flex items-center">
+          <h2 class="text-base sm:text-lg font-extrabold text-[#0F172A] tracking-tight">Welcome, ${ERP_DATA.currentUser.name}</h2>
+        </div>
+
+        <!-- Right: Dedicated Notification Page Button & Profile Menu -->
+        <div class="relative flex items-center gap-3">
           <a
             href="#/notifications/center/all-notifications"
             id="header-notifications-page-btn"
             class="relative w-9 h-9 rounded-full border ${isNotificationsActive ? 'border-[#006C7A] bg-[#F0FAFC] text-[#006C7A]' : 'border-[#CBD5E1] bg-[#F8FAFC] text-[#475569]'} hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] flex items-center justify-center transition-all cursor-pointer"
             title="Open Notification Center (${unreadCount} Unread)"
           >
-            <svg class="w-4.5 h-4.5" style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
             ${unreadCount > 0 ? `
@@ -39,14 +44,8 @@ export const Header = {
             ` : ''}
           </a>
 
-          <div class="h-6 w-[1px] bg-[#E2E8F0]"></div>
-
-          <button id="user-menu-btn" class="flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-right outline-none">
-            <div class="text-right">
-              <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, ${ERP_DATA.currentUser.name}</div>
-              <div class="text-[11px] text-[#64748B] leading-tight font-medium">${ERP_DATA.currentUser.role}</div>
-            </div>
-            <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] transition-all">
+          <button id="user-menu-btn" class="flex items-center hover:opacity-90 transition-opacity cursor-pointer outline-none" title="${ERP_DATA.currentUser.name} — ${ERP_DATA.currentUser.role}">
+            <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#475569] hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] transition-all">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
             </div>
           </button>
