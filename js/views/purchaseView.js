@@ -611,6 +611,7 @@ export const PurchaseView = {
       );
     }, 50);
 
+    let centersTableInstance = null;
     const renderCentersTable = () => {
       const centerVal = document.getElementById('rm-dash-center')?.value || 'ALL';
       const plantVal = document.getElementById('rm-dash-plant')?.value || 'ALL';
@@ -620,7 +621,7 @@ export const PurchaseView = {
         return true;
       });
 
-      new DataTable({
+      centersTableInstance = new DataTable({
         containerId: 'rm-top-centers-table',
         tableTitle: 'Quantity by Center',
         data: filteredCenters,
@@ -631,14 +632,32 @@ export const PurchaseView = {
         showDensity: false,
         hideTopFilterBar: true,
         columns: [
-          { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
+          { field: 'code', header: 'Center Code', render: (v) => `<span class="font-bold text-[#17191c]">${v}</span>` },
           { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
           { field: 'plant', header: 'Mapped Plant Facility' },
-          { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class=" font-bold">${v} Lots</span>` },
-          { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class=" font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
-          { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c] ">${v}%</span>` },
-          { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span class="">₹ ${v}/KG</span>` }
-        ]
+          { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class="font-bold">${v} Lots</span>` },
+          { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class="font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
+          { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c]">${v}%</span>` },
+          { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span>₹ ${v}/KG</span>` }
+        ],
+        actions: [
+          {
+            label: 'View Details',
+            icon: `<svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`,
+            onClick: (row) => PurchaseView.showCenterDetails(row)
+          },
+          {
+            label: 'Edit Center',
+            icon: `<svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`,
+            onClick: (row) => PurchaseView.openEditCenterModal(row, centersTableInstance)
+          },
+          {
+            label: 'Download Slip',
+            icon: `<svg class="w-4 h-4 text-[#00875A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>`,
+            onClick: (row) => PurchaseView.downloadRecord(row)
+          }
+        ],
+        onRowClick: (row) => PurchaseView.showCenterDetails(row)
       });
     };
 
@@ -6523,7 +6542,7 @@ export const PurchaseView = {
   },
 
   downloadRecord(record) {
-    const filename = `${record.bookingNo || record.arrivalNumber || record.arrivalCode || record.billNo || record.txnId || record.voucherNo || record.lotNumber || record.id || 'record'}.json`;
+    const filename = `${record.bookingNo || record.arrivalNumber || record.arrivalCode || record.billNo || record.txnId || record.voucherNo || record.lotNumber || record.code || record.id || 'record'}.json`;
     const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(record, null, 2));
     const dlAnchorElem = document.createElement('a');
     dlAnchorElem.setAttribute("href", jsonStr);
@@ -6532,6 +6551,160 @@ export const PurchaseView = {
     dlAnchorElem.click();
     dlAnchorElem.remove();
     Toast.show(`Downloaded ${filename}`, 'success', 'File Downloaded');
+  },
+
+  showCenterDetails(center) {
+    Modal.open({
+      title: `Procurement Center: ${center.centerName}`,
+      size: 'lg',
+      content: `
+        <div class="space-y-4 text-xs">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
+            <div>
+              <span class="text-[#64748B] block text-[10px] font-semibold uppercase">Center Code</span>
+              <span class="font-extrabold text-[#006C7A] text-sm">${center.code}</span>
+            </div>
+            <div>
+              <span class="text-[#64748B] block text-[10px] font-semibold uppercase">Mapped Facility</span>
+              <span class="font-bold text-[#0F172A] text-sm">${center.plant}</span>
+            </div>
+            <div>
+              <span class="text-[#64748B] block text-[10px] font-semibold uppercase">Total Lots Supplied</span>
+              <span class="font-extrabold text-[#0F172A] text-sm">${center.totalLots} Lots</span>
+            </div>
+            <div>
+              <span class="text-[#64748B] block text-[10px] font-semibold uppercase">Total Intake Qty</span>
+              <span class="font-extrabold text-[#006644] text-sm">${(center.totalQtyKg || 0).toLocaleString()} KG</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 bg-white border border-[#E2E8F0] rounded-xl space-y-2">
+              <h4 class="font-bold text-xs text-[#0F172A] border-b pb-1.5 flex items-center justify-between">
+                <span>Performance & Yield</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#E3FCEF] text-[#006644] font-bold">Grade A</span>
+              </h4>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Average Yield Ratio:</span>
+                <span class="font-bold text-[#0F172A]">${center.yieldPct}%</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Procurement Rate:</span>
+                <span class="font-bold text-[#0F172A]">₹ ${center.avgRateInr} / KG</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-[#64748B]">Total Center Valuation:</span>
+                <span class="font-bold text-[#006644]">₹ ${((center.totalQtyKg || 0) * (center.avgRateInr || 0)).toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-white border border-[#E2E8F0] rounded-xl space-y-2">
+              <h4 class="font-bold text-xs text-[#0F172A] border-b pb-1.5 flex items-center justify-between">
+                <span>Center Operations</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1D4ED8] font-bold">Operational</span>
+              </h4>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Supervisor In-Charge:</span>
+                <span class="font-semibold text-[#0F172A]">R. K. Varma (Plant Liaison)</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Cold-Chain Fleet:</span>
+                <span class="font-semibold text-[#0F172A]">4 Insulated Reefer Trucks</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-[#64748B]">Operating Dispatch Schedule:</span>
+                <span class="font-semibold text-[#0F172A]">Daily (04:00 AM – 11:30 PM)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 flex justify-between items-center border-t border-[#E2E8F0]">
+            <a href="#/purchase/operations/rm-arrivals" onclick="document.getElementById('modal-close-btn')?.click();" class="text-xs font-bold text-[#006C7A] hover:underline flex items-center gap-1">
+              View All RM Arrivals for this Center →
+            </a>
+            <div class="flex gap-2">
+              <button id="modal-center-dl-btn" class="px-3 py-1.5 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#0F172A] font-semibold rounded-lg text-xs transition-colors">
+                Download Summary
+              </button>
+              <button onclick="document.getElementById('modal-close-btn')?.click();" class="btn-primary px-3 py-1.5 rounded-lg text-xs">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      `
+    });
+
+    const dlBtn = document.getElementById('modal-center-dl-btn');
+    if (dlBtn) {
+      dlBtn.onclick = () => {
+        PurchaseView.downloadRecord(center);
+      };
+    }
+  },
+
+  openEditCenterModal(center, tableInstance) {
+    Modal.open({
+      title: `Edit Procurement Center: ${center.centerName}`,
+      size: 'md',
+      content: `
+        <form id="edit-center-form" class="space-y-3 text-xs">
+          <div>
+            <label class="block text-[11px] font-bold text-[#475569] mb-1">Center Name</label>
+            <input type="text" id="edit-center-name" value="${center.centerName}" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" required />
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-[#475569] mb-1">Mapped Plant Facility</label>
+            <select id="edit-center-plant" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]">
+              <option value="DFL UNIT-1 (VSP)" ${center.plant.includes('UNIT-1') ? 'selected' : ''}>DFL UNIT-1 (VSP)</option>
+              <option value="DFL UNIT-2 (KKD)" ${center.plant.includes('UNIT-2') ? 'selected' : ''}>DFL UNIT-2 (KKD)</option>
+              <option value="DFL UNIT-3 (PSP)" ${center.plant.includes('UNIT-3') ? 'selected' : ''}>DFL UNIT-3 (PSP)</option>
+              <option value="DFL UNIT-4 (PND)" ${center.plant.includes('UNIT-4') ? 'selected' : ''}>DFL UNIT-4 (PND)</option>
+              <option value="DFL UNIT-5 (JPT)" ${center.plant.includes('UNIT-5') ? 'selected' : ''}>DFL UNIT-5 (JPT)</option>
+              <option value="DFL UNIT-6 (JPT-II)" ${center.plant.includes('UNIT-6') ? 'selected' : ''}>DFL UNIT-6 (JPT-II)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">Avg Rate (₹/KG)</label>
+              <input type="number" id="edit-center-rate" value="${center.avgRateInr}" min="1" max="2000" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" required />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">Avg Yield Target (%)</label>
+              <input type="number" step="0.1" id="edit-center-yield" value="${center.yieldPct}" min="1" max="100" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" required />
+            </div>
+          </div>
+
+          <div class="pt-3 flex justify-end gap-2 border-t border-[#E2E8F0]">
+            <button type="button" onclick="document.getElementById('modal-close-btn')?.click();" class="px-3 py-1.5 border border-[#CBD5E1] rounded-lg hover:bg-[#F8FAFC] text-[#475569] font-semibold text-xs">
+              Cancel
+            </button>
+            <button type="submit" class="btn-primary px-4 py-1.5 rounded-lg text-xs">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      `
+    });
+
+    const form = document.getElementById('edit-center-form');
+    if (form) {
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        center.centerName = document.getElementById('edit-center-name').value.trim();
+        center.plant = document.getElementById('edit-center-plant').value;
+        center.avgRateInr = parseFloat(document.getElementById('edit-center-rate').value) || center.avgRateInr;
+        center.yieldPct = parseFloat(document.getElementById('edit-center-yield').value) || center.yieldPct;
+
+        if (tableInstance && typeof tableInstance.setData === 'function') {
+          tableInstance.setData(PurchaseView.centersList);
+        }
+        document.getElementById('modal-close-btn')?.click();
+        Toast.show(`Center ${center.code} updated successfully`, 'success', 'Center Updated');
+      };
+    }
   },
 
   // =========================================================================
