@@ -129,6 +129,15 @@ export const App = {
       return;
     }
 
+    // Authentication Guard: require login first before accessing dashboard
+    const isAuthenticated = sessionStorage.getItem('dfl_authenticated') === 'true';
+    if (!isAuthenticated) {
+      window.location.hash = '#/login';
+      document.getElementById('app-root').innerHTML = `<div id="login-view-container"></div>`;
+      LoginView.render('login-view-container');
+      return;
+    }
+
     // If empty hash, default to main dashboard
     if (rawHash === '' || rawHash === '#' || rawHash === '#/') {
       window.location.hash = '#/purchase/dashboard/rm-dashboard';

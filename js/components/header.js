@@ -341,7 +341,14 @@ export const Header = {
     const logoutBtn = document.getElementById('logout-menu-btn');
     if (logoutBtn) {
       logoutBtn.onclick = () => {
+        sessionStorage.removeItem('dfl_authenticated');
+        const existing = document.getElementById('erp-app-shell');
+        if (existing) existing.remove();
+        Toast.show('You have been signed out safely.', 'info');
         window.location.hash = '#/login';
+        if (window.App && typeof window.App.route === 'function') {
+          window.App.route();
+        }
       };
     }
 
