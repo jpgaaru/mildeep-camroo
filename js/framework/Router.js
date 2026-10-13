@@ -28,15 +28,15 @@ export const SECTION_METADATA_REGISTRY = {
     },
     'floor-operations': {
       title: 'Pre-Processing Floor Operations',
-      subtitle: 'Live receiving, sorting tables, de-heading & peeling line task allocation'
+      subtitle: 'Receiving, grading, sorting tables, and live peeling task allocation'
     },
     'chemical-inventory': {
       title: 'Chemical Inventory & Usage',
-      subtitle: 'Food-grade soaking additives, chlorine dosing logs, and batch chemical consumption'
+      subtitle: 'Food-grade soaking additives, ice usage logs, and batch dosage tracking'
     },
     traceability: {
       title: 'Pre-Processing Traceability',
-      subtitle: 'Farm-to-line batch genealogy, pond source linkage, and lot yield reconciliation'
+      subtitle: 'End-to-end pond-to-line batch traceability and yield reconciliation logs'
     }
   },
   quality: {
@@ -46,19 +46,19 @@ export const SECTION_METADATA_REGISTRY = {
     },
     lab: {
       title: 'Quality Control Laboratory',
-      subtitle: 'ELISA antibiotic residue screening, microbiological cultures, and external lab certificates'
+      subtitle: 'ELISA antibiotic screening, microbiological testing, and external lab certificates'
     },
     'qc-operations': {
       title: 'Quality Control Operations',
-      subtitle: 'Line inspection orders, core temperature checks, and export QC documentation'
+      subtitle: 'Line inspection orders, core temperature checks, and compliance documentation'
     },
     'chemical-screening': {
-      title: 'Chemical & Residue Screening',
-      subtitle: 'Pre-harvest and dock arrival chemical residue screening registers'
+      title: 'Chemical Screening Registry',
+      subtitle: 'Residue screening logs, sulfite checks, and pre-shipment chemical clearance'
     },
     'qc-audits': {
-      title: 'Compliance & Quality Audits',
-      subtitle: 'USFDA, EU, BAP, BRCGS food safety, farm, hatchery, and social audit registries'
+      title: 'Quality & Compliance Audits',
+      subtitle: 'BRCGS food safety, social compliance, farm, hatchery, and feed mill audit logs'
     }
   },
   production: {
@@ -67,24 +67,24 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'IQF, blast freezing, glazing lines, and master carton packaging'
     },
     'setup-master': {
-      title: 'Production Setup & Yields',
-      subtitle: 'Standard species conversion yield norms, count-grade tolerances, and line norms'
+      title: 'Production Setup & Standard Yields',
+      subtitle: 'Species-wise standard yield benchmarks, glaze specs, and line configurations'
     },
     'batch-tracking': {
       title: 'Production Batch Tracking',
-      subtitle: 'Real-time soaking tank dwell timers and IQF/blast freezer batch tracking'
+      subtitle: 'Real-time soaking tank progression and IQF / block freezing tunnel tracking'
     },
     'production-operations': {
-      title: 'Production Line Operations',
-      subtitle: 'Active soaking batches, glaze pick-up verification, and freezing transfer logs'
+      title: 'Production Floor Operations',
+      subtitle: 'Active soaking schedules, freezing line runs, and carton packing transfer'
     },
     'production-control': {
-      title: 'Production Control & Mass Balance',
-      subtitle: 'Floor balance by variety, head-on to finished conversion, and line reconciliation'
+      title: 'Production Control & Reconciliation',
+      subtitle: 'Floor balance by variety, soaking/freezing control, and head-on to finished conversion'
     },
     'anti-dumping': {
       title: 'Anti-Dumping Compliance Ledger',
-      subtitle: 'Statutory US/EU export traceability, negative audit verification, and closing balances'
+      subtitle: 'Statutory export audit logs, shipment reconciliation, and opening/closing balances'
     }
   },
   coldstore: {
@@ -94,19 +94,19 @@ export const SECTION_METADATA_REGISTRY = {
     },
     'inward-intake': {
       title: 'Coldstore Inward & Intake',
-      subtitle: 'Finished master carton intake from packing lines, general stock-in, and approvals'
+      subtitle: 'Production carton intake, general stock-in, and chamber supervisor approvals'
     },
     'store-operations': {
-      title: 'Coldstore Chamber Operations',
-      subtitle: 'Master pallet inventory, thawing & repacking orders, and physical cycle adjustments'
+      title: 'Coldstore Operations & Inventory',
+      subtitle: 'Master pallet inventory, thawing & repacking logs, and physical stock adjustments'
     },
     'dispatch-outward': {
-      title: 'Dispatch & Container Outward',
-      subtitle: 'Buyer order allocations, reefer container loading manifests, and IBT transfers'
+      title: 'Dispatch & Outward Logistics',
+      subtitle: 'Order allocations, container loading shipments, stock-out, and inter-branch transfers'
     },
     'setup-imports': {
-      title: 'Coldstore Racks & Data Setup',
-      subtitle: 'Chamber rack bin topology, pallet capacity mapping, and bulk stock imports'
+      title: 'Coldstore Racks & Batch Imports',
+      subtitle: 'Chamber rack location mapping and bulk pallet inventory data uploads'
     }
   },
   inventory: {
@@ -115,16 +115,16 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'Raw material stores, consumables, packaging stock, and real-time ledger'
     },
     requisitions: {
-      title: 'Material Requisitions & Indents',
-      subtitle: 'Departmental packaging, chemical, and engineering store indents'
+      title: 'Store Requisitions & Indents',
+      subtitle: 'Departmental packaging, chemical, and engineering store indent requests'
     },
     procurement: {
       title: 'Store Procurement & Orders',
-      subtitle: 'Packaging & consumable purchase orders, proforma invoices, and vendor registers'
+      subtitle: 'Proforma invoices, store purchase orders, and vendor procurement register'
     },
     'store-operations': {
-      title: 'Store Receipt & Material Issues',
-      subtitle: 'Goods Receipt Notes (GRN), quality inspection clearance, and floor material issues'
+      title: 'Goods Receipt & Material Issues',
+      subtitle: 'Inward Goods Receipt Notes (GRN) and floor material issue vouchers'
     }
   },
   sales: {
@@ -133,34 +133,34 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'International buyers, sales contracts, port dock dispatch, and container manifests'
     },
     'master-data': {
-      title: 'Commercial & Buyer Master Data',
-      subtitle: 'Export product specifications, international consignees, and private label brands'
+      title: 'Sales & Buyer Master Data',
+      subtitle: 'Export product catalog, international buyers & consignees, and private label brands'
     },
     'contracts-pricing': {
-      title: 'Export Contracts & Price Books',
-      subtitle: 'International species grade price books and buyer sales contract commitments'
+      title: 'Contracts & Export Pricing',
+      subtitle: 'International buyer price books, LC/TT sales contracts, and grade rate schedules'
     },
     'export-ops': {
       title: 'Export Operations & Logistics',
-      subtitle: 'Bills of Lading, health certificates, customs clearing, and vessel tracking'
+      subtitle: 'Bills of Lading, health certificates, customs clearing, container tracking, and marine insurance'
     },
     'export-finance': {
       title: 'Export Finance & Realization',
-      subtitle: 'Letter of Credit (LC) bank negotiations, forex forward contracts, and realization'
+      subtitle: 'Bank document negotiations, export collections realization, and FX forward contracts'
     }
   },
   reports: {
     'production-analytics': {
       title: 'Production & Yield Analytics',
-      subtitle: 'Species recovery yields, daily floor summaries, and anti-dumping export extracts'
+      subtitle: 'Plant yield recovery abstracts, floor summaries, and anti-dumping export logs'
     },
     'coldstore-analytics': {
-      title: 'Coldstore & Valuation Analytics',
-      subtitle: 'Chamber stock valuation, aging summaries, movement logs, and temperature exceptions'
+      title: 'Coldstore & Inventory Analytics',
+      subtitle: 'Cold chain stock valuation, aging summaries, movement logs, and exception reports'
     },
     'sales-export-analytics': {
-      title: 'Sales, Freight & Export Analytics',
-      subtitle: 'Regulatory compliance abstracts, container freight economics, and export realizations'
+      title: 'Sales, Logistics & Financial Analytics',
+      subtitle: 'Regulatory compliance abstracts, container freight analysis, and export realization reports'
     }
   },
   setup: {

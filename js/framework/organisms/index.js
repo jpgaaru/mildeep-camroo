@@ -21,8 +21,8 @@ export const Organisms = {
               <div id="header-container" class="bg-white rounded-2xl"></div>
             </div>
 
-            <!-- Card 2: Breadcrumbs, Section Header & Underline Tabs Menu (Sticky) -->
-            <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-4 pb-0 shadow-xs">
+            <!-- Breadcrumbs, Section Header & Full-Width Underline Tabs Menu (Sticky, Flat) -->
+            <div id="sticky-tabs-header-card" class="pt-1 pb-0 px-1 bg-[#F8FAFC]">
               <div id="breadcrumbs-container" class="mb-2"></div>
               <div id="section-title-container" class="mb-3"></div>
               <div id="global-tab-bar-container"></div>

@@ -1,6 +1,6 @@
 // Coldstore Module Views (Configured with On-Screen Tabs & Standard Empty States)
 
-import { Router } from '../framework/Router.js';
+import { TabBar } from '../components/tabBar.js';
 import { renderEmptyState } from '../components/emptyState.js';
 
 export const ColdstoreView = {
@@ -8,17 +8,18 @@ export const ColdstoreView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = `<div id="coldstore-subpage-content"></div>`;
-    const subContainer = document.getElementById('coldstore-subpage-content');
+    const tabContext = TabBar.getContext(activeHash);
+    const tabLabel = tabContext?.submenu?.tabs?.find(t => t.id === subPage)?.label || subPage.replace(/-/g, ' ');
 
-    const routeInfo = Router.resolve(activeHash);
-    const tabLabel = routeInfo?.subObj?.tabs?.find(t => t.id === subPage)?.label || subPage.replace(/-/g, ' ');
-
-    subContainer.innerHTML = renderEmptyState({
-      title: `No Coldstore Stock Records for ${tabLabel}`,
-      description: `The Coldstore warehouse registry (${routeInfo?.subObj?.title || 'Coldstore'}) currently has no active pallet records. Full interactive CRUD operations are active under the Purchase module.`,
-      moduleName: "Coldstore",
-      tabName: tabLabel
-    });
+    container.innerHTML = `
+      <div id="coldstore-subpage-content">
+        ${renderEmptyState({
+          title: `No Coldstore Stock Records for ${tabLabel}`,
+          description: `The Coldstore warehouse registry (${tabContext?.submenu?.title || 'Coldstore'}) currently has no active pallet records. Full interactive CRUD operations are active under the Purchase module.`,
+          moduleName: "Coldstore",
+          tabName: tabLabel
+        })}
+      </div>
+    `;
   }
 };
