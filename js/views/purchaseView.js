@@ -622,11 +622,13 @@ export const PurchaseView = {
 
       new DataTable({
         containerId: 'rm-top-centers-table',
+        tableTitle: 'Quantity by Center',
         data: filteredCenters,
         keyField: 'code',
         pageSize: 6,
         searchable: false,
         exportable: true,
+        showDensity: false,
         hideTopFilterBar: true,
         columns: [
           { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
