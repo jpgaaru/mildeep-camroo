@@ -1,4 +1,5 @@
-// Enterprise Notification Center View — Dedicated Full Page for Plant Alerts & Operational Notifications
+// Enterprise Notification Center View — Streamlined Apple/Airbnb Minimalist Architecture
+// Whitespace over borders, zero redundant metric cards, subtle badges & Noto Sans typographic scale
 
 import { Toast } from '../components/toast.js';
 import { Header } from '../components/header.js';
@@ -112,12 +113,8 @@ export const NOTIFICATIONS_DATA = [
 
 export const NotificationsView = {
   activeTab: 'all-notifications',
-  filters: {
-    search: '',
-    priority: 'ALL',
-    module: 'ALL',
-    status: 'ALL'
-  },
+  filterStatus: 'ALL', // 'ALL', 'UNREAD', 'CRITICAL'
+  searchQuery: '',
 
   getUnreadCount() {
     return NOTIFICATIONS_DATA.filter(n => n.unread).length;
@@ -128,154 +125,87 @@ export const NotificationsView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const totalCount = NOTIFICATIONS_DATA.length;
-    const unreadCount = NOTIFICATIONS_DATA.filter(n => n.unread).length;
-    const criticalCount = NOTIFICATIONS_DATA.filter(n => n.priority === 'Critical' || n.priority === 'High').length;
-    const procurementCount = NOTIFICATIONS_DATA.filter(n => n.category === 'procurement').length;
-
+    const unreadCount = this.getUnreadCount();
     const filteredList = this.getFilteredNotifications();
 
     container.innerHTML = `
-      <div class="space-y-4">
-        <!-- KPI Summary Row -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Total Notifications</div>
-              <div class="text-2xl font-extrabold text-[#0F172A] mt-1">${totalCount}</div>
-              <div class="text-[11px] text-[#006C7A] font-semibold mt-1">All active plant feeds</div>
+      <div class="max-w-5xl mx-auto space-y-6 pt-1 pb-12 font-sans select-none">
+        
+        <!-- Streamlined Top Control Bar (Clean, Unobtrusive Whitespace Design) -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 pb-2">
+          
+          <!-- Consolidated Search Input -->
+          <div class="relative flex-1 max-w-md">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="search" class="w-4 h-4"></i>
             </div>
-            <div class="w-11 h-11 rounded-xl bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
-              <i data-lucide="bell" class="w-5 h-5"></i>
-            </div>
+            <input
+              type="text"
+              id="notif-search-input"
+              value="${this.searchQuery}"
+              placeholder="Search notifications, lots, chambers, plants..."
+              class="w-full h-10 pl-9 pr-8 text-[13px] bg-white border border-slate-200/80 rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/15 text-slate-800 placeholder-slate-400 transition-all font-normal shadow-xs"
+            />
+            ${this.searchQuery ? `
+              <button id="notif-search-clear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 text-xs cursor-pointer">✕</button>
+            ` : ''}
           </div>
 
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Unread Alerts</div>
-              <div class="text-2xl font-extrabold text-[#006C7A] mt-1">${unreadCount}</div>
-              <div class="text-[11px] text-[#64748B] font-medium mt-1">Requires supervisor review</div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-[#E0F2FE] border border-[#7DD3FC] flex items-center justify-center text-[#0369A1]">
-              <i data-lucide="mail-warning" class="w-5 h-5"></i>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">High / Critical Priority</div>
-              <div class="text-2xl font-extrabold text-[#DC2626] mt-1">${criticalCount}</div>
-              <div class="text-[11px] text-[#B45309] font-semibold mt-1">Cold chain & pending bills</div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-[#FFE4E6] border border-[#FDA4AF] flex items-center justify-center text-[#BE123C]">
-              <i data-lucide="shield-alert" class="w-5 h-5"></i>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Procurement & Arrivals</div>
-              <div class="text-2xl font-extrabold text-[#047857] mt-1">${procurementCount}</div>
-              <div class="text-[11px] text-[#065F46] font-semibold mt-1">Live dock & booking events</div>
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-[#DCFCE7] border border-[#86EFAC] flex items-center justify-center text-[#047857]">
-              <i data-lucide="truck" class="w-5 h-5"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Filter & Action Bar Card -->
-        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Search Alerts</label>
-              <div class="relative">
-                <input
-                  type="text"
-                  id="notif-search-input"
-                  value="${this.filters.search}"
-                  placeholder="Search lot, arrival, chamber..."
-                  class="w-full h-9 pl-9 pr-3 text-xs rounded-lg border border-[#CBD5E1]"
-                />
-                <svg class="w-4 h-4 text-[#64748B] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Priority Level</label>
-              <select id="notif-priority-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
-                <option value="ALL" ${this.filters.priority === 'ALL' ? 'selected' : ''}>All Priorities</option>
-                <option value="Critical" ${this.filters.priority === 'Critical' ? 'selected' : ''}>Critical</option>
-                <option value="High" ${this.filters.priority === 'High' ? 'selected' : ''}>High</option>
-                <option value="Normal" ${this.filters.priority === 'Normal' ? 'selected' : ''}>Normal</option>
-                <option value="Low" ${this.filters.priority === 'Low' ? 'selected' : ''}>Low</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">ERP Module</label>
-              <select id="notif-module-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
-                <option value="ALL" ${this.filters.module === 'ALL' ? 'selected' : ''}>All Modules</option>
-                <option value="Purchase & RM" ${this.filters.module === 'Purchase & RM' ? 'selected' : ''}>Purchase & RM</option>
-                <option value="Transactions & Bills" ${this.filters.module === 'Transactions & Bills' ? 'selected' : ''}>Transactions & Bills</option>
-                <option value="Quality Control" ${this.filters.module === 'Quality Control' ? 'selected' : ''}>Quality Control</option>
-                <option value="Cold Storage" ${this.filters.module === 'Cold Storage' ? 'selected' : ''}>Cold Storage</option>
-                <option value="Pre-Processing" ${this.filters.module === 'Pre-Processing' ? 'selected' : ''}>Pre-Processing</option>
-                <option value="Sales & Export" ${this.filters.module === 'Sales & Export' ? 'selected' : ''}>Sales & Export</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Read Status</label>
-              <select id="notif-status-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
-                <option value="ALL" ${this.filters.status === 'ALL' ? 'selected' : ''}>All Statuses</option>
-                <option value="UNREAD" ${this.filters.status === 'UNREAD' ? 'selected' : ''}>Unread Only</option>
-                <option value="READ" ${this.filters.status === 'READ' ? 'selected' : ''}>Read Only</option>
-              </select>
-            </div>
-
-            <div class="flex items-center gap-2">
+          <!-- Quick Filter Pills & Actions -->
+          <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0">
+            <div class="inline-flex items-center bg-slate-100/80 p-1 rounded-xl gap-1">
               <button
                 type="button"
-                id="notif-reset-btn"
-                class="h-9 px-3 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-xs font-semibold text-[#334155] cursor-pointer transition-colors"
+                class="notif-pill-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${this.filterStatus === 'ALL' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'}"
+                data-status="ALL"
               >
-                Reset
+                All (${NOTIFICATIONS_DATA.length})
               </button>
+              <button
+                type="button"
+                class="notif-pill-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${this.filterStatus === 'UNREAD' ? 'bg-white text-[#006C7A] shadow-xs' : 'text-slate-500 hover:text-slate-900'}"
+                data-status="UNREAD"
+              >
+                Unread (${unreadCount})
+              </button>
+              <button
+                type="button"
+                class="notif-pill-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${this.filterStatus === 'CRITICAL' ? 'bg-white text-red-600 shadow-xs' : 'text-slate-500 hover:text-slate-900'}"
+                data-status="CRITICAL"
+              >
+                Critical & High
+              </button>
+            </div>
+
+            <!-- Mark All Read Subtle Link -->
+            ${unreadCount > 0 ? `
               <button
                 type="button"
                 id="notif-mark-all-read-btn"
-                class="flex-1 h-9 px-3.5 rounded-lg btn-primary text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+                class="text-xs font-semibold text-[#006C7A] hover:text-[#005662] hover:bg-[#F0FAFC] px-3 py-2 rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
+                title="Mark all notifications as read"
               >
-                <i data-lucide="check-check" class="w-4 h-4"></i>
-                <span>Mark All Read</span>
+                <i data-lucide="check-check" class="w-3.5 h-3.5"></i>
+                <span class="hidden md:inline">Mark all read</span>
               </button>
-            </div>
+            ` : ''}
           </div>
+
         </div>
 
-        <!-- Dedicated Notification Feed List -->
-        <div class="bg-white rounded-2xl border border-[#E2E8F0] shadow-xs overflow-hidden">
-          <div class="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#FAFBFC]">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-[#0F172A]">Showing ${filteredList.length} Notification${filteredList.length === 1 ? '' : 's'}</span>
-              <span class="lozenge lozenge-inprogress">${unreadCount} Unread</span>
-            </div>
-            <div class="text-[11px] text-[#64748B] font-medium">Real-time Plant Telemetry & Workflow Stream</div>
-          </div>
-
-          <div class="divide-y divide-[#E2E8F0]">
-            ${filteredList.length === 0 ? `
-              <div class="py-12 text-center">
-                <div class="w-12 h-12 rounded-2xl bg-[#F0FAFC] border border-[#B2ECF3] text-[#006C7A] flex items-center justify-center mx-auto mb-3">
-                  <i data-lucide="bell-off" class="w-6 h-6"></i>
-                </div>
-                <div class="text-sm font-bold text-[#0F172A]">No matching notifications</div>
-                <p class="text-xs text-[#64748B] mt-1">Try clearing your filters or switching notification tabs above.</p>
+        <!-- Notification Feed List (Border-free Whitespace Architecture) -->
+        <div class="space-y-1">
+          ${filteredList.length === 0 ? `
+            <div class="py-16 text-center">
+              <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="bell-off" class="w-5 h-5"></i>
               </div>
-            ` : filteredList.map(item => this.renderNotificationCard(item)).join('')}
-          </div>
+              <div class="text-sm font-semibold text-slate-800">No notifications found</div>
+              <p class="text-xs text-slate-400 mt-1">There are no alerts matching your search criteria.</p>
+            </div>
+          ` : filteredList.map(item => this.renderNotificationRow(item)).join('')}
         </div>
+
       </div>
     `;
 
@@ -288,100 +218,122 @@ export const NotificationsView = {
 
   getFilteredNotifications() {
     return NOTIFICATIONS_DATA.filter(item => {
+      // Submenu tabs filter
       if (this.activeTab === 'unread-alerts' && !item.unread) return false;
       if (this.activeTab === 'procurement-alerts' && item.category !== 'procurement') return false;
       if (this.activeTab === 'quality-alerts' && item.category !== 'quality') return false;
 
-      if (this.filters.priority !== 'ALL' && item.priority !== this.filters.priority) return false;
-      if (this.filters.module !== 'ALL' && item.module !== this.filters.module) return false;
-      if (this.filters.status === 'UNREAD' && !item.unread) return false;
-      if (this.filters.status === 'READ' && item.unread) return false;
+      // Status pill filter
+      if (this.filterStatus === 'UNREAD' && !item.unread) return false;
+      if (this.filterStatus === 'CRITICAL' && item.priority !== 'Critical' && item.priority !== 'High') return false;
 
-      if (this.filters.search.trim() !== '') {
-        const q = this.filters.search.toLowerCase();
+      // Search query filter
+      if (this.searchQuery.trim() !== '') {
+        const q = this.searchQuery.toLowerCase();
         const match =
           item.title.toLowerCase().includes(q) ||
           item.message.toLowerCase().includes(q) ||
           item.recordRef.toLowerCase().includes(q) ||
-          item.plant.toLowerCase().includes(q);
+          item.plant.toLowerCase().includes(q) ||
+          item.module.toLowerCase().includes(q);
         if (!match) return false;
       }
       return true;
     });
   },
 
-  renderNotificationCard(item) {
+  renderNotificationRow(item) {
+    // Subtle low-opacity badges (informs gently without screaming for attention)
     const priorityBadge = {
-      Critical: 'lozenge-danger',
-      High: 'lozenge-warning',
-      Normal: 'lozenge-inprogress',
-      Low: 'lozenge-default'
-    }[item.priority] || 'lozenge-default';
-
-    const iconMap = {
-      'Cold Storage': 'snowflake',
-      'Purchase & RM': 'truck',
-      'Quality Control': 'microscope',
-      'Transactions & Bills': 'receipt',
-      'Pre-Processing': 'layers',
-      'Sales & Export': 'ship'
-    };
-    const iconName = iconMap[item.module] || 'bell';
+      Critical: 'bg-red-50 text-red-700',
+      High: 'bg-amber-50 text-amber-800',
+      Normal: 'bg-slate-100 text-slate-600',
+      Low: 'bg-slate-50 text-slate-500'
+    }[item.priority] || 'bg-slate-100 text-slate-600';
 
     return `
-      <div class="p-4 sm:px-6 transition-colors ${item.unread ? 'bg-[#F0FAFC]/60 hover:bg-[#F0FAFC]' : 'bg-white hover:bg-[#F8FAFC]'} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div class="flex items-start gap-3.5 min-w-0">
-          <div class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center border ${item.unread ? 'bg-[#006C7A] text-white border-[#005662]' : 'bg-[#F8FAFC] text-[#64748B] border-[#CBD5E1]'}">
-            <i data-lucide="${iconName}" class="w-5 h-5"></i>
-          </div>
-          <div class="min-w-0 flex-1">
-            <div class="flex flex-wrap items-center gap-2 mb-1">
-              ${item.unread ? `<span class="inline-block w-2 h-2 rounded-full bg-[#006C7A]" title="Unread"></span>` : ''}
-              <span class="text-xs font-bold text-[#0F172A]">${item.title}</span>
-              <span class="lozenge ${priorityBadge}">${item.priority}</span>
-              <span class="lozenge lozenge-default">${item.module}</span>
-              <span class="text-[11px] font-semibold text-[#006C7A] bg-[#E0F7FA] px-2 py-0.5 rounded">${item.recordRef}</span>
-            </div>
-            <p class="text-xs text-[#475569] leading-relaxed">${item.message}</p>
-            <div class="flex flex-wrap items-center gap-3 mt-2 text-[11px] text-[#64748B]">
-              <span class="inline-flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ${item.timestamp}</span>
-              <span>•</span>
-              <span class="inline-flex items-center gap-1"><i data-lucide="building-2" class="w-3.5 h-3.5"></i> ${item.plant}</span>
-            </div>
-          </div>
+      <div 
+        class="group relative rounded-2xl p-4 sm:p-5 transition-all duration-150 cursor-pointer ${item.unread ? 'bg-[#F0FAFC]/50 hover:bg-[#F0FAFC]/90' : 'bg-transparent hover:bg-slate-50/80'} flex items-start gap-3.5"
+        data-id="${item.id}"
+        data-href="${item.targetHash}"
+      >
+        <!-- Left Unread Dot Beacon -->
+        <div class="pt-1.5 shrink-0">
+          <div 
+            class="w-2 h-2 rounded-full transition-transform ${item.unread ? 'bg-[#006C7A] scale-100 shadow-[0_0_6px_rgba(0,108,122,0.6)]' : 'bg-transparent scale-0'}" 
+            title="${item.unread ? 'Unread notification' : 'Read'}"
+          ></div>
         </div>
 
-        <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+        <!-- Notification Content Body (Typographic Unification with Strict Noto Sans Scale) -->
+        <div class="min-w-0 flex-1 pr-2">
+          
+          <!-- Header Line: Title & Subtle Tags -->
+          <div class="flex flex-wrap items-center gap-2 mb-1.5">
+            <h4 class="text-[13.5px] font-bold text-[#0F172A] tracking-tight group-hover:text-[#006C7A] transition-colors leading-snug">
+              ${item.title}
+            </h4>
+            <span class="text-[11px] font-medium px-2 py-0.5 rounded-md ${priorityBadge}">
+              ${item.priority}
+            </span>
+            <span class="text-[11px] font-medium text-slate-500">
+              ${item.module}
+            </span>
+            <span class="text-[11px] font-mono font-medium text-slate-600 bg-slate-100/80 px-1.5 py-0.5 rounded">
+              ${item.recordRef}
+            </span>
+          </div>
+
+          <!-- Description Text (Unboxed, Natural Flow) -->
+          <p class="text-[13px] font-normal text-[#475569] leading-relaxed max-w-4xl">
+            ${item.message}
+          </p>
+
+          <!-- Metadata Footer: Timestamp & Facility -->
+          <div class="flex flex-wrap items-center gap-2.5 mt-2.5 text-[11.5px] font-normal text-slate-400">
+            <span class="text-slate-500 font-medium">${item.timestamp}</span>
+            <span>•</span>
+            <span>${item.plant}</span>
+          </div>
+
+        </div>
+
+        <!-- Far Right Actions: Subtle, Appears on Hover without Permanent Clutter -->
+        <div class="shrink-0 flex items-center gap-3 pt-1">
+          <!-- Quick Toggle Read/Unread Icon -->
           <button
             type="button"
-            class="notif-toggle-read-btn px-3 py-1.5 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[11px] font-semibold text-[#334155] cursor-pointer transition-colors"
+            class="notif-toggle-btn w-8 h-8 rounded-full text-slate-400 hover:text-[#006C7A] hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-2xs"
             data-id="${item.id}"
+            title="${item.unread ? 'Mark as read' : 'Mark as unread'}"
           >
-            ${item.unread ? 'Mark Read' : 'Mark Unread'}
+            <i data-lucide="${item.unread ? 'check' : 'mail'}" class="w-4 h-4"></i>
           </button>
+
+          <!-- Subtle Open Record Link -->
           <a
             href="${item.targetHash}"
-            class="px-3 py-1.5 rounded-lg bg-[#F0FAFC] hover:bg-[#E0F7FA] border border-[#B2ECF3] text-[11px] font-bold text-[#006C7A] inline-flex items-center gap-1 transition-colors"
+            class="text-xs font-semibold text-[#006C7A] hover:text-[#005662] hidden sm:inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all pr-1"
+            title="Open record in ERP"
           >
-            <span>Open Record</span>
+            <span>Open</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
+
       </div>
     `;
   },
 
   bindEvents(containerId) {
     const searchInput = document.getElementById('notif-search-input');
-    const prioritySel = document.getElementById('notif-priority-filter');
-    const moduleSel = document.getElementById('notif-module-filter');
-    const statusSel = document.getElementById('notif-status-filter');
-    const resetBtn = document.getElementById('notif-reset-btn');
+    const searchClear = document.getElementById('notif-search-clear');
     const markAllBtn = document.getElementById('notif-mark-all-read-btn');
 
+    // Search input
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
-        this.filters.search = e.target.value;
+        this.searchQuery = e.target.value;
         this.render(containerId, this.activeTab);
         const el = document.getElementById('notif-search-input');
         if (el) {
@@ -391,37 +343,27 @@ export const NotificationsView = {
       });
     }
 
-    if (prioritySel) {
-      prioritySel.addEventListener('change', (e) => {
-        this.filters.priority = e.target.value;
+    // Search clear
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        this.searchQuery = '';
         this.render(containerId, this.activeTab);
       });
     }
 
-    if (moduleSel) {
-      moduleSel.addEventListener('change', (e) => {
-        this.filters.module = e.target.value;
+    // Filter pills (All / Unread / Critical)
+    document.querySelectorAll('.notif-pill-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.filterStatus = btn.dataset.status || 'ALL';
         this.render(containerId, this.activeTab);
       });
-    }
+    });
 
-    if (statusSel) {
-      statusSel.addEventListener('change', (e) => {
-        this.filters.status = e.target.value;
-        this.render(containerId, this.activeTab);
-      });
-    }
-
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        this.filters = { search: '', priority: 'ALL', module: 'ALL', status: 'ALL' };
-        this.render(containerId, this.activeTab);
-        Toast.show('Notification filters reset', 'info');
-      });
-    }
-
+    // Mark all as read
     if (markAllBtn) {
-      markAllBtn.addEventListener('click', () => {
+      markAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         NOTIFICATIONS_DATA.forEach(n => { n.unread = false; });
         this.render(containerId, this.activeTab);
         Header.render('header-container');
@@ -429,8 +371,30 @@ export const NotificationsView = {
       });
     }
 
-    document.querySelectorAll('.notif-toggle-read-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+    // Row click: navigate to targetHash & mark as read
+    document.querySelectorAll('[data-href]').forEach(row => {
+      row.addEventListener('click', (e) => {
+        // Prevent trigger if clicking the toggle button or open link directly
+        if (e.target.closest('.notif-toggle-btn') || e.target.closest('a')) {
+          return;
+        }
+        const id = row.dataset.id;
+        const targetHref = row.dataset.href;
+        const item = NOTIFICATIONS_DATA.find(n => n.id === id);
+        if (item) {
+          item.unread = false;
+          Header.render('header-container');
+        }
+        if (targetHref) {
+          window.location.hash = targetHref;
+        }
+      });
+    });
+
+    // Toggle read/unread button
+    document.querySelectorAll('.notif-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const id = btn.dataset.id;
         const item = NOTIFICATIONS_DATA.find(n => n.id === id);
         if (item) {
