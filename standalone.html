@@ -9209,294 +9209,595 @@ const CalendarPicker = {
   }
 };
 
-  // AquaPulse Enterprise Custom Select Dropdown Popover (v5 Enterprise)
-// Replaces native OS gray <select> menus with a custom AquaPulse popover matching CalendarPicker
+  // AquaOps Design System — Enterprise Rich Select & Combobox Controller (AquaSelect)
+// Automatically upgrades all <select> elements into AquaOps .rich-select molecules
+// Zero native OS gray dropdowns; full search, subtitles, status badges, checkmarks & keyboard navigation.
 
 
+
+// Domain metadata enrichment for fisheries ERP options (matching designsystem.html)
+const OPTION_METADATA = {
+  'All Species (Select)': { sub: 'All cultivated & wild-caught species', badge: 'All' },
+  'All Species': { sub: 'All cultivated & wild-caught species', badge: 'All' },
+  'Vannamei (VM)': { sub: 'L. Vannamei · Whiteleg Shrimp · High Density', badge: 'Optimal' },
+  'L. Vannamei': { sub: 'Whiteleg Shrimp · Prime Export Grade', badge: 'Optimal' },
+  'Black Tiger (BT)': { sub: 'P. Monodon · Jumbo Tiger Grade', badge: 'Premium' },
+  'P. Monodon': { sub: 'Black Tiger · Jumbo Export Grade', badge: 'Premium' },
+  'Asian Seabass': { sub: 'Lates Calcarifer · Cage Harvest', badge: 'Active' },
+  'Scampi': { sub: 'M. Rosenbergii · Freshwater Scampi', badge: 'Normal' },
+
+  'All Centers (Select)': { sub: 'All coastal & delta procurement hubs', badge: 'All Hubs' },
+  'All Centers': { sub: 'All coastal & delta procurement hubs', badge: 'All Hubs' },
+  'Bhimavaram Center #1': { sub: 'West Godavari Cluster · Code BVM-C1', badge: 'Hub #1' },
+  'Kakinada Sea Intake #2': { sub: 'East Godavari Coast · Code KKD-C2', badge: 'Hub #2' },
+  'Amalapuram Harvesters #4': { sub: 'Konaseema Delta · Code AML-C4', badge: 'Hub #4' },
+  'Machilipatnam Delta #3': { sub: 'Krishna Delta · Code MCN-C3', badge: 'Hub #3' },
+  'Ongole Coastal Hub #1': { sub: 'Prakasam Coast · Code ONG-C1', badge: 'Hub #5' },
+  'Visakhapatnam Gate Dock': { sub: 'Port Landing Dock · Code VSP-D1', badge: 'Dock #1' },
+
+  'All Plants (Select)': { sub: 'All Devi Fisheries processing units', badge: 'All Units' },
+  'All Plants': { sub: 'All Devi Fisheries processing units', badge: 'All Units' },
+  'DFL UNIT-1 (VSP)': { sub: 'Visakhapatnam Export Processing Terminal', badge: 'Unit 1' },
+  'DFL UNIT-2 (KKD)': { sub: 'Kakinada Deep Freeze & IQF Facility', badge: 'Unit 2' },
+  'DFL UNIT-3 (PSP)': { sub: 'Peddapuram EU/USFDA Certified Plant', badge: 'Unit 3' },
+  'DFL UNIT-4 (PND)': { sub: 'Penumantra Coldstore & Grading Unit', badge: 'Unit 4' },
+  'DFL UNIT-5 (JPT)': { sub: 'Jaggampeta Main Processing Plant', badge: 'Unit 5' },
+  'DFL UNIT-6 (JPT-II)': { sub: 'Jaggampeta Phase-II Value-Added Unit', badge: 'Unit 6' }
+};
+
+function getLeadingIconSvg(selectEl) {
+  const labelText = (
+    selectEl.previousElementSibling?.textContent ||
+    selectEl.closest('div')?.querySelector('label')?.textContent ||
+    selectEl.id ||
+    ''
+  ).toLowerCase();
+
+  if (labelText.includes('species')) {
+    return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>`;
+  }
+  if (labelText.includes('center') || labelText.includes('location') || labelText.includes('hub')) {
+    return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
+  }
+  if (labelText.includes('plant') || labelText.includes('unit') || labelText.includes('company')) {
+    return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`;
+  }
+  if (labelText.includes('supplier') || labelText.includes('agent') || labelText.includes('farmer') || labelText.includes('vendor')) {
+    return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+  }
+  if (labelText.includes('status') || labelText.includes('priority')) {
+    return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+  }
+  return `<svg class="rs-lead-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>`;
+}
 
 const SelectPicker = {
-  activeSelect: null,
-  popover: null,
-  searchQuery: '',
+  instances: new Map(),
+  openInstance: null,
+  observer: null,
 
   init() {
-    this.createPopover();
-    this.bindGlobalListeners();
+    this.injectDesignSystemOverrides();
+    this.upgradeAllSelects();
+    this.bindGlobalEvents();
+    this.startObserver();
   },
 
-  createPopover() {
-    let existing = document.getElementById('aquapulse-select-popover');
-    if (existing) {
-      this.popover = existing;
-      return;
+  injectDesignSystemOverrides() {
+    if (document.getElementById('aquaops-rich-select-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'aquaops-rich-select-styles';
+    style.textContent = `
+      select.aquapulse-native-select-hidden {
+        display: none !important;
+      }
+      .rich-select {
+        position: relative;
+        width: 100%;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .rich-select.compact {
+        width: auto;
+        display: inline-block;
+      }
+      .rich-select .rs-trigger {
+        height: 38px;
+        width: 100%;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        border: 1px solid #CBD5E1;
+        border-radius: 8px;
+        background: #FFFFFF;
+        cursor: pointer;
+        user-select: none;
+        font-size: 13px;
+        font-weight: 500;
+        color: #0F172A;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+        outline: none;
+      }
+      .rich-select.compact .rs-trigger {
+        height: 32px;
+        padding: 0 10px;
+        font-size: 12px;
+        min-width: 72px;
+      }
+      .rich-select .rs-trigger:hover {
+        border-color: #94A3B8;
+        background: #FAFBFC;
+      }
+      .rich-select.open .rs-trigger,
+      .rich-select .rs-trigger:focus-visible {
+        border-color: #006C7A !important;
+        box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
+        background: #FFFFFF !important;
+      }
+      .rich-select .rs-current {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+        flex: 1;
+      }
+      .rich-select .rs-current span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .rich-select .rs-lead-icon {
+        width: 15px;
+        height: 15px;
+        color: #006C7A;
+        flex-shrink: 0;
+      }
+      .rich-select .rs-chev {
+        width: 15px;
+        height: 15px;
+        color: #64748B;
+        transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s ease;
+        flex-shrink: 0;
+      }
+      .rich-select.open .rs-chev {
+        transform: rotate(180deg);
+        color: #006C7A;
+      }
+      .rich-select .rs-menu {
+        position: fixed !important;
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 14px !important;
+        box-shadow: 0 16px 36px -6px rgba(10, 27, 57, 0.16), 0 6px 14px -4px rgba(0, 108, 122, 0.1) !important;
+        display: none;
+        z-index: 99999 !important;
+        overflow: hidden;
+        animation: rsSpring 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .rich-select.open .rs-menu {
+        display: block !important;
+      }
+      .rich-select .rs-search-wrap {
+        padding: 9px 12px !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+        background: #F8FAFC !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+      }
+      .rich-select .rs-search-wrap svg {
+        width: 14px !important;
+        height: 14px !important;
+        color: #64748B !important;
+        flex-shrink: 0 !important;
+      }
+      .rich-select input.rs-search-input {
+        width: 100% !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        height: 22px !important;
+        font-size: 12.5px !important;
+        color: #0F172A !important;
+        outline: none !important;
+        border-radius: 0 !important;
+      }
+      .rich-select input.rs-search-input:focus {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .rich-select .rs-list {
+        max-height: 250px;
+        overflow-y: auto;
+        padding: 6px;
+      }
+      .rich-select .rs-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 11px;
+        border-radius: 9px;
+        cursor: pointer;
+        transition: background 0.14s ease, transform 0.14s ease;
+        user-select: none;
+      }
+      .rich-select .rs-option:hover,
+      .rich-select .rs-option.focused {
+        background: #F1F5F9;
+      }
+      .rich-select .rs-option.selected {
+        background: #F0FAFC;
+        color: #005662;
+      }
+      .rich-select .rs-opt-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+        flex: 1;
+      }
+      .rich-select .rs-opt-title {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #0F172A;
+        line-height: 1.3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .rich-select .rs-option.selected .rs-opt-title {
+        color: #006C7A;
+        font-weight: 700;
+      }
+      .rich-select .rs-opt-sub {
+        font-size: 11px;
+        color: #64748B;
+        line-height: 1.3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .rich-select .rs-opt-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .rich-select .rs-opt-badge {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background: #F1F5F9;
+        color: #475569;
+        border: 1px solid #E2E8F0;
+      }
+      .rich-select .rs-option.selected .rs-opt-badge {
+        background: #D8F4F8;
+        color: #005662;
+        border-color: #84DFEB;
+      }
+      .rich-select .rs-check-icon {
+        width: 15px;
+        height: 15px;
+        color: #006C7A;
+        display: none;
+        flex-shrink: 0;
+      }
+      .rich-select .rs-option.selected .rs-check-icon {
+        display: block;
+      }
+      .rich-select .rs-empty-msg {
+        padding: 14px 12px;
+        text-align: center;
+        font-size: 12px;
+        color: #64748B;
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+  },
+
+  startObserver() {
+    if (this.observer) return;
+    this.observer = new MutationObserver(() => {
+      this.upgradeAllSelects();
+    });
+    this.observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  },
+
+  upgradeAllSelects(root = document) {
+    const selects = root.querySelectorAll('select:not([multiple])');
+    selects.forEach(selectEl => {
+      if ((selectEl.size || 0) > 1) return;
+      if (selectEl.dataset.aquaUpgraded === 'true') {
+        // Check if sibling .rich-select still exists
+        const next = selectEl.nextElementSibling;
+        if (next && next.classList.contains('rich-select')) {
+          return;
+        }
+      }
+      this.upgradeSelect(selectEl);
+    });
+  },
+
+  upgradeSelect(selectEl) {
+    selectEl.dataset.aquaUpgraded = 'true';
+    selectEl.classList.add('aquapulse-native-select-hidden');
+    selectEl.setAttribute('aria-hidden', 'true');
+    selectEl.tabIndex = -1;
+
+    // Remove any stale adjacent rich-select
+    if (selectEl.nextElementSibling && selectEl.nextElementSibling.classList.contains('rich-select')) {
+      selectEl.nextElementSibling.remove();
     }
 
-    const popover = document.createElement('div');
-    popover.id = 'aquapulse-select-popover';
-    popover.className = 'fixed hidden bg-white rounded-2xl border border-[#CBD5E1] p-1.5 select-none text-xs font-sans animate-fade-in';
-    popover.style.zIndex = '99999';
-    popover.style.boxShadow = '0 10px 30px -5px rgba(0, 108, 122, 0.18), 0 8px 12px -6px rgba(0, 0, 0, 0.08)';
-    document.body.appendChild(popover);
-    this.popover = popover;
-  },
+    const isCompact =
+      selectEl.className.includes('py-1 ') ||
+      selectEl.className.includes('h-7') ||
+      selectEl.className.includes('h-8') ||
+      Boolean(selectEl.closest('.pagination-controls, [id*="pagination"]'));
 
-  bindGlobalListeners() {
-    const interceptSelect = (e) => {
-      const selectEl = e.target.closest('select');
-      if (selectEl && !selectEl.disabled && !selectEl.multiple && (selectEl.size || 0) <= 1) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.type === 'mousedown') {
-          this.toggle(selectEl);
+    const wrapper = document.createElement('div');
+    wrapper.className = `rich-select${isCompact ? ' compact' : ''}`;
+
+    const leadIcon = isCompact ? '' : getLeadingIconSvg(selectEl);
+
+    const buildMarkup = () => {
+      const options = Array.from(selectEl.options || []);
+      const selectedOpt = options[selectEl.selectedIndex] || options[0];
+      const currentLabel = selectedOpt ? selectedOpt.text.trim() : 'Select...';
+      const showSearch = !isCompact && options.length >= 3;
+
+      const optionsHtml = options.map((opt, idx) => {
+        const isSelected = idx === selectEl.selectedIndex;
+        const label = opt.text.trim();
+        const val = opt.value;
+        const meta = OPTION_METADATA[label] || null;
+        const subText = opt.dataset.sub || (meta ? meta.sub : '');
+        const badgeText = opt.dataset.badge || (meta ? meta.badge : '');
+
+        return `
+          <div class="rs-option ${isSelected ? 'selected' : ''}" role="option" data-opt-idx="${idx}" data-value="${val.replace(/"/g, '&quot;')}">
+            <div class="rs-opt-main">
+              <div class="rs-opt-title">${label}</div>
+              ${subText ? `<div class="rs-opt-sub">${subText}</div>` : ''}
+            </div>
+            <div class="rs-opt-right">
+              ${badgeText ? `<span class="rs-opt-badge">${badgeText}</span>` : ''}
+              <svg class="rs-check-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      wrapper.innerHTML = `
+        <div class="rs-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+          <span class="rs-current">
+            ${leadIcon}
+            <span class="rs-current-label">${currentLabel}</span>
+          </span>
+          <svg class="rs-chev" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="rs-menu">
+          ${showSearch ? `
+            <div class="rs-search-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" class="rs-search-input" placeholder="Filter options..." autocomplete="off" />
+            </div>
+          ` : ''}
+          <div class="rs-list">
+            <div class="rs-empty-msg">No matching options found</div>
+            ${optionsHtml}
+          </div>
+        </div>
+      `;
+    };
+
+    buildMarkup();
+    selectEl.insertAdjacentElement('afterend', wrapper);
+
+    const instance = {
+      selectEl,
+      wrapper,
+      isCompact,
+      syncFromSelect: () => {
+        const options = Array.from(selectEl.options || []);
+        const selectedOpt = options[selectEl.selectedIndex] || options[0];
+        const labelEl = wrapper.querySelector('.rs-current-label');
+        if (labelEl && selectedOpt) {
+          labelEl.textContent = selectedOpt.text.trim();
         }
-        return false;
+        wrapper.querySelectorAll('.rs-option').forEach((optEl) => {
+          const idx = parseInt(optEl.getAttribute('data-opt-idx'), 10);
+          optEl.classList.toggle('selected', idx === selectEl.selectedIndex);
+        });
+      },
+      positionMenu: () => {
+        const trigger = wrapper.querySelector('.rs-trigger');
+        const menu = wrapper.querySelector('.rs-menu');
+        if (!trigger || !menu) return;
+
+        const rect = trigger.getBoundingClientRect();
+        const hasRichMeta = Boolean(wrapper.querySelector('.rs-opt-sub'));
+        const minWidth = isCompact ? Math.max(rect.width, 130) : (hasRichMeta ? Math.max(rect.width, 290) : Math.max(rect.width, 200));
+        menu.style.width = `${minWidth}px`;
+
+        const menuHeight = menu.offsetHeight || 240;
+        let top = rect.bottom + 6;
+        let left = rect.left;
+
+        if (top + menuHeight > window.innerHeight - 12 && rect.top > menuHeight + 12) {
+          top = rect.top - menuHeight - 6;
+        }
+        if (left + minWidth > window.innerWidth - 12) {
+          left = Math.max(12, window.innerWidth - minWidth - 12);
+        }
+
+        menu.style.top = `${top}px`;
+        menu.style.left = `${left}px`;
+      },
+      open: () => {
+        if (CalendarPicker && typeof CalendarPicker.close === 'function') {
+          CalendarPicker.close();
+        }
+        if (this.openInstance && this.openInstance !== instance) {
+          this.openInstance.close();
+        }
+        instance.syncFromSelect();
+        wrapper.classList.add('open');
+        const trigger = wrapper.querySelector('.rs-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+
+        const searchInput = wrapper.querySelector('.rs-search-input');
+        if (searchInput) {
+          searchInput.value = '';
+          instance.filterOptions('');
+        }
+
+        instance.positionMenu();
+        this.openInstance = instance;
+
+        if (searchInput) {
+          setTimeout(() => searchInput.focus(), 20);
+        }
+      },
+      close: () => {
+        wrapper.classList.remove('open');
+        const trigger = wrapper.querySelector('.rs-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        if (this.openInstance === instance) {
+          this.openInstance = null;
+        }
+      },
+      filterOptions: (query) => {
+        const term = (query || '').toLowerCase().trim();
+        let visibleCount = 0;
+        wrapper.querySelectorAll('.rs-option').forEach((optEl) => {
+          const text = optEl.textContent.toLowerCase();
+          const show = !term || text.includes(term);
+          optEl.style.display = show ? 'flex' : 'none';
+          if (show) visibleCount++;
+        });
+        const emptyMsg = wrapper.querySelector('.rs-empty-msg');
+        if (emptyMsg) {
+          emptyMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
       }
     };
 
-    // Intercept mousedown & pointerdown in capture phase to prevent native OS dropdown menu
-    document.addEventListener('pointerdown', (e) => {
-      const selectEl = e.target.closest('select');
-      if (selectEl && !selectEl.disabled && !selectEl.multiple && (selectEl.size || 0) <= 1) {
-        e.preventDefault();
-      }
-    }, true);
+    this.bindInstanceEvents(instance);
+    this.instances.set(selectEl, instance);
+  },
 
-    document.addEventListener('mousedown', (e) => {
-      const selectEl = e.target.closest('select');
-      if (selectEl && !selectEl.disabled && !selectEl.multiple && (selectEl.size || 0) <= 1) {
+  bindInstanceEvents(instance) {
+    const { wrapper, selectEl } = instance;
+    const trigger = wrapper.querySelector('.rs-trigger');
+    const searchInput = wrapper.querySelector('.rs-search-input');
+
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.toggle(selectEl);
-        return;
-      }
+        if (wrapper.classList.contains('open')) {
+          instance.close();
+        } else {
+          instance.open();
+        }
+      });
 
-      // Close when clicking outside popover
-      if (this.popover && !this.popover.contains(e.target)) {
-        this.close();
-      }
-    }, true);
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!wrapper.classList.contains('open')) {
+            instance.open();
+          }
+        } else if (e.key === 'Escape') {
+          instance.close();
+        }
+      });
+    }
 
+    if (searchInput) {
+      searchInput.addEventListener('click', (e) => e.stopPropagation());
+      searchInput.addEventListener('input', (e) => {
+        instance.filterOptions(e.target.value);
+        instance.positionMenu();
+      });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          instance.close();
+          trigger?.focus();
+        }
+      });
+    }
+
+    wrapper.querySelectorAll('.rs-option').forEach((optEl) => {
+      optEl.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const idx = parseInt(optEl.getAttribute('data-opt-idx'), 10);
+        if (!isNaN(idx) && selectEl.options[idx]) {
+          selectEl.selectedIndex = idx;
+          selectEl.value = selectEl.options[idx].value;
+          instance.syncFromSelect();
+          instance.close();
+
+          // Dispatch native events so all existing ERP view listeners work
+          selectEl.dispatchEvent(new Event('input', { bubbles: true }));
+          selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+  },
+
+  bindGlobalEvents() {
     document.addEventListener('click', (e) => {
-      const selectEl = e.target.closest('select');
-      if (selectEl && !selectEl.disabled && !selectEl.multiple && (selectEl.size || 0) <= 1) {
-        e.preventDefault();
-        e.stopPropagation();
+      if (this.openInstance && !this.openInstance.wrapper.contains(e.target)) {
+        this.openInstance.close();
       }
-    }, true);
+      // Sync all rich-selects after any button click (e.g. Reset Filters button)
+      setTimeout(() => {
+        this.instances.forEach((inst, sel) => {
+          if ( document.body.contains(sel) ) {
+            inst.syncFromSelect();
+          } else {
+            this.instances.delete(sel);
+          }
+        });
+      }, 10);
+    });
 
-    // Keyboard accessibility (Space, Enter, ArrowDown, ArrowUp, Escape)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.close();
-        return;
-      }
-
-      const selectEl = e.target.closest('select');
-      if (selectEl && !selectEl.disabled && [' ', 'Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.open(selectEl);
-      }
-    }, true);
-
-    // Reposition on window resize / scroll
     window.addEventListener('resize', () => {
-      if (this.activeSelect && this.popover && !this.popover.classList.contains('hidden')) {
-        this.positionPopover();
+      if (this.openInstance) {
+        this.openInstance.positionMenu();
       }
     });
 
     window.addEventListener('scroll', (e) => {
-      // Do not reposition/close if scrolling inside the popover list itself
-      if (this.popover && this.popover.contains(e.target)) return;
-      if (this.activeSelect && this.popover && !this.popover.classList.contains('hidden')) {
-        this.positionPopover();
+      if (this.openInstance) {
+        const menu = this.openInstance.wrapper.querySelector('.rs-menu');
+        if (menu && menu.contains(e.target)) return;
+        this.openInstance.positionMenu();
       }
     }, true);
   },
 
-  toggle(selectElement) {
-    if (this.activeSelect === selectElement && this.popover && !this.popover.classList.contains('hidden')) {
-      this.close();
-    } else {
-      this.open(selectElement);
-    }
-  },
-
-  open(selectElement) {
-    if (!this.popover) this.createPopover();
-
-    // Close CalendarPicker if open
-    if (CalendarPicker && typeof CalendarPicker.close === 'function') {
-      CalendarPicker.close();
-    }
-
-    if (this.activeSelect && this.activeSelect !== selectElement) {
-      this.activeSelect.classList.remove('aquapulse-select-open');
-    }
-
-    this.activeSelect = selectElement;
-    this.searchQuery = '';
-    selectElement.classList.add('aquapulse-select-open');
-    selectElement.blur();
-
-    this.render();
-    this.popover.classList.remove('hidden');
-    this.positionPopover();
-
-    // Focus search input if present
-    const searchInp = this.popover.querySelector('#aquapulse-select-search');
-    if (searchInp) {
-      setTimeout(() => searchInp.focus(), 10);
-    }
-  },
-
   close() {
-    if (this.activeSelect) {
-      this.activeSelect.classList.remove('aquapulse-select-open');
+    if (this.openInstance) {
+      this.openInstance.close();
     }
-    if (this.popover) {
-      this.popover.classList.add('hidden');
-    }
-    this.activeSelect = null;
-    this.searchQuery = '';
-  },
-
-  positionPopover() {
-    if (!this.activeSelect || !this.popover) return;
-    const rect = this.activeSelect.getBoundingClientRect();
-    const popWidth = Math.max(rect.width, 190);
-    this.popover.style.width = `${popWidth}px`;
-
-    const popHeight = this.popover.offsetHeight || 240;
-    let top = rect.bottom + 6;
-    let left = rect.left;
-
-    // Flip above if overflowing bottom viewport
-    if (top + popHeight > window.innerHeight - 12) {
-      top = Math.max(12, rect.top - popHeight - 6);
-    }
-
-    // Clamp right edge
-    if (left + popWidth > window.innerWidth - 12) {
-      left = Math.max(12, window.innerWidth - popWidth - 12);
-    }
-
-    this.popover.style.top = `${top}px`;
-    this.popover.style.left = `${left}px`;
-  },
-
-  render() {
-    if (!this.activeSelect || !this.popover) return;
-
-    const options = Array.from(this.activeSelect.options || []);
-    const selectedIdx = this.activeSelect.selectedIndex;
-    const showSearch = options.length > 7;
-
-    const searchHtml = showSearch ? `
-      <div class="px-1.5 pt-1 pb-1.5 border-b border-[#F1F5F9] mb-1">
-        <div class="relative flex items-center">
-          <svg class="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path d="m21 21-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
-          <input
-            type="text"
-            id="aquapulse-select-search"
-            value="${this.searchQuery}"
-            placeholder="Filter options..."
-            autocomplete="off"
-            class="w-full h-8 pl-8 pr-3 text-xs bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg focus:outline-none focus:border-[#006C7A] text-[#0F172A]"
-          />
-        </div>
-      </div>
-    ` : '';
-
-    this.popover.innerHTML = `
-      ${searchHtml}
-      <div id="aquapulse-select-options-list" class="max-h-60 overflow-y-auto space-y-0.5 pr-0.5">
-        ${this.renderOptionsList(options, selectedIdx)}
-      </div>
-    `;
-
-    this.bindPopoverEvents(options);
-  },
-
-  renderOptionsList(options, selectedIdx) {
-    const q = (this.searchQuery || '').trim().toLowerCase();
-    const filtered = options
-      .map((opt, idx) => ({ opt, idx }))
-      .filter(({ opt }) => !q || opt.text.toLowerCase().includes(q));
-
-    if (filtered.length === 0) {
-      return `<div class="px-3 py-3 text-center text-[#94A3B8] text-xs">No matching options</div>`;
-    }
-
-    return filtered.map(({ opt, idx }) => {
-      const isSelected = idx === selectedIdx;
-      const isDisabled = opt.disabled;
-
-      if (isDisabled) {
-        return `
-          <div class="px-3 py-2 rounded-xl text-xs text-[#94A3B8] cursor-not-allowed select-none">
-            ${opt.text}
-          </div>
-        `;
-      }
-
-      return `
-        <button
-          type="button"
-          data-opt-idx="${idx}"
-          class="w-full text-left px-3 py-2 rounded-xl text-xs flex items-center justify-between gap-2 transition-all cursor-pointer ${
-            isSelected
-              ? 'bg-[#F0FAFC] text-[#006C7A] font-bold'
-              : 'text-[#0F172A] font-medium hover:bg-[#F8FAFC] hover:text-[#006C7A]'
-          }"
-        >
-          <span class="truncate">${opt.text}</span>
-          ${
-            isSelected
-              ? `<svg class="w-4 h-4 text-[#006C7A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`
-              : ''
-          }
-        </button>
-      `;
-    }).join('');
-  },
-
-  bindPopoverEvents(options) {
-    const listEl = this.popover.querySelector('#aquapulse-select-options-list');
-    const searchInp = this.popover.querySelector('#aquapulse-select-search');
-
-    if (searchInp && listEl) {
-      searchInp.addEventListener('input', (e) => {
-        this.searchQuery = e.target.value;
-        listEl.innerHTML = this.renderOptionsList(options, this.activeSelect.selectedIndex);
-        this.bindOptionClicks();
-      });
-    }
-
-    this.bindOptionClicks();
-  },
-
-  bindOptionClicks() {
-    if (!this.popover) return;
-    this.popover.querySelectorAll('[data-opt-idx]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const idx = parseInt(btn.getAttribute('data-opt-idx'), 10);
-        if (this.activeSelect && !isNaN(idx)) {
-          const targetSelect = this.activeSelect;
-          targetSelect.selectedIndex = idx;
-          if (targetSelect.options[idx]) {
-            targetSelect.value = targetSelect.options[idx].value;
-          }
-          // Dispatch native input and change events so all listeners and inline onchange handlers run
-          targetSelect.dispatchEvent(new Event('input', { bubbles: true }));
-          targetSelect.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        this.close();
-      });
-    });
   }
 };
 
@@ -9954,32 +10255,37 @@ const PurchaseView = {
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-xs">
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Species (Select)</option>
-                  <option selected>Vannamei (VM)</option>
-                  <option>Black Tiger (BT)</option>
-                  <option>Asian Seabass</option>
+                <select id="rm-dash-species" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Species (Select)</option>
+                  <option value="Vannamei (VM)" selected>Vannamei (VM)</option>
+                  <option value="Black Tiger (BT)">Black Tiger (BT)</option>
+                  <option value="Asian Seabass">Asian Seabass</option>
                 </select>
               </div>
 
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Centers (Select)</option>
-                  <option>Bhimavaram Center #1</option>
-                  <option>Kakinada Sea Intake #2</option>
-                  <option>Amalapuram Harvesters #4</option>
+                <select id="rm-dash-center" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Centers (Select)</option>
+                  <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
+                  <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
+                  <option value="Amalapuram Harvesters #4">Amalapuram Harvesters #4</option>
+                  <option value="Machilipatnam Delta #3">Machilipatnam Delta #3</option>
+                  <option value="Ongole Coastal Hub #1">Ongole Coastal Hub #1</option>
+                  <option value="Visakhapatnam Gate Dock">Visakhapatnam Gate Dock</option>
                 </select>
               </div>
 
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Plants (Select)</option>
-                  <option>DFL UNIT-5 (JPT)</option>
-                  <option>DFL UNIT-3 (PSP)</option>
-                  <option>DFL UNIT-6 (JPT-II)</option>
-                  <option>DFL UNIT-4 (PND)</option>
+                <select id="rm-dash-plant" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Plants (Select)</option>
+                  <option value="DFL UNIT-5 (JPT)">DFL UNIT-5 (JPT)</option>
+                  <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
+                  <option value="DFL UNIT-6 (JPT-II)">DFL UNIT-6 (JPT-II)</option>
+                  <option value="DFL UNIT-4 (PND)">DFL UNIT-4 (PND)</option>
+                  <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
+                  <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 </select>
               </div>
 
@@ -10310,24 +10616,46 @@ const PurchaseView = {
       );
     }, 50);
 
-    // Quantity by Center Table
-    new DataTable({
-      containerId: 'rm-top-centers-table',
-      data: this.centersList,
-      keyField: 'code',
-      pageSize: 6,
-      searchable: false,
-      exportable: true,
-      hideTopFilterBar: true,
-      columns: [
-        { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
-        { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
-        { field: 'plant', header: 'Mapped Plant Facility' },
-        { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class=" font-bold">${v} Lots</span>` },
-        { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class=" font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
-        { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c] ">${v}%</span>` },
-        { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span class="">₹ ${v}/KG</span>` }
-      ]
+    const renderCentersTable = () => {
+      const centerVal = document.getElementById('rm-dash-center')?.value || 'ALL';
+      const plantVal = document.getElementById('rm-dash-plant')?.value || 'ALL';
+      const filteredCenters = this.centersList.filter(c => {
+        if (centerVal !== 'ALL' && c.centerName !== centerVal) return false;
+        if (plantVal !== 'ALL' && c.plant !== plantVal) return false;
+        return true;
+      });
+
+      new DataTable({
+        containerId: 'rm-top-centers-table',
+        data: filteredCenters,
+        keyField: 'code',
+        pageSize: 6,
+        searchable: false,
+        exportable: true,
+        hideTopFilterBar: true,
+        columns: [
+          { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
+          { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
+          { field: 'plant', header: 'Mapped Plant Facility' },
+          { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class=" font-bold">${v} Lots</span>` },
+          { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class=" font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
+          { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c] ">${v}%</span>` },
+          { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span class="">₹ ${v}/KG</span>` }
+        ]
+      });
+    };
+
+    renderCentersTable();
+
+    ['rm-dash-species', 'rm-dash-center', 'rm-dash-plant'].forEach(selId => {
+      const el = document.getElementById(selId);
+      if (el) {
+        el.addEventListener('change', (e) => {
+          renderCentersTable();
+          const selectedText = e.target.options[e.target.selectedIndex]?.text || e.target.value;
+          Toast.show(`Filter updated: ${selectedText}`, 'info');
+        });
+      }
     });
   },
 

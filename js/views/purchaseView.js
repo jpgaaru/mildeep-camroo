@@ -294,32 +294,37 @@ export const PurchaseView = {
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-xs">
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Species (Select)</option>
-                  <option selected>Vannamei (VM)</option>
-                  <option>Black Tiger (BT)</option>
-                  <option>Asian Seabass</option>
+                <select id="rm-dash-species" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Species (Select)</option>
+                  <option value="Vannamei (VM)" selected>Vannamei (VM)</option>
+                  <option value="Black Tiger (BT)">Black Tiger (BT)</option>
+                  <option value="Asian Seabass">Asian Seabass</option>
                 </select>
               </div>
 
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Centers (Select)</option>
-                  <option>Bhimavaram Center #1</option>
-                  <option>Kakinada Sea Intake #2</option>
-                  <option>Amalapuram Harvesters #4</option>
+                <select id="rm-dash-center" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Centers (Select)</option>
+                  <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
+                  <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
+                  <option value="Amalapuram Harvesters #4">Amalapuram Harvesters #4</option>
+                  <option value="Machilipatnam Delta #3">Machilipatnam Delta #3</option>
+                  <option value="Ongole Coastal Hub #1">Ongole Coastal Hub #1</option>
+                  <option value="Visakhapatnam Gate Dock">Visakhapatnam Gate Dock</option>
                 </select>
               </div>
 
               <div>
                 <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
-                <select class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option>All Plants (Select)</option>
-                  <option>DFL UNIT-5 (JPT)</option>
-                  <option>DFL UNIT-3 (PSP)</option>
-                  <option>DFL UNIT-6 (JPT-II)</option>
-                  <option>DFL UNIT-4 (PND)</option>
+                <select id="rm-dash-plant" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
+                  <option value="ALL">All Plants (Select)</option>
+                  <option value="DFL UNIT-5 (JPT)">DFL UNIT-5 (JPT)</option>
+                  <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
+                  <option value="DFL UNIT-6 (JPT-II)">DFL UNIT-6 (JPT-II)</option>
+                  <option value="DFL UNIT-4 (PND)">DFL UNIT-4 (PND)</option>
+                  <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
+                  <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
                 </select>
               </div>
 
@@ -650,24 +655,46 @@ export const PurchaseView = {
       );
     }, 50);
 
-    // Quantity by Center Table
-    new DataTable({
-      containerId: 'rm-top-centers-table',
-      data: this.centersList,
-      keyField: 'code',
-      pageSize: 6,
-      searchable: false,
-      exportable: true,
-      hideTopFilterBar: true,
-      columns: [
-        { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
-        { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
-        { field: 'plant', header: 'Mapped Plant Facility' },
-        { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class=" font-bold">${v} Lots</span>` },
-        { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class=" font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
-        { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c] ">${v}%</span>` },
-        { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span class="">₹ ${v}/KG</span>` }
-      ]
+    const renderCentersTable = () => {
+      const centerVal = document.getElementById('rm-dash-center')?.value || 'ALL';
+      const plantVal = document.getElementById('rm-dash-plant')?.value || 'ALL';
+      const filteredCenters = this.centersList.filter(c => {
+        if (centerVal !== 'ALL' && c.centerName !== centerVal) return false;
+        if (plantVal !== 'ALL' && c.plant !== plantVal) return false;
+        return true;
+      });
+
+      new DataTable({
+        containerId: 'rm-top-centers-table',
+        data: filteredCenters,
+        keyField: 'code',
+        pageSize: 6,
+        searchable: false,
+        exportable: true,
+        hideTopFilterBar: true,
+        columns: [
+          { field: 'code', header: 'Center Code', render: (v) => `<span class=" font-bold text-[#17191c]">${v}</span>` },
+          { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
+          { field: 'plant', header: 'Mapped Plant Facility' },
+          { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class=" font-bold">${v} Lots</span>` },
+          { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class=" font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
+          { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c] ">${v}%</span>` },
+          { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span class="">₹ ${v}/KG</span>` }
+        ]
+      });
+    };
+
+    renderCentersTable();
+
+    ['rm-dash-species', 'rm-dash-center', 'rm-dash-plant'].forEach(selId => {
+      const el = document.getElementById(selId);
+      if (el) {
+        el.addEventListener('change', (e) => {
+          renderCentersTable();
+          const selectedText = e.target.options[e.target.selectedIndex]?.text || e.target.value;
+          Toast.show(`Filter updated: ${selectedText}`, 'info');
+        });
+      }
     });
   },
 
