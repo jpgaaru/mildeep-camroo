@@ -1,6 +1,6 @@
 // Sales & Exports Module Views (Configured with On-Screen Tabs & Standard Empty States)
 
-import { TabBar } from '../components/tabBar.js';
+import { Router } from '../framework/Router.js';
 import { renderEmptyState } from '../components/emptyState.js';
 
 export const SalesView = {
@@ -8,19 +8,15 @@ export const SalesView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = `
-      <div id="sales-tab-bar-container"></div>
-      <div id="sales-subpage-content"></div>
-    `;
-
-    const tabContext = TabBar.render('sales-tab-bar-container', activeHash);
+    container.innerHTML = `<div id="sales-subpage-content"></div>`;
     const subContainer = document.getElementById('sales-subpage-content');
 
-    const tabLabel = tabContext?.submenu?.tabs?.find(t => t.id === subPage)?.label || subPage.replace(/-/g, ' ');
+    const routeInfo = Router.resolve(activeHash);
+    const tabLabel = routeInfo?.subObj?.tabs?.find(t => t.id === subPage)?.label || subPage.replace(/-/g, ' ');
 
     subContainer.innerHTML = renderEmptyState({
       title: `No Sales & Export Records for ${tabLabel}`,
-      description: `The Sales & Exports commercial directory (${tabContext?.submenu?.title || 'Sales & Exports'}) currently has no active contracts or shipping logs. Full interactive CRUD operations are active under the Purchase module.`,
+      description: `The Sales & Exports commercial directory (${routeInfo?.subObj?.title || 'Sales & Exports'}) currently has no active contracts or shipping logs. Full interactive CRUD operations are active under the Purchase module.`,
       moduleName: "Sales & Exports",
       tabName: tabLabel
     });

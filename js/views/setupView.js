@@ -4482,11 +4482,9 @@ export const SetupView = {
     if (!container) return;
 
     container.innerHTML = `
-      <div id="setup-tab-bar-container"></div>
-      <div id="setup-subpage-content" class="mt-4"></div>
+      <div id="setup-subpage-content"></div>
     `;
 
-    const tabContext = TabBar.render('setup-tab-bar-container', activeHash);
     const subContainer = document.getElementById('setup-subpage-content');
 
     const clean = (activeHash || '').replace(/^#\/?/, '').replace(/^\/+/, '');
