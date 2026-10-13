@@ -3483,14 +3483,17 @@ input::-webkit-calendar-picker-indicator {
    GLOBAL PASTEL PALETTE HARMONIZATION & WCAG COMPLIANCE
    ========================================================================== */
 
-/* Pastel Canvas & Shell */
-body, #erp-app-shell, .bg-\[\#F4F5F7\] {
-  background-color: #F2F5F9 !important;
-}
-
+/* Pastel Canvas & Shell - Unified Background Across Entire App */
+body, 
+#erp-app-shell, 
+#main-layout-wrapper,
+#sticky-top-nav-wrapper,
+#sticky-tabs-header-card,
+.bg-\[\#F2F5F9\],
+.bg-\[\#F4F5F7\],
 .bg-\[\#FAFBFC\],
 .bg-\[\#F8FAFC\] {
-  background-color: #F8FAFD !important;
+  background-color: #F8FAFC !important;
 }
 
 /* Pastel Borders (Clean non-text boundary definition) */
@@ -7971,28 +7974,28 @@ const Header = {
           </div>
         </div>
 
-        <!-- Right: Actions & User Profile Block -->
-        <div class="flex items-center gap-3">
-          <!-- Help Button (?) -->
+        <!-- Right: Actions & User Profile Block (Border-free minimal icons) -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Help Button (?) - Clean without stroke boundary -->
           <button
             id="header-help-btn"
-            class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            class="w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
             title="Help & Shortcuts (?)"
           >
-            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width:19px;height:19px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="9.5" stroke-width="1.8"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m0 3.5h.01"/>
             </svg>
           </button>
 
-          <!-- Notification Bell Button -->
+          <!-- Notification Bell Button - Clean without stroke boundary -->
           <a
             href="#/notifications/center/all-notifications"
             id="header-notifications-page-btn"
-            class="relative w-9 h-9 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            class="relative w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
             title="Notification Center (${unreadCount} Unread)"
           >
-            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width:19px;height:19px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
             ${unreadCount > 0 ? `
@@ -8013,7 +8016,7 @@ const Header = {
               <img
                 src="${ERP_DATA.currentUser.avatar}"
                 alt="${ERP_DATA.currentUser.name}"
-                class="w-8 h-8 rounded-full object-cover border border-[#CBD5E1]"
+                class="w-8 h-8 rounded-full object-cover"
                 onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');"
               />
               <div class="hidden w-8 h-8 rounded-full bg-[#006C7A] text-white text-xs font-bold flex items-center justify-center">

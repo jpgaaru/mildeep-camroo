@@ -944,14 +944,17 @@ input::-webkit-calendar-picker-indicator {
    GLOBAL PASTEL PALETTE HARMONIZATION & WCAG COMPLIANCE
    ========================================================================== */
 
-/* Pastel Canvas & Shell */
-body, #erp-app-shell, .bg-\[\#F4F5F7\] {
-  background-color: #F2F5F9 !important;
-}
-
+/* Pastel Canvas & Shell - Unified Background Across Entire App */
+body, 
+#erp-app-shell, 
+#main-layout-wrapper,
+#sticky-top-nav-wrapper,
+#sticky-tabs-header-card,
+.bg-\[\#F2F5F9\],
+.bg-\[\#F4F5F7\],
 .bg-\[\#FAFBFC\],
 .bg-\[\#F8FAFC\] {
-  background-color: #F8FAFD !important;
+  background-color: #F8FAFC !important;
 }
 
 /* Pastel Borders (Clean non-text boundary definition) */
