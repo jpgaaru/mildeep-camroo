@@ -4033,12 +4033,12 @@ const ERP_DATA = {
 
   currentUser: {
     id: "ADM-001",
-    name: "Manikanta",
-    role: "Procurement Manager",
-    email: "manikanta@devifisheries.com",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+    name: "Dr. Y.S. Prasad",
+    role: "Super Admin",
+    email: "ysprasad@devifisheries.com",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
     roles: [
-      "Admin"
+      "Super Admin"
     ]
   },
 
@@ -7947,11 +7947,11 @@ const Header = {
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
-      <header class="bg-white h-14 px-6 flex items-center justify-between select-none rounded-2xl relative z-40">
-        <!-- Left: Global Search Options / Input (Replacing 'Welcome, Manikanta') -->
-        <div class="flex items-center flex-1 max-w-md sm:max-w-lg" id="header-search-container">
-          <div class="relative w-full">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#64748B]">
+      <header class="bg-white h-14 px-5 flex items-center justify-between select-none rounded-2xl relative z-40">
+        <!-- Left: Search ERP records... -->
+        <div class="flex items-center" id="header-search-container">
+          <div class="relative w-64 sm:w-72 md:w-80">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
@@ -7959,42 +7959,75 @@ const Header = {
             <input 
               type="text" 
               id="header-global-search-input" 
-              placeholder="Search lot, arrival, supplier, bill, species, or section... (Ctrl+K or /)" 
-              class="w-full text-xs pl-9 pr-8 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:bg-white focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
+              placeholder="Search ERP records..." 
+              class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
             />
-            <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+            <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
 
             <!-- Live Search Results Dropdown -->
-            <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full max-w-lg bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
+            <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
               <div id="header-search-results-content" class="max-h-96 overflow-y-auto space-y-3"></div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Dedicated Notification Page Button & Profile Menu -->
+        <!-- Right: Actions & User Profile Block -->
         <div class="flex items-center gap-3">
+          <!-- Help Button (?) -->
+          <button
+            id="header-help-btn"
+            class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            title="Help & Shortcuts (?)"
+          >
+            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9.5" stroke-width="1.8"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m0 3.5h.01"/>
+            </svg>
+          </button>
+
+          <!-- Notification Bell Button -->
           <a
             href="#/notifications/center/all-notifications"
             id="header-notifications-page-btn"
-            class="relative w-9 h-9 rounded-full border ${isNotificationsActive ? 'border-[#006C7A] bg-[#F0FAFC] text-[#006C7A]' : 'border-[#CBD5E1] bg-[#F8FAFC] text-[#475569]'} hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] flex items-center justify-center transition-all cursor-pointer"
-            title="Open Notification Center (${unreadCount} Unread)"
+            class="relative w-9 h-9 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            title="Notification Center (${unreadCount} Unread)"
           >
-            <svg style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
             ${unreadCount > 0 ? `
-              <span class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#DC2626] text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-white leading-none">
-                ${unreadCount}
-              </span>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#EF4444] border-2 border-white ring-1 ring-[#EF4444]/30"></span>
             ` : ''}
           </a>
 
-          <!-- Profile Menu with dedicated relative wrapper and top-full positioning -->
+          <!-- Vertical Divider -->
+          <div class="h-8 w-px bg-[#E2E8F0] mx-0.5"></div>
+
+          <!-- User Profile Trigger & Menu -->
           <div class="relative">
-            <button id="user-menu-btn" class="flex items-center hover:opacity-90 transition-opacity cursor-pointer outline-none" title="${ERP_DATA.currentUser.name} — ${ERP_DATA.currentUser.role}">
-              <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#475569] hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <button
+              id="user-menu-btn"
+              class="flex items-center gap-2.5 py-1 px-1.5 rounded-xl hover:bg-[#F8FAFC] transition-colors cursor-pointer outline-none group"
+              title="${ERP_DATA.currentUser.name} (${ERP_DATA.currentUser.role})"
+            >
+              <img
+                src="${ERP_DATA.currentUser.avatar}"
+                alt="${ERP_DATA.currentUser.name}"
+                class="w-8 h-8 rounded-full object-cover border border-[#CBD5E1]"
+                onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');"
+              />
+              <div class="hidden w-8 h-8 rounded-full bg-[#006C7A] text-white text-xs font-bold flex items-center justify-center">
+                YP
               </div>
+
+              <div class="flex flex-col text-left">
+                <span class="text-xs font-bold text-[#0F172A] leading-tight group-hover:text-[#006C7A] transition-colors">${ERP_DATA.currentUser.name}</span>
+                <span class="text-[11px] font-medium text-[#64748B] leading-tight">${ERP_DATA.currentUser.role}</span>
+              </div>
+
+              <svg class="w-4 h-4 text-[#64748B] ml-0.5 group-hover:text-[#0F172A] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
             </button>
 
             <!-- User Menu Popup (top-full mt-2 ensures it opens strictly below the button) -->
@@ -8230,11 +8263,16 @@ const Header = {
       };
     }
 
-    // Help Button: navigates to Help module screen (Under Construction as per other screens)
+    // Help Button: opens keyboard shortcuts modal or navigates to documentation
     const helpBtn = document.getElementById('header-help-btn');
     if (helpBtn) {
-      helpBtn.addEventListener('click', () => {
-        window.location.hash = '#/help/documentation/compliance-manual';
+      helpBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.App && typeof window.App.openKeyboardShortcutsModal === 'function') {
+          window.App.openKeyboardShortcutsModal();
+        } else {
+          window.location.hash = '#/help/documentation/compliance-manual';
+        }
       });
     }
   }
