@@ -33,19 +33,21 @@
   <!-- STAGE NAVIGATION BAR -->
   <nav class="stage-nav">
     <div class="stage-nav-inner">
-      <span class="stage-nav-group-label">Atomic Stages</span>
-      <a href="#stage1" class="stage-nav-btn active">1 · Atoms</a>
-      <a href="#stage2" class="stage-nav-btn">2 · Molecules</a>
-      <a href="#stage3" class="stage-nav-btn">3 · Organisms</a>
-      <a href="#stage4" class="stage-nav-btn">4 · Templates</a>
-      <a href="#stage5" class="stage-nav-btn">5 · Pages</a>
-      <span class="stage-nav-divider"></span>
-      <span class="stage-nav-group-label">Enterprise</span>
-      <a href="#tabular-data" class="stage-nav-btn"><i data-lucide="table" style="width:12px;height:12px"></i>Data Grid</a>
-      <a href="#error-states" class="stage-nav-btn"><i data-lucide="shield-alert" style="width:12px;height:12px"></i>Resilience &amp; Errors</a>
-      <span class="stage-nav-divider"></span>
-      <span class="stage-nav-group-label">Governance</span>
-      <a href="#principles" class="stage-nav-btn"><i data-lucide="award" style="width:12px;height:12px"></i>WCAG &amp; UI Laws</a>
+      <div class="stage-nav-dock">
+        <span class="stage-dock-tag">Atomic Stages</span>
+        <a href="#stage1" class="stage-nav-btn active"><span class="stage-num-badge">1</span> Atoms</a>
+        <a href="#stage2" class="stage-nav-btn"><span class="stage-num-badge">2</span> Molecules</a>
+        <a href="#stage3" class="stage-nav-btn"><span class="stage-num-badge">3</span> Organisms</a>
+        <a href="#stage4" class="stage-nav-btn"><span class="stage-num-badge">4</span> Templates</a>
+        <a href="#stage5" class="stage-nav-btn"><span class="stage-num-badge">5</span> Pages</a>
+      </div>
+      <div class="stage-nav-divider"></div>
+      <div class="stage-nav-dock">
+        <span class="stage-dock-tag">Enterprise</span>
+        <a href="#tabular-data" class="stage-nav-btn"><i data-lucide="table"></i> Data Grid</a>
+        <a href="#error-states" class="stage-nav-btn"><i data-lucide="shield-alert"></i> Resilience</a>
+        <a href="#principles" class="stage-nav-btn"><i data-lucide="award"></i> UI Standards</a>
+      </div>
     </div>
   </nav>
 
@@ -121,26 +123,243 @@
     <!-- Icons -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Iconography</div>
-        <p class="spec-desc">Lucide 24px grid, 1.75 stroke weight. Teal hover state.</p>
+        <div class="spec-title">Complete Icon Library</div>
+        <p class="spec-desc">Lucide 24px grid system with 1.75 stroke weight. Unified visual metaphor across all ERP modules: Aquaculture, Processing, Logistics, Quality, and Telemetry.</p>
+        <div class="callout callout-info" style="margin-top:14px;padding:12px 14px;font-size:12px">
+          <i data-lucide="info" style="width:15px;height:15px"></i>
+          <div>Click any icon to copy its Lucide markup <code>&lt;i data-lucide="..."&gt;</code> to your clipboard.</div>
+        </div>
       </div>
       <div class="spec-content">
-        <div class="icon-grid">
-          <div class="ic-unit"><i data-lucide="home"></i><span>home</span></div>
-          <div class="ic-unit"><i data-lucide="layout-dashboard"></i><span>dashboard</span></div>
-          <div class="ic-unit"><i data-lucide="droplets"></i><span>ponds</span></div>
-          <div class="ic-unit"><i data-lucide="activity"></i><span>sensors</span></div>
-          <div class="ic-unit"><i data-lucide="microscope"></i><span>qc lab</span></div>
-          <div class="ic-unit"><i data-lucide="snowflake"></i><span>coldstore</span></div>
-          <div class="ic-unit"><i data-lucide="ship"></i><span>exports</span></div>
-          <div class="ic-unit"><i data-lucide="bar-chart-3"></i><span>reports</span></div>
-          <div class="ic-unit"><i data-lucide="search"></i><span>search</span></div>
-          <div class="ic-unit"><i data-lucide="bell"></i><span>alerts</span></div>
-          <div class="ic-unit"><i data-lucide="settings"></i><span>settings</span></div>
-          <div class="ic-unit"><i data-lucide="plus"></i><span>add</span></div>
-          <div class="ic-unit"><i data-lucide="check"></i><span>done</span></div>
-          <div class="ic-unit"><i data-lucide="download"></i><span>export</span></div>
-          <div class="ic-unit"><i data-lucide="filter"></i><span>filter</span></div>
+        <div class="icon-library-card">
+          <!-- Toolbar -->
+          <div class="icon-toolbar">
+            <div class="icon-search-wrap">
+              <i data-lucide="search"></i>
+              <input type="text" class="icon-search-input" id="iconSearchInput" placeholder="Search 150+ Camaroo icons by name or tag (e.g. pond, chart, truck, alert)..." />
+            </div>
+            <div class="icon-category-pills">
+              <button type="button" class="icon-cat-btn active" data-cat="all">All <span class="cat-count">(150)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="nav">Navigation <span class="cat-count">(15)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="aqua">Aquaculture &amp; Processing <span class="cat-count">(18)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="ops">Operations &amp; Logistics <span class="cat-count">(15)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="qc">Quality &amp; Lab <span class="cat-count">(16)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="iot">Telemetry &amp; IoT <span class="cat-count">(16)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="chart">Analytics &amp; Finance <span class="cat-count">(16)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="actions">Actions &amp; Controls <span class="cat-count">(22)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="users">Users &amp; Org <span class="cat-count">(13)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="alerts">Alerts &amp; Status <span class="cat-count">(12)</span></button>
+              <button type="button" class="icon-cat-btn" data-cat="files">Files &amp; Docs <span class="cat-count">(15)</span></button>
+            </div>
+            <div class="icon-status-bar">
+              <span>Showing <b id="iconVisibleCount" style="color:var(--teal-800)">158</b> icons</span>
+              <span style="font-size:11.5px;color:var(--muted)">Stroke: 1.75px · Default Grid: 24×24 · Proportional SVG</span>
+            </div>
+          </div>
+
+          <!-- Icon Grid -->
+          <div class="icon-grid" id="masterIconGrid">
+            <!-- 1. Navigation & Hierarchy -->
+            <div class="ic-unit" data-icon-name="home" data-cat="nav" title="Click to copy &lt;i data-lucide='home'&gt;&lt;/i&gt;"><i data-lucide="home"></i><span>home</span></div>
+            <div class="ic-unit" data-icon-name="layout-dashboard" data-cat="nav" title="Click to copy"><i data-lucide="layout-dashboard"></i><span>dashboard</span></div>
+            <div class="ic-unit" data-icon-name="layout-grid" data-cat="nav" title="Click to copy"><i data-lucide="layout-grid"></i><span>layout-grid</span></div>
+            <div class="ic-unit" data-icon-name="menu" data-cat="nav" title="Click to copy"><i data-lucide="menu"></i><span>menu</span></div>
+            <div class="ic-unit" data-icon-name="sidebar" data-cat="nav" title="Click to copy"><i data-lucide="sidebar"></i><span>sidebar</span></div>
+            <div class="ic-unit" data-icon-name="panel-left" data-cat="nav" title="Click to copy"><i data-lucide="panel-left"></i><span>panel-left</span></div>
+            <div class="ic-unit" data-icon-name="panel-right" data-cat="nav" title="Click to copy"><i data-lucide="panel-right"></i><span>panel-right</span></div>
+            <div class="ic-unit" data-icon-name="compass" data-cat="nav" title="Click to copy"><i data-lucide="compass"></i><span>compass</span></div>
+            <div class="ic-unit" data-icon-name="layers" data-cat="nav" title="Click to copy"><i data-lucide="layers"></i><span>layers</span></div>
+            <div class="ic-unit" data-icon-name="navigation" data-cat="nav" title="Click to copy"><i data-lucide="navigation"></i><span>navigation</span></div>
+            <div class="ic-unit" data-icon-name="maximize-2" data-cat="nav" title="Click to copy"><i data-lucide="maximize-2"></i><span>maximize</span></div>
+            <div class="ic-unit" data-icon-name="minimize-2" data-cat="nav" title="Click to copy"><i data-lucide="minimize-2"></i><span>minimize</span></div>
+            <div class="ic-unit" data-icon-name="external-link" data-cat="nav" title="Click to copy"><i data-lucide="external-link"></i><span>external-link</span></div>
+            <div class="ic-unit" data-icon-name="globe" data-cat="nav" title="Click to copy"><i data-lucide="globe"></i><span>globe</span></div>
+            <div class="ic-unit" data-icon-name="hash" data-cat="nav" title="Click to copy"><i data-lucide="hash"></i><span>hash</span></div>
+
+            <!-- 2. Aquaculture, Coldstore & Processing -->
+            <div class="ic-unit" data-icon-name="droplets" data-cat="aqua" title="Click to copy"><i data-lucide="droplets"></i><span>droplets</span></div>
+            <div class="ic-unit" data-icon-name="droplet" data-cat="aqua" title="Click to copy"><i data-lucide="droplet"></i><span>droplet</span></div>
+            <div class="ic-unit" data-icon-name="waves" data-cat="aqua" title="Click to copy"><i data-lucide="waves"></i><span>waves</span></div>
+            <div class="ic-unit" data-icon-name="snowflake" data-cat="aqua" title="Click to copy"><i data-lucide="snowflake"></i><span>snowflake</span></div>
+            <div class="ic-unit" data-icon-name="thermometer" data-cat="aqua" title="Click to copy"><i data-lucide="thermometer"></i><span>thermometer</span></div>
+            <div class="ic-unit" data-icon-name="scale" data-cat="aqua" title="Click to copy"><i data-lucide="scale"></i><span>scale</span></div>
+            <div class="ic-unit" data-icon-name="wind" data-cat="aqua" title="Click to copy"><i data-lucide="wind"></i><span>wind</span></div>
+            <div class="ic-unit" data-icon-name="flame" data-cat="aqua" title="Click to copy"><i data-lucide="flame"></i><span>flame</span></div>
+            <div class="ic-unit" data-icon-name="factory" data-cat="aqua" title="Click to copy"><i data-lucide="factory"></i><span>factory</span></div>
+            <div class="ic-unit" data-icon-name="anchor" data-cat="aqua" title="Click to copy"><i data-lucide="anchor"></i><span>anchor</span></div>
+            <div class="ic-unit" data-icon-name="container" data-cat="aqua" title="Click to copy"><i data-lucide="container"></i><span>container</span></div>
+            <div class="ic-unit" data-icon-name="ship" data-cat="aqua" title="Click to copy"><i data-lucide="ship"></i><span>ship</span></div>
+            <div class="ic-unit" data-icon-name="fish" data-cat="aqua" title="Click to copy"><i data-lucide="fish"></i><span>fish</span></div>
+            <div class="ic-unit" data-icon-name="package" data-cat="aqua" title="Click to copy"><i data-lucide="package"></i><span>package</span></div>
+            <div class="ic-unit" data-icon-name="package-check" data-cat="aqua" title="Click to copy"><i data-lucide="package-check"></i><span>pkg-check</span></div>
+            <div class="ic-unit" data-icon-name="package-open" data-cat="aqua" title="Click to copy"><i data-lucide="package-open"></i><span>pkg-open</span></div>
+            <div class="ic-unit" data-icon-name="boxes" data-cat="aqua" title="Click to copy"><i data-lucide="boxes"></i><span>boxes</span></div>
+            <div class="ic-unit" data-icon-name="box" data-cat="aqua" title="Click to copy"><i data-lucide="box"></i><span>box</span></div>
+
+            <!-- 3. Operations & Logistics -->
+            <div class="ic-unit" data-icon-name="truck" data-cat="ops" title="Click to copy"><i data-lucide="truck"></i><span>truck</span></div>
+            <div class="ic-unit" data-icon-name="shopping-cart" data-cat="ops" title="Click to copy"><i data-lucide="shopping-cart"></i><span>cart</span></div>
+            <div class="ic-unit" data-icon-name="shopping-bag" data-cat="ops" title="Click to copy"><i data-lucide="shopping-bag"></i><span>bag</span></div>
+            <div class="ic-unit" data-icon-name="barcode" data-cat="ops" title="Click to copy"><i data-lucide="barcode"></i><span>barcode</span></div>
+            <div class="ic-unit" data-icon-name="qr-code" data-cat="ops" title="Click to copy"><i data-lucide="qr-code"></i><span>qr-code</span></div>
+            <div class="ic-unit" data-icon-name="map-pin" data-cat="ops" title="Click to copy"><i data-lucide="map-pin"></i><span>map-pin</span></div>
+            <div class="ic-unit" data-icon-name="route" data-cat="ops" title="Click to copy"><i data-lucide="route"></i><span>route</span></div>
+            <div class="ic-unit" data-icon-name="clock" data-cat="ops" title="Click to copy"><i data-lucide="clock"></i><span>clock</span></div>
+            <div class="ic-unit" data-icon-name="history" data-cat="ops" title="Click to copy"><i data-lucide="history"></i><span>history</span></div>
+            <div class="ic-unit" data-icon-name="calendar" data-cat="ops" title="Click to copy"><i data-lucide="calendar"></i><span>calendar</span></div>
+            <div class="ic-unit" data-icon-name="calendar-days" data-cat="ops" title="Click to copy"><i data-lucide="calendar-days"></i><span>cal-days</span></div>
+            <div class="ic-unit" data-icon-name="timer" data-cat="ops" title="Click to copy"><i data-lucide="timer"></i><span>timer</span></div>
+            <div class="ic-unit" data-icon-name="hourglass" data-cat="ops" title="Click to copy"><i data-lucide="hourglass"></i><span>hourglass</span></div>
+            <div class="ic-unit" data-icon-name="archive" data-cat="ops" title="Click to copy"><i data-lucide="archive"></i><span>archive</span></div>
+            <div class="ic-unit" data-icon-name="package-search" data-cat="ops" title="Click to copy"><i data-lucide="package-search"></i><span>pkg-search</span></div>
+
+            <!-- 4. Quality Control & Laboratory -->
+            <div class="ic-unit" data-icon-name="microscope" data-cat="qc" title="Click to copy"><i data-lucide="microscope"></i><span>microscope</span></div>
+            <div class="ic-unit" data-icon-name="flask-conical" data-cat="qc" title="Click to copy"><i data-lucide="flask-conical"></i><span>flask-conical</span></div>
+            <div class="ic-unit" data-icon-name="flask-round" data-cat="qc" title="Click to copy"><i data-lucide="flask-round"></i><span>flask-round</span></div>
+            <div class="ic-unit" data-icon-name="test-tube" data-cat="qc" title="Click to copy"><i data-lucide="test-tube"></i><span>test-tube</span></div>
+            <div class="ic-unit" data-icon-name="test-tubes" data-cat="qc" title="Click to copy"><i data-lucide="test-tubes"></i><span>test-tubes</span></div>
+            <div class="ic-unit" data-icon-name="shield-check" data-cat="qc" title="Click to copy"><i data-lucide="shield-check"></i><span>shield-check</span></div>
+            <div class="ic-unit" data-icon-name="shield-alert" data-cat="qc" title="Click to copy"><i data-lucide="shield-alert"></i><span>shield-alert</span></div>
+            <div class="ic-unit" data-icon-name="shield" data-cat="qc" title="Click to copy"><i data-lucide="shield"></i><span>shield</span></div>
+            <div class="ic-unit" data-icon-name="award" data-cat="qc" title="Click to copy"><i data-lucide="award"></i><span>award</span></div>
+            <div class="ic-unit" data-icon-name="badge-check" data-cat="qc" title="Click to copy"><i data-lucide="badge-check"></i><span>badge-check</span></div>
+            <div class="ic-unit" data-icon-name="check-circle-2" data-cat="qc" title="Click to copy"><i data-lucide="check-circle-2"></i><span>check-circle-2</span></div>
+            <div class="ic-unit" data-icon-name="check-circle" data-cat="qc" title="Click to copy"><i data-lucide="check-circle"></i><span>check-circle</span></div>
+            <div class="ic-unit" data-icon-name="clipboard-check" data-cat="qc" title="Click to copy"><i data-lucide="clipboard-check"></i><span>clip-check</span></div>
+            <div class="ic-unit" data-icon-name="dna" data-cat="qc" title="Click to copy"><i data-lucide="dna"></i><span>dna</span></div>
+            <div class="ic-unit" data-icon-name="stethoscope" data-cat="qc" title="Click to copy"><i data-lucide="stethoscope"></i><span>stethoscope</span></div>
+            <div class="ic-unit" data-icon-name="sparkles" data-cat="qc" title="Click to copy"><i data-lucide="sparkles"></i><span>sparkles</span></div>
+
+            <!-- 5. Telemetry, IoT & Hardware -->
+            <div class="ic-unit" data-icon-name="activity" data-cat="iot" title="Click to copy"><i data-lucide="activity"></i><span>activity</span></div>
+            <div class="ic-unit" data-icon-name="cpu" data-cat="iot" title="Click to copy"><i data-lucide="cpu"></i><span>cpu</span></div>
+            <div class="ic-unit" data-icon-name="radio" data-cat="iot" title="Click to copy"><i data-lucide="radio"></i><span>radio</span></div>
+            <div class="ic-unit" data-icon-name="wifi" data-cat="iot" title="Click to copy"><i data-lucide="wifi"></i><span>wifi</span></div>
+            <div class="ic-unit" data-icon-name="wifi-off" data-cat="iot" title="Click to copy"><i data-lucide="wifi-off"></i><span>wifi-off</span></div>
+            <div class="ic-unit" data-icon-name="zap" data-cat="iot" title="Click to copy"><i data-lucide="zap"></i><span>zap</span></div>
+            <div class="ic-unit" data-icon-name="gauge" data-cat="iot" title="Click to copy"><i data-lucide="gauge"></i><span>gauge</span></div>
+            <div class="ic-unit" data-icon-name="sliders" data-cat="iot" title="Click to copy"><i data-lucide="sliders"></i><span>sliders</span></div>
+            <div class="ic-unit" data-icon-name="sliders-horizontal" data-cat="iot" title="Click to copy"><i data-lucide="sliders-horizontal"></i><span>sliders-h</span></div>
+            <div class="ic-unit" data-icon-name="power" data-cat="iot" title="Click to copy"><i data-lucide="power"></i><span>power</span></div>
+            <div class="ic-unit" data-icon-name="battery" data-cat="iot" title="Click to copy"><i data-lucide="battery"></i><span>battery</span></div>
+            <div class="ic-unit" data-icon-name="battery-charging" data-cat="iot" title="Click to copy"><i data-lucide="battery-charging"></i><span>charging</span></div>
+            <div class="ic-unit" data-icon-name="signal" data-cat="iot" title="Click to copy"><i data-lucide="signal"></i><span>signal</span></div>
+            <div class="ic-unit" data-icon-name="rss" data-cat="iot" title="Click to copy"><i data-lucide="rss"></i><span>rss</span></div>
+            <div class="ic-unit" data-icon-name="hard-drive" data-cat="iot" title="Click to copy"><i data-lucide="hard-drive"></i><span>hard-drive</span></div>
+            <div class="ic-unit" data-icon-name="server" data-cat="iot" title="Click to copy"><i data-lucide="server"></i><span>server</span></div>
+
+            <!-- 6. Finance, Analytics & Metrics -->
+            <div class="ic-unit" data-icon-name="bar-chart-3" data-cat="chart" title="Click to copy"><i data-lucide="bar-chart-3"></i><span>bar-chart-3</span></div>
+            <div class="ic-unit" data-icon-name="bar-chart-2" data-cat="chart" title="Click to copy"><i data-lucide="bar-chart-2"></i><span>bar-chart-2</span></div>
+            <div class="ic-unit" data-icon-name="bar-chart" data-cat="chart" title="Click to copy"><i data-lucide="bar-chart"></i><span>bar-chart</span></div>
+            <div class="ic-unit" data-icon-name="line-chart" data-cat="chart" title="Click to copy"><i data-lucide="line-chart"></i><span>line-chart</span></div>
+            <div class="ic-unit" data-icon-name="pie-chart" data-cat="chart" title="Click to copy"><i data-lucide="pie-chart"></i><span>pie-chart</span></div>
+            <div class="ic-unit" data-icon-name="trending-up" data-cat="chart" title="Click to copy"><i data-lucide="trending-up"></i><span>trending-up</span></div>
+            <div class="ic-unit" data-icon-name="trending-down" data-cat="chart" title="Click to copy"><i data-lucide="trending-down"></i><span>trending-down</span></div>
+            <div class="ic-unit" data-icon-name="percent" data-cat="chart" title="Click to copy"><i data-lucide="percent"></i><span>percent</span></div>
+            <div class="ic-unit" data-icon-name="dollar-sign" data-cat="chart" title="Click to copy"><i data-lucide="dollar-sign"></i><span>dollar</span></div>
+            <div class="ic-unit" data-icon-name="wallet" data-cat="chart" title="Click to copy"><i data-lucide="wallet"></i><span>wallet</span></div>
+            <div class="ic-unit" data-icon-name="credit-card" data-cat="chart" title="Click to copy"><i data-lucide="credit-card"></i><span>credit-card</span></div>
+            <div class="ic-unit" data-icon-name="receipt" data-cat="chart" title="Click to copy"><i data-lucide="receipt"></i><span>receipt</span></div>
+            <div class="ic-unit" data-icon-name="calculator" data-cat="chart" title="Click to copy"><i data-lucide="calculator"></i><span>calculator</span></div>
+            <div class="ic-unit" data-icon-name="table" data-cat="chart" title="Click to copy"><i data-lucide="table"></i><span>table</span></div>
+            <div class="ic-unit" data-icon-name="coins" data-cat="chart" title="Click to copy"><i data-lucide="coins"></i><span>coins</span></div>
+            <div class="ic-unit" data-icon-name="banknote" data-cat="chart" title="Click to copy"><i data-lucide="banknote"></i><span>banknote</span></div>
+
+            <!-- 7. Actions, Editing & Controls -->
+            <div class="ic-unit" data-icon-name="search" data-cat="actions" title="Click to copy"><i data-lucide="search"></i><span>search</span></div>
+            <div class="ic-unit" data-icon-name="filter" data-cat="actions" title="Click to copy"><i data-lucide="filter"></i><span>filter</span></div>
+            <div class="ic-unit" data-icon-name="plus" data-cat="actions" title="Click to copy"><i data-lucide="plus"></i><span>plus</span></div>
+            <div class="ic-unit" data-icon-name="plus-circle" data-cat="actions" title="Click to copy"><i data-lucide="plus-circle"></i><span>plus-circle</span></div>
+            <div class="ic-unit" data-icon-name="minus" data-cat="actions" title="Click to copy"><i data-lucide="minus"></i><span>minus</span></div>
+            <div class="ic-unit" data-icon-name="minus-circle" data-cat="actions" title="Click to copy"><i data-lucide="minus-circle"></i><span>minus-circle</span></div>
+            <div class="ic-unit" data-icon-name="x" data-cat="actions" title="Click to copy"><i data-lucide="x"></i><span>close (x)</span></div>
+            <div class="ic-unit" data-icon-name="x-circle" data-cat="actions" title="Click to copy"><i data-lucide="x-circle"></i><span>x-circle</span></div>
+            <div class="ic-unit" data-icon-name="check" data-cat="actions" title="Click to copy"><i data-lucide="check"></i><span>check</span></div>
+            <div class="ic-unit" data-icon-name="check-check" data-cat="actions" title="Click to copy"><i data-lucide="check-check"></i><span>check-check</span></div>
+            <div class="ic-unit" data-icon-name="pencil" data-cat="actions" title="Click to copy"><i data-lucide="pencil"></i><span>pencil</span></div>
+            <div class="ic-unit" data-icon-name="edit" data-cat="actions" title="Click to copy"><i data-lucide="edit"></i><span>edit</span></div>
+            <div class="ic-unit" data-icon-name="trash-2" data-cat="actions" title="Click to copy"><i data-lucide="trash-2"></i><span>trash-2</span></div>
+            <div class="ic-unit" data-icon-name="trash" data-cat="actions" title="Click to copy"><i data-lucide="trash"></i><span>trash</span></div>
+            <div class="ic-unit" data-icon-name="copy" data-cat="actions" title="Click to copy"><i data-lucide="copy"></i><span>copy</span></div>
+            <div class="ic-unit" data-icon-name="download" data-cat="actions" title="Click to copy"><i data-lucide="download"></i><span>download</span></div>
+            <div class="ic-unit" data-icon-name="upload" data-cat="actions" title="Click to copy"><i data-lucide="upload"></i><span>upload</span></div>
+            <div class="ic-unit" data-icon-name="file-up" data-cat="actions" title="Click to copy"><i data-lucide="file-up"></i><span>file-up</span></div>
+            <div class="ic-unit" data-icon-name="refresh-cw" data-cat="actions" title="Click to copy"><i data-lucide="refresh-cw"></i><span>refresh-cw</span></div>
+            <div class="ic-unit" data-icon-name="rotate-ccw" data-cat="actions" title="Click to copy"><i data-lucide="rotate-ccw"></i><span>rotate-ccw</span></div>
+            <div class="ic-unit" data-icon-name="undo-2" data-cat="actions" title="Click to copy"><i data-lucide="undo-2"></i><span>undo</span></div>
+            <div class="ic-unit" data-icon-name="redo-2" data-cat="actions" title="Click to copy"><i data-lucide="redo-2"></i><span>redo</span></div>
+
+            <!-- 8. Security, Users & Org -->
+            <div class="ic-unit" data-icon-name="user" data-cat="users" title="Click to copy"><i data-lucide="user"></i><span>user</span></div>
+            <div class="ic-unit" data-icon-name="users" data-cat="users" title="Click to copy"><i data-lucide="users"></i><span>users</span></div>
+            <div class="ic-unit" data-icon-name="user-check" data-cat="users" title="Click to copy"><i data-lucide="user-check"></i><span>user-check</span></div>
+            <div class="ic-unit" data-icon-name="user-plus" data-cat="users" title="Click to copy"><i data-lucide="user-plus"></i><span>user-plus</span></div>
+            <div class="ic-unit" data-icon-name="user-minus" data-cat="users" title="Click to copy"><i data-lucide="user-minus"></i><span>user-minus</span></div>
+            <div class="ic-unit" data-icon-name="user-x" data-cat="users" title="Click to copy"><i data-lucide="user-x"></i><span>user-x</span></div>
+            <div class="ic-unit" data-icon-name="lock" data-cat="users" title="Click to copy"><i data-lucide="lock"></i><span>lock</span></div>
+            <div class="ic-unit" data-icon-name="unlock" data-cat="users" title="Click to copy"><i data-lucide="unlock"></i><span>unlock</span></div>
+            <div class="ic-unit" data-icon-name="key" data-cat="users" title="Click to copy"><i data-lucide="key"></i><span>key</span></div>
+            <div class="ic-unit" data-icon-name="fingerprint" data-cat="users" title="Click to copy"><i data-lucide="fingerprint"></i><span>fingerprint</span></div>
+            <div class="ic-unit" data-icon-name="building-2" data-cat="users" title="Click to copy"><i data-lucide="building-2"></i><span>building-2</span></div>
+            <div class="ic-unit" data-icon-name="building" data-cat="users" title="Click to copy"><i data-lucide="building"></i><span>building</span></div>
+            <div class="ic-unit" data-icon-name="briefcase" data-cat="users" title="Click to copy"><i data-lucide="briefcase"></i><span>briefcase</span></div>
+
+            <!-- 9. Alerts, Notifications & Status -->
+            <div class="ic-unit" data-icon-name="bell" data-cat="alerts" title="Click to copy"><i data-lucide="bell"></i><span>bell</span></div>
+            <div class="ic-unit" data-icon-name="bell-off" data-cat="alerts" title="Click to copy"><i data-lucide="bell-off"></i><span>bell-off</span></div>
+            <div class="ic-unit" data-icon-name="bell-ring" data-cat="alerts" title="Click to copy"><i data-lucide="bell-ring"></i><span>bell-ring</span></div>
+            <div class="ic-unit" data-icon-name="alert-triangle" data-cat="alerts" title="Click to copy"><i data-lucide="alert-triangle"></i><span>triangle</span></div>
+            <div class="ic-unit" data-icon-name="alert-circle" data-cat="alerts" title="Click to copy"><i data-lucide="alert-circle"></i><span>circle</span></div>
+            <div class="ic-unit" data-icon-name="alert-octagon" data-cat="alerts" title="Click to copy"><i data-lucide="alert-octagon"></i><span>octagon</span></div>
+            <div class="ic-unit" data-icon-name="info" data-cat="alerts" title="Click to copy"><i data-lucide="info"></i><span>info</span></div>
+            <div class="ic-unit" data-icon-name="help-circle" data-cat="alerts" title="Click to copy"><i data-lucide="help-circle"></i><span>help</span></div>
+            <div class="ic-unit" data-icon-name="life-buoy" data-cat="alerts" title="Click to copy"><i data-lucide="life-buoy"></i><span>life-buoy</span></div>
+            <div class="ic-unit" data-icon-name="flag" data-cat="alerts" title="Click to copy"><i data-lucide="flag"></i><span>flag</span></div>
+            <div class="ic-unit" data-icon-name="eye" data-cat="alerts" title="Click to copy"><i data-lucide="eye"></i><span>eye</span></div>
+            <div class="ic-unit" data-icon-name="eye-off" data-cat="alerts" title="Click to copy"><i data-lucide="eye-off"></i><span>eye-off</span></div>
+
+            <!-- 10. Files, Reports & Communications -->
+            <div class="ic-unit" data-icon-name="file-text" data-cat="files" title="Click to copy"><i data-lucide="file-text"></i><span>file-text</span></div>
+            <div class="ic-unit" data-icon-name="file-spreadsheet" data-cat="files" title="Click to copy"><i data-lucide="file-spreadsheet"></i><span>spreadsheet</span></div>
+            <div class="ic-unit" data-icon-name="file-check" data-cat="files" title="Click to copy"><i data-lucide="file-check"></i><span>file-check</span></div>
+            <div class="ic-unit" data-icon-name="file-plus" data-cat="files" title="Click to copy"><i data-lucide="file-plus"></i><span>file-plus</span></div>
+            <div class="ic-unit" data-icon-name="file" data-cat="files" title="Click to copy"><i data-lucide="file"></i><span>file</span></div>
+            <div class="ic-unit" data-icon-name="folder" data-cat="files" title="Click to copy"><i data-lucide="folder"></i><span>folder</span></div>
+            <div class="ic-unit" data-icon-name="folder-open" data-cat="files" title="Click to copy"><i data-lucide="folder-open"></i><span>folder-open</span></div>
+            <div class="ic-unit" data-icon-name="printer" data-cat="files" title="Click to copy"><i data-lucide="printer"></i><span>printer</span></div>
+            <div class="ic-unit" data-icon-name="share-2" data-cat="files" title="Click to copy"><i data-lucide="share-2"></i><span>share</span></div>
+            <div class="ic-unit" data-icon-name="mail" data-cat="files" title="Click to copy"><i data-lucide="mail"></i><span>mail</span></div>
+            <div class="ic-unit" data-icon-name="phone" data-cat="files" title="Click to copy"><i data-lucide="phone"></i><span>phone</span></div>
+            <div class="ic-unit" data-icon-name="send" data-cat="files" title="Click to copy"><i data-lucide="send"></i><span>send</span></div>
+            <div class="ic-unit" data-icon-name="message-square" data-cat="files" title="Click to copy"><i data-lucide="message-square"></i><span>msg-square</span></div>
+            <div class="ic-unit" data-icon-name="message-circle" data-cat="files" title="Click to copy"><i data-lucide="message-circle"></i><span>msg-circle</span></div>
+            <div class="ic-unit" data-icon-name="inbox" data-cat="files" title="Click to copy"><i data-lucide="inbox"></i><span>inbox</span></div>
+          </div>
+
+          <!-- Size & Stroke Calibration Grid -->
+          <div class="icon-spec-row">
+            <div class="icon-spec-col">
+              <div class="spec-box"><i data-lucide="activity" style="width:16px;height:16px;stroke-width:1.75"></i></div>
+              <span>Micro 16px (Dense Tables)</span>
+            </div>
+            <div class="icon-spec-col">
+              <div class="spec-box"><i data-lucide="activity" style="width:20px;height:20px;stroke-width:1.75"></i></div>
+              <span>Small 20px (Buttons &amp; Inputs)</span>
+            </div>
+            <div class="icon-spec-col">
+              <div class="spec-box"><i data-lucide="activity" style="width:24px;height:24px;stroke-width:1.75"></i></div>
+              <span>Standard 24px (Navigation Rail)</span>
+            </div>
+            <div class="icon-spec-col">
+              <div class="spec-box"><i data-lucide="activity" style="width:32px;height:32px;stroke-width:1.75"></i></div>
+              <span>Large 32px (Empty States)</span>
+            </div>
+            <div style="margin-left:auto;font-size:12px;color:var(--muted);max-width:320px;line-height:1.5">
+              <b>Icon Engineering Rules:</b> All icons render via vector SVG with <code>stroke-width: 1.75</code>, stroke-linecap <code>round</code>, stroke-linejoin <code>round</code>, adhering to Apple SF Symbols &amp; Google Material geometric optics.
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -308,7 +308,92 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 17. Re-initialize Lucide Icons for dynamic additions
+  // 17. Complete Icon Library Controller (Search, Filter, Copy)
+  const iconSearchInput = document.getElementById('iconSearchInput');
+  const iconCatBtns = document.querySelectorAll('.icon-cat-btn');
+  const masterGrid = document.getElementById('masterIconGrid');
+  const iconCountBadge = document.getElementById('iconVisibleCount');
+
+  let activeCat = 'all';
+  let searchTerm = '';
+
+  const filterIcons = () => {
+    if (!masterGrid) return;
+    const units = masterGrid.querySelectorAll('.ic-unit');
+    let count = 0;
+    units.forEach((u) => {
+      const name = (u.dataset.iconName || '').toLowerCase();
+      const cat = u.dataset.cat || '';
+      const matchesCat = activeCat === 'all' || cat === activeCat;
+      const matchesSearch = !searchTerm || name.includes(searchTerm);
+
+      if (matchesCat && matchesSearch) {
+        u.style.display = 'flex';
+        count++;
+      } else {
+        u.style.display = 'none';
+      }
+    });
+    if (iconCountBadge) iconCountBadge.textContent = count;
+  };
+
+  iconSearchInput?.addEventListener('input', (e) => {
+    searchTerm = e.target.value.trim().toLowerCase();
+    filterIcons();
+  });
+
+  iconCatBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      iconCatBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      filterIcons();
+    });
+  });
+
+  masterGrid?.addEventListener('click', (e) => {
+    const unit = e.target.closest('.ic-unit');
+    if (!unit) return;
+    const iconName = unit.dataset.iconName;
+    if (iconName) {
+      const markup = `<i data-lucide="${iconName}"></i>`;
+      navigator.clipboard?.writeText(markup);
+      AquaToast.show(`Copied: ${markup}`, 'teal');
+    }
+  });
+
+  // 18. Stage Nav ScrollSpy & Smooth Jump
+  const stageNavBtns = document.querySelectorAll('.stage-nav-btn');
+  const sections = Array.from(stageNavBtns)
+    .map((btn) => {
+      const href = btn.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const el = document.getElementById(href.slice(1));
+        return el ? { btn, el } : null;
+      }
+      return null;
+    })
+    .filter(Boolean);
+
+  const updateScrollSpy = () => {
+    const scrollY = window.scrollY + 140;
+    let current = null;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].el.offsetTop <= scrollY) {
+        current = sections[i];
+        break;
+      }
+    }
+    if (current) {
+      stageNavBtns.forEach((b) => b.classList.remove('active'));
+      current.btn.classList.add('active');
+    }
+  };
+
+  window.addEventListener('scroll', updateScrollSpy, { passive: true });
+  updateScrollSpy();
+
+  // 19. Re-initialize Lucide Icons for dynamic additions
   if (window.lucide) {
     window.lucide.createIcons();
   }
