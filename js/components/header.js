@@ -20,14 +20,32 @@ export const Header = {
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
-      <header class="bg-white h-14 px-6 flex items-center justify-between select-none rounded-2xl">
-        <!-- Left: Bold Big Welcome Text -->
-        <div class="flex items-center">
-          <h2 class="text-base sm:text-lg font-extrabold text-[#0F172A] tracking-tight">Welcome, ${ERP_DATA.currentUser.name}</h2>
+      <header class="bg-white h-14 px-6 flex items-center justify-between select-none rounded-2xl relative z-40">
+        <!-- Left: Global Search Options / Input (Replacing 'Welcome, Manikanta') -->
+        <div class="flex items-center flex-1 max-w-md sm:max-w-lg" id="header-search-container">
+          <div class="relative w-full">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#64748B]">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <input 
+              type="text" 
+              id="header-global-search-input" 
+              placeholder="Search lot, arrival, supplier, bill, species, or section... (Ctrl+K or /)" 
+              class="w-full text-xs pl-9 pr-8 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:bg-white focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
+            />
+            <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+
+            <!-- Live Search Results Dropdown -->
+            <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full max-w-lg bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
+              <div id="header-search-results-content" class="max-h-96 overflow-y-auto space-y-3"></div>
+            </div>
+          </div>
         </div>
 
         <!-- Right: Dedicated Notification Page Button & Profile Menu -->
-        <div class="relative flex items-center gap-3">
+        <div class="flex items-center gap-3">
           <a
             href="#/notifications/center/all-notifications"
             id="header-notifications-page-btn"
@@ -44,14 +62,16 @@ export const Header = {
             ` : ''}
           </a>
 
-          <button id="user-menu-btn" class="flex items-center hover:opacity-90 transition-opacity cursor-pointer outline-none" title="${ERP_DATA.currentUser.name} — ${ERP_DATA.currentUser.role}">
-            <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#475569] hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-            </div>
-          </button>
+          <!-- Profile Menu with dedicated relative wrapper and top-full positioning -->
+          <div class="relative">
+            <button id="user-menu-btn" class="flex items-center hover:opacity-90 transition-opacity cursor-pointer outline-none" title="${ERP_DATA.currentUser.name} — ${ERP_DATA.currentUser.role}">
+              <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#475569] hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              </div>
+            </button>
 
-            <!-- User Menu Popup -->
-            <div id="user-dropdown-menu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl border border-[#DFE1E6] py-2 z-[60] text-xs">
+            <!-- User Menu Popup (top-full mt-2 ensures it opens strictly below the button) -->
+            <div id="user-dropdown-menu" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-[#DFE1E6] shadow-2xl py-2 z-[90] text-xs">
               <div class="px-3 py-2 border-b border-[#EBECF0]">
                 <div class="font-bold text-[#172B4D]">${ERP_DATA.currentUser.name}</div>
                 <div class="text-[11px] text-[#5E6C84]">${ERP_DATA.currentUser.email}</div>
