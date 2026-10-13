@@ -28,6 +28,14 @@ const accessibility = fs.readFileSync(path.join(__dirname, 'js', 'components', '
 const calendarPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'calendarPicker.js'), 'utf-8');
 const selectPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'selectPicker.js'), 'utf-8');
 
+const fwComponent = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Component.js'), 'utf-8');
+const fwStore = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Store.js'), 'utf-8');
+const fwRouter = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Router.js'), 'utf-8');
+const fwAtoms = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'atoms', 'index.js'), 'utf-8');
+const fwMolecules = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'molecules', 'index.js'), 'utf-8');
+const fwOrganisms = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'organisms', 'index.js'), 'utf-8');
+const fwIndex = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'index.js'), 'utf-8');
+
 const loginView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'loginView.js'), 'utf-8');
 const purchaseView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchaseView.js'), 'utf-8');
 const preprocessingView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessingView.js'), 'utf-8');
@@ -45,6 +53,7 @@ const app = fs.readFileSync(path.join(__dirname, 'js', 'app.js'), 'utf-8');
 function cleanCode(code) {
   return code
     .replace(/import\s+[\s\S]*?from\s+['"].*?['"];?/g, '')
+    .replace(/export\s*\{[\s\S]*?\};?/g, '')
     .replace(/export\s+const\s+/g, 'const ')
     .replace(/export\s+class\s+/g, 'class ')
     .replace(/export\s+function\s+/g, 'function ')
@@ -75,6 +84,15 @@ const combinedJS = `
   ${cleanCode(accessibility)}
   ${cleanCode(calendarPicker)}
   ${cleanCode(selectPicker)}
+
+  // AquaPulse Component Framework (BaseComponent, Store, Router, Atoms, Molecules, Organisms)
+  ${cleanCode(fwComponent)}
+  ${cleanCode(fwStore)}
+  ${cleanCode(fwRouter)}
+  ${cleanCode(fwAtoms)}
+  ${cleanCode(fwMolecules)}
+  ${cleanCode(fwOrganisms)}
+  ${cleanCode(fwIndex)}
 
   // Views
   ${cleanCode(loginView)}

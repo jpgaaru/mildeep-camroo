@@ -11,6 +11,7 @@ import { TourGuide } from './components/tourGuide.js';
 import { Accessibility } from './components/accessibility.js';
 import { CalendarPicker } from './components/calendarPicker.js';
 import { SelectPicker } from './components/selectPicker.js';
+import { AquaFramework, Router, ERPStore, Molecules, Organisms } from './framework/index.js';
 
 // Views
 import { LoginView } from './views/loginView.js';
@@ -27,6 +28,8 @@ import { HelpView } from './views/helpView.js';
 import { NotificationsView } from './views/notificationsView.js';
 
 export const App = {
+  framework: AquaFramework,
+
   init() {
     Accessibility.init();
     CalendarPicker.init();
@@ -132,142 +135,31 @@ export const App = {
       return;
     }
 
-    // Ensure main ERP shell is mounted
+    // Ensure main ERP shell is mounted via Organisms.AppShell
     this.ensureShellMounted();
 
-    // Clean hash: remove leading # and /
-    const clean = rawHash.replace(/^#\/?/, '').replace(/^\/+/, '');
-    const parts = clean.split('/');
-    const moduleName = parts[0] || 'purchase';
-    let submenuName = parts[1] || '';
-    let tabName = parts[2] || '';
+    // Resolve route declaratively via AquaFramework Router
+    const routeInfo = Router.resolve(rawHash);
+    const { modObj, tabId: tabName, resolvedHash, metadata: secMeta } = routeInfo;
 
-    // Auto-resolve default module, submenu, and tab if missing or shorthand
-    const modObj = NAV_HIERARCHY.find(m => m.id === moduleName) || NAV_HIERARCHY[0];
-    let subObj = modObj.submenus.find(s => s.id === submenuName);
-    if (!subObj) {
-      // Check if parts[1] was actually a tab ID under one of the submenus
-      for (const sm of modObj.submenus) {
-        if (sm.tabs.some(t => t.id === submenuName)) {
-          subObj = sm;
-          tabName = submenuName;
-          submenuName = sm.id;
-          break;
-        }
-      }
-      if (!subObj) {
-        subObj = modObj.submenus[0];
-        submenuName = subObj.id;
-      }
-    }
-    if (!tabName) {
-      tabName = subObj.defaultTab || subObj.tabs[0]?.id || '';
-    }
-
-    const resolvedHash = `#/${modObj.id}/${subObj.id}/${tabName}`;
+    ERPStore.setSlice('activeRoute', {
+      moduleId: routeInfo.moduleId,
+      submenuId: routeInfo.submenuId,
+      tabId: routeInfo.tabId,
+      hash: resolvedHash
+    });
 
     // Render Header, Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
     Header.render('header-container');
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
 
-    // Section Titles and Subtitles Metadata (Matching AquaPulse Design System)
-    const SECTION_METADATA = {
-      'purchase': {
-        'dashboard': {
-          title: 'Purchase Dashboard',
-          subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution.'
-        },
-        'operations': {
-          title: 'Purchase Operations',
-          subtitle: 'Farmer procurement bookings, dock weighment arrivals, and lot intake tracking'
-        },
-        'transactions-bills': {
-          title: 'Transactions & Bills',
-          subtitle: 'Commercial accounts payable, broker settlements, and supplier bills'
-        },
-        'payments': {
-          title: 'Payments & Disbursements',
-          subtitle: 'Bank wire vouchers, vendor payment status, and statutory disbursements'
-        }
-      },
-      'preprocessing': {
-        'dashboard': {
-          title: 'Pre-Processing Floor',
-          subtitle: 'De-heading, grading, peeling lines, and yield recovery telemetry'
-        }
-      },
-      'quality': {
-        'dashboard': {
-          title: 'Quality Assurance & Lab',
-          subtitle: 'Antibiotic screenings, microbiological testing, and HACCP compliance'
-        }
-      },
-      'production': {
-        'dashboard': {
-          title: 'Production & Freezing',
-          subtitle: 'IQF, blast freezing, glazing lines, and master carton packaging'
-        }
-      },
-      'coldstore': {
-        'dashboard': {
-          title: 'Cold Storage Management',
-          subtitle: 'Deep freeze chambers, pallet rack locations, and FIFO temperature telemetry'
-        }
-      },
-      'inventory': {
-        'dashboard': {
-          title: 'Inventory & Stock Ledger',
-          subtitle: 'Raw material stores, consumables, packaging stock, and real-time ledger'
-        }
-      },
-      'sales': {
-        'dashboard': {
-          title: 'Sales & Export Shipments',
-          subtitle: 'International buyers, sales contracts, port dock dispatch, and container manifests'
-        }
-      },
-      'reports': {
-        'reports': {
-          title: 'Enterprise Analytics & Reports',
-          subtitle: 'Comprehensive financial, operational, and regulatory reporting abstracts'
-        }
-      },
-      'setup': {
-        'master-data': {
-          title: 'Master Settings & Profiles',
-          subtitle: 'Plant configuration, supplier master registry, species pricing, and system parameters'
-        }
-      },
-      'help': {
-        'support-tickets': {
-          title: 'Help & Support Center',
-          subtitle: '24/7 IT Helpdesk, weighbridge & barcode support tickets, and plant compliance guides'
-        },
-        'documentation': {
-          title: 'Compliance & SOP Documentation',
-          subtitle: 'Standard operating procedures, MPEDA/USFDA manuals, and module user guides'
-        }
-      },
-      'notifications': {
-        'center': {
-          title: 'Notification Center',
-          subtitle: 'Real-time operational alerts, dock arrivals, cold chain telemetry, and pending approvals'
-        }
-      }
-    };
-
-    const secMeta = SECTION_METADATA[modObj.id]?.[subObj.id] || {
-      title: `${modObj.title} ${subObj.title}`,
-      subtitle: 'Aquaculture operations, live metrics, and records'
-    };
-
     const titleEl = document.getElementById('section-title-container');
     if (titleEl) {
-      titleEl.innerHTML = `
-        <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">${secMeta.title}</h1>
-        <p class="text-xs text-[#64748B] mt-0.5">${secMeta.subtitle}</p>
-      `;
+      titleEl.innerHTML = Molecules.SectionHeader({
+        title: secMeta.title,
+        subtitle: secMeta.subtitle
+      });
     }
 
     // Render Sticky Underline Navigation Tabs directly under the Title
@@ -330,38 +222,9 @@ export const App = {
   ensureShellMounted() {
     let existing = document.getElementById('erp-app-shell');
     if (!existing) {
-      const isCollapsed = Sidebar.isCollapsed;
-      const collapsedClass = isCollapsed ? 'is-collapsed' : '';
-
-      document.getElementById('app-root').innerHTML = `
-        <div id="erp-app-shell" data-layout="option1" class="min-h-screen bg-[#F8FAFC]">
-          <!-- Left Floated Sidebar (Floating with rounded corners) -->
-          <div id="sidebar-container" class="${collapsedClass}"></div>
-
-          <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
-          <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-            <!-- Sticky Top Navigation & Tabs Area -->
-            <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC] pt-3 mr-3 pb-1 space-y-3">
-              <!-- Card 1: Top Header Card -->
-              <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
-                <div id="header-container" class="bg-white rounded-2xl"></div>
-              </div>
-
-              <!-- Card 2: Breadcrumbs, Section Header & Underline Tabs Menu (Sticky) -->
-              <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-4 pb-0 shadow-xs">
-                <div id="breadcrumbs-container" class="mb-2"></div>
-                <div id="section-title-container" class="mb-3"></div>
-                <div id="global-tab-bar-container"></div>
-              </div>
-            </div>
-
-            <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-            <main id="main-content-container" class="px-0 pt-3 pb-8 flex-1 w-full mr-3"></main>
-          </div>
-        </div>
-      `;
-
-      // Mount Header
+      document.getElementById('app-root').innerHTML = Organisms.AppShell({
+        isCollapsed: Sidebar.isCollapsed
+      });
       Header.render('header-container');
     }
   },

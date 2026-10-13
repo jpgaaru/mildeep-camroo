@@ -8,6 +8,7 @@ import { Toast } from '../components/toast.js';
 import { TabBar } from '../components/tabBar.js';
 import { Skeleton } from '../components/skeleton.js';
 import { renderEmptyState } from '../components/emptyState.js';
+import { Molecules } from '../framework/index.js';
 
 export const PurchaseView = {
   // Store local state for CRUD & filter presets
@@ -268,164 +269,119 @@ export const PurchaseView = {
   // SUB MENU: DASHBOARD -> TAB 1: RAW MATERIAL DASHBOARD (COMPLETE USER DESIGN)
   // =========================================================================
   renderRMDashboard(container) {
+    const filterBarHtml = Molecules.FilterBar({
+      id: 'rm-filter',
+      title: 'Search & Filters',
+      fields: [
+        {
+          type: 'select',
+          id: 'rm-dash-species',
+          label: 'SPECIES',
+          value: 'Vannamei (VM)',
+          options: [
+            { value: 'ALL', label: 'All Species (Select)' },
+            { value: 'Vannamei (VM)', label: 'Vannamei (VM)', selected: true },
+            { value: 'Black Tiger (BT)', label: 'Black Tiger (BT)' },
+            { value: 'Asian Seabass', label: 'Asian Seabass' }
+          ]
+        },
+        {
+          type: 'select',
+          id: 'rm-dash-center',
+          label: 'CENTER',
+          value: 'ALL',
+          options: [
+            { value: 'ALL', label: 'All Centers (Select)' },
+            { value: 'Bhimavaram Center #1', label: 'Bhimavaram Center #1' },
+            { value: 'Kakinada Sea Intake #2', label: 'Kakinada Sea Intake #2' },
+            { value: 'Amalapuram Harvesters #4', label: 'Amalapuram Harvesters #4' },
+            { value: 'Machilipatnam Delta #3', label: 'Machilipatnam Delta #3' },
+            { value: 'Ongole Coastal Hub #1', label: 'Ongole Coastal Hub #1' },
+            { value: 'Visakhapatnam Gate Dock', label: 'Visakhapatnam Gate Dock' }
+          ]
+        },
+        {
+          type: 'select',
+          id: 'rm-dash-plant',
+          label: 'PLANT',
+          value: 'ALL',
+          options: [
+            { value: 'ALL', label: 'All Plants (Select)' },
+            { value: 'DFL UNIT-5 (JPT)', label: 'DFL UNIT-5 (JPT)' },
+            { value: 'DFL UNIT-3 (PSP)', label: 'DFL UNIT-3 (PSP)' },
+            { value: 'DFL UNIT-6 (JPT-II)', label: 'DFL UNIT-6 (JPT-II)' },
+            { value: 'DFL UNIT-4 (PND)', label: 'DFL UNIT-4 (PND)' },
+            { value: 'DFL UNIT-2 (KKD)', label: 'DFL UNIT-2 (KKD)' },
+            { value: 'DFL UNIT-1 (VSP)', label: 'DFL UNIT-1 (VSP)' }
+          ]
+        },
+        {
+          type: 'date',
+          id: 'rm-dash-from-date',
+          label: 'FROM DATE',
+          placeholder: 'dd/mm/yyyy'
+        },
+        {
+          type: 'date',
+          id: 'rm-dash-to-date',
+          label: 'TO DATE',
+          placeholder: 'dd/mm/yyyy'
+        }
+      ]
+    });
+
+    const statTilesHtml = [
+      Molecules.StatTile({
+        label: 'TOTAL QUANTITY',
+        value: '142,500',
+        unit: 'Kg',
+        badgeText: '↑ 8.4%',
+        badgeTone: 'teal',
+        icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>`,
+        footerLabel: 'vs last week',
+        footerValue: '+11,040 Kg'
+      }),
+      Molecules.StatTile({
+        label: 'HEAD ON QTY',
+        value: '142,500',
+        unit: 'Kg',
+        badgeText: '✓ 100%',
+        badgeTone: 'emerald',
+        icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>`,
+        footerLabel: 'Weighbridge status',
+        footerValue: 'Verified',
+        footerValueColor: 'text-[#056A38]'
+      }),
+      Molecules.StatTile({
+        label: 'DAMAGE WEIGHT',
+        value: '1,250',
+        unit: 'Kg',
+        badgeText: '0.88%',
+        badgeTone: 'ruby',
+        valueColor: 'text-[#B5152B]',
+        icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`,
+        footerLabel: 'Tolerance limit',
+        footerValue: '< 1.50%'
+      }),
+      Molecules.StatTile({
+        label: 'PENDING PRODUCTION',
+        value: '48,200',
+        unit: 'Kg',
+        badgeText: '33.8%',
+        badgeTone: 'amber',
+        icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+        footerLabel: 'Processing stage',
+        footerValue: 'Staging Bay'
+      })
+    ].join('');
+
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
-        <!-- Main Dashboard Header Card with Collapsible Filters (AquaPulse Architecture) -->
-        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
-          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#0F172A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-              <h3 class="text-sm font-bold text-[#0F172A]">Search &amp; Filters</h3>
-            </div>
-
-            <!-- Filter Controls: Reset & Toggle Open/Close -->
-            <div class="flex items-center gap-2 text-xs font-semibold text-[#64748B]">
-              <button type="button" onclick="const s = document.querySelectorAll('#rm-filter-body select'); s.forEach(sel => sel.selectedIndex = 0); const d = document.querySelectorAll('#rm-filter-body input'); d.forEach(i => i.value=''); Toast.show('Filters reset', 'info');" class="hover:text-[#006C7A] transition-colors cursor-pointer" title="Reset all filters">Reset</button>
-              <span class="text-[#CBD5E1]">|</span>
-              <button type="button" onclick="const b = document.getElementById('rm-filter-body'); const t = this.querySelector('.rm-toggle-text'); const ic = this.querySelector('svg'); b.classList.toggle('hidden'); if(b.classList.contains('hidden')){ t.innerText='Show Filter'; ic.classList.add('rotate-180'); } else { t.innerText='Hide Filter'; ic.classList.remove('rotate-180'); }" class="flex items-center gap-1 hover:text-[#006C7A] transition-colors cursor-pointer" title="Hide Filter">
-                <span class="rm-toggle-text">Hide Filter</span>
-                <svg class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Collapsible Filter Inputs Grid -->
-          <div id="rm-filter-body" class="dt-top-filter-body mt-4 transition-all duration-200">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-xs">
-              <div>
-                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">SPECIES</label>
-                <select id="rm-dash-species" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option value="ALL">All Species (Select)</option>
-                  <option value="Vannamei (VM)" selected>Vannamei (VM)</option>
-                  <option value="Black Tiger (BT)">Black Tiger (BT)</option>
-                  <option value="Asian Seabass">Asian Seabass</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">CENTER</label>
-                <select id="rm-dash-center" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option value="ALL">All Centers (Select)</option>
-                  <option value="Bhimavaram Center #1">Bhimavaram Center #1</option>
-                  <option value="Kakinada Sea Intake #2">Kakinada Sea Intake #2</option>
-                  <option value="Amalapuram Harvesters #4">Amalapuram Harvesters #4</option>
-                  <option value="Machilipatnam Delta #3">Machilipatnam Delta #3</option>
-                  <option value="Ongole Coastal Hub #1">Ongole Coastal Hub #1</option>
-                  <option value="Visakhapatnam Gate Dock">Visakhapatnam Gate Dock</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">PLANT</label>
-                <select id="rm-dash-plant" class="w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A]">
-                  <option value="ALL">All Plants (Select)</option>
-                  <option value="DFL UNIT-5 (JPT)">DFL UNIT-5 (JPT)</option>
-                  <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
-                  <option value="DFL UNIT-6 (JPT-II)">DFL UNIT-6 (JPT-II)</option>
-                  <option value="DFL UNIT-4 (PND)">DFL UNIT-4 (PND)</option>
-                  <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
-                  <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">FROM DATE</label>
-                <div class="erp-date-wrapper">
-                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">TO DATE</label>
-                <div class="erp-date-wrapper">
-                  <input type="text" readonly inputmode="none" value="" class="erp-date-input w-full h-[38px] text-xs px-3 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] cursor-pointer" placeholder="dd/mm/yyyy" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Search Action Row -->
-            <div class="flex justify-end mt-4">
-              <button onclick="Toast.show('Dashboard filters applied successfully', 'info');" class="btn-primary h-[38px] px-6 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Search</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        ${filterBarHtml}
 
         <!-- AquaPulse Stat Tiles (High-Precision Telemetry Grid) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-          <!-- 1. Total Quantity -->
-          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
-            <div class="flex items-center justify-between gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
-              </span>
-              <span class="inline-flex items-center gap-1 font-bold text-[#056A38] bg-[#EAFaf1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#A8E7C3]">↑ 8.4%</span>
-            </div>
-            <div class="mt-3">
-              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">142,500 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
-              <div class="text-xs font-semibold text-[#64748B] mt-0.5">TOTAL QUANTITY</div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
-              <span>vs last week</span>
-              <b class="text-[#0F172A] font-semibold">+11,040 Kg</b>
-            </div>
-          </div>
-
-          <!-- 2. Head On Qty -->
-          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
-            <div class="flex items-center justify-between gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-[#EAFaf1] border border-[#A8E7C3] flex items-center justify-center text-[#056A38]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-              </span>
-              <span class="inline-flex items-center gap-1 font-bold text-[#056A38] bg-[#EAFaf1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#A8E7C3]">✓ 100%</span>
-            </div>
-            <div class="mt-3">
-              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">142,500 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
-              <div class="text-xs font-semibold text-[#64748B] mt-0.5">HEAD ON QTY</div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
-              <span>Weighbridge status</span>
-              <b class="text-[#056A38] font-semibold">Verified</b>
-            </div>
-          </div>
-
-          <!-- 3. Damage Weight -->
-          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
-            <div class="flex items-center justify-between gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-[#FEEFF1] border border-[#F9B0BE] flex items-center justify-center text-[#B5152B]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-              </span>
-              <span class="inline-flex items-center gap-1 font-bold text-[#B5152B] bg-[#FEEFF1] px-2 py-0.5 rounded-full text-[10.5px] border border-[#F9B0BE]">0.88%</span>
-            </div>
-            <div class="mt-3">
-              <div class="text-2xl font-extrabold text-[#B5152B] tracking-tight tabular-nums">1,250 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
-              <div class="text-xs font-semibold text-[#64748B] mt-0.5">DAMAGE WEIGHT</div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
-              <span>Tolerance limit</span>
-              <b class="text-[#0F172A] font-semibold">&lt; 1.50%</b>
-            </div>
-          </div>
-
-          <!-- 4. Pending Production -->
-          <div class="mcard bg-white p-5 rounded-2xl border border-[#E2E8F0] shadow-xs hover:shadow-md transition-all">
-            <div class="flex items-center justify-between gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-[#FFF9E6] border border-[#F7DA94] flex items-center justify-center text-[#824D00]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              </span>
-              <span class="inline-flex items-center gap-1 font-bold text-[#824D00] bg-[#FFF9E6] px-2 py-0.5 rounded-full text-[10.5px] border border-[#F7DA94]">33.8%</span>
-            </div>
-            <div class="mt-3">
-              <div class="text-2xl font-extrabold text-[#0F172A] tracking-tight tabular-nums">48,200 <span class="text-xs font-medium text-[#64748B]">Kg</span></div>
-              <div class="text-xs font-semibold text-[#64748B] mt-0.5">PENDING PRODUCTION</div>
-            </div>
-            <div class="mt-3 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-[11px] text-[#64748B]">
-              <span>Processing stage</span>
-              <b class="text-[#0F172A] font-semibold">Staging Bay</b>
-            </div>
-          </div>
+          ${statTilesHtml}
         </div>
 
         <!-- Section 1 Charts: Sum of QTY by SPECIES & Sum of QTY by PLANT -->
