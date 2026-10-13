@@ -11067,12 +11067,210 @@ const PurchaseView = {
   ],
 
   centersList: [
-    { centerName: 'Bhimavaram Center #1', code: 'BVM-C1', plant: 'DFL UNIT-5 (JPT)', totalLots: 38, totalQtyKg: 40200, yieldPct: 69.4, avgRateInr: 385 },
-    { centerName: 'Kakinada Sea Intake #2', code: 'KKD-C2', plant: 'DFL UNIT-3 (PSP)', totalLots: 28, totalQtyKg: 27150, yieldPct: 69.1, avgRateInr: 410 },
-    { centerName: 'Amalapuram Harvesters #4', code: 'AML-C4', plant: 'DFL UNIT-6 (JPT-II)', totalLots: 22, totalQtyKg: 22500, yieldPct: 68.8, avgRateInr: 375 },
-    { centerName: 'Machilipatnam Delta #3', code: 'MCN-C3', plant: 'DFL UNIT-4 (PND)', totalLots: 20, totalQtyKg: 20100, yieldPct: 69.8, avgRateInr: 390 },
-    { centerName: 'Ongole Coastal Hub #1', code: 'ONG-C1', plant: 'DFL UNIT-2 (KKD)', totalLots: 16, totalQtyKg: 16050, yieldPct: 69.2, avgRateInr: 380 },
-    { centerName: 'Visakhapatnam Gate Dock', code: 'VSP-D1', plant: 'DFL UNIT-1 (VSP)', totalLots: 14, totalQtyKg: 13200, yieldPct: 70.1, avgRateInr: 420 }
+    {
+      code: 'BVM-C1',
+      centerName: 'Bhimavaram Center #1',
+      location: 'West Godavari (Akividu Pond Belt), AP',
+      plant: 'DFL UNIT-5 (JPT)',
+      lastIntakeTime: '13-Oct-2026 14:15',
+      species: 'Vannamei (VM)',
+      totalLots: 38,
+      totalQtyKg: 40200,
+      yieldPct: 69.4,
+      avgRateInr: 385,
+      totalValueInr: 15477000,
+      vehicles: 4,
+      supervisor: 'R. K. Varma',
+      contact: '+91 98480 23114',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'KKD-C2',
+      centerName: 'Kakinada Sea Intake #2',
+      location: 'East Godavari (Kakinada Bay), AP',
+      plant: 'DFL UNIT-3 (PSP)',
+      lastIntakeTime: '13-Oct-2026 13:40',
+      species: 'Black Tiger (BT)',
+      totalLots: 28,
+      totalQtyKg: 27150,
+      yieldPct: 69.1,
+      avgRateInr: 410,
+      totalValueInr: 11131500,
+      vehicles: 3,
+      supervisor: 'M. S. Murthy',
+      contact: '+91 98481 44521',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'AML-C4',
+      centerName: 'Amalapuram Harvesters #4',
+      location: 'Konaseema Delta (Coastal Zone 3), AP',
+      plant: 'DFL UNIT-6 (JPT-II)',
+      lastIntakeTime: '13-Oct-2026 12:20',
+      species: 'Vannamei (VM)',
+      totalLots: 22,
+      totalQtyKg: 22500,
+      yieldPct: 68.8,
+      avgRateInr: 375,
+      totalValueInr: 8437500,
+      vehicles: 3,
+      supervisor: 'G. Suribabu',
+      contact: '+91 98482 11984',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'MCN-C3',
+      centerName: 'Machilipatnam Delta #3',
+      location: 'Krishna District (Pamarru Sector), AP',
+      plant: 'DFL UNIT-4 (PND)',
+      lastIntakeTime: '13-Oct-2026 11:10',
+      species: 'Vannamei (VM)',
+      totalLots: 20,
+      totalQtyKg: 20100,
+      yieldPct: 69.8,
+      avgRateInr: 390,
+      totalValueInr: 7839000,
+      vehicles: 2,
+      supervisor: 'Ch. Prasad Rao',
+      contact: '+91 98483 77625',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'ONG-C1',
+      centerName: 'Ongole Coastal Hub #1',
+      location: 'Prakasam (Singarayakonda Coast), AP',
+      plant: 'DFL UNIT-2 (KKD)',
+      lastIntakeTime: '13-Oct-2026 09:45',
+      species: 'Black Tiger (BT)',
+      totalLots: 16,
+      totalQtyKg: 16050,
+      yieldPct: 69.2,
+      avgRateInr: 380,
+      totalValueInr: 6099000,
+      vehicles: 2,
+      supervisor: 'Y. Brahmaiah',
+      contact: '+91 98484 99012',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'VSP-D1',
+      centerName: 'Visakhapatnam Gate Dock',
+      location: 'Visakhapatnam Harbor (Dock 2), AP',
+      plant: 'DFL UNIT-1 (VSP)',
+      lastIntakeTime: '13-Oct-2026 08:30',
+      species: 'Vannamei & Sea Catch',
+      totalLots: 14,
+      totalQtyKg: 13200,
+      yieldPct: 70.1,
+      avgRateInr: 420,
+      totalValueInr: 5544000,
+      vehicles: 2,
+      supervisor: 'P. Appa Rao',
+      contact: '+91 98485 33281',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'BPT-C2',
+      centerName: 'Bapatla Brackish Station #2',
+      location: 'Bapatla Coastal Cluster (Surya Lanka), AP',
+      plant: 'DFL UNIT-4 (PND)',
+      lastIntakeTime: '12-Oct-2026 21:15',
+      species: 'Vannamei (VM)',
+      totalLots: 18,
+      totalQtyKg: 18400,
+      yieldPct: 69.0,
+      avgRateInr: 395,
+      totalValueInr: 7268000,
+      vehicles: 2,
+      supervisor: 'K. R. Chowdary',
+      contact: '+91 98486 88192',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'NEL-C3',
+      centerName: 'Nellore Coastal Hub #3',
+      location: 'SPSR Nellore (Allur & Gudur Zone), AP',
+      plant: 'DFL UNIT-2 (KKD)',
+      lastIntakeTime: '12-Oct-2026 18:50',
+      species: 'Black Tiger (BT)',
+      totalLots: 24,
+      totalQtyKg: 25600,
+      yieldPct: 69.6,
+      avgRateInr: 405,
+      totalValueInr: 10368000,
+      vehicles: 3,
+      supervisor: 'T. Subrahmanyam',
+      contact: '+91 98487 44019',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'BLS-C1',
+      centerName: 'Balasore Marine Gate #1',
+      location: 'Balasore Coastal Belt (Chandipur), Odisha',
+      plant: 'DFL UNIT-5 (JPT)',
+      lastIntakeTime: '12-Oct-2026 16:30',
+      species: 'Vannamei (VM)',
+      totalLots: 15,
+      totalQtyKg: 14800,
+      yieldPct: 68.5,
+      avgRateInr: 370,
+      totalValueInr: 5476000,
+      vehicles: 2,
+      supervisor: 'B. C. Mohapatra',
+      contact: '+91 98488 12398',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'RPL-C1',
+      centerName: 'Repalle Riverine Depot',
+      location: 'Krishna River Mouth / Nizampatnam, AP',
+      plant: 'DFL UNIT-4 (PND)',
+      lastIntakeTime: '12-Oct-2026 14:10',
+      species: 'Vannamei (VM)',
+      totalLots: 12,
+      totalQtyKg: 11900,
+      yieldPct: 68.9,
+      avgRateInr: 385,
+      totalValueInr: 4581500,
+      vehicles: 1,
+      supervisor: 'M. Siva Kumar',
+      contact: '+91 98489 77102',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'NSP-C2',
+      centerName: 'Narsapur Estuary Dock #2',
+      location: 'West Godavari Estuary (Perupalem Beach), AP',
+      plant: 'DFL UNIT-5 (JPT)',
+      lastIntakeTime: '12-Oct-2026 10:25',
+      species: 'Vannamei (VM)',
+      totalLots: 19,
+      totalQtyKg: 19300,
+      yieldPct: 69.7,
+      avgRateInr: 392,
+      totalValueInr: 7565600,
+      vehicles: 2,
+      supervisor: 'V. Krishna Murthy',
+      contact: '+91 98490 66211',
+      status: 'ACTIVE'
+    },
+    {
+      code: 'SMP-C1',
+      centerName: 'Sompeta Northern Yard',
+      location: 'Srikakulam Coastal Zone (Baruva), AP',
+      plant: 'DFL UNIT-1 (VSP)',
+      lastIntakeTime: '11-Oct-2026 22:00',
+      species: 'Vannamei & Sea Catch',
+      totalLots: 11,
+      totalQtyKg: 10500,
+      yieldPct: 69.3,
+      avgRateInr: 415,
+      totalValueInr: 4357500,
+      vehicles: 1,
+      supervisor: 'K. Jagannatham',
+      contact: '+91 98491 55309',
+      status: 'STANDBY'
+    }
   ],
 
   purchaseReportsList: [
@@ -11503,9 +11701,11 @@ const PurchaseView = {
 
     let centersTableInstance = null;
     const renderCentersTable = () => {
+      const speciesVal = document.getElementById('rm-dash-species')?.value || 'ALL';
       const centerVal = document.getElementById('rm-dash-center')?.value || 'ALL';
       const plantVal = document.getElementById('rm-dash-plant')?.value || 'ALL';
       const filteredCenters = this.centersList.filter(c => {
+        if (speciesVal !== 'ALL' && c.species && !c.species.includes(speciesVal)) return false;
         if (centerVal !== 'ALL' && c.centerName !== centerVal) return false;
         if (plantVal !== 'ALL' && c.plant !== plantVal) return false;
         return true;
@@ -11516,19 +11716,99 @@ const PurchaseView = {
         tableTitle: 'Quantity by Center',
         data: filteredCenters,
         keyField: 'code',
-        pageSize: 6,
-        searchable: false,
+        pageSize: 8,
+        searchable: true,
         exportable: true,
         showDensity: false,
         hideTopFilterBar: true,
         columns: [
-          { field: 'code', header: 'Center Code', render: (v) => `<span class="font-bold text-[#17191c]">${v}</span>` },
-          { field: 'centerName', header: 'Center Name', render: (v) => `<span class="font-semibold text-[#172B4D]">${v}</span>` },
-          { field: 'plant', header: 'Mapped Plant Facility' },
-          { field: 'totalLots', header: 'Lots Supplied', render: (v) => `<span class="font-bold">${v} Lots</span>` },
-          { field: 'totalQtyKg', header: 'Total Qty (KG)', render: (v) => `<span class="font-bold text-[#006644]">${v.toLocaleString()} KG</span>` },
-          { field: 'yieldPct', header: 'Avg Yield %', render: (v) => `<span class="font-bold text-[#17191c]">${v}%</span>` },
-          { field: 'avgRateInr', header: 'Avg Rate (INR)', render: (v) => `<span>₹ ${v}/KG</span>` }
+          {
+            field: 'code',
+            header: 'Center Code',
+            render: (v) => `<span class="font-mono font-bold text-xs text-[#006C7A] bg-[#F0FAFC] px-2 py-0.5 rounded border border-[#B2ECF3]">${v}</span>`
+          },
+          {
+            field: 'centerName',
+            header: 'Center Name & Location',
+            render: (v, row) => `
+              <div>
+                <div class="font-bold text-[#0F172A] hover:text-[#006C7A] transition-colors">${v}</div>
+                <div class="text-[11px] text-[#64748B] flex items-center gap-1 mt-0.5">
+                  <svg class="w-3 h-3 text-[#94A3B8] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>${row.location || 'AP Coastal Belt'}</span>
+                </div>
+              </div>
+            `
+          },
+          {
+            field: 'lastIntakeTime',
+            header: 'Last Intake (Date & Time)',
+            render: (v) => {
+              if (!v) return '<span class="text-[#94A3B8]">—</span>';
+              const parts = v.split(' ');
+              const d = parts[0] || v;
+              const t = parts.slice(1).join(' ');
+              return `
+                <div class="leading-tight">
+                  <span class="font-semibold text-[#1E293B] block text-xs">${d}</span>
+                  <span class="text-[11px] text-[#64748B] font-mono">${t}</span>
+                </div>
+              `;
+            }
+          },
+          {
+            field: 'plant',
+            header: 'Mapped Facility',
+            render: (v) => `<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#F1F5F9] text-[#334155] border border-[#CBD5E1]">${v}</span>`
+          },
+          {
+            field: 'species',
+            header: 'Species Handled',
+            render: (v) => `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold ${v && v.includes('BT') ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]' : 'bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD]'}">${v || 'Vannamei (VM)'}</span>`
+          },
+          {
+            field: 'totalLots',
+            header: 'Lots Supplied',
+            render: (v) => `<span class="font-bold text-[#1E293B]">${v} Lots</span>`
+          },
+          {
+            field: 'totalQtyKg',
+            header: 'Intake Qty (KG)',
+            render: (v) => `<span class="font-extrabold text-[#006644]">${(v || 0).toLocaleString()} KG</span>`
+          },
+          {
+            field: 'yieldPct',
+            header: 'Avg Yield %',
+            render: (v) => `
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-[#0F172A] text-xs">${v}%</span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full ${parseFloat(v) >= 71 ? 'bg-[#10B981]' : 'bg-[#F59E0B]'}"></span>
+              </div>
+            `
+          },
+          {
+            field: 'avgRateInr',
+            header: 'Avg Rate',
+            render: (v) => `<span class="font-semibold text-[#1E293B]">₹ ${v}/KG</span>`
+          },
+          {
+            field: 'totalValueInr',
+            header: 'Valuation (₹ Lakhs)',
+            render: (v, row) => {
+              const valLakhs = v ? (v / 100000).toFixed(2) : (((row.totalQtyKg || 0) * (row.avgRateInr || 0)) / 100000).toFixed(2);
+              return `<span class="font-bold text-[#0F172A]">₹ ${valLakhs} L</span>`;
+            }
+          },
+          {
+            field: 'status',
+            header: 'Status',
+            render: (v) => `
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold ${v === 'Active' ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEF3C7] text-[#92400E]'}">
+                <span class="w-1.5 h-1.5 rounded-full ${v === 'Active' ? 'bg-[#16A34A]' : 'bg-[#D97706]'}"></span>
+                ${v || 'Active'}
+              </span>
+            `
+          }
         ],
         actions: [
           {
@@ -17444,11 +17724,13 @@ const PurchaseView = {
   },
 
   showCenterDetails(center) {
+    const valLakhs = center.totalValueInr ? (center.totalValueInr / 100000).toFixed(2) : (((center.totalQtyKg || 0) * (center.avgRateInr || 0)) / 100000).toFixed(2);
     Modal.open({
-      title: `Procurement Center: ${center.centerName}`,
+      title: `Procurement Center: ${center.centerName} (${center.code})`,
       size: 'lg',
       content: `
         <div class="space-y-4 text-xs">
+          <!-- Top Metric Cards -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
             <div>
               <span class="text-[#64748B] block text-[10px] font-semibold uppercase">Center Code</span>
@@ -17468,10 +17750,40 @@ const PurchaseView = {
             </div>
           </div>
 
+          <!-- Center Details 2-Column Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="p-3 bg-white border border-[#E2E8F0] rounded-xl space-y-2">
               <h4 class="font-bold text-xs text-[#0F172A] border-b pb-1.5 flex items-center justify-between">
-                <span>Performance & Yield</span>
+                <span>Location & Operational Profile</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full ${center.status === 'Active' ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEF3C7] text-[#92400E]'} font-bold">${center.status || 'Active'}</span>
+              </h4>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Procurement District / Hub:</span>
+                <span class="font-semibold text-[#0F172A] flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  ${center.location || 'AP Coastal Belt'}
+                </span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Last Intake Timestamp:</span>
+                <span class="font-mono font-bold text-[#0F172A] flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  ${center.lastIntakeTime || '13-Oct-2026 12:00'}
+                </span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
+                <span class="text-[#64748B]">Primary Species Handled:</span>
+                <span class="font-bold text-[#0369A1]">${center.species || 'Vannamei (VM)'}</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-[#64748B]">Assigned Fleet:</span>
+                <span class="font-semibold text-[#0F172A]">${center.vehicles || 4} Insulated Reefer Trucks</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-white border border-[#E2E8F0] rounded-xl space-y-2">
+              <h4 class="font-bold text-xs text-[#0F172A] border-b pb-1.5 flex items-center justify-between">
+                <span>Performance & Financial Valuation</span>
                 <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#E3FCEF] text-[#006644] font-bold">Grade A</span>
               </h4>
               <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
@@ -17479,31 +17791,16 @@ const PurchaseView = {
                 <span class="font-bold text-[#0F172A]">${center.yieldPct}%</span>
               </div>
               <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
-                <span class="text-[#64748B]">Procurement Rate:</span>
+                <span class="text-[#64748B]">Average Procurement Rate:</span>
                 <span class="font-bold text-[#0F172A]">₹ ${center.avgRateInr} / KG</span>
               </div>
-              <div class="flex justify-between py-1">
+              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
                 <span class="text-[#64748B]">Total Center Valuation:</span>
-                <span class="font-bold text-[#006644]">₹ ${((center.totalQtyKg || 0) * (center.avgRateInr || 0)).toLocaleString()}</span>
-              </div>
-            </div>
-
-            <div class="p-3 bg-white border border-[#E2E8F0] rounded-xl space-y-2">
-              <h4 class="font-bold text-xs text-[#0F172A] border-b pb-1.5 flex items-center justify-between">
-                <span>Center Operations</span>
-                <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1D4ED8] font-bold">Operational</span>
-              </h4>
-              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
-                <span class="text-[#64748B]">Supervisor In-Charge:</span>
-                <span class="font-semibold text-[#0F172A]">R. K. Varma (Plant Liaison)</span>
-              </div>
-              <div class="flex justify-between py-1 border-b border-[#F1F5F9]">
-                <span class="text-[#64748B]">Cold-Chain Fleet:</span>
-                <span class="font-semibold text-[#0F172A]">4 Insulated Reefer Trucks</span>
+                <span class="font-bold text-[#006644]">₹ ${valLakhs} Lakhs</span>
               </div>
               <div class="flex justify-between py-1">
-                <span class="text-[#64748B]">Operating Dispatch Schedule:</span>
-                <span class="font-semibold text-[#0F172A]">Daily (04:00 AM – 11:30 PM)</span>
+                <span class="text-[#64748B]">Supervisor / Liaison:</span>
+                <span class="font-semibold text-[#0F172A]">${center.supervisor || 'R. K. Varma'} (${center.contact || '+91 98480 12345'})</span>
               </div>
             </div>
           </div>
@@ -17514,7 +17811,7 @@ const PurchaseView = {
             </a>
             <div class="flex gap-2">
               <button id="modal-center-dl-btn" class="px-3 py-1.5 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#0F172A] font-semibold rounded-lg text-xs transition-colors">
-                Download Summary
+                Download Slip
               </button>
               <button onclick="document.getElementById('modal-close-btn')?.click();" class="btn-primary px-3 py-1.5 rounded-lg text-xs">
                 Close
@@ -17535,13 +17832,27 @@ const PurchaseView = {
 
   openEditCenterModal(center, tableInstance) {
     Modal.open({
-      title: `Edit Procurement Center: ${center.centerName}`,
+      title: `Edit Procurement Center: ${center.centerName} (${center.code})`,
       size: 'md',
       content: `
         <form id="edit-center-form" class="space-y-3 text-xs">
           <div>
             <label class="block text-[11px] font-bold text-[#475569] mb-1">Center Name</label>
             <input type="text" id="edit-center-name" value="${center.centerName}" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" required />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">District / Hub Location</label>
+              <input type="text" id="edit-center-location" value="${center.location || ''}" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" required />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">Operational Status</label>
+              <select id="edit-center-status" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]">
+                <option value="Active" ${center.status === 'Active' ? 'selected' : ''}>Active</option>
+                <option value="Standby" ${center.status === 'Standby' ? 'selected' : ''}>Standby</option>
+              </select>
+            </div>
           </div>
 
           <div>
@@ -17567,6 +17878,17 @@ const PurchaseView = {
             </div>
           </div>
 
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">Supervisor In-Charge</label>
+              <input type="text" id="edit-center-supervisor" value="${center.supervisor || ''}" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] mb-1">Supervisor Phone</label>
+              <input type="text" id="edit-center-contact" value="${center.contact || ''}" class="w-full px-3 py-2 border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#006C7A]" />
+            </div>
+          </div>
+
           <div class="pt-3 flex justify-end gap-2 border-t border-[#E2E8F0]">
             <button type="button" onclick="document.getElementById('modal-close-btn')?.click();" class="px-3 py-1.5 border border-[#CBD5E1] rounded-lg hover:bg-[#F8FAFC] text-[#475569] font-semibold text-xs">
               Cancel
@@ -17584,9 +17906,14 @@ const PurchaseView = {
       form.onsubmit = (e) => {
         e.preventDefault();
         center.centerName = document.getElementById('edit-center-name').value.trim();
+        center.location = document.getElementById('edit-center-location').value.trim();
+        center.status = document.getElementById('edit-center-status').value;
         center.plant = document.getElementById('edit-center-plant').value;
         center.avgRateInr = parseFloat(document.getElementById('edit-center-rate').value) || center.avgRateInr;
         center.yieldPct = parseFloat(document.getElementById('edit-center-yield').value) || center.yieldPct;
+        center.supervisor = document.getElementById('edit-center-supervisor').value.trim();
+        center.contact = document.getElementById('edit-center-contact').value.trim();
+        center.totalValueInr = Math.round((center.totalQtyKg || 0) * (center.avgRateInr || 0));
 
         if (tableInstance && typeof tableInstance.setData === 'function') {
           tableInstance.setData(PurchaseView.centersList);
