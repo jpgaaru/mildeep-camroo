@@ -462,6 +462,24 @@ export const NAV_HIERARCHY = [
         ]
       }
     ]
+  },
+  {
+    id: "notifications",
+    title: "Notifications",
+    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>`,
+    submenus: [
+      {
+        id: "center",
+        title: "Notification Center",
+        defaultTab: "all-notifications",
+        tabs: [
+          { id: "all-notifications", label: "All Notifications", hash: "#/notifications/center/all-notifications" },
+          { id: "unread-alerts", label: "Unread Alerts", hash: "#/notifications/center/unread-alerts" },
+          { id: "procurement-alerts", label: "Procurement & Arrivals", hash: "#/notifications/center/procurement-alerts" },
+          { id: "quality-alerts", label: "Quality & Cold Chain", hash: "#/notifications/center/quality-alerts" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -475,7 +493,8 @@ export const MODULE_LUCIDE_ICONS = {
   sales: 'trending-up',
   reports: 'bar-chart-3',
   setup: 'settings',
-  help: 'help-circle'
+  help: 'life-buoy',
+  notifications: 'bell'
 };
 
 export const Sidebar = {
@@ -539,13 +558,13 @@ export const Sidebar = {
 
     container.innerHTML = `
       <aside class="f-sidebar ${collapsedClass}" id="erp-sidebar">
-        <!-- Floating Sidebar Header with Brand & Edge Toggle -->
+        <!-- Floating Sidebar Header with Devi Fisheries Brand Logo & Edge Toggle -->
         <div class="f-sb-header">
-          <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — AquaPulse ERP">
-            <div class="f-sb-logo"><i data-lucide="waves"></i></div>
+          <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — Enterprise ERP">
+            <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 6px rgba(0, 108, 122, 0.2);" />
             <div class="f-sb-brand-info">
               <div class="f-sb-title">Devi Fisheries</div>
-              <div class="f-sb-subtitle">AquaPulse ERP</div>
+              <div class="f-sb-subtitle">Enterprise ERP</div>
             </div>
           </a>
           <button class="f-sb-toggle" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}">
@@ -565,16 +584,19 @@ export const Sidebar = {
           </a>
         </div>
 
-        <!-- Floating Sidebar Footer Profile -->
-        <div class="f-sb-footer" title="Devi Fisheries #1 — Plant Admin">
-          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;">
-            <span style="font-weight:800;font-size:12px;color:#006C7A;">DF</span>
+        <!-- Floating Sidebar Footer: Help & Support Desk -->
+        <a href="#/help/support-tickets/it-support" class="f-sb-footer ${this.activeModuleId === 'help' ? 'bg-[#F0FAFC]' : ''}" style="text-decoration:none;cursor:pointer;" title="Help & Support — 24/7 IT & Plant Desk">
+          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;color:#006C7A;">
+            <i data-lucide="life-buoy" style="width:18px;height:18px;stroke:#006C7A;"></i>
           </div>
           <div class="f-sb-user-text">
-            <span class="f-sb-user-name">Devi Fisheries #1</span>
-            <span class="f-sb-user-role">Plant Admin</span>
+            <span class="f-sb-user-name" style="display:flex;align-items:center;gap:6px;">
+              Help & Support
+              <span style="width:7px;height:7px;border-radius:9999px;background:#10B981;display:inline-block;" title="Support Desk Online"></span>
+            </span>
+            <span class="f-sb-user-role">24/7 IT & Plant Desk</span>
           </div>
-        </div>
+        </a>
       </aside>
     `;
 
@@ -587,8 +609,8 @@ export const Sidebar = {
   },
 
   renderNavGroups() {
-    // Setup is in Configuration section at bottom
-    const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup');
+    // Setup is in Configuration section; Help is in Footer; Notifications is in Top Header
+    const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup' && m.id !== 'help' && m.id !== 'notifications');
     return sidebarModules.map(mod => {
       const isExpanded = mod.id === this.activeModuleId;
       const iconName = MODULE_LUCIDE_ICONS[mod.id] || 'box';

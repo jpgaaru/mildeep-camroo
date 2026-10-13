@@ -38,6 +38,8 @@ const inventoryView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'inven
 const salesView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'salesView.js'), 'utf-8');
 const reportsView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'reportsView.js'), 'utf-8');
 const setupView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setupView.js'), 'utf-8');
+const helpView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'helpView.js'), 'utf-8');
+const notificationsView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'notificationsView.js'), 'utf-8');
 const app = fs.readFileSync(path.join(__dirname, 'js', 'app.js'), 'utf-8');
 
 function cleanCode(code) {
@@ -85,6 +87,8 @@ const combinedJS = `
   ${cleanCode(salesView)}
   ${cleanCode(reportsView)}
   ${cleanCode(setupView)}
+  ${cleanCode(helpView)}
+  ${cleanCode(notificationsView)}
 
   // App Controller
   ${cleanCode(app)}
@@ -97,6 +101,8 @@ const html = `<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devi Fisheries ERP — Enterprise Seafood Processing & Export SaaS</title>
+  <link rel="icon" type="image/png" href="DEVI-FISHERIES-LOGO.png" />
+  <link rel="apple-touch-icon" href="DEVI-FISHERIES-LOGO.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (typeof tailwind !== 'undefined') {

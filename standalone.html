@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devi Fisheries ERP — Enterprise Seafood Processing & Export SaaS</title>
+  <link rel="icon" type="image/png" href="DEVI-FISHERIES-LOGO.png" />
+  <link rel="apple-touch-icon" href="DEVI-FISHERIES-LOGO.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (typeof tailwind !== 'undefined') {
@@ -6991,6 +6993,24 @@ const NAV_HIERARCHY = [
         ]
       }
     ]
+  },
+  {
+    id: "notifications",
+    title: "Notifications",
+    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>`,
+    submenus: [
+      {
+        id: "center",
+        title: "Notification Center",
+        defaultTab: "all-notifications",
+        tabs: [
+          { id: "all-notifications", label: "All Notifications", hash: "#/notifications/center/all-notifications" },
+          { id: "unread-alerts", label: "Unread Alerts", hash: "#/notifications/center/unread-alerts" },
+          { id: "procurement-alerts", label: "Procurement & Arrivals", hash: "#/notifications/center/procurement-alerts" },
+          { id: "quality-alerts", label: "Quality & Cold Chain", hash: "#/notifications/center/quality-alerts" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -7004,7 +7024,8 @@ const MODULE_LUCIDE_ICONS = {
   sales: 'trending-up',
   reports: 'bar-chart-3',
   setup: 'settings',
-  help: 'help-circle'
+  help: 'life-buoy',
+  notifications: 'bell'
 };
 
 const Sidebar = {
@@ -7068,13 +7089,13 @@ const Sidebar = {
 
     container.innerHTML = `
       <aside class="f-sidebar ${collapsedClass}" id="erp-sidebar">
-        <!-- Floating Sidebar Header with Brand & Edge Toggle -->
+        <!-- Floating Sidebar Header with Devi Fisheries Brand Logo & Edge Toggle -->
         <div class="f-sb-header">
-          <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — AquaPulse ERP">
-            <div class="f-sb-logo"><i data-lucide="waves"></i></div>
+          <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — Enterprise ERP">
+            <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 6px rgba(0, 108, 122, 0.2);" />
             <div class="f-sb-brand-info">
               <div class="f-sb-title">Devi Fisheries</div>
-              <div class="f-sb-subtitle">AquaPulse ERP</div>
+              <div class="f-sb-subtitle">Enterprise ERP</div>
             </div>
           </a>
           <button class="f-sb-toggle" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}">
@@ -7094,16 +7115,19 @@ const Sidebar = {
           </a>
         </div>
 
-        <!-- Floating Sidebar Footer Profile -->
-        <div class="f-sb-footer" title="Devi Fisheries #1 — Plant Admin">
-          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;">
-            <span style="font-weight:800;font-size:12px;color:#006C7A;">DF</span>
+        <!-- Floating Sidebar Footer: Help & Support Desk -->
+        <a href="#/help/support-tickets/it-support" class="f-sb-footer ${this.activeModuleId === 'help' ? 'bg-[#F0FAFC]' : ''}" style="text-decoration:none;cursor:pointer;" title="Help & Support — 24/7 IT & Plant Desk">
+          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;color:#006C7A;">
+            <i data-lucide="life-buoy" style="width:18px;height:18px;stroke:#006C7A;"></i>
           </div>
           <div class="f-sb-user-text">
-            <span class="f-sb-user-name">Devi Fisheries #1</span>
-            <span class="f-sb-user-role">Plant Admin</span>
+            <span class="f-sb-user-name" style="display:flex;align-items:center;gap:6px;">
+              Help & Support
+              <span style="width:7px;height:7px;border-radius:9999px;background:#10B981;display:inline-block;" title="Support Desk Online"></span>
+            </span>
+            <span class="f-sb-user-role">24/7 IT & Plant Desk</span>
           </div>
-        </div>
+        </a>
       </aside>
     `;
 
@@ -7116,8 +7140,8 @@ const Sidebar = {
   },
 
   renderNavGroups() {
-    // Setup is in Configuration section at bottom
-    const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup');
+    // Setup is in Configuration section; Help is in Footer; Notifications is in Top Header
+    const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup' && m.id !== 'help' && m.id !== 'notifications');
     return sidebarModules.map(mod => {
       const isExpanded = mod.id === this.activeModuleId;
       const iconName = MODULE_LUCIDE_ICONS[mod.id] || 'box';
@@ -7662,17 +7686,40 @@ const Breadcrumbs = {
 
 
 
+
 const Header = {
   render(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
+    const unreadCount = Array.isArray(NOTIFICATIONS_DATA)
+      ? NOTIFICATIONS_DATA.filter(n => n.unread).length
+      : 5;
+    const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
       <header class="bg-white h-14 px-6 flex items-center justify-end select-none rounded-2xl">
-        <!-- Right: Welcome Manikanta & Profile -->
-        <div class="relative flex items-center gap-3">
+        <!-- Right: Dedicated Notification Page Button + Welcome Manikanta & Profile -->
+        <div class="relative flex items-center gap-3.5">
+          <a
+            href="#/notifications/center/all-notifications"
+            id="header-notifications-page-btn"
+            class="relative w-9 h-9 rounded-full border ${isNotificationsActive ? 'border-[#006C7A] bg-[#F0FAFC] text-[#006C7A]' : 'border-[#CBD5E1] bg-[#F8FAFC] text-[#475569]'} hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] flex items-center justify-center transition-all cursor-pointer"
+            title="Open Notification Center (${unreadCount} Unread)"
+          >
+            <svg class="w-4.5 h-4.5" style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+            ${unreadCount > 0 ? `
+              <span class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#DC2626] text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-white leading-none">
+                ${unreadCount}
+              </span>
+            ` : ''}
+          </a>
+
+          <div class="h-6 w-[1px] bg-[#E2E8F0]"></div>
+
           <button id="user-menu-btn" class="flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-right outline-none">
             <div class="text-right">
               <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, ${ERP_DATA.currentUser.name}</div>
@@ -23828,6 +23875,676 @@ const SetupView = {
   }
 };
 
+  // Help & Support Center View — 24/7 IT Helpdesk, Plant Support Tickets & Compliance Documentation
+
+
+
+
+const SUPPORT_TICKETS = [
+  {
+    ticketId: 'SUP-2026-412',
+    subject: 'Weighbridge #2 RS-232 Serial Auto-Capture Calibration',
+    category: 'Hardware & IoT',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    priority: 'High',
+    assignedTo: 'Ramesh Babu (Plant IT)',
+    status: 'In Progress',
+    createdAt: '13 Oct 2026, 09:40 AM'
+  },
+  {
+    ticketId: 'SUP-2026-409',
+    subject: 'Add New Export Buyer Bank Swift Code for EU Rotterdam Consignee',
+    category: 'ERP Master Data',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    priority: 'Normal',
+    assignedTo: 'Srinivas Rao (ERP Admin)',
+    status: 'Resolved',
+    createdAt: '12 Oct 2026, 04:15 PM'
+  },
+  {
+    ticketId: 'SUP-2026-404',
+    subject: 'Zebra ZT411 Barcode Thermal Printer Label Alignment on IQF Line #1',
+    category: 'Barcode & Scanners',
+    plant: 'Devi Fisheries #2 — Bhimavaram',
+    priority: 'Normal',
+    assignedTo: 'Kiran Kumar (Floor Support)',
+    status: 'Resolved',
+    createdAt: '11 Oct 2026, 11:20 AM'
+  }
+];
+
+const HelpView = {
+  render(containerId, activeTab = 'it-support') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="space-y-4">
+        <!-- Support Desk KPI Banner -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">24/7 Plant IT Helpline</div>
+              <div class="text-lg font-extrabold text-[#006C7A] mt-1">+91 884-230-9900</div>
+              <div class="text-[11px] text-[#64748B] font-medium mt-1">Ext: 108 (Kakinada HQ)</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+              <i data-lucide="headset" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Open Support Tickets</div>
+              <div class="text-2xl font-extrabold text-[#0F172A] mt-1">${SUPPORT_TICKETS.filter(t => t.status !== 'Resolved').length}</div>
+              <div class="text-[11px] text-[#047857] font-semibold mt-1">Avg response: 14 mins</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#E0F2FE] border border-[#7DD3FC] flex items-center justify-center text-[#0369A1]">
+              <i data-lucide="life-buoy" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">ERP Cloud Telemetry</div>
+              <div class="text-lg font-extrabold text-[#047857] mt-1">99.98% Online</div>
+              <div class="text-[11px] text-[#64748B] font-medium mt-1">All 4 Plants Synced</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#DCFCE7] border border-[#86EFAC] flex items-center justify-center text-[#047857]">
+              <i data-lucide="activity" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">HACCP & BRCGS SOPs</div>
+              <div class="text-lg font-extrabold text-[#0F172A] mt-1">v2026.4 Certified</div>
+              <div class="text-[11px] text-[#006C7A] font-semibold mt-1">MPEDA / USFDA Ready</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#FEF3C7] border border-[#FCD34D] flex items-center justify-center text-[#B45309]">
+              <i data-lucide="file-check-2" class="w-5 h-5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support Tickets & Quick Help Section -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] shadow-xs overflow-hidden">
+          <div class="px-6 py-4 border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 bg-[#FAFBFC]">
+            <div>
+              <h2 class="text-sm font-bold text-[#0F172A]">Plant IT & ERP Support Tickets</h2>
+              <p class="text-xs text-[#64748B] mt-0.5">Raise hardware, weighbridge, thermal barcode, or ERP workflow requests directly with the Devi Fisheries IT Desk.</p>
+            </div>
+            <button
+              type="button"
+              id="raise-support-ticket-btn"
+              class="btn-primary h-9 px-4 rounded-lg text-xs font-bold inline-flex items-center gap-2 cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Raise Support Ticket</span>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-[#E2E8F0] bg-[#F8FAFC] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+                  <th class="py-3 px-5">Ticket ID</th>
+                  <th class="py-3 px-4">Subject & Issue</th>
+                  <th class="py-3 px-4">Category</th>
+                  <th class="py-3 px-4">Plant Location</th>
+                  <th class="py-3 px-4">Priority</th>
+                  <th class="py-3 px-4">Assigned Engineer</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-5 text-right">Logged Time</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E2E8F0] text-xs">
+                ${SUPPORT_TICKETS.map(t => `
+                  <tr class="hover:bg-[#F8FAFC] transition-colors">
+                    <td class="py-3.5 px-5 font-bold text-[#006C7A]">${t.ticketId}</td>
+                    <td class="py-3.5 px-4 font-semibold text-[#0F172A]">${t.subject}</td>
+                    <td class="py-3.5 px-4"><span class="lozenge lozenge-default">${t.category}</span></td>
+                    <td class="py-3.5 px-4 text-[#475569]">${t.plant}</td>
+                    <td class="py-3.5 px-4">
+                      <span class="lozenge ${t.priority === 'High' ? 'lozenge-warning' : 'lozenge-inprogress'}">${t.priority}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-[#334155] font-medium">${t.assignedTo}</td>
+                    <td class="py-3.5 px-4">
+                      <span class="lozenge ${t.status === 'Resolved' ? 'lozenge-success' : 'lozenge-warning'}">${t.status}</span>
+                    </td>
+                    <td class="py-3.5 px-5 text-right text-[#64748B]">${t.createdAt}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+
+    if (typeof window !== 'undefined' && window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+
+    const raiseBtn = document.getElementById('raise-support-ticket-btn');
+    if (raiseBtn) {
+      raiseBtn.addEventListener('click', () => {
+        Modal.open({
+          title: 'Raise Plant IT / ERP Support Ticket',
+          size: 'md',
+          content: `
+            <div class="space-y-3.5 text-xs">
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Issue Subject</label>
+                <input type="text" id="new-ticket-subject" placeholder="e.g., Dock #1 Weighbridge indicator sync delay" class="w-full h-9 px-3 rounded-lg border border-[#CBD5E1]" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Category</label>
+                  <select id="new-ticket-category" class="w-full h-9 px-3 rounded-lg border border-[#CBD5E1]">
+                    <option value="Hardware & IoT">Hardware & IoT</option>
+                    <option value="Barcode & Scanners">Barcode & Scanners</option>
+                    <option value="ERP Master Data">ERP Master Data</option>
+                    <option value="Accounts & Billing">Accounts & Billing</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Priority</label>
+                  <select id="new-ticket-priority" class="w-full h-9 px-3 rounded-lg border border-[#CBD5E1]">
+                    <option value="Normal">Normal</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant Location</label>
+                <select id="new-ticket-plant" class="w-full h-9 px-3 rounded-lg border border-[#CBD5E1]">
+                  <option value="Devi Fisheries #1 — Kakinada">Devi Fisheries #1 — Kakinada</option>
+                  <option value="Devi Fisheries #2 — Bhimavaram">Devi Fisheries #2 — Bhimavaram</option>
+                  <option value="Devi Fisheries #3 — Visakhapatnam">Devi Fisheries #3 — Visakhapatnam</option>
+                </select>
+              </div>
+            </div>
+          `,
+          footerButtons: [
+            { label: 'Cancel', type: 'secondary', onClick: (m) => m.close() },
+            {
+              label: 'Submit Ticket',
+              type: 'primary',
+              onClick: (m) => {
+                const subj = document.getElementById('new-ticket-subject')?.value?.trim() || 'Plant Floor Support Request';
+                const cat = document.getElementById('new-ticket-category')?.value || 'Hardware & IoT';
+                const prio = document.getElementById('new-ticket-priority')?.value || 'Normal';
+                const plant = document.getElementById('new-ticket-plant')?.value || 'Devi Fisheries #1 — Kakinada';
+                SUPPORT_TICKETS.unshift({
+                  ticketId: `SUP-2026-${413 + SUPPORT_TICKETS.length}`,
+                  subject: subj,
+                  category: cat,
+                  plant,
+                  priority: prio,
+                  assignedTo: 'Ramesh Babu (Plant IT)',
+                  status: 'In Progress',
+                  createdAt: 'Just now'
+                });
+                m.close();
+                this.render(containerId, activeTab);
+                Toast.show('Support ticket logged with IT Helpdesk', 'success');
+              }
+            }
+          ]
+        });
+      });
+    }
+  }
+};
+
+  // Enterprise Notification Center View — Dedicated Full Page for Plant Alerts & Operational Notifications
+
+
+
+
+const NOTIFICATIONS_DATA = [
+  {
+    id: 'NOTIF-2026-091',
+    title: 'Critical Cold Chain Alert: Chamber #2 Temperature Drift (-15.8°C)',
+    message: 'Coldstore Chamber #2 recorded a 2.2°C rise above the -18.0°C threshold for 18 minutes. Maintenance & Refrigeration team notified for immediate compressor valve check.',
+    category: 'quality',
+    module: 'Cold Storage',
+    priority: 'Critical',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: '10 mins ago • 13 Oct 2026, 11:02 AM',
+    unread: true,
+    recordRef: 'CH-02 / PAL-8841',
+    targetHash: '#/coldstore/dashboard/overview'
+  },
+  {
+    id: 'NOTIF-2026-090',
+    title: 'Fresh RM Dock Arrival: RMA-2026-00348 (Vannamei 40C — 4,850 KG)',
+    message: 'Insulated reefer vehicle AP-05-TU-8821 from Godavari Coastal Aqua Farms arrived at Receiving Dock #1. Core pulp temperature verified at 1.9°C.',
+    category: 'procurement',
+    module: 'Purchase & RM',
+    priority: 'High',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: '28 mins ago • 13 Oct 2026, 10:44 AM',
+    unread: true,
+    recordRef: 'RMA-2026-00348',
+    targetHash: '#/purchase/operations/rm-arrivals'
+  },
+  {
+    id: 'NOTIF-2026-089',
+    title: 'Antibiotic ELISA Screening Passed: LOT-2026-00125',
+    message: 'Zero Nitrofurans (AOZ/AMOZ) and Chloramphenicol detected for Lot LOT-2026-00125. Cleared for IQF HLSO freezing line allocation.',
+    category: 'quality',
+    module: 'Quality Control',
+    priority: 'Normal',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: '1 hour ago • 13 Oct 2026, 10:15 AM',
+    unread: true,
+    recordRef: 'LOT-2026-00125',
+    targetHash: '#/quality/dashboard/qc-overview'
+  },
+  {
+    id: 'NOTIF-2026-088',
+    title: 'Supplier Invoice Pending Approval: BILL-2026-118 (₹ 14,82,500)',
+    message: 'Final weighment and grade reconciliation completed for Sri Venkateswara Aqua Exports. Bill requires Procurement Manager sign-off before RTGS batch release.',
+    category: 'procurement',
+    module: 'Transactions & Bills',
+    priority: 'High',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: '2 hours ago • 13 Oct 2026, 09:30 AM',
+    unread: true,
+    recordRef: 'BILL-2026-118',
+    targetHash: '#/purchase/transactions-bills/supplier-bills'
+  },
+  {
+    id: 'NOTIF-2026-087',
+    title: 'Pre-Processing Peeling Yield Above Target (84.6%)',
+    message: 'Floor Line B achieved 84.6% HLSO recovery on Vannamei 30C batch (Target: 83.0%). Incentive log updated for Morning Shift supervisors.',
+    category: 'quality',
+    module: 'Pre-Processing',
+    priority: 'Normal',
+    plant: 'Devi Fisheries #2 — Bhimavaram',
+    timestamp: '3 hours ago • 13 Oct 2026, 08:20 AM',
+    unread: true,
+    recordRef: 'BATCH-PP-409',
+    targetHash: '#/preprocessing/dashboard/floor-overview'
+  },
+  {
+    id: 'NOTIF-2026-086',
+    title: 'New Purchase Booking Confirmed: PB-2026-0912 (6,200 KG Black Tiger)',
+    message: 'Field agent Manikanta confirmed pond harvest booking at Amalapuram Cluster. Ice dispatch and 2 insulated trucks scheduled for 14:00 HRS.',
+    category: 'procurement',
+    module: 'Purchase & RM',
+    priority: 'Normal',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: '5 hours ago • 13 Oct 2026, 06:40 AM',
+    unread: false,
+    recordRef: 'PB-2026-0912',
+    targetHash: '#/purchase/operations/purchase-bookings'
+  },
+  {
+    id: 'NOTIF-2026-085',
+    title: 'Export Container Sealed & Dispatched: CONT-MAEU-992814',
+    message: '40ft High-Cube Reefer loaded with 2,200 Master Cartons (Sysco Corp USA PO #88412). E-Seal verified and departed for Visakhapatnam Port Terminal.',
+    category: 'procurement',
+    module: 'Sales & Export',
+    priority: 'Normal',
+    plant: 'Devi Fisheries #1 — Kakinada',
+    timestamp: 'Yesterday • 12 Oct 2026, 07:15 PM',
+    unread: false,
+    recordRef: 'CONT-MAEU-992814',
+    targetHash: '#/sales/dashboard/overview'
+  },
+  {
+    id: 'NOTIF-2026-084',
+    title: 'HACCP Metal Detector Calibration Completed — IQF Line #1 & #2',
+    message: 'Hourly Fe (1.5mm), Non-Fe (2.0mm), and SUS (2.5mm) test wands verified with 100% auto-reject response across all packaging conveyor lanes.',
+    category: 'quality',
+    module: 'Quality Control',
+    priority: 'Low',
+    plant: 'Devi Fisheries #2 — Bhimavaram',
+    timestamp: 'Yesterday • 12 Oct 2026, 04:50 PM',
+    unread: false,
+    recordRef: 'HACCP-CCP-04',
+    targetHash: '#/quality/dashboard/qc-overview'
+  }
+];
+
+const NotificationsView = {
+  activeTab: 'all-notifications',
+  filters: {
+    search: '',
+    priority: 'ALL',
+    module: 'ALL',
+    status: 'ALL'
+  },
+
+  getUnreadCount() {
+    return NOTIFICATIONS_DATA.filter(n => n.unread).length;
+  },
+
+  render(containerId, tabName = 'all-notifications') {
+    this.activeTab = tabName || 'all-notifications';
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const totalCount = NOTIFICATIONS_DATA.length;
+    const unreadCount = NOTIFICATIONS_DATA.filter(n => n.unread).length;
+    const criticalCount = NOTIFICATIONS_DATA.filter(n => n.priority === 'Critical' || n.priority === 'High').length;
+    const procurementCount = NOTIFICATIONS_DATA.filter(n => n.category === 'procurement').length;
+
+    const filteredList = this.getFilteredNotifications();
+
+    container.innerHTML = `
+      <div class="space-y-4">
+        <!-- KPI Summary Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Total Notifications</div>
+              <div class="text-2xl font-extrabold text-[#0F172A] mt-1">${totalCount}</div>
+              <div class="text-[11px] text-[#006C7A] font-semibold mt-1">All active plant feeds</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#F0FAFC] border border-[#B2ECF3] flex items-center justify-center text-[#006C7A]">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Unread Alerts</div>
+              <div class="text-2xl font-extrabold text-[#006C7A] mt-1">${unreadCount}</div>
+              <div class="text-[11px] text-[#64748B] font-medium mt-1">Requires supervisor review</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#E0F2FE] border border-[#7DD3FC] flex items-center justify-center text-[#0369A1]">
+              <i data-lucide="mail-warning" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">High / Critical Priority</div>
+              <div class="text-2xl font-extrabold text-[#DC2626] mt-1">${criticalCount}</div>
+              <div class="text-[11px] text-[#B45309] font-semibold mt-1">Cold chain & pending bills</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#FFE4E6] border border-[#FDA4AF] flex items-center justify-center text-[#BE123C]">
+              <i data-lucide="shield-alert" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Procurement & Arrivals</div>
+              <div class="text-2xl font-extrabold text-[#047857] mt-1">${procurementCount}</div>
+              <div class="text-[11px] text-[#065F46] font-semibold mt-1">Live dock & booking events</div>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-[#DCFCE7] border border-[#86EFAC] flex items-center justify-center text-[#047857]">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Action Bar Card -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Search Alerts</label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="notif-search-input"
+                  value="${this.filters.search}"
+                  placeholder="Search lot, arrival, chamber..."
+                  class="w-full h-9 pl-9 pr-3 text-xs rounded-lg border border-[#CBD5E1]"
+                />
+                <svg class="w-4 h-4 text-[#64748B] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Priority Level</label>
+              <select id="notif-priority-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
+                <option value="ALL" ${this.filters.priority === 'ALL' ? 'selected' : ''}>All Priorities</option>
+                <option value="Critical" ${this.filters.priority === 'Critical' ? 'selected' : ''}>Critical</option>
+                <option value="High" ${this.filters.priority === 'High' ? 'selected' : ''}>High</option>
+                <option value="Normal" ${this.filters.priority === 'Normal' ? 'selected' : ''}>Normal</option>
+                <option value="Low" ${this.filters.priority === 'Low' ? 'selected' : ''}>Low</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">ERP Module</label>
+              <select id="notif-module-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
+                <option value="ALL" ${this.filters.module === 'ALL' ? 'selected' : ''}>All Modules</option>
+                <option value="Purchase & RM" ${this.filters.module === 'Purchase & RM' ? 'selected' : ''}>Purchase & RM</option>
+                <option value="Transactions & Bills" ${this.filters.module === 'Transactions & Bills' ? 'selected' : ''}>Transactions & Bills</option>
+                <option value="Quality Control" ${this.filters.module === 'Quality Control' ? 'selected' : ''}>Quality Control</option>
+                <option value="Cold Storage" ${this.filters.module === 'Cold Storage' ? 'selected' : ''}>Cold Storage</option>
+                <option value="Pre-Processing" ${this.filters.module === 'Pre-Processing' ? 'selected' : ''}>Pre-Processing</option>
+                <option value="Sales & Export" ${this.filters.module === 'Sales & Export' ? 'selected' : ''}>Sales & Export</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">Read Status</label>
+              <select id="notif-status-filter" class="w-full h-9 px-3 text-xs rounded-lg border border-[#CBD5E1]">
+                <option value="ALL" ${this.filters.status === 'ALL' ? 'selected' : ''}>All Statuses</option>
+                <option value="UNREAD" ${this.filters.status === 'UNREAD' ? 'selected' : ''}>Unread Only</option>
+                <option value="READ" ${this.filters.status === 'READ' ? 'selected' : ''}>Read Only</option>
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button
+                type="button"
+                id="notif-reset-btn"
+                class="h-9 px-3 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-xs font-semibold text-[#334155] cursor-pointer transition-colors"
+              >
+                Reset
+              </button>
+              <button
+                type="button"
+                id="notif-mark-all-read-btn"
+                class="flex-1 h-9 px-3.5 rounded-lg btn-primary text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <i data-lucide="check-check" class="w-4 h-4"></i>
+                <span>Mark All Read</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dedicated Notification Feed List -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] shadow-xs overflow-hidden">
+          <div class="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#FAFBFC]">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#0F172A]">Showing ${filteredList.length} Notification${filteredList.length === 1 ? '' : 's'}</span>
+              <span class="lozenge lozenge-inprogress">${unreadCount} Unread</span>
+            </div>
+            <div class="text-[11px] text-[#64748B] font-medium">Real-time Plant Telemetry & Workflow Stream</div>
+          </div>
+
+          <div class="divide-y divide-[#E2E8F0]">
+            ${filteredList.length === 0 ? `
+              <div class="py-12 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-[#F0FAFC] border border-[#B2ECF3] text-[#006C7A] flex items-center justify-center mx-auto mb-3">
+                  <i data-lucide="bell-off" class="w-6 h-6"></i>
+                </div>
+                <div class="text-sm font-bold text-[#0F172A]">No matching notifications</div>
+                <p class="text-xs text-[#64748B] mt-1">Try clearing your filters or switching notification tabs above.</p>
+              </div>
+            ` : filteredList.map(item => this.renderNotificationCard(item)).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    if (typeof window !== 'undefined' && window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+
+    this.bindEvents(containerId);
+  },
+
+  getFilteredNotifications() {
+    return NOTIFICATIONS_DATA.filter(item => {
+      if (this.activeTab === 'unread-alerts' && !item.unread) return false;
+      if (this.activeTab === 'procurement-alerts' && item.category !== 'procurement') return false;
+      if (this.activeTab === 'quality-alerts' && item.category !== 'quality') return false;
+
+      if (this.filters.priority !== 'ALL' && item.priority !== this.filters.priority) return false;
+      if (this.filters.module !== 'ALL' && item.module !== this.filters.module) return false;
+      if (this.filters.status === 'UNREAD' && !item.unread) return false;
+      if (this.filters.status === 'READ' && item.unread) return false;
+
+      if (this.filters.search.trim() !== '') {
+        const q = this.filters.search.toLowerCase();
+        const match =
+          item.title.toLowerCase().includes(q) ||
+          item.message.toLowerCase().includes(q) ||
+          item.recordRef.toLowerCase().includes(q) ||
+          item.plant.toLowerCase().includes(q);
+        if (!match) return false;
+      }
+      return true;
+    });
+  },
+
+  renderNotificationCard(item) {
+    const priorityBadge = {
+      Critical: 'lozenge-danger',
+      High: 'lozenge-warning',
+      Normal: 'lozenge-inprogress',
+      Low: 'lozenge-default'
+    }[item.priority] || 'lozenge-default';
+
+    const iconMap = {
+      'Cold Storage': 'snowflake',
+      'Purchase & RM': 'truck',
+      'Quality Control': 'microscope',
+      'Transactions & Bills': 'receipt',
+      'Pre-Processing': 'layers',
+      'Sales & Export': 'ship'
+    };
+    const iconName = iconMap[item.module] || 'bell';
+
+    return `
+      <div class="p-4 sm:px-6 transition-colors ${item.unread ? 'bg-[#F0FAFC]/60 hover:bg-[#F0FAFC]' : 'bg-white hover:bg-[#F8FAFC]'} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-start gap-3.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center border ${item.unread ? 'bg-[#006C7A] text-white border-[#005662]' : 'bg-[#F8FAFC] text-[#64748B] border-[#CBD5E1]'}">
+            <i data-lucide="${iconName}" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              ${item.unread ? `<span class="inline-block w-2 h-2 rounded-full bg-[#006C7A]" title="Unread"></span>` : ''}
+              <span class="text-xs font-bold text-[#0F172A]">${item.title}</span>
+              <span class="lozenge ${priorityBadge}">${item.priority}</span>
+              <span class="lozenge lozenge-default">${item.module}</span>
+              <span class="text-[11px] font-semibold text-[#006C7A] bg-[#E0F7FA] px-2 py-0.5 rounded">${item.recordRef}</span>
+            </div>
+            <p class="text-xs text-[#475569] leading-relaxed">${item.message}</p>
+            <div class="flex flex-wrap items-center gap-3 mt-2 text-[11px] text-[#64748B]">
+              <span class="inline-flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ${item.timestamp}</span>
+              <span>•</span>
+              <span class="inline-flex items-center gap-1"><i data-lucide="building-2" class="w-3.5 h-3.5"></i> ${item.plant}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+          <button
+            type="button"
+            class="notif-toggle-read-btn px-3 py-1.5 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[11px] font-semibold text-[#334155] cursor-pointer transition-colors"
+            data-id="${item.id}"
+          >
+            ${item.unread ? 'Mark Read' : 'Mark Unread'}
+          </button>
+          <a
+            href="${item.targetHash}"
+            class="px-3 py-1.5 rounded-lg bg-[#F0FAFC] hover:bg-[#E0F7FA] border border-[#B2ECF3] text-[11px] font-bold text-[#006C7A] inline-flex items-center gap-1 transition-colors"
+          >
+            <span>Open Record</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    `;
+  },
+
+  bindEvents(containerId) {
+    const searchInput = document.getElementById('notif-search-input');
+    const prioritySel = document.getElementById('notif-priority-filter');
+    const moduleSel = document.getElementById('notif-module-filter');
+    const statusSel = document.getElementById('notif-status-filter');
+    const resetBtn = document.getElementById('notif-reset-btn');
+    const markAllBtn = document.getElementById('notif-mark-all-read-btn');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        this.filters.search = e.target.value;
+        this.render(containerId, this.activeTab);
+        const el = document.getElementById('notif-search-input');
+        if (el) {
+          el.focus();
+          el.setSelectionRange(el.value.length, el.value.length);
+        }
+      });
+    }
+
+    if (prioritySel) {
+      prioritySel.addEventListener('change', (e) => {
+        this.filters.priority = e.target.value;
+        this.render(containerId, this.activeTab);
+      });
+    }
+
+    if (moduleSel) {
+      moduleSel.addEventListener('change', (e) => {
+        this.filters.module = e.target.value;
+        this.render(containerId, this.activeTab);
+      });
+    }
+
+    if (statusSel) {
+      statusSel.addEventListener('change', (e) => {
+        this.filters.status = e.target.value;
+        this.render(containerId, this.activeTab);
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        this.filters = { search: '', priority: 'ALL', module: 'ALL', status: 'ALL' };
+        this.render(containerId, this.activeTab);
+        Toast.show('Notification filters reset', 'info');
+      });
+    }
+
+    if (markAllBtn) {
+      markAllBtn.addEventListener('click', () => {
+        NOTIFICATIONS_DATA.forEach(n => { n.unread = false; });
+        this.render(containerId, this.activeTab);
+        Header.render('header-container');
+        Toast.show('All notifications marked as read', 'success');
+      });
+    }
+
+    document.querySelectorAll('.notif-toggle-read-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const item = NOTIFICATIONS_DATA.find(n => n.id === id);
+        if (item) {
+          item.unread = !item.unread;
+          this.render(containerId, this.activeTab);
+          Header.render('header-container');
+          Toast.show(item.unread ? 'Marked as unread' : 'Marked as read', 'info');
+        }
+      });
+    });
+  }
+};
+
 
   // App Controller
   // Master Application Controller & Router for Fisheries ERP
@@ -23845,6 +24562,7 @@ const SetupView = {
 
 
 // Views
+
 
 
 
@@ -23997,7 +24715,8 @@ const App = {
 
     const resolvedHash = `#/${modObj.id}/${subObj.id}/${tabName}`;
 
-    // Render Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
+    // Render Header, Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
+    Header.render('header-container');
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
 
@@ -24068,6 +24787,22 @@ const App = {
           title: 'Master Settings & Profiles',
           subtitle: 'Plant configuration, supplier master registry, species pricing, and system parameters'
         }
+      },
+      'help': {
+        'support-tickets': {
+          title: 'Help & Support Center',
+          subtitle: '24/7 IT Helpdesk, weighbridge & barcode support tickets, and plant compliance guides'
+        },
+        'documentation': {
+          title: 'Compliance & SOP Documentation',
+          subtitle: 'Standard operating procedures, MPEDA/USFDA manuals, and module user guides'
+        }
+      },
+      'notifications': {
+        'center': {
+          title: 'Notification Center',
+          subtitle: 'Real-time operational alerts, dock arrivals, cold chain telemetry, and pending approvals'
+        }
       }
     };
 
@@ -24118,7 +24853,10 @@ const App = {
         SetupView.render(mainContainer, tabName || 'users', resolvedHash);
         break;
       case 'help':
-        HelpView.render(mainContainer, tabName || 'compliance-manual', resolvedHash);
+        HelpView.render(mainContainer, tabName || 'it-support', resolvedHash);
+        break;
+      case 'notifications':
+        NotificationsView.render(mainContainer, tabName || 'all-notifications', resolvedHash);
         break;
       default:
         PurchaseView.render(mainContainer, 'rm-dashboard', '#/purchase/dashboard/rm-dashboard');

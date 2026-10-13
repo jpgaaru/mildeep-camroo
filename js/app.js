@@ -24,6 +24,7 @@ import { SalesView } from './views/salesView.js';
 import { ReportsView } from './views/reportsView.js';
 import { SetupView } from './views/setupView.js';
 import { HelpView } from './views/helpView.js';
+import { NotificationsView } from './views/notificationsView.js';
 
 export const App = {
   init() {
@@ -165,7 +166,8 @@ export const App = {
 
     const resolvedHash = `#/${modObj.id}/${subObj.id}/${tabName}`;
 
-    // Render Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
+    // Render Header, Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
+    Header.render('header-container');
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
 
@@ -236,6 +238,22 @@ export const App = {
           title: 'Master Settings & Profiles',
           subtitle: 'Plant configuration, supplier master registry, species pricing, and system parameters'
         }
+      },
+      'help': {
+        'support-tickets': {
+          title: 'Help & Support Center',
+          subtitle: '24/7 IT Helpdesk, weighbridge & barcode support tickets, and plant compliance guides'
+        },
+        'documentation': {
+          title: 'Compliance & SOP Documentation',
+          subtitle: 'Standard operating procedures, MPEDA/USFDA manuals, and module user guides'
+        }
+      },
+      'notifications': {
+        'center': {
+          title: 'Notification Center',
+          subtitle: 'Real-time operational alerts, dock arrivals, cold chain telemetry, and pending approvals'
+        }
       }
     };
 
@@ -286,7 +304,10 @@ export const App = {
         SetupView.render(mainContainer, tabName || 'users', resolvedHash);
         break;
       case 'help':
-        HelpView.render(mainContainer, tabName || 'compliance-manual', resolvedHash);
+        HelpView.render(mainContainer, tabName || 'it-support', resolvedHash);
+        break;
+      case 'notifications':
+        NotificationsView.render(mainContainer, tabName || 'all-notifications', resolvedHash);
         break;
       default:
         PurchaseView.render(mainContainer, 'rm-dashboard', '#/purchase/dashboard/rm-dashboard');

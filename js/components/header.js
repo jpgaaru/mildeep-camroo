@@ -6,6 +6,7 @@ import { Modal } from './modal.js';
 import { TourGuide } from './tourGuide.js';
 import { Sidebar } from './sidebar.js';
 import { Accessibility } from './accessibility.js';
+import { NOTIFICATIONS_DATA } from '../views/notificationsView.js';
 
 export const Header = {
   render(containerId) {
@@ -13,11 +14,33 @@ export const Header = {
     if (!container) return;
 
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
+    const unreadCount = Array.isArray(NOTIFICATIONS_DATA)
+      ? NOTIFICATIONS_DATA.filter(n => n.unread).length
+      : 5;
+    const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
       <header class="bg-white h-14 px-6 flex items-center justify-end select-none rounded-2xl">
-        <!-- Right: Welcome Manikanta & Profile -->
-        <div class="relative flex items-center gap-3">
+        <!-- Right: Dedicated Notification Page Button + Welcome Manikanta & Profile -->
+        <div class="relative flex items-center gap-3.5">
+          <a
+            href="#/notifications/center/all-notifications"
+            id="header-notifications-page-btn"
+            class="relative w-9 h-9 rounded-full border ${isNotificationsActive ? 'border-[#006C7A] bg-[#F0FAFC] text-[#006C7A]' : 'border-[#CBD5E1] bg-[#F8FAFC] text-[#475569]'} hover:text-[#006C7A] hover:border-[#006C7A] hover:bg-[#F0FAFC] flex items-center justify-center transition-all cursor-pointer"
+            title="Open Notification Center (${unreadCount} Unread)"
+          >
+            <svg class="w-4.5 h-4.5" style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+            ${unreadCount > 0 ? `
+              <span class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#DC2626] text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-white leading-none">
+                ${unreadCount}
+              </span>
+            ` : ''}
+          </a>
+
+          <div class="h-6 w-[1px] bg-[#E2E8F0]"></div>
+
           <button id="user-menu-btn" class="flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-right outline-none">
             <div class="text-right">
               <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, ${ERP_DATA.currentUser.name}</div>
