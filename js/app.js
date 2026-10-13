@@ -319,17 +319,14 @@ export const App = {
           <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
             <!-- Sticky Top Navigation & Tabs Area -->
             <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC] pt-3 mr-3 pb-1 space-y-3">
-              <!-- Card 1: Top Header & Breadcrumbs Card -->
+              <!-- Card 1: Top Header Card -->
               <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
-                <div id="header-container" class="bg-white rounded-t-2xl"></div>
-                <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
-                <div class="px-6 py-2.5 bg-white border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
-                  <div id="breadcrumbs-container"></div>
-                </div>
+                <div id="header-container" class="bg-white rounded-2xl"></div>
               </div>
 
-              <!-- Card 2: Section Header & Underline Tabs Menu (Sticky) -->
-              <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-5 pb-0 shadow-xs">
+              <!-- Card 2: Breadcrumbs, Section Header & Underline Tabs Menu (Sticky) -->
+              <div id="sticky-tabs-header-card" class="rounded-2xl border border-[#E2E8F0] bg-white px-6 pt-4 pb-0 shadow-xs">
+                <div id="breadcrumbs-container" class="mb-2"></div>
                 <div id="section-title-container" class="mb-3"></div>
                 <div id="global-tab-bar-container"></div>
               </div>

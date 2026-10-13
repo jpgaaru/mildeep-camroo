@@ -15,28 +15,13 @@ export const Header = {
     const isCollapsed = localStorage.getItem('dfl_sidebar_collapsed') === 'true';
 
     container.innerHTML = `
-      <header class="bg-white border-b border-[#E2E8F0] h-16 px-6 flex items-center justify-between select-none rounded-t-2xl">
-        <!-- Left: AquaPulse DS Logo Link Pill -->
-        <div class="flex items-center gap-3">
-          <a 
-            href="/designsystem" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#006C7A] hover:bg-[#005662] text-white rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer"
-            title="Open AquaPulse Design System & Interactive Telemetry"
-          >
-            <svg class="w-4 h-4 text-[#4FCFE0]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-            <span>AquaPulse DS</span>
-            <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-          </a>
-        </div>
-
-        <!-- Right: Welcome Admin & Profile -->
+      <header class="bg-white h-14 px-6 flex items-center justify-end select-none rounded-2xl">
+        <!-- Right: Welcome Manikanta & Profile -->
         <div class="relative flex items-center gap-3">
           <button id="user-menu-btn" class="flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-right outline-none">
-            <div class="hidden sm:block text-right">
-              <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, Admin</div>
-              <div class="text-[11px] text-[#64748B] leading-tight font-medium">Procurement Manager</div>
+            <div class="text-right">
+              <div class="text-xs font-bold text-[#0F172A] leading-tight">Welcome, ${ERP_DATA.currentUser.name}</div>
+              <div class="text-[11px] text-[#64748B] leading-tight font-medium">${ERP_DATA.currentUser.role}</div>
             </div>
             <div class="w-9 h-9 rounded-full border border-[#CBD5E1] bg-[#F8FAFC] flex items-center justify-center text-[#64748B] hover:text-[#006C7A] hover:border-[#006C7A] transition-all">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>

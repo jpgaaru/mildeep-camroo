@@ -19,9 +19,9 @@ export const ERP_DATA = {
 
   currentUser: {
     id: "ADM-001",
-    name: "Admin",
-    role: "Admin",
-    email: "admin@devifisheries.com",
+    name: "Manikanta",
+    role: "Procurement Manager",
+    email: "manikanta@devifisheries.com",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
     roles: [
       "Admin"
