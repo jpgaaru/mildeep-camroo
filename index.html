@@ -130,9 +130,13 @@
       padding-right: 36px !important;
       transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
     }
-    select:focus {
+    select:focus,
+    select.aquapulse-select-open {
       border-color: #006C7A !important;
       box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.16) !important;
+    }
+    select.aquapulse-select-open {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23006C7A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m18 15-6-6-6 6'/%3E%3C/svg%3E") !important;
     }
 
     /* AquaPulse Deep Teal Calendar UI */

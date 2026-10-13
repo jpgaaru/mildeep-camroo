@@ -10,6 +10,7 @@ import { TabBar } from './components/tabBar.js';
 import { TourGuide } from './components/tourGuide.js';
 import { Accessibility } from './components/accessibility.js';
 import { CalendarPicker } from './components/calendarPicker.js';
+import { SelectPicker } from './components/selectPicker.js';
 
 // Views
 import { LoginView } from './views/loginView.js';
@@ -28,6 +29,7 @@ export const App = {
   init() {
     Accessibility.init();
     CalendarPicker.init();
+    SelectPicker.init();
     if (localStorage.getItem('dfl_theme') === 'dark') {
       document.documentElement.classList.add('theme-dark');
     }

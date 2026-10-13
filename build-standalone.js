@@ -26,6 +26,7 @@ const skeleton = fs.readFileSync(path.join(__dirname, 'js', 'components', 'skele
 const tourGuide = fs.readFileSync(path.join(__dirname, 'js', 'components', 'tourGuide.js'), 'utf-8');
 const accessibility = fs.readFileSync(path.join(__dirname, 'js', 'components', 'accessibility.js'), 'utf-8');
 const calendarPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'calendarPicker.js'), 'utf-8');
+const selectPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'selectPicker.js'), 'utf-8');
 
 const loginView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'loginView.js'), 'utf-8');
 const purchaseView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchaseView.js'), 'utf-8');
@@ -71,6 +72,7 @@ const combinedJS = `
   ${cleanCode(tourGuide)}
   ${cleanCode(accessibility)}
   ${cleanCode(calendarPicker)}
+  ${cleanCode(selectPicker)}
 
   // Views
   ${cleanCode(loginView)}
