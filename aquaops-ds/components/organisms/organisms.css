@@ -17,10 +17,10 @@
 }
 .f-sidebar {
   width: 270px;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: #002D34;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 30px -4px rgba(0, 20, 24, 0.4), 0 4px 12px -2px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   overflow: visible;
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   gap: 10px;
   position: relative;
   min-height: 66px;
@@ -68,29 +68,29 @@
   overflow: hidden;
   transition: opacity 0.2s ease;
 }
-.f-sb-title { font-size: 14px; font-weight: 700; color: #0F172A; white-space: nowrap; line-height: 1.2; }
-.f-sb-subtitle { display: block; font-size: 10px; color: #006C7A; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; margin-top: 1px; }
+.f-sb-title { font-size: 14.5px; font-weight: 700; color: #FFFFFF; white-space: nowrap; line-height: 1.2; }
+.f-sb-subtitle { display: block; font-size: 10px; color: #4FCFE0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; margin-top: 2px; }
 
 .f-sb-toggle {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid #CBD5E1;
-  background: #FFFFFF;
-  color: #475569;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #003B44;
+  color: #B2D4D8;
   display: grid;
   place-items: center;
   cursor: pointer;
   flex-shrink: 0;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
   outline: none;
 }
 .f-sb-toggle:focus { outline: none; }
 .f-sb-toggle:hover {
-  background: #F0FAFC;
-  color: #006C7A;
-  border-color: #84DFEB;
+  background: #004D59;
+  color: #FFFFFF;
+  border-color: #4FCFE0;
 }
 .f-sidebar.collapsed .f-sb-header {
   padding: 14px 8px;
@@ -137,17 +137,17 @@
 .f-sb-flyout-title {
   font-size: 11px;
   font-weight: 700;
-  color: #0F172A;
+  color: #FFFFFF;
   padding: 4px 8px 6px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 4px;
 }
 .f-sb-sec {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #64748B;
+  color: #7AA1A8;
   padding: 12px 12px 4px;
   white-space: nowrap;
 }
@@ -160,7 +160,7 @@
   border-radius: 12px;
   font-size: 13px;
   font-weight: 600;
-  color: #334155;
+  color: #CBD5E1;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.15s ease;
@@ -169,19 +169,19 @@
   outline: none;
 }
 .f-sb-link:focus { outline: none; }
-.f-sb-link:focus-visible { outline: 2px solid #006C7A; outline-offset: 1px; }
-.f-sb-link svg, .f-sb-link i { width: 17px; height: 17px; flex-shrink: 0; color: #64748B; transition: color 0.15s ease; }
-.f-sb-link:hover { background: #F1F5F9; color: #0F172A; }
-.f-sb-link:hover svg, .f-sb-link:hover i { color: #0F172A; }
-.f-sb-link.active { background: #F0FAFC; color: #006C7A; font-weight: 700; border: 1px solid #B2ECF3; }
-.f-sb-link.active svg, .f-sb-link.active i { color: #006C7A; }
+.f-sb-link:focus-visible { outline: 2px solid #4FCFE0; outline-offset: 1px; }
+.f-sb-link svg, .f-sb-link i { width: 17px; height: 17px; flex-shrink: 0; color: #8BAAB0; transition: color 0.15s ease; }
+.f-sb-link:hover { background: rgba(255, 255, 255, 0.08); color: #FFFFFF; }
+.f-sb-link:hover svg, .f-sb-link:hover i { color: #4FCFE0; }
+.f-sb-link.active { background: #00454E; color: #FFFFFF; font-weight: 700; border: 1px solid rgba(79, 207, 224, 0.35); }
+.f-sb-link.active svg, .f-sb-link.active i { color: #4FCFE0; }
 .f-sb-badge {
   margin-left: auto;
   font-size: 11px;
   font-weight: 700;
-  background: #F0FAFC;
-  color: #006C7A;
-  border: 1px solid #B2ECF3;
+  background: rgba(79, 207, 224, 0.18);
+  color: #4FCFE0;
+  border: 1px solid rgba(79, 207, 224, 0.3);
   padding: 1px 7px;
   border-radius: 9999px;
 }
@@ -195,7 +195,7 @@
   border-radius: 12px;
   font-size: 13px;
   font-weight: 600;
-  color: #334155;
+  color: #CBD5E1;
   cursor: pointer;
   border: none;
   background: transparent;
@@ -206,33 +206,33 @@
   outline: none;
 }
 .f-sb-grp-btn:focus { outline: none; }
-.f-sb-grp-btn:focus-visible { outline: 2px solid #006C7A; outline-offset: 1px; }
+.f-sb-grp-btn:focus-visible { outline: 2px solid #4FCFE0; outline-offset: 1px; }
 .f-sb-grp-btn svg:first-child, .f-sb-grp-btn i:first-child {
   width: 17px;
   height: 17px;
   flex-shrink: 0;
-  color: #64748B;
+  color: #8BAAB0;
   transition: color 0.15s ease;
 }
-.f-sb-grp-btn:hover { background: #F1F5F9; color: #0F172A; }
-.f-sb-grp-btn:hover svg:first-child, .f-sb-grp-btn:hover i:first-child { color: #0F172A; }
+.f-sb-grp-btn:hover { background: rgba(255, 255, 255, 0.08); color: #FFFFFF; }
+.f-sb-grp-btn:hover svg:first-child, .f-sb-grp-btn:hover i:first-child { color: #4FCFE0; }
 .f-sb-grp.open .f-sb-grp-btn {
-  color: #0F172A;
+  color: #FFFFFF;
   font-weight: 700;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   border: none;
 }
 .f-sb-grp.open .f-sb-grp-btn svg:first-child, .f-sb-grp.open .f-sb-grp-btn i:first-child {
-  color: #0F172A;
+  color: #4FCFE0;
 }
 .f-sb-chev {
   margin-left: auto;
   width: 14px;
   height: 14px;
   transition: transform 0.2s ease;
-  color: #94A3B8;
+  color: #6C949B;
 }
-.f-sb-grp.open .f-sb-chev { transform: rotate(180deg); color: #006C7A; }
+.f-sb-grp.open .f-sb-chev { transform: rotate(180deg); color: #4FCFE0; }
 
 .f-sb-sub {
   display: none;
@@ -247,7 +247,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #64748B;
+  color: #8BAAB0;
   border-radius: 10px;
   text-decoration: none;
   transition: all 0.15s ease;
@@ -259,11 +259,11 @@
   background: transparent;
 }
 .f-sb-sub-link:focus { outline: none; }
-.f-sb-sub-link:hover { color: #0F172A; background: #F8FAFC; }
+.f-sb-sub-link:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.06); }
 .f-sb-sub-link.active {
-  color: #005662;
+  color: #FFFFFF;
   font-weight: 800;
-  background: #E8F7FA;
+  background: #004650;
   border: none;
 }
 .f-sb-sub-link::before {
@@ -271,14 +271,14 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #CBD5E1;
+  background: #004D56;
   transition: all 0.15s ease;
   flex-shrink: 0;
 }
-.f-sb-sub-link:hover::before { background: #94A3B8; }
+.f-sb-sub-link:hover::before { background: #4FCFE0; }
 .f-sb-sub-link.active::before {
-  background: #00A4B7;
-  box-shadow: none;
+  background: #4FCFE0;
+  box-shadow: 0 0 8px rgba(79, 207, 224, 0.7);
 }
 
 .f-sidebar.collapsed .f-sb-title,
@@ -298,10 +298,10 @@
   position: absolute;
   left: calc(100% + 8px);
   top: 0;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: #002D34;
+  border: 1px solid #004752;
   border-radius: 14px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 28px -4px rgba(0, 15, 20, 0.6);
   padding: 8px;
   min-width: 200px;
   z-index: 90;
@@ -309,14 +309,21 @@
 
 .f-sb-footer {
   padding: 12px 14px;
-  border-top: 1px solid #E2E8F0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #FAFBFC;
+  background: #00242A;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  transition: padding 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.f-sb-footer:hover {
+  background: #00282E;
+}
+.f-sb-footer.active {
+  background: #00333B;
+  border-top-color: rgba(79, 207, 224, 0.3);
 }
 .f-sb-user-text {
   display: flex;
@@ -326,13 +333,13 @@
 .f-sb-user-name {
   font-size: 13px;
   font-weight: 700;
-  color: #0F172A;
+  color: #FFFFFF;
   white-space: nowrap;
 }
 .f-sb-user-role {
   font-size: 11px;
   font-weight: 500;
-  color: #64748B;
+  color: #8BAAB0;
   white-space: nowrap;
 }
 .f-sidebar.collapsed .f-sb-footer {

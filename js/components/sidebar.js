@@ -551,7 +551,7 @@ export const Sidebar = {
         <!-- Floating Sidebar Header with Devi Fisheries Brand Logo & Edge Toggle -->
         <div class="f-sb-header">
           <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — Enterprise ERP">
-            <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 6px rgba(0, 108, 122, 0.2);" />
+            <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0, 0, 0, 0.35);border:1.5px solid rgba(255, 255, 255, 0.16);" />
             <div class="f-sb-brand-info">
               <div class="f-sb-title">Devi Fisheries</div>
               <div class="f-sb-subtitle">Enterprise ERP</div>
@@ -575,14 +575,14 @@ export const Sidebar = {
         </div>
 
         <!-- Floating Sidebar Footer: Help & Support Desk -->
-        <a href="#/help/support-tickets/it-support" class="f-sb-footer ${this.activeModuleId === 'help' ? 'bg-[#F0FAFC]' : ''}" style="text-decoration:none;cursor:pointer;" title="Help & Support — 24/7 IT & Plant Desk">
-          <div style="width:36px;height:36px;border-radius:10px;background:#E0F7FA;border:1px solid #B2ECF3;display:grid;place-items:center;flex-shrink:0;color:#006C7A;">
-            <i data-lucide="life-buoy" style="width:18px;height:18px;stroke:#006C7A;"></i>
+        <a href="#/help/support-tickets/it-support" class="f-sb-footer ${this.activeModuleId === 'help' ? 'active' : ''}" style="text-decoration:none;cursor:pointer;" title="Help & Support — 24/7 IT & Plant Desk">
+          <div style="width:36px;height:36px;border-radius:10px;background:#003B44;border:1px solid rgba(79, 207, 224, 0.25);display:grid;place-items:center;flex-shrink:0;color:#4FCFE0;">
+            <i data-lucide="life-buoy" style="width:18px;height:18px;stroke:#4FCFE0;"></i>
           </div>
           <div class="f-sb-user-text">
             <span class="f-sb-user-name" style="display:flex;align-items:center;gap:6px;">
               Help & Support
-              <span style="width:7px;height:7px;border-radius:9999px;background:#10B981;display:inline-block;" title="Support Desk Online"></span>
+              <span style="width:7px;height:7px;border-radius:9999px;background:#10B981;box-shadow:0 0 6px rgba(16, 185, 129, 0.7);display:inline-block;" title="Support Desk Online"></span>
             </span>
             <span class="f-sb-user-role">24/7 IT & Plant Desk</span>
           </div>

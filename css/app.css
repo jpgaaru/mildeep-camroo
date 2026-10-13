@@ -1311,4 +1311,144 @@ html.a11y-underline-links .cursor-pointer {
   text-underline-offset: 3px !important;
 }
 
+/* ==========================================================
+   Devi Fisheries ERP — Dark Oceanic Maritime Sidebar (#002D34)
+   ========================================================== */
+#erp-sidebar.f-sidebar {
+  background: #002D34 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px -4px rgba(0, 20, 24, 0.4), 0 4px 12px -2px rgba(0, 0, 0, 0.25) !important;
+}
+
+#erp-sidebar .f-sb-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#erp-sidebar .f-sb-title {
+  color: #FFFFFF !important;
+}
+
+#erp-sidebar .f-sb-subtitle {
+  color: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-toggle {
+  background: #003B44 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #B2D4D8 !important;
+}
+
+#erp-sidebar .f-sb-toggle:hover {
+  background: #004D59 !important;
+  color: #FFFFFF !important;
+  border-color: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-sec {
+  color: #7AA1A8 !important;
+}
+
+#erp-sidebar .f-sb-link,
+#erp-sidebar .f-sb-grp-btn {
+  color: #CBD5E1 !important;
+}
+
+#erp-sidebar .f-sb-link svg,
+#erp-sidebar .f-sb-link i,
+#erp-sidebar .f-sb-grp-btn svg:first-child,
+#erp-sidebar .f-sb-grp-btn i:first-child {
+  color: #8BAAB0 !important;
+  stroke: #8BAAB0 !important;
+}
+
+#erp-sidebar .f-sb-link:hover,
+#erp-sidebar .f-sb-grp-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+}
+
+#erp-sidebar .f-sb-link:hover svg,
+#erp-sidebar .f-sb-link:hover i,
+#erp-sidebar .f-sb-grp-btn:hover svg:first-child,
+#erp-sidebar .f-sb-grp-btn:hover i:first-child {
+  color: #4FCFE0 !important;
+  stroke: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-grp.open .f-sb-grp-btn {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+#erp-sidebar .f-sb-grp.open .f-sb-grp-btn svg:first-child,
+#erp-sidebar .f-sb-grp.open .f-sb-grp-btn i:first-child {
+  color: #4FCFE0 !important;
+  stroke: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-chev {
+  color: #6C949B !important;
+}
+
+#erp-sidebar .f-sb-grp.open .f-sb-chev {
+  color: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-link.active {
+  background: #00454E !important;
+  border: 1px solid rgba(79, 207, 224, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
+#erp-sidebar .f-sb-link.active svg,
+#erp-sidebar .f-sb-link.active i {
+  color: #4FCFE0 !important;
+  stroke: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-sub-link {
+  color: #8BAAB0 !important;
+}
+
+#erp-sidebar .f-sb-sub-link:hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+#erp-sidebar .f-sb-sub-link.active {
+  background: #004650 !important;
+  color: #FFFFFF !important;
+}
+
+#erp-sidebar .f-sb-sub-link::before {
+  background: #004D56 !important;
+}
+
+#erp-sidebar .f-sb-sub-link:hover::before {
+  background: #4FCFE0 !important;
+}
+
+#erp-sidebar .f-sb-sub-link.active::before {
+  background: #4FCFE0 !important;
+  box-shadow: 0 0 8px rgba(79, 207, 224, 0.7) !important;
+}
+
+#erp-sidebar .f-sb-footer {
+  background: #00242A !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#erp-sidebar .f-sb-footer:hover {
+  background: #00282E !important;
+}
+
+#erp-sidebar .f-sb-user-name {
+  color: #FFFFFF !important;
+}
+
+#erp-sidebar .f-sb-user-role {
+  color: #8BAAB0 !important;
+}
+
+
 
