@@ -50,39 +50,6 @@
   </nav>
 
   <!-- ========================================================
-       COMPONENT INSPECTOR CONTROLS & REACT (TSX) CODE TOOLBAR
-       ======================================================== -->
-  <div class="ds-view-bar" id="dsViewBar">
-    <div class="ds-view-bar-left">
-      <div class="ds-view-title">
-        <i data-lucide="code-2"></i>
-        <span>Component Inspector &amp; React (TSX) Code Portal</span>
-      </div>
-      <div class="ds-mode-switcher">
-        <button type="button" class="ds-mode-btn active" data-mode="split">
-          <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-          <span>Preview &amp; Code</span>
-        </button>
-        <button type="button" class="ds-mode-btn" data-mode="preview">
-          <i data-lucide="eye" style="width:13px;height:13px"></i>
-          <span>Preview Only</span>
-        </button>
-        <button type="button" class="ds-mode-btn" data-mode="code">
-          <i data-lucide="terminal" style="width:13px;height:13px"></i>
-          <span>Code Only</span>
-        </button>
-      </div>
-    </div>
-    <div class="ds-view-bar-right">
-      <div class="ds-search-box">
-        <i data-lucide="search"></i>
-        <input type="text" id="dsCompSearch" class="ds-search-input" placeholder="Search components & code..." />
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ========================================================
        STAGE 1 · ATOMS
        ======================================================== -->
   <section class="stage-section" id="stage1">
@@ -97,39 +64,7 @@
         <p class="spec-desc">California Sunset Teal scale with verified contrast ratios. Tints for subtle fills, base anchors for brand recognition, and deep shades for AAA text contrast.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Color Tokens">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Color Tokens</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Color Tokens React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="swatches">
+        <div class="swatches">
           <div class="sw-card"><i style="background:#f0fafc"></i><span>050</span><div class="hex">#f0fafc</div><span class="wcag-badge wcag-aa">Tint</span></div>
           <div class="sw-card"><i style="background:#d8f4f8"></i><span>100</span><div class="hex">#d8f4f8</div><span class="wcag-badge wcag-aa">Tint</span></div>
           <div class="sw-card"><i style="background:#b2ecf3"></i><span>200</span><div class="hex">#b2ecf3</div><span class="wcag-badge wcag-aa">Focus</span></div>
@@ -147,45 +82,7 @@
           <div class="sw-card"><i style="background:#ffffff"></i><span>White</span><div class="hex">#ffffff</div><span class="wcag-badge wcag-aaa">Canvas</span></div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/tokens/colors.config.ts</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="cmt">// tailwind.config.ts / tokens.ts</span>
-<span class="cmt">// AquaPulse WCAG 2.1 Calibrated California Sunset Teal Scale</span>
-<span class="kwd">export</span> <span class="kwd">const</span> aquaPulseColors = {
-  teal: {
-    50: &#x27;#f0fafc&#x27;,  <span class="cmt">// Subtle Tint</span>
-    100: &#x27;#d8f4f8&#x27;, <span class="cmt">// Soft Tint</span>
-    200: &#x27;#b2ecf3&#x27;, <span class="cmt">// Focus Ring</span>
-    300: &#x27;#84dfeb&#x27;, <span class="cmt">// Tone</span>
-    400: &#x27;#4fcfe0&#x27;, <span class="cmt">// Accent Tone</span>
-    500: &#x27;#1abdd2&#x27;, <span class="cmt">// Hover State</span>
-    600: &#x27;#00a4b7&#x27;, <span class="cmt">// Base Brand Anchor</span>
-    700: &#x27;#008292&#x27;, <span class="cmt">// AA compliant text on white</span>
-    800: &#x27;#006c7a&#x27;, <span class="cmt">// AAA compliant text (6.13:1) on white</span>
-    900: &#x27;#005662&#x27;, <span class="cmt">// Deep Shade</span>
-    990: &#x27;#002d34&#x27;, <span class="cmt">// Dark Navy/Teal Sidebar Surface (#002d34)</span>
-  },
-  neutral: {
-    black: &#x27;#000000&#x27;,
-    ink: &#x27;#111113&#x27;,
-    muted: &#x27;#6e6e73&#x27;,
-    soft: &#x27;#f5f5f7&#x27;,
-    canvas: &#x27;#f8f9fb&#x27;,
-    white: &#x27;#ffffff&#x27;,
-  },
-  semantic: {
-    success: { bg: &#x27;#eafaf1&#x27;, text: &#x27;#056a38&#x27;, border: &#x27;#a8e7c3&#x27; },
-    warning: { bg: &#x27;#fff9e6&#x27;, text: &#x27;#824d00&#x27;, border: &#x27;#f7da94&#x27; },
-    danger:  { bg: &#x27;#feeff1&#x27;, text: &#x27;#b5152b&#x27;, border: &#x27;#f9b0be&#x27; },
-  }
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Typography -->
     <div class="spec-grid">
@@ -194,39 +91,7 @@
         <p class="spec-desc">Noto Sans fluid type scale. High legibility, tight tracking on headings, tabular figures for all metric readouts.</p>
       </div>
       <div class="spec-content type-table">
-        <div class="ds-comp-box split-view" data-comp-name="Typography Spec">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Typography Spec</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Typography Spec React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="type-row">
+        <div class="type-row">
           <div class="type-row-meta">Display / Hero (2.90rem – 4.25rem)</div>
           <div style="font-size:var(--t-display);font-weight:800;letter-spacing:-0.035em;line-height:1.02">Harvest Matrix 98%</div>
         </div>
@@ -251,41 +116,7 @@
           <div style="font-size:var(--t-md);font-weight:700;font-variant-numeric:tabular-nums;color:var(--black)">12,450.86 kg · DO: 6.82 mg/L · Salinity: 18 ppt</div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/tokens/typography.ts</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="cmt">// Noto Sans Fluid Typography &amp; Tabular Figure Primitives</span>
-<span class="kwd">export</span> <span class="kwd">const</span> Display: React.FC&lt;{ children: React.ReactNode; className?: string }&gt; = ({ children, className = &#x27;&#x27; }) =&gt; (
-  &lt;h1 className={<span class="str">`text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-none ${className}`</span>}&gt;
-    {children}
-  &lt;/h1&gt;
-);
-
-<span class="kwd">export</span> <span class="kwd">const</span> Heading: React.FC&lt;{ level?: 1 | 2 | 3; children: React.ReactNode }&gt; = ({ level = 1, children }) =&gt; {
-  <span class="kwd">const</span> styles = {
-    1: &#x27;text-2xl md:text-3xl font-bold tracking-tight text-slate-900&#x27;,
-    2: &#x27;text-xl md:text-2xl font-bold tracking-tight text-slate-900&#x27;,
-    3: &#x27;text-lg font-bold text-slate-900&#x27;,
-  }[level];
-  <span class="kwd">return</span> &lt;div className={styles}&gt;{children}&lt;/div&gt;;
-};
-
-<span class="kwd">export</span> <span class="kwd">const</span> TabularMetric: React.FC&lt;{ value: string | number; unit?: string; label?: string }&gt; = ({ value, unit, label }) =&gt; (
-  &lt;div className=<span class="str">&quot;flex flex-col&quot;</span>&gt;
-    {label &amp;&amp; &lt;span className=<span class="str">&quot;text-xs font-semibold text-slate-500 uppercase tracking-wider&quot;</span>&gt;{label}&lt;/span&gt;}
-    &lt;span className=<span class="str">&quot;font-mono font-bold text-lg md:text-xl text-slate-900 tabular-nums&quot;</span>&gt;
-      {value} {unit &amp;&amp; &lt;span className=<span class="str">&quot;text-xs font-sans text-slate-500 font-normal&quot;</span>&gt;{unit}&lt;/span&gt;}
-    &lt;/span&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Icons -->
     <div class="spec-grid">
@@ -294,39 +125,7 @@
         <p class="spec-desc">Lucide 24px grid, 1.75 stroke weight. Teal hover state.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Iconography">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Iconography</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Iconography React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="icon-grid">
+        <div class="icon-grid">
           <div class="ic-unit"><i data-lucide="home"></i><span>home</span></div>
           <div class="ic-unit"><i data-lucide="layout-dashboard"></i><span>dashboard</span></div>
           <div class="ic-unit"><i data-lucide="droplets"></i><span>ponds</span></div>
@@ -344,32 +143,7 @@
           <div class="ic-unit"><i data-lucide="filter"></i><span>filter</span></div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/atoms/Icons.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> * <span class="kwd">as</span> LucideIcons <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">interface</span> IconProps extends LucideIcons.LucideProps {
-  name: keyof typeof LucideIcons;
-  size?: number;
-  interactive?: boolean;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> AquaIcon: React.FC<span class="tag">&lt;IconProps</span>&gt; = ({ name, size = 20, interactive = <span class="kwd">true</span>, className = &#x27;&#x27;, ...props }) =&gt; {
-  <span class="kwd">const</span> IconComponent = (LucideIcons[name] <span class="kwd">as</span> React.ElementType) || LucideIcons.HelpCircle;
-  <span class="kwd">return</span> (
-    &lt;span className={<span class="str">`inline-flex items-center justify-center transition-colors duration-150 ${interactive ? &#x27;text-slate-700 hover:text-[#006C7A] cursor-pointer&#x27; : &#x27;text-slate-600&#x27;} ${className}`</span>}&gt;
-      <span class="tag">&lt;IconComponent</span> size={size} strokeWidth={1.75} {...props} /&gt;
-    &lt;/span&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Buttons with Full States & WCAG Hierarchy -->
     <div class="spec-grid">
@@ -378,39 +152,7 @@
         <p class="spec-desc">Optimized WCAG contrast hierarchy. Pill geometry, active depression, and clear visual state distinctions.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Button System">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Button System</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Button System React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div>
+        <div>
           <div class="category-label">Variants (WCAG Contrast Calibrated)</div>
           <div class="line-row">
             <button class="btn btn-primary" title="Deep Teal 800 #006c7a with White text (6.13:1 AAA)"><i data-lucide="check"></i>Primary (Deep Teal 800 · White Text · 6.13:1)</button>
@@ -441,61 +183,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/atoms/Button.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Loader2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> ButtonProps extends React.ButtonHTMLAttributes<span class="tag">&lt;HTMLButtonElement</span>&gt; {
-  variant?: &#x27;primary&#x27; | &#x27;tealLight&#x27; | &#x27;dark&#x27; | &#x27;secondary&#x27; | &#x27;ghost&#x27; | &#x27;danger&#x27;;
-  size?: &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
-  loading?: boolean;
-  icon?: React.ReactNode;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> Button: React.FC<span class="tag">&lt;ButtonProps</span>&gt; = ({
-  variant = &#x27;primary&#x27;,
-  size = &#x27;md&#x27;,
-  loading = <span class="kwd">false</span>,
-  icon,
-  children,
-  disabled,
-  className = &#x27;&#x27;,
-  ...props
-}) =&gt; {
-  <span class="kwd">const</span> base = &#x27;inline-flex items-center justify-center font-bold rounded-full transition-all duration-150 select-none active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer&#x27;;
-  
-  <span class="kwd">const</span> sizes = {
-    sm: &#x27;h-[38px] px-4 text-xs gap-1.5&#x27;,
-    md: &#x27;h-[48px] px-6 text-sm gap-2&#x27;,
-    lg: &#x27;h-[56px] px-8 text-base gap-2.5&#x27;,
-  }[size];
-
-  <span class="kwd">const</span> variants = {
-    <span class="cmt">// Deep Teal 800 (AAA Contrast 6.13:1 with white text)</span>
-    primary: &#x27;bg-[#006C7A] hover:bg-[#005662] text-white shadow-sm hover:shadow&#x27;,
-    <span class="cmt">// Anchor Teal 600 with crisp black text</span>
-    tealLight: &#x27;bg-[#00A4B7] hover:bg-[#1ABDD2] text-black shadow-sm&#x27;,
-    dark: &#x27;bg-[#000000] hover:bg-[#111113] text-white&#x27;,
-    secondary: &#x27;bg-white hover:bg-slate-50 text-[#006C7A] border border-[#CBD5E1]&#x27;,
-    ghost: &#x27;bg-transparent hover:bg-slate-100 text-slate-700&#x27;,
-    danger: &#x27;bg-[#B5152B] hover:bg-[#8F1022] text-white shadow-sm&#x27;,
-  }[variant];
-
-  <span class="kwd">return</span> (
-    &lt;button className={<span class="str">`${base} ${sizes} ${variants} ${className}`</span>} disabled={disabled || loading} {...props}&gt;
-      {loading ? <span class="tag">&lt;Loader2</span> className=<span class="str">&quot;w-4 h-4 animate-spin&quot;</span> /&gt; : icon}
-      &lt;span&gt;{children}&lt;/span&gt;
-    &lt;/button&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Avatars (Fixed Aspect Ratio, Clean Circular, High-Res Photos) -->
     <div class="spec-grid">
@@ -504,39 +192,7 @@
         <p class="spec-desc">Perfect 1:1 circular avatars, natural photo framing, presence badges, and clean overlapping team stacks.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Avatars & Presence">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Avatars & Presence</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Avatars & Presence React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div>
+        <div>
           <div class="category-label">Photo Avatars with Online Status</div>
           <div class="av-wrap">
             <div class="av lg">
@@ -579,59 +235,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/atoms/Avatar.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> AvatarProps {
-  src?: string;
-  name?: string;
-  size?: &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
-  online?: boolean;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> Avatar: React.FC<span class="tag">&lt;AvatarProps</span>&gt; = ({ src, name = &#x27;User&#x27;, size = &#x27;md&#x27;, online = <span class="kwd">false</span> }) =&gt; {
-  <span class="kwd">const</span> sizes = {
-    sm: &#x27;w-8 h-8 text-xs&#x27;,
-    md: &#x27;w-10 h-10 text-sm&#x27;,
-    lg: &#x27;w-14 h-14 text-base&#x27;,
-  }[size];
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;relative inline-block select-none&quot;</span>&gt;
-      {src ? (
-        &lt;img src={src} alt={name} className={<span class="str">`${sizes} rounded-full object-cover ring-2 ring-white shadow-xs`</span>} /&gt;
-      ) : (
-        &lt;div className={<span class="str">`${sizes} rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center ring-2 ring-white shadow-xs`</span>}&gt;
-          {name.slice(0, 2).toUpperCase()}
-        &lt;/div&gt;
-      )}
-      {online &amp;&amp; (
-        &lt;span className=<span class="str">&quot;absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#10B981] ring-2 ring-white shadow-xs&quot;</span> /&gt;
-      )}
-    &lt;/div&gt;
-  );
-};
-
-<span class="kwd">export</span> <span class="kwd">const</span> AvatarStack: React.FC&lt;{ users: { src?: string; name: string }[]; max?: number }&gt; = ({ users = [], max = 4 }) =&gt; (
-  &lt;div className=<span class="str">&quot;flex -space-x-2.5 overflow-hidden items-center&quot;</span>&gt;
-    {users.slice(0, max).map((u, i) =&gt; (
-      <span class="tag">&lt;Avatar</span> key={i} {...u} size=<span class="str">&quot;md&quot;</span> /&gt;
-    ))}
-    {users.length &gt; max &amp;&amp; (
-      &lt;div className=<span class="str">&quot;w-10 h-10 rounded-full bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center ring-2 ring-white shadow-xs&quot;</span>&gt;
-        +{users.length - max}
-      &lt;/div&gt;
-    )}
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Inputs & Clean Dropdowns (BREATHING ROOM & PROPORTION) -->
     <div class="spec-grid">
@@ -640,39 +244,7 @@
         <p class="spec-desc">Restrained, airy form controls following Apple &amp; Airbnb patterns. Generous spacing, clean option hierarchies, and subtle focus states.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Inputs & RichSelect">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Inputs & RichSelect</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Inputs & RichSelect React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="form-responsive-grid">
+        <div class="form-responsive-grid">
           
           <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
           <div class="field-block">
@@ -1042,94 +614,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/atoms/SelectInput.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState, useRef, useEffect } <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { ChevronDown, Search, Check } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> Option {
-  value: string;
-  label: string;
-  sub?: string;
-  badge?: string;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> RichSelect: React.FC&lt;{
-  label?: string;
-  options: Option[];
-  value: string;
-  onChange: (val: string) =&gt; void;
-  placeholder?: string;
-}&gt; = ({ label, options, value, onChange, placeholder = &#x27;Select option...&#x27; }) =&gt; {
-  <span class="kwd">const</span> [open, setOpen] = useState(<span class="kwd">false</span>);
-  <span class="kwd">const</span> [query, setQuery] = useState(&#x27;&#x27;);
-  <span class="kwd">const</span> ref = useRef<span class="tag">&lt;HTMLDivElement</span>&gt;(<span class="kwd">null</span>);
-
-  <span class="kwd">const</span> selected = options.find(o =&gt; o.value === value);
-  <span class="kwd">const</span> filtered = options.filter(o =&gt; o.label.toLowerCase().includes(query.toLowerCase()));
-
-  useEffect(() =&gt; {
-    <span class="kwd">const</span> handleClick = (e: MouseEvent) =&gt; {
-      <span class="kwd">if</span> (ref.current &amp;&amp; !ref.current.contains(e.target <span class="kwd">as</span> Node)) setOpen(<span class="kwd">false</span>);
-    };
-    document.addEventListener(&#x27;mousedown&#x27;, handleClick);
-    <span class="kwd">return</span> () =&gt; document.removeEventListener(&#x27;mousedown&#x27;, handleClick);
-  }, []);
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;relative w-full&quot;</span> ref={ref}&gt;
-      {label &amp;&amp; &lt;label className=<span class="str">&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5&quot;</span>&gt;{label}&lt;/label&gt;}
-      &lt;button
-        <span class="kwd">type</span>=<span class="str">&quot;button&quot;</span>
-        onClick={() =&gt; setOpen(!open)}
-        className=<span class="str">&quot;w-full h-12 px-4 rounded-xl bg-white border border-slate-200 hover:border-[#006C7A] flex items-center justify-between text-sm transition-all focus:ring-2 focus:ring-[#006C7A]/20&quot;</span>
-      &gt;
-        &lt;span className={selected ? &#x27;font-bold text-slate-900&#x27; : &#x27;text-slate-400&#x27;}&gt;
-          {selected ? selected.label : placeholder}
-        &lt;/span&gt;
-        <span class="tag">&lt;ChevronDown</span> className={<span class="str">`w-4 h-4 text-slate-400 transition-transform duration-200 ${open ? &#x27;rotate-180&#x27; : &#x27;&#x27;}`</span>} /&gt;
-      &lt;/button&gt;
-
-      {open &amp;&amp; (
-        &lt;div className=<span class="str">&quot;absolute z-50 left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden animate-in fade-in&quot;</span>&gt;
-          &lt;div className=<span class="str">&quot;p-2 border-b border-slate-100 flex items-center gap-2&quot;</span>&gt;
-            <span class="tag">&lt;Search</span> className=<span class="str">&quot;w-4 h-4 text-slate-400&quot;</span> /&gt;
-            &lt;input
-              <span class="kwd">type</span>=<span class="str">&quot;text&quot;</span>
-              placeholder=<span class="str">&quot;Search...&quot;</span>
-              value={query}
-              onChange={e =&gt; setQuery(e.target.value)}
-              className=<span class="str">&quot;w-full text-xs outline-none bg-transparent&quot;</span>
-              autoFocus
-            /&gt;
-          &lt;/div&gt;
-          &lt;div className=<span class="str">&quot;max-h-56 overflow-y-auto p-1 divide-y divide-slate-50&quot;</span>&gt;
-            {filtered.map(opt =&gt; (
-              &lt;div
-                key={opt.value}
-                onClick={() =&gt; { onChange(opt.value); setOpen(<span class="kwd">false</span>); }}
-                className={<span class="str">`px-3 py-2.5 rounded-lg text-xs cursor-pointer flex items-center justify-between hover:bg-[#F0FAFC] ${opt.value === value ? &#x27;bg-[#F0FAFC] text-[#006C7A] font-bold&#x27; : &#x27;text-slate-700&#x27;}`</span>}
-              &gt;
-                &lt;div&gt;
-                  &lt;div className=<span class="str">&quot;font-semibold&quot;</span>&gt;{opt.label}&lt;/div&gt;
-                  {opt.sub &amp;&amp; &lt;div className=<span class="str">&quot;text-[11px] text-slate-500 mt-0.5&quot;</span>&gt;{opt.sub}&lt;/div&gt;}
-                &lt;/div&gt;
-                {opt.value === value &amp;&amp; <span class="tag">&lt;Check</span> className=<span class="str">&quot;w-4 h-4 text-[#006C7A]&quot;</span> /&gt;}
-              &lt;/div&gt;
-            ))}
-          &lt;/div&gt;
-        &lt;/div&gt;
-      )}
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Enterprise Scalability Atoms Spec -->
     <div class="spec-grid">
@@ -1138,39 +623,7 @@
         <p class="spec-desc">Hardware telemetry state indicators with pulsing ripple animations, and dismissible query filter tags.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Status Beacons">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Status Beacons</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Status Beacons React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div>
+        <div>
           <div class="category-label">Telemetry Status Beacons (Pulsing IoT Hardware Ripples)</div>
           <div class="line-row" style="gap:var(--s4)">
             <span class="beacon beacon-live"><span class="beacon-dot"></span>Probe Node 01 (Live Streaming)</span>
@@ -1237,48 +690,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/atoms/StatusBeacon.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> StatusBeacon: React.FC&lt;{ status?: &#x27;live&#x27; | &#x27;warning&#x27; | &#x27;critical&#x27; | &#x27;offline&#x27;; label?: string }&gt; = ({
-  status = &#x27;live&#x27;,
-  label
-}) =&gt; {
-  <span class="kwd">const</span> configs = {
-    live:     { bg: &#x27;bg-[#10B981]&#x27;, ring: &#x27;ring-[#A7F3D0]&#x27;, text: &#x27;text-[#065F46]&#x27; },
-    warning:  { bg: &#x27;bg-[#F59E0B]&#x27;, ring: &#x27;ring-[#FDE68A]&#x27;, text: &#x27;text-[#92400E]&#x27; },
-    critical: { bg: &#x27;bg-[#EF4444]&#x27;, ring: &#x27;ring-[#FECACA]&#x27;, text: &#x27;text-[#991B1B]&#x27; },
-    offline:  { bg: &#x27;bg-[#94A3B8]&#x27;, ring: &#x27;ring-[#E2E8F0]&#x27;, text: &#x27;text-[#475569]&#x27; },
-  }[status];
-
-  <span class="kwd">return</span> (
-    &lt;span className=<span class="str">&quot;inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold&quot;</span>&gt;
-      &lt;span className={<span class="str">`w-2 h-2 rounded-full ${configs.bg} ring-4 ${configs.ring} animate-pulse`</span>} /&gt;
-      {label &amp;&amp; &lt;span className={configs.text}&gt;{label}&lt;/span&gt;}
-    &lt;/span&gt;
-  );
-};
-
-<span class="kwd">export</span> <span class="kwd">const</span> FilterBadge: React.FC&lt;{ label: string; active?: boolean; onRemove?: () =&gt; void }&gt; = ({
-  label,
-  active = <span class="kwd">false</span>,
-  onRemove
-}) =&gt; (
-  &lt;span className={<span class="str">`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border transition-all ${active ? &#x27;bg-[#F0FAFC] text-[#006C7A] border-[#B2ECF3]&#x27; : &#x27;bg-slate-100 text-slate-600 border-transparent hover:border-slate-300&#x27;}`</span>}&gt;
-    &lt;span&gt;{label}&lt;/span&gt;
-    {onRemove &amp;&amp; (
-      &lt;button onClick={onRemove} className=<span class="str">&quot;hover:text-black&quot;</span>&gt;×&lt;/button&gt;
-    )}
-  &lt;/span&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
   </section>
 
   <!-- ========================================================
@@ -1296,39 +708,7 @@
         <p class="spec-desc">Error, Warning, and Success states with top-aligned status icons that never drop below or wrap awkwardly with multi-line guidance text.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Field Validation">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Field Validation</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Field Validation React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="form-responsive-grid">
+        <div class="form-responsive-grid">
           
           <!-- Critical Error State (Addresses User Screenshot) -->
           <div class="field-block">
@@ -1388,48 +768,7 @@
 
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/resilience/FieldValidation.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { AlertCircle, CheckCircle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> ValidatedInputProps extends React.InputHTMLAttributes<span class="tag">&lt;HTMLInputElement</span>&gt; {
-  label: string;
-  error?: string;
-  success?: boolean;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> ValidatedInput: React.FC<span class="tag">&lt;ValidatedInputProps</span>&gt; = ({ label, error, success, className = &#x27;&#x27;, ...props }) =&gt; (
-  &lt;div className=<span class="str">&quot;w-full&quot;</span>&gt;
-    &lt;label className=<span class="str">&quot;block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5&quot;</span>&gt;{label}&lt;/label&gt;
-    &lt;div className=<span class="str">&quot;relative&quot;</span>&gt;
-      &lt;input
-        className={<span class="str">`w-full h-12 px-4 rounded-xl border text-sm transition-all outline-none ${
-          error
-            ? &#x27;border-[#B5152B] bg-[#FEF2F2] focus:ring-2 focus:ring-[#B5152B]/20 text-[#991B1B]&#x27;
-            : success
-            ? &#x27;border-[#10B981] bg-[#ECFDF5] focus:ring-2 focus:ring-[#10B981]/20&#x27;
-            : &#x27;border-slate-200 bg-white focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20&#x27;
-        } ${className}`</span>}
-        {...props}
-      /&gt;
-      {error &amp;&amp; <span class="tag">&lt;AlertCircle</span> className=<span class="str">&quot;w-4 h-4 text-[#B5152B] absolute right-3.5 top-4 pointer-events-none&quot;</span> /&gt;}
-      {success &amp;&amp; <span class="tag">&lt;CheckCircle</span> className=<span class="str">&quot;w-4 h-4 text-[#10B981] absolute right-3.5 top-4 pointer-events-none&quot;</span> /&gt;}
-    &lt;/div&gt;
-    {error &amp;&amp; (
-      &lt;p className=<span class="str">&quot;mt-1.5 text-xs text-[#B5152B] font-semibold flex items-center gap-1&quot;</span>&gt;
-        &lt;span&gt;{error}&lt;/span&gt;
-      &lt;/p&gt;
-    )}
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Form-Level Error Summary Box (WCAG 3.3.1 Compliance) -->
     <div class="spec-grid">
@@ -1438,39 +777,7 @@
         <p class="spec-desc">Top-of-form error summary card for multi-field forms, listing direct jump links for keyboard and screen-reader accessibility.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Error Summary Callout">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Error Summary Callout</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Error Summary Callout React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="form-error-summary">
+        <div class="form-error-summary">
           <div class="form-error-summary-header">
             <i data-lucide="alert-octagon"></i>
             <span>There are 3 validation errors that need your correction before saving:</span>
@@ -1482,37 +789,7 @@
           </ol>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/resilience/FormErrorSummary.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { AlertTriangle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> FormErrorSummary: React.FC&lt;{ errors: string[]; title?: string }&gt; = ({
-  errors,
-  title = &#x27;There are issues requiring your correction:&#x27;
-}) =&gt; {
-  <span class="kwd">if</span> (!errors || errors.length === 0) <span class="kwd">return</span> <span class="kwd">null</span>;
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;p-4 rounded-2xl bg-[#FEF2F2] border border-[#FECACA] text-xs text-[#991B1B] shadow-xs&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;flex items-center gap-2 font-bold text-sm mb-2&quot;</span>&gt;
-        <span class="tag">&lt;AlertTriangle</span> className=<span class="str">&quot;w-4 h-4 text-[#B5152B]&quot;</span> /&gt;
-        &lt;span&gt;{title}&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;ul className=<span class="str">&quot;list-disc list-inside space-y-1 font-medium pl-1&quot;</span>&gt;
-        {errors.map((err, i) =&gt; (
-          &lt;li key={i}&gt;{err}&lt;/li&gt;
-        ))}
-      &lt;/ul&gt;
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Alert Callout Banners (All 4 System Severity Levels) -->
     <div class="spec-grid">
@@ -1521,39 +798,8 @@
         <p class="spec-desc">Structured inline banners with semantic color coding, severity iconography, and immediate recovery actions.</p>
       </div>
       <div class="spec-content" style="display:flex;flex-direction:column;gap:14px">
-        <div class="ds-comp-box split-view" data-comp-name="Alert Callouts">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Alert Callouts</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Alert Callouts React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <!-- Danger / Critical Banner with Actions -->
+        
+        <!-- Danger / Critical Banner with Actions -->
         <div class="callout callout-danger">
           <i data-lucide="alert-octagon"></i>
           <div class="callout-content">
@@ -1594,42 +840,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/resilience/AlertCallout.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Info, AlertTriangle, AlertCircle, CheckCircle2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> AlertCallout: React.FC&lt;{
-  <span class="kwd">type</span>?: &#x27;info&#x27; | &#x27;warning&#x27; | &#x27;danger&#x27; | &#x27;success&#x27;;
-  title?: string;
-  children: React.ReactNode;
-}&gt; = ({ <span class="kwd">type</span> = &#x27;info&#x27;, title, children }) =&gt; {
-  <span class="kwd">const</span> configs = {
-    info:    { bg: &#x27;bg-[#F0FAFC]&#x27;, border: &#x27;border-[#B2ECF3]&#x27;, text: &#x27;text-[#005662]&#x27;, icon: Info },
-    warning: { bg: &#x27;bg-[#FFFBEB]&#x27;, border: &#x27;border-[#FDE68A]&#x27;, text: &#x27;text-[#92400E]&#x27;, icon: AlertTriangle },
-    danger:  { bg: &#x27;bg-[#FEF2F2]&#x27;, border: &#x27;border-[#FECACA]&#x27;, text: &#x27;text-[#991B1B]&#x27;, icon: AlertCircle },
-    success: { bg: &#x27;bg-[#ECFDF5]&#x27;, border: &#x27;border-[#A7F3D0]&#x27;, text: &#x27;text-[#065F46]&#x27;, icon: CheckCircle2 },
-  }[<span class="kwd">type</span>];
-
-  <span class="kwd">const</span> Icon = configs.icon;
-
-  <span class="kwd">return</span> (
-    &lt;div className={<span class="str">`p-4 rounded-2xl border flex gap-3 text-xs leading-relaxed ${configs.bg} ${configs.border} ${configs.text}`</span>}&gt;
-      <span class="tag">&lt;Icon</span> className=<span class="str">&quot;w-5 h-5 shrink-0 mt-0.5&quot;</span> /&gt;
-      &lt;div&gt;
-        {title &amp;&amp; &lt;h5 className=<span class="str">&quot;font-bold text-sm mb-1&quot;</span>&gt;{title}&lt;/h5&gt;}
-        &lt;div&gt;{children}&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Hardware / Offline Error State Widget -->
     <div class="spec-grid">
@@ -1638,39 +849,7 @@
         <p class="spec-desc">Graceful degradation and recovery UI when IoT gateways or sensor telemetry connections drop offline.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Hardware Fallback Banner">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Hardware Fallback Banner</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Hardware Fallback Banner React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="empty-state" style="padding:32px 24px;border:1px dashed var(--ruby-border);background:#fffcfc">
+        <div class="empty-state" style="padding:32px 24px;border:1px dashed var(--ruby-border);background:#fffcfc">
           <div class="empty-icon-wrap" style="background:var(--ruby-bg);color:var(--ruby-text)">
             <i data-lucide="wifi-off"></i>
           </div>
@@ -1684,40 +863,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/resilience/NetworkFallback.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { WifiOff, RefreshCw } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> NetworkFallbackBanner: React.FC&lt;{ onRetry?: () =&gt; void; isRetrying?: boolean }&gt; = ({
-  onRetry,
-  isRetrying = <span class="kwd">false</span>
-}) =&gt; (
-  &lt;div className=<span class="str">&quot;p-4 rounded-2xl bg-[#FFFBEB] border border-[#FDE68A] flex items-center justify-between gap-4 text-xs&quot;</span>&gt;
-    &lt;div className=<span class="str">&quot;flex items-center gap-3 text-[#92400E]&quot;</span>&gt;
-      <span class="tag">&lt;WifiOff</span> className=<span class="str">&quot;w-5 h-5 shrink-0&quot;</span> /&gt;
-      &lt;div&gt;
-        &lt;span className=<span class="str">&quot;font-bold block&quot;</span>&gt;Pond Sensor Telemetry Offline&lt;/span&gt;
-        &lt;span className=<span class="str">&quot;text-[11px] text-amber-700&quot;</span>&gt;Displaying cached local records <span class="kwd">from</span> 14:15 IST. Sensor node reconnecting.&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;button
-      onClick={onRetry}
-      disabled={isRetrying}
-      className=<span class="str">&quot;px-3.5 py-1.5 rounded-lg bg-amber-800 text-white font-bold hover:bg-amber-900 transition-colors flex items-center gap-1.5 disabled:opacity-50 cursor-pointer&quot;</span>
-    &gt;
-      <span class="tag">&lt;RefreshCw</span> className={<span class="str">`w-3.5 h-3.5 ${isRetrying ? &#x27;animate-spin&#x27; : &#x27;&#x27;}`</span>} /&gt;
-      &lt;span&gt;{isRetrying ? &#x27;Retrying...&#x27; : &#x27;Retry Connection&#x27;}&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
   </section>
 
@@ -1736,91 +882,13 @@
         <p class="spec-desc">Input, search icon, and interactive clear button within a single pill container.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Search Bar Molecule">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Search Bar Molecule</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Search Bar Molecule React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="searchbar">
+        <div class="searchbar">
           <i data-lucide="search"></i>
           <input id="sInput" placeholder="Search ponds, lots, farmers, invoices..." />
           <button id="sClear"><i data-lucide="x"></i></button>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/SearchBar.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Search, X } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> SearchBar: React.FC&lt;{
-  value?: string;
-  onChange?: (v: string) =&gt; void;
-  placeholder?: string;
-}&gt; = ({ value = &#x27;&#x27;, onChange, placeholder = &#x27;Search ponds, suppliers, arrivals...&#x27; }) =&gt; {
-  <span class="kwd">const</span> [query, setQuery] = useState(value);
-
-  <span class="kwd">const</span> handleClear = () =&gt; {
-    setQuery(&#x27;&#x27;);
-    onChange?.(&#x27;&#x27;);
-  };
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;relative flex items-center w-full max-w-sm&quot;</span>&gt;
-      <span class="tag">&lt;Search</span> className=<span class="str">&quot;w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none&quot;</span> /&gt;
-      &lt;input
-        <span class="kwd">type</span>=<span class="str">&quot;text&quot;</span>
-        value={query}
-        onChange={e =&gt; {
-          setQuery(e.target.value);
-          onChange?.(e.target.value);
-        }}
-        placeholder={placeholder}
-        className=<span class="str">&quot;w-full h-10 pl-10 pr-12 rounded-xl bg-slate-100 border border-transparent focus:bg-white focus:border-[#006C7A] text-xs font-medium text-slate-800 transition-all outline-none&quot;</span>
-      /&gt;
-      {query ? (
-        &lt;button onClick={handleClear} className=<span class="str">&quot;absolute right-3 text-slate-400 hover:text-slate-600&quot;</span>&gt;
-          <span class="tag">&lt;X</span> className=<span class="str">&quot;w-3.5 h-3.5&quot;</span> /&gt;
-        &lt;/button&gt;
-      ) : (
-        &lt;kbd className=<span class="str">&quot;absolute right-3 px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[10px] font-mono text-slate-400&quot;</span>&gt;⌘K&lt;/kbd&gt;
-      )}
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Tabs -->
     <div class="spec-grid">
@@ -1829,39 +897,7 @@
         <p class="spec-desc">Pill segment for compact controls; underline for full page section switching.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Navigation Tabs">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Navigation Tabs</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Navigation Tabs React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="tabs" data-tabs>
+        <div class="tabs" data-tabs>
           <button class="active">Overview</button>
           <button>Pond Matrix</button>
           <button>Telemetry</button>
@@ -1873,70 +909,7 @@
           <button>Audit Log</button>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/NavigationTabs.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> TabItem {
-  id: string;
-  label: string;
-  count?: number;
-}
-
-<span class="kwd">export</span> <span class="kwd">const</span> NavTabs: React.FC&lt;{
-  tabs: TabItem[];
-  activeTab: string;
-  onChange: (id: string) =&gt; void;
-  variant?: &#x27;underline&#x27; | &#x27;pill&#x27;;
-}&gt; = ({ tabs, activeTab, onChange, variant = &#x27;underline&#x27; }) =&gt; {
-  <span class="kwd">if</span> (variant === &#x27;pill&#x27;) {
-    <span class="kwd">return</span> (
-      &lt;div className=<span class="str">&quot;inline-flex p-1 bg-slate-100 rounded-xl gap-1&quot;</span>&gt;
-        {tabs.map(tab =&gt; (
-          &lt;button
-            key={tab.id}
-            onClick={() =&gt; onChange(tab.id)}
-            className={<span class="str">`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-              activeTab === tab.id ? &#x27;bg-white text-[#006C7A] shadow-xs&#x27; : &#x27;text-slate-600 hover:text-slate-900&#x27;
-            }`</span>}
-          &gt;
-            {tab.label}
-          &lt;/button&gt;
-        ))}
-      &lt;/div&gt;
-    );
-  }
-
-  <span class="kwd">return</span> (
-    &lt;nav className=<span class="str">&quot;flex border-b border-slate-200 gap-6&quot;</span>&gt;
-      {tabs.map(tab =&gt; (
-        &lt;button
-          key={tab.id}
-          onClick={() =&gt; onChange(tab.id)}
-          className={<span class="str">`pb-3 text-sm font-bold transition-all relative ${
-            activeTab === tab.id
-              ? &#x27;text-[#006C7A] border-b-2 border-[#006C7A]&#x27;
-              : &#x27;text-slate-500 hover:text-slate-900&#x27;
-          }`</span>}
-        &gt;
-          {tab.label}
-          {tab.count !== <span class="kwd">undefined</span> &amp;&amp; (
-            &lt;span className=<span class="str">&quot;ml-2 px-1.5 py-0.5 rounded-full text-[10px] bg-slate-200 text-slate-700&quot;</span>&gt;
-              {tab.count}
-            &lt;/span&gt;
-          )}
-        &lt;/button&gt;
-      ))}
-    &lt;/nav&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Wayfinding & Pager -->
     <div class="spec-grid">
@@ -1945,39 +918,7 @@
         <p class="spec-desc">Breadcrumbs and page navigation with functional previous/next handlers.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Pagination Pager">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Pagination Pager</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Pagination Pager React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <nav class="crumbs">
+        <nav class="crumbs">
           Aquaculture <i data-lucide="chevron-right"></i> Farm Operations <i data-lucide="chevron-right"></i> <b>Pond Telemetry</b>
         </nav>
         <div class="line-row" style="justify-content:space-between">
@@ -1991,43 +932,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/PaginationPager.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { ChevronLeft, ChevronRight } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> Pager: React.FC&lt;{
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (p: number) =&gt; void;
-}&gt; = ({ currentPage, totalPages, onPageChange }) =&gt; (
-  &lt;div className=<span class="str">&quot;flex items-center justify-between text-xs text-slate-600 py-3 border-t border-slate-200&quot;</span>&gt;
-    &lt;span&gt;Page &lt;b&gt;{currentPage}&lt;/b&gt; of &lt;b&gt;{totalPages}&lt;/b&gt;&lt;/span&gt;
-    &lt;div className=<span class="str">&quot;flex items-center gap-1.5&quot;</span>&gt;
-      &lt;button
-        onClick={() =&gt; onPageChange(currentPage - 1)}
-        disabled={currentPage &lt;= 1}
-        className=<span class="str">&quot;px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:pointer-events-none font-semibold flex items-center gap-1&quot;</span>
-      &gt;
-        <span class="tag">&lt;ChevronLeft</span> className=<span class="str">&quot;w-3.5 h-3.5&quot;</span> /&gt; Previous
-      &lt;/button&gt;
-      &lt;button
-        onClick={() =&gt; onPageChange(currentPage + 1)}
-        disabled={currentPage &gt;= totalPages}
-        className=<span class="str">&quot;px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:pointer-events-none font-semibold flex items-center gap-1&quot;</span>
-      &gt;
-        Next <span class="tag">&lt;ChevronRight</span> className=<span class="str">&quot;w-3.5 h-3.5&quot;</span> /&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Dropdowns & Toasts -->
     <div class="spec-grid">
@@ -2036,39 +941,7 @@
         <p class="spec-desc">Contextual menu actions and transient system notifications.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Action Menu & Toasts">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Action Menu & Toasts</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Action Menu & Toasts React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="line-row">
+        <div class="line-row">
           <div class="dropdown" id="dd">
             <button class="btn btn-secondary" id="ddBtn"><i data-lucide="more-horizontal"></i>Actions Menu</button>
             <div class="menu">
@@ -2081,46 +954,7 @@
           <button class="btn btn-dark btn-sm" id="toastDarkBtn">Trigger Dark Toast</button>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/ActionMenuToast.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { MoreVertical, Edit2, Trash2, CheckCircle2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> ActionMenu: React.FC&lt;{ onEdit?: () =&gt; void; onDelete?: () =&gt; void }&gt; = ({ onEdit, onDelete }) =&gt; {
-  <span class="kwd">const</span> [open, setOpen] = useState(<span class="kwd">false</span>);
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;relative inline-block text-left&quot;</span>&gt;
-      &lt;button onClick={() =&gt; setOpen(!open)} className=<span class="str">&quot;p-1.5 rounded-lg hover:bg-slate-100 text-slate-500&quot;</span>&gt;
-        <span class="tag">&lt;MoreVertical</span> className=<span class="str">&quot;w-4 h-4&quot;</span> /&gt;
-      &lt;/button&gt;
-      {open &amp;&amp; (
-        &lt;div className=<span class="str">&quot;absolute right-0 z-50 mt-1 w-40 bg-white rounded-xl shadow-lg border border-slate-200 py-1 text-xs&quot;</span>&gt;
-          &lt;button onClick={() =&gt; { onEdit?.(); setOpen(<span class="kwd">false</span>); }} className=<span class="str">&quot;w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center gap-2 text-slate-700&quot;</span>&gt;
-            <span class="tag">&lt;Edit2</span> className=<span class="str">&quot;w-3.5 h-3.5 text-[#006C7A]&quot;</span> /&gt; Edit Record
-          &lt;/button&gt;
-          &lt;button onClick={() =&gt; { onDelete?.(); setOpen(<span class="kwd">false</span>); }} className=<span class="str">&quot;w-full px-3 py-2 text-left hover:bg-red-50 flex items-center gap-2 text-red-600 font-semibold&quot;</span>&gt;
-            <span class="tag">&lt;Trash2</span> className=<span class="str">&quot;w-3.5 h-3.5&quot;</span> /&gt; Delete
-          &lt;/button&gt;
-        &lt;/div&gt;
-      )}
-    &lt;/div&gt;
-  );
-};
-
-<span class="kwd">export</span> <span class="kwd">const</span> ToastNotification: React.FC&lt;{ message: string; <span class="kwd">type</span>?: &#x27;teal&#x27; | &#x27;success&#x27; }&gt; = ({ message, <span class="kwd">type</span> = &#x27;teal&#x27; }) =&gt; (
-  &lt;div className=<span class="str">&quot;inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900 text-white text-xs font-semibold shadow-xl&quot;</span>&gt;
-    <span class="tag">&lt;CheckCircle2</span> className=<span class="str">&quot;w-4 h-4 text-[#4FCFE0]&quot;</span> /&gt;
-    &lt;span&gt;{message}&lt;/span&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Stepper -->
     <div class="spec-grid">
@@ -2129,88 +963,13 @@
         <p class="spec-desc">Step-by-step progress tracker for multi-stage workflows.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Stepper Wizard">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Stepper Wizard</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Stepper Wizard React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="stepper" id="stepper"></div>
+        <div class="stepper" id="stepper"></div>
         <div class="line-row">
           <button class="btn btn-secondary btn-sm" id="stBack">Back</button>
           <button class="btn btn-primary btn-sm" id="stNext">Next Step</button>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/StepperWizard.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Check } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> Stepper: React.FC&lt;{
-  steps: { id: string; label: string }[];
-  currentStep: number;
-}&gt; = ({ steps, currentStep }) =&gt; (
-  &lt;div className=<span class="str">&quot;flex items-center w-full&quot;</span>&gt;
-    {steps.map((step, idx) =&gt; {
-      <span class="kwd">const</span> isDone = idx &lt; currentStep;
-      <span class="kwd">const</span> isCurrent = idx === currentStep;
-      <span class="kwd">return</span> (
-        <span class="tag">&lt;React</span>.Fragment key={step.id}&gt;
-          &lt;div className=<span class="str">&quot;flex items-center gap-2&quot;</span>&gt;
-            &lt;div className={<span class="str">`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-              isDone
-                ? &#x27;bg-[#006C7A] text-white&#x27;
-                : isCurrent
-                ? &#x27;bg-[#00A4B7] text-black ring-4 ring-[#B2ECF3]&#x27;
-                : &#x27;bg-slate-200 text-slate-600&#x27;
-            }`</span>}&gt;
-              {isDone ? <span class="tag">&lt;Check</span> className=<span class="str">&quot;w-4 h-4&quot;</span> /&gt; : idx + 1}
-            &lt;/div&gt;
-            &lt;span className={<span class="str">`text-xs font-bold ${isCurrent ? &#x27;text-slate-900&#x27; : &#x27;text-slate-500&#x27;}`</span>}&gt;
-              {step.label}
-            &lt;/span&gt;
-          &lt;/div&gt;
-          {idx &lt; steps.length - 1 &amp;&amp; (
-            &lt;div className={<span class="str">`flex-1 h-0.5 mx-3 ${isDone ? &#x27;bg-[#006C7A]&#x27; : &#x27;bg-slate-200&#x27;}`</span>} /&gt;
-          )}
-        <span class="tag">&lt;/React</span>.Fragment&gt;
-      );
-    })}
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Empty States with Reset Actions -->
     <div class="spec-grid">
@@ -2219,39 +978,7 @@
         <p class="spec-desc">Mandatory empty state components with clear illustrations, explanatory subtitles, and contextual recovery actions.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Empty States">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Empty States</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Empty States React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="empty-states-grid">
+        <div class="empty-states-grid">
           
           <!-- Variant 1: No Search Results / Filters -->
           <div class="empty-card">
@@ -2285,51 +1012,7 @@
 
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/EmptyState.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Search, FolderOpen, AlertCircle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> EmptyState: React.FC&lt;{
-  scenario?: &#x27;no-data&#x27; | &#x27;no-search&#x27; | &#x27;error&#x27;;
-  title?: string;
-  description?: string;
-  actionText?: string;
-  onAction?: () =&gt; void;
-}&gt; = ({
-  scenario = &#x27;no-data&#x27;,
-  title = &#x27;No records found&#x27;,
-  description = &#x27;There are no active procurement arrivals recorded for this filter criteria.&#x27;,
-  actionText = &#x27;Create New Intake&#x27;,
-  onAction
-}) =&gt; {
-  <span class="kwd">const</span> Icon = scenario === &#x27;no-search&#x27; ? Search : scenario === &#x27;error&#x27; ? AlertCircle : FolderOpen;
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;p-10 rounded-2xl border border-dashed border-slate-300 text-center flex flex-col items-center justify-center bg-slate-50/50&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#006C7A] shadow-xs mb-3&quot;</span>&gt;
-        <span class="tag">&lt;Icon</span> className=<span class="str">&quot;w-6 h-6&quot;</span> /&gt;
-      &lt;/div&gt;
-      &lt;h4 className=<span class="str">&quot;font-extrabold text-sm text-slate-900 mb-1&quot;</span>&gt;{title}&lt;/h4&gt;
-      &lt;p className=<span class="str">&quot;text-xs text-slate-500 max-w-sm mb-4 leading-relaxed&quot;</span>&gt;{description}&lt;/p&gt;
-      {actionText &amp;&amp; (
-        &lt;button
-          onClick={onAction}
-          className=<span class="str">&quot;px-4 py-2 rounded-full bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-sm&quot;</span>
-        &gt;
-          {actionText}
-        &lt;/button&gt;
-      )}
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Enterprise Scalability Molecules Showcase -->
     <div class="spec-grid">
@@ -2338,39 +1021,8 @@
         <p class="spec-desc">High-density data query controls, attached unit inputs, and command palette wayfinding for operations.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Filter Bar Organism">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Filter Bar Organism</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Filter Bar Organism React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <!-- Filter Chip Bar Molecule -->
+        
+        <!-- Filter Chip Bar Molecule -->
         <div class="filter-bar">
           <span class="filter-bar-label"><i data-lucide="sliders-horizontal" style="width:13px;height:13px;display:inline;vertical-align:-1px;margin-right:4px"></i>Active Filters (3):</span>
           <span class="tag tag-teal">Broodstock: SPF Hawaii <button class="tag-remove" title="Remove"><i data-lucide="x"></i></button></span>
@@ -2447,51 +1099,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/molecules/FilterBar.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Filter, RotateCcw } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> CompoundFilterBar: React.FC&lt;{
-  onReset?: () =&gt; void;
-  onApply?: () =&gt; void;
-}&gt; = ({ onReset, onApply }) =&gt; (
-  &lt;div className=<span class="str">&quot;p-4 bg-white rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs&quot;</span>&gt;
-    &lt;div className=<span class="str">&quot;flex items-center gap-3 flex-wrap&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;flex items-center gap-1.5 font-bold text-slate-800&quot;</span>&gt;
-        <span class="tag">&lt;Filter</span> className=<span class="str">&quot;w-4 h-4 text-[#006C7A]&quot;</span> /&gt;
-        &lt;span&gt;Filters&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;select className=<span class="str">&quot;h-9 px-3 rounded-lg border border-slate-200 bg-white font-medium text-slate-700&quot;</span>&gt;
-        &lt;option&gt;All Centers (12)&lt;/option&gt;
-        &lt;option&gt;Bhimavaram Center #1&lt;/option&gt;
-        &lt;option&gt;Kakinada Sea Intake #2&lt;/option&gt;
-      &lt;/select&gt;
-      &lt;select className=<span class="str">&quot;h-9 px-3 rounded-lg border border-slate-200 bg-white font-medium text-slate-700&quot;</span>&gt;
-        &lt;option&gt;All Species (VM / BT)&lt;/option&gt;
-        &lt;option&gt;L. Vannamei (VM)&lt;/option&gt;
-        &lt;option&gt;Black Tiger (BT)&lt;/option&gt;
-      &lt;/select&gt;
-      &lt;input <span class="kwd">type</span>=<span class="str">&quot;date&quot;</span> className=<span class="str">&quot;h-9 px-3 rounded-lg border border-slate-200 bg-white font-medium text-slate-700&quot;</span> /&gt;
-    &lt;/div&gt;
-
-    &lt;div className=<span class="str">&quot;flex items-center gap-2&quot;</span>&gt;
-      &lt;button onClick={onReset} className=<span class="str">&quot;h-9 px-3 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 font-semibold flex items-center gap-1&quot;</span>&gt;
-        <span class="tag">&lt;RotateCcw</span> className=<span class="str">&quot;w-3.5 h-3.5&quot;</span> /&gt; Reset
-      &lt;/button&gt;
-      &lt;button onClick={onApply} className=<span class="str">&quot;h-9 px-4 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white font-bold&quot;</span>&gt;
-        Apply Filter
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
   </section>
 
   <!-- ========================================================
@@ -2509,39 +1117,7 @@
         <p class="spec-desc">Modern floating island navigation with sub-menu accordion dropdowns, text-only selected color highlights, and expand/collapse toggle.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Dark Sidebar (#002d34)">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Dark Sidebar (#002d34)</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Dark Sidebar (#002d34) React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="floating-sidebar-demo">
+        <div class="floating-sidebar-demo">
           
           <aside class="f-sidebar" id="demoSidebar">
             <div class="f-sb-header">
@@ -2623,73 +1199,7 @@
 
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/FloatingSidebar.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { LayoutDashboard, ShoppingCart, Activity, ShieldCheck, Warehouse, ChevronLeft } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> DarkSidebar: React.FC&lt;{ activeRoute?: string; onNavigate?: (path: string) =&gt; void }&gt; = ({
-  activeRoute = &#x27;/purchase&#x27;,
-  onNavigate
-}) =&gt; {
-  <span class="kwd">const</span> [collapsed, setCollapsed] = useState(<span class="kwd">false</span>);
-
-  <span class="kwd">const</span> menu = [
-    { label: &#x27;Dashboard&#x27;, icon: LayoutDashboard, path: &#x27;/dashboard&#x27; },
-    { label: &#x27;Raw Material&#x27;, icon: ShoppingCart, path: &#x27;/purchase&#x27;, badge: 12 },
-    { label: &#x27;Water Quality IoT&#x27;, icon: Activity, path: &#x27;/iot&#x27; },
-    { label: &#x27;QC Lab Queue&#x27;, icon: ShieldCheck, path: &#x27;/qc&#x27;, badge: 3 },
-    { label: &#x27;Coldstore CS-2&#x27;, icon: Warehouse, path: &#x27;/coldstore&#x27; },
-  ];
-
-  <span class="kwd">return</span> (
-    &lt;aside className={<span class="str">`bg-[#002d34] text-white rounded-3xl p-4 flex flex-col transition-all duration-300 ${collapsed ? &#x27;w-20&#x27; : &#x27;w-64&#x27;} shadow-2xl border border-white/5`</span>}&gt;
-      &lt;div className=<span class="str">&quot;flex items-center justify-between pb-4 border-b border-white/10&quot;</span>&gt;
-        &lt;div className=<span class="str">&quot;flex items-center gap-3 overflow-hidden&quot;</span>&gt;
-          &lt;div className=<span class="str">&quot;w-9 h-9 rounded-xl bg-[#00A4B7] text-black font-black flex items-center justify-center shrink-0&quot;</span>&gt;M&lt;/div&gt;
-          {!collapsed &amp;&amp; (
-            &lt;div&gt;
-              &lt;div className=<span class="str">&quot;font-extrabold text-sm leading-tight text-white&quot;</span>&gt;AquaPulse&lt;/div&gt;
-              &lt;div className=<span class="str">&quot;text-[10px] text-[#4FCFE0] font-bold uppercase tracking-wider&quot;</span>&gt;Enterprise ERP&lt;/div&gt;
-            &lt;/div&gt;
-          )}
-        &lt;/div&gt;
-        &lt;button onClick={() =&gt; setCollapsed(!collapsed)} className=<span class="str">&quot;p-1 rounded-full bg-[#003B44] text-[#B2D4D8] hover:text-white&quot;</span>&gt;
-          <span class="tag">&lt;ChevronLeft</span> className={<span class="str">`w-4 h-4 transition-transform ${collapsed ? &#x27;rotate-180&#x27; : &#x27;&#x27;}`</span>} /&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-
-      &lt;nav className=<span class="str">&quot;mt-4 space-y-1.5 flex-1&quot;</span>&gt;
-        {menu.map(item =&gt; {
-          <span class="kwd">const</span> Icon = item.icon;
-          <span class="kwd">const</span> isActive = activeRoute.startsWith(item.path);
-          <span class="kwd">return</span> (
-            &lt;button
-              key={item.path}
-              onClick={() =&gt; onNavigate?.(item.path)}
-              className={<span class="str">`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                isActive ? &#x27;bg-[#006C7A] text-white shadow-sm&#x27; : &#x27;text-slate-300 hover:bg-white/5 hover:text-white&#x27;
-              }`</span>}
-            &gt;
-              <span class="tag">&lt;Icon</span> className=<span class="str">&quot;w-4 h-4 shrink-0&quot;</span> /&gt;
-              {!collapsed &amp;&amp; &lt;span&gt;{item.label}&lt;/span&gt;}
-              {!collapsed &amp;&amp; item.badge &amp;&amp; (
-                &lt;span className=<span class="str">&quot;ml-auto text-[10px] px-2 py-0.5 rounded-full bg-white/20 font-bold&quot;</span>&gt;{item.badge}&lt;/span&gt;
-              )}
-            &lt;/button&gt;
-          );
-        })}
-      &lt;/nav&gt;
-    &lt;/aside&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Metric Card System -->
     <div class="spec-grid">
@@ -2698,39 +1208,7 @@
         <p class="spec-desc">Anatomy: icon chip · delta badge · prominent value · label · comparison foot. Four canonical variants.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Metric KPI Cards">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Metric KPI Cards</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Metric KPI Cards React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="mcards">
+        <div class="mcards">
           <!-- Sparkline Variant -->
           <div class="mcard">
             <div class="mcard-top"><span class="mchip"><i data-lucide="wind"></i></span><span class="badge badge-soft"><i data-lucide="trending-up"></i>+8.4%</span></div>
@@ -2761,45 +1239,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/MetricCardGrid.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { TrendingUp, TrendingDown, Wind } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> MetricCard: React.FC&lt;{
-  title: string;
-  value: string | number;
-  delta?: string;
-  isPositive?: boolean;
-  subtitle?: string;
-  icon?: React.ReactNode;
-}&gt; = ({ title, value, delta, isPositive = <span class="kwd">true</span>, subtitle, icon }) =&gt; (
-  &lt;div className=<span class="str">&quot;bg-white rounded-2xl p-5 border border-slate-200 shadow-xs hover:shadow-md transition-shadow&quot;</span>&gt;
-    &lt;div className=<span class="str">&quot;flex items-center justify-between text-slate-500 mb-2&quot;</span>&gt;
-      &lt;span className=<span class="str">&quot;text-xs font-bold uppercase tracking-wider&quot;</span>&gt;{title}&lt;/span&gt;
-      {icon &amp;&amp; &lt;span className=<span class="str">&quot;p-1.5 rounded-lg bg-[#F0FAFC] text-[#006C7A]&quot;</span>&gt;{icon}&lt;/span&gt;}
-    &lt;/div&gt;
-    &lt;div className=<span class="str">&quot;text-2xl font-black text-slate-900 tracking-tight tabular-nums&quot;</span>&gt;{value}&lt;/div&gt;
-    &lt;div className=<span class="str">&quot;mt-3 flex items-center justify-between text-xs&quot;</span>&gt;
-      {delta &amp;&amp; (
-        &lt;span className={<span class="str">`inline-flex items-center gap-1 font-bold px-2 py-0.5 rounded-full ${
-          isPositive ? &#x27;bg-[#DCFCE7] text-[#166534]&#x27; : &#x27;bg-[#FEE2E2] text-[#991B1B]&#x27;
-        }`</span>}&gt;
-          {isPositive ? <span class="tag">&lt;TrendingUp</span> className=<span class="str">&quot;w-3 h-3&quot;</span> /&gt; : <span class="tag">&lt;TrendingDown</span> className=<span class="str">&quot;w-3 h-3&quot;</span> /&gt;}
-          {delta}
-        &lt;/span&gt;
-      )}
-      {subtitle &amp;&amp; &lt;span className=<span class="str">&quot;text-slate-400 font-medium&quot;</span>&gt;{subtitle}&lt;/span&gt;}
-    &lt;/div&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Charts & Advanced Telemetry Visualizations -->
     <div class="spec-grid">
@@ -2808,39 +1248,7 @@
         <p class="spec-desc">Signal-first color balance housed in elevated card frames. Hover tooltips, real-time telemetry crosshairs, radial water indices, and interactive heatmaps.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Telemetry Visualizations">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Telemetry Visualizations</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Telemetry Visualizations React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="charts-grid">
+        <div class="charts-grid">
           
           <!-- 1. Vertical Bars -->
           <div class="viz-card">
@@ -3000,36 +1408,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/TelemetryCharts.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="cmt">// Responsive SVG Mini Telemetry Chart</span>
-<span class="kwd">export</span> <span class="kwd">const</span> TelemetryLineChart: React.FC&lt;{ data?: number[]; height?: number }&gt; = ({
-  data = [30, 45, 60, 52, 68, 74, 90],
-  height = 80
-}) =&gt; {
-  <span class="kwd">const</span> points = data.map((v, i) =&gt; <span class="str">`${(i / (data.length - 1)) * 300},${height - (v / 100) * height}`</span>).join(&#x27; &#x27;);
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;w-full bg-white p-4 rounded-2xl border border-slate-200&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;flex justify-between items-center mb-2 text-xs&quot;</span>&gt;
-        &lt;span className=<span class="str">&quot;font-bold text-slate-800&quot;</span>&gt;Water Dissolved Oxygen (24h)&lt;/span&gt;
-        &lt;span className=<span class="str">&quot;font-mono font-bold text-[#006C7A]&quot;</span>&gt;6.84 mg/L (Optimal)&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;svg viewBox={<span class="str">`0 0 300 ${height}`</span>} className=<span class="str">&quot;w-full h-20 overflow-visible&quot;</span>&gt;
-        &lt;polyline fill=<span class="str">&quot;none&quot;</span> stroke=<span class="str">&quot;#00A4B7&quot;</span> strokeWidth=<span class="str">&quot;2.5&quot;</span> points={points} /&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Tables & Bulk Actions -->
     <div class="spec-grid">
@@ -3038,39 +1417,7 @@
         <p class="spec-desc">Lightweight tabular presentation primitive for inline summaries, modal listings, and simple read-only dataset displays. <a href="#tabular-data" style="color:var(--teal-700);font-weight:600;margin-left:4px;">(Looking for the full Enterprise Data Grid with density toggles &amp; expandable subrows? Jump to Enterprise Data Grid ↓)</a></p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Simple Table Primitive">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Simple Table Primitive</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Simple Table Primitive React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="table-wrap">
+        <div class="table-wrap">
           <div class="bulk" id="bulk"><span id="bulkN">0 selected</span><button class="btn btn-primary btn-sm">Approve Selected</button></div>
           <table class="tbl">
             <thead>
@@ -3084,39 +1431,7 @@
           </table>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/SimpleTablePrimitive.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Download, Search } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> SimpleTable: React.FC&lt;{ columns: { field: string; header: string }[]; data: any[] }&gt; = ({
-  columns,
-  data
-}) =&gt; (
-  &lt;div className=<span class="str">&quot;bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden&quot;</span>&gt;
-    &lt;table className=<span class="str">&quot;w-full text-xs text-left&quot;</span>&gt;
-      &lt;thead className=<span class="str">&quot;bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider&quot;</span>&gt;
-        &lt;tr&gt;
-          {columns.map(c =&gt; &lt;th key={c.field} className=<span class="str">&quot;px-4 py-3&quot;</span>&gt;{c.header}&lt;/th&gt;)}
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody className=<span class="str">&quot;divide-y divide-slate-100&quot;</span>&gt;
-        {data.map((row, i) =&gt; (
-          &lt;tr key={i} className=<span class="str">&quot;hover:bg-slate-50&quot;</span>&gt;
-            {columns.map(c =&gt; &lt;td key={c.field} className=<span class="str">&quot;px-4 py-3&quot;</span>&gt;{row[c.field]}&lt;/td&gt;)}
-          &lt;/tr&gt;
-        ))}
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Object Cards with Unsplash Photos -->
     <div class="spec-grid">
@@ -3125,39 +1440,7 @@
         <p class="spec-desc">Modular entity cards with high-definition aquaculture photography from Unsplash.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Object Media Card">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Object Media Card</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Object Media Card React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <div class="lotcards">
+        <div class="lotcards">
           <div class="lot">
             <div class="img-top">
               <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Pond 101" />
@@ -3192,36 +1475,7 @@
           </div>
         </div>
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/ObjectMediaCard.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> ObjectCard: React.FC&lt;{
-  title: string;
-  image: string;
-  tag: string;
-  metric: string;
-}&gt; = ({ title, image, tag, metric }) =&gt; (
-  &lt;div className=<span class="str">&quot;rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-xs hover:shadow-md transition-shadow&quot;</span>&gt;
-    &lt;div className=<span class="str">&quot;relative h-44 overflow-hidden&quot;</span>&gt;
-      &lt;img src={image} alt={title} className=<span class="str">&quot;w-full h-full object-cover&quot;</span> /&gt;
-      &lt;span className=<span class="str">&quot;absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white font-bold text-[10px]&quot;</span>&gt;
-        {tag}
-      &lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div className=<span class="str">&quot;p-4&quot;</span>&gt;
-      &lt;h4 className=<span class="str">&quot;font-extrabold text-sm text-slate-900 mb-1&quot;</span>&gt;{title}&lt;/h4&gt;
-      &lt;div className=<span class="str">&quot;text-xs text-slate-500 font-medium&quot;</span>&gt;{metric}&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-);</code></pre>
-          </div>
-        </div></div>
+    </div>
 
     <!-- Enterprise Scalability Organisms Showcase -->
     <div class="spec-grid">
@@ -3230,39 +1484,8 @@
         <p class="spec-desc">Complex mission-critical organisms: off-canvas detail inspector drawer and 4-probe IoT live telemetry card.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Slide-Over Inspector Drawer">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Slide-Over Inspector Drawer</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Slide-Over Inspector Drawer React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-            <!-- Interactive Drawer Trigger -->
+        
+        <!-- Interactive Drawer Trigger -->
         <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--r-16);padding:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
           <div>
             <div style="font-size:var(--t-sm);font-weight:700">Slide-Over Inspector Drawer Organism</div>
@@ -3387,40 +1610,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/organisms/InspectorDrawer.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { X, Zap } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">const</span> SlideOverDrawer: React.FC&lt;{
-  isOpen: boolean;
-  onClose: () =&gt; void;
-  title: string;
-  children: React.ReactNode;
-}&gt; = ({ isOpen, onClose, title, children }) =&gt; {
-  <span class="kwd">if</span> (!isOpen) <span class="kwd">return</span> <span class="kwd">null</span>;
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;w-full max-w-md bg-white h-full shadow-2xl flex flex-col&quot;</span>&gt;
-        &lt;div className=<span class="str">&quot;p-4 border-b border-slate-100 flex items-center justify-between&quot;</span>&gt;
-          &lt;h3 className=<span class="str">&quot;font-extrabold text-sm text-slate-900&quot;</span>&gt;{title}&lt;/h3&gt;
-          &lt;button onClick={onClose} className=<span class="str">&quot;p-1 rounded-lg hover:bg-slate-100 text-slate-400&quot;</span>&gt;
-            <span class="tag">&lt;X</span> className=<span class="str">&quot;w-4 h-4&quot;</span> /&gt;
-          &lt;/button&gt;
-        &lt;/div&gt;
-        &lt;div className=<span class="str">&quot;flex-1 overflow-y-auto p-5&quot;</span>&gt;{children}&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};</code></pre>
-          </div>
-        </div></div>
+    </div>
   </section>
 
   <!-- ========================================================
@@ -3437,39 +1627,8 @@
         <p class="spec-desc">Mission-critical enterprise grid with cluster filtering, multi-status filter tabs, 3-level row height density toggles (compact 36px / standard 48px / spacious 60px), multi-row selection, expandable telemetry probe subrows, and pagination. <a href="#stage3" style="color:var(--teal-700);font-weight:600;margin-left:4px;">(Looking for simple inline read-only tables? See Simple Data Table Primitive ↑)</a></p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box split-view" data-comp-name="Enterprise Data Grid">
-          <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Enterprise Data Grid</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Enterprise Data Grid React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <div class="ds-comp-preview">
-            <!-- Table Toolbar & Filter Controls -->
+        <!-- Table Toolbar & Filter Controls -->
         <div class="table-toolbar">
           <div class="toolbar-left">
             <div class="searchbar" id="tblSearchWrap">
@@ -3734,80 +1893,7 @@
         </div>
 
       </div>
-          </div>
-
-          <div class="ds-comp-code">
-            <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/components/enterprise/EnterpriseDataGrid.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
-<span class="kwd">import</span> { Download, Search, ChevronDown } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
-
-<span class="kwd">export</span> <span class="kwd">interface</span> Column<span class="tag">&lt;T</span>&gt; {
-  field: keyof T;
-  header: string;
-  render?: (val: any, row: T) =&gt; React.ReactNode;
-}
-
-<span class="kwd">export</span> <span class="kwd">function</span> EnterpriseDataGrid<span class="tag">&lt;T</span> extends { id: string | number }&gt;({
-  columns,
-  data,
-  title = &#x27;Enterprise Explorer&#x27;
-}: {
-  columns: Column<span class="tag">&lt;T</span>&gt;[];
-  data: T[];
-  title?: string;
-}) {
-  <span class="kwd">const</span> [search, setSearch] = useState(&#x27;&#x27;);
-
-  <span class="kwd">const</span> filtered = data.filter(row =&gt;
-    Object.values(row).some(v =&gt; String(v).toLowerCase().includes(search.toLowerCase()))
-  );
-
-  <span class="kwd">return</span> (
-    &lt;div className=<span class="str">&quot;bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden&quot;</span>&gt;
-      &lt;div className=<span class="str">&quot;p-4 border-b border-slate-200 flex items-center justify-between gap-4 flex-wrap&quot;</span>&gt;
-        &lt;h3 className=<span class="str">&quot;font-extrabold text-slate-900 text-sm&quot;</span>&gt;{title}&lt;/h3&gt;
-        &lt;div className=<span class="str">&quot;flex items-center gap-2&quot;</span>&gt;
-          &lt;input
-            <span class="kwd">type</span>=<span class="str">&quot;text&quot;</span>
-            value={search}
-            onChange={e =&gt; setSearch(e.target.value)}
-            placeholder=<span class="str">&quot;Search records...&quot;</span>
-            className=<span class="str">&quot;h-8 px-3 text-xs bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-[#006C7A]&quot;</span>
-          /&gt;
-          &lt;button className=<span class="str">&quot;h-8 px-3 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50 flex items-center gap-1.5&quot;</span>&gt;
-            <span class="tag">&lt;Download</span> className=<span class="str">&quot;w-3.5 h-3.5 text-[#006C7A]&quot;</span> /&gt; Export
-          &lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div className=<span class="str">&quot;overflow-x-auto&quot;</span>&gt;
-        &lt;table className=<span class="str">&quot;w-full text-xs text-left&quot;</span>&gt;
-          &lt;thead className=<span class="str">&quot;bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider&quot;</span>&gt;
-            &lt;tr&gt;
-              {columns.map(col =&gt; &lt;th key={String(col.field)} className=<span class="str">&quot;px-4 py-3&quot;</span>&gt;{col.header}&lt;/th&gt;)}
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody className=<span class="str">&quot;divide-y divide-slate-100&quot;</span>&gt;
-            {filtered.map(row =&gt; (
-              &lt;tr key={row.id} className=<span class="str">&quot;hover:bg-[#F0FAFC]/60 transition-colors&quot;</span>&gt;
-                {columns.map(col =&gt; (
-                  &lt;td key={String(col.field)} className=<span class="str">&quot;px-4 py-3&quot;</span>&gt;
-                    {col.render ? col.render(row[col.field], row) : String(row[col.field])}
-                  &lt;/td&gt;
-                ))}
-              &lt;/tr&gt;
-            ))}
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-          </div>
-        </div></div>
+    </div>
   </section>
 
   <!-- ========================================================
@@ -3818,40 +1904,7 @@
     <h2>Templates</h2>
     <p>Wireframe architectural skeletons that unify layouts across the application.</p>
 
-    
-    <div class="ds-comp-box split-view" data-comp-name="Templates Architecture">
-      <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Templates Architecture</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Templates Architecture React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-        <div class="wires">
+    <div class="wires">
       <div>
         <div class="wire dash">
           <div class="wb" style="background:#efeff2">Floating Rail</div>
@@ -3910,38 +1963,6 @@
         <p class="wire-cap"><b>IoT Command Center Template.</b> Alert banner, multi-probe telemetry cards, and operational queue.</p>
       </div>
     </div>
-      </div>
-
-      <div class="ds-comp-code">
-        <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/templates/EnterpriseLayoutTemplate.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code>import React from &#x27;react&#x27;;
-import { LayoutDashboard, ShoppingCart, Activity, ShieldCheck } from &#x27;lucide-react&#x27;;
-
-export const DashboardLayoutTemplate: React.FC&lt;{
-  sidebar: React.ReactNode;
-  header: React.ReactNode;
-  metrics: React.ReactNode;
-  children: React.ReactNode;
-}&gt; = ({ sidebar, header, metrics, children }) =&gt; (
-  &lt;div className=&quot;flex h-screen bg-[#F8FAFC] text-slate-900 overflow-hidden&quot;&gt;
-    {/* Floating Left Rail / Dark Sidebar */}
-    &lt;div className=&quot;p-4 flex shrink-0&quot;&gt;
-      {sidebar}
-    &lt;/div&gt;
-
-    {/* Main Scrollable Canvas */}
-    &lt;div className=&quot;flex-1 flex flex-col min-w-0 overflow-y-auto p-6 space-y-6&quot;&gt;
-      {header}
-      {metrics &amp;&amp; &lt;div className=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4&quot;&gt;{metrics}&lt;/div&gt;}
-      &lt;main className=&quot;flex-1 min-w-0&quot;&gt;{children}&lt;/main&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-);</code></pre>
-      </div>
-    </div>
   </section>
 
   <!-- ========================================================
@@ -3952,40 +1973,7 @@ export const DashboardLayoutTemplate: React.FC&lt;{
     <h2>Pages</h2>
     <p>A complete, live composite screen bringing all atoms, molecules, and organisms together with team photos and active telemetry.</p>
 
-    
-    <div class="ds-comp-box split-view" data-comp-name="Operations Page Shell">
-      <div class="ds-comp-header">
-            <div class="ds-comp-title-pill">
-              <span class="ds-comp-dot"></span>
-              <span class="ds-comp-name">Operations Page Shell</span>
-              <span class="ds-comp-lang">React · TSX</span>
-            </div>
-            <div class="ds-comp-header-right">
-              <div class="ds-comp-tabs">
-                <button type="button" class="ds-tab-btn active" data-tab="split" title="Split Preview &amp; Code">
-                  <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-                  <span>Split</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="preview" title="Preview Only">
-                  <i data-lucide="eye" style="width:13px;height:13px"></i>
-                  <span>Preview</span>
-                </button>
-                <button type="button" class="ds-tab-btn" data-tab="react" title="Code Only">
-                  <i data-lucide="terminal" style="width:13px;height:13px"></i>
-                  <span>Code</span>
-                </button>
-              </div>
-              <div class="ds-comp-actions">
-                <button type="button" class="ds-copy-btn" title="Copy Operations Page Shell React Code">
-                  <i data-lucide="copy" style="width:13px;height:13px"></i>
-                  <span>Copy React</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="ds-comp-preview">
-        <div class="shell">
+    <div class="shell">
       <!-- Page Rail -->
       <aside class="p-rail">
         <div class="brand"><div class="brand-icon"><i data-lucide="waves"></i></div>AquaPulse ERP</div>
@@ -4131,75 +2119,6 @@ export const DashboardLayoutTemplate: React.FC&lt;{
           <span class="lft"><span class="sdot"></span>48 IoT sensors online · Last sync 42 seconds ago</span>
           <span>AquaPulse v5.0 · Atomic Design System</span>
         </div>
-      </div>
-    </div>
-      </div>
-
-      <div class="ds-comp-code">
-        <div class="ds-code-bar">
-            <span class="ds-code-file"><i data-lucide="file-code" style="width:13px;height:13px"></i> src/pages/OperationsDashboardPage.tsx</span>
-            <span class="ds-code-env">TypeScript · React 18 · Tailwind CSS</span>
-          </div>
-          <pre class="ds-code-pre"><code>import React, { useState } from &#x27;react&#x27;;
-import { DarkSidebar } from &#x27;./DarkSidebar&#x27;;
-import { MetricCard } from &#x27;./MetricCard&#x27;;
-import { SearchBar } from &#x27;./SearchBar&#x27;;
-import { NavTabs } from &#x27;./NavTabs&#x27;;
-import { Plus, Download, Bell, Settings } from &#x27;lucide-react&#x27;;
-
-export const OperationsPage: React.FC = () =&gt; {
-  const [activeTab, setActiveTab] = useState(&#x27;overview&#x27;);
-
-  return (
-    &lt;div className=&quot;flex h-screen bg-[#F8FAFC]&quot;&gt;
-      &lt;DarkSidebar activeRoute=&quot;/dashboard&quot; /&gt;
-
-      &lt;div className=&quot;flex-1 overflow-y-auto p-6 space-y-6&quot;&gt;
-        {/* Top Header */}
-        &lt;div className=&quot;flex items-center justify-between gap-4&quot;&gt;
-          &lt;SearchBar placeholder=&quot;Search ponds, lots, metrics...&quot; /&gt;
-          &lt;div className=&quot;flex items-center gap-3&quot;&gt;
-            &lt;button className=&quot;p-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-black&quot;&gt;
-              &lt;Bell className=&quot;w-4 h-4&quot; /&gt;
-            &lt;/button&gt;
-            &lt;div className=&quot;flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200&quot;&gt;
-              &lt;span className=&quot;w-2 h-2 rounded-full bg-[#10B981]&quot; /&gt;
-              &lt;span className=&quot;text-xs font-bold text-slate-800&quot;&gt;Admin&lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        {/* Action Title Bar */}
-        &lt;div className=&quot;flex items-center justify-between flex-wrap gap-4&quot;&gt;
-          &lt;div&gt;
-            &lt;h1 className=&quot;text-2xl font-black text-slate-900 tracking-tight&quot;&gt;Active Aquaculture Dashboard&lt;/h1&gt;
-            &lt;p className=&quot;text-xs text-slate-500 mt-1&quot;&gt;Optical DO probes, automated aerator schedule, and biomass growth curves.&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div className=&quot;flex items-center gap-2&quot;&gt;
-            &lt;button className=&quot;px-4 py-2 rounded-full bg-white border border-slate-200 text-xs font-bold text-[#006C7A] hover:bg-slate-50 flex items-center gap-1.5&quot;&gt;
-              &lt;Download className=&quot;w-3.5 h-3.5&quot; /&gt; Export CSV
-            &lt;/button&gt;
-            &lt;button className=&quot;px-4 py-2 rounded-full bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-sm flex items-center gap-1.5&quot;&gt;
-              &lt;Plus className=&quot;w-3.5 h-3.5&quot; /&gt; Log Sample
-            &lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        {/* Tabs &amp; Content */}
-        &lt;NavTabs
-          tabs={[
-            { id: &#x27;overview&#x27;, label: &#x27;Overview&#x27; },
-            { id: &#x27;matrix&#x27;, label: &#x27;Pond Matrix&#x27;, count: 8 },
-            { id: &#x27;chemistry&#x27;, label: &#x27;Water Chemistry&#x27; },
-            { id: &#x27;aerator&#x27;, label: &#x27;Aerator Log&#x27; },
-          ]}
-          activeTab={activeTab}
-          onChange={setActiveTab}
-        /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};</code></pre>
       </div>
     </div>
   </section>

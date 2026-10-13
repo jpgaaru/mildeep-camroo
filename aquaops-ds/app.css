@@ -7,7 +7,6 @@
 @import url("./components/atoms/atoms.css");
 @import url("./components/molecules/molecules.css");
 @import url("./components/organisms/organisms.css");
-@import url("./components/code-preview.css");
 
 /* Base Global Reset & App Shell */
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -112,6 +111,25 @@ svg { display: block; }
 }
 .stage-nav-btn:hover { background: var(--soft); color: var(--ink); }
 .stage-nav-btn.active { background: var(--black); color: var(--white); }
+
+.stage-nav-group-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  padding: 0 6px;
+  user-select: none;
+}
+
+.stage-nav-divider {
+  display: inline-block;
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+  margin: 0 6px;
+  align-self: center;
+}
 
 .stage-section {
   padding: var(--s6) 0 var(--s7);

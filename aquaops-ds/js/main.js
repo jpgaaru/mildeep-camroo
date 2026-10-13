@@ -10,7 +10,6 @@ import { AquaTable, AquaPager } from './aqua-table.js';
 import { AquaCharts } from './aqua-charts.js';
 import { AquaDrawer } from './aqua-drawer.js';
 import { AquaMotion } from './aqua-motion.js';
-import { CodeViewer } from './code-viewer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Lucide Icons
@@ -20,9 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1b. Initialize Kinetic Motion & Micro-Physics
   AquaMotion.init();
-
-  // 1c. Initialize Component Code Viewer & React Copy
-  CodeViewer.init();
 
   // 2. Component: Rich Select Dropdowns
   document.querySelectorAll('.rich-select').forEach((el) => {
