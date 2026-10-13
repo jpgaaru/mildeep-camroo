@@ -1,6 +1,6 @@
 /**
  * AquaOps Design System — Interactive Component Space & React Code Viewer
- * Provides interactive Preview / React Code tabs, split-view, and 1-click clipboard copy
+ * Provides visible React code panels, interactive preview/code toggles, and 1-click clipboard copy
  */
 
 .ds-view-bar {
@@ -11,30 +11,32 @@
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--r-16);
-  padding: 12px 20px;
+  padding: 14px 20px;
   margin: 20px 0 28px;
-  box-shadow: var(--sh-1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   flex-wrap: wrap;
 }
 
 .ds-view-bar-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .ds-view-title {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 13.5px;
+  font-weight: 800;
   color: var(--ink);
   display: flex;
   align-items: center;
   gap: 8px;
+  letter-spacing: -0.01em;
 }
 
 .ds-view-title svg {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   color: var(--teal-800);
 }
 
@@ -70,7 +72,7 @@
 .ds-mode-btn.active {
   background: var(--black);
   color: var(--white);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.14);
 }
 
 .ds-view-bar-right {
@@ -87,7 +89,7 @@
 
 .ds-search-box svg {
   position: absolute;
-  left: 10px;
+  left: 11px;
   width: 14px;
   height: 14px;
   color: var(--muted);
@@ -95,9 +97,9 @@
 }
 
 .ds-search-input {
-  height: 34px;
+  height: 36px;
   width: 220px;
-  padding: 0 12px 0 32px;
+  padding: 0 12px 0 34px;
   border-radius: var(--pill);
   border: 1px solid var(--line);
   background: var(--soft);
@@ -115,30 +117,30 @@
 }
 
 /* ==========================================================
-   COMPONENT BOX & CODE VIEWER PANEL
+   COMPONENT BOX & REACT CODE VIEWER PANEL (VISIBLE BY DEFAULT)
    ========================================================== */
 
 .ds-comp-box {
   border: 1px solid var(--line);
-  border-radius: var(--r-16);
+  border-radius: var(--r-20);
   background: #ffffff;
   margin-top: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ds-comp-box:hover {
   border-color: var(--line-strong);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
 .ds-comp-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 10px 16px;
   background: #F8FAFC;
   border-bottom: 1px solid var(--line);
   gap: 12px;
@@ -148,15 +150,15 @@
 .ds-comp-tabs {
   display: inline-flex;
   align-items: center;
-  background: #EDF2F7;
-  padding: 2.5px;
-  border-radius: 8px;
+  background: #E2E8F0;
+  padding: 3px;
+  border-radius: 9px;
   gap: 2px;
 }
 
 .ds-tab-btn {
   padding: 5px 12px;
-  border-radius: 6px;
+  border-radius: 7px;
   font-size: 11px;
   font-weight: 700;
   border: none;
@@ -181,7 +183,7 @@
 .ds-tab-btn.active {
   background: #FFFFFF;
   color: #006C7A;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10);
 }
 
 .ds-comp-actions {
@@ -194,29 +196,29 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 6px 14px;
   background: #FFFFFF;
   border: 1px solid #CBD5E1;
   border-radius: 8px;
   font-size: 11px;
   font-weight: 700;
-  color: #334155;
+  color: #1E293B;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .ds-copy-btn svg {
-  width: 13px;
-  height: 13px;
+  width: 13.5px;
+  height: 13.5px;
   color: #006C7A;
   transition: transform 0.15s ease;
 }
 
 .ds-copy-btn:hover {
-  background: #F1F5F9;
-  border-color: #94A3B8;
-  color: #0F172A;
+  background: #F0FAFC;
+  border-color: #006C7A;
+  color: #006C7A;
 }
 
 .ds-copy-btn:active {
@@ -224,59 +226,85 @@
 }
 
 .ds-copy-btn.copied {
-  background: #DCFCE7;
-  border-color: #86EFAC;
-  color: #166534;
+  background: #DCFCE7 !important;
+  border-color: #86EFAC !important;
+  color: #166534 !important;
 }
 
 .ds-copy-btn.copied svg {
-  color: #16A34A;
+  color: #16A34A !important;
 }
 
-/* Component Content Panels */
+/* ==========================================================
+   COMPONENT CONTENT PANELS (SPLIT PREVIEW + CODE VISIBLE BY DEFAULT)
+   ========================================================== */
+
 .ds-comp-preview {
   padding: 24px;
   background: #FFFFFF;
   min-height: 90px;
-}
-
-.ds-comp-code {
-  display: none;
-  background: #0B132B;
-  border-top: 1px solid #1E293B;
-  position: relative;
-}
-
-.ds-comp-box.show-code .ds-comp-code {
-  display: block;
-}
-
-.ds-comp-box.code-only .ds-comp-preview {
-  display: none;
-}
-
-.ds-comp-box.code-only .ds-comp-code {
-  display: block;
-}
-
-.ds-comp-box.split-view .ds-comp-preview {
-  display: block;
   border-bottom: 1px solid var(--line);
 }
 
+.ds-comp-code {
+  display: block; /* VISIBLE BY DEFAULT! */
+  background: #0B132B;
+  position: relative;
+}
+
+.ds-code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  background: #080E21;
+  border-bottom: 1px solid #1E293B;
+  font-size: 11px;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ds-code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #38BDF8;
+}
+
+/* Tab Modes */
+.ds-comp-box.preview-only .ds-comp-code {
+  display: none !important;
+}
+.ds-comp-box.preview-only .ds-comp-preview {
+  border-bottom: none;
+}
+
+.ds-comp-box.code-only .ds-comp-preview {
+  display: none !important;
+}
+.ds-comp-box.code-only .ds-comp-code {
+  display: block !important;
+}
+
+.ds-comp-box.split-view .ds-comp-preview {
+  display: block !important;
+  border-bottom: 1px solid var(--line);
+}
 .ds-comp-box.split-view .ds-comp-code {
-  display: block;
+  display: block !important;
 }
 
 .ds-code-pre {
   margin: 0;
-  padding: 18px 20px;
+  padding: 20px 22px;
   font-family: var(--font-mono);
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: #E2E8F0;
   overflow-x: auto;
-  max-height: 440px;
+  max-height: 480px;
   scrollbar-width: thin;
   scrollbar-color: #334155 #0B132B;
 }

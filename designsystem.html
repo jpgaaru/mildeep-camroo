@@ -54,17 +54,17 @@
         <span>Component Inspector &amp; React (TSX) Code Portal</span>
       </div>
       <div class="ds-mode-switcher">
-        <button type="button" class="ds-mode-btn active" data-mode="preview">
+        <button type="button" class="ds-mode-btn active" data-mode="split">
+          <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+          <span>Preview &amp; Code</span>
+        </button>
+        <button type="button" class="ds-mode-btn" data-mode="preview">
           <i data-lucide="eye" style="width:13px;height:13px"></i>
           <span>Preview Only</span>
         </button>
-        <button type="button" class="ds-mode-btn" data-mode="split">
-          <i data-lucide="columns-2" style="width:13px;height:13px"></i>
-          <span>Split (Preview + Code)</span>
-        </button>
         <button type="button" class="ds-mode-btn" data-mode="code">
           <i data-lucide="terminal" style="width:13px;height:13px"></i>
-          <span>React Code Only</span>
+          <span>Code Only</span>
         </button>
       </div>
     </div>
@@ -92,16 +92,20 @@
         <p class="spec-desc">California Sunset Teal scale with verified contrast ratios. Tints for subtle fills, base anchors for brand recognition, and deep shades for AAA text contrast.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Color Tokens">
+        <div class="ds-comp-box split-view" data-comp-name="Color Tokens">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -134,7 +138,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="cmt">// tailwind.config.ts / tokens.ts</span>
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="cmt">// tailwind.config.ts / tokens.ts</span>
 <span class="cmt">// AquaPulse WCAG 2.1 Calibrated California Sunset Teal Scale</span>
 <span class="kwd">export</span> <span class="kwd">const</span> aquaPulseColors = {
   teal: {
@@ -174,16 +182,20 @@
         <p class="spec-desc">Noto Sans fluid type scale. High legibility, tight tracking on headings, tabular figures for all metric readouts.</p>
       </div>
       <div class="spec-content type-table">
-        <div class="ds-comp-box" data-comp-name="Typography Spec">
+        <div class="ds-comp-box split-view" data-comp-name="Typography Spec">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -223,7 +235,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="cmt">// Noto Sans Fluid Typography &amp; Tabular Figure Primitives</span>
 <span class="kwd">export</span> <span class="kwd">const</span> Display: React.FC&lt;{ children: React.ReactNode; className?: string }&gt; = ({ children, className = &#x27;&#x27; }) =&gt; (
@@ -259,16 +275,20 @@
         <p class="spec-desc">Lucide 24px grid, 1.75 stroke weight. Teal hover state.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Iconography">
+        <div class="ds-comp-box split-view" data-comp-name="Iconography">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -301,7 +321,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> * <span class="kwd">as</span> LucideIcons <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">interface</span> IconProps extends LucideIcons.LucideProps {
@@ -328,16 +352,20 @@
         <p class="spec-desc">Optimized WCAG contrast hierarchy. Pill geometry, active depression, and clear visual state distinctions.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Button System">
+        <div class="ds-comp-box split-view" data-comp-name="Button System">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -383,7 +411,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Loader2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> ButtonProps extends React.ButtonHTMLAttributes<span class="tag">&lt;HTMLButtonElement</span>&gt; {
@@ -439,16 +471,20 @@
         <p class="spec-desc">Perfect 1:1 circular avatars, natural photo framing, presence badges, and clean overlapping team stacks.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Avatars & Presence">
+        <div class="ds-comp-box split-view" data-comp-name="Avatars & Presence">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -506,7 +542,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> AvatarProps {
   src?: string;
@@ -560,16 +600,20 @@
         <p class="spec-desc">Restrained, airy form controls following Apple &amp; Airbnb patterns. Generous spacing, clean option hierarchies, and subtle focus states.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Inputs & RichSelect">
+        <div class="ds-comp-box split-view" data-comp-name="Inputs & RichSelect">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -954,7 +998,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState, useRef, useEffect } <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState, useRef, useEffect } <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { ChevronDown, Search, Check } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> Option {
@@ -1043,16 +1091,20 @@
         <p class="spec-desc">Hardware telemetry state indicators with pulsing ripple animations, and dismissible query filter tags.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Status Beacons">
+        <div class="ds-comp-box split-view" data-comp-name="Status Beacons">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1134,7 +1186,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> StatusBeacon: React.FC&lt;{ status?: &#x27;live&#x27; | &#x27;warning&#x27; | &#x27;critical&#x27; | &#x27;offline&#x27;; label?: string }&gt; = ({
   status = &#x27;live&#x27;,
@@ -1186,16 +1242,20 @@
         <p class="spec-desc">Error, Warning, and Success states with top-aligned status icons that never drop below or wrap awkwardly with multi-line guidance text.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Field Validation">
+        <div class="ds-comp-box split-view" data-comp-name="Field Validation">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1270,7 +1330,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { AlertCircle, CheckCircle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> ValidatedInputProps extends React.InputHTMLAttributes<span class="tag">&lt;HTMLInputElement</span>&gt; {
@@ -1313,16 +1377,20 @@
         <p class="spec-desc">Top-of-form error summary card for multi-field forms, listing direct jump links for keyboard and screen-reader accessibility.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Error Summary Callout">
+        <div class="ds-comp-box split-view" data-comp-name="Error Summary Callout">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1349,7 +1417,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { AlertTriangle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> FormErrorSummary: React.FC&lt;{ errors: string[]; title?: string }&gt; = ({
@@ -1381,16 +1453,20 @@
         <p class="spec-desc">Structured inline banners with semantic color coding, severity iconography, and immediate recovery actions.</p>
       </div>
       <div class="spec-content" style="display:flex;flex-direction:column;gap:14px">
-        <div class="ds-comp-box" data-comp-name="Alert Callouts">
+        <div class="ds-comp-box split-view" data-comp-name="Alert Callouts">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1446,7 +1522,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Info, AlertTriangle, AlertCircle, CheckCircle2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> AlertCallout: React.FC&lt;{
@@ -1483,16 +1563,20 @@
         <p class="spec-desc">Graceful degradation and recovery UI when IoT gateways or sensor telemetry connections drop offline.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Hardware Fallback Banner">
+        <div class="ds-comp-box split-view" data-comp-name="Hardware Fallback Banner">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1521,7 +1605,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { WifiOff, RefreshCw } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> NetworkFallbackBanner: React.FC&lt;{ onRetry?: () =&gt; void; isRetrying?: boolean }&gt; = ({
@@ -1566,16 +1654,20 @@
         <p class="spec-desc">Input, search icon, and interactive clear button within a single pill container.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Search Bar Molecule">
+        <div class="ds-comp-box split-view" data-comp-name="Search Bar Molecule">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1596,7 +1688,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Search, X } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> SearchBar: React.FC&lt;{
@@ -1644,16 +1740,20 @@
         <p class="spec-desc">Pill segment for compact controls; underline for full page section switching.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Navigation Tabs">
+        <div class="ds-comp-box split-view" data-comp-name="Navigation Tabs">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1680,7 +1780,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> TabItem {
   id: string;
@@ -1745,16 +1849,20 @@
         <p class="spec-desc">Breadcrumbs and page navigation with functional previous/next handlers.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Pagination Pager">
+        <div class="ds-comp-box split-view" data-comp-name="Pagination Pager">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1783,7 +1891,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { ChevronLeft, ChevronRight } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> Pager: React.FC&lt;{
@@ -1821,16 +1933,20 @@
         <p class="spec-desc">Contextual menu actions and transient system notifications.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Action Menu & Toasts">
+        <div class="ds-comp-box split-view" data-comp-name="Action Menu & Toasts">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1858,7 +1974,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { MoreVertical, Edit2, Trash2, CheckCircle2 } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> ActionMenu: React.FC&lt;{ onEdit?: () =&gt; void; onDelete?: () =&gt; void }&gt; = ({ onEdit, onDelete }) =&gt; {
@@ -1899,16 +2019,20 @@
         <p class="spec-desc">Step-by-step progress tracker for multi-stage workflows.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Stepper Wizard">
+        <div class="ds-comp-box split-view" data-comp-name="Stepper Wizard">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -1929,7 +2053,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Check } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> Stepper: React.FC&lt;{
@@ -1974,16 +2102,20 @@
         <p class="spec-desc">Mandatory empty state components with clear illustrations, explanatory subtitles, and contextual recovery actions.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Empty States">
+        <div class="ds-comp-box split-view" data-comp-name="Empty States">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2032,7 +2164,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Search, FolderOpen, AlertCircle } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> EmptyState: React.FC&lt;{
@@ -2078,16 +2214,20 @@
         <p class="spec-desc">High-density data query controls, attached unit inputs, and command palette wayfinding for operations.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Filter Bar Organism">
+        <div class="ds-comp-box split-view" data-comp-name="Filter Bar Organism">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2179,7 +2319,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Filter, RotateCcw } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> CompoundFilterBar: React.FC&lt;{
@@ -2234,16 +2378,20 @@
         <p class="spec-desc">Modern floating island navigation with sub-menu accordion dropdowns, text-only selected color highlights, and expand/collapse toggle.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Dark Sidebar (#002d34)">
+        <div class="ds-comp-box split-view" data-comp-name="Dark Sidebar (#002d34)">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2340,7 +2488,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { LayoutDashboard, ShoppingCart, Activity, ShieldCheck, Warehouse, ChevronLeft } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> DarkSidebar: React.FC&lt;{ activeRoute?: string; onNavigate?: (path: string) =&gt; void }&gt; = ({
@@ -2408,16 +2560,20 @@
         <p class="spec-desc">Anatomy: icon chip · delta badge · prominent value · label · comparison foot. Four canonical variants.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Metric KPI Cards">
+        <div class="ds-comp-box split-view" data-comp-name="Metric KPI Cards">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2463,7 +2619,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { TrendingUp, TrendingDown, Wind } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> MetricCard: React.FC&lt;{
@@ -2503,16 +2663,20 @@
         <p class="spec-desc">Signal-first color balance housed in elevated card frames. Hover tooltips, real-time telemetry crosshairs, radial water indices, and interactive heatmaps.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Telemetry Visualizations">
+        <div class="ds-comp-box split-view" data-comp-name="Telemetry Visualizations">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2687,7 +2851,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="cmt">// Responsive SVG Mini Telemetry Chart</span>
 <span class="kwd">export</span> <span class="kwd">const</span> TelemetryLineChart: React.FC&lt;{ data?: number[]; height?: number }&gt; = ({
@@ -2718,16 +2886,20 @@
         <p class="spec-desc">Selectable rows, compact row heights, and floating bulk action bar.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Data Tables">
+        <div class="ds-comp-box split-view" data-comp-name="Data Tables">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2756,7 +2928,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Download, Search } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> SimpleTable: React.FC&lt;{ columns: { field: string; header: string }[]; data: any[] }&gt; = ({
@@ -2790,16 +2966,20 @@
         <p class="spec-desc">Modular entity cards with high-definition aquaculture photography from Unsplash.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Object Media Card">
+        <div class="ds-comp-box split-view" data-comp-name="Object Media Card">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -2849,7 +3029,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> ObjectCard: React.FC&lt;{
   title: string;
@@ -2880,16 +3064,20 @@
         <p class="spec-desc">Complex mission-critical organisms: off-canvas detail inspector drawer and 4-probe IoT live telemetry card.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Slide-Over Inspector Drawer">
+        <div class="ds-comp-box split-view" data-comp-name="Slide-Over Inspector Drawer">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -3029,7 +3217,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { X, Zap } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">const</span> SlideOverDrawer: React.FC&lt;{
@@ -3072,16 +3264,20 @@
         <p class="spec-desc">High-density information layout with full keyboard navigation, active row highlights, and real-time status badges.</p>
       </div>
       <div class="spec-content">
-        <div class="ds-comp-box" data-comp-name="Enterprise Data Grid">
+        <div class="ds-comp-box split-view" data-comp-name="Enterprise Data Grid">
           <div class="ds-comp-header">
             <div class="ds-comp-tabs">
-              <button type="button" class="ds-tab-btn active" data-tab="preview">
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
                 <i data-lucide="eye" style="width:13px;height:13px"></i>
-                <span>Preview</span>
+                <span>Preview Only</span>
               </button>
               <button type="button" class="ds-tab-btn" data-tab="react">
-                <i data-lucide="code-2" style="width:13px;height:13px"></i>
-                <span>React (TSX)</span>
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
               </button>
             </div>
             <div class="ds-comp-actions">
@@ -3361,7 +3557,11 @@
           </div>
 
           <div class="ds-comp-code">
-            <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
+            <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code><span class="kwd">import</span> React, { useState } <span class="kwd">from</span> &#x27;react&#x27;;
 <span class="kwd">import</span> { Download, Search, ChevronDown } <span class="kwd">from</span> &#x27;lucide-react&#x27;;
 
 <span class="kwd">export</span> <span class="kwd">interface</span> Column<span class="tag">&lt;T</span>&gt; {
@@ -3439,18 +3639,22 @@
     <p>Wireframe architectural skeletons that unify layouts across the application.</p>
 
     
-    <div class="ds-comp-box" data-comp-name="Templates Architecture">
+    <div class="ds-comp-box split-view" data-comp-name="Templates Architecture">
       <div class="ds-comp-header">
         <div class="ds-comp-tabs">
-          <button type="button" class="ds-tab-btn active" data-tab="preview">
-            <i data-lucide="eye" style="width:13px;height:13px"></i>
-            <span>Preview</span>
-          </button>
-          <button type="button" class="ds-tab-btn" data-tab="react">
-            <i data-lucide="code-2" style="width:13px;height:13px"></i>
-            <span>React (TSX)</span>
-          </button>
-        </div>
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
+                <i data-lucide="eye" style="width:13px;height:13px"></i>
+                <span>Preview Only</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="react">
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
+              </button>
+            </div>
         <div class="ds-comp-actions">
           <button type="button" class="ds-copy-btn" title="Copy Templates React Code">
             <i data-lucide="copy" style="width:13px;height:13px"></i>
@@ -3522,7 +3726,11 @@
       </div>
 
       <div class="ds-comp-code">
-        <pre class="ds-code-pre"><code>import React from &#x27;react&#x27;;
+        <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code>import React from &#x27;react&#x27;;
 import { LayoutDashboard, ShoppingCart, Activity, ShieldCheck } from &#x27;lucide-react&#x27;;
 
 export const DashboardLayoutTemplate: React.FC&lt;{
@@ -3558,18 +3766,22 @@ export const DashboardLayoutTemplate: React.FC&lt;{
     <p>A complete, live composite screen bringing all atoms, molecules, and organisms together with team photos and active telemetry.</p>
 
     
-    <div class="ds-comp-box" data-comp-name="Operations Page Shell">
+    <div class="ds-comp-box split-view" data-comp-name="Operations Page Shell">
       <div class="ds-comp-header">
         <div class="ds-comp-tabs">
-          <button type="button" class="ds-tab-btn active" data-tab="preview">
-            <i data-lucide="eye" style="width:13px;height:13px"></i>
-            <span>Preview</span>
-          </button>
-          <button type="button" class="ds-tab-btn" data-tab="react">
-            <i data-lucide="code-2" style="width:13px;height:13px"></i>
-            <span>React (TSX)</span>
-          </button>
-        </div>
+              <button type="button" class="ds-tab-btn active" data-tab="split">
+                <i data-lucide="columns-2" style="width:13px;height:13px"></i>
+                <span>Preview &amp; Code</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="preview">
+                <i data-lucide="eye" style="width:13px;height:13px"></i>
+                <span>Preview Only</span>
+              </button>
+              <button type="button" class="ds-tab-btn" data-tab="react">
+                <i data-lucide="terminal" style="width:13px;height:13px"></i>
+                <span>Code Only</span>
+              </button>
+            </div>
         <div class="ds-comp-actions">
           <button type="button" class="ds-copy-btn" title="Copy Operations Page React Code">
             <i data-lucide="copy" style="width:13px;height:13px"></i>
@@ -3730,7 +3942,11 @@ export const DashboardLayoutTemplate: React.FC&lt;{
       </div>
 
       <div class="ds-comp-code">
-        <pre class="ds-code-pre"><code>import React, { useState } from &#x27;react&#x27;;
+        <div class="ds-code-bar">
+            <span class="ds-code-badge"><i data-lucide="terminal" style="width:13px;height:13px"></i> React (TSX) Component Code</span>
+            <span style="font-size:10px;color:#64748B">TypeScript · Tailwind CSS · Production Ready</span>
+          </div>
+          <pre class="ds-code-pre"><code>import React, { useState } from &#x27;react&#x27;;
 import { DarkSidebar } from &#x27;./DarkSidebar&#x27;;
 import { MetricCard } from &#x27;./MetricCard&#x27;;
 import { SearchBar } from &#x27;./SearchBar&#x27;;

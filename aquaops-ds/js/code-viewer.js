@@ -7,23 +7,26 @@ import { AquaToast } from './aqua-toast.js';
 
 export class CodeViewer {
   static init() {
-    // 1. Tab Switcher (Preview vs React TSX)
+    // 1. Tab Switcher on each component card
     document.querySelectorAll('.ds-tab-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const box = btn.closest('.ds-comp-box');
         if (!box) return;
 
-        const targetTab = btn.dataset.tab; // 'preview' or 'react'
+        const targetTab = btn.dataset.tab; // 'split', 'preview', or 'react'
         const tabs = box.querySelectorAll('.ds-tab-btn');
         tabs.forEach(t => t.classList.remove('active'));
         btn.classList.add('active');
 
-        if (targetTab === 'react') {
-          box.classList.add('show-code');
+        box.classList.remove('split-view', 'preview-only', 'code-only', 'show-code');
+
+        if (targetTab === 'preview') {
+          box.classList.add('preview-only');
+        } else if (targetTab === 'react') {
           box.classList.add('code-only');
         } else {
-          box.classList.remove('show-code');
-          box.classList.remove('code-only');
+          // 'split' -> show both preview and code
+          box.classList.add('split-view');
         }
       });
     });
@@ -62,53 +65,63 @@ export class CodeViewer {
             <svg class="w-3.5 h-3.5 text-[#16A34A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
             </svg>
-            <span>Copied!</span>
+            <span>✓ Copied React Code!</span>
           `;
 
-          AquaToast.show(`Copied ${compName} React (TSX) code!`, 'teal');
+          if (window.AquaToast && typeof window.AquaToast.show === 'function') {
+            window.AquaToast.show(`Copied ${compName} React code!`, 'teal');
+          }
 
           setTimeout(() => {
             btn.classList.remove('copied');
             btn.innerHTML = origHtml;
-            if (window.lucide) window.lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+              window.lucide.createIcons();
+            }
           }, 2400);
 
         } catch (err) {
           console.error('Failed to copy code: ', err);
-          AquaToast.show(`Failed to copy to clipboard`, 'ruby');
+          if (window.AquaToast && typeof window.AquaToast.show === 'function') {
+            window.AquaToast.show(`Failed to copy to clipboard`, 'ruby');
+          }
         }
       });
     });
 
-    // 3. Global Display Mode Switcher (Preview Only | Split View | Code Only)
+    // 3. Global Display Mode Switcher (Split View | Preview Only | Code Only)
     document.querySelectorAll('.ds-mode-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const mode = btn.dataset.mode; // 'preview', 'split', 'code'
+        const mode = btn.dataset.mode; // 'split', 'preview', 'code'
         document.querySelectorAll('.ds-mode-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         const allBoxes = document.querySelectorAll('.ds-comp-box');
         allBoxes.forEach(box => {
-          box.classList.remove('split-view', 'code-only', 'show-code');
+          box.classList.remove('split-view', 'preview-only', 'code-only', 'show-code');
+          const splitTabBtn = box.querySelector('.ds-tab-btn[data-tab="split"]');
           const previewTabBtn = box.querySelector('.ds-tab-btn[data-tab="preview"]');
           const reactTabBtn = box.querySelector('.ds-tab-btn[data-tab="react"]');
 
-          if (mode === 'split') {
-            box.classList.add('split-view');
-            if (previewTabBtn) previewTabBtn.classList.remove('active');
-            if (reactTabBtn) reactTabBtn.classList.remove('active');
+          const allCardTabs = box.querySelectorAll('.ds-tab-btn');
+          allCardTabs.forEach(t => t.classList.remove('active'));
+
+          if (mode === 'preview') {
+            box.classList.add('preview-only');
+            if (previewTabBtn) previewTabBtn.classList.add('active');
           } else if (mode === 'code') {
             box.classList.add('code-only');
-            if (previewTabBtn) previewTabBtn.classList.remove('active');
             if (reactTabBtn) reactTabBtn.classList.add('active');
           } else {
-            // Preview only
-            if (previewTabBtn) previewTabBtn.classList.add('active');
-            if (reactTabBtn) reactTabBtn.classList.remove('active');
+            // Default split
+            box.classList.add('split-view');
+            if (splitTabBtn) splitTabBtn.classList.add('active');
           }
         });
 
-        AquaToast.show(`Switched to ${mode.toUpperCase()} view mode`, 'teal');
+        if (window.AquaToast && typeof window.AquaToast.show === 'function') {
+          window.AquaToast.show(`Switched to ${mode.toUpperCase()} view mode`, 'teal');
+        }
       });
     });
 
