@@ -32,8 +32,18 @@ export const Breadcrumbs = {
       }
     }
 
+    if (!activeHash || activeHash === '#/home' || activeHash.startsWith('#/home')) {
+      container.innerHTML = '';
+      return;
+    }
+
     if (customLeaf) {
       crumbs.push({ label: customLeaf, hash: null, active: true });
+    }
+
+    if (crumbs.length === 0) {
+      container.innerHTML = '';
+      return;
     }
 
     const html = `
