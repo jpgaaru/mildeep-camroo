@@ -1,8 +1,8 @@
 // AquaOps Home Welcome Board Controller
-// Clean, uncluttered entrance launchpad with high-contrast user context,
-// direct workflow shortcuts, and permissible role access directory (Zero stats/telemetry)
-
-import { ERP_DATA } from '../data/mockData.js';
+// Clean, uncluttered entrance launchpad matching the exact visual design specification:
+// - Serene coastal sunrise hero banner with active shift badge
+// - Clean, uncluttered Quick Workflow Shortcuts grid with high-resolution semantic SVG icons
+// - Zero visual clutter, high contrast typography, full responsiveness
 
 export const HomeView = {
   render(containerId) {
@@ -23,173 +23,177 @@ export const HomeView = {
     const shortcuts = [
       {
         title: "Raw Material Bookings",
-        desc: "Farmer contracts & count rates",
-        module: "Purchase",
-        icon: "📋",
-        color: "bg-teal-50 text-teal-700 border-teal-200",
+        module: "PURCHASE",
+        iconColor: "#0284C7",
+        bgColor: "#F0F9FF",
+        borderColor: "#E0F2FE",
+        iconSvg: `<svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
         hash: "#/purchase/operations/bookings"
       },
       {
         title: "Dock Inward Arrivals",
-        desc: "Weighbridge & truck intake",
-        module: "Purchase",
-        icon: "🚚",
-        color: "bg-sky-50 text-sky-700 border-sky-200",
+        module: "PURCHASE",
+        iconColor: "#0284C7",
+        bgColor: "#E0F2FE",
+        borderColor: "#BAE6FD",
+        iconSvg: `<svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 17H5a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v9m-4 4h4m4-4h1a2 2 0 002-2v-3.5a1.5 1.5 0 00-1.5-1.5H18V6a2 2 0 00-2-2h-3m-3 13a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
         hash: "#/purchase/operations/rm-arrivals"
       },
       {
         title: "RM Received Trackid",
-        desc: "Floor batch & vehicle intake",
-        module: "Pre-Processing",
-        icon: "⚡",
-        color: "bg-indigo-50 text-indigo-700 border-indigo-200",
+        module: "PRE-PROCESSING",
+        iconColor: "#6366F1",
+        bgColor: "#EEF2FF",
+        borderColor: "#E0E7FF",
+        iconSvg: `<svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
         hash: "#/preprocessing/floor-operations/rm-received"
       },
       {
         title: "Chemical Consumption",
-        desc: "Daily STPP dosing & ledger",
-        module: "Pre-Processing",
-        icon: "🧪",
-        color: "bg-purple-50 text-purple-700 border-purple-200",
+        module: "PRE-PROCESSING",
+        iconColor: "#8B5CF6",
+        bgColor: "#F5F3FF",
+        borderColor: "#EDE9FE",
+        iconSvg: `<svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`,
         hash: "#/preprocessing/chemical-inventory/chemicals-consumption"
       },
       {
         title: "Antibiotic ELISA Screening",
-        desc: "Lab pre-harvest lot testing",
-        module: "Quality Control",
-        icon: "🔬",
-        color: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        module: "QUALITY CONTROL",
+        iconColor: "#10B981",
+        bgColor: "#ECFDF5",
+        borderColor: "#D1FAE5",
+        iconSvg: `<svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>`,
         hash: "#/quality/lab/antibiotic-testing"
       },
       {
         title: "Cold Storage Pallet Intake",
-        desc: "Carton intake & chamber allocation",
-        module: "Cold Storage",
-        icon: "❄️",
-        color: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        module: "COLD STORAGE",
+        iconColor: "#06B6D4",
+        bgColor: "#ECFEFF",
+        borderColor: "#CFFAFE",
+        iconSvg: `<svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v18m0-18l-3 3m3-3l3 3m-3 15l-3-3m3 3l3-3M3 12h18m-18 0l3-3m-3 3l3 3m15-3l-3-3m3 3l3 3"/></svg>`,
         hash: "#/coldstore/inward-intake/production-intake"
       },
       {
         title: "Export Sales Contracts",
-        desc: "International buyers & pricing",
-        module: "Sales & Export",
-        icon: "🚢",
-        color: "bg-amber-50 text-amber-700 border-amber-200",
+        module: "SALES & EXPORT",
+        iconColor: "#D97706",
+        bgColor: "#FEF3C7",
+        borderColor: "#FDE68A",
+        iconSvg: `<svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>`,
         hash: "#/sales/contracts-pricing"
       },
       {
         title: "System Master Setup",
-        desc: "Plants, roles, & company profiles",
-        module: "Configuration",
-        icon: "⚙️",
-        color: "bg-slate-100 text-slate-700 border-slate-300",
+        module: "CONFIGURATION",
+        iconColor: "#64748B",
+        bgColor: "#F1F5F9",
+        borderColor: "#E2E8F0",
+        iconSvg: `<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
         hash: "#/setup/client-master-setup/company-setup"
       }
     ];
 
-    const permissibleModules = [
-      { name: "Purchase", role: "Full Access", desc: "Bookings, Arrivals, Supplier Bills & Payments" },
-      { name: "Pre-Processing", role: "Full Access", desc: "Receiving, Tasks, Chemical Stock & Traceability" },
-      { name: "Quality Control", role: "Full Access", desc: "Lab Testing, Antibiotic Screening & QC Audits" },
-      { name: "Production", role: "Full Access", desc: "Soaking, Freezing Tunnels & Anti-Dumping" },
-      { name: "Cold Storage", role: "Full Access", desc: "Inward Intake, Store Ops & Container Dispatch" },
-      { name: "Inventory", role: "Full Access", desc: "Requisitions, Procurement & Material Issues" },
-      { name: "Sales & Export", role: "Full Access", desc: "Buyer Master, Contracts & Freight Realization" },
-      { name: "Configuration", role: "Super Admin", desc: "Organization Profiles, RBAC Roles & Audit Logs" }
-    ];
-
     container.innerHTML = `
-      <div class="space-y-5 animate-fade-in max-w-7xl mx-auto pb-8">
-        <!-- 1. Crisp User Context & Active Shift Banner (High Contrast, Clean Solid Card) -->
-        <div class="bg-white rounded-xl border border-[#E2E8F0] p-4 sm:p-5 shadow-xs flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-xl bg-[#004D57] text-[#4FCFE0] font-bold text-sm flex items-center justify-center shrink-0 border border-[#006C7A]/30 shadow-xs">
-              YP
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="text-base font-bold text-[#0F172A]">${ERP_DATA.currentUser.name}</h2>
-                <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
-                  ${ERP_DATA.currentUser.role}
-                </span>
-                <span class="px-2 py-0.5 rounded text-[10.5px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                  DFL Unit-1 Visakhapatnam (HQ)
-                </span>
-              </div>
-              <p class="text-xs text-[#64748B] mt-1 flex items-center gap-2 flex-wrap">
-                <span class="inline-flex items-center gap-1.5 font-medium text-[#334155]">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-                  <span>Active Shift: Shift A (06:00 - 14:00 IST)</span>
-                </span>
-                <span class="text-slate-300 hidden sm:inline">•</span>
-                <span class="text-[#64748B]">Devi Fisheries Limited — Enterprise Seafood Processing & Export</span>
-              </p>
-            </div>
+      <div class="space-y-6 animate-fade-in max-w-7xl mx-auto pb-10">
+        
+        <!-- 1. Serene Coastal Sunrise Hero Banner -->
+        <div 
+          class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 p-7 sm:p-9 md:p-11 overflow-hidden shadow-xs"
+          style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 45%, #D8F4F8 100%);"
+        >
+          <!-- Artistic Coastal Vector Graphic Background -->
+          <div class="absolute right-0 bottom-0 top-0 w-2/3 md:w-1/2 pointer-events-none select-none overflow-hidden">
+            <svg viewBox="0 0 420 200" fill="none" preserveAspectRatio="xMaxYMax meet" class="w-full h-full opacity-90">
+              <defs>
+                <linearGradient id="sunGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95" />
+                  <stop offset="100%" stop-color="#FDE047" stop-opacity="0.75" />
+                </linearGradient>
+                <linearGradient id="backHills" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.65" />
+                  <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.3" />
+                </linearGradient>
+                <linearGradient id="frontHills" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.6" />
+                </linearGradient>
+              </defs>
+
+              <!-- Warm Pastel Sun -->
+              <circle cx="370" cy="75" r="48" fill="url(#sunGlow)" />
+
+              <!-- Flying Birds Silhouettes -->
+              <path d="M310 88 Q315 82 320 88 Q325 82 330 88" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
+              <path d="M328 104 Q332 99 336 104 Q340 99 344 104" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
+
+              <!-- Layered Soft Rolling Waves / Coastal Dunes -->
+              <path d="M120 200 Q240 100 370 145 L420 200 Z" fill="url(#backHills)" />
+              <path d="M40 200 Q190 120 340 165 Q380 180 420 200 Z" fill="url(#frontHills)" />
+              <path d="M0 200 Q140 160 270 185 Q350 200 420 200 Z" fill="#F0F9FF" opacity="0.95" />
+            </svg>
           </div>
 
-          <div class="flex items-center gap-2">
-            <a href="#/setup/client-master-setup/roles-permissions" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#006C7A] border border-[#CBD5E1] transition-all flex items-center gap-1.5">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              <span>Security & Roles</span>
-            </a>
+          <!-- Banner Foreground Content -->
+          <div class="relative z-10 max-w-2xl">
+            <!-- Active Shift Pill -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/85 backdrop-blur-xs border border-slate-200/70 shadow-2xs mb-4">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[10.5px] font-bold text-slate-700 tracking-wider uppercase">
+                ACTIVE SHIFT: SHIFT A (06:00 - 14:00 IST) • DFL UNIT-1 VISAKHAPATNAM (HQ)
+              </span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
+              Welcome to Camaroo ERP
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-sm sm:text-[15px] font-medium text-[#475569] mt-2">
+              Devi Fisheries Limited • Enterprise Seafood Processing & Export SaaS
+            </p>
           </div>
         </div>
 
-        <!-- 2. Quick Workflow Shortcuts (Clean Uncluttered Launchpad) -->
-        <div class="bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-xs">
-          <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9] mb-4">
-            <div>
-              <h3 class="text-sm font-bold text-[#0F172A]">Quick Workflow Shortcuts</h3>
-              <p class="text-xs text-[#64748B] mt-0.5">Direct 1-click links to the most frequent operational workflows across departments</p>
-            </div>
-          </div>
+        <!-- 2. Quick Workflow Shortcuts Section -->
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight mb-4">
+            Quick Workflow Shortcuts
+          </h2>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <!-- Clean Uncluttered Responsive Grid (4 columns desktop, 2 tablet, 1 mobile) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             ${shortcuts.map(s => `
               <a 
                 href="${s.hash}" 
-                class="p-3.5 rounded-xl border border-[#E2E8F0] hover:border-[#006C7A] hover:shadow-xs transition-all bg-white hover:bg-slate-50/70 flex items-start gap-3 group cursor-pointer"
+                class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200 flex flex-col justify-between group cursor-pointer"
               >
-                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-105 transition-transform ${s.color} border">
-                  ${s.icon}
-                </div>
-                <div class="min-w-0 flex-1">
-                  <span class="text-[10px] font-bold text-[#64748B] uppercase tracking-wider block">${s.module}</span>
-                  <h4 class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] mt-0.5 truncate">${s.title}</h4>
-                  <p class="text-[11px] text-[#64748B] mt-0.5 leading-snug line-clamp-1">${s.desc}</p>
+                <div>
+                  <!-- Squircle Icon Box -->
+                  <div 
+                    class="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-105"
+                    style="background-color: ${s.bgColor}; border: 1px solid ${s.borderColor};"
+                  >
+                    ${s.iconSvg}
+                  </div>
+
+                  <!-- Category Tag -->
+                  <span class="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                    ${s.module}
+                  </span>
+
+                  <!-- Shortcut Title -->
+                  <h3 class="text-sm sm:text-[14.5px] font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors leading-snug">
+                    ${s.title}
+                  </h3>
                 </div>
               </a>
             `).join('')}
           </div>
         </div>
 
-        <!-- 3. My Permissible Roles & Module Access Directory -->
-        <div class="bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-xs">
-          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#F1F5F9] mb-4">
-            <div>
-              <h3 class="text-sm font-bold text-[#0F172A]">My Permissible Roles & Access Authorization</h3>
-              <p class="text-xs text-[#64748B] mt-0.5">Overview of active department privileges granted to your account</p>
-            </div>
-            <a href="#/setup/client-master-setup/roles-permissions" class="text-xs font-semibold text-[#006C7A] hover:underline flex items-center gap-1">
-              <span>Manage Roles & Privileges in Settings</span>
-              <span>→</span>
-            </a>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            ${permissibleModules.map(m => `
-              <div class="p-3 rounded-lg border border-[#E2E8F0] bg-slate-50/50">
-                <div class="flex items-center justify-between gap-2 mb-1">
-                  <span class="text-xs font-bold text-[#0F172A]">${m.name}</span>
-                  <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold ${m.role === 'Super Admin' ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-teal-50 text-teal-700 border border-teal-200'}">
-                    ${m.role}
-                  </span>
-                </div>
-                <p class="text-[11px] text-[#64748B] leading-tight">${m.desc}</p>
-              </div>
-            `).join('')}
-          </div>
-        </div>
       </div>
     `;
   }
