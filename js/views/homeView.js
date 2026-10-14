@@ -1,8 +1,8 @@
 // AquaOps Home Welcome Board Controller
-// Clean, uncluttered entrance launchpad matching the exact visual design specification:
-// - Serene coastal sunrise hero banner with active shift badge
-// - Clean, uncluttered Quick Workflow Shortcuts grid with high-resolution semantic SVG icons
-// - Zero visual clutter, high contrast typography, full responsiveness
+// Clean, uncluttered entrance launchpad:
+// - Serene coastal sunrise hero banner with "Welcome to Camaroo ERP"
+// - Quick Workflow Shortcuts grid with perfectly aligned responsive layout
+// - My Permissible Roles compact section with Manage Settings shortcut
 
 export const HomeView = {
   render(containerId) {
@@ -95,12 +95,23 @@ export const HomeView = {
       }
     ];
 
+    const roles = [
+      { module: "Purchase", role: "Full Access", hash: "#/purchase/dashboard/rm-dashboard" },
+      { module: "Pre-Processing", role: "Full Access", hash: "#/preprocessing/dashboard/floor-overview" },
+      { module: "Quality Control", role: "Full Access", hash: "#/quality/dashboard/qc-overview" },
+      { module: "Production", role: "Full Access", hash: "#/production/dashboard/overview" },
+      { module: "Cold Storage", role: "Full Access", hash: "#/coldstore/dashboard/overview" },
+      { module: "Inventory", role: "Full Access", hash: "#/inventory/dashboard/overview" },
+      { module: "Sales & Export", role: "Full Access", hash: "#/sales/dashboard/overview" },
+      { module: "Configuration", role: "Super Admin", hash: "#/setup/client-master-setup/roles-permissions" }
+    ];
+
     container.innerHTML = `
-      <div class="space-y-6 animate-fade-in max-w-7xl mx-auto pb-10">
+      <div class="space-y-6 animate-fade-in w-full pb-10">
         
         <!-- 1. Serene Coastal Sunrise Hero Banner -->
         <div 
-          class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 p-7 sm:p-9 md:p-11 overflow-hidden shadow-xs"
+          class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 p-7 sm:p-9 md:p-12 overflow-hidden shadow-xs w-full"
           style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 45%, #D8F4F8 100%);"
         >
           <!-- Artistic Coastal Vector Graphic Background -->
@@ -137,14 +148,6 @@ export const HomeView = {
 
           <!-- Banner Foreground Content -->
           <div class="relative z-10 max-w-2xl">
-            <!-- Active Shift Pill -->
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/85 backdrop-blur-xs border border-slate-200/70 shadow-2xs mb-4">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="text-[10.5px] font-bold text-slate-700 tracking-wider uppercase">
-                ACTIVE SHIFT: SHIFT A (06:00 - 14:00 IST) • DFL UNIT-1 VISAKHAPATNAM (HQ)
-              </span>
-            </div>
-
             <!-- Main Title -->
             <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
               Welcome to Camaroo ERP
@@ -153,13 +156,13 @@ export const HomeView = {
         </div>
 
         <!-- 2. Quick Workflow Shortcuts Section -->
-        <div>
+        <div class="w-full">
           <h2 class="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight mb-4">
             Quick Workflow Shortcuts
           </h2>
 
           <!-- Clean Uncluttered Responsive Grid (4 columns desktop, 2 tablet, 1 mobile) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full">
             ${shortcuts.map(s => `
               <a 
                 href="${s.hash}" 
@@ -184,6 +187,40 @@ export const HomeView = {
                     ${s.title}
                   </h3>
                 </div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 3. My Permissible Roles Section -->
+        <div class="w-full pt-2">
+          <div class="flex items-center justify-between gap-3 mb-3.5">
+            <h2 class="text-base sm:text-lg font-bold text-[#0F172A] tracking-tight">
+              My Permissible Roles
+            </h2>
+            <a 
+              href="#/setup/client-master-setup/roles-permissions" 
+              class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-slate-50 text-[#006C7A] border border-[#CBD5E1] transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
+            >
+              <span>Manage Settings</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- 8 Compact Role Shortcuts Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full">
+            ${roles.map(r => `
+              <a 
+                href="${r.hash}" 
+                class="bg-white rounded-xl p-3.5 border border-slate-200/80 shadow-2xs flex items-center justify-between gap-3 hover:border-slate-300 hover:shadow-xs transition-all group cursor-pointer"
+              >
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <span class="w-2 h-2 rounded-full ${r.role === 'Super Admin' ? 'bg-rose-500' : 'bg-teal-500'} shrink-0"></span>
+                  <span class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors truncate">${r.module}</span>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10.5px] font-bold shrink-0 ${r.role === 'Super Admin' ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-teal-50 text-teal-700 border border-teal-200'}">
+                  ${r.role}
+                </span>
               </a>
             `).join('')}
           </div>
