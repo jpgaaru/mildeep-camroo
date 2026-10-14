@@ -65,8 +65,11 @@ export const NAV_HIERARCHY = [
         title: "Floor Operations",
         defaultTab: "receiving-sorting",
         tabs: [
-          { id: "receiving-sorting", label: "Receiving & Sorting", hash: "#/preprocessing/floor-operations/receiving-sorting" },
-          { id: "preprocessing-tasks", label: "Pre-Processing Tasks", hash: "#/preprocessing/floor-operations/preprocessing-tasks" }
+          { id: "receiving-sorting", label: "Receiving & Track ID", hash: "#/preprocessing/floor-operations/receiving-sorting" },
+          { id: "deheading", label: "Deheading Runs", hash: "#/preprocessing/floor-operations/deheading" },
+          { id: "grading", label: "Grading Lines", hash: "#/preprocessing/floor-operations/grading" },
+          { id: "value-addition", label: "Value Addition", hash: "#/preprocessing/floor-operations/value-addition" },
+          { id: "transfers", label: "VA Transfers", hash: "#/preprocessing/floor-operations/transfers" }
         ]
       },
       {
@@ -75,7 +78,9 @@ export const NAV_HIERARCHY = [
         defaultTab: "chemical-stock",
         tabs: [
           { id: "chemical-stock", label: "Chemical Stock", hash: "#/preprocessing/chemical-inventory/chemical-stock" },
-          { id: "usage-logs", label: "Usage Logs", hash: "#/preprocessing/chemical-inventory/usage-logs" }
+          { id: "usage-logs", label: "Usage Logs", hash: "#/preprocessing/chemical-inventory/usage-logs" },
+          { id: "chemical-pos", label: "Chemical POs & Customs", hash: "#/preprocessing/chemical-inventory/chemical-pos" },
+          { id: "payments", label: "Vendor Payments", hash: "#/preprocessing/chemical-inventory/payments" }
         ]
       },
       {
@@ -83,7 +88,10 @@ export const NAV_HIERARCHY = [
         title: "Traceability",
         defaultTab: "batch-traceability",
         tabs: [
-          { id: "batch-traceability", label: "Batch Traceability Logs", hash: "#/preprocessing/traceability/batch-traceability" }
+          { id: "batch-traceability", label: "Pond-to-Pack Traceability", hash: "#/preprocessing/traceability/batch-traceability" },
+          { id: "floor-balance", label: "Floor Balance Matrix", hash: "#/preprocessing/traceability/floor-balance" },
+          { id: "assumed-reports", label: "Assumed Yield Reports", hash: "#/preprocessing/traceability/assumed-reports" },
+          { id: "consolidation", label: "Packing Consolidation", hash: "#/preprocessing/traceability/consolidation" }
         ]
       }
     ]
