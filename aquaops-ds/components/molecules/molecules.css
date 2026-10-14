@@ -120,39 +120,41 @@
 
 /* Underline for Full Page Section Switching (.tabs-line) */
 .tabs-line {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  border-bottom: 1px solid #E2E8F0;
-  width: 100%;
-  overflow-x: auto;
-  user-select: none;
-  -webkit-user-select: none;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 28px !important;
+  border-bottom: none !important;
+  background: none !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  scrollbar-width: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
 .tabs-line button,
 .tabs-line a,
 .tabs-line [role="tab"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 4px 13px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 4px 13px !important;
   border: none !important;
   background: transparent !important;
-  color: #64748B;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
+  color: #64748B !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
   border-bottom: 2.5px solid transparent !important;
-  margin-bottom: -1px;
-  text-decoration: none;
-  white-space: nowrap;
-  outline: none;
-  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: -1px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  outline: none !important;
+  transition: color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 .tabs-line button:hover,
 .tabs-line a:hover,
 .tabs-line [role="tab"]:hover {
-  color: #0F172A;
+  color: #0F172A !important;
   border-bottom-color: #CBD5E1 !important;
 }
 .tabs-line button:active,
@@ -169,7 +171,8 @@
 .tabs-line a.tab-active {
   color: #006C7A !important;
   font-weight: 700 !important;
-  border-bottom-color: #006C7A !important;
+  border-bottom: 2.5px solid #006C7A !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 108, 122, 0.25) !important;
 }
 .tabs-line a span,
 .tabs-line button span,

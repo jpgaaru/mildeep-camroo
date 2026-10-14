@@ -222,15 +222,12 @@ body {
 
 /* 1. Full Page Section Switching: Underline Tabs (.tabs-line) */
 .tabs-line {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   gap: 28px !important;
-  border-bottom: 1px solid transparent !important;
-  background-image: linear-gradient(to right, rgba(226, 232, 240, 0.95) 0%, rgba(226, 232, 240, 0.5) 50%, rgba(226, 232, 240, 0) 100%) !important;
-  background-position: bottom !important;
-  background-size: 100% 1px !important;
-  background-repeat: no-repeat !important;
-  width: 100% !important;
+  border-bottom: none !important;
+  background: none !important;
+  max-width: 100% !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   scrollbar-width: none !important;
