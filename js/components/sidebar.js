@@ -63,27 +63,42 @@ export const NAV_HIERARCHY = [
       {
         id: "floor-operations",
         title: "Floor Operations",
-        defaultTab: "receiving-sorting",
+        defaultTab: "rm-received",
         tabs: [
-          { id: "receiving-sorting", label: "Receiving & Sorting", hash: "#/preprocessing/floor-operations/receiving-sorting" },
-          { id: "preprocessing-tasks", label: "Pre-Processing Tasks", hash: "#/preprocessing/floor-operations/preprocessing-tasks" }
+          { id: "rm-received", label: "RM Received Trackid", hash: "#/preprocessing/floor-operations/rm-received" },
+          { id: "deheading", label: "Deheading", hash: "#/preprocessing/floor-operations/deheading" },
+          { id: "grading", label: "Grading", hash: "#/preprocessing/floor-operations/grading" },
+          { id: "deheading-trackid", label: "De-Heading Trackid", hash: "#/preprocessing/floor-operations/deheading-trackid" },
+          { id: "grading-trackid", label: "Grading Trackid", hash: "#/preprocessing/floor-operations/grading-trackid" },
+          { id: "value-addition", label: "Value Addition Trackid", hash: "#/preprocessing/floor-operations/value-addition" },
+          { id: "hon-qty-transfer", label: "Hon Qty Transfer", hash: "#/preprocessing/floor-operations/hon-qty-transfer" }
         ]
       },
       {
         id: "chemical-inventory",
         title: "Chemical Inventory & Usage",
-        defaultTab: "chemical-stock",
+        defaultTab: "chemical-pos",
         tabs: [
-          { id: "chemical-stock", label: "Chemical Stock", hash: "#/preprocessing/chemical-inventory/chemical-stock" },
-          { id: "usage-logs", label: "Usage Logs", hash: "#/preprocessing/chemical-inventory/usage-logs" }
+          { id: "chemical-pos", label: "Chemical Pos", hash: "#/preprocessing/chemical-inventory/chemical-pos" },
+          { id: "received-chemicals", label: "Received Chemicals", hash: "#/preprocessing/chemical-inventory/received-chemicals" },
+          { id: "chemicals-consumption", label: "Consumption", hash: "#/preprocessing/chemical-inventory/chemicals-consumption" },
+          { id: "chemical-received-report", label: "Received Report", hash: "#/preprocessing/chemical-inventory/chemical-received-report" },
+          { id: "chemical-opening-balance", label: "Opening Balance", hash: "#/preprocessing/chemical-inventory/chemical-opening-balance" },
+          { id: "chemical-balance-report", label: "Balance Report", hash: "#/preprocessing/chemical-inventory/chemical-balance-report" },
+          { id: "chemical-payments-list", label: "Payments List", hash: "#/preprocessing/chemical-inventory/chemical-payments-list" }
         ]
       },
       {
         id: "traceability",
         title: "Traceability",
-        defaultTab: "batch-traceability",
+        defaultTab: "track-code-report",
         tabs: [
-          { id: "batch-traceability", label: "Batch Traceability", hash: "#/preprocessing/traceability/batch-traceability" }
+          { id: "track-code-report", label: "Track Code Report", hash: "#/preprocessing/traceability/track-code-report" },
+          { id: "va-floor-balance", label: "VA Floor Balance", hash: "#/preprocessing/traceability/va-floor-balance" },
+          { id: "va-transfer", label: "VA Transfer Report", hash: "#/preprocessing/traceability/va-transfer" },
+          { id: "assumed-reports", label: "Assumed Reports", hash: "#/preprocessing/traceability/assumed-reports" },
+          { id: "consolidation-daily", label: "Consolidation Report", hash: "#/preprocessing/traceability/consolidation-daily" },
+          { id: "file-upload", label: "File Upload", hash: "#/preprocessing/traceability/file-upload" }
         ]
       }
     ]
