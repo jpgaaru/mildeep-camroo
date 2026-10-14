@@ -475,19 +475,19 @@
 /* 2. Compound Input Groups (Attached Units & Controls - Seamless Curvature) */
 .input-compound {
   display: flex; align-items: center; width: 100%;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-12);
+  border: 1px solid #CBD5E1;
+  border-radius: var(--r-8);
   background: var(--white);
-  height: 48px;
+  height: 42px;
   overflow: hidden;
-  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  transition: border-color 0.16s var(--ease), box-shadow 0.16s var(--ease);
 }
 .input-compound:hover {
-  border-color: var(--faint);
+  border-color: #94A3B8;
 }
 .input-compound:focus-within {
-  border-color: var(--teal-600);
-  box-shadow: 0 0 0 3px var(--teal-100);
+  border-color: #004d57;
+  box-shadow: 0 0 0 3px rgba(0, 77, 87, 0.14);
 }
 .input-compound.err,
 .input-compound:has(.input.err) {
@@ -503,17 +503,17 @@
 .input-compound-suffix,
 .input-compound-addon {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 0 16px; background: var(--soft);
-  color: var(--muted); font-size: var(--t-xs); font-weight: 700;
+  padding: 0 14px; background: #F8FAFC;
+  color: #64748B; font-size: 11.5px; font-weight: 700;
   user-select: none; white-space: nowrap; height: 100%; flex-shrink: 0;
   transition: border-color var(--dur-fast);
 }
 .input-compound-prefix,
 .input-compound-addon {
-  border-right: 1px solid var(--line-strong);
+  border-right: 1px solid #CBD5E1;
 }
 .input-compound-suffix {
-  border-left: 1px solid var(--line-strong);
+  border-left: 1px solid #CBD5E1;
 }
 .input-compound .input {
   flex: 1; height: 100%;
@@ -521,17 +521,17 @@
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
-  padding: 0 16px; font-size: var(--t-sm);
-  outline: none; color: var(--ink);
+  padding: 0 14px; font-size: 13.5px;
+  outline: none; color: #0F172A;
 }
 .input-compound .btn {
-  height: 34px; margin-right: 6px; flex-shrink: 0;
-  padding: 0 14px; font-size: var(--t-xs);
+  height: 30px; margin-right: 5px; flex-shrink: 0;
+  padding: 0 12px; font-size: 12px; border-radius: var(--r-6);
 }
 
 /* 3. Drag & Drop File Upload Dropzone (Lab QC / Pathology Certificates) */
 .dropzone {
-  border: 1.5px dashed var(--line-strong); border-radius: var(--r-20);
+  border: 1.5px dashed #CBD5E1; border-radius: var(--r-12);
   background: var(--white); padding: var(--s5) var(--s4);
   display: flex; flex-direction: column; align-items: center; text-align: center;
   gap: var(--s2); cursor: pointer;

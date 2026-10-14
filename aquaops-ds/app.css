@@ -222,8 +222,8 @@ svg { display: block; }
 
 /* Swatch Card Helper */
 .swatches { display: flex; gap: 10px; flex-wrap: wrap; }
-.sw-card { width: 68px; }
-.sw-card i { display: block; height: 58px; border-radius: var(--r-12); border: 1px solid rgba(0,0,0,0.06); }
+.sw-card { width: 72px; }
+.sw-card i { display: block; height: 56px; border-radius: var(--r-8); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
 .sw-card span { display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-top: 6px; text-align: center; }
 .sw-card .hex { font-size: 9.5px; color: var(--faint); text-align: center; font-family: var(--font-mono); }
 .sw-card .wcag-badge { font-size: 8.5px; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-align: center; display: block; margin-top: 3px; }

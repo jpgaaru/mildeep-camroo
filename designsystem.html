@@ -76,8 +76,9 @@
           <div class="sw-card"><i style="background:#00a4b7"></i><span>600</span><div class="hex">#00a4b7</div><span class="wcag-badge wcag-aa">Anchor</span></div>
           <div class="sw-card"><i style="background:#008292"></i><span>700</span><div class="hex">#008292</div><span class="wcag-badge wcag-aa">AA Text</span></div>
           <div class="sw-card"><i style="background:#006c7a"></i><span>800</span><div class="hex">#006c7a</div><span class="wcag-badge wcag-aaa">AAA Text</span></div>
-          <div class="sw-card"><i style="background:#005662"></i><span>900</span><div class="hex">#005662</div><span class="wcag-badge wcag-aaa">Shade</span></div>
-          <div class="sw-card"><i style="background:#002d34"></i><span>990</span><div class="hex">#002d34</div><span class="wcag-badge wcag-aaa">Deep</span></div>
+          <div class="sw-card"><i style="background:#005662"></i><span>850</span><div class="hex">#005662</div><span class="wcag-badge wcag-aaa">7.4:1 AAA</span></div>
+          <div class="sw-card"><i style="background:#004d57"></i><span>900 Action</span><div class="hex">#004d57</div><span class="wcag-badge wcag-aaa">8.2:1 AAA</span></div>
+          <div class="sw-card"><i style="background:#002d34"></i><span>990 Deep</span><div class="hex">#002d34</div><span class="wcag-badge wcag-aaa">Deep</span></div>
           <div class="sw-card"><i style="background:#000000"></i><span>Black</span><div class="hex">#000000</div><span class="wcag-badge wcag-aaa">AAA</span></div>
           <div class="sw-card"><i style="background:#6e6e73"></i><span>Muted</span><div class="hex">#6e6e73</div><span class="wcag-badge wcag-aa">AA Text</span></div>
           <div class="sw-card"><i style="background:#f5f5f7"></i><span>Soft</span><div class="hex">#f5f5f7</div><span class="wcag-badge wcag-aa">Surface</span></div>
@@ -444,14 +445,38 @@
           </div>
         </div>
 
-        <div>
-          <div class="category-label">Status Pills &amp; Badges</div>
-          <div class="line-row">
-            <span class="badge badge-teal"><i data-lucide="check"></i>Active Batch</span>
-            <span class="badge badge-soft"><i data-lucide="refresh-cw"></i>Syncing IoT</span>
-            <span class="badge badge-dark">Critical Hold</span>
-            <span class="badge badge-gray">QC Passed</span>
-            <span class="badge badge-line">Pending Screen</span>
+      </div>
+    </div>
+
+    <!-- Status Lozenges & Badges (WCAG CALIBRATED) -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Badges &amp; Status Lozenges</div>
+        <p class="spec-desc">Subtle, low-opacity background badges and high-contrast status pills following Apple HIG and Google Material guidelines. Equipped with live status dot indicators.</p>
+      </div>
+      <div class="spec-content">
+        <div class="stack-col">
+          <div>
+            <div class="category-label">Semantic Status Pills with Icons</div>
+            <div class="line-row">
+              <span class="badge badge-teal"><i data-lucide="check"></i>Active Batch</span>
+              <span class="badge badge-soft"><i data-lucide="refresh-cw"></i>Syncing IoT</span>
+              <span class="badge badge-success"><i data-lucide="shield-check"></i>HACCP Certified</span>
+              <span class="badge badge-warning"><i data-lucide="alert-triangle"></i>Low Aeration</span>
+              <span class="badge badge-danger"><i data-lucide="alert-octagon"></i>Critical DO</span>
+              <span class="badge badge-dark"><i data-lucide="lock"></i>Telemetry Locked</span>
+            </div>
+          </div>
+          <div>
+            <div class="category-label">Live Dot Indicators &amp; Outlined Lozenges</div>
+            <div class="line-row">
+              <span class="badge badge-teal"><span class="badge-dot"></span>Pond 04 Live</span>
+              <span class="badge badge-success"><span class="badge-dot"></span>Chamber 02 Cold</span>
+              <span class="badge badge-warning"><span class="badge-dot"></span>Biomass Warning</span>
+              <span class="badge badge-danger"><span class="badge-dot"></span>Ammonia Spike</span>
+              <span class="badge badge-gray">QC Passed</span>
+              <span class="badge badge-line">Pending Screen</span>
+            </div>
           </div>
         </div>
       </div>
@@ -751,88 +776,103 @@
           </div>
 
         </div>
+      </div>
+    </div>
 
-        <div>
-          <div class="category-label">Choices &amp; Switches</div>
-          <div class="line-row" style="gap:var(--s5)">
-            <label class="check"><input type="checkbox" checked />Antibiotic screening verified</label>
-            <label class="check"><input type="radio" name="demoR" checked />Automated Aerators</label>
-            <div class="line-row" style="gap:10px">
-              <label class="switch"><input type="checkbox" checked /><i></i></label>
-              <span style="font-size:var(--t-sm);font-weight:600">IoT Telemetry Sync</span>
+    <!-- Choices & Switches -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Choices, Radios &amp; Switches</div>
+        <p class="spec-desc">Accessible binary and multi-choice selections. Tactile iOS-grade toggle switch with 44px × 24px track, and 4px rounded check controls.</p>
+      </div>
+      <div class="spec-content">
+        <div class="line-row" style="gap:var(--s5);align-items:center;flex-wrap:wrap">
+          <label class="check"><input type="checkbox" checked />Antibiotic screening verified</label>
+          <label class="check"><input type="radio" name="demoR" checked />Automated Aerators</label>
+          <div class="line-row" style="gap:10px;align-items:center">
+            <label class="switch"><input type="checkbox" checked /><i></i></label>
+            <span style="font-size:13.5px;font-weight:600;color:#1E293B">IoT Telemetry Sync</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skeleton Shimmer Loaders -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Skeleton Shimmer Loaders</div>
+        <p class="spec-desc">Content-aware placeholder geometries indicating pending data without layout shifts, conforming to Apple HIG shimmer specifications.</p>
+      </div>
+      <div class="spec-content">
+        <div class="form-responsive-grid">
+          <div class="skeleton-card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="skeleton-circle"></div>
+              <div class="skeleton" style="width:70px;height:24px;border-radius:var(--pill)"></div>
             </div>
+            <div class="skeleton" style="width:60%;height:28px"></div>
+            <div class="skeleton" style="width:40%"></div>
+            <div class="skeleton" style="width:100%;height:6px"></div>
+          </div>
+
+          <div class="skeleton-card">
+            <div class="skeleton" style="width:50%;height:20px"></div>
+            <div class="skeleton" style="width:100%;height:14px"></div>
+            <div class="skeleton" style="width:85%;height:14px"></div>
+            <div class="skeleton" style="width:70%;height:14px"></div>
           </div>
         </div>
 
-        <!-- Skeleton Loaders Demo Section -->
-        <div>
-          <div class="category-label">Skeleton Shimmer Loaders (Industry Grade)</div>
-          <div class="form-responsive-grid">
-            <div class="skeleton-card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="skeleton-circle"></div>
-                <div class="skeleton" style="width:70px;height:24px;border-radius:var(--pill)"></div>
-              </div>
-              <div class="skeleton" style="width:60%;height:32px"></div>
-              <div class="skeleton" style="width:40%"></div>
-              <div class="skeleton" style="width:100%;height:6px"></div>
-            </div>
+        <!-- Table Row Skeletons -->
+        <div class="skeleton-card" style="margin-top:16px;padding:16px 20px">
+          <div class="skeleton-row">
+            <div class="skeleton" style="width:18px;height:18px;border-radius:4px"></div>
+            <div class="skeleton" style="width:140px;height:16px"></div>
+            <div class="skeleton" style="width:90px;height:16px"></div>
+            <div class="skeleton" style="width:110px;height:16px;margin-left:auto"></div>
+            <div class="skeleton" style="width:60px;height:22px;border-radius:var(--pill)"></div>
+          </div>
+          <div class="skeleton-row">
+            <div class="skeleton" style="width:18px;height:18px;border-radius:4px"></div>
+            <div class="skeleton" style="width:160px;height:16px"></div>
+            <div class="skeleton" style="width:80px;height:16px"></div>
+            <div class="skeleton" style="width:95px;height:16px;margin-left:auto"></div>
+            <div class="skeleton" style="width:60px;height:22px;border-radius:var(--pill)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <div class="skeleton-card">
-              <div class="skeleton" style="width:50%;height:20px"></div>
-              <div class="skeleton" style="width:100%;height:14px"></div>
-              <div class="skeleton" style="width:85%;height:14px"></div>
-              <div class="skeleton" style="width:70%;height:14px"></div>
+    <!-- Callouts & Feedback Banners -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Callouts &amp; Feedback Banners</div>
+        <p class="spec-desc">Contextual messaging banners with semantic color coding, 10px corner radius, and top-aligned status iconography.</p>
+      </div>
+      <div class="spec-content">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="callout callout-info">
+            <i data-lucide="info"></i>
+            <div class="callout-content">
+              <div class="callout-title">Biosecurity Quarantine In Effect</div>
+              <div>Pond Cluster B is undergoing prophylactic micro-screen sampling. Automated telemetry reports are synchronized every 15 minutes.</div>
             </div>
           </div>
-
-          <!-- Table Row Skeletons -->
-          <div class="skeleton-card" style="margin-top:16px;padding:16px 20px">
-            <div class="skeleton-row">
-              <div class="skeleton" style="width:18px;height:18px;border-radius:4px"></div>
-              <div class="skeleton" style="width:140px;height:16px"></div>
-              <div class="skeleton" style="width:90px;height:16px"></div>
-              <div class="skeleton" style="width:110px;height:16px;margin-left:auto"></div>
-              <div class="skeleton" style="width:60px;height:22px;border-radius:var(--pill)"></div>
+          <div class="callout callout-success">
+            <i data-lucide="check-circle-2"></i>
+            <div class="callout-content">
+              <div class="callout-title">HACCP Coldstore Verification Complete</div>
+              <div>All batch temperature records conform to EU export standards (-18.4°C sustained over 72 hours).</div>
             </div>
-            <div class="skeleton-row">
-              <div class="skeleton" style="width:18px;height:18px;border-radius:4px"></div>
-              <div class="skeleton" style="width:160px;height:16px"></div>
-              <div class="skeleton" style="width:80px;height:16px"></div>
-              <div class="skeleton" style="width:95px;height:16px;margin-left:auto"></div>
-              <div class="skeleton" style="width:60px;height:22px;border-radius:var(--pill)"></div>
+          </div>
+          <div class="callout callout-warning">
+            <i data-lucide="alert-triangle"></i>
+            <div class="callout-content">
+              <div class="callout-title">Dissolved Oxygen Threshold Alert</div>
+              <div>Pond 104 DO dropped below 4.2 mg/L. Aerator paddlewheels switched to emergency continuous drive.</div>
             </div>
           </div>
         </div>
-
-        <!-- Callouts & Feedback Banners -->
-        <div>
-          <div class="category-label">Callouts &amp; Feedback Banners</div>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div class="callout callout-info">
-              <i data-lucide="info"></i>
-              <div class="callout-content">
-                <div class="callout-title">Biosecurity Quarantine In Effect</div>
-                <div>Pond Cluster B is undergoing prophylactic micro-screen sampling. Automated telemetry reports are synchronized every 15 minutes.</div>
-              </div>
-            </div>
-            <div class="callout callout-success">
-              <i data-lucide="check-circle-2"></i>
-              <div class="callout-content">
-                <div class="callout-title">HACCP Coldstore Verification Complete</div>
-                <div>All batch temperature records conform to EU export standards (-18.4°C sustained over 72 hours).</div>
-              </div>
-            </div>
-            <div class="callout callout-warning">
-              <i data-lucide="alert-triangle"></i>
-              <div class="callout-content">
-                <div class="callout-title">Dissolved Oxygen Threshold Alert</div>
-                <div>Pond 104 DO dropped below 4.2 mg/L. Aerator paddlewheels switched to emergency continuous drive.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -871,27 +911,42 @@
           </div>
         </div>
 
-        <div>
-          <div class="category-label">Segmented Controls &amp; Micro-Tooltips</div>
-          <div class="line-row" style="justify-content:space-between">
-            <div class="segmented-control">
-              <button class="segment-btn active"><i data-lucide="radio"></i>Live</button>
-              <button class="segment-btn">1 Hour</button>
-              <button class="segment-btn">24 Hours</button>
-              <button class="segment-btn">7 Days</button>
-              <button class="segment-btn">Cycle</button>
-            </div>
-            <div class="line-row" style="gap:var(--s4);font-size:var(--t-xs)">
-              <span class="has-tooltip">DO (Dissolved Oxygen)<span class="tooltip-box">Critical oxygen concentration dissolved in water (mg/L). Minimum threshold: 4.0 mg/L</span></span>
-              <span class="has-tooltip">ORP (Redox Potential)<span class="tooltip-box">Oxidation-Reduction Potential. Indicates pond sanitization level (+200 to +250 mV optimal)</span></span>
-              <span class="has-tooltip">FCR (Feed Conversion Ratio)<span class="tooltip-box">Total feed intake (kg) / net biomass gain (kg). Benchmark: 1.25</span></span>
-            </div>
+      </div>
+    </div>
+
+    <!-- Segmented Controls & Micro-Tooltips -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Segmented Controls &amp; Tooltips</div>
+        <p class="spec-desc">Tactile sliding segmented mode toggles with pill containers, and accessible micro-tooltips for technical telemetry definitions.</p>
+      </div>
+      <div class="spec-content">
+        <div class="line-row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+          <div class="segmented-control">
+            <button class="segment-btn active"><i data-lucide="radio"></i>Live</button>
+            <button class="segment-btn">1 Hour</button>
+            <button class="segment-btn">24 Hours</button>
+            <button class="segment-btn">7 Days</button>
+            <button class="segment-btn">Cycle</button>
+          </div>
+          <div class="line-row" style="gap:20px;font-size:var(--t-xs)">
+            <span class="has-tooltip">DO (Dissolved Oxygen)<span class="tooltip-box">Critical oxygen concentration dissolved in water (mg/L). Minimum threshold: 4.0 mg/L</span></span>
+            <span class="has-tooltip">ORP (Redox Potential)<span class="tooltip-box">Oxidation-Reduction Potential. Indicates pond sanitization level (+200 to +250 mV optimal)</span></span>
+            <span class="has-tooltip">FCR (Feed Conversion Ratio)<span class="tooltip-box">Total feed intake (kg) / net biomass gain (kg). Benchmark: 1.25</span></span>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div>
-          <div class="category-label">Hopper Biomass &amp; Capacity Meter Bars</div>
-          <div class="form-responsive-grid">
+    <!-- Capacity Meter Bars & Progress -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Capacity &amp; Progress Meters</div>
+        <p class="spec-desc">Visual percentage indicators for pond carrying capacities, automated feed hoppers, and cold storage room volume fill.</p>
+      </div>
+      <div class="spec-content">
+        <div class="form-responsive-grid">
+          <div class="meter-card">
             <div class="meter-bar">
               <div class="meter-header">
                 <span>Pond 101 Carrying Capacity</span>
@@ -899,6 +954,8 @@
               </div>
               <div class="meter-track"><div class="meter-fill" style="width:72%"></div></div>
             </div>
+          </div>
+          <div class="meter-card">
             <div class="meter-bar">
               <div class="meter-header">
                 <span>Automated Feeder Hopper Level</span>
@@ -908,7 +965,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>

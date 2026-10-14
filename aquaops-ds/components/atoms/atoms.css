@@ -200,13 +200,21 @@
 /* ==========================================================
    BADGE ATOMS
    ========================================================== */
-.badge { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: var(--pill); font-size: var(--t-xs); font-weight: 600; white-space: nowrap; }
-.badge svg { width: 13px; height: 13px; }
-.badge-teal { background: var(--teal-600); color: var(--black); }
-.badge-soft { background: var(--teal-050); color: var(--teal-990); border: 1px solid var(--teal-200); }
-.badge-dark { background: var(--black); color: var(--white); }
-.badge-gray { background: var(--soft); color: var(--ink); }
-.badge-line { border: 1px solid var(--line-strong); color: var(--muted); }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 26px; padding: 0 10px; border-radius: var(--pill);
+  font-size: 11.5px; font-weight: 600; white-space: nowrap; line-height: 1;
+}
+.badge svg { width: 12px; height: 12px; }
+.badge-teal { background: #E0F7FA; color: #004d57; border: 1px solid #B2EBF2; }
+.badge-soft { background: #F0FAFC; color: #004d57; border: 1px solid #B2ECF3; }
+.badge-dark { background: #0F172A; color: #FFFFFF; }
+.badge-gray { background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0; }
+.badge-line { border: 1px solid #CBD5E1; color: #64748B; background: #FFFFFF; }
+.badge-success { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.badge-warning { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+.badge-danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
 /* ==========================================================
    INPUT & SELECT ATOMS
@@ -363,11 +371,11 @@ select.input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87
 
 .skeleton-card {
   background: var(--white); border: 1px solid var(--line);
-  border-radius: var(--r-20); padding: 24px;
+  border-radius: var(--r-12); padding: 20px;
   display: flex; flex-direction: column; gap: 14px;
 }
 .skeleton-circle {
-  width: 40px; height: 40px; border-radius: var(--r-12);
+  width: 40px; height: 40px; border-radius: var(--r-8);
   background: var(--soft);
 }
 .skeleton-row {
@@ -380,7 +388,7 @@ select.input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87
    ALERT & CALLOUT BANNER ATOMS
    ========================================================== */
 .callout {
-  padding: 14px 18px; border-radius: var(--r-14);
+  padding: 14px 18px; border-radius: var(--r-10);
   display: flex; align-items: flex-start; gap: 12px;
   font-size: var(--t-sm); line-height: 1.5;
   border: 1px solid transparent;
@@ -439,7 +447,7 @@ select.input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87
 /* 2. Interactive Removable Filter Tags (Pill Geometry & Kinetic Removal) */
 .tag {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 28px; padding: 0 10px 0 12px; border-radius: var(--pill);
+  height: 28px; padding: 0 10px 0 12px; border-radius: var(--r-6);
   font-size: var(--t-xs); font-weight: 600; background: var(--soft);
   color: var(--ink); border: 1px solid var(--line-strong);
   transition: all var(--dur-fast) var(--ease), transform var(--dur-normal) var(--ease-apple-spring);
@@ -498,15 +506,16 @@ select.input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87
 }
 .tooltip-box {
   position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-  padding: 6px 12px; border-radius: var(--r-8); background: var(--black);
-  color: var(--white); font-size: var(--t-xs); font-weight: 500; white-space: nowrap;
+  padding: 6px 12px; border-radius: var(--r-6); background: #0F172A;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--white); font-size: 11.5px; font-weight: 500; white-space: nowrap;
   pointer-events: none; opacity: 0; visibility: hidden;
   transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
-  box-shadow: var(--sh-2); z-index: 80; line-height: 1.4;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); z-index: 80; line-height: 1.4;
 }
 .tooltip-box::after {
   content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  border: 5px solid transparent; border-top-color: var(--black);
+  border: 5px solid transparent; border-top-color: #0F172A;
 }
 .has-tooltip:hover .tooltip-box,
 .has-tooltip:focus-visible .tooltip-box {
@@ -515,46 +524,53 @@ select.input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87
 
 /* 5. Segmented Controls (Sliding Pill Design Token & Physical Glider) */
 .segmented-control {
-  position: relative; display: inline-flex; align-items: center; background: var(--soft);
-  border: 1px solid var(--line); border-radius: var(--pill); padding: 3px;
+  position: relative; display: inline-flex; align-items: center; background: #F1F5F9;
+  border: 1px solid #E2E8F0; border-radius: var(--r-8); padding: 3px;
   user-select: none; z-index: 1;
 }
 .segment-glider {
   position: absolute; top: 3px; bottom: 3px; left: 3px;
-  background: var(--white); border-radius: var(--pill);
+  background: var(--white); border-radius: var(--r-6);
   box-shadow: var(--sh-1); z-index: 1; pointer-events: none;
   transition: transform var(--dur-normal) var(--ease-apple-spring), width var(--dur-normal) var(--ease-apple-spring);
 }
 .segment-btn {
-  position: relative; z-index: 2; height: 32px; padding: 0 16px; border-radius: var(--pill);
-  border: none; background: transparent; font-size: var(--t-xs);
-  font-weight: 600; color: var(--muted); cursor: pointer;
+  position: relative; z-index: 2; height: 30px; padding: 0 14px; border-radius: var(--r-6);
+  border: none; background: transparent; font-size: 12px;
+  font-weight: 600; color: #64748B; cursor: pointer;
   transition: color var(--dur-fast) var(--ease); display: inline-flex; align-items: center; gap: 6px;
+}
 .segment-btn svg { width: 13px; height: 13px; }
-.segment-btn:hover { color: var(--ink); }
+.segment-btn:hover { color: #0F172A; }
 .segment-btn.active {
-  color: var(--ink);
+  color: #0F172A;
   background: var(--white);
-  box-shadow: var(--sh-1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* 6. Capacity Meter Bar (Hopper / Pond Biomass Capacity) */
+.meter-card {
+  padding: 16px 18px; border-radius: var(--r-8); border: 1px solid #E2E8F0;
+  background: var(--white); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  display: flex; flex-direction: column; gap: 10px; width: 100%;
+}
 .meter-bar {
-  display: flex; flex-direction: column; gap: var(--s1); width: 100%;
+  display: flex; flex-direction: column; gap: 8px; width: 100%;
 }
 .meter-header {
   display: flex; justify-content: space-between; align-items: center;
   font-size: var(--t-xs); font-weight: 600; color: var(--ink);
 }
 .meter-track {
-  height: 8px; border-radius: var(--pill); background: var(--soft);
-  border: 1px solid var(--line); overflow: hidden; position: relative;
+  height: 8px; border-radius: var(--pill); background: #F1F5F9;
+  border: 1px solid #E2E8F0; overflow: hidden; position: relative;
 }
 .meter-fill {
-  height: 100%; border-radius: var(--pill); background: var(--teal-600);
+  height: 100%; border-radius: var(--pill);
+  background: linear-gradient(90deg, #008292, #004d57);
   transition: width 0.6s var(--ease);
 }
 .meter-fill.warn { background: var(--amber-text); }
-.meter-fill.crit { background: var(--ruby-text); }
+.meter-fill.crit { background: #DC2626; }
 
 
