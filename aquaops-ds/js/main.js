@@ -308,26 +308,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 17. Complete Icon Library Controller (Search, Filter, Copy)
-  const iconSearchInput = document.getElementById('iconSearchInput');
+  // 17. Complete Icon Library Controller (Category Filter & Copy)
   const iconCatBtns = document.querySelectorAll('.icon-cat-btn');
   const masterGrid = document.getElementById('masterIconGrid');
   const iconCountBadge = document.getElementById('iconVisibleCount');
 
   let activeCat = 'all';
-  let searchTerm = '';
 
   const filterIcons = () => {
     if (!masterGrid) return;
     const units = masterGrid.querySelectorAll('.ic-unit');
     let count = 0;
     units.forEach((u) => {
-      const name = (u.dataset.iconName || '').toLowerCase();
       const cat = u.dataset.cat || '';
       const matchesCat = activeCat === 'all' || cat === activeCat;
-      const matchesSearch = !searchTerm || name.includes(searchTerm);
 
-      if (matchesCat && matchesSearch) {
+      if (matchesCat) {
         u.style.display = 'flex';
         count++;
       } else {
@@ -336,11 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (iconCountBadge) iconCountBadge.textContent = count;
   };
-
-  iconSearchInput?.addEventListener('input', (e) => {
-    searchTerm = e.target.value.trim().toLowerCase();
-    filterIcons();
-  });
 
   iconCatBtns.forEach((btn) => {
     btn.addEventListener('click', () => {

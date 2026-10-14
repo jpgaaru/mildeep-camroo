@@ -135,10 +135,6 @@
         <div class="icon-library-card">
           <!-- Toolbar -->
           <div class="icon-toolbar">
-            <div class="icon-search-wrap">
-              <i data-lucide="search"></i>
-              <input type="text" class="icon-search-input" id="iconSearchInput" placeholder="Search 150+ Camaroo icons by name or tag (e.g. pond, chart, truck, alert)..." />
-            </div>
             <div class="icon-category-pills">
               <button type="button" class="icon-cat-btn active" data-cat="all">All <span class="cat-count">(150)</span></button>
               <button type="button" class="icon-cat-btn" data-cat="nav">Navigation <span class="cat-count">(15)</span></button>
@@ -482,297 +478,236 @@
       </div>
     </div>
 
-    <!-- Inputs & Clean Dropdowns (BREATHING ROOM & PROPORTION) -->
+    <!-- Inputs & Clean Dropdowns (GLOBAL SAAS UI STANDARDS) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Inputs &amp; Dropdowns</div>
-        <p class="spec-desc">Restrained, airy form controls following Apple &amp; Airbnb patterns. Generous spacing, clean option hierarchies, and subtle focus states.</p>
+        <div class="spec-title">Inputs &amp; Dropdowns (Global SaaS)</div>
+        <p class="spec-desc">Architectural form controls conforming strictly to Stripe, Linear, and Apple HIG patterns. Strict 8px corner radius, calibrated height tokens (34px, 42px, 48px), subtle 1px border hierarchy, compound addons, and accessible focus states.</p>
       </div>
       <div class="spec-content">
-        <div class="form-responsive-grid">
           
-          <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
-          <div class="field-block">
-            <label class="label">
-              <span>Species &amp; Grade Selection</span>
-              <span class="hint">Searchable</span>
-            </label>
-            <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter species or grades...">
-              <div class="rs-trigger" tabindex="0">
-                <span class="rs-current">
-                  <i data-lucide="droplets"></i>
-                  <span>L. Vannamei (Whiteleg Shrimp)</span>
-                </span>
-                <i data-lucide="chevron-down" class="rs-chev"></i>
+        <div class="stack-col" style="gap:24px">
+
+          <!-- 1. Standard Input States -->
+          <div>
+            <div class="category-label">Text Inputs &amp; Interactive States</div>
+            <div class="form-responsive-grid">
+              <div class="field-block">
+                <label class="label">
+                  <span>Harvest Lot Identifier</span>
+                  <span class="hint">Default</span>
+                </label>
+                <input type="text" class="input" placeholder="e.g. LOT-2026-VAN-08" />
+                <div class="hint">Standard 42px form input with subtle 1px border.</div>
               </div>
-              <div class="rs-menu">
-                <div class="rs-search-wrap">
-                  <i data-lucide="search"></i>
-                  <input type="text" class="rs-search-input" id="rsSearchInput" placeholder="Filter species or grades..." />
-                </div>
-                <div class="rs-list">
-                  <div class="rs-empty-msg">No matching species found</div>
-                  <div class="rs-option selected" data-value="L. Vannamei (Whiteleg Shrimp)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">L. Vannamei (Whiteleg Shrimp)</div>
-                      <div class="rs-opt-sub">Ponds 101–104 · DOC 72 · High Density</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Optimal</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="P. Monodon (Black Tiger)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">P. Monodon (Black Tiger)</div>
-                      <div class="rs-opt-sub">Ponds 105–106 · DOC 94 · Jumbo Grade</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Quarantine</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="M. Rosenbergii (Scampi)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">M. Rosenbergii (Freshwater Scampi)</div>
-                      <div class="rs-opt-sub">Pond 107 · Low Salinity · DOC 110</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Normal</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Oreochromis (Nile Tilapia)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Oreochromis (Nile Tilapia)</div>
-                      <div class="rs-opt-sub">Biofloc Nursery · High Protein Feeding</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Active</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Active Focused Input</span>
+                  <span class="hint" style="color:var(--teal-800);font-weight:600">3px Aura</span>
+                </label>
+                <input type="text" class="input" value="L. Vannamei (Selected)" style="border-color:#004d57;box-shadow:0 0 0 3px rgba(0,77,87,0.14)" />
+                <div class="hint">Focused state with Dark Teal #004D57 aura glow.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Genetic Lineage Code</span>
+                  <span class="hint">Disabled</span>
+                </label>
+                <input type="text" class="input" value="SPF-KONA-GEN3-LOCKED" disabled />
+                <div class="hint">Locked field with muted background and not-allowed cursor.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Intake Ledger Hash</span>
+                  <span class="hint">Read-Only</span>
+                </label>
+                <input type="text" class="input" value="0x8f2c...4e19" readonly />
+                <div class="hint">Read-only immutable transaction hash.</div>
               </div>
             </div>
-            <div class="hint">Searchable combobox with status badges, subtitle details, and keyboard navigation.</div>
           </div>
 
-          <!-- 2. OPTIMIZED STANDARD CUSTOM SELECT (ZERO DEFAULT OS POPUP) -->
-          <div class="field-block">
-            <label class="label">
-              <span>Harvest Grade Target</span>
-              <span class="req">*</span>
-            </label>
-            <div class="rich-select" id="richTargetSelect">
-              <div class="rs-trigger" tabindex="0">
-                <span class="rs-current">
-                  <i data-lucide="package-check"></i>
-                  <span>Grade A Export (16/20 Count)</span>
-                </span>
-                <i data-lucide="chevron-down" class="rs-chev"></i>
+          <!-- 2. Sizing Scale -->
+          <div>
+            <div class="category-label">Input Sizing Hierarchy (Enterprise Heights)</div>
+            <div class="form-responsive-grid">
+              <div class="field-block">
+                <label class="label">
+                  <span>Small / Compact (34px)</span>
+                  <span class="hint">6px Radius</span>
+                </label>
+                <input type="text" class="input input-sm" placeholder="Search tables or filter rows..." />
+                <div class="hint">Designed for dense data grids, toolbars, and filter rails.</div>
               </div>
-              <div class="rs-menu">
-                <div class="rs-list">
-                  <div class="rs-option selected" data-value="Grade A Export (16/20 Count)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Grade A Export (16/20 Count)</div>
-                      <div class="rs-opt-sub">IQF Blast Frozen · Prime International Grade</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Export Target</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Grade B Block Frozen (26/30 Count)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Grade B Block Frozen (26/30 Count)</div>
-                      <div class="rs-opt-sub">Commercial 2kg Block · Local Market Standard</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Commercial</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="PUD Seconds (Processing Grade)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">PUD Seconds (Processing Grade)</div>
-                      <div class="rs-opt-sub">Peeled &amp; Undeveined · Domestic Value-Add</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Secondary</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Default / Standard (42px)</span>
+                  <span class="hint">8px Radius</span>
+                </label>
+                <input type="text" class="input input-md" placeholder="Standard enterprise form field..." />
+                <div class="hint">Core standard field height across all forms and drawers.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Large / Prominent (48px)</span>
+                  <span class="hint">10px Radius</span>
+                </label>
+                <input type="text" class="input input-lg" placeholder="Modal dialog or hero intake..." />
+                <div class="hint">Used in authentication, wizard headers, and hero modals.</div>
               </div>
             </div>
-            <div class="hint">Custom floating select with leading icon, status tag, and checkmark. Zero default OS menu.</div>
           </div>
 
-          <!-- 3. MULTI-SELECT TAG COMBOBOX -->
-          <div class="field-block">
-            <label class="label">
-              <span>Monitored Pond Clusters</span>
-              <span class="hint">Multi-Select</span>
-            </label>
-            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select ponds to monitor...">
-              <div class="rs-trigger" tabindex="0">
-                <div class="rs-tags-container">
-                  <span class="rs-pill-tag">
-                    <span>Pond 101</span>
-                    <button type="button" class="rs-tag-remove" data-value="Pond 101" aria-label="Remove Pond 101">×</button>
-                  </span>
-                  <span class="rs-pill-tag">
-                    <span>Pond 102</span>
-                    <button type="button" class="rs-tag-remove" data-value="Pond 102" aria-label="Remove Pond 102">×</button>
-                  </span>
+          <!-- 3. Leading & Trailing Affixes -->
+          <div>
+            <div class="category-label">Inputs with Affixes, Icons &amp; Compound Addons</div>
+            <div class="form-responsive-grid">
+              <div class="field-block">
+                <label class="label">Leading Icon Search</label>
+                <div class="input-wrap">
+                  <i data-lucide="search" class="leading"></i>
+                  <input type="text" class="input" placeholder="Search ponds, batches, probes..." />
                 </div>
-                <div style="display:flex;align-items:center;gap:6px">
-                  <span class="rs-count-badge">2 selected</span>
-                  <i data-lucide="chevron-down" class="rs-chev"></i>
-                </div>
+                <div class="hint">Left-aligned 16px vector icon with 38px text indent.</div>
               </div>
-              <div class="rs-menu">
-                <div class="rs-search-wrap">
-                  <i data-lucide="search"></i>
-                  <input type="text" class="rs-search-input" placeholder="Search ponds..." />
+
+              <div class="field-block">
+                <label class="label">Trailing Tabular Unit</label>
+                <div class="input-wrap">
+                  <i data-lucide="scale" class="leading"></i>
+                  <input type="text" class="input" value="12,450.80" />
+                  <span class="trailing-unit">KG</span>
                 </div>
-                <div class="rs-list">
-                  <div class="rs-empty-msg">No matching ponds found</div>
-                  <div class="rs-option selected" data-value="Pond 101">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 101 · Cluster Alpha</div>
-                      <div class="rs-opt-sub">L. Vannamei · DO 6.8 mg/L</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option selected" data-value="Pond 102">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 102 · Cluster Alpha</div>
-                      <div class="rs-opt-sub">L. Vannamei · DO 6.4 mg/L</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Pond 103">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 103 · Cluster Beta</div>
-                      <div class="rs-opt-sub">L. Vannamei · Attention Required</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Pond 104">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 104 · Cluster Delta</div>
-                      <div class="rs-opt-sub">P. Monodon · Jumbo Quarantine</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
+                <div class="hint">Leading metric icon with anchored tabular unit badge.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">Trailing Interactive Action</label>
+                <div class="input-wrap">
+                  <i data-lucide="key" class="leading"></i>
+                  <input type="password" class="input" value="TelemetrySecretKey2026" />
+                  <button type="button" class="trailing-action" title="Toggle password" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password'"><i data-lucide="eye"></i></button>
                 </div>
+                <div class="hint">Trailing click action to toggle mask visibility.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">Compound Prefix &amp; Suffix Group</label>
+                <div class="input-group">
+                  <span class="input-addon">https://</span>
+                  <input type="text" class="input" value="coldstore-cs2" />
+                  <span class="input-addon">.camaroo.io</span>
+                </div>
+                <div class="hint">Joined continuous addon block with seamless border radius.</div>
               </div>
             </div>
-            <div class="hint">Interactive multi-select pills with instant removal and search filter.</div>
           </div>
 
-          <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
-          <div class="field-block">
-            <label class="label">
-              <span>Telemetry Metric Focus</span>
-              <span class="hint">Categorized</span>
-            </label>
-            <div class="rich-select" id="richMetricSelect">
-              <div class="rs-trigger" tabindex="0">
-                <span class="rs-current">
-                  <i data-lucide="activity"></i>
-                  <span>Dissolved Oxygen (DO mg/L)</span>
-                </span>
-                <i data-lucide="chevron-down" class="rs-chev"></i>
+          <!-- 4. Global SaaS Dropdowns & Selects -->
+          <div>
+            <div class="category-label">Global SaaS Dropdowns &amp; Selects</div>
+            <div class="form-responsive-grid">
+              <div class="field-block">
+                <label class="label">
+                  <span>Genetic Broodstock Species</span>
+                  <span class="hint">Standard 42px</span>
+                </label>
+                <select class="input">
+                  <option value="" disabled selected>Select species classification...</option>
+                  <option value="1">L. Vannamei (Pacific Whiteleg Shrimp)</option>
+                  <option value="2">P. Monodon (Giant Black Tiger Prawn)</option>
+                  <option value="3">M. Rosenbergii (Freshwater Scampi)</option>
+                  <option value="4">O. Niloticus (Nile Tilapia Broodstock)</option>
+                </select>
+                <div class="hint">Native accessibility with custom SVG stroke chevron.</div>
               </div>
-              <div class="rs-menu">
-                <div class="rs-list">
-                  <div class="rs-group-label">Water Quality Parameters</div>
-                  <div class="rs-option selected" data-value="Dissolved Oxygen (DO mg/L)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Dissolved Oxygen (DO)</div>
-                      <div class="rs-opt-sub">Real-time galvanic probe (mg/L)</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Primary</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Water Temperature (°C)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Water Temperature</div>
-                      <div class="rs-opt-sub">Thermocouple array (°C)</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Continuous</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Salinity Level (PPT)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Salinity Concentration</div>
-                      <div class="rs-opt-sub">Refractometer telemetry (PPT)</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Hourly</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
 
-                  <div class="rs-group-label">Aeration &amp; Power Dynamics</div>
-                  <div class="rs-option" data-value="Paddlewheel Aeration (RPM)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Paddlewheel Speed</div>
-                      <div class="rs-opt-sub">VFD motor RPM feedback</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Telemetry</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Feed Hopper Dispense (KG)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Daily Feed Rate</div>
-                      <div class="rs-opt-sub">Load cell dispenser total (kg)</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Batch</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
+              <div class="field-block">
+                <label class="label">
+                  <span>Pond Cluster Filter</span>
+                  <span class="hint">Compact 34px</span>
+                </label>
+                <select class="input input-sm">
+                  <option>All Clusters (Active)</option>
+                  <option>Cluster Alpha (Ponds 101–104)</option>
+                  <option>Cluster Delta (Ponds 105–106)</option>
+                  <option>Quarantine Bay CS-2</option>
+                </select>
+                <div class="hint">Dense table toolbar and navigation rail dropdown.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Telemetry Metric Focus</span>
+                  <span class="hint">Optgroup</span>
+                </label>
+                <select class="input">
+                  <optgroup label="Water Quality Parameters">
+                    <option selected>Dissolved Oxygen (DO mg/L)</option>
+                    <option>Water Temperature (°C)</option>
+                    <option>Salinity Concentration (PPT)</option>
+                    <option>Oxidation-Reduction (ORP mV)</option>
+                  </optgroup>
+                  <optgroup label="Mechanical &amp; Aeration">
+                    <option>Paddlewheel Speed (RPM)</option>
+                    <option>Feed Hopper Rate (KG/HR)</option>
+                    <option>Aerator Motor Amperage (A)</option>
+                  </optgroup>
+                </select>
+                <div class="hint">Categorized option groups with native system support.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">
+                  <span>Coldstore Locker Assignment</span>
+                  <span class="hint">Disabled</span>
+                </label>
+                <select class="input" disabled>
+                  <option>Chamber 02 (Capacity Locked)</option>
+                </select>
+                <div class="hint">Disabled select dropdown state.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Textarea & Field Validation States -->
+          <div>
+            <div class="category-label">Multi-Line Textarea &amp; Inline Validation (WCAG 3.3.1)</div>
+            <div class="form-responsive-grid">
+              <div class="field-block" style="grid-column:1/-1">
+                <label class="label">
+                  <span>Harvest Lot Remarks &amp; Sensory Quality Notes</span>
+                  <span class="hint">Max 500 characters</span>
+                </label>
+                <textarea class="input textarea" placeholder="Document organoleptic assessment, shell hardness, hepatopancreas condition, or cold chain log notes..."></textarea>
+                <div class="hint">Multi-line textarea with 8px radius, 1.5 line-height, and responsive vertical resize.</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">Dissolved Oxygen Threshold<span class="req">*</span></label>
+                <div class="input-wrap">
+                  <i data-lucide="activity" class="leading"></i>
+                  <input class="input err" value="2.8" />
+                  <span class="trailing-unit">MG/L</span>
                 </div>
+                <div class="msg err"><i data-lucide="alert-triangle"></i>DO cannot be below minimum biosecurity limit (4.0 mg/L)</div>
+              </div>
+
+              <div class="field-block">
+                <label class="label">Water Alkalinity / pH</label>
+                <div class="input-wrap">
+                  <i data-lucide="droplet" class="leading"></i>
+                  <input class="input succ" value="7.82" />
+                  <span class="trailing-unit">PH</span>
+                </div>
+                <div class="msg ok"><i data-lucide="check-circle-2"></i>Pond pH verified within optimal range for L. Vannamei</div>
               </div>
             </div>
-            <div class="hint">Optgroup categorized choices with metric subtitles and clear section headers.</div>
-          </div>
-
-          <!-- Text Input with Leading Icon & Trailing Unit -->
-          <div class="field-block">
-            <label class="label">Pond Batch Biomass</label>
-            <div class="input-wrap">
-              <i data-lucide="scale" class="leading"></i>
-              <input type="text" class="input" value="12,450.80" />
-              <span class="trailing-unit">KG</span>
-            </div>
-            <div class="hint">Leading icon and fixed tabular unit.</div>
-          </div>
-
-          <!-- Error Validation State Input -->
-          <div class="field-block">
-            <label class="label">Dissolved Oxygen Threshold<span class="req">*</span></label>
-            <input class="input err" value="2.8" />
-            <div class="msg err"><i data-lucide="alert-triangle"></i>DO cannot be below minimum safety limit (4.0 mg/L)</div>
           </div>
 
         </div>
@@ -1150,6 +1085,285 @@
     <span class="stage-pill">Stage 2</span>
     <h2>Molecules</h2>
     <p>Combinations of atoms bonded together into functional units.</p>
+
+    <!-- Rich Comboboxes & Custom Select Molecules -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Rich Selects &amp; Comboboxes</div>
+        <p class="spec-desc">Searchable rich comboboxes, floating option cards with secondary subtitles, status badges, and multi-select tags with kinetic dismissal.</p>
+      </div>
+      <div class="spec-content">
+        <div class="form-responsive-grid">
+          
+          <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
+          <div class="field-block">
+            <label class="label">
+              <span>Species &amp; Grade Selection</span>
+              <span class="hint">Searchable</span>
+            </label>
+            <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter species or grades...">
+              <div class="rs-trigger" tabindex="0">
+                <span class="rs-current">
+                  <i data-lucide="droplets"></i>
+                  <span>L. Vannamei (Whiteleg Shrimp)</span>
+                </span>
+                <i data-lucide="chevron-down" class="rs-chev"></i>
+              </div>
+              <div class="rs-menu">
+                <div class="rs-search-wrap">
+                  <i data-lucide="search"></i>
+                  <input type="text" class="rs-search-input" id="rsSearchInput" placeholder="Filter species or grades..." />
+                </div>
+                <div class="rs-list">
+                  <div class="rs-empty-msg">No matching species found</div>
+                  <div class="rs-option selected" data-value="L. Vannamei (Whiteleg Shrimp)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">L. Vannamei (Whiteleg Shrimp)</div>
+                      <div class="rs-opt-sub">Ponds 101–104 · DOC 72 · High Density</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Optimal</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="P. Monodon (Black Tiger)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">P. Monodon (Black Tiger)</div>
+                      <div class="rs-opt-sub">Ponds 105–106 · DOC 94 · Jumbo Grade</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Quarantine</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="M. Rosenbergii (Scampi)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">M. Rosenbergii (Freshwater Scampi)</div>
+                      <div class="rs-opt-sub">Pond 107 · Low Salinity · DOC 110</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Normal</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Oreochromis (Nile Tilapia)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Oreochromis (Nile Tilapia)</div>
+                      <div class="rs-opt-sub">Biofloc Nursery · High Protein Feeding</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Active</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hint">Searchable combobox with status badges, subtitle details, and keyboard navigation.</div>
+          </div>
+
+          <!-- 2. SINGLE-SELECT FLOATING COMBOBOX -->
+          <div class="field-block">
+            <label class="label">
+              <span>Harvest Grade Target</span>
+              <span class="req">*</span>
+            </label>
+            <div class="rich-select" id="richTargetSelect">
+              <div class="rs-trigger" tabindex="0">
+                <span class="rs-current">
+                  <i data-lucide="package-check"></i>
+                  <span>Grade A Export (16/20 Count)</span>
+                </span>
+                <i data-lucide="chevron-down" class="rs-chev"></i>
+              </div>
+              <div class="rs-menu">
+                <div class="rs-list">
+                  <div class="rs-option selected" data-value="Grade A Export (16/20 Count)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Grade A Export (16/20 Count)</div>
+                      <div class="rs-opt-sub">IQF Blast Frozen · Prime International Grade</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Export Target</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Grade B Block Frozen (26/30 Count)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Grade B Block Frozen (26/30 Count)</div>
+                      <div class="rs-opt-sub">Commercial 2kg Block · Local Market Standard</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Commercial</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="PUD Seconds (Processing Grade)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">PUD Seconds (Processing Grade)</div>
+                      <div class="rs-opt-sub">Peeled &amp; Undeveined · Domestic Value-Add</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Secondary</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hint">Custom floating select with leading icon, status tag, and checkmark. Zero default OS menu.</div>
+          </div>
+
+          <!-- 3. MULTI-SELECT TAG COMBOBOX -->
+          <div class="field-block">
+            <label class="label">
+              <span>Monitored Pond Clusters</span>
+              <span class="hint">Multi-Select</span>
+            </label>
+            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select ponds to monitor...">
+              <div class="rs-trigger" tabindex="0">
+                <div class="rs-tags-container">
+                  <span class="rs-pill-tag">
+                    <span>Pond 101</span>
+                    <button type="button" class="rs-tag-remove" data-value="Pond 101" aria-label="Remove Pond 101">×</button>
+                  </span>
+                  <span class="rs-pill-tag">
+                    <span>Pond 102</span>
+                    <button type="button" class="rs-tag-remove" data-value="Pond 102" aria-label="Remove Pond 102">×</button>
+                  </span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="rs-count-badge">2 selected</span>
+                  <i data-lucide="chevron-down" class="rs-chev"></i>
+                </div>
+              </div>
+              <div class="rs-menu">
+                <div class="rs-search-wrap">
+                  <i data-lucide="search"></i>
+                  <input type="text" class="rs-search-input" placeholder="Search ponds..." />
+                </div>
+                <div class="rs-list">
+                  <div class="rs-empty-msg">No matching ponds found</div>
+                  <div class="rs-option selected" data-value="Pond 101">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Pond 101 · Cluster Alpha</div>
+                      <div class="rs-opt-sub">L. Vannamei · DO 6.8 mg/L</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option selected" data-value="Pond 102">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Pond 102 · Cluster Alpha</div>
+                      <div class="rs-opt-sub">L. Vannamei · DO 6.4 mg/L</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Pond 103">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Pond 103 · Cluster Beta</div>
+                      <div class="rs-opt-sub">L. Vannamei · Attention Required</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Pond 104">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Pond 104 · Cluster Delta</div>
+                      <div class="rs-opt-sub">P. Monodon · Jumbo Quarantine</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hint">Interactive multi-select pills with instant removal and search filter.</div>
+          </div>
+
+          <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
+          <div class="field-block">
+            <label class="label">
+              <span>Telemetry Metric Focus</span>
+              <span class="hint">Categorized</span>
+            </label>
+            <div class="rich-select" id="richMetricSelect">
+              <div class="rs-trigger" tabindex="0">
+                <span class="rs-current">
+                  <i data-lucide="activity"></i>
+                  <span>Dissolved Oxygen (DO mg/L)</span>
+                </span>
+                <i data-lucide="chevron-down" class="rs-chev"></i>
+              </div>
+              <div class="rs-menu">
+                <div class="rs-list">
+                  <div class="rs-group-label">Water Quality Parameters</div>
+                  <div class="rs-option selected" data-value="Dissolved Oxygen (DO mg/L)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Dissolved Oxygen (DO)</div>
+                      <div class="rs-opt-sub">Real-time galvanic probe (mg/L)</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Primary</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Water Temperature (°C)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Water Temperature</div>
+                      <div class="rs-opt-sub">Thermocouple array (°C)</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Continuous</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Salinity Level (PPT)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Salinity Concentration</div>
+                      <div class="rs-opt-sub">Refractometer telemetry (PPT)</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Hourly</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+
+                  <div class="rs-group-label">Aeration &amp; Power Dynamics</div>
+                  <div class="rs-option" data-value="Paddlewheel Aeration (RPM)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Paddlewheel Speed</div>
+                      <div class="rs-opt-sub">VFD motor RPM feedback</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Telemetry</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Feed Hopper Dispense (KG)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Daily Feed Rate</div>
+                      <div class="rs-opt-sub">Load cell dispenser total (kg)</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Batch</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hint">Optgroup categorized choices with metric subtitles and clear section headers.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <!-- Search -->
     <div class="spec-grid">
