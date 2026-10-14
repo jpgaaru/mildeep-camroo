@@ -502,6 +502,181 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 17b. Interactive Atoms: Color Swatches Click-to-Copy
+  document.querySelectorAll('.sw-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const hex = card.dataset.hex;
+      if (hex) {
+        navigator.clipboard?.writeText(hex);
+        AquaToast.show(`Copied ${hex} to clipboard`, 'teal');
+      }
+    });
+  });
+
+  // 17c. Interactive Atoms: Buttons Showcase
+  const stage1 = document.getElementById('stage1');
+  if (stage1) {
+    stage1.querySelectorAll('.btn').forEach((btn) => {
+      if (btn.disabled || btn.getAttribute('data-bound')) return;
+      btn.setAttribute('data-bound', 'true');
+      btn.addEventListener('click', (e) => {
+        const text = btn.textContent.trim();
+        if (text.includes('Save changes')) {
+          AquaToast.show('Changes saved successfully', 'teal');
+        } else if (text.includes('New item')) {
+          AquaToast.show('New item created', 'teal');
+        } else if (text.includes('Delete')) {
+          AquaToast.show('Item deleted', 'ruby');
+        } else if (text.includes('Pill')) {
+          AquaToast.show('Pill mode activated', 'teal');
+        }
+      });
+    });
+
+    // Bell notification toggle
+    stage1.querySelectorAll('.iconbtn').forEach((btn) => {
+      if (btn.title?.includes('Notifications') || btn.title?.includes('Alerts')) {
+        btn.addEventListener('click', () => {
+          const dot = btn.querySelector('.ndot');
+          if (dot) {
+            const isHidden = dot.style.display === 'none';
+            dot.style.display = isHidden ? 'block' : 'none';
+            AquaToast.show(isHidden ? '1 unread notification' : 'Notifications marked as read', 'teal');
+          }
+        });
+      }
+    });
+
+    // Tag removal (.tag-remove)
+    stage1.querySelectorAll('.tag-remove').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tag = btn.closest('.tag');
+        if (tag) {
+          tag.style.opacity = '0';
+          tag.style.transform = 'scale(0.85)';
+          tag.style.transition = 'all 0.18s cubic-bezier(0.16, 1, 0.3, 1)';
+          setTimeout(() => {
+            const label = tag.textContent.trim();
+            tag.remove();
+            AquaToast.show(`Filter removed: ${label}`, 'teal');
+          }, 180);
+        }
+      });
+    });
+
+    // Switch toggles
+    stage1.querySelectorAll('.switch input').forEach((sw) => {
+      sw.addEventListener('change', () => {
+        const label = sw.closest('.line-row')?.querySelector('span')?.textContent?.trim() || 'Setting';
+        AquaToast.show(`${label}: ${sw.checked ? 'Enabled' : 'Disabled'}`, 'teal');
+      });
+    });
+
+    // Inline Calendar Specimen Interaction
+    const inlineCal = stage1.querySelector('.calendar-popover');
+    if (inlineCal) {
+      inlineCal.querySelectorAll('.calendar-preset-btn').forEach((pbtn) => {
+        pbtn.addEventListener('click', () => {
+          inlineCal.querySelectorAll('.calendar-preset-btn').forEach(b => b.classList.remove('active'));
+          pbtn.classList.add('active');
+          const pText = pbtn.textContent.trim();
+          const days = inlineCal.querySelectorAll('.calendar-day-btn');
+          days.forEach(d => d.classList.remove('selected'));
+          if (pText === 'Today') {
+            days.forEach(d => { if (d.textContent.trim() === '14' && !d.classList.contains('other-month')) d.classList.add('selected'); });
+            AquaToast.show('Calendar set to Today (Oct 14)', 'teal');
+          } else if (pText === 'Yesterday') {
+            days.forEach(d => { if (d.textContent.trim() === '13' && !d.classList.contains('other-month')) d.classList.add('selected'); });
+            AquaToast.show('Calendar set to Yesterday (Oct 13)', 'teal');
+          } else if (pText === '1st of Month') {
+            days.forEach(d => { if (d.textContent.trim() === '1' && !d.classList.contains('other-month')) d.classList.add('selected'); });
+            AquaToast.show('Calendar set to Oct 1', 'teal');
+          } else if (pText === 'Clear') {
+            AquaToast.show('Calendar selection cleared', '');
+          }
+        });
+      });
+
+      inlineCal.querySelectorAll('.calendar-day-btn:not(.other-month)').forEach((dbtn) => {
+        dbtn.addEventListener('click', () => {
+          inlineCal.querySelectorAll('.calendar-day-btn').forEach(d => d.classList.remove('selected'));
+          inlineCal.querySelectorAll('.calendar-preset-btn').forEach(b => b.classList.remove('active'));
+          dbtn.classList.add('selected');
+          const day = dbtn.textContent.trim();
+          AquaToast.show(`Selected date: October ${day}, 2026`, 'teal');
+        });
+      });
+    }
+  }
+
+  // 17d. Live Interactive Field Validation Demo
+  const errDoField = document.getElementById('errDoField');
+  const liveValMsg = document.getElementById('liveValMsg');
+  if (errDoField && liveValMsg) {
+    errDoField.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      if (!isNaN(val) && val >= 4.0) {
+        errDoField.className = 'input succ';
+        liveValMsg.className = 'msg ok';
+        liveValMsg.innerHTML = '<i data-lucide="check-circle-2"></i><span>Looks good! Value is within safety limits.</span>';
+      } else {
+        errDoField.className = 'input err';
+        liveValMsg.className = 'msg err';
+        liveValMsg.innerHTML = '<i data-lucide="alert-triangle"></i><span>Value must be at least 4.0 mg/L. (Try typing 4.0 or more)</span>';
+      }
+      if (window.lucide) window.lucide.createIcons();
+    });
+  }
+
+  // 17e. System Alerts & Offline Card Reconnect
+  document.getElementById('btnReconnectSensor')?.addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    btn.innerHTML = '<span class="spinner"></span>Connecting...';
+    btn.disabled = true;
+    setTimeout(() => {
+      const alert = document.getElementById('demoCriticalAlert');
+      if (alert) {
+        alert.className = 'callout callout-success';
+        alert.innerHTML = `
+          <i data-lucide="check-circle-2"></i>
+          <div class="callout-content">
+            <div class="callout-title">Sensor 104 Reconnected</div>
+            <div>Live telemetry stream restored and transmitting normally.</div>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+      }
+      AquaToast.show('Sensor 104 reconnected successfully', 'teal');
+    }, 900);
+  });
+
+  document.getElementById('btnRetryOffline')?.addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    btn.innerHTML = '<span class="spinner"></span>Connecting...';
+    btn.disabled = true;
+    setTimeout(() => {
+      const card = document.getElementById('demoOfflineCard');
+      const iconWrap = document.getElementById('offlineIconWrap');
+      const title = document.getElementById('offlineTitle');
+      const desc = document.getElementById('offlineDesc');
+      if (card && iconWrap && title && desc) {
+        card.style.background = '#f0fafc';
+        card.style.border = '1px solid #b2ecf3';
+        iconWrap.style.background = '#d8f4f8';
+        iconWrap.style.color = '#004d57';
+        iconWrap.innerHTML = '<i data-lucide="wifi"></i>';
+        title.textContent = 'Device Online';
+        desc.textContent = 'Station Delta is connected and synchronizing local telemetry records.';
+        btn.innerHTML = '<i data-lucide="check"></i>Connected';
+        btn.className = 'btn btn-primary btn-sm';
+        btn.disabled = true;
+        if (window.lucide) window.lucide.createIcons();
+      }
+      AquaToast.show('Station Delta connection restored', 'teal');
+    }, 1000);
+  });
+
   // 18. Stage Nav ScrollSpy & Smooth Jump
   const stageNavBtns = document.querySelectorAll('.stage-nav-btn');
   const sections = Array.from(stageNavBtns)

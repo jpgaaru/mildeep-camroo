@@ -222,13 +222,48 @@ svg { display: block; }
 .line-row { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
 .stack-col { display: flex; flex-direction: column; gap: var(--s3); }
 
-/* Swatch Card Helper */
-.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
-.sw-card { width: 72px; }
-.sw-card i { display: block; height: 56px; border-radius: var(--r-8); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-.sw-card span { display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-top: 6px; text-align: center; }
-.sw-card .hex { font-size: 9.5px; color: var(--faint); text-align: center; font-family: var(--font-mono); }
-.sw-card .wcag-badge { font-size: 8.5px; font-weight: 800; padding: 2px 4px; border-radius: 4px; text-align: center; display: block; margin-top: 3px; }
+/* Swatch Card Helper — Progressive Disclosure on Hover (Apple / Airbnb Aesthetic) */
+.swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+.sw-card { 
+  width: 76px; 
+  cursor: pointer; 
+  position: relative; 
+  user-select: none;
+  min-height: 120px;
+}
+.sw-card i { 
+  display: block; 
+  height: 64px; 
+  border-radius: var(--r-8); 
+  border: 1px solid rgba(0,0,0,0.06); 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04); 
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sw-card:hover i {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+.sw-card:active i {
+  transform: translateY(0) scale(0.97);
+}
+.sw-card .sw-meta {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.sw-card:hover .sw-meta {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.sw-card .sw-meta span.sw-name { display: block; font-size: 11px; font-weight: 700; color: var(--black); text-align: center; }
+.sw-card .sw-meta .hex { font-size: 10px; color: var(--muted); text-align: center; font-family: var(--font-mono); margin-top: 2px; }
+.sw-card .sw-meta .wcag-badge { font-size: 8.5px; font-weight: 800; padding: 2px 5px; border-radius: 4px; text-align: center; display: inline-block; margin-top: 4px; }
 .wcag-aaa { background: #eafaf1; color: #056a38; }
 .wcag-aa { background: #f0fafc; color: #006c7a; }
 
