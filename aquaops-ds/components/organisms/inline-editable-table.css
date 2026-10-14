@@ -1,0 +1,111 @@
+/**
+ * AquaOps Design System — Inline Editable Table Organism (.aq-editable-*)
+ * Strictly adheres to Camaroo Design Tokens:
+ * --font-sans, --teal-800, --teal-900, #E2E8F0, #F8FAFC.
+ * Fully scoped — zero leakage.
+ */
+
+.aq-editable-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 24px;
+}
+
+.aq-editable-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+}
+
+.aq-editable-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+}
+
+.aq-editable-caption {
+  font-size: 11.5px;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.aq-editable-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+table.aq-editable-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  text-align: left;
+}
+
+table.aq-editable-table thead tr {
+  background: #F8FAFC;
+  border-bottom: 1.5px solid #E2E8F0;
+}
+
+table.aq-editable-table th {
+  padding: 10px 14px;
+  color: #475569;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  white-space: nowrap;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+table.aq-editable-table tbody tr {
+  border-bottom: 1px solid #F1F5F9;
+  transition: background-color 0.1s ease;
+}
+
+table.aq-editable-table tbody tr:hover {
+  background: #F8FAFC;
+}
+
+table.aq-editable-table td {
+  padding: 8px 14px;
+  vertical-align: middle;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.aq-editable-input {
+  padding: 5px 8px;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: #0F172A;
+  background: #FFFFFF;
+  outline: none;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.aq-editable-input:focus {
+  border-color: var(--teal-800, #006C7A);
+  box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.14);
+}
+
+.aq-editable-delta-good {
+  color: #16A34A;
+  font-weight: 700;
+}
+
+.aq-editable-delta-warn {
+  color: #DC2626;
+  font-weight: 700;
+}

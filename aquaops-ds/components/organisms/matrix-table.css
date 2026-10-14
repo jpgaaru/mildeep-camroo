@@ -1,0 +1,176 @@
+/**
+ * AquaOps Design System — Matrix & Multi-Tier Table Organism (.aq-matrix-*)
+ * Strictly adheres to Camaroo Design Tokens: #004D57 / #14B8A6, #0F172A, #E2E8F0, Inter font stack.
+ * Purely scoped — zero style leakage to standard tables.
+ */
+
+.aq-matrix-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+}
+
+.aq-matrix-header {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #E2E8F0;
+  background: #FFFFFF;
+}
+
+.aq-matrix-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aq-matrix-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0F172A;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.aq-matrix-subtitle {
+  font-size: 12px;
+  color: #64748B;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.aq-matrix-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aq-matrix-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 250px;
+  transition: all 0.15s ease;
+}
+
+.aq-matrix-search-box:focus-within {
+  border-color: #006C7A;
+  box-shadow: 0 0 0 3px rgba(0, 108, 122, 0.14);
+  background: #FFFFFF;
+}
+
+.aq-matrix-search-box input {
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  font-size: 12.5px;
+  color: #0F172A;
+  width: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.aq-matrix-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  position: relative;
+}
+
+table.aq-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  text-align: left;
+}
+
+/* Multi-Tier Group Headers */
+table.aq-matrix-table th {
+  background: #F8FAFC;
+  color: #475569;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  padding: 10px 12px;
+  border: 1px solid #E2E8F0;
+  white-space: nowrap;
+}
+
+table.aq-matrix-table th.aq-matrix-th-parent {
+  text-align: center;
+  background: #F1F5F9;
+  color: #0F172A;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+table.aq-matrix-table th.aq-matrix-th-child {
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+table.aq-matrix-table th.aq-matrix-th-sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #F8FAFC;
+}
+
+table.aq-matrix-table td {
+  padding: 9px 12px;
+  border: 1px solid #E2E8F0;
+  color: #334155;
+  vertical-align: middle;
+  white-space: nowrap;
+  background: #FFFFFF;
+  transition: background-color 0.1s ease;
+}
+
+table.aq-matrix-table td.text-center { text-align: center; }
+table.aq-matrix-table td.text-right { text-align: right; }
+
+table.aq-matrix-table tr:hover td {
+  background: #F8FAFC;
+}
+
+table.aq-matrix-table tr.aq-matrix-row-highlight td {
+  background: rgba(20, 184, 166, 0.08);
+}
+
+table.aq-matrix-table td.aq-matrix-td-sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #FFFFFF;
+  font-weight: 600;
+}
+
+table.aq-matrix-table tr:hover td.aq-matrix-td-sticky-left {
+  background: #F8FAFC;
+}
+
+table.aq-matrix-table td.aq-matrix-total-cell {
+  background: #FAFBFC;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* Empty State */
+table.aq-matrix-table td.aq-matrix-empty {
+  text-align: center;
+  padding: 36px 16px;
+  color: #64748B;
+  font-style: italic;
+  background: #FFFFFF;
+}

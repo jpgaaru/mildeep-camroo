@@ -24,7 +24,10 @@ def test_syntax():
         'js/framework/Router.js',
         'js/views/homeView.js',
         'js/views/loginView.js',
-        'js/views/preprocessingView.js'
+        'js/views/preprocessingView.js',
+        'js/components/matrixTable.js',
+        'js/components/inlineEditableTable.js',
+        'js/components/industrialAtoms.js'
     ]
     all_ok = True
     for f in files:
@@ -202,6 +205,7 @@ def test_business_logic():
 
 def test_live_deployment():
     print("\n=== 4. LIVE PRODUCTION HEALTH CHECK ===")
+    import ssl
     urls = [
         'https://mildeep-camaroo-2026.vercel.app/',
         'https://mildeep-camaroo-2026.vercel.app/preprocessing',
@@ -214,7 +218,9 @@ def test_live_deployment():
         def http_error_308(self, req, fp, code, msg, headers):
             return self.http_error_301(req, fp, code, msg, headers)
 
-    opener = urllib.request.build_opener(HTTP308RedirectHandler)
+    ssl_context = ssl._create_unverified_context()
+    https_handler = urllib.request.HTTPSHandler(context=ssl_context)
+    opener = urllib.request.build_opener(HTTP308RedirectHandler, https_handler)
 
     all_ok = True
     for u in urls:

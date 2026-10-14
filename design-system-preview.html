@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaOps Design System — Specialized Industrial Components</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS for showcase layout -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- AquaOps Design System Bundle & New Scoped Organisms -->
+  <link rel="stylesheet" href="aquaops-ds/bundle.css" />
+  <link rel="stylesheet" href="aquaops-ds/components/organisms/matrix-table.css" />
+  <link rel="stylesheet" href="aquaops-ds/components/organisms/inline-editable-table.css" />
+
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .token-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .token-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 md:p-10">
+
+  <!-- Header & Token Guarantee Banner -->
+  <header class="max-w-7xl mx-auto mb-10">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1] mb-2">
+          <span>AquaOps Design System Extension</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#14B8A6]"></span>
+          <span>100% Additive · Zero Regression</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-[#0F172A] tracking-tight">Specialized Seafood ERP UI Components</h1>
+        <p class="text-sm text-slate-500 mt-1">Industrial data-dense components calibrated to Devi Fisheries & Camaroo design tokens.</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 transition-all shadow-sm">
+          ← Back to Main App
+        </a>
+        <a href="preprocessing.html" class="px-4 py-2 text-xs font-semibold rounded-lg bg-[#004D57] text-white hover:bg-[#003840] transition-all shadow-sm">
+          Open Pre-Processing (21 Screens) →
+        </a>
+      </div>
+    </div>
+
+    <!-- Active Token Alignment Strip -->
+    <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-600">
+      <span class="font-semibold text-slate-800">Inherited Tokens:</span>
+      <span class="token-chip"><span class="token-dot" style="background:#004D57;"></span>--teal-900 (#004D57)</span>
+      <span class="token-chip"><span class="token-dot" style="background:#006C7A;"></span>--teal-800 (#006C7A)</span>
+      <span class="token-chip"><span class="token-dot" style="background:#14B8A6;"></span>--teal-500 (#14B8A6)</span>
+      <span class="token-chip"><span class="token-dot" style="background:#0F172A;"></span>--ink (#0F172A)</span>
+      <span class="token-chip"><span class="token-dot" style="background:#E2E8F0;"></span>--border (#E2E8F0)</span>
+      <span class="token-chip"><span class="token-dot" style="background:#F8FAFC;"></span>--bg-surface (#F8FAFC)</span>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto space-y-12">
+
+    <!-- SECTION 1: INDUSTRIAL ATOMS -->
+    <section>
+      <div class="mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#006C7A]">Stage 1 · Specialized Atoms</span>
+        <h2 class="text-lg font-bold text-slate-900">Industrial Process Atoms & Indicators</h2>
+        <p class="text-xs text-slate-500">Lightweight semantic indicators designed for high-density seafood floor tables.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Yield Badges -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Yield % Badges</div>
+          <div class="flex flex-wrap gap-2" id="yield-badges-demo"></div>
+          <p class="text-[11px] text-slate-400">Semantic thresholds: ≥68% Good (Emerald), 64-67% Warning (Amber), <64% Deficit (Rose).</p>
+        </div>
+
+        <!-- Difference Pills -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Count & Weight Deltas</div>
+          <div class="flex flex-wrap gap-2" id="difference-pills-demo"></div>
+          <p class="text-[11px] text-slate-400">Green highlight for favorable count delta (-3 count = larger shrimp size).</p>
+        </div>
+
+        <!-- Track Code Chips -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Audit Track Code Chips</div>
+          <div class="flex flex-col gap-2" id="track-chips-demo"></div>
+          <p class="text-[11px] text-slate-400">Monospace clickable chips linking directly to batch audit reports.</p>
+        </div>
+
+        <!-- Process Status Badges -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Lot & Chemical Statuses</div>
+          <div class="flex flex-wrap gap-2" id="status-badges-demo"></div>
+          <p class="text-[11px] text-slate-400">Official status tokens for raw material and chemical inventory.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: MULTI-TIER MATRIX TABLE ORGANISM -->
+    <section>
+      <div class="mb-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#006C7A]">Stage 3 · Organisms</span>
+          <h2 class="text-lg font-bold text-slate-900">Multi-Tier Matrix Table Organism (<code class="text-xs font-mono text-teal-700">MatrixTable</code>)</h2>
+          <p class="text-xs text-slate-500">2-tier grouping headers, frozen/sticky left column, instant search filtering, and one-click CSV export.</p>
+        </div>
+        <div class="text-xs text-slate-400 italic">Try searching "VM-VSP" or exporting CSV below:</div>
+      </div>
+
+      <div id="matrix-table-mount"></div>
+    </section>
+
+    <!-- SECTION 3: INLINE EDITABLE FLOOR GRID ORGANISM -->
+    <section>
+      <div class="mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#006C7A]">Stage 3 · Organisms</span>
+        <h2 class="text-lg font-bold text-slate-900">Floor Data Entry Grid (<code class="text-xs font-mono text-teal-700">InlineEditableTable</code>)</h2>
+        <p class="text-xs text-slate-500">Mixed read-only & editable cells, reactive calculations on every keystroke, and seamless Tab key navigation.</p>
+      </div>
+
+      <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900 mb-3 flex items-center gap-2">
+        <span>💡</span>
+        <span><b>Try editing:</b> Change <i>Recv Count</i> or <i>Recv Weight</i> below. Watch <b>Count Diff</b> and <b>Qty Diff</b> recalculate and recolor instantly!</span>
+      </div>
+
+      <div id="editable-table-mount"></div>
+    </section>
+
+    <!-- SECTION 4: NATIVE INDUSTRIAL YIELD CHART -->
+    <section>
+      <div class="mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#006C7A]">Stage 3 · Analytics</span>
+        <h2 class="text-lg font-bold text-slate-900">Industrial Yield Distribution Chart</h2>
+        <p class="text-xs text-slate-500">High-performance Canvas 2D chart rendered with zero heavyweight third-party dependencies.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-sm font-bold text-slate-800">Yield Efficiency by Commercial Grade Band (%)</div>
+          <span class="text-xs px-2.5 py-1 rounded bg-teal-50 text-teal-800 font-semibold border border-teal-200">Plant Target: 65.0%</span>
+        </div>
+        <canvas id="yieldCanvas" width="800" height="240" class="w-full h-60"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto mt-16 pt-6 border-t border-slate-200 text-center text-xs text-slate-400">
+    AquaOps Design System · Camaroo ERP v3.0.0 · Devi Fisheries Limited · Zero Modification Guarantee
+  </footer>
+
+  <!-- Module Script Mounting Demo Instances -->
+  <script type="module">
+    import { MatrixTable } from './js/components/matrixTable.js';
+    import { InlineEditableTable } from './js/components/inlineEditableTable.js';
+    import { YieldBadge, DifferencePill, TrackCodeChip, ProcessStatusBadge } from './js/components/industrialAtoms.js';
+
+    // 1. Mount Industrial Atoms Demos
+    document.getElementById('yield-badges-demo').innerHTML = `
+      ${YieldBadge(72.40)}
+      ${YieldBadge(69.45)}
+      ${YieldBadge(66.20)}
+      ${YieldBadge(61.80)}
+    `;
+
+    document.getElementById('difference-pills-demo').innerHTML = `
+      ${DifferencePill(-3.00)}
+      ${DifferencePill(-19.60)}
+      ${DifferencePill(0)}
+      ${DifferencePill(4.50)}
+    `;
+
+    document.getElementById('track-chips-demo').innerHTML = `
+      <div>${TrackCodeChip('VM-VSP-SKM-054')}</div>
+      <div>${TrackCodeChip('VM-KKD-MKP-043')}</div>
+      <div>${TrackCodeChip('VM-VSP-AVN-034')}</div>
+    `;
+
+    document.getElementById('status-badges-demo').innerHTML = `
+      ${ProcessStatusBadge('MELTING')}
+      ${ProcessStatusBadge('FRESH')}
+      ${ProcessStatusBadge('ISSUED')}
+      ${ProcessStatusBadge('VERIFIED')}
+      ${ProcessStatusBadge('PENDING')}
+    `;
+
+    // 2. Mount MatrixTable Demo
+    new MatrixTable({
+      containerId: 'matrix-table-mount',
+      title: 'Grading Yield & Distribution Matrix (Floor Batch Consolidation)',
+      subtitle: 'Real-time multi-grade breakdown across production units',
+      searchable: true,
+      exportable: true,
+      headerGroups: [
+        { label: 'Batch Identifier', colspan: 1, rowspan: 2, stickyLeft: true },
+        { label: 'Source Plant', colspan: 1, rowspan: 2 },
+        { label: 'Grade 16/20', colspan: 2, rowspan: 1 },
+        { label: 'Grade 21/25', colspan: 2, rowspan: 1 },
+        { label: 'Grade 26/30', colspan: 2, rowspan: 1 },
+        { label: 'Grade 31/40', colspan: 2, rowspan: 1 },
+        { label: 'Total Output', colspan: 1, rowspan: 2 },
+        { label: 'Batch Yield', colspan: 1, rowspan: 2 }
+      ],
+      columns: [
+        { key: 'batch', label: 'Batch', stickyLeft: true, render: (v) => TrackCodeChip(v) },
+        { key: 'plant', label: 'Plant' },
+        { key: 'g16_kg', label: 'Kgs', isChild: true, align: 'right' },
+        { key: 'g16_cr', label: 'Crates', isChild: true, align: 'center' },
+        { key: 'g21_kg', label: 'Kgs', isChild: true, align: 'right' },
+        { key: 'g21_cr', label: 'Crates', isChild: true, align: 'center' },
+        { key: 'g26_kg', label: 'Kgs', isChild: true, align: 'right' },
+        { key: 'g26_cr', label: 'Crates', isChild: true, align: 'center' },
+        { key: 'g31_kg', label: 'Kgs', isChild: true, align: 'right' },
+        { key: 'g31_cr', label: 'Crates', isChild: true, align: 'center' },
+        { key: 'totalKg', label: 'Total Kgs', isTotal: true, align: 'right', render: (v) => `<b>${v}</b>` },
+        { key: 'yield', label: 'Yield', align: 'center', render: (v) => YieldBadge(v) }
+      ],
+      data: [
+        { batch: 'VM-VSP-SKM-054', plant: 'DFL UNIT-1 (VSP)', g16_kg: '450.0', g16_cr: 18, g21_kg: '620.0', g21_cr: 25, g26_kg: '510.0', g26_cr: 20, g31_kg: '380.0', g31_cr: 15, totalKg: '1,960.0', yield: 71.2 },
+        { batch: 'VM-KKD-MKP-043', plant: 'DFL UNIT-2 (KKD)', g16_kg: '280.0', g16_cr: 11, g21_kg: '490.0', g21_cr: 20, g26_kg: '680.0', g26_cr: 27, g31_kg: '420.0', g31_cr: 17, totalKg: '1,870.0', yield: 69.8 },
+        { batch: 'VM-VSP-AVN-034', plant: 'DFL UNIT-1 (VSP)', g16_kg: '310.0', g16_cr: 12, g21_kg: '540.0', g21_cr: 22, g26_kg: '430.0', g26_cr: 17, g31_kg: '290.0', g31_cr: 12, totalKg: '1,570.0', yield: 67.5 },
+        { batch: 'VM-JPT-SMP-012', plant: 'DFL UNIT-5 (JPT)', g16_kg: '190.0', g16_cr: 8, g21_kg: '380.0', g21_cr: 15, g26_kg: '520.0', g26_cr: 21, g31_kg: '310.0', g31_cr: 12, totalKg: '1,400.0', yield: 65.4 }
+      ]
+    });
+
+    // 3. Mount InlineEditableTable Demo
+    new InlineEditableTable({
+      containerId: 'editable-table-mount',
+      title: 'Incoming RM Receiving & Verification Grid (Vehicle: AP05TM2628)',
+      columns: [
+        { key: 'sno', label: 'S.No', width: '40px' },
+        { key: 'billNo', label: 'Bill No' },
+        { key: 'variety', label: 'Variety' },
+        { key: 'expectedCount', label: 'Expected Count' },
+        { key: 'expectedWeight', label: 'Expected Weight (Kg)' },
+        { key: 'recvCount', label: 'Recv Count', editable: true, type: 'number', step: '0.1', width: '90px' },
+        { key: 'recvWeight', label: 'Recv Weight (Kg)', editable: true, type: 'number', step: '0.1', width: '100px' },
+        { key: 'sampleQty', label: 'Sample Qty (Kg)', editable: true, type: 'number', step: '0.1', width: '85px' },
+        { key: 'pieces', label: 'Pcs', editable: true, type: 'number', width: '75px' },
+        { 
+          key: 'countDiff', 
+          label: 'Count Diff', 
+          calculated: (row) => {
+            const exp = parseFloat(row.expectedCount) || 0;
+            const recv = parseFloat(row.recvCount) || 0;
+            return parseFloat((recv - exp).toFixed(2));
+          } 
+        },
+        { 
+          key: 'qtyDiff', 
+          label: 'Qty Diff (Kg)', 
+          calculated: (row) => {
+            const exp = parseFloat(row.expectedWeight) || 0;
+            const recv = parseFloat(row.recvWeight) || 0;
+            return parseFloat((recv - exp).toFixed(2));
+          } 
+        }
+      ],
+      data: [
+        { sno: 1, billNo: 'AVN/2526/0001', variety: 'VM-HEAD ON', expectedCount: 63.0, expectedWeight: 309.0, recvCount: 60.0, recvWeight: 309.0, sampleQty: 5.0, pieces: 300 },
+        { sno: 2, billNo: 'AVN/2526/0002', variety: 'VM-HEAD ON', expectedCount: 65.0, expectedWeight: 450.0, recvCount: 62.0, recvWeight: 452.0, sampleQty: 5.0, pieces: 310 },
+        { sno: 3, billNo: 'SKM/2526/0089', variety: 'VM-HEAD ON', expectedCount: 55.0, expectedWeight: 520.0, recvCount: 56.5, recvWeight: 518.0, sampleQty: 5.0, pieces: 280 }
+      ]
+    });
+
+    // 4. Render Canvas Yield Chart
+    const canvas = document.getElementById('yieldCanvas');
+    if (canvas && canvas.getContext) {
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const labels = ['16/20', '21/25', '26/30', '31/40', '41/50', '51/60'];
+      const values = [72, 70, 68, 65, 62, 60];
+      const w = rect.width;
+      const h = rect.height;
+      const padLeft = 45;
+      const padRight = 20;
+      const padTop = 20;
+      const padBottom = 35;
+      const chartW = w - padLeft - padRight;
+      const chartH = h - padTop - padBottom;
+      const barCount = labels.length;
+      const barWidth = Math.min(chartW / barCount * 0.45, 55);
+      const step = chartW / barCount;
+
+      // Draw background grid
+      ctx.strokeStyle = '#E2E8F0';
+      ctx.lineWidth = 1;
+      for (let yVal = 0; yVal <= 80; yVal += 20) {
+        const y = padTop + chartH - (yVal / 80) * chartH;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(w - padRight, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '10.5px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(`${yVal}%`, padLeft - 8, y + 3.5);
+      }
+
+      // Draw target threshold line (65%)
+      const targetY = padTop + chartH - (65 / 80) * chartH;
+      ctx.save();
+      ctx.strokeStyle = '#F59E0B';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(padLeft, targetY);
+      ctx.lineTo(w - padRight, targetY);
+      ctx.stroke();
+      ctx.restore();
+
+      // Draw Bars
+      values.forEach((val, i) => {
+        const x = padLeft + (i * step) + (step - barWidth) / 2;
+        const bH = (val / 80) * chartH;
+        const y = padTop + chartH - bH;
+
+        const grad = ctx.createLinearGradient(0, y, 0, y + bH);
+        grad.addColorStop(0, '#14B8A6');
+        grad.addColorStop(1, '#004D57');
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(x, y, barWidth, bH, [6, 6, 0, 0]);
+        } else {
+          ctx.rect(x, y, barWidth, bH);
+        }
+        ctx.fill();
+
+        // Label value on top of bar
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '600 11px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${val}%`, x + barWidth / 2, y - 6);
+
+        // Grade label below bar
+        ctx.fillStyle = '#64748B';
+        ctx.font = '500 11.5px Inter, sans-serif';
+        ctx.fillText(labels[i], x + barWidth / 2, h - padBottom + 18);
+      });
+    }
+  </script>
+</body>
+</html>
