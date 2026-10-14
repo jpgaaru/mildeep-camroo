@@ -57,13 +57,13 @@
   <section class="stage-section" id="stage1">
     <span class="stage-pill">Stage 1</span>
     <h2>Atoms</h2>
-    <p>The irreducible design primitives. Building blocks that cannot be broken down further without losing their meaning.</p>
+    <p>The foundational design primitives—color tokens, typography scales, iconography, buttons, and low-level form elements that cannot be decomposed further without loss of semantic meaning.</p>
 
     <!-- Colors with WCAG Tints, Shades, & Tones -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Color Tokens (WCAG Calibrated)</div>
-        <p class="spec-desc">California Sunset Teal scale with verified contrast ratios. Tints for subtle fills, base anchors for brand recognition, and deep shades for AAA text contrast.</p>
+        <div class="spec-title">Color System &amp; Contrast Tokens</div>
+        <p class="spec-desc">Calibrated California Sunset Teal palette paired with monochrome neutrals. Systematically tested against WCAG 2.1 contrast benchmarks: tints for surface backgrounds, mid-tones for interactive state cues, and deep shades exceeding 8.2:1 AAA text readability.</p>
       </div>
       <div class="spec-content">
         <div class="swatches">
@@ -90,32 +90,32 @@
     <!-- Typography -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Typography Spec</div>
-        <p class="spec-desc">Noto Sans fluid type scale. High legibility, tight tracking on headings, tabular figures for all metric readouts.</p>
+        <div class="spec-title">Typography &amp; Fluid Type Scale</div>
+        <p class="spec-desc">Engineered using Noto Sans across an 8-step modular hierarchy. Features optical negative tracking for large display headings, relaxed body line heights for sustained legibility, and monospaced tabular figures for high-density sensor readouts.</p>
       </div>
       <div class="spec-content type-table">
         <div class="type-row">
-          <div class="type-row-meta">Display / Hero (2.90rem – 4.25rem)</div>
+          <div class="type-row-meta">Display / Large Hero (2.90rem – 4.25rem)</div>
           <div style="font-size:var(--t-display);font-weight:800;letter-spacing:-0.035em;line-height:1.02">Harvest Matrix 98%</div>
         </div>
         <div class="type-row">
-          <div class="type-row-meta">Heading 1 (2.30rem – 3.20rem)</div>
+          <div class="type-row-meta">Heading 1 / Page Title (2.30rem – 3.20rem)</div>
           <div style="font-size:var(--t-2xl);font-weight:700;letter-spacing:-0.03em">Coldstore Intake Queue</div>
         </div>
         <div class="type-row">
-          <div class="type-row-meta">Heading 2 (1.85rem – 2.40rem)</div>
+          <div class="type-row-meta">Heading 2 / Section Header (1.85rem – 2.40rem)</div>
           <div style="font-size:var(--t-xl);font-weight:700;letter-spacing:-0.025em">Water Chemistry &amp; Dissolved Oxygen</div>
         </div>
         <div class="type-row">
-          <div class="type-row-meta">Body Large / Subhead (1.20rem – 1.40rem)</div>
+          <div class="type-row-meta">Body Large / Subtitle (1.20rem – 1.40rem)</div>
           <div style="font-size:var(--t-md);font-weight:500;color:var(--muted)">Aeration cycles completed on schedule across all 8 Vannamei ponds.</div>
         </div>
         <div class="type-row">
-          <div class="type-row-meta">Standard Body (17px / 1.0625rem)</div>
-          <div style="font-size:var(--t-base)">Body text across tables, forms, disclosures, and platform summaries for enterprise users.</div>
+          <div class="type-row-meta">Body Regular / Paragraph (17px / 1.0625rem)</div>
+          <div style="font-size:var(--t-base)">Primary text for enterprise workflows, inspection summaries, tabular data, and input descriptors.</div>
         </div>
         <div class="type-row">
-          <div class="type-row-meta">Tabular Figures (Numbers)</div>
+          <div class="type-row-meta">Tabular Numerals (Data &amp; Metrics)</div>
           <div style="font-size:var(--t-md);font-weight:700;font-variant-numeric:tabular-nums;color:var(--black)">12,450.86 kg · DO: 6.82 mg/L · Salinity: 18 ppt</div>
         </div>
       </div>
@@ -124,11 +124,11 @@
     <!-- Icons -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Complete Icon Library</div>
-        <p class="spec-desc">Lucide 24px grid system with 1.75 stroke weight. Unified visual metaphor across all ERP modules: Aquaculture, Processing, Logistics, Quality, and Telemetry.</p>
+        <div class="spec-title">Iconography System</div>
+        <p class="spec-desc">Geometric icon set built on a 24px bounding grid with a balanced 1.75px optical stroke weight. Provides unified visual metaphors for industrial aquaculture, cold chain logistics, automated telemetry, and enterprise quality control.</p>
         <div class="callout callout-info" style="margin-top:14px;padding:12px 14px;font-size:12px">
           <i data-lucide="info" style="width:15px;height:15px"></i>
-          <div>Click any icon to copy its Lucide markup <code>&lt;i data-lucide="..."&gt;</code> to your clipboard.</div>
+          <div>Click any icon glyph to copy its production markup <code>&lt;i data-lucide="..."&gt;&lt;/i&gt;</code> directly to your clipboard.</div>
         </div>
       </div>
       <div class="spec-content">
@@ -354,7 +354,7 @@
               <span>Large 32px (Empty States)</span>
             </div>
             <div style="margin-left:auto;font-size:12px;color:var(--muted);max-width:320px;line-height:1.5">
-              <b>Icon Engineering Rules:</b> All icons render via vector SVG with <code>stroke-width: 1.75</code>, stroke-linecap <code>round</code>, stroke-linejoin <code>round</code>, adhering to Apple SF Symbols &amp; Google Material geometric optics.
+              <b>Design &amp; Engineering Rules:</b> All iconography is authored on a 24×24 coordinate plane with <code>stroke-width: 1.75</code>, rounded caps, and rounded joins, adhering to Apple SF Symbols and Uber Base visual consistency.
             </div>
           </div>
         </div>
@@ -364,38 +364,37 @@
     <!-- Buttons with Full States & WCAG Hierarchy -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Button System &amp; Hierarchy (WCAG AAA)</div>
-        <p class="spec-desc">Architectural 8px corner radius, strict height scale (34px, 42px, 48px), and calibrated Dark Teal <code>#004d57</code> for guaranteed 8.2:1 AAA white text contrast.</p>
+        <div class="spec-title">Buttons &amp; Action Controls</div>
+        <p class="spec-desc">Hierarchical interactive controls with calibrated 8px corner radius, standard heights (34px, 42px, 48px), and Dark Teal <code>#004d57</code> delivering 8.2:1 contrast ratio against white text (exceeding WCAG 2.1 AAA).</p>
       </div>
       <div class="spec-content">
         <div>
-          <div class="category-label">Variants (WCAG 2.1 AAA Contrast Calibrated)</div>
+          <div class="category-label">Button Variants &amp; Semantic Hierarchy</div>
           <div class="line-row">
-            <button class="btn btn-primary" title="Dark Teal #004d57 with White text (8.20:1 AAA)"><i data-lucide="check"></i>Primary (Dark Teal · White Text · 8.2:1 AAA)</button>
-            <button class="btn btn-teal-light" title="Soft Tint #f0fafc with #004d57 Dark Teal text"><i data-lucide="plus"></i>Teal Soft (Tint #f0fafc)</button>
-            <button class="btn btn-dark" title="Dark Slate #0f172a"><i data-lucide="shield"></i>Dark Slate</button>
+            <button class="btn btn-primary" title="Dark Teal #004d57 with White text (8.20:1 AAA)"><i data-lucide="check"></i>Primary Action</button>
+            <button class="btn btn-teal-light" title="Soft Tint #f0fafc with #004d57 Dark Teal text"><i data-lucide="plus"></i>Subtle Tint</button>
+            <button class="btn btn-dark" title="Dark Slate #0f172a"><i data-lucide="shield"></i>Neutral Dark</button>
             <button class="btn btn-secondary">Secondary Outline</button>
-            <button class="btn btn-ghost">Ghost Link</button>
+            <button class="btn btn-ghost">Ghost Action</button>
             <button class="btn btn-danger"><i data-lucide="alert-triangle"></i>Destructive</button>
-            <button class="btn btn-primary btn-pill"><i data-lucide="sparkles"></i>Pill Variant</button>
+            <button class="btn btn-primary btn-pill"><i data-lucide="sparkles"></i>Rounded Pill</button>
           </div>
           <div class="callout callout-info" style="margin-top:14px;padding:12px 16px;font-size:12px">
             <i data-lucide="info" style="width:16px;height:16px"></i>
             <div>
-              <b>WCAG 2.1 AAA Contrast Calibration:</b>
-              Primary buttons use <b>Dark Teal <code>#004d57</code></b> providing an exceptional <b>8.20:1 contrast ratio</b> against crisp white text (<code>#ffffff</code>), exceeding the 7.0:1 AAA international standard.
-              Corner radius is geometrically standardized to <b>8px (<code>--r-8</code>)</b> across all buttons, inputs, and selects for refined enterprise UI precision.
+              <b>Contrast Calibration &amp; Geometry:</b>
+              Primary buttons employ deep <b>Dark Teal <code>#004d57</code></b> to provide an <b>8.2:1 contrast ratio</b> against pure white text (<code>#ffffff</code>), comfortably exceeding the WCAG 2.1 AAA requirement (7.0:1). Corner radius is standardized at <b>8px (<code>--r-8</code>)</b> across all primary controls for structural consistency.
             </div>
           </div>
         </div>
         <div>
-          <div class="category-label">Sizes &amp; Interactive States (Geometric 8px Radius)</div>
+          <div class="category-label">Sizing Hierarchy &amp; Interactive States</div>
           <div class="line-row">
-            <button class="btn btn-primary btn-sm">Small (34px · 6px R)</button>
-            <button class="btn btn-primary">Default (42px · 8px R)</button>
-            <button class="btn btn-primary btn-lg">Large (48px · 10px R)</button>
+            <button class="btn btn-primary btn-sm">Small (34px · 6px Radius)</button>
+            <button class="btn btn-primary">Default (42px · 8px Radius)</button>
+            <button class="btn btn-primary btn-lg">Large (48px · 10px Radius)</button>
             <button class="btn btn-primary" disabled><i data-lucide="lock"></i>Disabled</button>
-            <button class="btn btn-primary"><span class="spinner"></span>Processing...</button>
+            <button class="btn btn-primary"><span class="spinner"></span>Loading State...</button>
             <button class="iconbtn" title="Alerts"><i data-lucide="bell"></i><span class="ndot"></span></button>
           </div>
         </div>
@@ -405,12 +404,12 @@
     <!-- Avatars (Fixed Aspect Ratio, Clean Circular, High-Res Photos) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Avatars &amp; Photos</div>
-        <p class="spec-desc">Perfect 1:1 circular avatars, natural photo framing, presence badges, and clean overlapping team stacks.</p>
+        <div class="spec-title">Avatars &amp; Presence Indicators</div>
+        <p class="spec-desc">1:1 circular profile avatars with retina resolution support, real-time presence status badges, fallback text initials, and clustered team stacks.</p>
       </div>
       <div class="spec-content">
         <div>
-          <div class="category-label">Photo Avatars with Online Status</div>
+          <div class="category-label">Individual Identity &amp; Real-Time Presence</div>
           <div class="av-wrap">
             <div class="av lg">
               <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=140&h=140&q=80" alt="Anitha Nair" />
@@ -432,7 +431,7 @@
         </div>
 
         <div>
-          <div class="category-label">Overlapping Team Avatar Stack</div>
+          <div class="category-label">Stacked Group Avatars (Compact Team Roster)</div>
           <div class="av-stack">
             <div class="av"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=100&h=100&q=80" alt="Lead" /></div>
             <div class="av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&w=100&h=100&q=80" alt="QC" /></div>
@@ -448,12 +447,12 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Badges &amp; Status Lozenges</div>
-        <p class="spec-desc">Subtle, low-opacity background badges and high-contrast status pills following Apple HIG and Google Material guidelines. Equipped with live status dot indicators.</p>
+        <p class="spec-desc">Compact metadata tags and status indicators designed for high-density tables and cards. Compliant with Apple HIG and Uber Base principles, featuring semantic color coding, subtle container tints, and live pulse dots.</p>
       </div>
       <div class="spec-content">
         <div class="stack-col">
           <div>
-            <div class="category-label">Semantic Status Pills with Icons</div>
+            <div class="category-label">Semantic Status Badges with Contextual Icons</div>
             <div class="line-row">
               <span class="badge badge-teal"><i data-lucide="check"></i>Active Batch</span>
               <span class="badge badge-soft"><i data-lucide="refresh-cw"></i>Syncing IoT</span>
@@ -464,7 +463,7 @@
             </div>
           </div>
           <div>
-            <div class="category-label">Live Dot Indicators &amp; Outlined Lozenges</div>
+            <div class="category-label">Live Telemetry Dots &amp; Outlined Status Tags</div>
             <div class="line-row">
               <span class="badge badge-teal"><span class="badge-dot"></span>Pond 04 Live</span>
               <span class="badge badge-success"><span class="badge-dot"></span>Chamber 02 Cold</span>
@@ -481,8 +480,8 @@
     <!-- Inputs & Clean Dropdowns (GLOBAL SAAS UI STANDARDS) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Inputs &amp; Dropdowns (Global SaaS)</div>
-        <p class="spec-desc">Architectural form controls conforming strictly to Stripe, Linear, and Apple HIG patterns. Strict 8px corner radius, calibrated height tokens (34px, 42px, 48px), subtle 1px border hierarchy, compound addons, and accessible focus states.</p>
+        <div class="spec-title">Form Inputs &amp; Dropdowns</div>
+        <p class="spec-desc">Precision form controls adhering to global SaaS, Apple HIG, and Uber Base conventions. Features an 8px uniform corner radius, strict height tokens (34px, 42px, 48px), 1px border hierarchy, accessible focus rings, and compound addons.</p>
       </div>
       <div class="spec-content">
           
@@ -490,146 +489,146 @@
 
           <!-- 1. Standard Input States -->
           <div>
-            <div class="category-label">Text Inputs (Core States)</div>
+            <div class="category-label">Text Input Field States</div>
             <div class="form-responsive-grid">
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Default</span>
-                  <span class="hint">Standard 42px</span>
+                  <span>Default State</span>
+                  <span class="hint">42px Height</span>
                 </label>
                 <input type="text" class="input" placeholder="e.g. LOT-2026-VAN-08" />
-                <div class="hint">Base form input with 8px radius and subtle 1px border.</div>
+                <div class="hint">Standard idle state with subtle 1px border and 8px corner radius.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Focused</span>
-                  <span class="hint" style="color:var(--teal-800);font-weight:600">Active Ring</span>
+                  <span>Focus State</span>
+                  <span class="hint" style="color:var(--teal-800);font-weight:600">3px Focus Aura</span>
                 </label>
                 <input type="text" class="input" value="L. Vannamei (Selected)" style="border-color:#004d57;box-shadow:0 0 0 3px rgba(0,77,87,0.14)" />
-                <div class="hint">Active focus state with Dark Teal #004D57 aura glow.</div>
+                <div class="hint">Focused state showing Dark Teal ring (0 0 0 3px rgba(0,77,87,0.14)).</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Disabled</span>
-                  <span class="hint">Locked</span>
+                  <span>Disabled State</span>
+                  <span class="hint">Not Interactive</span>
                 </label>
                 <input type="text" class="input" value="SPF-KONA-GEN3-LOCKED" disabled />
-                <div class="hint">Locked field with muted background and not-allowed cursor.</div>
+                <div class="hint">Disabled field with reduced opacity and not-allowed cursor.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Read-Only</span>
-                  <span class="hint">Immutable</span>
+                  <span>Read-Only State</span>
+                  <span class="hint">Value Locked</span>
                 </label>
                 <input type="text" class="input" value="0x8f2c...4e19" readonly />
-                <div class="hint">Read-only immutable transaction hash value.</div>
+                <div class="hint">Immutable value selectable by user but not editable.</div>
               </div>
             </div>
           </div>
 
           <!-- 2. Sizing Scale -->
           <div>
-            <div class="category-label">Text Inputs (Sizing Hierarchy)</div>
+            <div class="category-label">Input Sizing Scale</div>
             <div class="form-responsive-grid">
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Small (sm)</span>
-                  <span class="hint">34px · 6px Radius</span>
+                  <span>Small (34px)</span>
+                  <span class="hint">Dense Layouts</span>
                 </label>
                 <input type="text" class="input input-sm" placeholder="Search tables or filter rows..." />
-                <div class="hint">Calibrated for dense data grids, toolbars, and filter rails.</div>
+                <div class="hint">Optimized for dense data tables, toolbars, and compact filter bars.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Medium (md)</span>
-                  <span class="hint">42px · 8px Radius (Default)</span>
+                  <span>Medium (42px)</span>
+                  <span class="hint">Default Form Standard</span>
                 </label>
                 <input type="text" class="input input-md" placeholder="Standard enterprise form field..." />
-                <div class="hint">Standard field height across forms, drawers, and modal panels.</div>
+                <div class="hint">Standard baseline height across forms, modal sheets, and side drawers.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Large (lg)</span>
-                  <span class="hint">48px · 10px Radius</span>
+                  <span>Large (48px)</span>
+                  <span class="hint">Prominent Forms</span>
                 </label>
                 <input type="text" class="input input-lg" placeholder="Modal dialog or hero intake..." />
-                <div class="hint">Prominent field for authentication and hero search experiences.</div>
+                <div class="hint">Prominent sizing for authentication screens and primary hero intakes.</div>
               </div>
             </div>
           </div>
 
           <!-- 3. Leading & Trailing Affixes -->
           <div>
-            <div class="category-label">Text Inputs (Affixes &amp; Addons)</div>
+            <div class="category-label">Inputs with Affixes &amp; Embedded Actions</div>
             <div class="form-responsive-grid">
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Leading Icon</span>
-                  <span class="hint">Search Filter</span>
+                  <span>Leading Search Icon</span>
+                  <span class="hint">38px Left Indent</span>
                 </label>
                 <div class="input-wrap">
                   <i data-lucide="search" class="leading"></i>
                   <input type="text" class="input" placeholder="Search ponds, batches, probes..." />
                 </div>
-                <div class="hint">Left-aligned 16px vector icon with 38px text indent.</div>
+                <div class="hint">Left-aligned 16px vector icon with calibrated 38px text padding.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Trailing Unit</span>
-                  <span class="hint">Metric Tag</span>
+                  <span>Trailing Unit Badge</span>
+                  <span class="hint">Fixed Monospace Unit</span>
                 </label>
                 <div class="input-wrap">
                   <i data-lucide="scale" class="leading"></i>
                   <input type="text" class="input" value="12,450.80" />
                   <span class="trailing-unit">KG</span>
                 </div>
-                <div class="hint">Leading metric icon with anchored tabular unit badge.</div>
+                <div class="hint">Numerical input with leading metric glyph and anchored unit indicator.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Trailing Action</span>
-                  <span class="hint">Password Toggle</span>
+                  <span>Trailing Interactive Action</span>
+                  <span class="hint">Clickable Eye Glyph</span>
                 </label>
                 <div class="input-wrap">
                   <i data-lucide="key" class="leading"></i>
                   <input type="password" class="input" value="TelemetrySecretKey2026" />
                   <button type="button" class="trailing-action" title="Toggle password" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password'"><i data-lucide="eye"></i></button>
                 </div>
-                <div class="hint">Interactive trailing icon button to toggle value visibility.</div>
+                <div class="hint">Interactive trailing button to toggle masked text visibility.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input Group / Prefix &amp; Suffix</span>
-                  <span class="hint">Continuous Addon</span>
+                  <span>Segmented URL Prefix &amp; Suffix</span>
+                  <span class="hint">Connected Addons</span>
                 </label>
                 <div class="input-group">
                   <span class="input-addon">https://</span>
                   <input type="text" class="input" value="coldstore-cs2" />
                   <span class="input-addon">.camaroo.io</span>
                 </div>
-                <div class="hint">Joined continuous addon block with seamless border radius.</div>
+                <div class="hint">Seamlessly integrated prefix and suffix addons with shared corner radii.</div>
               </div>
             </div>
           </div>
 
           <!-- 4. Global SaaS Dropdowns & Selects (Image 2) -->
           <div>
-            <div class="category-label">Select Fields (Dropdowns)</div>
+            <div class="category-label">Single-Select Menus (Custom Popover)</div>
             <div class="form-responsive-grid">
               
               <!-- Custom Select: Plant Selection (Exact Image 2) -->
               <div class="field-block">
                 <label class="label">
                   <span>Plant</span>
-                  <span class="hint">Standard 42px</span>
+                  <span class="hint">Single Selection</span>
                 </label>
                 <div class="custom-select" id="demoPlantSelect">
                   <div class="custom-select-trigger" tabindex="0">
@@ -665,7 +664,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="hint">Clean white card menu with 8px radius, teal focus ring, and checkmark state.</div>
+                <div class="hint">White floating menu card with 8px radius, Dark Teal focus ring, and selection checkmark.</div>
               </div>
 
               <!-- Genetic Broodstock Species (Custom Select) -->
@@ -700,14 +699,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="hint">Replaces dark native OS menus with pixel-perfect SaaS dropdown.</div>
+                <div class="hint">Replaces browser-native select overlays with an accessible, keyboard-navigable popover.</div>
               </div>
 
               <!-- Compact 34px Custom Select -->
               <div class="field-block">
                 <label class="label">
                   <span>Pond Cluster Filter</span>
-                  <span class="hint">Compact 34px</span>
+                  <span class="hint">Compact (34px)</span>
                 </label>
                 <div class="custom-select input-sm" id="demoClusterSelect">
                   <div class="custom-select-trigger" tabindex="0">
@@ -731,14 +730,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="hint">Dense table toolbar and navigation rail dropdown.</div>
+                <div class="hint">Compact dropdown height for data table headers and dense operational toolbars.</div>
               </div>
 
               <!-- Disabled Select Dropdown -->
               <div class="field-block">
                 <label class="label">
                   <span>Coldstore Locker Assignment</span>
-                  <span class="hint">Disabled</span>
+                  <span class="hint">Disabled State</span>
                 </label>
                 <div class="custom-select" style="pointer-events:none;opacity:0.6">
                   <div class="custom-select-trigger">
@@ -746,7 +745,7 @@
                     <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </div>
                 </div>
-                <div class="hint">Disabled select dropdown state.</div>
+                <div class="hint">Visually dimmed and non-interactive select container.</div>
               </div>
 
             </div>
@@ -754,40 +753,40 @@
 
           <!-- 5. Date & Calendar Fields (Image 3 Standard) -->
           <div>
-            <div class="category-label">Date &amp; Calendar Fields</div>
+            <div class="category-label">Date Selection &amp; Calendar Pickers</div>
             <div class="form-responsive-grid">
               
               <!-- From Date (Interactive Datepicker Trigger) -->
               <div class="field-block">
                 <label class="label">
-                  <span>Date / Single Date</span>
-                  <span class="hint">Standard 42px</span>
+                  <span>Single Date Input</span>
+                  <span class="hint">Formatted DD/MM/YYYY</span>
                 </label>
                 <div class="date-input-wrap">
                   <input type="text" class="input date-input" id="demoFromDate" value="14/10/2026" placeholder="dd/mm/yyyy" readonly />
                   <span class="date-icon"><i data-lucide="calendar"></i></span>
                 </div>
-                <div class="hint">Click input or calendar icon to toggle interactive datepicker.</div>
+                <div class="hint">Click either the input field or calendar icon to toggle the popover picker.</div>
               </div>
 
               <!-- To Date -->
               <div class="field-block">
                 <label class="label">
-                  <span>Date / Range End</span>
-                  <span class="hint">Standard 42px</span>
+                  <span>Range End Date</span>
+                  <span class="hint">Target Horizon</span>
                 </label>
                 <div class="date-input-wrap">
                   <input type="text" class="input date-input" id="demoToDate" placeholder="dd/mm/yyyy" readonly />
                   <span class="date-icon"><i data-lucide="calendar"></i></span>
                 </div>
-                <div class="hint">Synchronized range limits for farm telemetry filtering.</div>
+                <div class="hint">Pairs with the start date to bound operational query filters.</div>
               </div>
 
               <!-- Live In-Line Calendar Popover Preview (Exact Image 3 Specimen) -->
               <div class="field-block" style="grid-column: 1 / -1">
                 <label class="label">
-                  <span>Calendar Popover Specification</span>
-                  <span class="hint">288px Fixed · 16px Radius · 4 Quick Presets</span>
+                  <span>Calendar Popover Geometry &amp; Controls</span>
+                  <span class="hint">288px Width · 16px Radius · Quick Presets</span>
                 </label>
                 <div style="display:flex;justify-content:flex-start;padding:12px 0">
                   <div class="calendar-popover" style="position:static;display:block;box-shadow:var(--sh-2)">
@@ -864,41 +863,41 @@
 
           <!-- 6. Textarea & Field Validation States -->
           <div>
-            <div class="category-label">Textarea &amp; Inline Validation States</div>
+            <div class="category-label">Textarea &amp; Inline Form Validation</div>
             <div class="form-responsive-grid">
               <div class="field-block" style="grid-column:1/-1">
                 <label class="label">
-                  <span>Textarea / Multi-Line</span>
-                  <span class="hint">Max 500 characters</span>
+                  <span>Multi-Line Text Area</span>
+                  <span class="hint">500 Characters Max</span>
                 </label>
                 <textarea class="input textarea" placeholder="Document organoleptic assessment, shell hardness, hepatopancreas condition, or cold chain log notes..."></textarea>
-                <div class="hint">Multi-line textarea with 8px radius, 1.5 line-height, and responsive vertical resize.</div>
+                <div class="hint">Extended text input with uniform 8px corner radius and comfortable 1.5 line height.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Error State</span>
-                  <span class="hint" style="color:#DC2626;font-weight:600">Required</span>
+                  <span>Error Validation State</span>
+                  <span class="hint" style="color:#DC2626;font-weight:600">Biosecurity Breach</span>
                 </label>
                 <div class="input-wrap">
                   <i data-lucide="activity" class="leading"></i>
                   <input class="input err" value="2.8" />
                   <span class="trailing-unit">MG/L</span>
                 </div>
-                <div class="msg err"><i data-lucide="alert-triangle"></i>DO cannot be below minimum biosecurity limit (4.0 mg/L)</div>
+                <div class="msg err"><i data-lucide="alert-triangle"></i>Dissolved oxygen cannot fall below the minimum threshold (4.0 mg/L).</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Input / Success State</span>
-                  <span class="hint" style="color:#16A34A;font-weight:600">Verified</span>
+                  <span>Verified Success State</span>
+                  <span class="hint" style="color:#16A34A;font-weight:600">Within Tolerance</span>
                 </label>
                 <div class="input-wrap">
                   <i data-lucide="droplet" class="leading"></i>
                   <input class="input succ" value="7.82" />
                   <span class="trailing-unit">PH</span>
                 </div>
-                <div class="msg ok"><i data-lucide="check-circle-2"></i>Pond pH verified within optimal range for L. Vannamei</div>
+                <div class="msg ok"><i data-lucide="check-circle-2"></i>Water pH verified within the target threshold for L. Vannamei (7.5–8.2).</div>
               </div>
             </div>
           </div>
@@ -910,8 +909,8 @@
     <!-- Choices & Switches -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Choices, Radios &amp; Switches</div>
-        <p class="spec-desc">Accessible binary and multi-choice selections. Tactile iOS-grade toggle switch with 44px × 24px track, and 4px rounded check controls.</p>
+        <div class="spec-title">Selection Controls (Checkboxes, Radios &amp; Switches)</div>
+        <p class="spec-desc">Binary and multi-choice selection controls designed for touch and pointer targets. Features an iOS-style tactile toggle switch (44px × 24px) alongside accessible checkboxes and radio buttons.</p>
       </div>
       <div class="spec-content">
         <div class="line-row" style="gap:var(--s5);align-items:center;flex-wrap:wrap">
@@ -928,8 +927,8 @@
     <!-- Skeleton Shimmer Loaders -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Skeleton Shimmer Loaders</div>
-        <p class="spec-desc">Content-aware placeholder geometries indicating pending data without layout shifts, conforming to Apple HIG shimmer specifications.</p>
+        <div class="spec-title">Skeleton Loading Placeholders</div>
+        <p class="spec-desc">Content-aware shimmer geometries that preserve layout stability during asynchronous data fetching, conforming to Apple HIG and Uber Base loading specifications.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -974,8 +973,8 @@
     <!-- Callouts & Feedback Banners -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Callouts &amp; Feedback Banners</div>
-        <p class="spec-desc">Contextual messaging banners with semantic color coding, 10px corner radius, and top-aligned status iconography.</p>
+        <div class="spec-title">Callouts &amp; Inline Banners</div>
+        <p class="spec-desc">Contextual status messages featuring semantic color accents, 10px corner radius, and top-aligned iconography for clear error, warning, and informational feedback.</p>
       </div>
       <div class="spec-content">
         <div style="display:flex;flex-direction:column;gap:12px">
@@ -1008,11 +1007,11 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Status Beacons &amp; Filter Tags</div>
-        <p class="spec-desc">Hardware telemetry state indicators with pulsing ripple animations, and dismissible query filter tags.</p>
+        <p class="spec-desc">Hardware status beacons with animated pulse ripples, accompanied by dismissible filter tags and delta change indicators.</p>
       </div>
       <div class="spec-content">
         <div>
-          <div class="category-label">Telemetry Status Beacons (Pulsing IoT Hardware Ripples)</div>
+          <div class="category-label">Telemetry Status Beacons (Pulsing Indicators)</div>
           <div class="line-row" style="gap:var(--s4)">
             <span class="beacon beacon-live"><span class="beacon-dot"></span>Probe Node 01 (Live Streaming)</span>
             <span class="beacon beacon-normal"><span class="beacon-dot"></span>Coldstore CS-2 (Optimal)</span>
@@ -1023,7 +1022,7 @@
         </div>
 
         <div>
-          <div class="category-label">Interactive Removable Filter Tags &amp; Metric Delta Pills</div>
+          <div class="category-label">Removable Filter Tags &amp; Metric Delta Indicators</div>
           <div class="line-row" style="justify-content:space-between">
             <div class="line-row" style="gap:8px">
               <span class="tag tag-teal">Species: L. Vannamei <button class="tag-remove" title="Remove filter"><i data-lucide="x"></i></button></span>
@@ -1045,8 +1044,8 @@
     <!-- Segmented Controls (Tab Switch System - Image 3) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Segmented Controls (Tab Switch System)</div>
-        <p class="spec-desc">Tactile sliding segmented mode toggles with pill-shaped rounded containers and physical gliders, conforming to Apple HIG and Linear tab switch guidelines.</p>
+        <div class="spec-title">Segmented Controls (Pill Mode Switch)</div>
+        <p class="spec-desc">Segmented view toggles built inside a pill container with animated slider feedback, conforming to Apple HIG and Uber Base navigation patterns.</p>
       </div>
       <div class="spec-content">
         <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
@@ -1072,7 +1071,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Capacity &amp; Progress Meters</div>
-        <p class="spec-desc">Visual percentage indicators for pond carrying capacities, automated feed hoppers, and cold storage room volume fill.</p>
+        <p class="spec-desc">Linear percentage meters for monitoring pond biomass density, automated feeder hopper levels, and cold storage utilization.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1111,7 +1110,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Field-Level Validation</div>
-        <p class="spec-desc">Error, Warning, and Success states with top-aligned status icons that never drop below or wrap awkwardly with multi-line guidance text.</p>
+        <p class="spec-desc">Field-level Error, Warning, and Success states with top-aligned icons that maintain strict baseline alignment across multi-line messages.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1186,7 +1185,7 @@
         <div class="form-error-summary">
           <div class="form-error-summary-header">
             <i data-lucide="alert-octagon"></i>
-            <span>There are 3 validation errors that need your correction before saving:</span>
+            <span>Please review and resolve the following 3 validation errors before saving:</span>
           </div>
           <ol class="form-error-summary-list">
             <li><a href="#errDoField">Dissolved Oxygen Threshold</a>: Concentration must be at or above 4.0 mg/L minimum benchmark.</li>
@@ -1201,7 +1200,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">System Alert Callouts</div>
-        <p class="spec-desc">Structured inline banners with semantic color coding, severity iconography, and immediate recovery actions.</p>
+        <p class="spec-desc">Structured notification banners with semantic severity levels, explicit iconography, and clear recovery actions.</p>
       </div>
       <div class="spec-content" style="display:flex;flex-direction:column;gap:14px">
         
@@ -1252,7 +1251,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Hardware &amp; Network Fallback</div>
-        <p class="spec-desc">Graceful degradation and recovery UI when IoT gateways or sensor telemetry connections drop offline.</p>
+        <p class="spec-desc">Graceful degradation patterns and offline recovery states for disconnected IoT hardware and intermittent network gateways.</p>
       </div>
       <div class="spec-content">
         <div class="empty-state" style="padding:32px 24px;border:1px dashed var(--ruby-border);background:#fffcfc">
@@ -1279,13 +1278,13 @@
   <section class="stage-section" id="stage2">
     <span class="stage-pill">Stage 2</span>
     <h2>Molecules</h2>
-    <p>Combinations of atoms bonded together into functional units.</p>
+    <p>Functional combinations of atomic elements bonded into purposeful UI components—such as searchable comboboxes, toolbars, date ranges, contextual menus, and structured tooltips.</p>
 
     <!-- Rich Comboboxes & Custom Select Molecules -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Rich Selects &amp; Comboboxes</div>
-        <p class="spec-desc">Searchable rich comboboxes, floating option cards with secondary subtitles, status badges, and multi-select tags with kinetic dismissal.</p>
+        <div class="spec-title">Rich Comboboxes &amp; Custom Menus</div>
+        <p class="spec-desc">Advanced selection molecules featuring real-time search filtering, structured option rows with subtitles and status tags, and multi-select token containers with instant dismissal.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1354,7 +1353,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Searchable combobox with status badges, subtitle details, and keyboard navigation.</div>
+            <div class="hint">Searchable combobox with keyboard accessibility, status tags, and secondary descriptive metadata.</div>
           </div>
 
           <!-- 2. SINGLE-SELECT FLOATING COMBOBOX -->
@@ -1406,7 +1405,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Custom floating select with leading icon, status tag, and checkmark. Zero default OS menu.</div>
+            <div class="hint">Custom floating menu with leading icon, status tag, and selection checkmark; bypasses unstyled OS menus.</div>
           </div>
 
           <!-- 3. MULTI-SELECT TAG COMBOBOX -->
@@ -1478,7 +1477,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Interactive multi-select pills with instant removal and search filter.</div>
+            <div class="hint">Multi-select container rendering selected options as dismissible tokens with real-time search filtering.</div>
           </div>
 
           <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
@@ -1553,7 +1552,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Optgroup categorized choices with metric subtitles and clear section headers.</div>
+            <div class="hint">Categorized menu featuring distinct group headers, metric descriptors, and clear status indicators.</div>
           </div>
 
         </div>
@@ -1563,8 +1562,8 @@
     <!-- Search -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Search Bar</div>
-        <p class="spec-desc">Input, search icon, shortcut indicator, and interactive clear button within a single pill container.</p>
+        <div class="spec-title">Global Search Input</div>
+        <p class="spec-desc">Consolidated search molecule with leading search glyph, responsive clear trigger, and platform keyboard shortcut badge (<code>/</code>).</p>
       </div>
       <div class="spec-content">
         <div class="searchbar">
@@ -1579,8 +1578,8 @@
     <!-- Tabs -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Navigation Tabs</div>
-        <p class="spec-desc">Pill segment for compact controls; underline for full page section switching.</p>
+        <div class="spec-title">Navigation Tabs (Pill &amp; Underline)</div>
+        <p class="spec-desc">Segmented pill navigation for localized data filtering, paired with an underline tab bar for major view and page transitions.</p>
       </div>
       <div class="spec-content">
         <div class="tabs" data-tabs>
@@ -1600,8 +1599,8 @@
     <!-- Wayfinding & Pager -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Wayfinding &amp; Pager</div>
-        <p class="spec-desc">Breadcrumbs and page navigation with functional previous/next handlers.</p>
+        <div class="spec-title">Breadcrumbs &amp; Data Pagination</div>
+        <p class="spec-desc">Hierarchical breadcrumb wayfinding paired with a data pager supporting active page indicators and directional controls.</p>
       </div>
       <div class="spec-content">
         <nav class="crumbs">
@@ -1623,8 +1622,8 @@
     <!-- Dropdowns & Toasts -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Action Menu &amp; Toasts</div>
-        <p class="spec-desc">Contextual menu actions with keyboard shortcuts, destructive actions, and transient system notifications.</p>
+        <div class="spec-title">Contextual Action Menus &amp; Toast Notifications</div>
+        <p class="spec-desc">Floating action popover with keyboard shortcut accelerators and destructive action boundaries, paired with transient toast notifications.</p>
       </div>
       <div class="spec-content">
         <div class="line-row">
@@ -1647,8 +1646,8 @@
     <!-- Stepper -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Stepper Indicator</div>
-        <p class="spec-desc">Step-by-step progress tracker for multi-stage workflows.</p>
+        <div class="spec-title">Multi-Step Process Stepper</div>
+        <p class="spec-desc">Sequential milestone indicator tracking multi-stage workflows such as hatchery batch intake, biosecurity clearance, and cold chain export.</p>
       </div>
       <div class="spec-content">
         <div class="stepper" id="stepper"></div>
@@ -1662,8 +1661,8 @@
     <!-- Empty States with Reset Actions -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Empty States (Multi-Scenario)</div>
-        <p class="spec-desc">Mandatory empty state components with clear illustrations, explanatory subtitles, and contextual recovery actions.</p>
+        <div class="spec-title">Empty States &amp; Zero-Data Fallbacks</div>
+        <p class="spec-desc">Contextual zero-data screens featuring descriptive iconography, concise explanations, and primary call-to-action buttons to guide recovery.</p>
       </div>
       <div class="spec-content">
         <div class="empty-states-grid">
@@ -1706,13 +1705,13 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Filter Bar &amp; Compound Inputs</div>
-        <p class="spec-desc">Global SaaS query toolbars, attached unit compound inputs, and command palette wayfinding for farm operations.</p>
+        <p class="spec-desc">Enterprise query toolbars with active filter chips, compound numerical inputs with attached physical units, and command palette triggers.</p>
       </div>
       <div class="spec-content">
         
         <!-- Global SaaS Interactive Filter Bar Molecule -->
         <div>
-          <div class="category-label">Global SaaS Filter Bar &amp; Query Toolbar</div>
+          <div class="category-label">Interactive Filter Bar with Tokenized Query Chips</div>
           <div class="filter-bar">
             <div class="filter-bar-header">
               <i data-lucide="filter"></i>
@@ -1748,7 +1747,7 @@
 
         <!-- Operational Query Toolbar Molecule (Plant Select + From/To Date Pickers - Images 2 & 3) -->
         <div>
-          <div class="category-label">Operational Query Toolbar Molecule (Plant Select &amp; Date Range Filter)</div>
+          <div class="category-label">Operational Query Toolbar (Facility Select &amp; Date Range Filter)</div>
           <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;padding:16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line)">
             <div style="min-width:200px;flex:1">
               <label class="label" style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)">Plant</label>
@@ -1791,7 +1790,7 @@
         <!-- Compound Inputs Grid (Attached Units, Currencies, Dual Range, Action Attached) -->
         <div class="form-responsive-grid">
           <div>
-            <div class="category-label">Compound Attached Units &amp; Currencies</div>
+            <div class="category-label">Compound Inputs with Attached Units &amp; Currencies</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="input-compound">
                 <span class="input-compound-prefix"><i data-lucide="scale" style="width:14px;height:14px"></i></span>
@@ -1807,7 +1806,7 @@
           </div>
 
           <div>
-            <div class="category-label">Dual-Range &amp; Action-Attached Compound Inputs</div>
+            <div class="category-label">Dual-Range Inputs &amp; Attached Action Triggers</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <!-- Dual Range DO Threshold -->
               <div class="input-compound dual-range">
@@ -1830,24 +1829,24 @@
         <!-- Command Palette Trigger & Dropzone -->
         <div class="form-responsive-grid">
           <div>
-            <div class="category-label">Quick Jump Trigger (⌘K Command Palette)</div>
+            <div class="category-label">Quick Navigation Trigger (⌘K Command Palette)</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="search-trigger" id="demoCmdK">
                 <i data-lucide="search"></i>
                 <span>Jump to pond, probe, or ledger...</span>
                 <kbd>⌘K</kbd>
               </div>
-              <div class="hint">Apple-grade quick jump pill for instantaneous search across 100+ farm ponds.</div>
+              <div class="hint">Global search launcher with keyboard shortcut badge (⌘K) for rapid navigation across ponds, sensors, and records.</div>
             </div>
           </div>
 
           <!-- Lab QC Document Dropzone Molecule -->
           <div>
-            <div class="category-label">Lab QC Pathology Dropzone (Drag &amp; Drop)</div>
+            <div class="category-label">File Upload Dropzone (Drag &amp; Drop)</div>
             <div class="dropzone" id="demoDropzone">
               <div class="dropzone-icon"><i data-lucide="file-up"></i></div>
               <div class="dropzone-title">Upload Micro-Screening PCR or Water Quality Data</div>
-              <div class="dropzone-desc">Drag and drop your automated probe CSV, hatchery pathology certificate, or feed ledger export here.</div>
+              <div class="dropzone-desc">Drag and drop sensor CSV files, pathology lab reports, or compliance certificates here, or click to browse.</div>
               <div class="dropzone-formats">
                 <span class="badge badge-line">.CSV</span>
                 <span class="badge badge-line">.PDF</span>
@@ -1859,7 +1858,7 @@
 
         <!-- Metadata Property Rows with Copy Action -->
         <div>
-          <div class="category-label">Hardware Metadata Key-Value Rows (One-Click Copy)</div>
+          <div class="category-label">Key-Value Property Rows with Copy Action</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="prop-row">
               <span class="prop-label">IoT Gateway Mesh MAC</span>
@@ -1884,14 +1883,14 @@
     <!-- Dedicated Interactive Tooltips System Molecule Showcase (Image 1 & 2 Standard) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Tooltips System</div>
-        <p class="spec-desc">Global SaaS contextual micro-interaction guides. Complete visual specimen matrix supporting Light and Brand Teal palettes, 4-way directional pointers, link icons, dismiss buttons, and technical telemetry popovers.</p>
+        <div class="spec-title">Contextual Tooltips &amp; Micro-Guidance</div>
+        <p class="spec-desc">Micro-interaction popovers delivering brief helper text or supplementary data without obscuring primary workflows. Supports Light and Dark Teal themes, 4 directional pointers, inline link icons, dismiss triggers, and rich telemetry cards.</p>
       </div>
       <div class="spec-content">
         
         <!-- Tooltip Specification Matrix (Exact Image 1 Replica) -->
         <div>
-          <div class="category-label">Global SaaS Tooltip Specification Matrix (Image 1 Visual Standards)</div>
+          <div class="category-label">Tooltip Visual Specimen Matrix (Light &amp; Dark Variants)</div>
           <div class="tooltip-matrix-canvas">
             
             <!-- Row 1, Col 1: Light Tooltip / Bottom Arrow -->
@@ -1934,7 +1933,7 @@
         </div>
 
         <div>
-          <div class="category-label">4-Way Directional Interactive Hover Triggers (With Keyboard Hotkeys)</div>
+          <div class="category-label">Directional Hover Anchors (Top, Bottom, Left, Right)</div>
           <div class="line-row" style="gap:24px;padding:24px 16px;background:var(--soft);border-radius:var(--r-12);border:1px dashed var(--line);justify-content:center;flex-wrap:wrap">
             
             <!-- Top Tooltip -->
@@ -1965,7 +1964,7 @@
         </div>
 
         <div style="margin-top:16px">
-          <div class="category-label">Aquaculture Telemetry &amp; Micro-Context Tooltips</div>
+          <div class="category-label">Rich Telemetry Tooltips with Metric Badges</div>
           <div class="line-row" style="gap:16px;flex-wrap:wrap">
             
             <div class="tooltip-wrap tooltip-top">
