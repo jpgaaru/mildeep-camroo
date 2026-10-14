@@ -2118,8 +2118,50 @@ textarea.input:focus, .textarea:focus {
   height: 0;
   border: 4px solid transparent;
 }
-.tooltip-wrap:hover .tooltip-box {
+.tooltip-wrap:hover .tooltip-box,
+.tooltip-wrap:focus-within .tooltip-box {
   opacity: 1;
+}
+/* Arrowless Minimal Variant */
+.tooltip-no-arrow .tooltip-box::after {
+  display: none !important;
+}
+/* Interactive Tooltip (WCAG 2.2 SC 1.4.13) */
+.tooltip-interactive .tooltip-box {
+  pointer-events: auto;
+}
+.tooltip-interactive.tooltip-top .tooltip-box::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+.tooltip-interactive.tooltip-bottom .tooltip-box::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+/* Disabled Trigger Wrapper Pattern */
+.tooltip-disabled-wrap {
+  display: inline-flex;
+  cursor: not-allowed;
+  outline: none;
+}
+.tooltip-disabled-wrap > * {
+  pointer-events: none;
+}
+/* Multiline Description Variant */
+.tooltip-box.tooltip-description {
+  white-space: normal;
+  max-width: 240px;
+  text-align: left;
+  line-height: 1.4;
+  padding: 6px 10px;
 }
 .tooltip-box kbd {
   font-family: var(--font-mono);
@@ -2144,7 +2186,8 @@ textarea.input:focus, .textarea:focus {
   transform: translateX(-50%);
   border-top-color: #0F172A;
 }
-.tooltip-top:hover .tooltip-box {
+.tooltip-top:hover .tooltip-box,
+.tooltip-top:focus-within .tooltip-box {
   transform: translateX(-50%) translateY(0);
 }
 .tooltip-bottom .tooltip-box {
@@ -2158,7 +2201,8 @@ textarea.input:focus, .textarea:focus {
   transform: translateX(-50%);
   border-bottom-color: #0F172A;
 }
-.tooltip-bottom:hover .tooltip-box {
+.tooltip-bottom:hover .tooltip-box,
+.tooltip-bottom:focus-within .tooltip-box {
   transform: translateX(-50%) translateY(0);
 }
 .tooltip-left .tooltip-box {
@@ -2172,7 +2216,8 @@ textarea.input:focus, .textarea:focus {
   transform: translateY(-50%);
   border-left-color: #0F172A;
 }
-.tooltip-left:hover .tooltip-box {
+.tooltip-left:hover .tooltip-box,
+.tooltip-left:focus-within .tooltip-box {
   transform: translateY(-50%) translateX(0);
 }
 .tooltip-right .tooltip-box {
@@ -2186,7 +2231,8 @@ textarea.input:focus, .textarea:focus {
   transform: translateY(-50%);
   border-right-color: #0F172A;
 }
-.tooltip-right:hover .tooltip-box {
+.tooltip-right:hover .tooltip-box,
+.tooltip-right:focus-within .tooltip-box {
   transform: translateY(-50%) translateX(0);
 }
 

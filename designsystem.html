@@ -1279,8 +1279,8 @@
     <!-- Searchable Dropdowns & Custom Select Molecules -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Searchable Dropdowns</div>
-        <p class="spec-desc">Find and select items with instant search, badges, and removable tags.</p>
+        <div class="spec-title">Select Menus</div>
+        <p class="spec-desc">Single and multi-select menus with instant search.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1288,7 +1288,7 @@
           <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
           <div class="field-block">
             <label class="label">
-              <span>Storage Location</span>
+              <span>Location</span>
               <span class="hint">Searchable</span>
             </label>
             <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter facilities or units...">
@@ -1349,13 +1349,12 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Search by name or status.</div>
           </div>
 
           <!-- 2. SINGLE-SELECT FLOATING COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Delivery Option</span>
+              <span>Delivery Method</span>
               <span class="req">*</span>
             </label>
             <div class="rich-select" id="richTargetSelect">
@@ -1401,13 +1400,12 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Select standard or priority delivery.</div>
           </div>
 
           <!-- 3. MULTI-SELECT TAG COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Monitored Locations</span>
+              <span>Active Zones</span>
               <span class="hint">Multi-Select</span>
             </label>
             <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select locations to monitor...">
@@ -1473,13 +1471,12 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Select locations to monitor.</div>
           </div>
 
           <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
           <div class="field-block">
             <label class="label">
-              <span>Live Metrics</span>
+              <span>Metric</span>
               <span class="hint">Categorized</span>
             </label>
             <div class="rich-select" id="richMetricSelect">
@@ -1548,7 +1545,6 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Grouped by category.</div>
           </div>
 
         </div>
@@ -1556,15 +1552,16 @@
     </div>
 
     <!-- Search -->
+    <!-- Search -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Global Search</div>
-        <p class="spec-desc">Instant search input with leading icon, clear button, and shortcut badge (<code>/</code>).</p>
+        <div class="spec-title">Search Bar</div>
+        <p class="spec-desc">Search field with quick-clear and shortcut key (<code>/</code>).</p>
       </div>
       <div class="spec-content">
         <div class="searchbar">
           <i data-lucide="search"></i>
-          <input id="sInput" placeholder="Search facilities, shipments, orders, or reports..." />
+          <input id="sInput" placeholder="Search anything..." />
           <span class="search-kbd">/</span>
           <button id="sClear"><i data-lucide="x"></i></button>
         </div>
@@ -1574,8 +1571,8 @@
     <!-- Tabs -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Navigation Tabs (Pill &amp; Underline)</div>
-        <p class="spec-desc">Segmented pill navigation for localized data filtering, paired with underline tabs for view transitions.</p>
+        <div class="spec-title">Tabs</div>
+        <p class="spec-desc">Segmented pills and underline tab bars.</p>
       </div>
       <div class="spec-content">
         <div class="tabs" data-tabs>
@@ -1595,15 +1592,15 @@
     <!-- Wayfinding & Pager -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Breadcrumbs &amp; Pagination</div>
-        <p class="spec-desc">Hierarchical breadcrumbs paired with a tactile pagination bar.</p>
+        <div class="spec-title">Breadcrumbs &amp; Pages</div>
+        <p class="spec-desc">Path trails and page navigation.</p>
       </div>
       <div class="spec-content">
         <nav class="crumbs">
-          Operations <i data-lucide="chevron-right"></i> Facilities <i data-lucide="chevron-right"></i> <b>Cold Storage Unit A</b>
+          Operations <i data-lucide="chevron-right"></i> Facilities <i data-lucide="chevron-right"></i> <b>Unit A</b>
         </nav>
         <div class="line-row" style="justify-content:space-between">
-          <span style="font-size:var(--t-sm);color:var(--muted)">Showing 1–20 of 148 items</span>
+          <span style="font-size:var(--t-sm);color:var(--muted)">1–20 of 148</span>
           <div class="pager" id="specPager">
             <button class="p-prev"><i data-lucide="chevron-left"></i></button>
             <button class="active">1</button>
@@ -1618,19 +1615,19 @@
     <!-- Dropdowns & Toasts -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Context Menus &amp; Notifications</div>
-        <p class="spec-desc">Floating action popover with keyboard shortcuts and transient feedback toasts.</p>
+        <div class="spec-title">Menus &amp; Toasts</div>
+        <p class="spec-desc">Action menus and brief status toasts.</p>
       </div>
       <div class="spec-content">
         <div class="line-row">
           <div class="dropdown" id="dd">
-            <button class="btn btn-secondary" id="ddBtn"><i data-lucide="more-horizontal"></i>Actions Menu</button>
+            <button class="btn btn-secondary" id="ddBtn"><i data-lucide="more-horizontal"></i>Actions</button>
             <div class="menu">
-              <button><i data-lucide="pencil"></i>Edit Details <kbd class="menu-kbd">⌘E</kbd></button>
-              <button><i data-lucide="download"></i>Export Report <kbd class="menu-kbd">⌘D</kbd></button>
-              <button><i data-lucide="copy"></i>Duplicate Entry <kbd class="menu-kbd">⌘C</kbd></button>
+              <button><i data-lucide="pencil"></i>Edit <kbd class="menu-kbd">⌘E</kbd></button>
+              <button><i data-lucide="download"></i>Export <kbd class="menu-kbd">⌘D</kbd></button>
+              <button><i data-lucide="copy"></i>Duplicate <kbd class="menu-kbd">⌘C</kbd></button>
               <div class="menu-divider"></div>
-              <button class="menu-danger"><i data-lucide="trash-2"></i>Delete Record <kbd class="menu-kbd">⌫</kbd></button>
+              <button class="menu-danger"><i data-lucide="trash-2"></i>Delete <kbd class="menu-kbd">⌫</kbd></button>
             </div>
           </div>
           <button class="btn btn-primary btn-sm" id="toastTealBtn">Success Toast</button>
@@ -1642,14 +1639,14 @@
     <!-- Stepper -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Step Progress Bar</div>
-        <p class="spec-desc">Milestone indicator tracking multi-step workflows like order setup or onboarding.</p>
+        <div class="spec-title">Step Progress</div>
+        <p class="spec-desc">Milestone indicator for multi-step flows.</p>
       </div>
       <div class="spec-content">
         <div class="stepper" id="stepper"></div>
         <div class="line-row">
           <button class="btn btn-secondary btn-sm" id="stBack">Back</button>
-          <button class="btn btn-primary btn-sm" id="stNext">Next Step</button>
+          <button class="btn btn-primary btn-sm" id="stNext">Next</button>
         </div>
       </div>
     </div>
@@ -1657,8 +1654,8 @@
     <!-- Empty States with Reset Actions -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Empty States &amp; Fallbacks</div>
-        <p class="spec-desc">Helpful zero-data screens featuring descriptive icons, plain-English copy, and recovery actions.</p>
+        <div class="spec-title">Empty States</div>
+        <p class="spec-desc">Helpful placeholders for blank or zero-result views.</p>
       </div>
       <div class="spec-content">
         <div class="empty-states-grid">
@@ -1667,9 +1664,9 @@
           <div class="empty-card">
             <div class="e-ic"><i data-lucide="search-x"></i></div>
             <h4>No results found</h4>
-            <p>We couldn't find anything matching your search. Try adjusting keywords or clearing active filters.</p>
+            <p>Try adjusting keywords or clearing active filters.</p>
             <div class="e-actions">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="rotate-ccw"></i>Reset Filters</button>
+              <button class="btn btn-secondary btn-sm"><i data-lucide="rotate-ccw"></i>Reset</button>
             </div>
           </div>
 
@@ -1677,9 +1674,9 @@
           <div class="empty-card">
             <div class="e-ic"><i data-lucide="folder-plus"></i></div>
             <h4>No items yet</h4>
-            <p>Get started by creating your first record. It takes less than a minute to set up.</p>
+            <p>Get started by creating your first record.</p>
             <div class="e-actions">
-              <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i>Create Entry</button>
+              <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i>Create</button>
             </div>
           </div>
 
@@ -1687,9 +1684,9 @@
           <div class="empty-card warning">
             <div class="e-ic"><i data-lucide="wifi-off"></i></div>
             <h4>Connection lost</h4>
-            <p>We couldn't reach the server. Saved data will sync automatically once connection is restored.</p>
+            <p>Saved changes will sync once connection returns.</p>
             <div class="e-actions">
-              <button class="btn btn-dark btn-sm"><i data-lucide="refresh-cw"></i>Retry Connection</button>
+              <button class="btn btn-dark btn-sm"><i data-lucide="refresh-cw"></i>Retry</button>
             </div>
           </div>
 
@@ -1700,18 +1697,18 @@
     <!-- Enterprise Scalability Molecules Showcase: Filter Bar & Compound Inputs -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Filter Bar &amp; Compound Inputs</div>
-        <p class="spec-desc">Query toolbars with active filter chips, combined number and unit fields, and search shortcuts.</p>
+        <div class="spec-title">Filters &amp; Inputs</div>
+        <p class="spec-desc">Filter toolbars, compound fields, and search shortcuts.</p>
       </div>
       <div class="spec-content">
         
         <!-- Global SaaS Interactive Filter Bar Molecule -->
         <div>
-          <div class="category-label">Interactive Filter Bar with Tokenized Query Chips</div>
+          <div class="category-label">Filter Chips</div>
           <div class="filter-bar">
             <div class="filter-bar-header">
               <i data-lucide="filter"></i>
-              <span>Active Filters</span>
+              <span>Active</span>
               <span class="filter-bar-badge">3</span>
             </div>
             <div class="filter-chips-list">
@@ -1721,7 +1718,7 @@
                 <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
               </span>
               <span class="filter-chip">
-                <span class="filter-chip-key">Temperature:</span>
+                <span class="filter-chip-key">Temp:</span>
                 <span class="filter-chip-val">&lt; -15°C</span>
                 <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
               </span>
@@ -1733,17 +1730,17 @@
               <button class="filter-add-btn"><i data-lucide="plus"></i> Add Filter</button>
             </div>
             <div class="filter-presets">
-              <button class="filter-preset-btn active">All Items</button>
+              <button class="filter-preset-btn active">All</button>
               <button class="filter-preset-btn">In Transit</button>
               <button class="filter-preset-btn">Delivered</button>
             </div>
-            <button class="filter-clear-all">Reset All</button>
+            <button class="filter-clear-all">Reset</button>
           </div>
         </div>
 
         <!-- Operational Query Toolbar Molecule (Plant Select + From/To Date Pickers) -->
         <div>
-          <div class="category-label">Operational Query Toolbar (Facility Select &amp; Date Range Filter)</div>
+          <div class="category-label">Filter Toolbar</div>
           <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;padding:16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line)">
             <div style="min-width:200px;flex:1">
               <label class="label" style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)">Facility</label>
@@ -1779,14 +1776,14 @@
               </div>
             </div>
 
-            <button class="btn btn-primary" style="height:42px" onclick="window.AquaToast?.show('Filter query applied for selected date range', 'teal')"><i data-lucide="filter"></i>Apply Filters</button>
+            <button class="btn btn-primary" style="height:42px" onclick="window.AquaToast?.show('Filter query applied for selected date range', 'teal')"><i data-lucide="filter"></i>Apply</button>
           </div>
         </div>
 
         <!-- Compound Inputs Grid (Attached Units, Currencies, Dual Range, Action Attached) -->
         <div class="form-responsive-grid">
           <div>
-            <div class="category-label">Compound Inputs with Attached Units &amp; Currencies</div>
+            <div class="category-label">Inputs with Units</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="input-compound">
                 <span class="input-compound-prefix"><i data-lucide="scale" style="width:14px;height:14px"></i></span>
@@ -1802,11 +1799,11 @@
           </div>
 
           <div>
-            <div class="category-label">Dual-Range Inputs &amp; Attached Action Triggers</div>
+            <div class="category-label">Range &amp; Action Inputs</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <!-- Dual Range DO Threshold -->
               <div class="input-compound dual-range">
-                <span class="input-compound-prefix">Target Range</span>
+                <span class="input-compound-prefix">Target</span>
                 <input class="input" value="18.0" style="width:70px" aria-label="Min Target" />
                 <span class="dual-range-sep">to</span>
                 <input class="input" value="24.0" style="width:70px" aria-label="Max Target" />
@@ -1816,7 +1813,7 @@
               <div class="input-compound">
                 <span class="input-compound-prefix"><i data-lucide="gauge" style="width:14px;height:14px"></i></span>
                 <input class="input" value="0.00" aria-label="Scale Reading" />
-                <button class="btn btn-secondary btn-sm">Tare Scale</button>
+                <button class="btn btn-secondary btn-sm">Tare</button>
               </div>
             </div>
           </div>
@@ -1825,24 +1822,23 @@
         <!-- Command Palette Trigger & Dropzone -->
         <div class="form-responsive-grid">
           <div>
-            <div class="category-label">Quick Navigation Trigger (⌘K Command Palette)</div>
+            <div class="category-label">Quick Search (⌘K)</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="search-trigger" id="demoCmdK">
                 <i data-lucide="search"></i>
                 <span>Jump to facility, order, or document...</span>
                 <kbd>⌘K</kbd>
               </div>
-              <div class="hint">Press ⌘K anywhere to quickly search and jump to pages or items.</div>
             </div>
           </div>
 
           <!-- Document Dropzone Molecule -->
           <div>
-            <div class="category-label">File Upload Dropzone (Drag &amp; Drop)</div>
+            <div class="category-label">File Upload</div>
             <div class="dropzone" id="demoDropzone">
               <div class="dropzone-icon"><i data-lucide="file-up"></i></div>
-              <div class="dropzone-title">Upload Documents or Data Sheets</div>
-              <div class="dropzone-desc">Drag and drop CSV, PDF, or spreadsheet files here, or click to browse.</div>
+              <div class="dropzone-title">Upload Documents</div>
+              <div class="dropzone-desc">Drag files here or click to browse.</div>
               <div class="dropzone-formats">
                 <span class="badge badge-line">.CSV</span>
                 <span class="badge badge-line">.PDF</span>
@@ -1854,17 +1850,17 @@
 
         <!-- Metadata Property Rows with Copy Action -->
         <div>
-          <div class="category-label">Key-Value Property Rows with Copy Action</div>
+          <div class="category-label">Data Rows</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="prop-row">
-              <span class="prop-label">Device Hardware ID</span>
+              <span class="prop-label">Hardware ID</span>
               <div class="prop-val-wrap">
                 <span class="prop-val">00:1A:C2:7B:44:91</span>
                 <button class="prop-copy" title="Copy MAC address"><i data-lucide="copy"></i></button>
               </div>
             </div>
             <div class="prop-row">
-              <span class="prop-label">Tracking Reference</span>
+              <span class="prop-label">Tracking ID</span>
               <div class="prop-val-wrap">
                 <span class="prop-val">TRK-2026-OCT-8842</span>
                 <button class="prop-copy" title="Copy Reference ID"><i data-lucide="copy"></i></button>
@@ -1877,93 +1873,113 @@
     </div>
 
     <!-- Dedicated Interactive Tooltips System Molecule Showcase -->
-    <!-- Dedicated Interactive Tooltips System Molecule Showcase (Shadcn & Apple Inspired) -->
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Tooltips</div>
-        <p class="spec-desc">Floating guidance that appears when hovering or focusing an element.</p>
+        <p class="spec-desc">Floating labels and guidance shown on hover or focus.</p>
       </div>
       <div class="spec-content">
         
-        <!-- 1. Shadcn-Style Action Icon Bar with Tooltips -->
+        <!-- 1. Label Tooltips (Icons without visible text) -->
         <div>
-          <div class="category-label">Action Toolbar with Keyboard Shortcuts</div>
-          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-            <div class="action-icon-bar">
-              <div class="tooltip-wrap tooltip-top">
-                <button class="icon-action-btn" aria-label="Add item"><i data-lucide="plus"></i></button>
-                <div class="tooltip-box">Create new item</div>
-              </div>
-              <div class="tooltip-wrap tooltip-top">
-                <button class="icon-action-btn" aria-label="Bookmark"><i data-lucide="bookmark"></i></button>
-                <div class="tooltip-box">Save to favorites</div>
-              </div>
-              <div class="tooltip-wrap tooltip-top">
-                <button class="icon-action-btn" aria-label="Share"><i data-lucide="share-2"></i></button>
-                <div class="tooltip-box">Share link <kbd>⌘S</kbd></div>
-              </div>
-              <div class="tooltip-wrap tooltip-top">
-                <button class="icon-action-btn" aria-label="Settings"><i data-lucide="sliders"></i></button>
-                <div class="tooltip-box">Preferences</div>
-              </div>
-              <div class="tooltip-wrap tooltip-top">
-                <button class="icon-action-btn danger" aria-label="Delete"><i data-lucide="trash-2"></i></button>
-                <div class="tooltip-box">Delete record <kbd>⌫</kbd></div>
-              </div>
+          <div class="category-label">Label Tooltips (Icon Actions)</div>
+          <div class="action-icon-bar">
+            <div class="tooltip-wrap tooltip-top">
+              <button class="icon-action-btn" aria-label="Add item"><i data-lucide="plus"></i></button>
+              <div class="tooltip-box">Add item <kbd>⌘N</kbd></div>
             </div>
-            <span style="font-size:12px;color:var(--muted)">Hover each action button to reveal its shortcut tooltip.</span>
+            <div class="tooltip-wrap tooltip-top">
+              <button class="icon-action-btn" aria-label="Bookmark"><i data-lucide="bookmark"></i></button>
+              <div class="tooltip-box">Save to favorites</div>
+            </div>
+            <div class="tooltip-wrap tooltip-top">
+              <button class="icon-action-btn" aria-label="Share"><i data-lucide="share-2"></i></button>
+              <div class="tooltip-box">Share link <kbd>⌘S</kbd></div>
+            </div>
+            <div class="tooltip-wrap tooltip-top">
+              <button class="icon-action-btn" aria-label="Settings"><i data-lucide="sliders"></i></button>
+              <div class="tooltip-box">Preferences</div>
+            </div>
+            <div class="tooltip-wrap tooltip-top">
+              <button class="icon-action-btn danger" aria-label="Delete"><i data-lucide="trash-2"></i></button>
+              <div class="tooltip-box">Delete record <kbd>⌫</kbd></div>
+            </div>
           </div>
         </div>
 
-        <!-- 2. Directional Tooltip Anchors -->
+        <!-- 2. Description Tooltips (Secondary context on named buttons) -->
         <div style="margin-top:16px">
-          <div class="category-label">Directional Placements (Top, Right, Bottom, Left)</div>
-          <div class="line-row" style="gap:20px;padding:20px 16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line);justify-content:center;flex-wrap:wrap">
+          <div class="category-label">Description Tooltips</div>
+          <div class="line-row" style="gap:12px;flex-wrap:wrap">
+            <div class="tooltip-wrap tooltip-top">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="upload-cloud"></i> Deploy</button>
+              <div class="tooltip-box tooltip-description">Pushes staged changes to production clusters instantly.</div>
+            </div>
+            <div class="tooltip-wrap tooltip-top">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw"></i> Sync</button>
+              <div class="tooltip-box tooltip-description">Immediately polls all sensor nodes for live telemetry.</div>
+            </div>
+            <!-- Disabled Trigger Pattern -->
+            <div class="tooltip-wrap tooltip-top tooltip-disabled-wrap" tabindex="0">
+              <button class="btn btn-secondary btn-sm" disabled><i data-lucide="lock"></i> Publish</button>
+              <div class="tooltip-box">Requires administrator role to execute.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Directional Placements & Style Variants -->
+        <div style="margin-top:16px">
+          <div class="category-label">Placements &amp; Styles</div>
+          <div class="line-row" style="gap:16px;padding:16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line);justify-content:center;flex-wrap:wrap">
             
             <div class="tooltip-wrap tooltip-top">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-up"></i> Top</button>
-              <div class="tooltip-box">Tooltip on top <kbd>⌘T</kbd></div>
+              <div class="tooltip-box">Top placement <kbd>⌘T</kbd></div>
             </div>
 
             <div class="tooltip-wrap tooltip-bottom">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-down"></i> Bottom</button>
-              <div class="tooltip-box">Tooltip on bottom <kbd>⌘B</kbd></div>
+              <div class="tooltip-box">Bottom placement <kbd>⌘B</kbd></div>
             </div>
 
             <div class="tooltip-wrap tooltip-left">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Left</button>
-              <div class="tooltip-box">Tooltip on left</div>
+              <div class="tooltip-box">Left placement</div>
             </div>
 
             <div class="tooltip-wrap tooltip-right">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-right"></i> Right</button>
-              <div class="tooltip-box">Tooltip on right</div>
+              <div class="tooltip-box">Right placement</div>
+            </div>
+
+            <div class="tooltip-wrap tooltip-top tooltip-no-arrow">
+              <button class="btn btn-secondary btn-sm">Minimal (No Arrow)</button>
+              <div class="tooltip-box">Clean floating pill</div>
             </div>
 
           </div>
         </div>
 
-        <!-- 3. Form Field Helper & Rich Popover Cards -->
+        <!-- 4. Form Field Hint & Interactive Hover Card (WCAG 2.2 Compliant) -->
         <div class="form-responsive-grid" style="margin-top:16px">
           <div>
-            <div class="category-label">Form Field Helper Guidance</div>
+            <div class="category-label">Field Hint</div>
             <div class="field-block">
               <label class="label">
-                <span>Production API Secret</span>
+                <span>API Secret Key</span>
                 <span class="tooltip-wrap tooltip-top">
                   <span class="tooltip-info-trigger" tabindex="0">?</span>
                   <span class="tooltip-box">Used to authenticate background sensor sync</span>
                 </span>
               </label>
               <input class="input" type="password" value="sec_prod_99482_live_x8" readonly />
-              <div class="hint">Hover the question mark icon for helper details.</div>
             </div>
           </div>
 
           <div>
-            <div class="category-label">Rich Profile Hover Card</div>
-            <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
-              <div class="tooltip-wrap tooltip-top">
+            <div class="category-label">Interactive Card (WCAG 2.2)</div>
+            <div style="display:flex;align-items:center;gap:12px;padding:6px 0">
+              <div class="tooltip-wrap tooltip-top tooltip-interactive">
                 <div class="av md" style="cursor:pointer">
                   <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=120&h=120&q=80" alt="Anitha" />
                   <span class="pres"></span>
@@ -1980,13 +1996,13 @@
                   </div>
                   <div style="display:flex;gap:6px;font-size:11px">
                     <span class="badge badge-teal">Operations Lead</span>
-                    <span class="badge badge-soft">Active Now</span>
+                    <span class="badge badge-soft">Active</span>
                   </div>
                 </div>
               </div>
               <div>
                 <div style="font-size:13px;font-weight:600">Anitha Nair</div>
-                <div style="font-size:11px;color:var(--muted)">Hover avatar to view profile card</div>
+                <div style="font-size:11px;color:var(--muted)">Hover avatar to inspect card</div>
               </div>
             </div>
           </div>
@@ -1998,15 +2014,15 @@
     <!-- Additional Core SaaS Molecules: Avatar Group, View Switcher, Callout Banner -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Team &amp; View Controls</div>
-        <p class="spec-desc">Collaborator stacks, view mode switchers, and dismissible notice banners.</p>
+        <div class="spec-title">Team &amp; Views</div>
+        <p class="spec-desc">Avatar stacks, display toggles, and alert banners.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
           
           <!-- Avatar Stack Group -->
           <div>
-            <div class="category-label">Avatar Group with Overflow Count</div>
+            <div class="category-label">Avatar Stack</div>
             <div style="display:flex;align-items:center;gap:12px">
               <div class="av-group">
                 <div class="av sm tooltip-wrap tooltip-top">
@@ -2026,20 +2042,18 @@
                   <div class="tooltip-box">+3 more team members</div>
                 </div>
               </div>
-              <span style="font-size:12px;color:var(--muted)">Active reviewers</span>
             </div>
           </div>
 
           <!-- View Mode Switcher -->
           <div>
-            <div class="category-label">View Mode Switcher (Grid / List / Split)</div>
+            <div class="category-label">View Switcher</div>
             <div style="display:flex;align-items:center;gap:12px">
               <div class="view-mode-switcher" id="demoViewSwitcher">
                 <button class="view-mode-btn active" title="Grid View"><i data-lucide="layout-grid"></i></button>
                 <button class="view-mode-btn" title="List View"><i data-lucide="list"></i></button>
                 <button class="view-mode-btn" title="Split View"><i data-lucide="columns-2"></i></button>
               </div>
-              <span style="font-size:12px;color:var(--muted)">Compact 30px table control</span>
             </div>
           </div>
 
@@ -2047,11 +2061,11 @@
 
         <!-- Dismissible Notice Banner -->
         <div style="margin-top:16px">
-          <div class="category-label">Dismissible Notice Banner</div>
+          <div class="category-label">Notice Banner</div>
           <div class="notice-banner" id="demoNoticeBanner">
             <div class="notice-banner-left">
               <i data-lucide="info"></i>
-              <span>Scheduled maintenance on Cold Storage Unit B tonight from 02:00 to 03:30 UTC. Telemetry will sync continuously.</span>
+              <span>Scheduled maintenance on Storage Unit B tonight from 02:00 to 03:30 UTC. Telemetry will sync continuously.</span>
             </div>
             <button class="notice-banner-close" aria-label="Dismiss banner" onclick="const b = document.getElementById('demoNoticeBanner'); b.classList.add('notice-banner-dismissing'); setTimeout(() => b.remove(), 250); window.AquaToast?.show('Notice dismissed', 'teal');">×</button>
           </div>
