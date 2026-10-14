@@ -1369,12 +1369,13 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Search Bar</div>
-        <p class="spec-desc">Input, search icon, and interactive clear button within a single pill container.</p>
+        <p class="spec-desc">Input, search icon, shortcut indicator, and interactive clear button within a single pill container.</p>
       </div>
       <div class="spec-content">
         <div class="searchbar">
           <i data-lucide="search"></i>
           <input id="sInput" placeholder="Search ponds, lots, farmers, invoices..." />
+          <span class="search-kbd">/</span>
           <button id="sClear"><i data-lucide="x"></i></button>
         </div>
       </div>
@@ -1428,16 +1429,18 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Action Menu &amp; Toasts</div>
-        <p class="spec-desc">Contextual menu actions and transient system notifications.</p>
+        <p class="spec-desc">Contextual menu actions with keyboard shortcuts, destructive actions, and transient system notifications.</p>
       </div>
       <div class="spec-content">
         <div class="line-row">
           <div class="dropdown" id="dd">
             <button class="btn btn-secondary" id="ddBtn"><i data-lucide="more-horizontal"></i>Actions Menu</button>
             <div class="menu">
-              <button><i data-lucide="pencil"></i>Edit Pond Record</button>
-              <button><i data-lucide="download"></i>Export Sensor Data</button>
-              <button><i data-lucide="trash-2"></i>Archive Batch</button>
+              <button><i data-lucide="pencil"></i>Edit Pond Record <kbd class="menu-kbd">⌘E</kbd></button>
+              <button><i data-lucide="download"></i>Export Sensor Data <kbd class="menu-kbd">⌘D</kbd></button>
+              <button><i data-lucide="copy"></i>Duplicate Batch <kbd class="menu-kbd">⌘C</kbd></button>
+              <div class="menu-divider"></div>
+              <button class="menu-danger"><i data-lucide="trash-2"></i>Archive Batch <kbd class="menu-kbd">⌫</kbd></button>
             </div>
           </div>
           <button class="btn btn-primary btn-sm" id="toastTealBtn">Trigger Teal Toast</button>
@@ -1504,41 +1507,91 @@
       </div>
     </div>
 
-    <!-- Enterprise Scalability Molecules Showcase -->
+    <!-- Enterprise Scalability Molecules Showcase: Filter Bar & Compound Inputs -->
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Filter Bar &amp; Compound Inputs</div>
-        <p class="spec-desc">High-density data query controls, attached unit inputs, and command palette wayfinding for operations.</p>
+        <p class="spec-desc">Global SaaS query toolbars, attached unit compound inputs, and command palette wayfinding for farm operations.</p>
       </div>
       <div class="spec-content">
         
-        <!-- Filter Chip Bar Molecule -->
-        <div class="filter-bar">
-          <span class="filter-bar-label"><i data-lucide="sliders-horizontal" style="width:13px;height:13px;display:inline;vertical-align:-1px;margin-right:4px"></i>Active Filters (3):</span>
-          <span class="tag tag-teal">Broodstock: SPF Hawaii <button class="tag-remove" title="Remove"><i data-lucide="x"></i></button></span>
-          <span class="tag">Salinity &gt; 22 PPT <button class="tag-remove" title="Remove"><i data-lucide="x"></i></button></span>
-          <span class="tag">Harvest Ready (Days &gt; 90) <button class="tag-remove" title="Remove"><i data-lucide="x"></i></button></span>
-          <button class="filter-clear-all">Reset All Filters</button>
+        <!-- Global SaaS Interactive Filter Bar Molecule -->
+        <div>
+          <div class="category-label">Global SaaS Filter Bar &amp; Query Toolbar</div>
+          <div class="filter-bar">
+            <div class="filter-bar-header">
+              <i data-lucide="filter"></i>
+              <span>Active Filters</span>
+              <span class="filter-bar-badge">3</span>
+            </div>
+            <div class="filter-chips-list">
+              <span class="filter-chip filter-chip-teal">
+                <span class="filter-chip-key">Broodstock:</span>
+                <span class="filter-chip-val">SPF Hawaii</span>
+                <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
+              </span>
+              <span class="filter-chip">
+                <span class="filter-chip-key">Salinity:</span>
+                <span class="filter-chip-val">&gt; 22 PPT</span>
+                <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
+              </span>
+              <span class="filter-chip">
+                <span class="filter-chip-key">Stage:</span>
+                <span class="filter-chip-val">Harvest Ready (&gt;90d)</span>
+                <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
+              </span>
+              <button class="filter-add-btn"><i data-lucide="plus"></i> Add Filter</button>
+            </div>
+            <div class="filter-presets">
+              <button class="filter-preset-btn active">All Ponds</button>
+              <button class="filter-preset-btn">Nursery</button>
+              <button class="filter-preset-btn">Grow-out</button>
+            </div>
+            <button class="filter-clear-all">Reset All</button>
+          </div>
         </div>
 
-        <!-- Compound Inputs Grid -->
+        <!-- Compound Inputs Grid (Attached Units, Currencies, Dual Range, Action Attached) -->
         <div class="form-responsive-grid">
           <div>
-            <div class="category-label">Compound Attached Units (Biomass / Currency)</div>
+            <div class="category-label">Compound Attached Units &amp; Currencies</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="input-compound">
                 <span class="input-compound-prefix"><i data-lucide="scale" style="width:14px;height:14px"></i></span>
-                <input class="input" value="18,450.00" />
-                <span class="input-compound-suffix">KG NET</span>
+                <input class="input" value="18,450.00" aria-label="Biomass Net" />
+                <span class="input-compound-suffix tag-unit">KG NET</span>
               </div>
               <div class="input-compound">
                 <span class="input-compound-prefix">$ USD</span>
-                <input class="input" value="7.40" />
-                <span class="input-compound-suffix">/ KG EXPORT</span>
+                <input class="input" value="7.40" aria-label="Price per kg" />
+                <span class="input-compound-suffix tag-unit">/ KG EXPORT</span>
               </div>
             </div>
           </div>
 
+          <div>
+            <div class="category-label">Dual-Range &amp; Action-Attached Compound Inputs</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <!-- Dual Range DO Threshold -->
+              <div class="input-compound dual-range">
+                <span class="input-compound-prefix">DO Target</span>
+                <input class="input" value="5.2" style="width:70px" aria-label="Min DO" />
+                <span class="dual-range-sep">to</span>
+                <input class="input" value="8.0" style="width:70px" aria-label="Max DO" />
+                <span class="input-compound-suffix tag-unit">MG/L</span>
+              </div>
+              <!-- Attached Action Button -->
+              <div class="input-compound">
+                <span class="input-compound-prefix"><i data-lucide="gauge" style="width:14px;height:14px"></i></span>
+                <input class="input" value="0.00" aria-label="Scale Reading" />
+                <button class="btn btn-secondary btn-sm">Tare Scale</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Command Palette Trigger & Dropzone -->
+        <div class="form-responsive-grid">
           <div>
             <div class="category-label">Quick Jump Trigger (⌘K Command Palette)</div>
             <div style="display:flex;flex-direction:column;gap:12px">
@@ -1550,19 +1603,19 @@
               <div class="hint">Apple-grade quick jump pill for instantaneous search across 100+ farm ponds.</div>
             </div>
           </div>
-        </div>
 
-        <!-- Lab QC Document Dropzone Molecule -->
-        <div>
-          <div class="category-label">Lab QC Pathology Dropzone (Drag &amp; Drop)</div>
-          <div class="dropzone" id="demoDropzone">
-            <div class="dropzone-icon"><i data-lucide="file-up"></i></div>
-            <div class="dropzone-title">Upload Micro-Screening PCR or Water Quality Data</div>
-            <div class="dropzone-desc">Drag and drop your automated probe CSV, hatchery pathology certificate, or feed ledger export here.</div>
-            <div class="dropzone-formats">
-              <span class="badge badge-line">.CSV</span>
-              <span class="badge badge-line">.PDF</span>
-              <span class="badge badge-line">.XLSX</span>
+          <!-- Lab QC Document Dropzone Molecule -->
+          <div>
+            <div class="category-label">Lab QC Pathology Dropzone (Drag &amp; Drop)</div>
+            <div class="dropzone" id="demoDropzone">
+              <div class="dropzone-icon"><i data-lucide="file-up"></i></div>
+              <div class="dropzone-title">Upload Micro-Screening PCR or Water Quality Data</div>
+              <div class="dropzone-desc">Drag and drop your automated probe CSV, hatchery pathology certificate, or feed ledger export here.</div>
+              <div class="dropzone-formats">
+                <span class="badge badge-line">.CSV</span>
+                <span class="badge badge-line">.PDF</span>
+                <span class="badge badge-line">.XLSX</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1585,6 +1638,84 @@
                 <button class="prop-copy" title="Copy Batch ID"><i data-lucide="copy"></i></button>
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Dedicated Interactive Tooltips System Molecule Showcase -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Tooltips System</div>
+        <p class="spec-desc">Micro-interaction contextual guides with 4-way directional pointers, keyboard shortcut badges, and aquaculture telemetry popovers.</p>
+      </div>
+      <div class="spec-content">
+        <div>
+          <div class="category-label">4-Way Directional Micro-Tooltips (High-Contrast Slate #0F172A)</div>
+          <div class="line-row" style="gap:24px;padding:24px 16px;background:var(--soft);border-radius:var(--r-12);border:1px dashed var(--line);justify-content:center;flex-wrap:wrap">
+            
+            <!-- Top Tooltip -->
+            <div class="tooltip-wrap tooltip-top">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-up"></i> Tooltip Top</button>
+              <div class="tooltip-box">Top aligned helper <kbd>⌘T</kbd></div>
+            </div>
+
+            <!-- Bottom Tooltip -->
+            <div class="tooltip-wrap tooltip-bottom">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-down"></i> Tooltip Bottom</button>
+              <div class="tooltip-box">Bottom aligned helper <kbd>⌘B</kbd></div>
+            </div>
+
+            <!-- Left Tooltip -->
+            <div class="tooltip-wrap tooltip-left">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Tooltip Left</button>
+              <div class="tooltip-box">Left aligned helper</div>
+            </div>
+
+            <!-- Right Tooltip -->
+            <div class="tooltip-wrap tooltip-right">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-right"></i> Tooltip Right</button>
+              <div class="tooltip-box">Right aligned helper</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <div class="category-label">Aquaculture Telemetry &amp; Micro-Context Tooltips</div>
+          <div class="line-row" style="gap:16px;flex-wrap:wrap">
+            
+            <div class="tooltip-wrap tooltip-top">
+              <span class="badge badge-teal" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
+                <i data-lucide="waves" style="width:14px;height:14px"></i> DO: 6.84 mg/L
+              </span>
+              <div class="tooltip-box tooltip-rich">
+                <div class="tooltip-rich-title"><i data-lucide="activity" style="width:13px;height:13px;color:#2DD4BF"></i> Dissolved Oxygen</div>
+                <div class="tooltip-rich-body">Optimal range: 5.0–8.5 mg/L. Probe auto-calibrated 12 min ago via mesh gateway.</div>
+              </div>
+            </div>
+
+            <div class="tooltip-wrap tooltip-top">
+              <span class="badge badge-emerald" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
+                <i data-lucide="droplet" style="width:14px;height:14px"></i> pH: 7.82 Opt
+              </span>
+              <div class="tooltip-box tooltip-rich">
+                <div class="tooltip-rich-title"><i data-lucide="check-circle-2" style="width:13px;height:13px;color:#34D399"></i> Water Acidity (pH)</div>
+                <div class="tooltip-rich-body">Target: 7.5–8.2. Microalgae bloom photosynthetic buffer healthy.</div>
+              </div>
+            </div>
+
+            <div class="tooltip-wrap tooltip-top">
+              <span class="badge badge-warn" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
+                <i data-lucide="thermometer" style="width:14px;height:14px"></i> Temp: 31.2°C
+              </span>
+              <div class="tooltip-box tooltip-rich">
+                <div class="tooltip-rich-title"><i data-lucide="alert-triangle" style="width:13px;height:13px;color:#FBBF24"></i> High Water Temperature</div>
+                <div class="tooltip-rich-body">Approaching upper stress threshold (&gt;32°C). Aerator cooling cycle recommended.</div>
+              </div>
+            </div>
+
           </div>
         </div>
 

@@ -6,12 +6,32 @@
 /* ==========================================================
    SEARCHBAR MOLECULE
    ========================================================== */
-.searchbar { position: relative; max-width: 440px; width: 100%; }
-.searchbar > svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; color: var(--muted); }
-.searchbar input { height: 48px; width: 100%; padding: 0 44px 0 46px; border: 1px solid var(--line-strong); border-radius: var(--pill); background: var(--soft); font-size: var(--t-sm); outline: none; transition: all 0.2s var(--ease); }
-.searchbar input:focus { background: var(--white); border-color: var(--teal-600); box-shadow: 0 0 0 3px var(--teal-100); }
-.searchbar button { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border: none; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; display: grid; place-items: center; }
-.searchbar button:hover { background: var(--line); }
+.searchbar { position: relative; max-width: 440px; width: 100%; display: flex; align-items: center; }
+.searchbar > svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: #64748B; pointer-events: none; }
+.searchbar input {
+  height: 42px; width: 100%; padding: 0 74px 0 38px;
+  border: 1px solid #CBD5E1; border-radius: var(--r-8);
+  background: var(--white); font-size: 13.5px; outline: none;
+  transition: all 0.16s var(--ease); color: #0F172A;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.searchbar input::placeholder { color: #94A3B8; }
+.searchbar input:hover { border-color: #94A3B8; }
+.searchbar input:focus { border-color: #004d57; box-shadow: 0 0 0 3px rgba(0, 77, 87, 0.14); }
+.searchbar .search-kbd {
+  position: absolute; right: 38px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  padding: 2px 6px; border-radius: 4px; background: #F1F5F9;
+  border: 1px solid #E2E8F0; color: #64748B; pointer-events: none; line-height: 1;
+}
+.searchbar button {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 26px; height: 26px; border: none; border-radius: 4px;
+  background: transparent; color: #64748B; cursor: pointer;
+  display: grid; place-items: center; transition: all 0.15s;
+}
+.searchbar button:hover { background: #F1F5F9; color: #0F172A; }
+.searchbar button svg { width: 14px; height: 14px; }
 
 /* ==========================================================
    TABS MOLECULE (AquaPulse Architecture)
@@ -151,11 +171,22 @@
 .crumbs svg { width: 15px; height: 15px; }
 .crumbs b { color: var(--ink); font-weight: 600; }
 
-.pager { display: flex; align-items: center; gap: var(--s2); }
-.pager button { min-width: 40px; height: 40px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: var(--r-12); background: var(--white); font-size: var(--t-sm); font-weight: 600; cursor: pointer; transition: all 0.18s var(--ease); display: grid; place-items: center; }
-.pager button:hover { background: var(--soft); }
-.pager button.active { background: var(--black); border-color: var(--black); color: var(--white); }
-.pager button svg { width: 16px; height: 16px; }
+.pager { display: flex; align-items: center; gap: 6px; }
+.pager button {
+  min-width: 36px; height: 36px; padding: 0 10px;
+  border: 1px solid #CBD5E1; border-radius: var(--r-8);
+  background: var(--white); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.16s var(--ease);
+  display: grid; place-items: center; color: #0F172A;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+.pager button:hover { background: #F8FAFC; border-color: #94A3B8; }
+.pager button.active {
+  background: #004d57; border-color: #004d57; color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 77, 87, 0.24);
+}
+.pager button:disabled { opacity: 0.5; cursor: not-allowed; background: #F8FAFC; }
+.pager button svg { width: 15px; height: 15px; }
 
 /* ==========================================================
    RICH COMBOBOX & OPTIMIZED SELECT MOLECULES
@@ -398,25 +429,57 @@
    DROPDOWN MENU MOLECULE
    ========================================================== */
 .dropdown { position: relative; }
-.menu { position: absolute; top: calc(100% + 8px); left: 0; min-width: 210px; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-16); padding: 6px; display: none; z-index: 50; box-shadow: var(--sh-3); }
+.menu {
+  position: absolute; top: calc(100% + 6px); left: 0; min-width: 220px;
+  background: var(--white); border: 1px solid #E2E8F0; border-radius: var(--r-8);
+  padding: 5px; display: none; z-index: 50;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
 .dropdown.open .menu { display: block; }
-.menu button { display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 12px; border: none; background: none; border-radius: var(--r-8); font-size: var(--t-sm); font-weight: 500; cursor: pointer; text-align: left; }
-.menu button:hover { background: var(--soft); }
-.menu button svg { width: 16px; height: 16px; color: var(--muted); }
+.menu button {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; height: 34px; padding: 0 10px; border: none; background: none;
+  border-radius: var(--r-6); font-size: 13px; font-weight: 500; cursor: pointer;
+  text-align: left; color: #1E293B; transition: all 0.15s var(--ease);
+}
+.menu button:hover { background: #F1F5F9; color: #0F172A; }
+.menu-btn-main { display: flex; align-items: center; gap: 8px; }
+.menu-btn-main svg { width: 15px; height: 15px; color: #64748B; }
+.menu button:hover .menu-btn-main svg { color: #004d57; }
+.menu-kbd {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  padding: 1px 5px; border-radius: 4px; background: #F8FAFC;
+  border: 1px solid #E2E8F0; color: #64748B;
+}
+.menu-divider { height: 1px; background: #E2E8F0; margin: 4px 0; }
+.menu-danger { color: #DC2626 !important; }
+.menu-danger svg { color: #DC2626 !important; }
+.menu-danger:hover { background: #FEF2F2 !important; color: #B91C1C !important; }
+.menu-danger:hover svg { color: #B91C1C !important; }
 
 /* ==========================================================
    STEPPER MOLECULE
    ========================================================== */
 .stepper { display: flex; align-items: center; flex-wrap: wrap; }
-.step { display: flex; align-items: center; gap: 11px; }
-.step i { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: var(--t-xs); font-weight: 700; font-style: normal; background: var(--soft); color: var(--muted); border: 1px solid var(--line-strong); transition: all 0.2s; }
+.step { display: flex; align-items: center; gap: 10px; }
+.step i {
+  width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 12px; font-weight: 700; font-style: normal;
+  background: #F1F5F9; color: #64748B; border: 1px solid #CBD5E1;
+  transition: all 0.2s var(--ease);
+}
 .step i svg { width: 14px; height: 14px; }
-.step span { font-size: var(--t-sm); font-weight: 600; color: var(--muted); }
-.step.done i { background: var(--teal-600); border-color: var(--teal-600); color: var(--black); }
-.step.done span { color: var(--ink); }
-.step.now i { background: var(--black); border-color: var(--black); color: var(--white); }
-.step.now span { color: var(--ink); }
-.step-line { width: 48px; height: 1px; background: var(--line-strong); margin: 0 var(--s3); }
+.step span { font-size: 13.5px; font-weight: 600; color: #64748B; }
+.step.done i {
+  background: #004d57; border-color: #004d57; color: #FFFFFF;
+}
+.step.done span { color: #0F172A; }
+.step.now i {
+  background: #FFFFFF; border-color: #004d57; color: #004d57;
+  box-shadow: 0 0 0 3px rgba(0, 77, 87, 0.16);
+}
+.step.now span { color: #004d57; font-weight: 700; }
+.step-line { width: 44px; height: 2px; background: #E2E8F0; margin: 0 12px; }
 
 /* ==========================================================
    EMPTY STATE MOLECULES & VARIANTS
@@ -454,32 +517,180 @@
    ENTERPRISE SCALABILITY MOLECULES (SYSTEM TOKEN HARMONIZED)
    ========================================================== */
 
-/* 1. Filter Chip Bar (Multi-Select & Dismiss Bar) */
+/* 1. Global SaaS Filter Bar & Query Toolbar */
 .filter-bar {
-  display: flex; align-items: center; gap: var(--s1); flex-wrap: wrap;
-  padding: 10px 16px; background: var(--canvas);
-  border: 1px solid var(--line); border-radius: var(--r-16);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: var(--white);
+  border: 1px solid #E2E8F0;
+  border-radius: var(--r-8);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
-.filter-bar-label {
-  font-size: var(--t-xs); font-weight: 700; color: var(--muted);
-  text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px;
+.filter-bar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  user-select: none;
+}
+.filter-bar-header svg {
+  width: 14px;
+  height: 14px;
+  color: #004d57;
+}
+.filter-bar-badge {
+  font-size: 11px;
+  font-weight: 700;
+  background: #E0F7FA;
+  color: #004d57;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  border: 1px solid #B2EBF2;
+}
+.filter-chips-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 6px 0 9px;
+  border-radius: var(--r-6);
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  font-size: 12px;
+  color: #1E293B;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.filter-chip:hover {
+  border-color: #94A3B8;
+  background: #E2E8F0;
+}
+.filter-chip-key {
+  color: #64748B;
+  font-weight: 500;
+}
+.filter-chip-val {
+  font-weight: 600;
+  color: #0F172A;
+}
+.filter-chip.filter-chip-teal {
+  background: #E0F7FA;
+  border-color: #B2EBF2;
+}
+.filter-chip.filter-chip-teal .filter-chip-key {
+  color: #006C7A;
+}
+.filter-chip.filter-chip-teal .filter-chip-val {
+  color: #004d57;
+}
+.filter-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+.filter-chip-remove:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #DC2626;
+}
+.filter-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 9px;
+  border-radius: var(--r-6);
+  background: #FFFFFF;
+  border: 1px dashed #CBD5E1;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-add-btn:hover {
+  border-color: #004d57;
+  color: #004d57;
+  background: #F0FAFC;
+}
+.filter-add-btn svg { width: 13px; height: 13px; }
+.filter-presets {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.filter-preset-btn {
+  height: 26px;
+  padding: 0 8px;
+  border-radius: var(--r-6);
+  border: 1px solid transparent;
+  background: transparent;
+  color: #64748B;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-preset-btn:hover {
+  color: #0F172A;
+  background: #F1F5F9;
+}
+.filter-preset-btn.active {
+  background: #F1F5F9;
+  border-color: #E2E8F0;
+  color: #004d57;
 }
 .filter-clear-all {
-  margin-left: auto; font-size: var(--t-xs); font-weight: 600;
-  color: var(--teal-900); background: transparent; border: none;
-  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
 }
-.filter-clear-all:hover { color: var(--black); }
+.filter-clear-all:hover {
+  color: #DC2626;
+  background: #FEF2F2;
+}
 
 /* 2. Compound Input Groups (Attached Units & Controls - Seamless Curvature) */
 .input-compound {
-  display: flex; align-items: center; width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
   border: 1px solid #CBD5E1;
   border-radius: var(--r-8);
   background: var(--white);
   height: 42px;
   overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   transition: border-color 0.16s var(--ease), box-shadow 0.16s var(--ease);
 }
 .input-compound:hover {
@@ -491,21 +702,29 @@
 }
 .input-compound.err,
 .input-compound:has(.input.err) {
-  border-color: var(--ruby-border);
-  background: #fffcfc;
+  border-color: #EF4444;
+  background: #FEF2F2;
 }
 .input-compound.err:focus-within,
 .input-compound:has(.input.err):focus-within {
-  border-color: var(--ruby-text);
-  box-shadow: 0 0 0 3px #feecef;
+  border-color: #DC2626;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.16);
 }
 .input-compound-prefix,
 .input-compound-suffix,
 .input-compound-addon {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0 14px; background: #F8FAFC;
-  color: #64748B; font-size: 11.5px; font-weight: 700;
-  user-select: none; white-space: nowrap; height: 100%; flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  background: #F8FAFC;
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
+  white-space: nowrap;
+  height: 100%;
+  flex-shrink: 0;
   transition: border-color var(--dur-fast);
 }
 .input-compound-prefix,
@@ -515,18 +734,170 @@
 .input-compound-suffix {
   border-left: 1px solid #CBD5E1;
 }
+.input-compound-suffix.tag-unit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
 .input-compound .input {
-  flex: 1; height: 100%;
+  flex: 1;
+  height: 100%;
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
-  padding: 0 14px; font-size: 13.5px;
-  outline: none; color: #0F172A;
+  padding: 0 14px;
+  font-size: 13.5px;
+  outline: none;
+  color: #0F172A;
 }
 .input-compound .btn {
-  height: 30px; margin-right: 5px; flex-shrink: 0;
-  padding: 0 12px; font-size: 12px; border-radius: var(--r-6);
+  height: 30px;
+  margin-right: 6px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--r-6);
+}
+
+/* Dual Range Compound Input (Min / Max in a single box) */
+.input-compound.dual-range {
+  display: flex;
+  align-items: center;
+}
+.input-compound.dual-range .input {
+  text-align: center;
+  padding: 0 8px;
+}
+.dual-range-sep {
+  color: #94A3B8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 4px;
+  user-select: none;
+}
+
+/* Tooltips System Molecule (Directional & Rich Context) */
+.tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.tooltip-box {
+  position: absolute;
+  z-index: 120;
+  padding: 5px 9px;
+  background: #0F172A;
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  border-radius: var(--r-6);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+.tooltip-box::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+}
+.tooltip-wrap:hover .tooltip-box {
+  opacity: 1;
+}
+.tooltip-box kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  margin-left: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  vertical-align: middle;
+}
+.tooltip-top .tooltip-box {
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+.tooltip-top .tooltip-box::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: #0F172A;
+}
+.tooltip-top:hover .tooltip-box {
+  transform: translateX(-50%) translateY(0);
+}
+.tooltip-bottom .tooltip-box {
+  top: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+.tooltip-bottom .tooltip-box::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: #0F172A;
+}
+.tooltip-bottom:hover .tooltip-box {
+  transform: translateX(-50%) translateY(0);
+}
+.tooltip-left .tooltip-box {
+  right: calc(100% + 7px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+}
+.tooltip-left .tooltip-box::after {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: #0F172A;
+}
+.tooltip-left:hover .tooltip-box {
+  transform: translateY(-50%) translateX(0);
+}
+.tooltip-right .tooltip-box {
+  left: calc(100% + 7px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+.tooltip-right .tooltip-box::after {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: #0F172A;
+}
+.tooltip-right:hover .tooltip-box {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Rich Micro-Context Telemetry Tooltips */
+.tooltip-box.tooltip-rich {
+  white-space: normal;
+  max-width: 220px;
+  padding: 8px 10px;
+}
+.tooltip-rich-title {
+  font-weight: 700;
+  font-size: 11.5px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.tooltip-rich-body {
+  font-size: 11px;
+  color: #CBD5E1;
+  line-height: 1.4;
 }
 
 /* 3. Drag & Drop File Upload Dropzone (Lab QC / Pathology Certificates) */

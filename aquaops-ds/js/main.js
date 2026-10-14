@@ -266,17 +266,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 15. Enterprise Molecule: Filter Clear All
+  // 15. Enterprise Molecule: Filter Clear All & Chip Removal
   document.querySelectorAll('.filter-clear-all').forEach((btn) => {
     btn.addEventListener('click', () => {
       const bar = btn.closest('.filter-bar');
       if (bar) {
-        bar.querySelectorAll('.tag').forEach((t) => {
-          t.classList.add('tag-dismissing');
-          setTimeout(() => t.remove(), 200);
+        bar.querySelectorAll('.tag, .filter-chip').forEach((t) => {
+          t.style.opacity = '0';
+          t.style.transform = 'scale(0.9)';
+          setTimeout(() => t.remove(), 180);
         });
+        const badge = bar.querySelector('.filter-bar-badge');
+        if (badge) badge.textContent = '0';
         AquaToast.show('All query filters reset', 'teal');
       }
+    });
+  });
+
+  document.querySelectorAll('.filter-chip-remove').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const chip = btn.closest('.filter-chip');
+      if (chip) {
+        chip.style.opacity = '0';
+        chip.style.transform = 'scale(0.9)';
+        chip.style.transition = 'all 0.15s ease';
+        setTimeout(() => {
+          const bar = chip.closest('.filter-bar');
+          chip.remove();
+          if (bar) {
+            const count = bar.querySelectorAll('.filter-chip').length;
+            const badge = bar.querySelector('.filter-bar-badge');
+            if (badge) badge.textContent = count;
+          }
+        }, 150);
+      }
+    });
+  });
+
+  document.querySelectorAll('.filter-preset-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.parentElement.querySelectorAll('.filter-preset-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      AquaToast.show(`Preset activated: ${btn.textContent.trim()}`, 'teal');
+    });
+  });
+
+  document.querySelectorAll('.filter-add-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      AquaToast.show('Select filter parameter (DO, Salinity, Feed, DOC)', 'teal');
     });
   });
 
