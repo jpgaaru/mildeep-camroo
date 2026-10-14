@@ -1274,13 +1274,13 @@
   <section class="stage-section" id="stage2">
     <span class="stage-pill">Stage 2</span>
     <h2>Molecules</h2>
-    <p>Functional combinations of atomic elements bonded into purposeful UI components—such as searchable comboboxes, toolbars, date ranges, contextual menus, and structured tooltips.</p>
+    <p>Interactive combinations of inputs, buttons, and menus designed for speed and clarity.</p>
 
-    <!-- Rich Comboboxes & Custom Select Molecules -->
+    <!-- Searchable Dropdowns & Custom Select Molecules -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Rich Comboboxes &amp; Custom Menus</div>
-        <p class="spec-desc">Dropdowns with instant search filtering, clear status tags, and multi-select tags with quick dismissal.</p>
+        <div class="spec-title">Searchable Dropdowns</div>
+        <p class="spec-desc">Find and select items with instant search, badges, and removable tags.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1288,7 +1288,7 @@
           <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
           <div class="field-block">
             <label class="label">
-              <span>Facility &amp; Storage Unit</span>
+              <span>Storage Location</span>
               <span class="hint">Searchable</span>
             </label>
             <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter facilities or units...">
@@ -1305,7 +1305,7 @@
                   <input type="text" class="rs-search-input" id="rsSearchInput" placeholder="Filter facilities or units..." />
                 </div>
                 <div class="rs-list">
-                  <div class="rs-empty-msg">No matching facilities found</div>
+                  <div class="rs-empty-msg">No matching locations found</div>
                   <div class="rs-option selected" data-value="Pacific Cold Storage (Unit A)">
                     <div class="rs-opt-main">
                       <div class="rs-opt-title">Pacific Cold Storage (Unit A)</div>
@@ -1349,13 +1349,13 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Type to instantly filter storage facilities and view live unit status.</div>
+            <div class="hint">Search by name or status.</div>
           </div>
 
           <!-- 2. SINGLE-SELECT FLOATING COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Shipping &amp; Delivery Tier</span>
+              <span>Delivery Option</span>
               <span class="req">*</span>
             </label>
             <div class="rich-select" id="richTargetSelect">
@@ -1401,16 +1401,16 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Clean floating menu with leading icon, status tag, and selection checkmark.</div>
+            <div class="hint">Select standard or priority delivery.</div>
           </div>
 
           <!-- 3. MULTI-SELECT TAG COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Monitored Zones &amp; Facilities</span>
+              <span>Monitored Locations</span>
               <span class="hint">Multi-Select</span>
             </label>
-            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select facilities to monitor...">
+            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select locations to monitor...">
               <div class="rs-trigger" tabindex="0">
                 <div class="rs-tags-container">
                   <span class="rs-pill-tag">
@@ -1422,7 +1422,7 @@
                     <button type="button" class="rs-tag-remove" data-value="Harbor Logistics" aria-label="Remove Harbor Logistics">×</button>
                   </span>
                 </div>
-                <div style="display:flex;align-items:center;gap:6px">
+                <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
                   <span class="rs-count-badge">2 selected</span>
                   <i data-lucide="chevron-down" class="rs-chev"></i>
                 </div>
@@ -1430,10 +1430,10 @@
               <div class="rs-menu">
                 <div class="rs-search-wrap">
                   <i data-lucide="search"></i>
-                  <input type="text" class="rs-search-input" placeholder="Search facilities..." />
+                  <input type="text" class="rs-search-input" placeholder="Search locations..." />
                 </div>
                 <div class="rs-list">
-                  <div class="rs-empty-msg">No matching facilities found</div>
+                  <div class="rs-empty-msg">No matching locations found</div>
                   <div class="rs-option selected" data-value="Pacific Storage">
                     <div class="rs-opt-main">
                       <div class="rs-opt-title">Pacific Storage · Zone Alpha</div>
@@ -1473,13 +1473,13 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Selected facilities display as clean tags with real-time search filtering.</div>
+            <div class="hint">Select locations to monitor.</div>
           </div>
 
           <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
           <div class="field-block">
             <label class="label">
-              <span>Metric Focus &amp; Alerts</span>
+              <span>Live Metrics</span>
               <span class="hint">Categorized</span>
             </label>
             <div class="rich-select" id="richMetricSelect">
@@ -1492,7 +1492,7 @@
               </div>
               <div class="rs-menu">
                 <div class="rs-list">
-                  <div class="rs-group-label">Storage &amp; Environment</div>
+                  <div class="rs-group-label">Storage</div>
                   <div class="rs-option selected" data-value="Storage Temperature (°C)">
                     <div class="rs-opt-main">
                       <div class="rs-opt-title">Storage Temperature</div>
@@ -1524,7 +1524,7 @@
                     </div>
                   </div>
 
-                  <div class="rs-group-label">Logistics &amp; Handling</div>
+                  <div class="rs-group-label">Logistics</div>
                   <div class="rs-option" data-value="Transfer Speed (Units/hr)">
                     <div class="rs-opt-main">
                       <div class="rs-opt-title">Transfer Speed</div>
@@ -1548,7 +1548,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Organized into clear categories with group headers and status indicators.</div>
+            <div class="hint">Grouped by category.</div>
           </div>
 
         </div>
@@ -1877,122 +1877,183 @@
     </div>
 
     <!-- Dedicated Interactive Tooltips System Molecule Showcase -->
+    <!-- Dedicated Interactive Tooltips System Molecule Showcase (Shadcn & Apple Inspired) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Tooltips &amp; Micro-Guidance</div>
-        <p class="spec-desc">Subtle popovers that provide extra context or helpful hints on hover. Supports light and brand themes, directional arrows, and status cards.</p>
+        <div class="spec-title">Tooltips</div>
+        <p class="spec-desc">Floating guidance that appears when hovering or focusing an element.</p>
       </div>
       <div class="spec-content">
         
-        <!-- Tooltip Specification Matrix -->
+        <!-- 1. Shadcn-Style Action Icon Bar with Tooltips -->
         <div>
-          <div class="category-label">Tooltip Visual Specimen Matrix (Light &amp; Dark Variants)</div>
-          <div class="tooltip-matrix-canvas">
-            
-            <!-- Row 1, Col 1: Light Tooltip / Bottom Arrow -->
-            <div class="tooltip-specimen theme-light arrow-bottom">
-              <span>Helpful tip</span>
+          <div class="category-label">Action Toolbar with Keyboard Shortcuts</div>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <div class="action-icon-bar">
+              <div class="tooltip-wrap tooltip-top">
+                <button class="icon-action-btn" aria-label="Add item"><i data-lucide="plus"></i></button>
+                <div class="tooltip-box">Create new item</div>
+              </div>
+              <div class="tooltip-wrap tooltip-top">
+                <button class="icon-action-btn" aria-label="Bookmark"><i data-lucide="bookmark"></i></button>
+                <div class="tooltip-box">Save to favorites</div>
+              </div>
+              <div class="tooltip-wrap tooltip-top">
+                <button class="icon-action-btn" aria-label="Share"><i data-lucide="share-2"></i></button>
+                <div class="tooltip-box">Share link <kbd>⌘S</kbd></div>
+              </div>
+              <div class="tooltip-wrap tooltip-top">
+                <button class="icon-action-btn" aria-label="Settings"><i data-lucide="sliders"></i></button>
+                <div class="tooltip-box">Preferences</div>
+              </div>
+              <div class="tooltip-wrap tooltip-top">
+                <button class="icon-action-btn danger" aria-label="Delete"><i data-lucide="trash-2"></i></button>
+                <div class="tooltip-box">Delete record <kbd>⌫</kbd></div>
+              </div>
             </div>
-
-            <!-- Row 1, Col 2: Brand/Dark Teal Tooltip / Top Arrow -->
-            <div class="tooltip-specimen theme-brand arrow-top">
-              <span>Helpful tip</span>
-            </div>
-
-            <!-- Row 1, Col 3: Light Tooltip / Left Arrow / Link Icon + Close Button -->
-            <div class="tooltip-specimen theme-light arrow-left">
-              <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Documentation</span>
-              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
-            </div>
-
-            <!-- Row 2, Col 1: Brand/Dark Teal Tooltip / Bottom Arrow / Link Icon + Close Button -->
-            <div class="tooltip-specimen theme-brand arrow-bottom">
-              <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Documentation</span>
-              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
-            </div>
-
-            <!-- Row 2, Col 2: Light Tooltip / Top Arrow / Close Button -->
-            <div class="tooltip-specimen theme-light arrow-top">
-              <span>Helpful tip</span>
-              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
-            </div>
-
-            <!-- Row 2, Col 3: Brand/Dark Teal Tooltip / Left Arrow / Link Icon -->
-            <div class="tooltip-specimen theme-brand arrow-left">
-              <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Documentation</span>
-            </div>
-
+            <span style="font-size:12px;color:var(--muted)">Hover each action button to reveal its shortcut tooltip.</span>
           </div>
         </div>
 
-        <div>
-          <div class="category-label">Directional Hover Anchors (Top, Bottom, Left, Right)</div>
-          <div class="line-row" style="gap:24px;padding:24px 16px;background:var(--soft);border-radius:var(--r-12);border:1px dashed var(--line);justify-content:center;flex-wrap:wrap">
-            
-            <!-- Top Tooltip -->
-            <div class="tooltip-wrap tooltip-top">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-up"></i> Tooltip Top</button>
-              <div class="tooltip-box">Top aligned hint <kbd>⌘T</kbd></div>
-            </div>
-
-            <!-- Bottom Tooltip -->
-            <div class="tooltip-wrap tooltip-bottom">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-down"></i> Tooltip Bottom</button>
-              <div class="tooltip-box">Bottom aligned hint <kbd>⌘B</kbd></div>
-            </div>
-
-            <!-- Left Tooltip -->
-            <div class="tooltip-wrap tooltip-left">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Tooltip Left</button>
-              <div class="tooltip-box">Left aligned hint</div>
-            </div>
-
-            <!-- Right Tooltip -->
-            <div class="tooltip-wrap tooltip-right">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-right"></i> Tooltip Right</button>
-              <div class="tooltip-box">Right aligned hint</div>
-            </div>
-
-          </div>
-        </div>
-
+        <!-- 2. Directional Tooltip Anchors -->
         <div style="margin-top:16px">
-          <div class="category-label">Status Badges with Rich Guidance Cards</div>
-          <div class="line-row" style="gap:16px;flex-wrap:wrap">
+          <div class="category-label">Directional Placements (Top, Right, Bottom, Left)</div>
+          <div class="line-row" style="gap:20px;padding:20px 16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line);justify-content:center;flex-wrap:wrap">
             
             <div class="tooltip-wrap tooltip-top">
-              <span class="badge badge-teal" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="thermometer" style="width:14px;height:14px"></i> Temp: -18.4°C
-              </span>
-              <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="thermometer" style="width:13px;height:13px;color:#2DD4BF"></i> Storage Temperature</div>
-                <div class="tooltip-rich-body">Within recommended range (-15°C to -22°C). Sensor auto-calibrated 12 min ago.</div>
-              </div>
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-up"></i> Top</button>
+              <div class="tooltip-box">Tooltip on top <kbd>⌘T</kbd></div>
             </div>
 
-            <div class="tooltip-wrap tooltip-top">
-              <span class="badge badge-emerald" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="check-circle-2" style="width:14px;height:14px"></i> System: Healthy
-              </span>
-              <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="check-circle-2" style="width:13px;height:13px;color:#34D399"></i> Operational Status</div>
-                <div class="tooltip-rich-body">All 14 connected monitoring nodes are transmitting normally.</div>
-              </div>
+            <div class="tooltip-wrap tooltip-bottom">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-down"></i> Bottom</button>
+              <div class="tooltip-box">Tooltip on bottom <kbd>⌘B</kbd></div>
             </div>
 
-            <div class="tooltip-wrap tooltip-top">
-              <span class="badge badge-warn" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="battery-warning" style="width:14px;height:14px"></i> Battery: 18%
-              </span>
-              <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="alert-triangle" style="width:13px;height:13px;color:#FBBF24"></i> Low Battery Warning</div>
-                <div class="tooltip-rich-body">Sensor battery below 20%. Replacement recommended within 48 hours.</div>
-              </div>
+            <div class="tooltip-wrap tooltip-left">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Left</button>
+              <div class="tooltip-box">Tooltip on left</div>
             </div>
 
+            <div class="tooltip-wrap tooltip-right">
+              <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-right"></i> Right</button>
+              <div class="tooltip-box">Tooltip on right</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. Form Field Helper & Rich Popover Cards -->
+        <div class="form-responsive-grid" style="margin-top:16px">
+          <div>
+            <div class="category-label">Form Field Helper Guidance</div>
+            <div class="field-block">
+              <label class="label">
+                <span>Production API Secret</span>
+                <span class="tooltip-wrap tooltip-top">
+                  <span class="tooltip-info-trigger" tabindex="0">?</span>
+                  <span class="tooltip-box">Used to authenticate background sensor sync</span>
+                </span>
+              </label>
+              <input class="input" type="password" value="sec_prod_99482_live_x8" readonly />
+              <div class="hint">Hover the question mark icon for helper details.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="category-label">Rich Profile Hover Card</div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+              <div class="tooltip-wrap tooltip-top">
+                <div class="av md" style="cursor:pointer">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=120&h=120&q=80" alt="Anitha" />
+                  <span class="pres"></span>
+                </div>
+                <div class="tooltip-box tooltip-card">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                    <div class="av sm">
+                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=80&h=80&q=80" alt="Anitha" />
+                    </div>
+                    <div>
+                      <div style="font-weight:700;font-size:13px;color:var(--ink)">Anitha Nair</div>
+                      <div style="font-size:11px;color:var(--muted)">anitha@camaroo.io</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:6px;font-size:11px">
+                    <span class="badge badge-teal">Operations Lead</span>
+                    <span class="badge badge-soft">Active Now</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:600">Anitha Nair</div>
+                <div style="font-size:11px;color:var(--muted)">Hover avatar to view profile card</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Additional Core SaaS Molecules: Avatar Group, View Switcher, Callout Banner -->
+    <div class="spec-grid">
+      <div class="spec-meta">
+        <div class="spec-title">Team &amp; View Controls</div>
+        <p class="spec-desc">Collaborator stacks, view mode switchers, and dismissible notice banners.</p>
+      </div>
+      <div class="spec-content">
+        <div class="form-responsive-grid">
+          
+          <!-- Avatar Stack Group -->
+          <div>
+            <div class="category-label">Avatar Group with Overflow Count</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="av-group">
+                <div class="av sm tooltip-wrap tooltip-top">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&w=80&h=80&q=80" alt="Anitha" />
+                  <div class="tooltip-box">Anitha (Lead)</div>
+                </div>
+                <div class="av sm tooltip-wrap tooltip-top">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&w=80&h=80&q=80" alt="Vikram" />
+                  <div class="tooltip-box">Vikram (Eng)</div>
+                </div>
+                <div class="av sm tooltip-wrap tooltip-top">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&w=80&h=80&q=80" alt="Sara" />
+                  <div class="tooltip-box">Sara (QC)</div>
+                </div>
+                <div class="av-group-more tooltip-wrap tooltip-top">
+                  +3
+                  <div class="tooltip-box">+3 more team members</div>
+                </div>
+              </div>
+              <span style="font-size:12px;color:var(--muted)">Active reviewers</span>
+            </div>
+          </div>
+
+          <!-- View Mode Switcher -->
+          <div>
+            <div class="category-label">View Mode Switcher (Grid / List / Split)</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="view-mode-switcher" id="demoViewSwitcher">
+                <button class="view-mode-btn active" title="Grid View"><i data-lucide="layout-grid"></i></button>
+                <button class="view-mode-btn" title="List View"><i data-lucide="list"></i></button>
+                <button class="view-mode-btn" title="Split View"><i data-lucide="columns-2"></i></button>
+              </div>
+              <span style="font-size:12px;color:var(--muted)">Compact 30px table control</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dismissible Notice Banner -->
+        <div style="margin-top:16px">
+          <div class="category-label">Dismissible Notice Banner</div>
+          <div class="notice-banner" id="demoNoticeBanner">
+            <div class="notice-banner-left">
+              <i data-lucide="info"></i>
+              <span>Scheduled maintenance on Cold Storage Unit B tonight from 02:00 to 03:30 UTC. Telemetry will sync continuously.</span>
+            </div>
+            <button class="notice-banner-close" aria-label="Dismiss banner" onclick="const b = document.getElementById('demoNoticeBanner'); b.classList.add('notice-banner-dismissing'); setTimeout(() => b.remove(), 250); window.AquaToast?.show('Notice dismissed', 'teal');">×</button>
           </div>
         </div>
 

@@ -428,6 +428,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 15b. Action Icon Toolbar & View Mode Switcher
+  document.querySelectorAll('#demoViewSwitcher .view-mode-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.parentElement.querySelectorAll('.view-mode-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const title = btn.getAttribute('title') || 'View mode';
+      AquaToast.show(`Layout changed: ${title}`, 'teal');
+    });
+  });
+
+  document.querySelectorAll('.action-icon-bar .icon-action-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const label = btn.getAttribute('aria-label') || 'Action';
+      AquaToast.show(`${label} executed`, 'teal');
+    });
+  });
+
   // 15b. Enterprise Molecule: Command Palette (⌘K)
   const triggerCmdK = () => {
     AquaToast.show('Quick jump active: Type to find any page or item', 'teal');
@@ -678,34 +695,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 18. Stage Nav ScrollSpy & Smooth Jump
   const stageNavBtns = document.querySelectorAll('.stage-nav-btn');
-  const sections = Array.from(stageNavBtns)
-    .map((btn) => {
-      const href = btn.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        const el = document.getElementById(href.slice(1));
-        return el ? { btn, el } : null;
-      }
-      return null;
-    })
-    .filter(Boolean);
+  const navInner = document.querySelector('.stage-nav-inner');
+
+  const getNavTargets = () => {
+    return Array.from(stageNavBtns)
+      .map((btn) => {
+        const href = btn.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const el = document.getElementById(href.slice(1));
+          return el ? { btn, el } : null;
+        }
+        return null;
+      })
+      .filter(Boolean)
+      .sort((a, b) => {
+        const topA = a.el.getBoundingClientRect().top + window.scrollY;
+        const topB = b.el.getBoundingClientRect().top + window.scrollY;
+        return topA - topB;
+      });
+  };
+
+  const navTargets = getNavTargets();
 
   const updateScrollSpy = () => {
-    const scrollY = window.scrollY + 140;
-    let current = null;
-    for (let i = sections.length - 1; i >= 0; i--) {
-      if (sections[i].el.offsetTop <= scrollY) {
-        current = sections[i];
+    const scrollPosition = window.scrollY + 100;
+    let activeTarget = navTargets[0];
+
+    for (let i = 0; i < navTargets.length; i++) {
+      const top = navTargets[i].el.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollPosition) {
+        activeTarget = navTargets[i];
+      } else {
         break;
       }
     }
-    if (current) {
+
+    if (activeTarget) {
       stageNavBtns.forEach((b) => b.classList.remove('active'));
-      current.btn.classList.add('active');
+      activeTarget.btn.classList.add('active');
+      if (navInner) {
+        const btnRect = activeTarget.btn.getBoundingClientRect();
+        const innerRect = navInner.getBoundingClientRect();
+        if (btnRect.left < innerRect.left || btnRect.right > innerRect.right) {
+          activeTarget.btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      }
     }
   };
 
   window.addEventListener('scroll', updateScrollSpy, { passive: true });
+  window.addEventListener('resize', updateScrollSpy, { passive: true });
   updateScrollSpy();
+
+  // Smooth scroll with sticky header offset on button click
+  stageNavBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const target = document.getElementById(href.slice(1));
+        if (target) {
+          e.preventDefault();
+          const targetTop = target.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+          stageNavBtns.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+      }
+    });
+  });
 
   // 19. Re-initialize Lucide Icons for dynamic additions
   if (window.lucide) {
