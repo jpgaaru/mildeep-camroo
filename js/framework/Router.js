@@ -9,8 +9,8 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution.'
     },
     operations: {
-      title: 'Purchase Operations',
-      subtitle: 'Farmer procurement bookings, dock weighment arrivals, and lot intake tracking'
+      title: 'Operations',
+      subtitle: 'Manage bookings, dock arrivals, crate weighments, and lot tracking.'
     },
     'transactions-bills': {
       title: 'Transactions & Bills',

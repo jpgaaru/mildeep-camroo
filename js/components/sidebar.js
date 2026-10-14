@@ -12,8 +12,8 @@ export const NAV_HIERARCHY = [
         title: "Dashboard",
         defaultTab: "rm-dashboard",
         tabs: [
-          { id: "rm-dashboard", label: "Raw Material Dashboard", hash: "#/purchase/dashboard/rm-dashboard" },
-          { id: "commercial-dashboard", label: "Commercial Dashboard", hash: "#/purchase/dashboard/commercial-dashboard" }
+          { id: "rm-dashboard", label: "Raw Material", hash: "#/purchase/dashboard/rm-dashboard" },
+          { id: "commercial-dashboard", label: "Commercial", hash: "#/purchase/dashboard/commercial-dashboard" }
         ]
       },
       {
@@ -22,8 +22,8 @@ export const NAV_HIERARCHY = [
         defaultTab: "bookings",
         tabs: [
           { id: "bookings", label: "Bookings", hash: "#/purchase/operations/bookings" },
-          { id: "rm-arrivals", label: "Raw Material Arrivals", hash: "#/purchase/operations/rm-arrivals" },
-          { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
+          { id: "rm-arrivals", label: "RM Arrivals", hash: "#/purchase/operations/rm-arrivals" },
+          { id: "arrivals", label: "Arrivals Register", hash: "#/purchase/operations/arrivals" },
           { id: "lot-tracking", label: "Lot Tracking", hash: "#/purchase/operations/lot-tracking" }
         ]
       },
@@ -32,8 +32,8 @@ export const NAV_HIERARCHY = [
         title: "Transactions & Bills",
         defaultTab: "supplier-bills",
         tabs: [
-          { id: "supplier-bills", label: "Supplier Bill Summary", hash: "#/purchase/transactions-bills/supplier-bills" },
-          { id: "commercial-txns", label: "Commercial Transactions", hash: "#/purchase/transactions-bills/commercial-txns" }
+          { id: "supplier-bills", label: "Supplier Bills", hash: "#/purchase/transactions-bills/supplier-bills" },
+          { id: "commercial-txns", label: "Commercial Txns", hash: "#/purchase/transactions-bills/commercial-txns" }
         ]
       },
       {

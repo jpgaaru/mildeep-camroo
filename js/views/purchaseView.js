@@ -1795,21 +1795,11 @@ export const PurchaseView = {
   renderLotTracking(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title and Action -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Lot Tracking &amp; Genealogy
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">End-to-end aquaculture lot lifecycle, farm source origin, and processing stage tracking</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Register New Lot</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Register New Lot</span>
+          </button>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->
@@ -2052,20 +2042,11 @@ export const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Procurement Bookings
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Farmer advance bookings, transport allocations, and expected harvest schedules</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Booking</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Booking</span>
+          </button>
         </div>
 
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
@@ -2378,20 +2359,11 @@ export const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Raw Material Intake
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Weighbridge gate arrivals, plant receiving inspection, and batch QC verification</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create RM Arrival</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create RM Arrival</span>
+          </button>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->
@@ -2776,21 +2748,11 @@ export const PurchaseView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Header with Title and Create Button -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Arrivals Register
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Center harvest catch intake, crate weighment logs, and count verification</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Arrival Record</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Arrival Record</span>
+          </button>
         </div>
 
         <!-- Table Mount Point -->
@@ -2988,21 +2950,11 @@ export const PurchaseView = {
   renderSupplierBills(container) {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
-        <!-- Page Title Header (AquaPulse Architecture) -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Supplier Bill Summary
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Procurement billing settlements, supplier reconciliation, and payment approval workflows</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Supplier Bill</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Supplier Bill</span>
+          </button>
         </div>
 
         <!-- Search / Filter Fields Card (AquaPulse Architecture) -->
@@ -3371,21 +3323,11 @@ export const PurchaseView = {
   renderCommercialTransactions(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Commercial Transactions
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Direct farmer payables, logistics charges, agent broker commissions, and TDS entries</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Add Transaction</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Add Transaction</span>
+          </button>
         </div>
 
         <!-- Search / Filter Card (AquaPulse Architecture) -->

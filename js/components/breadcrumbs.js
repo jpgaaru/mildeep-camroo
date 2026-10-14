@@ -27,13 +27,8 @@ export const Breadcrumbs = {
           crumbs.push({ label: submenu.title, hash: defaultSubHash });
         }
 
-        // For Payments, the active tab below already clearly indicates view; shorten breadcrumb to Module > Submenu
-        if (subId !== 'payments') {
-          const tab = submenu.tabs.find(t => t.id === tabId);
-          if (tab) {
-            crumbs.push({ label: tab.label, hash: tab.hash, active: !customLeaf });
-          }
-        }
+        // Tabs directly below header already clearly indicate the active view.
+        // Maintain clean, focused breadcrumb hierarchy: Module › Submenu (plus customLeaf when present)
       }
     }
 
