@@ -298,10 +298,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 9. Toast Triggers
   document.getElementById('toastTealBtn')?.addEventListener('click', () => {
-    AquaToast.show('Sensor calibration threshold saved', 'teal');
+    AquaToast.show('Settings saved successfully', 'teal');
   });
   document.getElementById('toastDarkBtn')?.addEventListener('click', () => {
-    AquaToast.show('Automated aerator override dispatched', '');
+    AquaToast.show('Scheduled task completed', '');
   });
 
   // 10. Accordion Organism
@@ -324,8 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 12. Stepper Molecule
-  // 12. Stepper Molecule
-  const steps = ['Stocking', 'Grow-out', 'Lab QC', 'Intake'];
+  const steps = ['Details', 'Inventory', 'Review', 'Confirm'];
   let curStep = 1;
   const stepperEl = document.getElementById('stepper');
   function drawSteps() {
@@ -425,13 +424,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.filter-add-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      AquaToast.show('Select filter parameter (DO, Salinity, Feed, DOC)', 'teal');
+      AquaToast.show('Choose a filter parameter to add', 'teal');
     });
   });
 
   // 15b. Enterprise Molecule: Command Palette (⌘K)
   const triggerCmdK = () => {
-    AquaToast.show('⌘K Quick Jump active: Type pond, probe, or batch ID to jump', 'teal');
+    AquaToast.show('Quick jump active: Type to find any page or item', 'teal');
   };
   document.getElementById('demoCmdK')?.addEventListener('click', triggerCmdK);
   window.addEventListener('keydown', (e) => {
@@ -443,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 15c. Enterprise Molecule: Lab QC Dropzone Click
   document.getElementById('demoDropzone')?.addEventListener('click', () => {
-    AquaToast.show('Dropzone active: Select or drag CSV / PDF lab screening file', 'teal');
+    AquaToast.show('Upload ready: Drag or choose files to upload', 'teal');
   });
 
   // 16. Enterprise Molecule: Property Copy Buttons

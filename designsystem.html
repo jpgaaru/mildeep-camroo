@@ -1280,7 +1280,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Rich Comboboxes &amp; Custom Menus</div>
-        <p class="spec-desc">Advanced selection molecules featuring real-time search filtering, structured option rows with subtitles and status tags, and multi-select token containers with instant dismissal.</p>
+        <p class="spec-desc">Dropdowns with instant search filtering, clear status tags, and multi-select tags with quick dismissal.</p>
       </div>
       <div class="spec-content">
         <div class="form-responsive-grid">
@@ -1288,138 +1288,138 @@
           <!-- 1. SEARCHABLE RICH COMBOBOX (AIRY, UNCLUTTERED) -->
           <div class="field-block">
             <label class="label">
-              <span>Species &amp; Grade Selection</span>
+              <span>Facility &amp; Storage Unit</span>
               <span class="hint">Searchable</span>
             </label>
-            <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter species or grades...">
+            <div class="rich-select" id="richSpeciesSelect" data-placeholder="Filter facilities or units...">
               <div class="rs-trigger" tabindex="0">
                 <span class="rs-current">
-                  <i data-lucide="droplets"></i>
-                  <span>L. Vannamei (Whiteleg Shrimp)</span>
+                  <i data-lucide="building-2"></i>
+                  <span>Pacific Cold Storage (Unit A)</span>
                 </span>
                 <i data-lucide="chevron-down" class="rs-chev"></i>
               </div>
               <div class="rs-menu">
                 <div class="rs-search-wrap">
                   <i data-lucide="search"></i>
-                  <input type="text" class="rs-search-input" id="rsSearchInput" placeholder="Filter species or grades..." />
+                  <input type="text" class="rs-search-input" id="rsSearchInput" placeholder="Filter facilities or units..." />
                 </div>
                 <div class="rs-list">
-                  <div class="rs-empty-msg">No matching species found</div>
-                  <div class="rs-option selected" data-value="L. Vannamei (Whiteleg Shrimp)">
+                  <div class="rs-empty-msg">No matching facilities found</div>
+                  <div class="rs-option selected" data-value="Pacific Cold Storage (Unit A)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">L. Vannamei (Whiteleg Shrimp)</div>
-                      <div class="rs-opt-sub">Ponds 101–104 · DOC 72 · High Density</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Optimal</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="P. Monodon (Black Tiger)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">P. Monodon (Black Tiger)</div>
-                      <div class="rs-opt-sub">Ponds 105–106 · DOC 94 · Jumbo Grade</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Quarantine</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="M. Rosenbergii (Scampi)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">M. Rosenbergii (Freshwater Scampi)</div>
-                      <div class="rs-opt-sub">Pond 107 · Low Salinity · DOC 110</div>
-                    </div>
-                    <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Normal</span>
-                      <i data-lucide="check" class="rs-check-icon"></i>
-                    </div>
-                  </div>
-                  <div class="rs-option" data-value="Oreochromis (Nile Tilapia)">
-                    <div class="rs-opt-main">
-                      <div class="rs-opt-title">Oreochromis (Nile Tilapia)</div>
-                      <div class="rs-opt-sub">Biofloc Nursery · High Protein Feeding</div>
+                      <div class="rs-opt-title">Pacific Cold Storage (Unit A)</div>
+                      <div class="rs-opt-sub">Bay 1–4 · Temp -18°C · Capacity 94%</div>
                     </div>
                     <div class="rs-opt-right">
                       <span class="rs-opt-badge">Active</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
+                  <div class="rs-option" data-value="Harbor Logistics Hub (Unit B)">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Harbor Logistics Hub (Unit B)</div>
+                      <div class="rs-opt-sub">Bay 5–8 · Temp -20°C · Fast Transit</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Optimal</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Metro Distribution Center">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Metro Distribution Center</div>
+                      <div class="rs-opt-sub">Dock 12 · Ambient Control · High Volume</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Normal</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
+                  <div class="rs-option" data-value="Coastal Processing Facility">
+                    <div class="rs-opt-main">
+                      <div class="rs-opt-title">Coastal Processing Facility</div>
+                      <div class="rs-opt-sub">Inspection Bay · Staging Area · Ready</div>
+                    </div>
+                    <div class="rs-opt-right">
+                      <span class="rs-opt-badge">Ready</span>
+                      <i data-lucide="check" class="rs-check-icon"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="hint">Searchable combobox with keyboard accessibility, status tags, and secondary descriptive metadata.</div>
+            <div class="hint">Type to instantly filter storage facilities and view live unit status.</div>
           </div>
 
           <!-- 2. SINGLE-SELECT FLOATING COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Harvest Grade Target</span>
+              <span>Shipping &amp; Delivery Tier</span>
               <span class="req">*</span>
             </label>
             <div class="rich-select" id="richTargetSelect">
               <div class="rs-trigger" tabindex="0">
                 <span class="rs-current">
-                  <i data-lucide="package-check"></i>
-                  <span>Grade A Export (16/20 Count)</span>
+                  <i data-lucide="truck"></i>
+                  <span>Express Priority (Next Day)</span>
                 </span>
                 <i data-lucide="chevron-down" class="rs-chev"></i>
               </div>
               <div class="rs-menu">
                 <div class="rs-list">
-                  <div class="rs-option selected" data-value="Grade A Export (16/20 Count)">
+                  <div class="rs-option selected" data-value="Express Priority (Next Day)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Grade A Export (16/20 Count)</div>
-                      <div class="rs-opt-sub">IQF Blast Frozen · Prime International Grade</div>
+                      <div class="rs-opt-title">Express Priority (Next Day)</div>
+                      <div class="rs-opt-sub">Guaranteed delivery · Temperature controlled</div>
                     </div>
                     <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Export Target</span>
+                      <span class="rs-opt-badge">Recommended</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Grade B Block Frozen (26/30 Count)">
+                  <div class="rs-option" data-value="Standard Ground Freight">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Grade B Block Frozen (26/30 Count)</div>
-                      <div class="rs-opt-sub">Commercial 2kg Block · Local Market Standard</div>
+                      <div class="rs-opt-title">Standard Ground Freight</div>
+                      <div class="rs-opt-sub">2–3 business days · Palletized cargo</div>
                     </div>
                     <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Commercial</span>
+                      <span class="rs-opt-badge">Standard</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="PUD Seconds (Processing Grade)">
+                  <div class="rs-option" data-value="Economy Bulk Transport">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">PUD Seconds (Processing Grade)</div>
-                      <div class="rs-opt-sub">Peeled &amp; Undeveined · Domestic Value-Add</div>
+                      <div class="rs-opt-title">Economy Bulk Transport</div>
+                      <div class="rs-opt-sub">5–7 business days · Scheduled route</div>
                     </div>
                     <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Secondary</span>
+                      <span class="rs-opt-badge">Economy</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="hint">Custom floating menu with leading icon, status tag, and selection checkmark; bypasses unstyled OS menus.</div>
+            <div class="hint">Clean floating menu with leading icon, status tag, and selection checkmark.</div>
           </div>
 
           <!-- 3. MULTI-SELECT TAG COMBOBOX -->
           <div class="field-block">
             <label class="label">
-              <span>Monitored Pond Clusters</span>
+              <span>Monitored Zones &amp; Facilities</span>
               <span class="hint">Multi-Select</span>
             </label>
-            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select ponds to monitor...">
+            <div class="rich-select multi-select" id="richMultiPondSelect" data-placeholder="Select facilities to monitor...">
               <div class="rs-trigger" tabindex="0">
                 <div class="rs-tags-container">
                   <span class="rs-pill-tag">
-                    <span>Pond 101</span>
-                    <button type="button" class="rs-tag-remove" data-value="Pond 101" aria-label="Remove Pond 101">×</button>
+                    <span>Pacific Storage</span>
+                    <button type="button" class="rs-tag-remove" data-value="Pacific Storage" aria-label="Remove Pacific Storage">×</button>
                   </span>
                   <span class="rs-pill-tag">
-                    <span>Pond 102</span>
-                    <button type="button" class="rs-tag-remove" data-value="Pond 102" aria-label="Remove Pond 102">×</button>
+                    <span>Harbor Logistics</span>
+                    <button type="button" class="rs-tag-remove" data-value="Harbor Logistics" aria-label="Remove Harbor Logistics">×</button>
                   </span>
                 </div>
                 <div style="display:flex;align-items:center;gap:6px">
@@ -1430,41 +1430,41 @@
               <div class="rs-menu">
                 <div class="rs-search-wrap">
                   <i data-lucide="search"></i>
-                  <input type="text" class="rs-search-input" placeholder="Search ponds..." />
+                  <input type="text" class="rs-search-input" placeholder="Search facilities..." />
                 </div>
                 <div class="rs-list">
-                  <div class="rs-empty-msg">No matching ponds found</div>
-                  <div class="rs-option selected" data-value="Pond 101">
+                  <div class="rs-empty-msg">No matching facilities found</div>
+                  <div class="rs-option selected" data-value="Pacific Storage">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 101 · Cluster Alpha</div>
-                      <div class="rs-opt-sub">L. Vannamei · DO 6.8 mg/L</div>
+                      <div class="rs-opt-title">Pacific Storage · Zone Alpha</div>
+                      <div class="rs-opt-sub">Sensor network online · Temp -18°C</div>
                     </div>
                     <div class="rs-opt-right">
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option selected" data-value="Pond 102">
+                  <div class="rs-option selected" data-value="Harbor Logistics">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 102 · Cluster Alpha</div>
-                      <div class="rs-opt-sub">L. Vannamei · DO 6.4 mg/L</div>
+                      <div class="rs-opt-title">Harbor Logistics · Zone Beta</div>
+                      <div class="rs-opt-sub">Active monitoring · Temp -20°C</div>
                     </div>
                     <div class="rs-opt-right">
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Pond 103">
+                  <div class="rs-option" data-value="Metro Distribution">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 103 · Cluster Beta</div>
-                      <div class="rs-opt-sub">L. Vannamei · Attention Required</div>
+                      <div class="rs-opt-title">Metro Distribution · Zone Gamma</div>
+                      <div class="rs-opt-sub">Scheduled review · Ambient control</div>
                     </div>
                     <div class="rs-opt-right">
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Pond 104">
+                  <div class="rs-option" data-value="Coastal Facility">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Pond 104 · Cluster Delta</div>
-                      <div class="rs-opt-sub">P. Monodon · Jumbo Quarantine</div>
+                      <div class="rs-opt-title">Coastal Facility · Zone Delta</div>
+                      <div class="rs-opt-sub">Automated sync · Ready for dispatch</div>
                     </div>
                     <div class="rs-opt-right">
                       <i data-lucide="check" class="rs-check-icon"></i>
@@ -1473,50 +1473,50 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Multi-select container rendering selected options as dismissible tokens with real-time search filtering.</div>
+            <div class="hint">Selected facilities display as clean tags with real-time search filtering.</div>
           </div>
 
           <!-- 4. CATEGORIZED TELEMETRY PARAMETER SELECT -->
           <div class="field-block">
             <label class="label">
-              <span>Telemetry Metric Focus</span>
+              <span>Metric Focus &amp; Alerts</span>
               <span class="hint">Categorized</span>
             </label>
             <div class="rich-select" id="richMetricSelect">
               <div class="rs-trigger" tabindex="0">
                 <span class="rs-current">
                   <i data-lucide="activity"></i>
-                  <span>Dissolved Oxygen (DO mg/L)</span>
+                  <span>Storage Temperature (°C)</span>
                 </span>
                 <i data-lucide="chevron-down" class="rs-chev"></i>
               </div>
               <div class="rs-menu">
                 <div class="rs-list">
-                  <div class="rs-group-label">Water Quality Parameters</div>
-                  <div class="rs-option selected" data-value="Dissolved Oxygen (DO mg/L)">
+                  <div class="rs-group-label">Storage &amp; Environment</div>
+                  <div class="rs-option selected" data-value="Storage Temperature (°C)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Dissolved Oxygen (DO)</div>
-                      <div class="rs-opt-sub">Real-time galvanic probe (mg/L)</div>
+                      <div class="rs-opt-title">Storage Temperature</div>
+                      <div class="rs-opt-sub">Continuous digital probe tracking (°C)</div>
                     </div>
                     <div class="rs-opt-right">
                       <span class="rs-opt-badge">Primary</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Water Temperature (°C)">
+                  <div class="rs-option" data-value="Relative Humidity (%)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Water Temperature</div>
-                      <div class="rs-opt-sub">Thermocouple array (°C)</div>
+                      <div class="rs-opt-title">Relative Humidity</div>
+                      <div class="rs-opt-sub">Atmospheric probe tracking (%)</div>
                     </div>
                     <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Continuous</span>
+                      <span class="rs-opt-badge">Live</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Salinity Level (PPT)">
+                  <div class="rs-option" data-value="Power Consumption (kW)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Salinity Concentration</div>
-                      <div class="rs-opt-sub">Refractometer telemetry (PPT)</div>
+                      <div class="rs-opt-title">Power Consumption</div>
+                      <div class="rs-opt-sub">Real-time facility energy meter (kW)</div>
                     </div>
                     <div class="rs-opt-right">
                       <span class="rs-opt-badge">Hourly</span>
@@ -1524,21 +1524,21 @@
                     </div>
                   </div>
 
-                  <div class="rs-group-label">Aeration &amp; Power Dynamics</div>
-                  <div class="rs-option" data-value="Paddlewheel Aeration (RPM)">
+                  <div class="rs-group-label">Logistics &amp; Handling</div>
+                  <div class="rs-option" data-value="Transfer Speed (Units/hr)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Paddlewheel Speed</div>
-                      <div class="rs-opt-sub">VFD motor RPM feedback</div>
+                      <div class="rs-opt-title">Transfer Speed</div>
+                      <div class="rs-opt-sub">Automated sorter throughput (Units/hr)</div>
                     </div>
                     <div class="rs-opt-right">
-                      <span class="rs-opt-badge">Telemetry</span>
+                      <span class="rs-opt-badge">Live</span>
                       <i data-lucide="check" class="rs-check-icon"></i>
                     </div>
                   </div>
-                  <div class="rs-option" data-value="Feed Hopper Dispense (KG)">
+                  <div class="rs-option" data-value="Daily Dispatch Volume (KG)">
                     <div class="rs-opt-main">
-                      <div class="rs-opt-title">Daily Feed Rate</div>
-                      <div class="rs-opt-sub">Load cell dispenser total (kg)</div>
+                      <div class="rs-opt-title">Daily Dispatch Volume</div>
+                      <div class="rs-opt-sub">Digital weighbridge total (kg)</div>
                     </div>
                     <div class="rs-opt-right">
                       <span class="rs-opt-badge">Batch</span>
@@ -1548,7 +1548,7 @@
                 </div>
               </div>
             </div>
-            <div class="hint">Categorized menu featuring distinct group headers, metric descriptors, and clear status indicators.</div>
+            <div class="hint">Organized into clear categories with group headers and status indicators.</div>
           </div>
 
         </div>
@@ -1558,13 +1558,13 @@
     <!-- Search -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Global Search Input</div>
-        <p class="spec-desc">Consolidated search molecule with leading search glyph, responsive clear trigger, and platform keyboard shortcut badge (<code>/</code>).</p>
+        <div class="spec-title">Global Search</div>
+        <p class="spec-desc">Instant search input with leading icon, clear button, and shortcut badge (<code>/</code>).</p>
       </div>
       <div class="spec-content">
         <div class="searchbar">
           <i data-lucide="search"></i>
-          <input id="sInput" placeholder="Search ponds, lots, farmers, invoices..." />
+          <input id="sInput" placeholder="Search facilities, shipments, orders, or reports..." />
           <span class="search-kbd">/</span>
           <button id="sClear"><i data-lucide="x"></i></button>
         </div>
@@ -1575,19 +1575,19 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Navigation Tabs (Pill &amp; Underline)</div>
-        <p class="spec-desc">Segmented pill navigation for localized data filtering, paired with an underline tab bar for major view and page transitions.</p>
+        <p class="spec-desc">Segmented pill navigation for localized data filtering, paired with underline tabs for view transitions.</p>
       </div>
       <div class="spec-content">
         <div class="tabs" data-tabs>
           <button class="active">Overview</button>
-          <button>Pond Matrix</button>
-          <button>Telemetry</button>
-          <button>Invoices</button>
+          <button>Shipments</button>
+          <button>Analytics</button>
+          <button>Settings</button>
         </div>
         <div class="tabs-line" data-tabs>
-          <button class="active">Pond Telemetry</button>
-          <button>Biomass Estimation</button>
-          <button>Audit Log</button>
+          <button class="active">Activity Log</button>
+          <button>System Health</button>
+          <button>Audit History</button>
         </div>
       </div>
     </div>
@@ -1595,15 +1595,15 @@
     <!-- Wayfinding & Pager -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Breadcrumbs &amp; Data Pagination</div>
-        <p class="spec-desc">Hierarchical breadcrumb wayfinding paired with a data pager supporting active page indicators and directional controls.</p>
+        <div class="spec-title">Breadcrumbs &amp; Pagination</div>
+        <p class="spec-desc">Hierarchical breadcrumbs paired with a tactile pagination bar.</p>
       </div>
       <div class="spec-content">
         <nav class="crumbs">
-          Aquaculture <i data-lucide="chevron-right"></i> Farm Operations <i data-lucide="chevron-right"></i> <b>Pond Telemetry</b>
+          Operations <i data-lucide="chevron-right"></i> Facilities <i data-lucide="chevron-right"></i> <b>Cold Storage Unit A</b>
         </nav>
         <div class="line-row" style="justify-content:space-between">
-          <span style="font-size:var(--t-sm);color:var(--muted)">Showing 1–20 of 148 lots</span>
+          <span style="font-size:var(--t-sm);color:var(--muted)">Showing 1–20 of 148 items</span>
           <div class="pager" id="specPager">
             <button class="p-prev"><i data-lucide="chevron-left"></i></button>
             <button class="active">1</button>
@@ -1618,23 +1618,23 @@
     <!-- Dropdowns & Toasts -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Contextual Action Menus &amp; Toast Notifications</div>
-        <p class="spec-desc">Floating action popover with keyboard shortcut accelerators and destructive action boundaries, paired with transient toast notifications.</p>
+        <div class="spec-title">Context Menus &amp; Notifications</div>
+        <p class="spec-desc">Floating action popover with keyboard shortcuts and transient feedback toasts.</p>
       </div>
       <div class="spec-content">
         <div class="line-row">
           <div class="dropdown" id="dd">
             <button class="btn btn-secondary" id="ddBtn"><i data-lucide="more-horizontal"></i>Actions Menu</button>
             <div class="menu">
-              <button><i data-lucide="pencil"></i>Edit Pond Record <kbd class="menu-kbd">⌘E</kbd></button>
-              <button><i data-lucide="download"></i>Export Sensor Data <kbd class="menu-kbd">⌘D</kbd></button>
-              <button><i data-lucide="copy"></i>Duplicate Batch <kbd class="menu-kbd">⌘C</kbd></button>
+              <button><i data-lucide="pencil"></i>Edit Details <kbd class="menu-kbd">⌘E</kbd></button>
+              <button><i data-lucide="download"></i>Export Report <kbd class="menu-kbd">⌘D</kbd></button>
+              <button><i data-lucide="copy"></i>Duplicate Entry <kbd class="menu-kbd">⌘C</kbd></button>
               <div class="menu-divider"></div>
-              <button class="menu-danger"><i data-lucide="trash-2"></i>Archive Batch <kbd class="menu-kbd">⌫</kbd></button>
+              <button class="menu-danger"><i data-lucide="trash-2"></i>Delete Record <kbd class="menu-kbd">⌫</kbd></button>
             </div>
           </div>
-          <button class="btn btn-primary btn-sm" id="toastTealBtn">Trigger Teal Toast</button>
-          <button class="btn btn-dark btn-sm" id="toastDarkBtn">Trigger Dark Toast</button>
+          <button class="btn btn-primary btn-sm" id="toastTealBtn">Success Toast</button>
+          <button class="btn btn-dark btn-sm" id="toastDarkBtn">Dark Toast</button>
         </div>
       </div>
     </div>
@@ -1642,8 +1642,8 @@
     <!-- Stepper -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Multi-Step Process Stepper</div>
-        <p class="spec-desc">Sequential milestone indicator tracking multi-stage workflows such as hatchery batch intake, biosecurity clearance, and cold chain export.</p>
+        <div class="spec-title">Step Progress Bar</div>
+        <p class="spec-desc">Milestone indicator tracking multi-step workflows like order setup or onboarding.</p>
       </div>
       <div class="spec-content">
         <div class="stepper" id="stepper"></div>
@@ -1657,8 +1657,8 @@
     <!-- Empty States with Reset Actions -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Empty States &amp; Zero-Data Fallbacks</div>
-        <p class="spec-desc">Contextual zero-data screens featuring descriptive iconography, concise explanations, and primary call-to-action buttons to guide recovery.</p>
+        <div class="spec-title">Empty States &amp; Fallbacks</div>
+        <p class="spec-desc">Helpful zero-data screens featuring descriptive icons, plain-English copy, and recovery actions.</p>
       </div>
       <div class="spec-content">
         <div class="empty-states-grid">
@@ -1666,30 +1666,30 @@
           <!-- Variant 1: No Search Results / Filters -->
           <div class="empty-card">
             <div class="e-ic"><i data-lucide="search-x"></i></div>
-            <h4>No ponds match criteria</h4>
-            <p>No active harvest batches found matching filter "Salinity &gt; 32 PPT". Try resetting filters.</p>
+            <h4>No results found</h4>
+            <p>We couldn't find anything matching your search. Try adjusting keywords or clearing active filters.</p>
             <div class="e-actions">
-              <button class="btn btn-secondary btn-sm"><i data-lucide="rotate-ccw"></i>Reset Filter</button>
+              <button class="btn btn-secondary btn-sm"><i data-lucide="rotate-ccw"></i>Reset Filters</button>
             </div>
           </div>
 
           <!-- Variant 2: Zero Records / Initial Intake -->
           <div class="empty-card">
-            <div class="e-ic"><i data-lucide="package-search"></i></div>
-            <h4>No pond arrivals today</h4>
-            <p>Weighbridge gate entries will automatically populate here once sync is completed.</p>
+            <div class="e-ic"><i data-lucide="folder-plus"></i></div>
+            <h4>No items yet</h4>
+            <p>Get started by creating your first record. It takes less than a minute to set up.</p>
             <div class="e-actions">
-              <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i>Create Manual Intake</button>
+              <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i>Create Entry</button>
             </div>
           </div>
 
           <!-- Variant 3: Sensor Disconnect / Warning -->
           <div class="empty-card warning">
             <div class="e-ic"><i data-lucide="wifi-off"></i></div>
-            <h4>Telemetry stream offline</h4>
-            <p>Paddlewheel IoT Gateway 04 lost wireless mesh sync 18 minutes ago. Verify power supply.</p>
+            <h4>Connection lost</h4>
+            <p>We couldn't reach the server. Saved data will sync automatically once connection is restored.</p>
             <div class="e-actions">
-              <button class="btn btn-dark btn-sm"><i data-lucide="refresh-cw"></i>Reconnect Gateway</button>
+              <button class="btn btn-dark btn-sm"><i data-lucide="refresh-cw"></i>Retry Connection</button>
             </div>
           </div>
 
@@ -1701,7 +1701,7 @@
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Filter Bar &amp; Compound Inputs</div>
-        <p class="spec-desc">Enterprise query toolbars with active filter chips, compound numerical inputs with attached physical units, and command palette triggers.</p>
+        <p class="spec-desc">Query toolbars with active filter chips, combined number and unit fields, and search shortcuts.</p>
       </div>
       <div class="spec-content">
         
@@ -1716,48 +1716,48 @@
             </div>
             <div class="filter-chips-list">
               <span class="filter-chip filter-chip-teal">
-                <span class="filter-chip-key">Broodstock:</span>
-                <span class="filter-chip-val">SPF Hawaii</span>
+                <span class="filter-chip-key">Category:</span>
+                <span class="filter-chip-val">Perishables</span>
                 <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
               </span>
               <span class="filter-chip">
-                <span class="filter-chip-key">Salinity:</span>
-                <span class="filter-chip-val">&gt; 22 PPT</span>
+                <span class="filter-chip-key">Temperature:</span>
+                <span class="filter-chip-val">&lt; -15°C</span>
                 <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
               </span>
               <span class="filter-chip">
-                <span class="filter-chip-key">Stage:</span>
-                <span class="filter-chip-val">Harvest Ready (&gt;90d)</span>
+                <span class="filter-chip-key">Status:</span>
+                <span class="filter-chip-val">In Transit</span>
                 <button class="filter-chip-remove" title="Remove filter"><i data-lucide="x"></i></button>
               </span>
               <button class="filter-add-btn"><i data-lucide="plus"></i> Add Filter</button>
             </div>
             <div class="filter-presets">
-              <button class="filter-preset-btn active">All Ponds</button>
-              <button class="filter-preset-btn">Nursery</button>
-              <button class="filter-preset-btn">Grow-out</button>
+              <button class="filter-preset-btn active">All Items</button>
+              <button class="filter-preset-btn">In Transit</button>
+              <button class="filter-preset-btn">Delivered</button>
             </div>
             <button class="filter-clear-all">Reset All</button>
           </div>
         </div>
 
-        <!-- Operational Query Toolbar Molecule (Plant Select + From/To Date Pickers - Images 2 & 3) -->
+        <!-- Operational Query Toolbar Molecule (Plant Select + From/To Date Pickers) -->
         <div>
           <div class="category-label">Operational Query Toolbar (Facility Select &amp; Date Range Filter)</div>
           <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;padding:16px;background:var(--soft);border-radius:var(--r-12);border:1px solid var(--line)">
             <div style="min-width:200px;flex:1">
-              <label class="label" style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)">Plant</label>
+              <label class="label" style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)">Facility</label>
               <div class="custom-select" id="molPlantSelect">
                 <div class="custom-select-trigger" tabindex="0">
-                  <span class="custom-select-current"><span>All Plants (Select)</span></span>
+                  <span class="custom-select-current"><span>All Facilities (Select)</span></span>
                   <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </div>
                 <div class="custom-select-menu">
                   <div class="custom-select-list">
-                    <div class="custom-select-option selected"><span>All Plants (Select)</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                    <div class="custom-select-option"><span>DFL UNIT-5 (JPT)</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                    <div class="custom-select-option"><span>DFL UNIT-3 (PSP)</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-                    <div class="custom-select-option"><span>DFL UNIT-6 (JPT-II)</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                    <div class="custom-select-option selected"><span>All Facilities (Select)</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                    <div class="custom-select-option"><span>Pacific Bay Hub</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                    <div class="custom-select-option"><span>Metro Distribution Center</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                    <div class="custom-select-option"><span>Coastal Terminal</span><svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
                   </div>
                 </div>
               </div>
@@ -1779,7 +1779,7 @@
               </div>
             </div>
 
-            <button class="btn btn-primary" style="height:42px" onclick="window.AquaToast?.show('Filter query applied for selected date range', 'teal')"><i data-lucide="filter"></i>Apply Query</button>
+            <button class="btn btn-primary" style="height:42px" onclick="window.AquaToast?.show('Filter query applied for selected date range', 'teal')"><i data-lucide="filter"></i>Apply Filters</button>
           </div>
         </div>
 
@@ -1790,13 +1790,13 @@
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="input-compound">
                 <span class="input-compound-prefix"><i data-lucide="scale" style="width:14px;height:14px"></i></span>
-                <input class="input" value="18,450.00" aria-label="Biomass Net" />
+                <input class="input" value="18,450.00" aria-label="Net Weight" />
                 <span class="input-compound-suffix tag-unit">KG NET</span>
               </div>
               <div class="input-compound">
                 <span class="input-compound-prefix">$ USD</span>
-                <input class="input" value="7.40" aria-label="Price per kg" />
-                <span class="input-compound-suffix tag-unit">/ KG EXPORT</span>
+                <input class="input" value="7.40" aria-label="Unit Price" />
+                <span class="input-compound-suffix tag-unit">/ UNIT</span>
               </div>
             </div>
           </div>
@@ -1806,11 +1806,11 @@
             <div style="display:flex;flex-direction:column;gap:12px">
               <!-- Dual Range DO Threshold -->
               <div class="input-compound dual-range">
-                <span class="input-compound-prefix">DO Target</span>
-                <input class="input" value="5.2" style="width:70px" aria-label="Min DO" />
+                <span class="input-compound-prefix">Target Range</span>
+                <input class="input" value="18.0" style="width:70px" aria-label="Min Target" />
                 <span class="dual-range-sep">to</span>
-                <input class="input" value="8.0" style="width:70px" aria-label="Max DO" />
-                <span class="input-compound-suffix tag-unit">MG/L</span>
+                <input class="input" value="24.0" style="width:70px" aria-label="Max Target" />
+                <span class="input-compound-suffix tag-unit">°C</span>
               </div>
               <!-- Attached Action Button -->
               <div class="input-compound">
@@ -1829,20 +1829,20 @@
             <div style="display:flex;flex-direction:column;gap:12px">
               <div class="search-trigger" id="demoCmdK">
                 <i data-lucide="search"></i>
-                <span>Jump to pond, probe, or ledger...</span>
+                <span>Jump to facility, order, or document...</span>
                 <kbd>⌘K</kbd>
               </div>
-              <div class="hint">Global search launcher with keyboard shortcut badge (⌘K) for rapid navigation across ponds, sensors, and records.</div>
+              <div class="hint">Press ⌘K anywhere to quickly search and jump to pages or items.</div>
             </div>
           </div>
 
-          <!-- Lab QC Document Dropzone Molecule -->
+          <!-- Document Dropzone Molecule -->
           <div>
             <div class="category-label">File Upload Dropzone (Drag &amp; Drop)</div>
             <div class="dropzone" id="demoDropzone">
               <div class="dropzone-icon"><i data-lucide="file-up"></i></div>
-              <div class="dropzone-title">Upload Micro-Screening PCR or Water Quality Data</div>
-              <div class="dropzone-desc">Drag and drop sensor CSV files, pathology lab reports, or compliance certificates here, or click to browse.</div>
+              <div class="dropzone-title">Upload Documents or Data Sheets</div>
+              <div class="dropzone-desc">Drag and drop CSV, PDF, or spreadsheet files here, or click to browse.</div>
               <div class="dropzone-formats">
                 <span class="badge badge-line">.CSV</span>
                 <span class="badge badge-line">.PDF</span>
@@ -1857,17 +1857,17 @@
           <div class="category-label">Key-Value Property Rows with Copy Action</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="prop-row">
-              <span class="prop-label">IoT Gateway Mesh MAC</span>
+              <span class="prop-label">Device Hardware ID</span>
               <div class="prop-val-wrap">
                 <span class="prop-val">00:1A:C2:7B:44:91</span>
                 <button class="prop-copy" title="Copy MAC address"><i data-lucide="copy"></i></button>
               </div>
             </div>
             <div class="prop-row">
-              <span class="prop-label">Prophylactic PCR Batch ID</span>
+              <span class="prop-label">Tracking Reference</span>
               <div class="prop-val-wrap">
-                <span class="prop-val">PCR-2026-OCT-8842</span>
-                <button class="prop-copy" title="Copy Batch ID"><i data-lucide="copy"></i></button>
+                <span class="prop-val">TRK-2026-OCT-8842</span>
+                <button class="prop-copy" title="Copy Reference ID"><i data-lucide="copy"></i></button>
               </div>
             </div>
           </div>
@@ -1876,53 +1876,53 @@
       </div>
     </div>
 
-    <!-- Dedicated Interactive Tooltips System Molecule Showcase (Image 1 & 2 Standard) -->
+    <!-- Dedicated Interactive Tooltips System Molecule Showcase -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Contextual Tooltips &amp; Micro-Guidance</div>
-        <p class="spec-desc">Micro-interaction popovers delivering brief helper text or supplementary data without obscuring primary workflows. Supports Light and Dark Teal themes, 4 directional pointers, inline link icons, dismiss triggers, and rich telemetry cards.</p>
+        <div class="spec-title">Tooltips &amp; Micro-Guidance</div>
+        <p class="spec-desc">Subtle popovers that provide extra context or helpful hints on hover. Supports light and brand themes, directional arrows, and status cards.</p>
       </div>
       <div class="spec-content">
         
-        <!-- Tooltip Specification Matrix (Exact Image 1 Replica) -->
+        <!-- Tooltip Specification Matrix -->
         <div>
           <div class="category-label">Tooltip Visual Specimen Matrix (Light &amp; Dark Variants)</div>
           <div class="tooltip-matrix-canvas">
             
             <!-- Row 1, Col 1: Light Tooltip / Bottom Arrow -->
             <div class="tooltip-specimen theme-light arrow-bottom">
-              <span>Example of tooltip</span>
+              <span>Helpful tip</span>
             </div>
 
             <!-- Row 1, Col 2: Brand/Dark Teal Tooltip / Top Arrow -->
             <div class="tooltip-specimen theme-brand arrow-top">
-              <span>Example of tooltip</span>
+              <span>Helpful tip</span>
             </div>
 
             <!-- Row 1, Col 3: Light Tooltip / Left Arrow / Link Icon + Close Button -->
             <div class="tooltip-specimen theme-light arrow-left">
               <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Example of tooltip</span>
+              <span>Documentation</span>
               <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
             </div>
 
             <!-- Row 2, Col 1: Brand/Dark Teal Tooltip / Bottom Arrow / Link Icon + Close Button -->
             <div class="tooltip-specimen theme-brand arrow-bottom">
               <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Example of tooltip</span>
+              <span>Documentation</span>
               <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
             </div>
 
             <!-- Row 2, Col 2: Light Tooltip / Top Arrow / Close Button -->
             <div class="tooltip-specimen theme-light arrow-top">
-              <span>Example of tooltip</span>
+              <span>Helpful tip</span>
               <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
             </div>
 
             <!-- Row 2, Col 3: Brand/Dark Teal Tooltip / Left Arrow / Link Icon -->
             <div class="tooltip-specimen theme-brand arrow-left">
               <i data-lucide="link" class="tooltip-icon"></i>
-              <span>Example of tooltip</span>
+              <span>Documentation</span>
             </div>
 
           </div>
@@ -1935,61 +1935,61 @@
             <!-- Top Tooltip -->
             <div class="tooltip-wrap tooltip-top">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-up"></i> Tooltip Top</button>
-              <div class="tooltip-box">Top aligned helper <kbd>⌘T</kbd></div>
+              <div class="tooltip-box">Top aligned hint <kbd>⌘T</kbd></div>
             </div>
 
             <!-- Bottom Tooltip -->
             <div class="tooltip-wrap tooltip-bottom">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-down"></i> Tooltip Bottom</button>
-              <div class="tooltip-box">Bottom aligned helper <kbd>⌘B</kbd></div>
+              <div class="tooltip-box">Bottom aligned hint <kbd>⌘B</kbd></div>
             </div>
 
             <!-- Left Tooltip -->
             <div class="tooltip-wrap tooltip-left">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Tooltip Left</button>
-              <div class="tooltip-box">Left aligned helper</div>
+              <div class="tooltip-box">Left aligned hint</div>
             </div>
 
             <!-- Right Tooltip -->
             <div class="tooltip-wrap tooltip-right">
               <button class="btn btn-secondary btn-sm"><i data-lucide="arrow-right"></i> Tooltip Right</button>
-              <div class="tooltip-box">Right aligned helper</div>
+              <div class="tooltip-box">Right aligned hint</div>
             </div>
 
           </div>
         </div>
 
         <div style="margin-top:16px">
-          <div class="category-label">Rich Telemetry Tooltips with Metric Badges</div>
+          <div class="category-label">Status Badges with Rich Guidance Cards</div>
           <div class="line-row" style="gap:16px;flex-wrap:wrap">
             
             <div class="tooltip-wrap tooltip-top">
               <span class="badge badge-teal" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="waves" style="width:14px;height:14px"></i> DO: 6.84 mg/L
+                <i data-lucide="thermometer" style="width:14px;height:14px"></i> Temp: -18.4°C
               </span>
               <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="activity" style="width:13px;height:13px;color:#2DD4BF"></i> Dissolved Oxygen</div>
-                <div class="tooltip-rich-body">Optimal range: 5.0–8.5 mg/L. Probe auto-calibrated 12 min ago via mesh gateway.</div>
+                <div class="tooltip-rich-title"><i data-lucide="thermometer" style="width:13px;height:13px;color:#2DD4BF"></i> Storage Temperature</div>
+                <div class="tooltip-rich-body">Within recommended range (-15°C to -22°C). Sensor auto-calibrated 12 min ago.</div>
               </div>
             </div>
 
             <div class="tooltip-wrap tooltip-top">
               <span class="badge badge-emerald" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="droplet" style="width:14px;height:14px"></i> pH: 7.82 Opt
+                <i data-lucide="check-circle-2" style="width:14px;height:14px"></i> System: Healthy
               </span>
               <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="check-circle-2" style="width:13px;height:13px;color:#34D399"></i> Water Acidity (pH)</div>
-                <div class="tooltip-rich-body">Target: 7.5–8.2. Microalgae bloom photosynthetic buffer healthy.</div>
+                <div class="tooltip-rich-title"><i data-lucide="check-circle-2" style="width:13px;height:13px;color:#34D399"></i> Operational Status</div>
+                <div class="tooltip-rich-body">All 14 connected monitoring nodes are transmitting normally.</div>
               </div>
             </div>
 
             <div class="tooltip-wrap tooltip-top">
               <span class="badge badge-warn" style="cursor:help;padding:6px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px">
-                <i data-lucide="thermometer" style="width:14px;height:14px"></i> Temp: 31.2°C
+                <i data-lucide="battery-warning" style="width:14px;height:14px"></i> Battery: 18%
               </span>
               <div class="tooltip-box tooltip-rich">
-                <div class="tooltip-rich-title"><i data-lucide="alert-triangle" style="width:13px;height:13px;color:#FBBF24"></i> High Water Temperature</div>
-                <div class="tooltip-rich-body">Approaching upper stress threshold (&gt;32°C). Aerator cooling cycle recommended.</div>
+                <div class="tooltip-rich-title"><i data-lucide="alert-triangle" style="width:13px;height:13px;color:#FBBF24"></i> Low Battery Warning</div>
+                <div class="tooltip-rich-body">Sensor battery below 20%. Replacement recommended within 48 hours.</div>
               </div>
             </div>
 
