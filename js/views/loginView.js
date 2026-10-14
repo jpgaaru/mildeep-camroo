@@ -160,7 +160,7 @@ export const LoginView = {
           if (existing) existing.remove();
 
           Toast.show(`Welcome to Devi Fisheries ERP, ${ERP_DATA.currentUser.name}!`, 'success', 'Signed In');
-          window.location.hash = '#/purchase/dashboard/rm-dashboard';
+          window.location.hash = '#/home/welcome/command-center';
           if (window.App && typeof window.App.route === 'function') {
             window.App.route();
           }

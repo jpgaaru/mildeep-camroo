@@ -3,6 +3,24 @@
 import { NAV_HIERARCHY } from '../components/sidebar.js';
 
 export const SECTION_METADATA_REGISTRY = {
+  home: {
+    welcome: {
+      title: 'Welcome & Command Center',
+      subtitle: 'Executive cockpit, active plant status, cross-module shortcuts, and shift telemetry'
+    },
+    'access-roles': {
+      title: 'My Access & Permissible Roles',
+      subtitle: 'Active RBAC permissions matrix, session credentials, and module privilege breakdown'
+    },
+    'role-dashboards': {
+      title: 'Role-Based Executive Dashboards',
+      subtitle: 'Tailored persona lenses for C-Suite, Plant Operations, Procurement, and Quality Control'
+    },
+    'admin-controls': {
+      title: 'Admin Controls & Role Allocation',
+      subtitle: 'Allocate permissible roles, manage department permissions, and configure shift delegations'
+    }
+  },
   purchase: {
     dashboard: {
       title: 'Purchase Dashboard',
@@ -195,7 +213,7 @@ export const Router = {
   resolve(rawHash = '') {
     const clean = rawHash.replace(/^#\/?/, '').replace(/^\/+/, '');
     const parts = clean.split('/');
-    const moduleName = parts[0] || 'purchase';
+    const moduleName = parts[0] || 'home';
     let submenuName = parts[1] || '';
     let tabName = parts[2] || '';
 

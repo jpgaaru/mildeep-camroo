@@ -15,6 +15,7 @@ import { AquaFramework, Router, ERPStore, Molecules, Organisms } from './framewo
 
 // Views
 import { LoginView } from './views/loginView.js';
+import { HomeView } from './views/homeView.js';
 import { PurchaseView } from './views/purchaseView.js';
 import { PreprocessingView } from './views/preprocessingView.js';
 import { QCView } from './views/qcView.js';
@@ -140,7 +141,7 @@ export const App = {
 
     // If empty hash, default to main dashboard
     if (rawHash === '' || rawHash === '#' || rawHash === '#/') {
-      window.location.hash = '#/purchase/dashboard/rm-dashboard';
+      window.location.hash = '#/home/welcome/command-center';
       return;
     }
 
@@ -180,6 +181,9 @@ export const App = {
     const mainContainer = 'main-content-container';
 
     switch (modObj.id) {
+      case 'home':
+        HomeView.render(mainContainer, tabName || 'command-center', resolvedHash);
+        break;
       case 'purchase':
         PurchaseView.render(mainContainer, tabName || 'rm-dashboard', resolvedHash);
         break;
