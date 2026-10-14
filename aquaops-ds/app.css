@@ -216,6 +216,8 @@ svg { display: block; }
 .spec-title { font-size: var(--t-md); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
 .spec-desc { font-size: var(--t-sm); color: var(--muted); margin-top: var(--s1); line-height: 1.55; }
 .spec-content { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }
+.spec-content > .tabs,
+.spec-content > .segmented-control { align-self: flex-start; }
 .category-label { font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--s3); }
 .line-row { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
 .stack-col { display: flex; flex-direction: column; gap: var(--s3); }

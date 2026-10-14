@@ -490,30 +490,30 @@
 
           <!-- 1. Standard Input States -->
           <div>
-            <div class="category-label">Text Inputs &amp; Interactive States</div>
+            <div class="category-label">Text Inputs (Core States)</div>
             <div class="form-responsive-grid">
               <div class="field-block">
                 <label class="label">
-                  <span>Harvest Lot Identifier</span>
-                  <span class="hint">Default</span>
+                  <span>Input / Default</span>
+                  <span class="hint">Standard 42px</span>
                 </label>
                 <input type="text" class="input" placeholder="e.g. LOT-2026-VAN-08" />
-                <div class="hint">Standard 42px form input with subtle 1px border.</div>
+                <div class="hint">Base form input with 8px radius and subtle 1px border.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Active Focused Input</span>
-                  <span class="hint" style="color:var(--teal-800);font-weight:600">3px Aura</span>
+                  <span>Input / Focused</span>
+                  <span class="hint" style="color:var(--teal-800);font-weight:600">Active Ring</span>
                 </label>
                 <input type="text" class="input" value="L. Vannamei (Selected)" style="border-color:#004d57;box-shadow:0 0 0 3px rgba(0,77,87,0.14)" />
-                <div class="hint">Focused state with Dark Teal #004D57 aura glow.</div>
+                <div class="hint">Active focus state with Dark Teal #004D57 aura glow.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Genetic Lineage Code</span>
-                  <span class="hint">Disabled</span>
+                  <span>Input / Disabled</span>
+                  <span class="hint">Locked</span>
                 </label>
                 <input type="text" class="input" value="SPF-KONA-GEN3-LOCKED" disabled />
                 <div class="hint">Locked field with muted background and not-allowed cursor.</div>
@@ -521,54 +521,57 @@
 
               <div class="field-block">
                 <label class="label">
-                  <span>Intake Ledger Hash</span>
-                  <span class="hint">Read-Only</span>
+                  <span>Input / Read-Only</span>
+                  <span class="hint">Immutable</span>
                 </label>
                 <input type="text" class="input" value="0x8f2c...4e19" readonly />
-                <div class="hint">Read-only immutable transaction hash.</div>
+                <div class="hint">Read-only immutable transaction hash value.</div>
               </div>
             </div>
           </div>
 
           <!-- 2. Sizing Scale -->
           <div>
-            <div class="category-label">Input Sizing Hierarchy (Enterprise Heights)</div>
+            <div class="category-label">Text Inputs (Sizing Hierarchy)</div>
             <div class="form-responsive-grid">
               <div class="field-block">
                 <label class="label">
-                  <span>Small / Compact (34px)</span>
-                  <span class="hint">6px Radius</span>
+                  <span>Input / Small (sm)</span>
+                  <span class="hint">34px · 6px Radius</span>
                 </label>
                 <input type="text" class="input input-sm" placeholder="Search tables or filter rows..." />
-                <div class="hint">Designed for dense data grids, toolbars, and filter rails.</div>
+                <div class="hint">Calibrated for dense data grids, toolbars, and filter rails.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Default / Standard (42px)</span>
-                  <span class="hint">8px Radius</span>
+                  <span>Input / Medium (md)</span>
+                  <span class="hint">42px · 8px Radius (Default)</span>
                 </label>
                 <input type="text" class="input input-md" placeholder="Standard enterprise form field..." />
-                <div class="hint">Core standard field height across all forms and drawers.</div>
+                <div class="hint">Standard field height across forms, drawers, and modal panels.</div>
               </div>
 
               <div class="field-block">
                 <label class="label">
-                  <span>Large / Prominent (48px)</span>
-                  <span class="hint">10px Radius</span>
+                  <span>Input / Large (lg)</span>
+                  <span class="hint">48px · 10px Radius</span>
                 </label>
                 <input type="text" class="input input-lg" placeholder="Modal dialog or hero intake..." />
-                <div class="hint">Used in authentication, wizard headers, and hero modals.</div>
+                <div class="hint">Prominent field for authentication and hero search experiences.</div>
               </div>
             </div>
           </div>
 
           <!-- 3. Leading & Trailing Affixes -->
           <div>
-            <div class="category-label">Inputs with Affixes, Icons &amp; Compound Addons</div>
+            <div class="category-label">Text Inputs (Affixes &amp; Addons)</div>
             <div class="form-responsive-grid">
               <div class="field-block">
-                <label class="label">Leading Icon Search</label>
+                <label class="label">
+                  <span>Input / Leading Icon</span>
+                  <span class="hint">Search Filter</span>
+                </label>
                 <div class="input-wrap">
                   <i data-lucide="search" class="leading"></i>
                   <input type="text" class="input" placeholder="Search ponds, batches, probes..." />
@@ -577,7 +580,10 @@
               </div>
 
               <div class="field-block">
-                <label class="label">Trailing Tabular Unit</label>
+                <label class="label">
+                  <span>Input / Trailing Unit</span>
+                  <span class="hint">Metric Tag</span>
+                </label>
                 <div class="input-wrap">
                   <i data-lucide="scale" class="leading"></i>
                   <input type="text" class="input" value="12,450.80" />
@@ -587,17 +593,23 @@
               </div>
 
               <div class="field-block">
-                <label class="label">Trailing Interactive Action</label>
+                <label class="label">
+                  <span>Input / Trailing Action</span>
+                  <span class="hint">Password Toggle</span>
+                </label>
                 <div class="input-wrap">
                   <i data-lucide="key" class="leading"></i>
                   <input type="password" class="input" value="TelemetrySecretKey2026" />
                   <button type="button" class="trailing-action" title="Toggle password" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password'"><i data-lucide="eye"></i></button>
                 </div>
-                <div class="hint">Trailing click action to toggle mask visibility.</div>
+                <div class="hint">Interactive trailing icon button to toggle value visibility.</div>
               </div>
 
               <div class="field-block">
-                <label class="label">Compound Prefix &amp; Suffix Group</label>
+                <label class="label">
+                  <span>Input Group / Prefix &amp; Suffix</span>
+                  <span class="hint">Continuous Addon</span>
+                </label>
                 <div class="input-group">
                   <span class="input-addon">https://</span>
                   <input type="text" class="input" value="coldstore-cs2" />
@@ -610,7 +622,7 @@
 
           <!-- 4. Global SaaS Dropdowns & Selects (Image 2) -->
           <div>
-            <div class="category-label">Global SaaS Custom Dropdowns &amp; Selects (Image 2 Standard)</div>
+            <div class="category-label">Select Fields (Dropdowns)</div>
             <div class="form-responsive-grid">
               
               <!-- Custom Select: Plant Selection (Exact Image 2) -->
@@ -740,29 +752,29 @@
             </div>
           </div>
 
-          <!-- 4b. Global SaaS Calendar Date Pickers (Image 3) -->
+          <!-- 5. Date & Calendar Fields (Image 3 Standard) -->
           <div>
-            <div class="category-label">Global SaaS Calendar Date Pickers (Image 3 Standard)</div>
+            <div class="category-label">Date &amp; Calendar Fields</div>
             <div class="form-responsive-grid">
               
               <!-- From Date (Interactive Datepicker Trigger) -->
               <div class="field-block">
                 <label class="label">
-                  <span>From Date</span>
-                  <span class="hint">Interactive Popover</span>
+                  <span>Date / Single Date</span>
+                  <span class="hint">Standard 42px</span>
                 </label>
                 <div class="date-input-wrap">
                   <input type="text" class="input date-input" id="demoFromDate" value="14/10/2026" placeholder="dd/mm/yyyy" readonly />
                   <span class="date-icon"><i data-lucide="calendar"></i></span>
                 </div>
-                <div class="hint">Click input or calendar icon to toggle Apple-grade datepicker.</div>
+                <div class="hint">Click input or calendar icon to toggle interactive datepicker.</div>
               </div>
 
               <!-- To Date -->
               <div class="field-block">
                 <label class="label">
-                  <span>To Date</span>
-                  <span class="hint">Interactive Popover</span>
+                  <span>Date / Range End</span>
+                  <span class="hint">Standard 42px</span>
                 </label>
                 <div class="date-input-wrap">
                   <input type="text" class="input date-input" id="demoToDate" placeholder="dd/mm/yyyy" readonly />
@@ -774,7 +786,7 @@
               <!-- Live In-Line Calendar Popover Preview (Exact Image 3 Specimen) -->
               <div class="field-block" style="grid-column: 1 / -1">
                 <label class="label">
-                  <span>Calendar Popover Specification (Live Component Geometry)</span>
+                  <span>Calendar Popover Specification</span>
                   <span class="hint">288px Fixed · 16px Radius · 4 Quick Presets</span>
                 </label>
                 <div style="display:flex;justify-content:flex-start;padding:12px 0">
@@ -850,13 +862,13 @@
             </div>
           </div>
 
-          <!-- 5. Textarea & Field Validation States -->
+          <!-- 6. Textarea & Field Validation States -->
           <div>
-            <div class="category-label">Multi-Line Textarea &amp; Inline Validation (WCAG 3.3.1)</div>
+            <div class="category-label">Textarea &amp; Inline Validation States</div>
             <div class="form-responsive-grid">
               <div class="field-block" style="grid-column:1/-1">
                 <label class="label">
-                  <span>Harvest Lot Remarks &amp; Sensory Quality Notes</span>
+                  <span>Textarea / Multi-Line</span>
                   <span class="hint">Max 500 characters</span>
                 </label>
                 <textarea class="input textarea" placeholder="Document organoleptic assessment, shell hardness, hepatopancreas condition, or cold chain log notes..."></textarea>
@@ -864,7 +876,10 @@
               </div>
 
               <div class="field-block">
-                <label class="label">Dissolved Oxygen Threshold<span class="req">*</span></label>
+                <label class="label">
+                  <span>Input / Error State</span>
+                  <span class="hint" style="color:#DC2626;font-weight:600">Required</span>
+                </label>
                 <div class="input-wrap">
                   <i data-lucide="activity" class="leading"></i>
                   <input class="input err" value="2.8" />
@@ -874,7 +889,10 @@
               </div>
 
               <div class="field-block">
-                <label class="label">Water Alkalinity / pH</label>
+                <label class="label">
+                  <span>Input / Success State</span>
+                  <span class="hint" style="color:#16A34A;font-weight:600">Verified</span>
+                </label>
                 <div class="input-wrap">
                   <i data-lucide="droplet" class="leading"></i>
                   <input class="input succ" value="7.82" />
@@ -1024,25 +1042,27 @@
       </div>
     </div>
 
-    <!-- Segmented Controls & Micro-Tooltips -->
+    <!-- Segmented Controls (Tab Switch System - Image 3) -->
     <div class="spec-grid">
       <div class="spec-meta">
-        <div class="spec-title">Segmented Controls &amp; Tooltips</div>
-        <p class="spec-desc">Tactile sliding segmented mode toggles with pill containers, and accessible micro-tooltips for technical telemetry definitions.</p>
+        <div class="spec-title">Segmented Controls (Tab Switch System)</div>
+        <p class="spec-desc">Tactile sliding segmented mode toggles with pill-shaped rounded containers and physical gliders, conforming to Apple HIG and Linear tab switch guidelines.</p>
       </div>
       <div class="spec-content">
-        <div class="line-row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
           <div class="segmented-control">
-            <button class="segment-btn active"><i data-lucide="radio"></i>Live</button>
+            <button class="segment-btn active"><i data-lucide="radio"></i>Live Telemetry</button>
             <button class="segment-btn">1 Hour</button>
             <button class="segment-btn">24 Hours</button>
             <button class="segment-btn">7 Days</button>
-            <button class="segment-btn">Cycle</button>
+            <button class="segment-btn">Full Cycle</button>
           </div>
-          <div class="line-row" style="gap:20px;font-size:var(--t-xs)">
-            <span class="has-tooltip">DO (Dissolved Oxygen)<span class="tooltip-box">Critical oxygen concentration dissolved in water (mg/L). Minimum threshold: 4.0 mg/L</span></span>
-            <span class="has-tooltip">ORP (Redox Potential)<span class="tooltip-box">Oxidation-Reduction Potential. Indicates pond sanitization level (+200 to +250 mV optimal)</span></span>
-            <span class="has-tooltip">FCR (Feed Conversion Ratio)<span class="tooltip-box">Total feed intake (kg) / net biomass gain (kg). Benchmark: 1.25</span></span>
+
+          <div class="segmented-control">
+            <button class="segment-btn active">Overview</button>
+            <button class="segment-btn">Pond Matrix</button>
+            <button class="segment-btn">Telemetry</button>
+            <button class="segment-btn">Invoices</button>
           </div>
         </div>
       </div>
@@ -1861,15 +1881,60 @@
       </div>
     </div>
 
-    <!-- Dedicated Interactive Tooltips System Molecule Showcase -->
+    <!-- Dedicated Interactive Tooltips System Molecule Showcase (Image 1 & 2 Standard) -->
     <div class="spec-grid">
       <div class="spec-meta">
         <div class="spec-title">Tooltips System</div>
-        <p class="spec-desc">Micro-interaction contextual guides with 4-way directional pointers, keyboard shortcut badges, and aquaculture telemetry popovers.</p>
+        <p class="spec-desc">Global SaaS contextual micro-interaction guides. Complete visual specimen matrix supporting Light and Brand Teal palettes, 4-way directional pointers, link icons, dismiss buttons, and technical telemetry popovers.</p>
       </div>
       <div class="spec-content">
+        
+        <!-- Tooltip Specification Matrix (Exact Image 1 Replica) -->
         <div>
-          <div class="category-label">4-Way Directional Micro-Tooltips (High-Contrast Slate #0F172A)</div>
+          <div class="category-label">Global SaaS Tooltip Specification Matrix (Image 1 Visual Standards)</div>
+          <div class="tooltip-matrix-canvas">
+            
+            <!-- Row 1, Col 1: Light Tooltip / Bottom Arrow -->
+            <div class="tooltip-specimen theme-light arrow-bottom">
+              <span>Example of tooltip</span>
+            </div>
+
+            <!-- Row 1, Col 2: Brand/Dark Teal Tooltip / Top Arrow -->
+            <div class="tooltip-specimen theme-brand arrow-top">
+              <span>Example of tooltip</span>
+            </div>
+
+            <!-- Row 1, Col 3: Light Tooltip / Left Arrow / Link Icon + Close Button -->
+            <div class="tooltip-specimen theme-light arrow-left">
+              <i data-lucide="link" class="tooltip-icon"></i>
+              <span>Example of tooltip</span>
+              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
+            </div>
+
+            <!-- Row 2, Col 1: Brand/Dark Teal Tooltip / Bottom Arrow / Link Icon + Close Button -->
+            <div class="tooltip-specimen theme-brand arrow-bottom">
+              <i data-lucide="link" class="tooltip-icon"></i>
+              <span>Example of tooltip</span>
+              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
+            </div>
+
+            <!-- Row 2, Col 2: Light Tooltip / Top Arrow / Close Button -->
+            <div class="tooltip-specimen theme-light arrow-top">
+              <span>Example of tooltip</span>
+              <button class="tooltip-close" title="Dismiss" onclick="window.AquaToast?.show('Tooltip dismissed', 'teal')">×</button>
+            </div>
+
+            <!-- Row 2, Col 3: Brand/Dark Teal Tooltip / Left Arrow / Link Icon -->
+            <div class="tooltip-specimen theme-brand arrow-left">
+              <i data-lucide="link" class="tooltip-icon"></i>
+              <span>Example of tooltip</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="category-label">4-Way Directional Interactive Hover Triggers (With Keyboard Hotkeys)</div>
           <div class="line-row" style="gap:24px;padding:24px 16px;background:var(--soft);border-radius:var(--r-12);border:1px dashed var(--line);justify-content:center;flex-wrap:wrap">
             
             <!-- Top Tooltip -->

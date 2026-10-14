@@ -298,10 +298,14 @@ body {
 /* 2. Compact Controls: Pill Segment Tabs (.tabs) */
 .tabs {
   display: inline-flex !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
   align-items: center !important;
   gap: 4px !important;
   padding: 4px !important;
   background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
   border-radius: 9999px !important;
   user-select: none !important;
   -webkit-user-select: none !important;

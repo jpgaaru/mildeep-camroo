@@ -1131,29 +1131,55 @@ textarea.input:focus, .textarea:focus {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-2px);
 }
 
-/* 5. Segmented Controls (Sliding Pill Design Token & Physical Glider) */
+/* 5. Segmented Controls (Sliding Pill Design Token - Image 3) */
 .segmented-control {
-  position: relative; display: inline-flex; align-items: center; background: #F1F5F9;
-  border: 1px solid #E2E8F0; border-radius: var(--r-8); padding: 3px;
-  user-select: none; z-index: 1;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--pill, 9999px);
+  padding: 3px;
+  user-select: none;
+  z-index: 1;
+  width: fit-content;
+  max-width: 100%;
 }
 .segment-glider {
-  position: absolute; top: 3px; bottom: 3px; left: 3px;
-  background: var(--white); border-radius: var(--r-6);
-  box-shadow: var(--sh-1); z-index: 1; pointer-events: none;
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  background: var(--white);
+  border-radius: var(--pill, 9999px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  pointer-events: none;
   transition: transform var(--dur-normal) var(--ease-apple-spring), width var(--dur-normal) var(--ease-apple-spring);
 }
 .segment-btn {
-  position: relative; z-index: 2; height: 30px; padding: 0 14px; border-radius: var(--r-6);
-  border: none; background: transparent; font-size: 12px;
-  font-weight: 600; color: #64748B; cursor: pointer;
-  transition: color var(--dur-fast) var(--ease); display: inline-flex; align-items: center; gap: 6px;
+  position: relative;
+  z-index: 2;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: var(--pill, 9999px);
+  border: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.segment-btn svg { width: 13px; height: 13px; }
+.segment-btn svg { width: 14px; height: 14px; }
 .segment-btn:hover { color: #0F172A; }
 .segment-btn.active {
-  color: #0F172A;
+  color: #004d57;
   background: var(--white);
+  font-weight: 700;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -1235,13 +1261,17 @@ textarea.input:focus, .textarea:focus {
   overflow-x: auto;
 }
 
-/* Pill Segment for Compact Controls (.tabs) */
+/* Pill Segment for Compact Controls (.tabs - Image 3 Fix) */
 .tabs {
-  display: inline-flex;
+  display: inline-flex !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
   align-items: center;
   gap: 4px;
   padding: 4px;
   background: #F1F5F9;
+  border: 1px solid #E2E8F0;
   border-radius: 9999px;
   user-select: none;
   -webkit-user-select: none;
@@ -2084,6 +2114,187 @@ textarea.input:focus, .textarea:focus {
   font-size: 11px;
   color: #CBD5E1;
   line-height: 1.4;
+}
+
+/* ==========================================================
+   TOOLTIPS SPECIMEN MATRIX (Image 1 Standard)
+   ========================================================== */
+.tooltip-matrix-canvas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 24px;
+  padding: 36px 28px;
+  background: #F8FAFC;
+  border: 1.5px dashed #CBD5E1;
+  border-radius: var(--r-16);
+  justify-items: center;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .tooltip-matrix-canvas {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.tooltip-specimen {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--r-8);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tooltip-specimen:hover {
+  transform: translateY(-1px);
+}
+
+/* Tooltip Theme: Light (White with Soft Shadow) */
+.tooltip-specimen.theme-light,
+.tooltip-box.theme-light {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+}
+
+/* Tooltip Theme: Brand / Dark Teal */
+.tooltip-specimen.theme-brand,
+.tooltip-box.theme-brand {
+  background: #004d57;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 25px -4px rgba(0, 77, 87, 0.38), 0 4px 10px -2px rgba(0, 77, 87, 0.2);
+}
+
+/* Pointer Arrow: Bottom (Pointing Down) */
+.tooltip-specimen.arrow-bottom::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid transparent;
+}
+.tooltip-specimen.theme-light.arrow-bottom::after {
+  border-top-color: #FFFFFF;
+}
+.tooltip-specimen.theme-brand.arrow-bottom::after {
+  border-top-color: #004d57;
+}
+
+/* Pointer Arrow: Top (Pointing Up) */
+.tooltip-specimen.arrow-top::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.tooltip-specimen.theme-light.arrow-top::after {
+  border-bottom-color: #FFFFFF;
+}
+.tooltip-specimen.theme-brand.arrow-top::after {
+  border-bottom-color: #004d57;
+}
+
+/* Pointer Arrow: Left (Pointing Left) */
+.tooltip-specimen.arrow-left::after {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.tooltip-specimen.theme-light.arrow-left::after {
+  border-right-color: #FFFFFF;
+}
+.tooltip-specimen.theme-brand.arrow-left::after {
+  border-right-color: #004d57;
+}
+
+/* Pointer Arrow: Right (Pointing Right) */
+.tooltip-specimen.arrow-right::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+.tooltip-specimen.theme-light.arrow-right::after {
+  border-left-color: #FFFFFF;
+}
+.tooltip-specimen.theme-brand.arrow-right::after {
+  border-left-color: #004d57;
+}
+
+/* Tooltip Affixes: Link Icon & Dismiss Button */
+.tooltip-specimen .tooltip-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.tooltip-specimen.theme-light .tooltip-icon {
+  color: #0F172A;
+}
+.tooltip-specimen.theme-brand .tooltip-icon {
+  color: #E0F7FA;
+}
+
+.tooltip-specimen .tooltip-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-size: 15px;
+  border-radius: 4px;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  margin-left: 4px;
+}
+.tooltip-specimen.theme-light .tooltip-close {
+  color: #64748B;
+}
+.tooltip-specimen.theme-light .tooltip-close:hover {
+  color: #0F172A;
+  background: #F1F5F9;
+}
+.tooltip-specimen.theme-brand .tooltip-close {
+  color: rgba(255, 255, 255, 0.7);
+}
+.tooltip-specimen.theme-brand .tooltip-close:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* 3. Drag & Drop File Upload Dropzone (Lab QC / Pathology Certificates) */
@@ -3703,10 +3914,14 @@ body {
 /* 2. Compact Controls: Pill Segment Tabs (.tabs) */
 .tabs {
   display: inline-flex !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  align-self: flex-start !important;
   align-items: center !important;
   gap: 4px !important;
   padding: 4px !important;
   background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
   border-radius: 9999px !important;
   user-select: none !important;
   -webkit-user-select: none !important;
