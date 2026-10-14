@@ -697,51 +697,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   });
 
-  // 18. Stage Nav ScrollSpy & Smooth Jump
-  const stageNavBtns = document.querySelectorAll('.stage-nav-btn');
+  // 18. Robust Live Viewport ScrollSpy & Stage Progress Tracker
+  const stageNav = document.querySelector('.stage-nav');
+  const stageNavBtns = Array.from(document.querySelectorAll('.stage-nav-btn'));
   const navInner = document.querySelector('.stage-nav-inner');
 
-  const getNavTargets = () => {
-    return Array.from(stageNavBtns)
-      .map((btn) => {
-        const href = btn.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const el = document.getElementById(href.slice(1));
-          return el ? { btn, el } : null;
-        }
-        return null;
-      })
-      .filter(Boolean)
-      .sort((a, b) => {
-        const topA = a.el.getBoundingClientRect().top + window.scrollY;
-        const topB = b.el.getBoundingClientRect().top + window.scrollY;
-        return topA - topB;
-      });
-  };
+  // Insert progress bar indicator along bottom edge of sticky stage-nav
+  let navProgressBar = document.querySelector('.stage-nav-progress');
+  if (!navProgressBar && stageNav) {
+    navProgressBar = document.createElement('div');
+    navProgressBar.className = 'stage-nav-progress';
+    stageNav.appendChild(navProgressBar);
+  }
 
-  const navTargets = getNavTargets();
+  // Map each button to its target element and anchor ID
+  const navTargets = stageNavBtns.map((btn) => {
+    const href = btn.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const el = document.getElementById(href.slice(1));
+      return el ? { btn, el, id: href.slice(1) } : null;
+    }
+    return null;
+  }).filter(Boolean);
 
   const updateScrollSpy = () => {
-    const scrollPosition = window.scrollY + 100;
-    let activeTarget = navTargets[0];
+    // 1. Live scroll progress percentage
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    if (navProgressBar) {
+      navProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    }
 
-    for (let i = 0; i < navTargets.length; i++) {
-      const top = navTargets[i].el.getBoundingClientRect().top + window.scrollY;
-      if (top <= scrollPosition) {
-        activeTarget = navTargets[i];
-      } else {
-        break;
+    // 2. Active Section Detection using live viewport coordinates
+    const headerHeight = 120; // sticky header offset
+    let activeTarget = null;
+
+    // Check if at the very bottom
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50) {
+      activeTarget = navTargets[navTargets.length - 1];
+    } else if (window.scrollY < 200) {
+      // At the top of the page
+      activeTarget = navTargets[0];
+    } else {
+      // Find the target whose top is <= headerHeight and bottom > headerHeight
+      for (const target of navTargets) {
+        const rect = target.el.getBoundingClientRect();
+        if (rect.top <= headerHeight && rect.bottom > headerHeight) {
+          activeTarget = target;
+          break;
+        }
+      }
+
+      // Fallback: target closest to top of viewport
+      if (!activeTarget) {
+        let minDiff = Infinity;
+        for (const target of navTargets) {
+          const rect = target.el.getBoundingClientRect();
+          const diff = Math.abs(rect.top - headerHeight);
+          if (diff < minDiff) {
+            minDiff = diff;
+            activeTarget = target;
+          }
+        }
       }
     }
 
     if (activeTarget) {
       stageNavBtns.forEach((b) => b.classList.remove('active'));
       activeTarget.btn.classList.add('active');
+
       if (navInner) {
         const btnRect = activeTarget.btn.getBoundingClientRect();
         const innerRect = navInner.getBoundingClientRect();
         if (btnRect.left < innerRect.left || btnRect.right > innerRect.right) {
-          activeTarget.btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+          activeTarget.btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
       }
     }
@@ -763,6 +792,9 @@ document.addEventListener('DOMContentLoaded', () => {
           window.scrollTo({ top: targetTop, behavior: 'smooth' });
           stageNavBtns.forEach((b) => b.classList.remove('active'));
           btn.classList.add('active');
+          if (navInner) {
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
         }
       }
     });

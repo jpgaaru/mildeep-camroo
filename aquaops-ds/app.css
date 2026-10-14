@@ -81,12 +81,22 @@ svg { display: block; }
 .stage-nav {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid #E2E8F0;
   z-index: 80;
   padding: 10px 0;
+}
+.stage-nav-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #00A4B7, #006C7A);
+  width: 0%;
+  transition: width 0.08s ease-out;
+  border-radius: 0 2px 2px 0;
 }
 .stage-nav-inner {
   display: flex;
@@ -129,6 +139,8 @@ svg { display: block; }
   font-weight: 600;
   color: #64748B;
   text-decoration: none;
+  cursor: pointer;
+  user-select: none;
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .stage-nav-btn svg {
@@ -147,16 +159,22 @@ svg { display: block; }
   font-size: 10.5px;
   font-weight: 700;
   line-height: 1;
+  transition: all 0.18s ease;
 }
 .stage-nav-btn:hover {
   background: #FFFFFF;
   color: #006C7A;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+.stage-nav-btn:active {
+  transform: scale(0.96);
 }
 .stage-nav-btn.active {
   background: #006C7A;
   color: #FFFFFF;
-  box-shadow: 0 2px 6px rgba(0, 108, 122, 0.28);
+  box-shadow: 0 2px 8px rgba(0, 108, 122, 0.32);
+  transform: translateY(0);
 }
 .stage-nav-btn.active .stage-num-badge {
   background: rgba(255, 255, 255, 0.25);
