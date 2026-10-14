@@ -4,6 +4,7 @@
  */
 
 import { AquaSelect } from './aqua-select.js';
+import { AquaCalendar } from './aqua-calendar.js';
 import { AquaSidebar } from './aqua-sidebar.js';
 import { AquaToast } from './aqua-toast.js';
 import { AquaTable, AquaPager } from './aqua-table.js';
@@ -20,10 +21,120 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1b. Initialize Kinetic Motion & Micro-Physics
   AquaMotion.init();
 
+  // 1c. Initialize Calendar Date Picker (Image 3)
+  AquaCalendar.init();
+
   // 2. Component: Rich Select Dropdowns
   document.querySelectorAll('.rich-select').forEach((el) => {
     new AquaSelect(el);
   });
+
+  // 2b. Global Custom Select Dropdown Enhancer (Image 2)
+  function upgradeNativeSelects() {
+    document.querySelectorAll('select.input:not([data-enhanced])').forEach((sel) => {
+      sel.setAttribute('data-enhanced', 'true');
+      sel.style.display = 'none';
+
+      const isSm = sel.classList.contains('input-sm');
+      const isLg = sel.classList.contains('input-lg');
+      const isDisabled = sel.disabled;
+
+      const wrap = document.createElement('div');
+      wrap.className = `custom-select ${isSm ? 'input-sm' : ''} ${isLg ? 'input-lg' : ''}`;
+
+      const selectedOpt = sel.options[sel.selectedIndex] || sel.options[0];
+      const initialText = selectedOpt ? selectedOpt.textContent : 'Select...';
+
+      const trigger = document.createElement('div');
+      trigger.className = 'custom-select-trigger';
+      if (isDisabled) {
+        trigger.style.opacity = '0.6';
+        trigger.style.cursor = 'not-allowed';
+      }
+      trigger.innerHTML = `
+        <span class="custom-select-current"><span>${initialText}</span></span>
+        <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      `;
+
+      const menu = document.createElement('div');
+      menu.className = 'custom-select-menu';
+      const list = document.createElement('div');
+      list.className = 'custom-select-list';
+
+      Array.from(sel.options).forEach((opt, idx) => {
+        if (opt.disabled && idx === 0 && !opt.value) return; // placeholder
+        const item = document.createElement('div');
+        item.className = `custom-select-option ${idx === sel.selectedIndex ? 'selected' : ''}`;
+        item.innerHTML = `
+          <span>${opt.textContent}</span>
+          <svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        `;
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sel.selectedIndex = idx;
+          sel.dispatchEvent(new Event('change', { bubbles: true }));
+          trigger.querySelector('.custom-select-current span').textContent = opt.textContent;
+          list.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+          item.classList.add('selected');
+          wrap.classList.remove('open');
+          AquaToast.show(`Selected: ${opt.textContent}`, 'teal');
+        });
+        list.appendChild(item);
+      });
+
+      menu.appendChild(list);
+      wrap.appendChild(trigger);
+      wrap.appendChild(menu);
+
+      if (!isDisabled) {
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = wrap.classList.contains('open');
+          document.querySelectorAll('.custom-select.open, .rich-select.open').forEach(el => el.classList.remove('open'));
+          if (!isOpen) wrap.classList.add('open');
+        });
+      }
+
+      sel.parentNode.insertBefore(wrap, sel.nextSibling);
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
+    });
+    initStaticCustomSelects();
+  }
+
+  function initStaticCustomSelects() {
+    document.querySelectorAll('.custom-select').forEach((cs) => {
+      const trigger = cs.querySelector('.custom-select-trigger');
+      const menu = cs.querySelector('.custom-select-menu');
+      if (!trigger || !menu || cs.hasAttribute('data-bound')) return;
+      cs.setAttribute('data-bound', 'true');
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = cs.classList.contains('open');
+        document.querySelectorAll('.custom-select.open, .rich-select.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) cs.classList.add('open');
+      });
+
+      cs.querySelectorAll('.custom-select-option').forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const text = opt.querySelector('span')?.textContent || opt.textContent.trim();
+          const currSpan = cs.querySelector('.custom-select-current span');
+          if (currSpan) currSpan.textContent = text;
+          cs.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          cs.classList.remove('open');
+          AquaToast.show(`Selected: ${text}`, 'teal');
+        });
+      });
+    });
+  }
+
+  upgradeNativeSelects();
+  initStaticCustomSelects();
 
   // Rich Select Change Handlers & Toasts
   document.getElementById('richSpeciesSelect')?.addEventListener('aqua-change', (e) => {
