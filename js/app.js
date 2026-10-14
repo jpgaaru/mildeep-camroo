@@ -141,7 +141,7 @@ export const App = {
 
     // If empty hash, default to main dashboard
     if (rawHash === '' || rawHash === '#' || rawHash === '#/') {
-      window.location.hash = '#/home/welcome/command-center';
+      window.location.hash = '#/home';
       return;
     }
 
@@ -182,7 +182,7 @@ export const App = {
 
     switch (modObj.id) {
       case 'home':
-        HomeView.render(mainContainer, tabName || 'command-center', resolvedHash);
+        HomeView.render(mainContainer);
         break;
       case 'purchase':
         PurchaseView.render(mainContainer, tabName || 'rm-dashboard', resolvedHash);

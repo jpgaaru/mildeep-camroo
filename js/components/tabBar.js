@@ -30,8 +30,16 @@ export const TabBar = {
     const container = document.getElementById(containerId);
     if (!container) return null;
 
+    if (activeHash && (activeHash === '#/home' || activeHash.startsWith('#/home'))) {
+      container.innerHTML = '';
+      return null;
+    }
+
     const ctx = this.getContext(activeHash);
-    if (!ctx) return null;
+    if (!ctx) {
+      container.innerHTML = '';
+      return null;
+    }
     const { module, submenu, currentTabId } = ctx;
     const isPill = options && options.variant === 'pill';
 

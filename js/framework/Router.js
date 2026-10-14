@@ -5,20 +5,8 @@ import { NAV_HIERARCHY } from '../components/sidebar.js';
 export const SECTION_METADATA_REGISTRY = {
   home: {
     welcome: {
-      title: 'Welcome & Command Center',
-      subtitle: 'Executive cockpit, active plant status, cross-module shortcuts, and shift telemetry'
-    },
-    'access-roles': {
-      title: 'My Access & Permissible Roles',
-      subtitle: 'Active RBAC permissions matrix, session credentials, and module privilege breakdown'
-    },
-    'role-dashboards': {
-      title: 'Role-Based Executive Dashboards',
-      subtitle: 'Tailored persona lenses for C-Suite, Plant Operations, Procurement, and Quality Control'
-    },
-    'admin-controls': {
-      title: 'Admin Controls & Role Allocation',
-      subtitle: 'Allocate permissible roles, manage department permissions, and configure shift delegations'
+      title: 'Welcome to Camaroo ERP',
+      subtitle: 'Devi Fisheries Limited • Enterprise Seafood Processing & Export SaaS'
     }
   },
   purchase: {
@@ -216,6 +204,18 @@ export const Router = {
     const moduleName = parts[0] || 'home';
     let submenuName = parts[1] || '';
     let tabName = parts[2] || '';
+
+    if (moduleName === 'home') {
+      return {
+        modObj: { id: 'home', title: 'Home', submenus: [] },
+        subObj: { id: 'welcome', title: 'Home', tabs: [] },
+        tabId: 'welcome',
+        moduleId: 'home',
+        submenuId: 'welcome',
+        resolvedHash: '#/home',
+        metadata: SECTION_METADATA_REGISTRY.home.welcome
+      };
+    }
 
     const modObj = NAV_HIERARCHY.find(m => m.id === moduleName) || NAV_HIERARCHY[0];
     let subObj = modObj.submenus.find(s => s.id === submenuName);

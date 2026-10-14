@@ -3,51 +3,6 @@ import { LOGO_COLOR, LOGO_WHITE } from '../data/logos.js';
 
 export const NAV_HIERARCHY = [
   {
-    id: "home",
-    title: "Home",
-    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`,
-    submenus: [
-      {
-        id: "welcome",
-        title: "Welcome",
-        defaultTab: "command-center",
-        tabs: [
-          { id: "command-center", label: "Command Center", hash: "#/home/welcome/command-center" },
-          { id: "quick-actions", label: "Quick Launchpad", hash: "#/home/welcome/quick-actions" }
-        ]
-      },
-      {
-        id: "access-roles",
-        title: "My Access & Roles",
-        defaultTab: "my-permissions",
-        tabs: [
-          { id: "my-permissions", label: "My Permissible Access", hash: "#/home/access-roles/my-permissions" },
-          { id: "role-matrix", label: "RBAC Role Matrix", hash: "#/home/access-roles/role-matrix" }
-        ]
-      },
-      {
-        id: "role-dashboards",
-        title: "Role Dashboards",
-        defaultTab: "executive",
-        tabs: [
-          { id: "executive", label: "Executive C-Suite", hash: "#/home/role-dashboards/executive" },
-          { id: "plant-manager", label: "Plant Operations Head", hash: "#/home/role-dashboards/plant-manager" },
-          { id: "procurement-head", label: "Procurement Lead", hash: "#/home/role-dashboards/procurement-head" },
-          { id: "qc-director", label: "QC & Lab Director", hash: "#/home/role-dashboards/qc-director" }
-        ]
-      },
-      {
-        id: "admin-controls",
-        title: "Admin & Roles",
-        defaultTab: "user-allocation",
-        tabs: [
-          { id: "user-allocation", label: "Allocate Roles", hash: "#/home/admin-controls/user-allocation" },
-          { id: "delegation", label: "Shift Delegations", hash: "#/home/admin-controls/delegation" }
-        ]
-      }
-    ]
-  },
-  {
     id: "purchase",
     title: "Purchase",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
@@ -108,21 +63,19 @@ export const NAV_HIERARCHY = [
       {
         id: "floor-operations",
         title: "Floor Operations",
-        defaultTab: "receiving-sizing",
+        defaultTab: "receiving-sorting",
         tabs: [
-          { id: "receiving-sizing", label: "RM Receiving & Sizing", hash: "#/preprocessing/floor-operations/receiving-sizing" },
-          { id: "deheading-peeling", label: "Deheading & Peeling", hash: "#/preprocessing/floor-operations/deheading-peeling" },
-          { id: "interplant-transfers", label: "Inter-Plant Transfers", hash: "#/preprocessing/floor-operations/interplant-transfers" }
+          { id: "receiving-sorting", label: "Receiving & Sorting", hash: "#/preprocessing/floor-operations/receiving-sorting" },
+          { id: "preprocessing-tasks", label: "Pre-Processing Tasks", hash: "#/preprocessing/floor-operations/preprocessing-tasks" }
         ]
       },
       {
         id: "chemical-inventory",
         title: "Chemical Inventory & Usage",
-        defaultTab: "stock-receipts",
+        defaultTab: "chemical-stock",
         tabs: [
-          { id: "stock-receipts", label: "Stock & Receipts", hash: "#/preprocessing/chemical-inventory/stock-receipts" },
-          { id: "daily-usage", label: "Daily Usage & Soaking", hash: "#/preprocessing/chemical-inventory/daily-usage" },
-          { id: "supplier-settlements", label: "Supplier Settlements", hash: "#/preprocessing/chemical-inventory/supplier-settlements" }
+          { id: "chemical-stock", label: "Chemical Stock", hash: "#/preprocessing/chemical-inventory/chemical-stock" },
+          { id: "usage-logs", label: "Usage Logs", hash: "#/preprocessing/chemical-inventory/usage-logs" }
         ]
       },
       {
@@ -130,9 +83,7 @@ export const NAV_HIERARCHY = [
         title: "Traceability",
         defaultTab: "batch-traceability",
         tabs: [
-          { id: "batch-traceability", label: "Batch Traceability", hash: "#/preprocessing/traceability/batch-traceability" },
-          { id: "va-floor-balance", label: "VA Floor Balance", hash: "#/preprocessing/traceability/va-floor-balance" },
-          { id: "yield-reconciliation", label: "Yield Reconciliation", hash: "#/preprocessing/traceability/yield-reconciliation" }
+          { id: "batch-traceability", label: "Batch Traceability", hash: "#/preprocessing/traceability/batch-traceability" }
         ]
       }
     ]
@@ -613,6 +564,11 @@ export const Sidebar = {
 
         <!-- Scrollable Navigation Hierarchy -->
         <div class="f-sb-nav" id="sidebar-nav-groups">
+          <a class="f-sb-link ${this.activeModuleId === 'home' ? 'active' : ''}" href="#/home" title="Home">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+          </a>
+
           <span class="f-sb-sec">Core Modules</span>
           ${this.renderNavGroups()}
 
