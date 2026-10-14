@@ -27,16 +27,16 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'De-heading, grading, peeling lines, and yield recovery telemetry'
     },
     'floor-operations': {
-      title: 'Pre-Processing Floor Operations',
-      subtitle: 'Receiving, grading, sorting tables, and live peeling task allocation'
+      title: 'Floor Operations',
+      subtitle: 'Intake sizing, roller grader lines, deheading yields, and inter-plant transfers'
     },
     'chemical-inventory': {
       title: 'Chemical Inventory & Usage',
-      subtitle: 'Food-grade soaking additives, ice usage logs, and batch dosage tracking'
+      subtitle: 'Customs inward, STPP/non-phosphate bath dosage logs, and supplier settlements'
     },
     traceability: {
-      title: 'Pre-Processing Traceability',
-      subtitle: 'End-to-end pond-to-line batch traceability and yield reconciliation logs'
+      title: 'Traceability & Reconciliation',
+      subtitle: 'Pond-to-pack genealogical audit, floor balance matrix, and packaging yield'
     }
   },
   quality: {
