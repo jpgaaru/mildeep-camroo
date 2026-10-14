@@ -151,12 +151,20 @@ export const Molecules = {
   },
 
   /**
-   * SectionHeader Molecule — Renders Page Title + Subtitle inside Sticky Header Card
+   * SectionHeader Molecule — Renders Page Title + Horizontal Inline Subtitle + Action Slot
    */
   SectionHeader({ title = '', subtitle = '' } = {}) {
     return `
-      <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">${title}</h1>
-      <p class="text-xs text-[#64748B] mt-0.5">${subtitle}</p>
+      <div class="flex items-center justify-between gap-4 py-0.5">
+        <!-- Left: Heading + Horizontal Inline Subtitle -->
+        <div class="flex flex-wrap items-baseline gap-2.5 min-w-0">
+          <h1 class="text-xl font-bold tracking-tight text-[#0F172A] whitespace-nowrap">${title}</h1>
+          ${subtitle ? `<span class="text-xs text-[#64748B] font-normal truncate hidden sm:inline">• ${subtitle}</span>` : ''}
+        </div>
+
+        <!-- Right: Primary Page-Level Action Button Slot -->
+        <div id="section-action-btn-container" class="shrink-0 flex items-center gap-2"></div>
+      </div>
     `;
   }
 };

@@ -21,16 +21,16 @@ export const Organisms = {
               <div id="header-container" class="bg-white rounded-2xl"></div>
             </div>
 
-            <!-- Breadcrumbs, Section Header & Full-Width Underline Tabs Menu (Sticky, Flat) -->
+            <!-- Breadcrumbs, Section Header & Underline Tabs Menu (Sticky, Flat) -->
             <div id="sticky-tabs-header-card" class="pt-1 pb-0 px-1 bg-[#F8FAFC]">
-              <div id="breadcrumbs-container" class="mb-2"></div>
-              <div id="section-title-container" class="mb-3"></div>
+              <div id="breadcrumbs-container" class="mb-1.5"></div>
+              <div id="section-title-container" class="mb-2"></div>
               <div id="global-tab-bar-container"></div>
             </div>
           </div>
 
           <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-          <main id="main-content-container" class="px-0 pt-3 pb-8 flex-1 w-full mr-3"></main>
+          <main id="main-content-container" class="px-0 pt-2 pb-8 flex-1 w-full mr-3"></main>
         </div>
       </div>
     `;

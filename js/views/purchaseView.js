@@ -401,9 +401,89 @@ export const PurchaseView = {
     { id: 'RPT-15', title: 'Agent Commission', desc: 'Agent commission report', icon: '💼', color: 'bg-[#F0F9FF] text-[#0284C7]' }
   ],
 
+  updateHeaderAction(tabName) {
+    const actionContainer = document.getElementById('section-action-btn-container');
+    if (!actionContainer) return;
+
+    switch (tabName) {
+      // Operations
+      case 'bookings':
+        actionContainer.innerHTML = `
+          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Booking</span>
+          </button>
+        `;
+        break;
+
+      case 'rm-arrivals':
+        actionContainer.innerHTML = `
+          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create RM Arrival</span>
+          </button>
+        `;
+        break;
+
+      case 'arrivals':
+        actionContainer.innerHTML = `
+          <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Arrival Record</span>
+          </button>
+        `;
+        break;
+
+      case 'lot-tracking':
+        actionContainer.innerHTML = `
+          <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Register New Lot</span>
+          </button>
+        `;
+        break;
+
+      // Transactions & Bills
+      case 'supplier-bills':
+        actionContainer.innerHTML = `
+          <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Supplier Bill</span>
+          </button>
+        `;
+        break;
+
+      case 'commercial-txns':
+        actionContainer.innerHTML = `
+          <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Create Transaction</span>
+          </button>
+        `;
+        break;
+
+      // Payments
+      case 'bill-date-payment':
+        actionContainer.innerHTML = `
+          <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Record Payment Voucher</span>
+          </button>
+        `;
+        break;
+
+      // Informational or Non-Action Tabs: Clean unmount/hide
+      default:
+        actionContainer.innerHTML = '';
+        break;
+    }
+  },
+
   render(containerId, subPage = 'rm-dashboard', activeHash = '#/purchase/dashboard/rm-dashboard') {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    this.updateHeaderAction(subPage);
 
     container.innerHTML = `<div id="purchase-subpage-content"></div>`;
     const subContainer = document.getElementById('purchase-subpage-content');
@@ -1795,13 +1875,6 @@ export const PurchaseView = {
   renderLotTracking(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-lot-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Register New Lot</span>
-          </button>
-        </div>
-
         <!-- Search / Filter Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -2042,13 +2115,6 @@ export const PurchaseView = {
   renderBookings(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-booking" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Booking</span>
-          </button>
-        </div>
-
         <!-- Search / Filter Fields (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -2359,13 +2425,6 @@ export const PurchaseView = {
   renderRMArrivals(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-arrival-modal" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create RM Arrival</span>
-          </button>
-        </div>
-
         <!-- Search / Filter Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -2748,13 +2807,6 @@ export const PurchaseView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-arrival-record" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Arrival Record</span>
-          </button>
-        </div>
-
         <!-- Table Mount Point -->
         <div id="center-arrivals-table-container"></div>
         <div id="arrivals-totals-container" class="mt-4"></div>
@@ -2950,13 +3002,6 @@ export const PurchaseView = {
   renderSupplierBills(container) {
     container.innerHTML = `
       <div class="space-y-5 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-create-supplier-bill" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Supplier Bill</span>
-          </button>
-        </div>
-
         <!-- Search / Filter Fields Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -3323,13 +3368,6 @@ export const PurchaseView = {
   renderCommercialTransactions(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-add-commercial-txn" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Add Transaction</span>
-          </button>
-        </div>
-
         <!-- Search / Filter Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -3963,13 +4001,6 @@ export const PurchaseView = {
   renderBillDatePayment(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex items-center justify-end gap-3 mb-1">
-          <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Record Payment Voucher</span>
-          </button>
-        </div>
-
         <div id="bill-date-payment-table-container"></div>
       </div>
     `;

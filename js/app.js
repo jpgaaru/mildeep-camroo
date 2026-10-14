@@ -174,6 +174,9 @@ export const App = {
     // Render Sticky Underline Navigation Tabs directly under the Title
     TabBar.render('global-tab-bar-container', resolvedHash);
 
+    const actionBtnContainer = document.getElementById('section-action-btn-container');
+    if (actionBtnContainer) actionBtnContainer.innerHTML = '';
+
     const mainContainer = 'main-content-container';
 
     switch (modObj.id) {
