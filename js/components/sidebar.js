@@ -41,8 +41,8 @@ export const NAV_HIERARCHY = [
         title: "Payments",
         defaultTab: "payment-summary",
         tabs: [
-          { id: "payment-summary", label: "Payment Summary", hash: "#/purchase/payments/payment-summary" },
-          { id: "bill-date-payment", label: "Bill & Date-Wise Payment", hash: "#/purchase/payments/bill-date-payment" }
+          { id: "payment-summary", label: "Summary", hash: "#/purchase/payments/payment-summary" },
+          { id: "bill-date-payment", label: "Bill & Date-Wise", hash: "#/purchase/payments/bill-date-payment" }
         ]
       }
     ]

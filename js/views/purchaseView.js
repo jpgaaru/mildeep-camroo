@@ -3701,17 +3701,6 @@ export const PurchaseView = {
   renderPaymentSummary(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <!-- Page Title Header -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Payment Summary
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Disbursement accounts, settled vouchers, pending vendor disbursements, and banking logs</span>
-          </div>
-        </div>
-
         <!-- Search / Filter Card (AquaPulse Architecture) -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs mb-5 transition-all duration-200">
           <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9]">
@@ -4032,20 +4021,11 @@ export const PurchaseView = {
   renderBillDatePayment(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F0FAFC] text-[#006C7A] border border-[#B2ECF3]">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#006C7A] mr-1.5 animate-pulse"></span>
-              Payment Vouchers
-            </span>
-            <span class="text-xs text-[#64748B] hidden sm:inline">Vendor disbursement vouchers, bank UTR references, and NEFT/RTGS settlement verification</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Record Payment Voucher</span>
-            </button>
-          </div>
+        <div class="flex items-center justify-end gap-3 mb-1">
+          <button id="btn-record-new-payment" class="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Record Payment Voucher</span>
+          </button>
         </div>
 
         <div id="bill-date-payment-table-container"></div>

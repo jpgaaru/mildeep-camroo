@@ -17,8 +17,8 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'Commercial accounts payable, broker settlements, and supplier bills'
     },
     payments: {
-      title: 'Payments & Disbursements',
-      subtitle: 'Bank wire vouchers, vendor payment status, and statutory disbursements'
+      title: 'Payments',
+      subtitle: 'Manage vendor payments, settled vouchers, and banking logs.'
     }
   },
   preprocessing: {
