@@ -156,10 +156,9 @@ export const Molecules = {
   SectionHeader({ title = '', subtitle = '' } = {}) {
     return `
       <div class="flex items-center justify-between gap-4 py-0.5">
-        <!-- Left: Heading + Horizontal Inline Subtitle -->
+        <!-- Left: Heading -->
         <div class="flex flex-wrap items-baseline gap-2.5 min-w-0">
           <h1 class="text-xl font-bold tracking-tight text-[#0F172A] whitespace-nowrap">${title}</h1>
-          ${subtitle ? `<span class="text-xs text-[#64748B] font-normal truncate hidden sm:inline">• ${subtitle}</span>` : ''}
         </div>
 
         <!-- Right: Primary Page-Level Action Button Slot -->

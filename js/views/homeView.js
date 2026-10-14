@@ -149,11 +149,6 @@ export const HomeView = {
             <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
               Welcome to Camaroo ERP
             </h1>
-
-            <!-- Subtitle -->
-            <p class="text-sm sm:text-[15px] font-medium text-[#475569] mt-2">
-              Devi Fisheries Limited • Enterprise Seafood Processing & Export SaaS
-            </p>
           </div>
         </div>
 

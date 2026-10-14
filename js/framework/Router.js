@@ -6,7 +6,7 @@ export const SECTION_METADATA_REGISTRY = {
   home: {
     welcome: {
       title: 'Welcome to Camaroo ERP',
-      subtitle: 'Devi Fisheries Limited • Enterprise Seafood Processing & Export SaaS'
+      subtitle: ''
     }
   },
   purchase: {

@@ -166,10 +166,13 @@ export const App = {
 
     const titleEl = document.getElementById('section-title-container');
     if (titleEl) {
-      titleEl.innerHTML = Molecules.SectionHeader({
-        title: secMeta.title,
-        subtitle: secMeta.subtitle
-      });
+      if (modObj.id === 'home') {
+        titleEl.innerHTML = '';
+      } else {
+        titleEl.innerHTML = Molecules.SectionHeader({
+          title: secMeta.title
+        });
+      }
     }
 
     // Render Sticky Underline Navigation Tabs directly under the Title
