@@ -11,6 +11,7 @@ import { AquaTable, AquaPager } from './aqua-table.js';
 import { AquaCharts } from './aqua-charts.js';
 import { AquaDrawer } from './aqua-drawer.js';
 import { AquaMotion } from './aqua-motion.js';
+import { AquaTooltip } from './aqua-tooltip.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Lucide Icons
@@ -23,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1c. Initialize Calendar Date Picker (Image 3)
   AquaCalendar.init();
+
+  // 1d. Initialize AquaTooltip Engine (MUI followCursor & Anchored)
+  AquaTooltip.init();
 
   // 2. Component: Rich Select Dropdowns
   document.querySelectorAll('.rich-select').forEach((el) => {
@@ -772,4 +776,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export globally for inline triggers if needed
 window.AquaToast = AquaToast;
+window.AquaTooltip = AquaTooltip;
 
