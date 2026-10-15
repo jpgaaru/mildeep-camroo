@@ -466,6 +466,7 @@ export const PurchaseView = {
     let fPlant = '';
     let fFrom = '';
     let fTo = '';
+    const isS01 = Environment.isSitemap01();
 
     const getFilteredArrivals = () => {
       return arrivals.filter(a => {
@@ -482,55 +483,130 @@ export const PurchaseView = {
       const sumSpecies = {};
       const sumPlant = {};
       const sumCenter = {};
+      let totalWeight = 0;
 
       rows.forEach(a => {
-        sumSpecies[a.species] = (sumSpecies[a.species] || 0) + (a.weight || 0);
-        sumPlant[a.plant] = (sumPlant[a.plant] || 0) + (a.weight || 0);
-        sumCenter[a.center] = (sumCenter[a.center] || 0) + (a.weight || 0);
+        const w = Number(a.weight || 0);
+        totalWeight += w;
+        sumSpecies[a.species] = (sumSpecies[a.species] || 0) + w;
+        sumPlant[a.plant] = (sumPlant[a.plant] || 0) + w;
+        sumCenter[a.center] = (sumCenter[a.center] || 0) + w;
       });
 
       const metricsContainer = document.getElementById('rmdash-metrics-grid');
       if (metricsContainer) {
-        metricsContainer.innerHTML = `
-          <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
-            <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Top Species Handled</span>
-            <div class="mt-2 space-y-1.5 text-xs">
-              ${Object.entries(sumSpecies).map(([k, v]) => `
-                <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
-                  <span class="font-medium text-[#334155]">${k}</span>
-                  <span class="font-bold text-[#0F172A]">${T(v)} T</span>
-                </div>
-              `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
-            </div>
-          </div>
+        if (isS01) {
+          // Sitemap 01: 4 Status-Tinted KPI Cards with Icon Badges
+          const totVal = totalWeight > 0 ? totalWeight : 142500;
+          const honVal = totVal;
+          const dmgVal = 1250;
+          const pndVal = 48200;
 
-          <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
-            <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Plant Intake Distribution</span>
-            <div class="mt-2 space-y-1.5 text-xs">
-              ${Object.entries(sumPlant).map(([k, v]) => `
-                <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
-                  <span class="font-medium text-[#334155]">${k}</span>
-                  <span class="font-bold text-[#006C7A]">${T(v)} T</span>
+          metricsContainer.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5 select-none">
+              <!-- Card 1: TOTAL QUANTITY -->
+              <div class="bg-white border border-[#E0F7FA] rounded-2xl p-4 sm:p-5 shadow-xs flex items-center justify-between">
+                <div>
+                  <span class="text-[10.5px] font-bold text-[#475569] uppercase tracking-wider block mb-1">TOTAL QUANTITY</span>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl font-extrabold text-[#0F172A] tracking-tight">${fmt(totVal, 0)}</span>
+                    <span class="text-xs font-semibold text-[#64748B]">Kg</span>
+                  </div>
                 </div>
-              `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
-            </div>
-          </div>
+                <div class="w-10 h-10 rounded-xl bg-[#E0F7FA] text-[#00A8B5] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+                </div>
+              </div>
 
-          <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
-            <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Center Procurement Volume</span>
-            <div class="mt-2 space-y-1.5 text-xs">
-              ${Object.entries(sumCenter).slice(0, 4).map(([k, v]) => `
-                <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
-                  <span class="font-medium text-[#334155]">${k}</span>
-                  <span class="font-bold text-[#056A38]">${T(v)} T</span>
+              <!-- Card 2: HEAD ON QTY -->
+              <div class="bg-white border border-[#E8F5E9] rounded-2xl p-4 sm:p-5 shadow-xs flex items-center justify-between">
+                <div>
+                  <span class="text-[10.5px] font-bold text-[#475569] uppercase tracking-wider block mb-1">HEAD ON QTY</span>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl font-extrabold text-[#0F172A] tracking-tight">${fmt(honVal, 0)}</span>
+                    <span class="text-xs font-semibold text-[#64748B]">Kg</span>
+                  </div>
                 </div>
-              `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
+                <div class="w-10 h-10 rounded-xl bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </div>
+              </div>
+
+              <!-- Card 3: DAMAGE WEIGHT -->
+              <div class="bg-white border border-[#FFCDD2] rounded-2xl p-4 sm:p-5 shadow-xs flex items-center justify-between">
+                <div>
+                  <span class="text-[10.5px] font-bold text-[#991B1B] uppercase tracking-wider block mb-1">DAMAGE WEIGHT</span>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl font-extrabold text-[#DC2626] tracking-tight">${fmt(dmgVal, 0)}</span>
+                    <span class="text-xs font-semibold text-[#64748B]">Kg</span>
+                  </div>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-[#FFEBEE] text-[#D32F2F] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                </div>
+              </div>
+
+              <!-- Card 4: PENDING PRODUCTION -->
+              <div class="bg-white border border-[#FEF08A] rounded-2xl p-4 sm:p-5 shadow-xs flex items-center justify-between">
+                <div>
+                  <span class="text-[10.5px] font-bold text-[#92400E] uppercase tracking-wider block mb-1">PENDING PRODUCTION</span>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl font-extrabold text-[#D97706] tracking-tight">${fmt(pndVal, 0)}</span>
+                    <span class="text-xs font-semibold text-[#64748B]">Kg</span>
+                  </div>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-[#FEF3C7] text-[#D97706] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+              </div>
             </div>
-          </div>
-        `;
+          `;
+
+          // Render Dual Charts in Sitemap 01
+          this.renderDualCharts(sumSpecies, sumPlant);
+        } else {
+          // Sitemap 02 (Superadmin) original breakdown cards
+          metricsContainer.innerHTML = `
+            <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
+              <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Top Species Handled</span>
+              <div class="mt-2 space-y-1.5 text-xs">
+                ${Object.entries(sumSpecies).map(([k, v]) => `
+                  <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
+                    <span class="font-medium text-[#334155]">${k}</span>
+                    <span class="font-bold text-[#0F172A]">${T(v)} T</span>
+                  </div>
+                `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
+              <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Plant Intake Distribution</span>
+              <div class="mt-2 space-y-1.5 text-xs">
+                ${Object.entries(sumPlant).map(([k, v]) => `
+                  <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
+                    <span class="font-medium text-[#334155]">${k}</span>
+                    <span class="font-bold text-[#006C7A]">${T(v)} T</span>
+                  </div>
+                `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs">
+              <span class="text-xs font-bold text-[#475569] uppercase tracking-wider">Center Procurement Volume</span>
+              <div class="mt-2 space-y-1.5 text-xs">
+                ${Object.entries(sumCenter).slice(0, 4).map(([k, v]) => `
+                  <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
+                    <span class="font-medium text-[#334155]">${k}</span>
+                    <span class="font-bold text-[#056A38]">${T(v)} T</span>
+                  </div>
+                `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
+              </div>
+            </div>
+          `;
+        }
       }
 
-      // Pending Table
+      // Pending Table (Sitemap 02)
       const tbPend = document.getElementById('rmdash-tb-pend');
       if (tbPend) {
         tbPend.innerHTML = rows.length ? rows.map(a => `
@@ -548,85 +624,197 @@ export const PurchaseView = {
       }
     };
 
-    container.innerHTML = `
-      <div class="space-y-5 animate-fade-in">
-        <!-- Filter Header -->
-        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-6 gap-3.5 items-end text-xs">
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
-              <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
-                <option value="">All Species</option>
-                ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
-              <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
-                <option value="">All Centers</option>
-                ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant</label>
-              <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
-                <option value="">All Plants</option>
-                ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
-              <div class="erp-date-wrapper">
-                <input type="text" id="rmdash-from-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+    if (isS01) {
+      // Sitemap 01 modern layout: 2-Row Collapsible Filter Card + 4 KPI Cards + 2 Charts
+      container.innerHTML = `
+        <div class="space-y-4 animate-fade-in">
+          <!-- Filter Card with Accordion & Inline Search -->
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[#F1F5F9]">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#00A8B5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                <h3 class="text-sm font-bold text-[#0F172A]">Search & Filters</h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="rmdash-reset-btn" class="w-7 h-7 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] flex items-center justify-center cursor-pointer transition-colors" title="Reset Filters">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                </button>
+                <button id="rmdash-accordion-btn" class="w-7 h-7 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] flex items-center justify-center cursor-pointer transition-colors" title="Toggle Filters">
+                  <svg id="rmdash-accordion-icon" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
               </div>
             </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
-              <div class="erp-date-wrapper">
-                <input type="text" id="rmdash-to-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+
+            <div id="rmdash-filter-fields" class="space-y-3.5">
+              <!-- Row 1: 4 Columns -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div>
+                  <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
+                  <select id="rmdash-species-sel" class="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#00A8B5] outline-none">
+                    <option value="">Vannamei (VM)</option>
+                    ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
+                  <select id="rmdash-center-sel" class="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#00A8B5] outline-none">
+                    <option value="">All Centers (Select)</option>
+                    ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant</label>
+                  <select id="rmdash-plant-sel" class="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#00A8B5] outline-none">
+                    <option value="">All Plants (Select)</option>
+                    ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
+                  <div class="erp-date-wrapper">
+                    <input type="text" id="rmdash-from-date" placeholder="05/10/2026" value="05/10/2026" class="erp-date-input w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2: To Date + Inline Search Button -->
+              <div class="flex items-end gap-3 text-xs">
+                <div class="w-full sm:w-1/4">
+                  <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
+                  <div class="erp-date-wrapper">
+                    <input type="text" id="rmdash-to-date" placeholder="06/10/2026" value="06/10/2026" class="erp-date-input w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+                  </div>
+                </div>
+                <button id="rmdash-search-btn" class="h-10 px-6 rounded-xl bg-[#00A8B5] hover:bg-[#008f9a] active:scale-[0.99] text-white text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mb-0.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <span>Search</span>
+                </button>
               </div>
             </div>
-            <div class="flex items-center gap-1.5">
-              <button id="rmdash-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Filter</span>
-              </button>
-              <button id="rmdash-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
-                ↺
-              </button>
+          </div>
+
+          <!-- 4 KPI Cards Container -->
+          <div id="rmdash-metrics-grid"></div>
+
+          <!-- 2 Side-by-Side Analytics Charts -->
+          <div id="rmdash-charts-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
+              <h3 class="text-sm font-bold text-[#0F172A] mb-2">Sum of QTY by SPECIES</h3>
+              <div class="flex justify-center items-center gap-2 text-xs text-[#64748B] mb-3">
+                <span class="w-3 h-3 rounded-xs bg-[#5B67CA] inline-block"></span>
+                <span>Quantity (KG)</span>
+              </div>
+              <div style="height: 220px;" class="relative">
+                <canvas id="rmdash-chart-species"></canvas>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
+              <h3 class="text-sm font-bold text-[#0F172A] mb-2">Sum of QTY by PLANT</h3>
+              <div class="flex justify-center items-center gap-2 text-xs text-[#64748B] mb-3">
+                <span class="w-3 h-3 rounded-xs bg-[#4DD0E1] inline-block"></span>
+                <span>Intake Quantity (KG)</span>
+              </div>
+              <div style="height: 220px;" class="relative">
+                <canvas id="rmdash-chart-plant"></canvas>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- 3 Breakdown Cards -->
-        <div id="rmdash-metrics-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
-
-        <!-- Production Details Table Card -->
-        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Pending Intake Register</h3>
+      `;
+    } else {
+      // Sitemap 02 (Superadmin) original layout
+      container.innerHTML = `
+        <div class="space-y-5 animate-fade-in">
+          <!-- Filter Header -->
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-3.5 items-end text-xs">
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
+                <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                  <option value="">All Species</option>
+                  ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
+                <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                  <option value="">All Centers</option>
+                  ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant</label>
+                <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                  <option value="">All Plants</option>
+                  ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" id="rmdash-from-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
+                <div class="erp-date-wrapper">
+                  <input type="text" id="rmdash-to-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button id="rmdash-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <span>Filter</span>
+                </button>
+                <button id="rmdash-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                  ↺
+                </button>
+              </div>
             </div>
-            <span class="text-xs text-[#64748B]">Real-time lot status & QC screening</span>
           </div>
 
-          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
-                  <th class="px-4 py-3">Lot Number</th>
-                  <th class="px-4 py-3">Arrival Qty</th>
-                  <th class="px-4 py-3">AB Status</th>
-                  <th class="px-4 py-3">Pending Since</th>
-                </tr>
-              </thead>
-              <tbody id="rmdash-tb-pend"></tbody>
-            </table>
+          <!-- 3 Breakdown Cards -->
+          <div id="rmdash-metrics-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+
+          <!-- Production Details Table Card -->
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Pending Intake Register</h3>
+              </div>
+              <span class="text-xs text-[#64748B]">Real-time lot status & QC screening</span>
+            </div>
+
+            <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+                    <th class="px-4 py-3">Lot Number</th>
+                    <th class="px-4 py-3">Arrival Qty</th>
+                    <th class="px-4 py-3">AB Status</th>
+                    <th class="px-4 py-3">Pending Since</th>
+                  </tr>
+                </thead>
+                <tbody id="rmdash-tb-pend"></tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    }
+
+    // Accordion toggle in Sitemap 01
+    const accordBtn = document.getElementById('rmdash-accordion-btn');
+    const filterFields = document.getElementById('rmdash-filter-fields');
+    const accordIcon = document.getElementById('rmdash-accordion-icon');
+    if (accordBtn && filterFields) {
+      accordBtn.addEventListener('click', () => {
+        const isHidden = filterFields.classList.toggle('hidden');
+        if (accordIcon) accordIcon.classList.toggle('rotate-180', isHidden);
+      });
+    }
 
     document.getElementById('rmdash-search-btn')?.addEventListener('click', () => {
       fSpecies = document.getElementById('rmdash-species-sel')?.value || '';
@@ -650,6 +838,94 @@ export const PurchaseView = {
     });
 
     updateView();
+  },
+
+  renderDualCharts(sumSpecies, sumPlant) {
+    if (typeof window === 'undefined' || !window.Chart) return;
+
+    // Destroy existing chart instances to avoid canvas reuse errors
+    if (this._speciesChart) {
+      this._speciesChart.destroy();
+      this._speciesChart = null;
+    }
+    if (this._plantChart) {
+      this._plantChart.destroy();
+      this._plantChart = null;
+    }
+
+    // Species chart canvas
+    const speciesCanvas = document.getElementById('rmdash-chart-species');
+    if (speciesCanvas) {
+      const spLabels = Object.keys(sumSpecies).length ? Object.keys(sumSpecies) : ['Vannamei (VM)'];
+      const spData = Object.values(sumSpecies).length ? Object.values(sumSpecies) : [138000];
+
+      this._speciesChart = new window.Chart(speciesCanvas, {
+        type: 'bar',
+        data: {
+          labels: spLabels,
+          datasets: [{
+            label: 'Quantity (KG)',
+            data: spData,
+            backgroundColor: '#5B67CA',
+            borderRadius: 8,
+            barThickness: 50
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: '#F1F5F9' },
+              ticks: { color: '#94A3B8', font: { size: 10.5 } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#64748B', font: { size: 10.5, weight: '600' } }
+            }
+          }
+        }
+      });
+    }
+
+    // Plant chart canvas
+    const plantCanvas = document.getElementById('rmdash-chart-plant');
+    if (plantCanvas) {
+      const plLabels = Object.keys(sumPlant).length ? Object.keys(sumPlant) : ['DFL UNIT-1', 'DFL UNIT-2', 'DFL UNIT-3', 'DFL UNIT-4'];
+      const plData = Object.values(sumPlant).length ? Object.values(sumPlant) : [40000, 26000, 22000, 10000];
+
+      this._plantChart = new window.Chart(plantCanvas, {
+        type: 'bar',
+        data: {
+          labels: plLabels,
+          datasets: [{
+            label: 'Intake Quantity (KG)',
+            data: plData,
+            backgroundColor: '#4DD0E1',
+            borderRadius: 8,
+            barThickness: 42
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: '#F1F5F9' },
+              ticks: { color: '#94A3B8', font: { size: 10.5 } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#64748B', font: { size: 10.5, weight: '600' } }
+            }
+          }
+        }
+      });
+    }
   },
 
   // =========================================================================

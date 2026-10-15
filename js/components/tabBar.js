@@ -1,6 +1,7 @@
 // On-Screen Horizontal Tab Bar Component
 
 import { NAV_HIERARCHY } from './sidebar.js';
+import { Environment } from '../framework/Environment.js';
 
 export const TabBar = {
   getContext(activeHash) {
@@ -73,17 +74,39 @@ export const TabBar = {
         </nav>
       `;
     } else {
+      const isS01 = Environment.isSitemap01();
+      const activeTabObj = submenu.tabs.find(t => t.id === currentTabId);
+
       // Clean full-width underline tabs for full page section switching across all submenus
       container.innerHTML = `
-        <nav aria-label="${submenu.title} tabs navigation" class="mb-0">
+        <nav aria-label="${submenu.title} tabs navigation" class="mb-3">
           <div 
             role="tablist" 
             aria-label="${submenu.title} views" 
             id="${containerId}-tablist"
-            class="tabs-line"
+            class="${isS01 ? 'flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none' : 'tabs-line'}"
           >
             ${submenu.tabs.map(tab => {
               const isActive = tab.id === currentTabId;
+              const displayLabel = (isS01 && tab.id === 'rm-dashboard') ? 'Raw Material Dashboard' : ((isS01 && tab.id === 'purchase-dashboard') ? 'Commercial Dashboard' : tab.label);
+              
+              if (isS01) {
+                return `
+                  <a 
+                    id="tab-${tab.id}"
+                    role="tab"
+                    href="${tab.hash}" 
+                    aria-selected="${isActive ? 'true' : 'false'}"
+                    tabindex="${isActive ? '0' : '-1'}"
+                    aria-controls="panel-${tab.id}"
+                    class="text-xs font-semibold py-2.5 transition-all relative ${isActive ? 'text-[#00A8B5] font-bold' : 'text-[#64748B] hover:text-[#0F172A]'}"
+                    style="${isActive ? 'border-bottom: 2.5px solid #00A8B5; margin-bottom: -1px;' : ''}"
+                  >
+                    <span>${displayLabel}</span>
+                  </a>
+                `;
+              }
+
               return `
                 <a 
                   id="tab-${tab.id}"
@@ -99,6 +122,11 @@ export const TabBar = {
               `;
             }).join('')}
           </div>
+          ${isS01 && activeTabObj ? `
+            <div class="pt-3 pb-1">
+              <h1 class="text-2xl font-bold text-[#0F172A] tracking-tight">${activeTabObj.id === 'rm-dashboard' ? 'Raw Material Dashboard' : activeTabObj.label}</h1>
+            </div>
+          ` : ''}
         </nav>
       `;
     }

@@ -21,12 +21,20 @@ export const Header = {
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
     const envMeta = Environment.getEnvMeta();
 
+    const isS01 = Environment.isSitemap01();
+
     container.innerHTML = `
       <header class="bg-white h-14 px-6 sm:px-8 flex items-center justify-between select-none relative z-40">
-        <!-- Left: Search ERP records & Environment Switcher -->
-        <div class="flex items-center gap-3">
-          <div class="relative w-64 sm:w-72 md:w-80" id="header-search-container">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+        ${isS01 ? `
+          <!-- Left: Greeting Welcome Text -->
+          <div class="flex items-center text-sm shrink-0">
+            <span class="text-[#64748B] font-normal mr-1.5">Welcome,</span>
+            <span class="font-bold text-[#0F172A]">P. Rama Krishna</span>
+          </div>
+
+          <!-- Center: Fully Rounded Capsule Search Bar -->
+          <div class="relative w-72 sm:w-80 md:w-96 mx-auto" id="header-search-container">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
@@ -35,16 +43,42 @@ export const Header = {
               type="text" 
               id="header-global-search-input" 
               placeholder="Search ERP records..." 
-              class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
+              class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-full focus:outline-none focus:border-[#00A8B5] focus:ring-2 focus:ring-[#00A8B5]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
             />
-            <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+            <button id="header-search-clear-btn" class="hidden absolute right-3 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
 
             <!-- Live Search Results Dropdown -->
             <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
               <div id="header-search-results-content" class="max-h-96 overflow-y-auto space-y-3"></div>
             </div>
           </div>
+        ` : `
+          <!-- Left: Search ERP records & Environment Switcher (Sitemap 02 Superadmin) -->
+          <div class="flex items-center gap-3">
+            <div class="relative w-64 sm:w-72 md:w-80" id="header-search-container">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                id="header-global-search-input" 
+                placeholder="Search ERP records..." 
+                class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
+              />
+              <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
 
+              <!-- Live Search Results Dropdown -->
+              <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
+                <div id="header-search-results-content" class="max-h-96 overflow-y-auto space-y-3"></div>
+              </div>
+            </div>
+          </div>
+        `}
+
+        <!-- Right: Actions & User Profile Block -->
+        <div class="flex items-center gap-2 sm:gap-3">
           <!-- Environment Indicator & Quick Switcher Badge -->
           <div class="relative" id="header-env-container">
             <button
@@ -60,7 +94,7 @@ export const Header = {
             </button>
 
             <!-- Environment Dropdown -->
-            <div id="header-env-dropdown" class="hidden absolute left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-2 z-[90] text-xs">
+            <div id="header-env-dropdown" class="hidden absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-2 z-[90] text-xs">
               <div class="px-3 py-2 border-b border-[#F1F5F9] mb-1">
                 <div class="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider">Select Active Environment</div>
                 <div class="text-[11px] text-[#475569] mt-0.5">Data stores are completely segregated.</div>
@@ -115,45 +149,39 @@ export const Header = {
               </a>
             </div>
           </div>
-        </div>
 
-        <!-- Right: Actions & User Profile Block (Border-free minimal icons) -->
-        <div class="flex items-center gap-2 sm:gap-3">
-          <!-- Help Button (?) - Clean without stroke boundary -->
+          <!-- Help Button (?) -->
           <button
             id="header-help-btn"
-            class="w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            class="${isS01 ? 'w-8 h-8 rounded-full border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#00A8B5] flex items-center justify-center transition-all cursor-pointer shadow-xs' : 'w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer'}"
             title="Help & Shortcuts (?)"
           >
-            <svg style="width:19px;height:19px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="9.5" stroke-width="1.8"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m0 3.5h.01"/>
             </svg>
           </button>
 
-          <!-- Notification Bell Button - Clean without stroke boundary -->
+          <!-- Notification Bell Button -->
           <a
             href="#/notifications/center/all-notifications"
             id="header-notifications-page-btn"
-            class="relative w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer"
+            class="${isS01 ? 'relative w-8 h-8 rounded-full border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#64748B] hover:text-[#00A8B5] flex items-center justify-center transition-all cursor-pointer shadow-xs' : 'relative w-9 h-9 rounded-full bg-transparent hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#006C7A] flex items-center justify-center transition-all cursor-pointer'}"
             title="Notification Center (${unreadCount} Unread)"
           >
-            <svg style="width:19px;height:19px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
             </svg>
             ${unreadCount > 0 ? `
-              <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#EF4444] border-2 border-white ring-1 ring-[#EF4444]/30"></span>
+              <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#EF4444] border-2 border-white ring-1 ring-[#EF4444]/30"></span>
             ` : ''}
           </a>
-
-          <!-- Vertical Divider -->
-          <div class="h-8 w-px bg-[#E2E8F0] mx-0.5"></div>
 
           <!-- User Profile Trigger & Menu -->
           <div class="relative">
             <button
               id="user-menu-btn"
-              class="flex items-center gap-2.5 py-1 px-1.5 rounded-xl hover:bg-[#F8FAFC] transition-colors cursor-pointer outline-none group"
+              class="flex items-center gap-2 py-1 px-1.5 rounded-xl hover:bg-[#F8FAFC] transition-colors cursor-pointer outline-none group"
               title="${ERP_DATA.currentUser.name} (${ERP_DATA.currentUser.role})"
             >
               <img
@@ -168,10 +196,10 @@ export const Header = {
 
               <div class="flex flex-col text-left">
                 <span class="text-xs font-bold text-[#0F172A] leading-tight group-hover:text-[#006C7A] transition-colors">${ERP_DATA.currentUser.name}</span>
-                <span class="text-[11px] font-medium text-[#64748B] leading-tight">${ERP_DATA.currentUser.role}</span>
+                <span class="text-[10px] font-medium text-[#64748B] leading-tight">${ERP_DATA.currentUser.role}</span>
               </div>
 
-              <svg class="w-4 h-4 text-[#64748B] ml-0.5 group-hover:text-[#0F172A] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 text-[#64748B] ml-0.5 group-hover:text-[#0F172A] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </button>

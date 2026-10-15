@@ -1,5 +1,6 @@
 // Navigation Hierarchy: Main Menu -> Sub Menu -> On-Screen Tabs
 import { LOGO_COLOR, LOGO_WHITE } from '../data/logos.js';
+import { Environment } from '../framework/Environment.js';
 
 export const NAV_HIERARCHY = [
   {
@@ -559,20 +560,21 @@ export const Sidebar = {
     this.activeTabId = tabId;
 
     const collapsedClass = this.isCollapsed ? 'collapsed' : '';
+    const isS01 = Environment.isSitemap01();
 
     container.innerHTML = `
-      <aside class="f-sidebar ${collapsedClass}" id="erp-sidebar">
+      <aside class="f-sidebar ${collapsedClass} ${isS01 ? 'sitemap01-sidebar' : ''}" id="erp-sidebar" style="${isS01 ? 'border-radius: 0 16px 16px 0; border-right: 1px solid #1E293B;' : ''}">
         <!-- Floating Sidebar Header with Devi Fisheries Brand Logo & Edge Toggle -->
-        <div class="f-sb-header">
+        <div class="f-sb-header" style="position:relative;">
           <a href="#/purchase/dashboard/rm-dashboard" class="f-sb-brand" title="Devi Fisheries — Enterprise ERP">
             <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" style="width:38px;height:38px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0, 0, 0, 0.35);border:1.5px solid rgba(255, 255, 255, 0.16);" />
             <div class="f-sb-brand-info">
-              <div class="f-sb-title">Devi Fisheries</div>
-              <div class="f-sb-subtitle">Enterprise ERP</div>
+              <div class="f-sb-title" style="font-weight:700;color:#fff;">Devi Fisheries</div>
+              <div class="f-sb-subtitle" style="${isS01 ? 'color:#00B4D8;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;' : ''}">${isS01 ? 'POWERED BY CAMAROO' : 'Enterprise ERP'}</div>
             </div>
           </a>
-          <button class="f-sb-toggle" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}">
-            <i data-lucide="chevron-left"></i>
+          <button class="f-sb-toggle ${isS01 ? 'sitemap01-seam-toggle' : ''}" id="sidebar-edge-toggle-btn" title="${this.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}" style="${isS01 ? 'position:absolute;right:-14px;top:20px;width:28px;height:28px;border-radius:9999px;background:#ffffff;border:1px solid #CBD5E1;box-shadow:0 2px 6px rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;color:#475569;cursor:pointer;z-index:60;' : ''}">
+            <svg class="w-3.5 h-3.5 transition-transform ${this.isCollapsed ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
           </button>
         </div>
 
@@ -584,7 +586,7 @@ export const Sidebar = {
           </a>
 
           <span class="f-sb-sec">Core Modules</span>
-          ${this.renderNavGroups()}
+          ${this.renderNavGroups(isS01)}
 
           <span class="f-sb-sec">Configuration</span>
           <a class="f-sb-link ${this.activeModuleId === 'setup' ? 'active' : ''}" href="#/setup/client-master-setup/company-setup" title="System Settings">
@@ -617,13 +619,52 @@ export const Sidebar = {
     this.bindEvents();
   },
 
-  renderNavGroups() {
+  renderNavGroups(isS01 = false) {
     // Setup is in Configuration section; Help is in Footer; Notifications is in Top Header
     const sidebarModules = NAV_HIERARCHY.filter(m => m.id !== 'setup' && m.id !== 'help' && m.id !== 'notifications');
     return sidebarModules.map(mod => {
       const isExpanded = mod.id === this.activeModuleId;
       const iconName = MODULE_LUCIDE_ICONS[mod.id] || 'box';
 
+      if (isS01) {
+        // Sitemap 01 modern pill capsule & indented bullet tree layout
+        return `
+          <div class="f-sb-grp ${isExpanded ? 'open' : ''}" data-mod-id="${mod.id}">
+            <button 
+              class="f-sb-grp-btn sidebar-mod-btn ${isExpanded ? 's01-active-pill' : ''}" 
+              data-module-id="${mod.id}" 
+              title="${mod.title}"
+              style="${isExpanded ? 'background: #00A8B5 !important; color: #0F172A !important; font-weight: 700 !important; border-radius: 12px; margin: 3px 8px; box-shadow: 0 4px 12px rgba(0, 168, 181, 0.25);' : ''}"
+            >
+              <i data-lucide="${iconName}" style="${isExpanded ? 'stroke: #0F172A !important; stroke-width: 2.2;' : ''}"></i>
+              <span style="${isExpanded ? 'color: #0F172A !important;' : ''}">${mod.title}</span>
+              <i data-lucide="${isExpanded ? 'chevron-down' : 'chevron-right'}" class="f-sb-chev" style="${isExpanded ? 'stroke: #0F172A !important;' : ''}"></i>
+            </button>
+            <div class="f-sb-sub" style="${isExpanded ? 'display: block; padding-left: 14px;' : ''}">
+              <div class="f-sb-flyout-title">${mod.title}</div>
+              ${mod.submenus.map(sub => {
+                const isSubActive = isExpanded && (sub.id === this.activeSubmenuId);
+                const defaultHash = sub.tabs[0]?.hash || `/#/${mod.id}/${sub.id}`;
+                return `
+                  <a 
+                    href="${defaultHash}" 
+                    class="f-sb-sub-link ${isSubActive ? 'active' : ''}"
+                    title="${sub.title}"
+                    data-module-id="${mod.id}"
+                    data-submenu-id="${sub.id}"
+                    style="${isSubActive ? 'background: #00B4D8 !important; color: #0F172A !important; font-weight: 700; border-radius: 8px; margin: 2px 4px; padding: 7px 12px;' : 'color: #94A3B8; padding: 6px 12px; margin: 1px 4px;'}"
+                  >
+                    <span style="font-size: 11px; margin-right: 6px; opacity: ${isSubActive ? '1' : '0.6'};">•</span>
+                    <span>${sub.title}</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      // Sitemap 02 (Pristine Superadmin) canonical rendering
       return `
         <div class="f-sb-grp ${isExpanded ? 'open' : ''}" data-mod-id="${mod.id}">
           <button class="f-sb-grp-btn sidebar-mod-btn" data-module-id="${mod.id}" title="${mod.title}">
