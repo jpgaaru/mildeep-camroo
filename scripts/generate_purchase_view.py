@@ -16,6 +16,7 @@ import { TabBar } from '../components/tabBar.js';
 import { Skeleton } from '../components/skeleton.js';
 import { renderEmptyState } from '../components/emptyState.js';
 import { Molecules } from '../framework/index.js';
+import { Environment } from '../framework/Environment.js';
 
 // ============================================================================
 // CONFIG & MASTERS
@@ -71,19 +72,19 @@ export const T = n => (Number(n || 0) / 1000).toFixed(2);
 export const monthIdx = { September: 8, October: 9, November: 10 };
 
 // ============================================================================
-// CANONICAL DATA STORE
+// CANONICAL DATA STORE (Environment Segregation & State Isolation)
 // ============================================================================
-export let bookings = [
+export const BASELINE_BOOKINGS = [
   { sNo: 1, no: 'BK/ADP/2627/0001', date: '2026-10-05', station: 'ADDARIPETA FARMS', species: 'COD', type: 'Site Weightment', supplier: 'K.GOPAL NAIDU', vehicle: 'AP05TM2628', driver: 'RAMU K', grader: 'K.PRASAD', agent: 'R.SURESH', farm: 'ADDARIPETA FARMS', count: 350, weight: 1000, rate: 200, plant: 'DFL UNIT-2 (KKD)', remarks: 'Dock verified' },
   { sNo: 2, no: 'BK/AVN/2627/0002', date: '2026-10-04', station: 'A.V.NAGARAM FARMS', species: 'LITOPENAEUS VANNAMEI', type: 'Site Weightment', supplier: 'K.GOPAL NAIDU', vehicle: 'AP39UF7171', driver: 'SOMU N', grader: 'M.RAO', agent: '', farm: 'NAGARAM', count: 50, weight: 500, rate: 200, plant: 'DFL UNIT-2 (KKD)', remarks: 'Grade A locked' }
 ];
 
-export let rmArrivals = [
+export const BASELINE_RM_ARRIVALS = [
   { sNo: 1, date: '2026-10-06', company: 'DEVI FISHERIES LIMITED', species: 'COD', plant: 'DFL UNIT-2 (KKD)', center: 'ADDARIPETA FARMS', weight: 1000, amount: 200000 },
   { sNo: 2, date: '2026-10-06', company: 'DEVI FISHERIES LIMITED', species: 'LITOPENAEUS VANNAMEI', plant: 'DFL UNIT-2 (KKD)', center: 'A.V.NAGARAM FARMS', weight: 500, amount: 25000 }
 ];
 
-export let arrivals = [
+export const BASELINE_ARRIVALS = [
   { id: 153934, no: 'BLS/2627/0143', billDate: '2026-10-01', date: '2026-10-01', center: 'BALASORE', plant: 'DFL UNIT-2 (KKD)', type: 'Site Weightment', supplier: 'K.GOPAL NAIDU', grader: '', agent: '', species: 'COD', variety: 'HO-COD', count: 160, weight: 400, rate: 180, harvest: 0, addDed: 0, abStatus: 'Test Pending', dehead: 0, grading: 0, va: 0, soaking: 0, packed: 0, billPending: true, border: false, returned: false, farm: 'BALASORE', supervisor: '', driver: '', vehicle: '' },
   { id: 153935, no: 'NLR/2627/0256', billDate: '2026-10-01', date: '2026-10-01', center: 'NELLORE', plant: 'DFL UNIT-1 (VSP)', type: 'Site Weightment', supplier: 'ADITYA AQUA FARMS', grader: '', agent: '', species: 'LITOPENAEUS VANNAMEI', variety: 'HEAD ON', count: 40, weight: 40000, rate: 450, harvest: 0, addDed: 0, abStatus: 'POSITIVE', dehead: 0, grading: 0, va: 0, soaking: 0, packed: 0, billPending: true, border: false, returned: false, farm: 'NELLORE', supervisor: '', driver: '', vehicle: '' },
   { id: 153938, no: 'AVN/2627/1234', billDate: '2026-10-04', date: '2026-10-06', center: 'A.V.NAGARAM FARMS', plant: 'DFL UNIT-2 (KKD)', type: 'Site Weightment', supplier: 'K.GOPAL NAIDU', grader: '', agent: '', species: 'LITOPENAEUS VANNAMEI', variety: 'HEAD ON', count: 50, weight: 50, rate: 200, harvest: 0, addDed: 0, abStatus: 'Test Pending', dehead: 4, grading: 0, va: 0, soaking: 0, packed: 0, billPending: false, border: true, returned: false, farm: 'NAGARAM', supervisor: '', driver: '', vehicle: '' },
@@ -93,9 +94,22 @@ export let arrivals = [
   { id: 153942, no: 'ADP/2627/0021', billDate: '2026-10-05', date: '2026-10-06', center: 'ADDARIPETA FARMS', plant: 'DFL UNIT-2 (KKD)', type: 'Site Weightment', supplier: 'L.G SEA FOODS(D HARIBABU)', grader: '', agent: '', species: 'COD', variety: 'HO-COD', count: 350, weight: 350, rate: 200, harvest: 0, addDed: 0, abStatus: 'Test Pending', dehead: 0, grading: 0, va: 0, soaking: 0, packed: 0, billPending: false, border: false, returned: false, farm: 'ADDARIPETA FARMS', supervisor: '', driver: '', vehicle: '' }
 ];
 
-export let payments = [
+export const BASELINE_PAYMENTS = [
   { voucher: 'CADP01', mode: 'Cash', date: '2026-10-05', center: 'ADDARIPETA FARMS', agent: '', cheque: '', comments: 'advance', lines: [{ no: 'ADP/2627/0020', amount: 5000 }], total: 5000 }
 ];
+
+export const reloadPurchaseStore = () => {
+  bookings = Environment.getStore('bookings', BASELINE_BOOKINGS);
+  rmArrivals = Environment.getStore('rmArrivals', BASELINE_RM_ARRIVALS);
+  arrivals = Environment.getStore('arrivals', BASELINE_ARRIVALS);
+  payments = Environment.getStore('payments', BASELINE_PAYMENTS);
+  return { bookings, rmArrivals, arrivals, payments };
+};
+
+export let bookings = Environment.getStore('bookings', BASELINE_BOOKINGS);
+export let rmArrivals = Environment.getStore('rmArrivals', BASELINE_RM_ARRIVALS);
+export let arrivals = Environment.getStore('arrivals', BASELINE_ARRIVALS);
+export let payments = Environment.getStore('payments', BASELINE_PAYMENTS);
 
 // Active contextual state
 let isCreatingBooking = false;
@@ -156,6 +170,7 @@ export const PurchaseView = {
   payments,
 
   render(containerId, subPage = 'purchase-dashboard', activeHash = '#/purchase/dashboard/purchase-dashboard') {
+    reloadPurchaseStore();
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -681,7 +696,7 @@ export const PurchaseView = {
               <button onclick="window.Toast.show('Booking details: ${b.no} at ${b.station}', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="View">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </button>
-              <button onclick="if(confirm('Delete booking ${b.no}?')){ bookings = bookings.filter(x => x.no !== '${b.no}'); PurchaseView.renderBookings(document.getElementById('purchase-subpage-content')); Toast.show('Booking deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
+              <button onclick="if(confirm('Delete booking ${b.no}?')){ bookings = bookings.filter(x => x.no !== '${b.no}'); if (window.Environment) window.Environment.setStore('bookings', bookings); PurchaseView.renderBookings(document.getElementById('purchase-subpage-content')); Toast.show('Booking deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               </button>
             </div>
@@ -998,6 +1013,7 @@ export const PurchaseView = {
       };
 
       bookings.unshift(newBooking);
+      Environment.setStore('bookings', bookings);
       Toast.show(`Booking ${no} created successfully!`, 'success');
       closeHandler();
     });
@@ -1222,7 +1238,7 @@ export const PurchaseView = {
               <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="Edit RM Bill">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
               </button>
-              <button onclick="if(confirm('Delete arrival ${a.no}?')){ arrivals = arrivals.filter(x => x.no !== '${a.no}'); PurchaseView.renderArrivals(document.getElementById('purchase-subpage-content')); Toast.show('Arrival deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
+              <button onclick="if(confirm('Delete arrival ${a.no}?')){ arrivals = arrivals.filter(x => x.no !== '${a.no}'); if (window.Environment) window.Environment.setStore('arrivals', arrivals); PurchaseView.renderArrivals(document.getElementById('purchase-subpage-content')); Toast.show('Arrival deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               </button>
             </div>
@@ -2063,7 +2079,7 @@ export const PurchaseView = {
               <button onclick="window.Toast.show('Voucher ${py.voucher} details loaded', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="View">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </button>
-              <button onclick="if(confirm('Delete voucher ${py.voucher}? Balances will be restored!')){ payments = payments.filter(p => p.voucher !== '${py.voucher}'); PurchaseView.renderPaymentSummary(document.getElementById('purchase-subpage-content')); Toast.show('Voucher deleted and balances restored', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
+              <button onclick="if(confirm('Delete voucher ${py.voucher}? Balances will be restored!')){ payments = payments.filter(p => p.voucher !== '${py.voucher}'); if (window.Environment) window.Environment.setStore('payments', payments); PurchaseView.renderPaymentSummary(document.getElementById('purchase-subpage-content')); Toast.show('Voucher deleted and balances restored', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               </button>
             </div>
@@ -2329,6 +2345,7 @@ export const PurchaseView = {
           lines,
           total: totalPaid
         });
+        Environment.setStore('payments', payments);
 
         Toast.show(`Payment saved! Voucher ${voucher} created for ₹${fmt(totalPaid)}`, 'success');
         PurchaseView.renderPayments(document.getElementById('purchase-subpage-content'));
@@ -2467,6 +2484,7 @@ export const PurchaseView = {
         };
 
         arrivals.unshift(newArr);
+        Environment.setStore('arrivals', arrivals);
         Toast.show(`Arrival receipt ${no} registered!`, 'success');
         PurchaseView.renderArrivals(document.getElementById('purchase-subpage-content'));
         return true;

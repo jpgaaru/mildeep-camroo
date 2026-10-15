@@ -7,6 +7,7 @@ import { TourGuide } from './tourGuide.js';
 import { Sidebar } from './sidebar.js';
 import { Accessibility } from './accessibility.js';
 import { NOTIFICATIONS_DATA } from '../views/notificationsView.js';
+import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02 } from '../framework/Environment.js';
 
 export const Header = {
   render(containerId) {
@@ -18,12 +19,13 @@ export const Header = {
       ? NOTIFICATIONS_DATA.filter(n => n.unread).length
       : 5;
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
+    const envMeta = Environment.getEnvMeta();
 
     container.innerHTML = `
       <header class="bg-white h-14 px-6 sm:px-8 flex items-center justify-between select-none relative z-40">
-        <!-- Left: Search ERP records... -->
-        <div class="flex items-center" id="header-search-container">
-          <div class="relative w-64 sm:w-72 md:w-80">
+        <!-- Left: Search ERP records & Environment Switcher -->
+        <div class="flex items-center gap-3">
+          <div class="relative w-64 sm:w-72 md:w-80" id="header-search-container">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -40,6 +42,77 @@ export const Header = {
             <!-- Live Search Results Dropdown -->
             <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
               <div id="header-search-results-content" class="max-h-96 overflow-y-auto space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- Environment Indicator & Quick Switcher Badge -->
+          <div class="relative" id="header-env-container">
+            <button
+              id="header-env-badge-btn"
+              class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${envMeta.bgPill} border transition-all cursor-pointer hover:shadow-sm"
+              title="Active Environment: ${envMeta.name} (${envMeta.role}). Click to switch."
+            >
+              <span class="w-2 h-2 rounded-full ${envMeta.dotColor} animate-pulse"></span>
+              <span>${envMeta.badgeLabel}</span>
+              <svg class="w-3.5 h-3.5 opacity-60 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- Environment Dropdown -->
+            <div id="header-env-dropdown" class="hidden absolute left-0 top-full mt-2 w-72 bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-2 z-[90] text-xs">
+              <div class="px-3 py-2 border-b border-[#F1F5F9] mb-1">
+                <div class="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider">Select Active Environment</div>
+                <div class="text-[11px] text-[#475569] mt-0.5">Data stores are completely segregated.</div>
+              </div>
+
+              <!-- Option: Sitemap 01 -->
+              <button
+                type="button"
+                id="header-switch-sitemap01-btn"
+                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'sitemap01' ? 'bg-[#006C7A]/5 font-bold text-[#006C7A]' : 'text-[#334155]'}"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#006C7A]"></span>
+                  <div>
+                    <div class="font-semibold text-[#0F172A]">Sitemap 01 (Custom)</div>
+                    <div class="text-[10px] text-[#64748B]">Client-specific custom ERP clone</div>
+                  </div>
+                </div>
+                ${envMeta.id === 'sitemap01' ? '<span class="text-[9px] font-bold text-[#006C7A] bg-[#006C7A]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
+              </button>
+
+              <!-- Option: Sitemap 02 -->
+              <button
+                type="button"
+                id="header-switch-sitemap02-btn"
+                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'sitemap02' ? 'bg-[#3B5AF6]/5 font-bold text-[#3B5AF6]' : 'text-[#334155]'}"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#3B5AF6]"></span>
+                  <div>
+                    <div class="font-semibold text-[#0F172A]">Sitemap 02 (Superadmin)</div>
+                    <div class="text-[10px] text-[#64748B]">Original pristine Superadmin ERP</div>
+                  </div>
+                </div>
+                ${envMeta.id === 'sitemap02' ? '<span class="text-[9px] font-bold text-[#3B5AF6] bg-[#3B5AF6]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
+              </button>
+
+              <!-- Option: CDS Design System -->
+              <a
+                href="designsystem.html"
+                id="header-link-cds-btn"
+                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left text-[#334155] cursor-pointer"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#8B5CF6]"></span>
+                  <div>
+                    <div class="font-semibold text-[#0F172A]">CDS (Design System)</div>
+                    <div class="text-[10px] text-[#64748B]">Component catalogue & specs</div>
+                  </div>
+                </div>
+                <svg class="w-3.5 h-3.5 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -200,6 +273,37 @@ export const Header = {
       };
     }
 
+    // Environment Dropdown & Switcher
+    const envBadgeBtn = document.getElementById('header-env-badge-btn');
+    const envDropdown = document.getElementById('header-env-dropdown');
+    const switchSitemap01Btn = document.getElementById('header-switch-sitemap01-btn');
+    const switchSitemap02Btn = document.getElementById('header-switch-sitemap02-btn');
+
+    if (envBadgeBtn && envDropdown) {
+      envBadgeBtn.onclick = (e) => {
+        e.stopPropagation();
+        envDropdown.classList.toggle('hidden');
+        if (userMenu) userMenu.classList.add('hidden');
+        if (notifMenu) notifMenu.classList.add('hidden');
+      };
+    }
+
+    if (switchSitemap01Btn) {
+      switchSitemap01Btn.onclick = (e) => {
+        e.stopPropagation();
+        if (envDropdown) envDropdown.classList.add('hidden');
+        Environment.switchEnvironment(ENV_SITEMAP_01);
+      };
+    }
+
+    if (switchSitemap02Btn) {
+      switchSitemap02Btn.onclick = (e) => {
+        e.stopPropagation();
+        if (envDropdown) envDropdown.classList.add('hidden');
+        Environment.switchEnvironment(ENV_SITEMAP_02);
+      };
+    }
+
     // User Dropdown
     const userBtn = document.getElementById('user-menu-btn');
     const userMenu = document.getElementById('user-dropdown-menu');
@@ -207,6 +311,7 @@ export const Header = {
       userBtn.onclick = (e) => {
         e.stopPropagation();
         userMenu.classList.toggle('hidden');
+        if (envDropdown) envDropdown.classList.add('hidden');
       };
     }
 
@@ -214,6 +319,7 @@ export const Header = {
     document.addEventListener('click', () => {
       if (notifMenu) notifMenu.classList.add('hidden');
       if (userMenu) userMenu.classList.add('hidden');
+      if (envDropdown) envDropdown.classList.add('hidden');
     });
 
     // Inline Live Search in Header (Direct input, no popup modal)
