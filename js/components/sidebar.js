@@ -10,10 +10,10 @@ export const NAV_HIERARCHY = [
       {
         id: "dashboard",
         title: "Dashboard",
-        defaultTab: "rm-dashboard",
+        defaultTab: "purchase-dashboard",
         tabs: [
-          { id: "rm-dashboard", label: "Raw Material", hash: "#/purchase/dashboard/rm-dashboard" },
-          { id: "commercial-dashboard", label: "Commercial", hash: "#/purchase/dashboard/commercial-dashboard" }
+          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/dashboard/purchase-dashboard" },
+          { id: "rm-dashboard", label: "RM Dashboard", hash: "#/purchase/dashboard/rm-dashboard" }
         ]
       },
       {
@@ -21,28 +21,29 @@ export const NAV_HIERARCHY = [
         title: "Operations",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Bookings", hash: "#/purchase/operations/bookings" },
-          { id: "rm-arrivals", label: "RM Arrivals", hash: "#/purchase/operations/rm-arrivals" },
-          { id: "arrivals", label: "Arrivals Register", hash: "#/purchase/operations/arrivals" },
-          { id: "lot-tracking", label: "Lot Tracking", hash: "#/purchase/operations/lot-tracking" }
+          { id: "bookings", label: "Bookings List", hash: "#/purchase/operations/bookings" },
+          { id: "create-booking", label: "Create Booking", hash: "#/purchase/operations/create-booking" },
+          { id: "rm-arrivals", label: "RM Arrival", hash: "#/purchase/operations/rm-arrivals" },
+          { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
+          { id: "lot-tracking", label: "LotTrack", hash: "#/purchase/operations/lot-tracking" }
         ]
       },
       {
         id: "transactions-bills",
         title: "Transactions & Bills",
-        defaultTab: "supplier-bills",
+        defaultTab: "bills",
         tabs: [
-          { id: "supplier-bills", label: "Supplier Bills", hash: "#/purchase/transactions-bills/supplier-bills" },
-          { id: "commercial-txns", label: "Commercial Txns", hash: "#/purchase/transactions-bills/commercial-txns" }
+          { id: "bills", label: "Bills", hash: "#/purchase/transactions-bills/bills" },
+          { id: "rm-bill", label: "RM Bill", hash: "#/purchase/transactions-bills/rm-bill" }
         ]
       },
       {
         id: "payments",
         title: "Payments",
-        defaultTab: "payment-summary",
+        defaultTab: "payments",
         tabs: [
-          { id: "payment-summary", label: "Summary", hash: "#/purchase/payments/payment-summary" },
-          { id: "bill-date-payment", label: "Bill & Date-Wise", hash: "#/purchase/payments/bill-date-payment" }
+          { id: "payments", label: "Payments", hash: "#/purchase/payments/payments" },
+          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/payments/payment-summary" }
         ]
       }
     ]

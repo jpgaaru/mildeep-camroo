@@ -188,7 +188,7 @@ export const App = {
         HomeView.render(mainContainer);
         break;
       case 'purchase':
-        PurchaseView.render(mainContainer, tabName || 'rm-dashboard', resolvedHash);
+        PurchaseView.render(mainContainer, tabName || 'purchase-dashboard', resolvedHash);
         break;
       case 'preprocessing':
         PreprocessingView.render(mainContainer, tabName || 'floor-overview', resolvedHash);
@@ -221,7 +221,7 @@ export const App = {
         NotificationsView.render(mainContainer, tabName || 'all-notifications', resolvedHash);
         break;
       default:
-        PurchaseView.render(mainContainer, 'rm-dashboard', '#/purchase/dashboard/rm-dashboard');
+        PurchaseView.render(mainContainer, 'purchase-dashboard', '#/purchase/dashboard/purchase-dashboard');
         break;
     }
 
