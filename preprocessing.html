@@ -857,6 +857,20 @@ table.matrix-table td {
   .content-area { padding: 16px; }
 }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body, html { font-family: 'Inter', system-ui, -apple-system, sans-serif !important; }
+  i[data-lucide] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 15px;
+    height: 15px;
+    stroke-width: 2;
+  }
+</style>
 </head>
 <body>
 
@@ -1102,28 +1116,28 @@ table.matrix-table td {
             </div>
             <div class="alert-list">
               <div class="alert-item danger">
-                <span class="alert-icon">🧪</span>
+                <span class="alert-icon"><i data-lucide="flask-conical"></i></span>
                 <div class="alert-content">
                   <div class="alert-title">CARNAL 659 S ADVANCED (STPP)</div>
                   <div class="alert-desc">Stock at 1,671 bags · Reorder soon</div>
                 </div>
               </div>
               <div class="alert-item">
-                <span class="alert-icon">🚛</span>
+                <span class="alert-icon"><i data-lucide="truck"></i></span>
                 <div class="alert-content">
                   <div class="alert-title">Count shortfall on AP39TT4177</div>
                   <div class="alert-desc">-9.0 count difference on VM-VSP-AMP-056</div>
                 </div>
               </div>
               <div class="alert-item">
-                <span class="alert-icon">📦</span>
+                <span class="alert-icon"><i data-lucide="package"></i></span>
                 <div class="alert-content">
                   <div class="alert-title">Batch VM-KKD-MKP-043 pending transfer</div>
                   <div class="alert-desc">1,186 Kgs ready for DFL UNIT-3 (PSP)</div>
                 </div>
               </div>
               <div class="alert-item success">
-                <span class="alert-icon">✅</span>
+                <span class="alert-icon"><i data-lucide="check-circle-2"></i></span>
                 <div class="alert-content">
                   <div class="alert-title">ALTESA NEO S100 received</div>
                   <div class="alert-desc">240 bags cleared at Kakinada port</div>
@@ -1159,19 +1173,19 @@ table.matrix-table td {
         <!-- Quick Actions Row -->
         <div class="quick-actions">
           <button class="action-btn" onclick="navigateTo('screen-rmreceived')">
-            <span class="act-icon">🚛</span>
+            <span class="act-icon"><i data-lucide="truck" style="width:20px;height:20px;"></i></span>
             <span>New RM Received</span>
           </button>
           <button class="action-btn" onclick="navigateTo('screen-deheading')">
-            <span class="act-icon">✂️</span>
+            <span class="act-icon"><i data-lucide="scissors" style="width:20px;height:20px;"></i></span>
             <span>Log Deheading</span>
           </button>
           <button class="action-btn" onclick="navigateTo('screen-grading')">
-            <span class="act-icon">📏</span>
+            <span class="act-icon"><i data-lucide="ruler" style="width:20px;height:20px;"></i></span>
             <span>Log Grading</span>
           </button>
           <button class="action-btn" onclick="navigateTo('screen-trackcodereport')">
-            <span class="act-icon">🔍</span>
+            <span class="act-icon"><i data-lucide="search" style="width:20px;height:20px;"></i></span>
             <span>Track a Batch</span>
           </button>
         </div>
@@ -1231,7 +1245,7 @@ table.matrix-table td {
               </div>
             </div>
             <div class="form-actions-row centered">
-              <button type="submit" class="btn btn-primary" style="padding:10px 32px;">💾 Save</button>
+              <button type="submit" class="btn btn-primary" style="padding:10px 32px;"><i data-lucide="save"></i> Save</button>
             </div>
           </form>
         </div>
@@ -1239,11 +1253,11 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search bill or variety...">
             </div>
             <div class="table-actions-right">
-              <button class="btn btn-outline" onclick="showToast('Downloading Excel report...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Downloading Excel report...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -1277,7 +1291,7 @@ table.matrix-table td {
                   <td><input type="number" class="tbl-input" value="300"></td>
                   <td><span id="countDiff-1" class="diff-negative">-3</span></td>
                   <td>0</td>
-                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')">✏️</button></td>
+                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')"><i data-lucide="pencil"></i></button></td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -1291,7 +1305,7 @@ table.matrix-table td {
                   <td><input type="number" class="tbl-input" value="339"></td>
                   <td><span id="countDiff-2" class="diff-negative">-0.2</span></td>
                   <td>0</td>
-                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')">✏️</button></td>
+                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')"><i data-lucide="pencil"></i></button></td>
                 </tr>
               </tbody>
             </table>
@@ -1390,8 +1404,8 @@ table.matrix-table td {
               </div>
             </div>
             <div class="form-actions-row">
-              <button type="button" class="btn btn-secondary" onclick="this.form.reset(); showToast('New record created', 'info');">+ New</button>
-              <button type="submit" class="btn btn-primary">💾 Save</button>
+              <button type="button" class="btn btn-secondary" onclick="this.form.reset(); showToast('New record created', 'info');"><i data-lucide="plus"></i> New</button>
+              <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
             </div>
           </form>
         </div>
@@ -1399,11 +1413,11 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search deheading logs...">
             </div>
             <div class="table-actions-right">
-              <button class="btn btn-outline" onclick="showToast('Downloading Excel...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Downloading Excel...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -1518,9 +1532,9 @@ table.matrix-table td {
               </div>
             </div>
             <div class="form-actions-row">
-              <button type="button" class="btn btn-secondary" onclick="this.form.reset(); showToast('New record created', 'info');">+ New</button>
-              <button type="button" class="btn btn-danger" onclick="showToast('Record deleted', 'error');">🗑 Delete</button>
-              <button type="submit" class="btn btn-primary">💾 Save</button>
+              <button type="button" class="btn btn-secondary" onclick="this.form.reset(); showToast('New record created', 'info');"><i data-lucide="plus"></i> New</button>
+              <button type="button" class="btn btn-danger" onclick="showToast('Record deleted', 'error');"><i data-lucide="trash-2"></i> Delete</button>
+              <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
             </div>
           </form>
         </div>
@@ -1587,7 +1601,7 @@ table.matrix-table td {
             </div>
 
             <div class="form-actions-row centered">
-              <button type="submit" class="btn btn-primary" style="padding:10px 32px;">💾 Save</button>
+              <button type="submit" class="btn btn-primary" style="padding:10px 32px;"><i data-lucide="save"></i> Save</button>
             </div>
           </form>
         </div>
@@ -1595,11 +1609,11 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search bill or variety...">
             </div>
             <div class="table-actions-right">
-              <button class="btn btn-outline" onclick="showToast('Downloading Excel...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Downloading Excel...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -1629,7 +1643,7 @@ table.matrix-table td {
                   <td><input type="number" class="tbl-input" value="303.00"></td>
                   <td><input type="number" class="tbl-input" value="3.50"></td>
                   <td><span class="badge badge-teal">70%</span></td>
-                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')">✏️</button></td>
+                  <td><button class="btn btn-sm btn-secondary" onclick="showToast('Row updated', 'info')"><i data-lucide="pencil"></i></button></td>
                 </tr>
               </tbody>
             </table>
@@ -1709,7 +1723,7 @@ table.matrix-table td {
             </div>
             <div class="form-actions-row">
               <button type="button" class="btn btn-info" onclick="showToast('Line added', 'info');">+ Add Line</button>
-              <button type="button" class="btn btn-danger" onclick="showToast('Line deleted', 'error');">🗑 Delete</button>
+              <button type="button" class="btn btn-danger" onclick="showToast('Line deleted', 'error');"><i data-lucide="trash-2"></i> Delete</button>
               <button type="submit" class="btn btn-primary">Save Grading</button>
             </div>
           </form>
@@ -1800,7 +1814,7 @@ table.matrix-table td {
             <div class="form-actions-row">
               <button type="button" class="btn btn-danger" onclick="showToast('Cancelled', 'error');">Cancel</button>
               <button type="button" class="btn btn-info" onclick="showToast('Transfer initiated', 'info');">Transfer to Another Plant</button>
-              <button type="submit" class="btn btn-primary">💾 Save</button>
+              <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
             </div>
           </form>
         </div>
@@ -1808,7 +1822,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search batch or plant...">
             </div>
           </div>
@@ -1928,7 +1942,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search bill or plant...">
             </div>
           </div>
@@ -2030,7 +2044,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search supplier, PO or chemical...">
             </div>
           </div>
@@ -2069,7 +2083,7 @@ table.matrix-table td {
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
-                  <td>✏️ ➕ 🖨️</td>
+                  <td><i data-lucide="pencil"></i> ➕ 🖨️</td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -2085,7 +2099,7 @@ table.matrix-table td {
                   <td>30-09-2026</td>
                   <td>29-10-2026</td>
                   <td>no</td>
-                  <td>✏️ ➕ 🖨️</td>
+                  <td><i data-lucide="pencil"></i> ➕ 🖨️</td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -2101,7 +2115,7 @@ table.matrix-table td {
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
-                  <td>✏️ ➕ 🖨️</td>
+                  <td><i data-lucide="pencil"></i> ➕ 🖨️</td>
                 </tr>
               </tbody>
             </table>
@@ -2154,12 +2168,12 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search chemical, PO or BL...">
             </div>
             <div class="table-actions-right">
               <button class="btn btn-sm btn-secondary" onclick="showToast('Loading full registry...', 'info')">Load All</button>
-              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -2279,7 +2293,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search consumption ledger...">
             </div>
           </div>
@@ -2399,7 +2413,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search PO or chemical...">
             </div>
           </div>
@@ -2525,7 +2539,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search opening stock...">
             </div>
           </div>
@@ -2649,7 +2663,7 @@ table.matrix-table td {
           <div class="table-header">
             <span style="font-weight:700;font-size:14px;color:var(--text-main);">October-2025 Reconciliation</span>
             <div class="table-actions-right">
-              <button class="btn btn-primary" onclick="showToast('Downloading monthly balance...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-primary" onclick="showToast('Downloading monthly balance...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -2745,12 +2759,12 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search payment entries...">
             </div>
             <div class="table-actions-right">
               <button class="btn btn-sm btn-secondary" onclick="showToast('Loading full payments...', 'info')">Load All</button>
-              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -2818,12 +2832,12 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search track code or bill...">
             </div>
             <div class="table-actions-right">
               <button class="btn btn-sm btn-secondary" onclick="showToast('Loading batch tree...', 'info')">Load All</button>
-              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Exporting to Excel...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -2941,7 +2955,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search variety or grade...">
             </div>
           </div>
@@ -3098,7 +3112,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search supplier or vehicle...">
             </div>
           </div>
@@ -3226,7 +3240,7 @@ table.matrix-table td {
           <div class="table-header">
             <span style="font-weight:700;font-size:13.5px;color:var(--text-main);">Inward Purchase Valuation vs Outward Grade Realization</span>
             <div class="table-actions-right">
-              <button class="btn btn-outline" onclick="showToast('Exporting valuation matrix...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Exporting valuation matrix...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -3417,11 +3431,11 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search count or grade...">
             </div>
             <div class="table-actions-right">
-              <button class="btn btn-outline" onclick="showToast('Exporting loss matrix...', 'info')">📊 Download Excel</button>
+              <button class="btn btn-outline" onclick="showToast('Exporting loss matrix...', 'info')"><i data-lucide="download"></i> Download Excel</button>
             </div>
           </div>
           <div class="table-wrapper">
@@ -3577,7 +3591,7 @@ table.matrix-table td {
               </div>
               <div class="form-group" style="justify-content:flex-end;">
                 <label>&nbsp;</label>
-                <button type="button" class="btn btn-primary" onclick="showToast('Upload dialog opened', 'info')">📁 Upload New Document</button>
+                <button type="button" class="btn btn-primary" onclick="showToast('Upload dialog opened', 'info')"><i data-lucide="upload"></i> Upload New Document</button>
               </div>
             </div>
             <div class="form-actions-row">
@@ -3589,7 +3603,7 @@ table.matrix-table td {
         <div class="table-card">
           <div class="table-header">
             <div class="table-search-box">
-              <span>🔍</span>
+              <i data-lucide="search"></i>
               <input type="text" class="table-search" placeholder="Search files...">
             </div>
           </div>
@@ -3676,7 +3690,7 @@ table.matrix-table td {
       </div>
       <div class="modal-actions">
         <button type="button" class="btn btn-danger" onclick="closeModal('modalChemPOCreate')">Close</button>
-        <button type="submit" class="btn btn-primary">💾 Save</button>
+        <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
       </div>
     </form>
   </div>
@@ -3745,7 +3759,7 @@ table.matrix-table td {
       </div>
       <div class="modal-actions">
         <button type="button" class="btn btn-danger" onclick="closeModal('modalChemOrderCreate')">Close</button>
-        <button type="submit" class="btn btn-primary">💾 Save</button>
+        <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
       </div>
     </form>
   </div>
@@ -3805,7 +3819,7 @@ table.matrix-table td {
       </div>
       <div class="modal-actions">
         <button type="button" class="btn btn-danger" onclick="closeModal('modalChemConsumptionCreate')">Close</button>
-        <button type="submit" class="btn btn-primary">💾 Save</button>
+        <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
       </div>
     </form>
   </div>
@@ -3881,7 +3895,7 @@ table.matrix-table td {
 
       <div class="modal-actions">
         <button type="button" class="btn btn-danger" onclick="closeModal('modalChemPaymentCreate')">Close</button>
-        <button type="submit" class="btn btn-primary">💾 Save</button>
+        <button type="submit" class="btn btn-primary"><i data-lucide="save"></i> Save</button>
       </div>
     </form>
   </div>
@@ -4294,6 +4308,11 @@ window.addEventListener('resize', () => {
 window.addEventListener('DOMContentLoaded', () => {
   drawAllCharts();
 });
+</script>
+<script>
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
 </script>
 </body>
 </html>

@@ -7,6 +7,8 @@
 
 import { Toast } from '../components/toast.js';
 import { Modal } from '../components/modal.js';
+import { Molecules, Organisms, Atoms } from '../framework/index.js';
+import { YieldBadge, DifferencePill, TrackCodeChip, ProcessStatusBadge } from '../components/industrialAtoms.js';
 
 export const PreprocessingView = {
   render(containerId, subPage = 'floor-overview', activeHash = '#/preprocessing/dashboard/floor-overview') {
@@ -96,6 +98,9 @@ export const PreprocessingView = {
     }
 
     this.bindTableSearch(subContainer);
+    if (typeof window !== 'undefined' && window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
   },
 
   updateHeaderAction(subPage) {
@@ -103,13 +108,13 @@ export const PreprocessingView = {
     if (!actionContainer) return;
 
     if (subPage === 'chemical-pos') {
-      actionContainer.innerHTML = `<button class="btn btn-primary" onclick="window.PreprocessingView.openChemPOModal()">+ Add Chemical PO</button>`;
+      actionContainer.innerHTML = `<button class="btn btn-primary px-3.5 py-1.5 text-xs font-semibold flex items-center gap-1.5" onclick="window.PreprocessingView.openChemPOModal()"><i data-lucide="plus" class="w-4 h-4"></i> Add Chemical PO</button>`;
     } else if (subPage === 'received-chemicals') {
-      actionContainer.innerHTML = `<button class="btn btn-primary" onclick="window.PreprocessingView.openChemOrderModal()">+ Add Order</button>`;
+      actionContainer.innerHTML = `<button class="btn btn-primary px-3.5 py-1.5 text-xs font-semibold flex items-center gap-1.5" onclick="window.PreprocessingView.openChemOrderModal()"><i data-lucide="plus" class="w-4 h-4"></i> Add Order</button>`;
     } else if (subPage === 'chemicals-consumption') {
-      actionContainer.innerHTML = `<button class="btn btn-primary" onclick="window.PreprocessingView.openChemConsumptionModal()">+ Add Consumption</button>`;
+      actionContainer.innerHTML = `<button class="btn btn-primary px-3.5 py-1.5 text-xs font-semibold flex items-center gap-1.5" onclick="window.PreprocessingView.openChemConsumptionModal()"><i data-lucide="plus" class="w-4 h-4"></i> Add Consumption</button>`;
     } else if (subPage === 'chemical-payments-list') {
-      actionContainer.innerHTML = `<button class="btn btn-primary" onclick="window.PreprocessingView.openChemPaymentModal()">+ Add Payment</button>`;
+      actionContainer.innerHTML = `<button class="btn btn-primary px-3.5 py-1.5 text-xs font-semibold flex items-center gap-1.5" onclick="window.PreprocessingView.openChemPaymentModal()"><i data-lucide="plus" class="w-4 h-4"></i> Add Payment</button>`;
     } else {
       actionContainer.innerHTML = '';
     }
@@ -136,144 +141,265 @@ export const PreprocessingView = {
   // 1. FLOOR OVERVIEW (DASHBOARD)
   // ============================================
   renderFloorOverview(container) {
+    const kpiRow1 = [
+      Molecules.StatTile({
+        label: "Today's Arrivals",
+        value: "3",
+        unit: "",
+        badgeText: "↑ 12%",
+        badgeTone: "teal",
+        icon: `<i data-lucide="truck" class="w-4 h-4"></i>`,
+        footerLabel: "vs yesterday",
+        footerValue: "16,009.30 Kgs"
+      }),
+      Molecules.StatTile({
+        label: "Average Yield",
+        value: "69.45%",
+        unit: "",
+        badgeText: "↓ 0.8%",
+        badgeTone: "ruby",
+        valueColor: "text-[#006C7A]",
+        icon: `<i data-lucide="percent" class="w-4 h-4"></i>`,
+        footerLabel: "Active batches",
+        footerValue: "3 Batches"
+      }),
+      Molecules.StatTile({
+        label: "Low Chemical Stock",
+        value: "2",
+        unit: "items",
+        badgeText: "Warning",
+        badgeTone: "amber",
+        valueColor: "text-[#B45309]",
+        icon: `<i data-lucide="flask-conical" class="w-4 h-4"></i>`,
+        footerLabel: "Below threshold",
+        footerValue: "STPP & Phosphate"
+      }),
+      Molecules.StatTile({
+        label: "WIP on Floor",
+        value: "3,103",
+        unit: "Kg",
+        badgeText: "119 Crates",
+        badgeTone: "sky",
+        icon: `<i data-lucide="package" class="w-4 h-4"></i>`,
+        footerLabel: "Across grades",
+        footerValue: "6 Grades"
+      })
+    ].join('');
+
+    const kpiRow2 = [
+      Molecules.StatTile({
+        label: "Pending Transfers",
+        value: "4",
+        unit: "Batches",
+        badgeText: "Pending",
+        badgeTone: "amber",
+        icon: `<i data-lucide="arrow-right-left" class="w-4 h-4"></i>`,
+        footerLabel: "Awaiting movement",
+        footerValue: "2,955.60 Kgs"
+      }),
+      Molecules.StatTile({
+        label: "Count Discrepancies",
+        value: "-19.6",
+        unit: "Count",
+        badgeText: "Shortfall",
+        badgeTone: "ruby",
+        valueColor: "text-[#B91C1C]",
+        icon: `<i data-lucide="alert-triangle" class="w-4 h-4"></i>`,
+        footerLabel: "Arrival status",
+        footerValue: "Variance Detected"
+      }),
+      Molecules.StatTile({
+        label: "Pending Payments",
+        value: "₹0",
+        unit: "",
+        badgeText: "Cleared",
+        badgeTone: "emerald",
+        icon: `<i data-lucide="credit-card" class="w-4 h-4"></i>`,
+        footerLabel: "Invoices",
+        footerValue: "All Cleared"
+      }),
+      Molecules.StatTile({
+        label: "Active Batches",
+        value: "7",
+        unit: "Batches",
+        badgeText: "Active",
+        badgeTone: "teal",
+        icon: `<i data-lucide="layers" class="w-4 h-4"></i>`,
+        footerLabel: "Floor split",
+        footerValue: "3 Grading · 4 VA"
+      })
+    ].join('');
+
     container.innerHTML = `
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">Today's Arrivals</div>
-          <div class="kpi-value">3</div>
-          <div class="kpi-sub"><span class="up">▲ 12%</span> 16,009.30 Kgs vs yesterday</div>
-        </div>
-        <div class="kpi-card info">
-          <div class="kpi-label">Average Yield</div>
-          <div class="kpi-value">69.45%</div>
-          <div class="kpi-sub"><span class="down">▼ 0.8%</span> Across 3 active batches</div>
-        </div>
-        <div class="kpi-card warning">
-          <div class="kpi-label">Low Chemical Stock</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-sub">STPP & Phosphate below threshold</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">WIP on Floor</div>
-          <div class="kpi-value">3,103</div>
-          <div class="kpi-sub">Kgs across 6 grades · 119 crates</div>
-        </div>
-      </div>
-
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">Pending Transfers</div>
-          <div class="kpi-value">4</div>
-          <div class="kpi-sub">2,955.60 Kgs awaiting movement</div>
-        </div>
-        <div class="kpi-card danger">
-          <div class="kpi-label">Count Discrepancies</div>
-          <div class="kpi-value" style="color:var(--danger);">-19.6</div>
-          <div class="kpi-sub">Shortfall in today's arrivals</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Pending Payments</div>
-          <div class="kpi-value">₹0</div>
-          <div class="kpi-sub">All chemical invoices cleared</div>
-        </div>
-        <div class="kpi-card info">
-          <div class="kpi-label">Active Batches</div>
-          <div class="kpi-value">7</div>
-          <div class="kpi-sub">3 in grading · 4 in VA</div>
-        </div>
-      </div>
-
-      <div class="dashboard-row-2col">
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">Production Trend (Last 7 Days)</span>
-            <select style="font-size:12px;padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;outline:none;">
-              <option>DFL UNIT-1 (VSP)</option>
-              <option>DFL UNIT-2 (KKD)</option>
-              <option>DFL UNIT-5 (JPT)</option>
-            </select>
-          </div>
-          <div class="chart-container">
-            <canvas id="productionChart"></canvas>
-          </div>
+      <div class="space-y-5 animate-fade-in w-full pb-8">
+        <!-- KPI Row 1 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          ${kpiRow1}
         </div>
 
-        <div class="alert-card">
-          <div class="card-header">
-            <span class="card-title">Alerts & Actions</span>
+        <!-- KPI Row 2 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          ${kpiRow2}
+        </div>
+
+        <!-- Row 2: Production Trend Chart + Alerts & Actions Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Production Trend (2 cols) -->
+          <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Production Trend (Last 7 Days)</h4>
+                <p class="text-xs text-[#64748B] mt-0.5">Floor processing volume across active shifts</p>
+              </div>
+              <select class="text-xs px-2.5 py-1.5 border border-[#CBD5E1] rounded-lg bg-white text-[#0F172A] outline-none font-medium">
+                <option>DFL UNIT-1 (VSP)</option>
+                <option>DFL UNIT-2 (KKD)</option>
+                <option>DFL UNIT-5 (JPT)</option>
+              </select>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="productionChart" class="w-full h-full"></canvas>
+            </div>
           </div>
-          <div class="alert-list">
-            <div class="alert-item danger">
-              <span class="alert-icon">🧪</span>
-              <div class="alert-content">
-                <div class="alert-title">CARNAL 659 S ADVANCED (STPP)</div>
-                <div class="alert-desc">Stock at 1,671 bags · Reorder soon</div>
-              </div>
+
+          <!-- Alerts Panel (1 col) -->
+          <div class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs flex flex-col">
+            <div class="flex items-center justify-between pb-3 border-b border-[#F1F5F9] mb-3">
+              <h4 class="text-sm font-bold text-[#0F172A]">Floor Alerts & Actions</h4>
+              <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-amber-50 text-amber-700 border border-amber-200">4 Active</span>
             </div>
-            <div class="alert-item">
-              <span class="alert-icon">🚛</span>
-              <div class="alert-content">
-                <div class="alert-title">Count shortfall on AP39TT4177</div>
-                <div class="alert-desc">-9.0 count difference on VM-VSP-AMP-056</div>
+            <div class="space-y-3 flex-1">
+              <!-- Alert 1 -->
+              <div class="p-3 rounded-xl border border-rose-200 bg-rose-50/50 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="text-xs font-bold text-[#0F172A]">CARNAL 659 S ADVANCED (STPP)</div>
+                  <div class="text-[11px] text-[#64748B] mt-0.5">Stock at 1,671 bags · Reorder soon</div>
+                </div>
               </div>
-            </div>
-            <div class="alert-item">
-              <span class="alert-icon">📦</span>
-              <div class="alert-content">
-                <div class="alert-title">Batch VM-KKD-MKP-043 pending transfer</div>
-                <div class="alert-desc">1,186 Kgs ready for DFL UNIT-3 (PSP)</div>
+              <!-- Alert 2 -->
+              <div class="p-3 rounded-xl border border-amber-200 bg-amber-50/50 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="text-xs font-bold text-[#0F172A]">Count shortfall on AP39TT4177</div>
+                  <div class="text-[11px] text-[#64748B] mt-0.5">-9.0 count difference on VM-VSP-AMP-056</div>
+                </div>
               </div>
-            </div>
-            <div class="alert-item success">
-              <span class="alert-icon">✅</span>
-              <div class="alert-content">
-                <div class="alert-title">ALTESA NEO S100 received</div>
-                <div class="alert-desc">240 bags cleared at Kakinada port</div>
+              <!-- Alert 3 -->
+              <div class="p-3 rounded-xl border border-sky-200 bg-sky-50/50 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="package" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="text-xs font-bold text-[#0F172A]">Batch VM-KKD-MKP-043 pending transfer</div>
+                  <div class="text-[11px] text-[#64748B] mt-0.5">1,186 Kgs ready for DFL UNIT-3 (PSP)</div>
+                </div>
+              </div>
+              <!-- Alert 4 -->
+              <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/50 flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="text-xs font-bold text-[#0F172A]">ALTESA NEO S100 received</div>
+                  <div class="text-[11px] text-[#64748B] mt-0.5">240 bags cleared at Kakinada port</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="dashboard-row-even">
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">Yield by Grade</span>
-            <span style="font-size:11.5px;color:var(--text-muted);">Target: &ge; 70%</span>
+        <!-- Row 3: Yield by Grade + Chemical Usage Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Yield by Grade</h4>
+                <p class="text-xs text-[#64748B] mt-0.5">Target: ≥ 70% floor recovery benchmark</p>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-teal-50 text-teal-700 border border-teal-200">Yield Audit</span>
+            </div>
+            <div class="h-60 relative">
+              <canvas id="yieldChart" class="w-full h-full"></canvas>
+            </div>
           </div>
-          <div class="chart-container">
-            <canvas id="yieldChart"></canvas>
+
+          <div class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Chemical Consumption (STPP)</h4>
+                <p class="text-xs text-[#64748B] mt-0.5">Daily dosage logs in KGs</p>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-amber-50 text-amber-700 border border-amber-200">STPP Dosing</span>
+            </div>
+            <div class="h-60 relative">
+              <canvas id="chemicalChart" class="w-full h-full"></canvas>
+            </div>
           </div>
         </div>
 
-        <div class="chart-card">
-          <div class="card-header">
-            <span class="card-title">Chemical Consumption (STPP)</span>
-            <span style="font-size:11.5px;color:var(--text-muted);">Daily KGs Used</span>
-          </div>
-          <div class="chart-container">
-            <canvas id="chemicalChart"></canvas>
+        <!-- Quick Workflow Actions -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#64748B] mb-3">Quick Operational Actions</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a 
+              href="#/preprocessing/floor-operations/rm-received" 
+              class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-[#006C7A] hover:shadow-xs transition-all flex items-center gap-3.5 group cursor-pointer"
+            >
+              <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-700 border border-sky-200 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="truck" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors">New RM Received</h5>
+                <p class="text-[11px] text-[#64748B] mt-0.5">Log incoming raw material trucks</p>
+              </div>
+            </a>
+
+            <a 
+              href="#/preprocessing/floor-operations/deheading" 
+              class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-[#006C7A] hover:shadow-xs transition-all flex items-center gap-3.5 group cursor-pointer"
+            >
+              <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="scissors" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors">Log Deheading</h5>
+                <p class="text-[11px] text-[#64748B] mt-0.5">HON to HL conversion tracking</p>
+              </div>
+            </a>
+
+            <a 
+              href="#/preprocessing/floor-operations/grading" 
+              class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-[#006C7A] hover:shadow-xs transition-all flex items-center gap-3.5 group cursor-pointer"
+            >
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="ruler" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors">Log Grading</h5>
+                <p class="text-[11px] text-[#64748B] mt-0.5">Size classification by grade</p>
+              </div>
+            </a>
+
+            <a 
+              href="#/preprocessing/traceability/track-code-report" 
+              class="p-4 rounded-xl border border-slate-200/80 bg-white hover:border-[#006C7A] hover:shadow-xs transition-all flex items-center gap-3.5 group cursor-pointer"
+            >
+              <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="search" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-[#0F172A] group-hover:text-[#006C7A] transition-colors">Track a Batch</h5>
+                <p class="text-[11px] text-[#64748B] mt-0.5">Full batch genealogy audit</p>
+              </div>
+            </a>
           </div>
         </div>
-      </div>
 
-      <div class="quick-actions">
-        <button class="action-btn" onclick="window.location.hash='#/preprocessing/floor-operations/rm-received'">
-          <span class="act-icon">🚛</span>
-          <span>New RM Received</span>
-        </button>
-        <button class="action-btn" onclick="window.location.hash='#/preprocessing/floor-operations/deheading'">
-          <span class="act-icon">✂️</span>
-          <span>Log Deheading</span>
-        </button>
-        <button class="action-btn" onclick="window.location.hash='#/preprocessing/floor-operations/grading'">
-          <span class="act-icon">📏</span>
-          <span>Log Grading</span>
-        </button>
-        <button class="action-btn" onclick="window.location.hash='#/preprocessing/traceability/track-code-report'">
-          <span class="act-icon">🔍</span>
-          <span>Track a Batch</span>
-        </button>
       </div>
     `;
 
@@ -523,7 +649,7 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="form-actions-row centered">
-            <button type="submit" class="btn btn-primary" style="padding:10px 32px;">💾 Save</button>
+            <button type="submit" class="btn btn-primary" style="padding:10px 32px;"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       </div>
@@ -531,11 +657,11 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search bill or variety...">
           </div>
           <div class="table-actions-right">
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel report...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel report...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -569,7 +695,7 @@ export const PreprocessingView = {
                 <td><input type="number" class="tbl-input" value="300"></td>
                 <td><span id="diff-1" class="diff-negative">-3</span></td>
                 <td>0</td>
-                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')">✏️</button></td>
+                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button></td>
               </tr>
               <tr>
                 <td>2</td>
@@ -583,7 +709,7 @@ export const PreprocessingView = {
                 <td><input type="number" class="tbl-input" value="339"></td>
                 <td><span id="diff-2" class="diff-negative">-0.2</span></td>
                 <td>0</td>
-                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')">✏️</button></td>
+                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -677,8 +803,8 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="form-actions-row">
-            <button type="button" class="btn btn-secondary" onclick="this.form.reset(); window.PreprocessingView.toastInfo('New record created');">+ New</button>
-            <button type="submit" class="btn btn-primary">💾 Save</button>
+            <button type="button" class="btn btn-secondary" onclick="this.form.reset(); window.PreprocessingView.toastInfo('New record created');"><i data-lucide="plus" class="w-3.5 h-3.5"></i> New</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       </div>
@@ -686,11 +812,11 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search deheading logs...">
           </div>
           <div class="table-actions-right">
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -798,9 +924,9 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="form-actions-row">
-            <button type="button" class="btn btn-secondary" onclick="this.form.reset(); window.PreprocessingView.toastInfo('New record created');">+ New</button>
-            <button type="button" class="btn btn-danger" onclick="window.PreprocessingView.toastError('Record deleted');">🗑 Delete</button>
-            <button type="submit" class="btn btn-primary">💾 Save</button>
+            <button type="button" class="btn btn-secondary" onclick="this.form.reset(); window.PreprocessingView.toastInfo('New record created');"><i data-lucide="plus" class="w-3.5 h-3.5"></i> New</button>
+            <button type="button" class="btn btn-danger" onclick="window.PreprocessingView.toastError('Record deleted');"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Delete</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       </div>
@@ -862,7 +988,7 @@ export const PreprocessingView = {
           </div>
 
           <div class="form-actions-row centered">
-            <button type="submit" class="btn btn-primary" style="padding:10px 32px;">💾 Save</button>
+            <button type="submit" class="btn btn-primary" style="padding:10px 32px;"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       </div>
@@ -870,11 +996,11 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search bill or variety...">
           </div>
           <div class="table-actions-right">
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Downloading Excel...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -904,7 +1030,7 @@ export const PreprocessingView = {
                 <td><input type="number" class="tbl-input" value="303.00"></td>
                 <td><input type="number" class="tbl-input" value="3.50"></td>
                 <td><span class="badge badge-teal">70%</span></td>
-                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')">✏️</button></td>
+                <td><button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Row updated')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -979,7 +1105,7 @@ export const PreprocessingView = {
           </div>
           <div class="form-actions-row">
             <button type="button" class="btn btn-info" onclick="window.PreprocessingView.toastInfo('Line added');">+ Add Line</button>
-            <button type="button" class="btn btn-danger" onclick="window.PreprocessingView.toastError('Line deleted');">🗑 Delete</button>
+            <button type="button" class="btn btn-danger" onclick="window.PreprocessingView.toastError('Line deleted');"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Delete</button>
             <button type="submit" class="btn btn-primary">Save Grading</button>
           </div>
         </form>
@@ -1065,7 +1191,7 @@ export const PreprocessingView = {
           <div class="form-actions-row">
             <button type="button" class="btn btn-danger" onclick="window.PreprocessingView.toastError('Cancelled');">Cancel</button>
             <button type="button" class="btn btn-info" onclick="window.PreprocessingView.toastInfo('Transfer initiated');">Transfer to Another Plant</button>
-            <button type="submit" class="btn btn-primary">💾 Save</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       </div>
@@ -1073,7 +1199,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search batch or plant...">
           </div>
         </div>
@@ -1188,7 +1314,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search bill or plant...">
           </div>
         </div>
@@ -1221,7 +1347,7 @@ export const PreprocessingView = {
                 <td>DFL UNIT-3 (PSP)</td>
                 <td>15-10-2025</td>
                 <td>1186.000</td>
-                <td><button class="btn btn-sm btn-danger" onclick="window.PreprocessingView.toastError('Record deleted');">🗑</button></td>
+                <td><button class="btn btn-sm btn-danger" onclick="window.PreprocessingView.toastError('Record deleted');"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -1289,7 +1415,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search supplier, PO or chemical...">
           </div>
         </div>
@@ -1328,7 +1454,7 @@ export const PreprocessingView = {
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td>✏️ ➕ 🖨️</td>
+                <td><i data-lucide="pencil" class="w-3.5 h-3.5"></i> <button class="p-1 hover:bg-slate-100 rounded text-teal-600 hover:text-teal-800" title="Add"><i data-lucide="plus" class="w-3.5 h-3.5"></i></button><button class="p-1 hover:bg-slate-100 rounded text-slate-500 hover:text-slate-800" title="Print"><i data-lucide="printer" class="w-3.5 h-3.5"></i></button></td>
               </tr>
               <tr>
                 <td>2</td>
@@ -1344,7 +1470,7 @@ export const PreprocessingView = {
                 <td>30-09-2026</td>
                 <td>29-10-2026</td>
                 <td>no</td>
-                <td>✏️ ➕ 🖨️</td>
+                <td><i data-lucide="pencil" class="w-3.5 h-3.5"></i> <button class="p-1 hover:bg-slate-100 rounded text-teal-600 hover:text-teal-800" title="Add"><i data-lucide="plus" class="w-3.5 h-3.5"></i></button><button class="p-1 hover:bg-slate-100 rounded text-slate-500 hover:text-slate-800" title="Print"><i data-lucide="printer" class="w-3.5 h-3.5"></i></button></td>
               </tr>
               <tr>
                 <td>3</td>
@@ -1360,7 +1486,7 @@ export const PreprocessingView = {
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td>✏️ ➕ 🖨️</td>
+                <td><i data-lucide="pencil" class="w-3.5 h-3.5"></i> <button class="p-1 hover:bg-slate-100 rounded text-teal-600 hover:text-teal-800" title="Add"><i data-lucide="plus" class="w-3.5 h-3.5"></i></button><button class="p-1 hover:bg-slate-100 rounded text-slate-500 hover:text-slate-800" title="Print"><i data-lucide="printer" class="w-3.5 h-3.5"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -1408,12 +1534,12 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search chemical, PO or BL...">
           </div>
           <div class="table-actions-right">
             <button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Loading full registry...')">Load All</button>
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -1528,7 +1654,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search consumption ledger...">
           </div>
         </div>
@@ -1643,7 +1769,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search PO or chemical...">
           </div>
         </div>
@@ -1764,7 +1890,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search opening stock...">
           </div>
         </div>
@@ -1883,7 +2009,7 @@ export const PreprocessingView = {
         <div class="table-header">
           <span style="font-weight:700;font-size:14px;color:var(--text-main);">October-2025 Reconciliation (Opening + Purchase − Consumption − Transfer = Closing)</span>
           <div class="table-actions-right">
-            <button class="btn btn-primary" onclick="window.PreprocessingView.toastInfo('Downloading monthly balance...')">📊 Download Excel</button>
+            <button class="btn btn-primary" onclick="window.PreprocessingView.toastInfo('Downloading monthly balance...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -1974,12 +2100,12 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search payment entries...">
           </div>
           <div class="table-actions-right">
             <button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Loading full payments...')">Load All</button>
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -2046,12 +2172,12 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search track code or bill...">
           </div>
           <div class="table-actions-right">
             <button class="btn btn-sm btn-secondary" onclick="window.PreprocessingView.toastInfo('Loading batch tree...')">Load All</button>
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting to Excel...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -2164,7 +2290,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search variety or grade...">
           </div>
         </div>
@@ -2316,7 +2442,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search supplier or vehicle...">
           </div>
         </div>
@@ -2439,7 +2565,7 @@ export const PreprocessingView = {
         <div class="table-header">
           <span style="font-weight:700;font-size:13.5px;color:var(--text-main);">Inward Purchase Valuation vs Outward Grade Realization</span>
           <div class="table-actions-right">
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting valuation matrix...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting valuation matrix...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -2625,11 +2751,11 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search count or grade...">
           </div>
           <div class="table-actions-right">
-            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting loss matrix...')">📊 Download Excel</button>
+            <button class="btn btn-outline" onclick="window.PreprocessingView.toastInfo('Exporting loss matrix...')"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download Excel</button>
           </div>
         </div>
         <div class="table-wrapper">
@@ -2780,7 +2906,7 @@ export const PreprocessingView = {
             </div>
             <div class="form-group" style="justify-content:flex-end;">
               <label>&nbsp;</label>
-              <button type="button" class="btn btn-primary" onclick="window.PreprocessingView.toastInfo('Upload dialog opened')">📁 Upload New Document</button>
+              <button type="button" class="btn btn-primary" onclick="window.PreprocessingView.toastInfo('Upload dialog opened')"><i data-lucide="upload" class="w-4 h-4"></i> Upload New Document</button>
             </div>
           </div>
           <div class="form-actions-row">
@@ -2792,7 +2918,7 @@ export const PreprocessingView = {
       <div class="table-card">
         <div class="table-header">
           <div class="table-search-box">
-            <span>🔍</span>
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
             <input type="text" class="table-search" placeholder="Search files...">
           </div>
         </div>
@@ -2898,8 +3024,8 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="flex justify-end gap-3 mt-5 pt-3 border-t">
-            <button type="button" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded text-sm font-semibold">💾 Save</button>
+            <button type="button" class="btn btn-secondary px-4 py-2 text-xs font-semibold" onclick="Modal.close()">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4 py-2 text-xs font-semibold flex items-center gap-1.5"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       `
@@ -2949,8 +3075,8 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="flex justify-end gap-3 mt-5 pt-3 border-t">
-            <button type="button" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded text-sm font-semibold">💾 Save</button>
+            <button type="button" class="btn btn-secondary px-4 py-2 text-xs font-semibold" onclick="Modal.close()">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4 py-2 text-xs font-semibold flex items-center gap-1.5"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       `
@@ -3000,8 +3126,8 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="flex justify-end gap-3 mt-5 pt-3 border-t">
-            <button type="button" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded text-sm font-semibold">💾 Save</button>
+            <button type="button" class="btn btn-secondary px-4 py-2 text-xs font-semibold" onclick="Modal.close()">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4 py-2 text-xs font-semibold flex items-center gap-1.5"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       `
@@ -3043,8 +3169,8 @@ export const PreprocessingView = {
             </div>
           </div>
           <div class="flex justify-end gap-3 mt-5 pt-3 border-t">
-            <button type="button" class="px-4 py-2 bg-red-600 text-white rounded text-sm font-semibold" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-4 py-2 bg-teal-600 text-white rounded text-sm font-semibold">💾 Save</button>
+            <button type="button" class="btn btn-secondary px-4 py-2 text-xs font-semibold" onclick="Modal.close()">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4 py-2 text-xs font-semibold flex items-center gap-1.5"><i data-lucide="save" class="w-4 h-4"></i> Save</button>
           </div>
         </form>
       `
