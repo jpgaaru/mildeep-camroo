@@ -28,9 +28,9 @@ export const CalendarPicker = {
   },
 
   bindGlobalListeners() {
-    // Intercept clicks on any date input or date wrapper
+    // Intercept clicks on any date input, date wrapper, or calendar button
     document.addEventListener('click', (e) => {
-      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar], [data-has-calendar]');
       const dateWrapper = e.target.closest('.erp-date-wrapper');
 
       if (dateInput) {
@@ -41,7 +41,7 @@ export const CalendarPicker = {
       }
 
       if (dateWrapper) {
-        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input, [data-calendar]');
+        const inp = dateWrapper.querySelector('input[type="date"], .erp-date-input, [data-calendar], [data-has-calendar], input');
         if (inp) {
           e.preventDefault();
           e.stopPropagation();
@@ -58,7 +58,7 @@ export const CalendarPicker = {
 
     // Intercept focus to prevent keyboard popping up on mobile/desktop
     document.addEventListener('focusin', (e) => {
-      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar]');
+      const dateInput = e.target.closest('input[type="date"], .erp-date-input, [data-calendar], [data-has-calendar]');
       if (dateInput && dateInput !== this.activeInput) {
         e.preventDefault();
         this.open(dateInput);
@@ -87,7 +87,12 @@ export const CalendarPicker = {
     if (!this.popover) this.createPopover();
     this.activeInput = inputElement;
 
-    // Safety guard: neutralize native browser date picker
+    // Ensure persistent styling and discovery classes
+    inputElement.classList.add('erp-date-input');
+    inputElement.setAttribute('data-calendar', 'true');
+    inputElement.setAttribute('data-has-calendar', 'true');
+
+    // Safety guard: neutralize native browser date picker popup
     if (inputElement.type === 'date') {
       try {
         inputElement.type = 'text';
@@ -112,11 +117,11 @@ export const CalendarPicker = {
         this.selectedDate = new Date(val);
         this.currentDate = new Date(val);
       } else {
-        this.selectedDate = new Date();
+        this.selectedDate = null;
         this.currentDate = new Date();
       }
     } else {
-      this.selectedDate = new Date();
+      this.selectedDate = null;
       this.currentDate = new Date();
     }
 

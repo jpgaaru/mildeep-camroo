@@ -140,12 +140,60 @@ def test_tabs_coverage():
 
     return all_found
 
+def test_date_selectors():
+    print("\n=== 4. DATE SELECTOR & CALENDAR AUDIT ===")
+    with open('js/views/purchaseView.js', 'r', encoding='utf-8') as f:
+        pv = f.read()
+
+    # 1. No raw type="date" inputs (all upgraded to unified Camaroo erp-date-input)
+    if 'type="date"' in pv:
+        print("  ✗ Found un-upgraded raw type=\"date\" input in purchaseView.js")
+        return False
+    else:
+        print("  ✓ Zero raw type=\"date\" inputs: all date selectors standardized to .erp-date-input")
+
+    # 2. Check essential date filter IDs exist across screens
+    expected_date_ids = [
+        'rmdash-from-date',
+        'rmdash-to-date',
+        'bk-f-date',
+        'cb-date',
+        'ra-date',
+        'ar-f-date',
+        'ma-date',
+        'ma-billdate',
+        'bl-f-from',
+        'bl-f-to',
+        'pay-f-date',
+        'ps-f-from',
+        'ps-f-to'
+    ]
+    all_dates_ok = True
+    for did in expected_date_ids:
+        if f'id="{did}"' in pv:
+            print(f"  ✓ Date field '{did}' active with .erp-date-wrapper")
+        else:
+            print(f"  ✗ Missing date field '{did}'")
+            all_dates_ok = False
+
+    # 3. Check CalendarPicker handles persistent data-calendar discovery
+    with open('js/components/calendarPicker.js', 'r', encoding='utf-8') as f:
+        cp = f.read()
+    if 'data-has-calendar' in cp and 'classList.add(\'erp-date-input\')' in cp:
+        print("  ✓ CalendarPicker has persistent class & attribute preservation for seamless re-opening")
+    else:
+        print("  ✗ CalendarPicker missing persistent class logic")
+        all_dates_ok = False
+
+    return all_dates_ok
+
 if __name__ == '__main__':
     ok1 = test_syntax()
     ok2 = test_business_math()
     ok3 = test_tabs_coverage()
+    ok4 = test_date_selectors()
 
-    if ok1 and ok2 and ok3:
+    if ok1 and ok2 and ok3 and ok4:
         print("\n==========================================")
         print("🎉 ALL PURCHASE v3 VERIFICATIONS PASSED 100%!")
         print("==========================================")

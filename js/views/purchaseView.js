@@ -443,12 +443,16 @@ export const PurchaseView = {
     let fSpecies = '';
     let fCenter = '';
     let fPlant = '';
+    let fFrom = '';
+    let fTo = '';
 
     const getFilteredArrivals = () => {
       return arrivals.filter(a => {
         return (!fSpecies || a.species === fSpecies) &&
           (!fCenter || a.center === fCenter) &&
-          (!fPlant || a.plant === fPlant);
+          (!fPlant || a.plant === fPlant) &&
+          (!fFrom || a.date >= fFrom) &&
+          (!fTo || a.date <= fTo);
       });
     };
 
@@ -527,7 +531,7 @@ export const PurchaseView = {
       <div class="space-y-5 animate-fade-in">
         <!-- Filter Header -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-3.5 items-end text-xs">
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
               <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
@@ -550,9 +554,24 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <button id="rmdash-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="rmdash-from-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="rmdash-to-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button id="rmdash-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Filter Analytics</span>
+                <span>Filter</span>
+              </button>
+              <button id="rmdash-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -592,8 +611,21 @@ export const PurchaseView = {
       fSpecies = document.getElementById('rmdash-species-sel')?.value || '';
       fCenter = document.getElementById('rmdash-center-sel')?.value || '';
       fPlant = document.getElementById('rmdash-plant-sel')?.value || '';
+      fFrom = document.getElementById('rmdash-from-date')?.value || '';
+      fTo = document.getElementById('rmdash-to-date')?.value || '';
       updateView();
       Toast.show('RM Dashboard updated.', 'info');
+    });
+
+    document.getElementById('rmdash-reset-btn')?.addEventListener('click', () => {
+      if (document.getElementById('rmdash-species-sel')) document.getElementById('rmdash-species-sel').value = '';
+      if (document.getElementById('rmdash-center-sel')) document.getElementById('rmdash-center-sel').value = '';
+      if (document.getElementById('rmdash-plant-sel')) document.getElementById('rmdash-plant-sel').value = '';
+      if (document.getElementById('rmdash-from-date')) document.getElementById('rmdash-from-date').value = '';
+      if (document.getElementById('rmdash-to-date')) document.getElementById('rmdash-to-date').value = '';
+      fSpecies = ''; fCenter = ''; fPlant = ''; fFrom = ''; fTo = '';
+      updateView();
+      Toast.show('Filters reset.', 'info');
     });
 
     updateView();
@@ -673,12 +705,17 @@ export const PurchaseView = {
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Date</label>
-              <input type="date" id="bk-f-date" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+              <div class="erp-date-wrapper">
+                <input type="text" id="bk-f-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
             </div>
-            <div>
-              <button id="bk-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <div class="flex items-center gap-1.5">
+              <button id="bk-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Search Records</span>
+                <span>Search</span>
+              </button>
+              <button id="bk-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -731,6 +768,20 @@ export const PurchaseView = {
       fDate = document.getElementById('bk-f-date')?.value || '';
       renderRows();
       Toast.show('Bookings filtered.', 'info');
+    });
+
+    document.getElementById('bk-f-date')?.addEventListener('change', () => {
+      fDate = document.getElementById('bk-f-date')?.value || '';
+      renderRows();
+    });
+
+    document.getElementById('bk-reset-btn')?.addEventListener('click', () => {
+      if (document.getElementById('bk-f-type')) document.getElementById('bk-f-type').value = '';
+      if (document.getElementById('bk-f-plant')) document.getElementById('bk-f-plant').value = '';
+      if (document.getElementById('bk-f-date')) document.getElementById('bk-f-date').value = '';
+      fType = ''; fPlant = ''; fDate = '';
+      renderRows();
+      Toast.show('Filters reset.', 'info');
     });
 
     document.getElementById('bk-search-input')?.addEventListener('input', e => {
@@ -814,7 +865,9 @@ export const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Date <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-date" type="date" required value="${TODAY}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <div class="erp-date-wrapper">
+                  <input id="cb-date" type="text" required value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                </div>
               </div>
 
               <div>
@@ -1003,7 +1056,9 @@ export const PurchaseView = {
           <form id="form-rm-arrival" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs items-end">
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Intake Date</label>
-              <input type="date" id="ra-date" value="${TODAY}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <div class="erp-date-wrapper">
+                <input id="ra-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              </div>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Company</label>
@@ -1186,7 +1241,7 @@ export const PurchaseView = {
       <div class="space-y-4 animate-fade-in">
         <!-- Filter Header -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 items-end text-xs">
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
               <select id="ar-f-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
@@ -1209,9 +1264,18 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <button id="ar-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="ar-f-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button id="ar-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Filter Arrivals</span>
+                <span>Filter</span>
+              </button>
+              <button id="ar-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -1263,8 +1327,24 @@ export const PurchaseView = {
       fCenter = document.getElementById('ar-f-center')?.value || '';
       fSupplier = document.getElementById('ar-f-supplier')?.value || '';
       fPlant = document.getElementById('ar-f-plant')?.value || '';
+      fDate = document.getElementById('ar-f-date')?.value || '';
       renderTable();
       Toast.show('Arrivals filtered.', 'info');
+    });
+
+    document.getElementById('ar-f-date')?.addEventListener('change', () => {
+      fDate = document.getElementById('ar-f-date')?.value || '';
+      renderTable();
+    });
+
+    document.getElementById('ar-reset-btn')?.addEventListener('click', () => {
+      if (document.getElementById('ar-f-center')) document.getElementById('ar-f-center').value = '';
+      if (document.getElementById('ar-f-supplier')) document.getElementById('ar-f-supplier').value = '';
+      if (document.getElementById('ar-f-plant')) document.getElementById('ar-f-plant').value = '';
+      if (document.getElementById('ar-f-date')) document.getElementById('ar-f-date').value = '';
+      fCenter = ''; fSupplier = ''; fPlant = ''; fDate = '';
+      renderTable();
+      Toast.show('Filters reset.', 'info');
     });
 
     document.getElementById('ar-search-input')?.addEventListener('input', e => {
@@ -1454,6 +1534,8 @@ export const PurchaseView = {
     let fSupplier = '';
     let fAgent = '';
     let fStatus = '';
+    let fFrom = '';
+    let fTo = '';
 
     const getFiltered = () => {
       return arrivals.filter(a => {
@@ -1462,7 +1544,9 @@ export const PurchaseView = {
           (!fPlant || a.plant === fPlant) &&
           (!fSupplier || a.supplier === fSupplier) &&
           (!fAgent || a.agent === fAgent) &&
-          (!fStatus || s === fStatus);
+          (!fStatus || s === fStatus) &&
+          (!fFrom || a.date >= fFrom) &&
+          (!fTo || a.date <= fTo);
       });
     };
 
@@ -1522,7 +1606,7 @@ export const PurchaseView = {
       <div class="space-y-4 animate-fade-in">
         <!-- Filter Header -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 items-end text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-3 items-end text-xs">
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Purchase Type</label>
               <select id="bl-f-type" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
@@ -1545,18 +1629,33 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Bill Status</label>
-              <select id="bl-f-status" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
-                <option value="">All Statuses</option>
-                <option value="Pending">Pending</option>
-                <option value="Partial">Partial</option>
-                <option value="Completed">Completed</option>
-              </select>
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="bl-f-from" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
             </div>
             <div>
-              <button id="bl-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="bl-f-to" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <div class="flex-1">
+                <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Status</label>
+                <select id="bl-f-status" class="w-full h-9 px-2 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+                  <option value="">All</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Partial">Partial</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+              <button id="bl-search-btn" class="h-9 px-3 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer" style="margin-top: 18px;" title="Filter Bills">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Filter Bills</span>
+                <span>Filter</span>
+              </button>
+              <button id="bl-reset-btn" class="h-9 px-2.5 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" style="margin-top: 18px;" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -1804,7 +1903,7 @@ export const PurchaseView = {
       <div class="space-y-4 animate-fade-in">
         <!-- Filter Header -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 items-end text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-3 items-end text-xs">
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
               <select id="pay-f-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
@@ -1835,9 +1934,18 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <button id="pay-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="pay-f-date" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button id="pay-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Search Records</span>
+                <span>Search</span>
+              </button>
+              <button id="pay-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -1962,7 +2070,7 @@ export const PurchaseView = {
       <div class="space-y-4 animate-fade-in">
         <!-- Filter Header -->
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs">
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-3.5 items-end text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-3 items-end text-xs">
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
               <select id="ps-f-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
@@ -1978,13 +2086,6 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Agent</label>
-              <select id="ps-f-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
-                <option value="">All</option>
-                ${M.agents.map(a => `<option value="${a}">${a}</option>`).join('')}
-              </select>
-            </div>
-            <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Payment Mode</label>
               <select id="ps-f-mode" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
                 <option value="">All</option>
@@ -1994,9 +2095,24 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <button id="ps-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">From Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="ps-f-from" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div>
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
+              <div class="erp-date-wrapper">
+                <input type="text" id="ps-f-to" placeholder="YYYY-MM-DD" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button id="ps-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <span>Filter Summary</span>
+                <span>Filter</span>
+              </button>
+              <button id="ps-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                ↺
               </button>
             </div>
           </div>
@@ -2255,6 +2371,18 @@ export const PurchaseView = {
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Number <span class="text-[#FF5150]">*</span></label>
               <input id="ma-no" value="${arrivalNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-bold text-[#006C7A]">
+            </div>
+            <div>
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Date <span class="text-[#FF5150]">*</span></label>
+              <div class="erp-date-wrapper">
+                <input id="ma-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none">
+              </div>
+            </div>
+            <div>
+              <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Bill Date <span class="text-[#FF5150]">*</span></label>
+              <div class="erp-date-wrapper">
+                <input id="ma-billdate" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none">
+              </div>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Species <span class="text-[#FF5150]">*</span></label>
