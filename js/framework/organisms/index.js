@@ -9,28 +9,26 @@ export const Organisms = {
     const collapsedClass = isCollapsed ? 'is-collapsed' : '';
     return `
       <div id="erp-app-shell" data-layout="option1" class="min-h-screen bg-[#F8FAFC]">
-        <!-- Left Floated Sidebar (Floating with rounded corners) -->
+        <!-- Docked Left Sidebar (Edge-to-Edge full height) -->
         <div id="sidebar-container" class="${collapsedClass}"></div>
 
-        <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
+        <!-- Main Layout Wrapper (offset by docked sidebar width) -->
         <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-          <!-- Sticky Top Navigation & Tabs Area -->
-          <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC] pt-3 mr-3 pb-1 space-y-3">
-            <!-- Card 1: Top Header Card -->
-            <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs">
-              <div id="header-container" class="bg-white rounded-2xl"></div>
-            </div>
+          <!-- Sticky Top Navigation & Header Area (Full width flush) -->
+          <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 bg-[#F8FAFC]">
+            <!-- Top Header Bar: edge-to-edge flush with bottom border -->
+            <div id="header-container" class="bg-white border-b border-[#E2E8F0]"></div>
 
-            <!-- Breadcrumbs, Section Header & Underline Tabs Menu (Sticky, Flat) -->
-            <div id="sticky-tabs-header-card" class="pt-1 pb-0 px-1 bg-[#F8FAFC]">
-              <div id="breadcrumbs-container" class="mb-1.5"></div>
+            <!-- Breadcrumbs, Section Header & Underline Tabs Menu -->
+            <div id="sticky-tabs-header-card" class="px-6 sm:px-8 pt-4 pb-0 bg-[#F8FAFC]">
+              <div id="breadcrumbs-container" class="mb-1"></div>
               <div id="section-title-container" class="mb-2"></div>
               <div id="global-tab-bar-container"></div>
             </div>
           </div>
 
-          <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-          <main id="main-content-container" class="px-0 pt-2 pb-8 flex-1 w-full mr-3"></main>
+          <!-- Module Subview Injected Here (Symmetrical 24px/32px padding, no asymmetric right gutter) -->
+          <main id="main-content-container" class="px-6 sm:px-8 pt-4 pb-10 flex-1 w-full"></main>
         </div>
       </div>
     `;

@@ -412,7 +412,7 @@ export const PurchaseView = {
             <span class="text-xs text-[#64748B]">Showing clean batches (AB- negative only)</span>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -596,7 +596,7 @@ export const PurchaseView = {
             <span class="text-xs text-[#64748B]">Real-time lot status & QC screening</span>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -739,7 +739,7 @@ export const PurchaseView = {
             <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -1120,7 +1120,7 @@ export const PurchaseView = {
             </div>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -1302,7 +1302,7 @@ export const PurchaseView = {
             <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -1466,7 +1466,7 @@ export const PurchaseView = {
             <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table id="tbl-lot-table" class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -1683,7 +1683,7 @@ export const PurchaseView = {
             </div>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -1969,7 +1969,7 @@ export const PurchaseView = {
             <span class="text-xs text-[#64748B]">Act Bill = Gross − TDS (0.1%) · Select rows to activate payment disbursal</span>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
@@ -2133,7 +2133,7 @@ export const PurchaseView = {
             </button>
           </div>
 
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider">

@@ -20,7 +20,7 @@ export const Header = {
     const isNotificationsActive = (window.location.hash || '').startsWith('#/notifications');
 
     container.innerHTML = `
-      <header class="bg-white h-14 px-5 flex items-center justify-between select-none rounded-2xl relative z-40">
+      <header class="bg-white h-14 px-6 sm:px-8 flex items-center justify-between select-none relative z-40">
         <!-- Left: Search ERP records... -->
         <div class="flex items-center" id="header-search-container">
           <div class="relative w-64 sm:w-72 md:w-80">

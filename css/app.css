@@ -93,15 +93,16 @@ body {
 :root {
   --erp-sidebar-width: 270px;
   --erp-sidebar-collapsed-width: 76px;
-  --erp-sidebar-offset: 14px;
-  --erp-sidebar-gap: 16px;
+  --erp-sidebar-offset: 0px;
+  --erp-sidebar-gap: 0px;
 }
 
 #sidebar-container {
   position: fixed !important;
-  top: var(--erp-sidebar-offset) !important;
-  left: var(--erp-sidebar-offset) !important;
-  bottom: var(--erp-sidebar-offset) !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  height: 100vh !important;
   width: var(--erp-sidebar-width) !important;
   z-index: 40 !important;
   transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -114,15 +115,17 @@ body {
 #sidebar-container #erp-sidebar {
   width: 100% !important;
   height: 100% !important;
+  border-radius: 0 !important;
 }
 
 #main-layout-wrapper {
-  margin-left: calc(var(--erp-sidebar-offset) + var(--erp-sidebar-width) + var(--erp-sidebar-gap)) !important;
+  margin-left: var(--erp-sidebar-width) !important;
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-height: 100vh !important;
 }
 
 #main-layout-wrapper.is-collapsed {
-  margin-left: calc(var(--erp-sidebar-offset) + var(--erp-sidebar-collapsed-width) + var(--erp-sidebar-gap)) !important;
+  margin-left: var(--erp-sidebar-collapsed-width) !important;
 }
 
 /* Custom Scrollbars */
@@ -1325,8 +1328,10 @@ html.a11y-underline-links .cursor-pointer {
    ========================================================== */
 #erp-sidebar.f-sidebar {
   background: #00161A !important;
-  border: 1px solid rgba(255, 255, 255, 0.07) !important;
-  box-shadow: 0 12px 36px -4px rgba(0, 10, 14, 0.55), 0 4px 14px -2px rgba(0, 0, 0, 0.35) !important;
+  border: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0 !important;
+  box-shadow: 2px 0 16px rgba(0, 10, 14, 0.35) !important;
 }
 
 #erp-sidebar .f-sb-header {
