@@ -93,12 +93,10 @@ def test_tabs_coverage():
         'purchase-dashboard',
         'rm-dashboard',
         'bookings',
-        'create-booking',
         'rm-arrivals',
         'arrivals',
         'lot-tracking',
         'bills',
-        'rm-bill',
         'payments',
         'payment-summary'
     ]
@@ -110,6 +108,36 @@ def test_tabs_coverage():
         else:
             print(f"  ✗ Missing tab '{t}' in sidebar")
             all_found = False
+
+    # Also verify that create-booking and rm-bill are NOT separate tabs in sidebar
+    if 'id: "create-booking"' not in sb and 'id: "rm-bill"' not in sb:
+        print("  ✓ 'create-booking' and 'rm-bill' properly removed from top-level sidebar tabs")
+    else:
+        print("  ✗ Warning: 'create-booking' or 'rm-bill' still present in sidebar tabs")
+        all_found = False
+
+    # Check that purchaseView.js contains embedded handlers and no literal plus buttons
+    with open('js/views/purchaseView.js', 'r', encoding='utf-8') as f:
+        pv = f.read()
+    
+    if 'isCreatingBooking' in pv and 'openRMBillEdit' in pv:
+        print("  ✓ Contextual screens embedded in Bookings and Bills views")
+    else:
+        print("  ✗ Contextual screen handlers missing in purchaseView.js")
+        all_found = False
+
+    # Check for '+' in button text
+    plus_buttons = ['>+ New', '>+ NEW', '>+ Pay', '>+ Create', '>+ Add']
+    found_plus = False
+    for pb in plus_buttons:
+        if pb in pv:
+            print(f"  ✗ Found literal plus in button: {pb}")
+            found_plus = True
+    if not found_plus:
+        print("  ✓ Clean button typography: no literal '+' prefixed to button text labels")
+    else:
+        all_found = False
+
     return all_found
 
 if __name__ == '__main__':

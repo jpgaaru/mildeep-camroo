@@ -22,7 +22,6 @@ export const NAV_HIERARCHY = [
         defaultTab: "bookings",
         tabs: [
           { id: "bookings", label: "Bookings List", hash: "#/purchase/operations/bookings" },
-          { id: "create-booking", label: "Create Booking", hash: "#/purchase/operations/create-booking" },
           { id: "rm-arrivals", label: "RM Arrival", hash: "#/purchase/operations/rm-arrivals" },
           { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
           { id: "lot-tracking", label: "LotTrack", hash: "#/purchase/operations/lot-tracking" }
@@ -33,8 +32,7 @@ export const NAV_HIERARCHY = [
         title: "Transactions & Bills",
         defaultTab: "bills",
         tabs: [
-          { id: "bills", label: "Bills", hash: "#/purchase/transactions-bills/bills" },
-          { id: "rm-bill", label: "RM Bill", hash: "#/purchase/transactions-bills/rm-bill" }
+          { id: "bills", label: "Bills", hash: "#/purchase/transactions-bills/bills" }
         ]
       },
       {

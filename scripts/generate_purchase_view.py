@@ -5,7 +5,7 @@ import sys
 def main():
     with open('js/views/purchaseView.js', 'w', encoding='utf-8') as f:
         f.write('''// Real-World Production Fisheries ERP Purchase Module (Client v3 Final Specification)
-// DFL Production Architecture: Canonical Masters, Live 0.1% TDS Math, Dynamic Balance Consumption, Auto-Numbering, and Atomic Design System
+// DFL Production Architecture: Canonical Masters, Live 0.1% TDS Math, Dynamic Balance Consumption, Auto-Numbering, and Contextual Sub-Screens
 
 import { ERP_DATA } from '../data/mockData.js';
 import { DataTable } from '../components/table.js';
@@ -97,8 +97,9 @@ export let payments = [
   { voucher: 'CADP01', mode: 'Cash', date: '2026-10-05', center: 'ADDARIPETA FARMS', agent: '', cheque: '', comments: 'advance', lines: [{ no: 'ADP/2627/0020', amount: 5000 }], total: 5000 }
 ];
 
-// Active state context
-let activeBillForEdit = arrivals[4]; // Default to ADP/2627/0020 for inspection
+// Active contextual state
+let isCreatingBooking = false;
+let activeBillForEdit = null;
 
 // ============================================================================
 // MONEY MATH HELPERS (Section 194Q TDS 0.1% Statutory Formula)
@@ -184,10 +185,13 @@ export const PurchaseView = {
 
         // Submenu: Operations
         case 'bookings':
+          isCreatingBooking = false;
           this.renderBookings(subContainer);
           break;
         case 'create-booking':
-          this.renderCreateBooking(subContainer);
+          // Contextual route handling - show form inside bookings
+          isCreatingBooking = true;
+          this.renderBookings(subContainer);
           break;
         case 'rm-arrivals':
         case 'rm-arrival':
@@ -204,11 +208,14 @@ export const PurchaseView = {
         // Submenu: Transactions & Bills
         case 'bills':
         case 'supplier-bills':
+          activeBillForEdit = null;
           this.renderBills(subContainer);
           break;
         case 'rm-bill':
         case 'commercial-txns':
-          this.renderRMBill(subContainer);
+          // Contextual route handling - show respective bill inside bills
+          if (!activeBillForEdit) activeBillForEdit = arrivals[0];
+          this.renderBills(subContainer);
           break;
 
         // Submenu: Payments
@@ -600,8 +607,14 @@ export const PurchaseView = {
 
   // =========================================================================
   // SUBMENU 2: OPERATIONS -> TAB 1: BOOKINGS LIST (Client: bookings)
+  // Contextual behavior: Create Booking renders smoothly inside this tab on demand
   // =========================================================================
   renderBookings(container) {
+    if (isCreatingBooking) {
+      this.renderCreateBooking(container);
+      return;
+    }
+
     let fType = '';
     let fPlant = '';
     let fDate = '';
@@ -636,7 +649,7 @@ export const PurchaseView = {
               <button onclick="window.Toast.show('Booking details: ${b.no} at ${b.station}', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="View">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </button>
-              <button onclick="if(confirm('Delete booking ${b.no}?')){ bookings = bookings.filter(x => x.no !== '${b.no}'); PurchaseView.render(document.getElementById('purchase-subpage-content'), 'bookings'); Toast.show('Booking deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
+              <button onclick="if(confirm('Delete booking ${b.no}?')){ bookings = bookings.filter(x => x.no !== '${b.no}'); PurchaseView.renderBookings(document.getElementById('purchase-subpage-content')); Toast.show('Booking deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
               </button>
             </div>
@@ -681,10 +694,10 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2.5">
-              <a href="#/purchase/operations/create-booking" class="px-4 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer">
+              <button id="btn-open-create-booking" class="px-4 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ New Bookings</span>
-              </a>
+                <span>New Booking</span>
+              </button>
             </div>
             <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
           </div>
@@ -713,6 +726,11 @@ export const PurchaseView = {
       </div>
     `;
 
+    document.getElementById('btn-open-create-booking')?.addEventListener('click', () => {
+      isCreatingBooking = true;
+      this.renderBookings(container);
+    });
+
     document.getElementById('bk-search-btn')?.addEventListener('click', () => {
       fType = document.getElementById('bk-f-type')?.value || '';
       fPlant = document.getElementById('bk-f-plant')?.value || '';
@@ -732,7 +750,7 @@ export const PurchaseView = {
   },
 
   // =========================================================================
-  // SUBMENU 2: OPERATIONS -> TAB 2: CREATE BOOKING (Client: createbooking)
+  // CREATE BOOKING (Sub-Screen under Bookings Tab)
   // =========================================================================
   renderCreateBooking(container) {
     container.innerHTML = `
@@ -743,9 +761,9 @@ export const PurchaseView = {
               <h3 class="text-base font-bold text-[#0F172A]">Create Procurement Booking</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Booking Number manual (⟳ Auto available) with uniqueness check · Vehicle/Driver/Grader = free text with master suggestions</p>
             </div>
-            <a href="#/purchase/operations/bookings" class="px-3 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
-              ← Back to List
-            </a>
+            <button id="btn-back-to-bookings" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              ← Back to Bookings List
+            </button>
           </div>
 
           <form id="form-create-booking" class="space-y-4">
@@ -821,7 +839,7 @@ export const PurchaseView = {
               <div class="col-span-2">
                 <div class="flex justify-between items-center mb-1">
                   <label class="font-bold text-[#475569] uppercase tracking-wider">Suppliers <span class="text-[#FF5150]">*</span></label>
-                  <button type="button" id="btn-new-supplier" class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#6366F1] text-white cursor-pointer">+ NEW</button>
+                  <button type="button" id="btn-new-supplier" class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#6366F1] text-white cursor-pointer">New Supplier</button>
                 </div>
                 <select id="cb-supplier" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
                   <option value="">Select Supplier</option>
@@ -859,9 +877,9 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <a href="#/purchase/operations/bookings" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
                 Close
-              </a>
+              </button>
               <button type="reset" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
                 Clear Form
               </button>
@@ -873,6 +891,14 @@ export const PurchaseView = {
         </div>
       </div>
     `;
+
+    const closeHandler = () => {
+      isCreatingBooking = false;
+      this.renderBookings(container);
+    };
+
+    document.getElementById('btn-back-to-bookings')?.addEventListener('click', closeHandler);
+    document.getElementById('btn-close-create-booking')?.addEventListener('click', closeHandler);
 
     document.getElementById('btn-auto-booking-no')?.addEventListener('click', () => {
       const st = document.getElementById('cb-station')?.value || 'ADDARIPETA FARMS';
@@ -920,12 +946,12 @@ export const PurchaseView = {
 
       bookings.unshift(newBooking);
       Toast.show(`Booking ${no} created successfully!`, 'success');
-      window.location.hash = '#/purchase/operations/bookings';
+      closeHandler();
     });
   },
 
   // =========================================================================
-  // SUBMENU 2: OPERATIONS -> TAB 3: RM ARRIVAL (Client: rmarrival)
+  // SUBMENU 2: OPERATIONS -> TAB 2: RM ARRIVAL (Client: rmarrival)
   // =========================================================================
   renderRMArrivals(container) {
     const renderTable = () => {
@@ -1096,7 +1122,7 @@ export const PurchaseView = {
   },
 
   // =========================================================================
-  // SUBMENU 2: OPERATIONS -> TAB 4: ARRIVALS REGISTER (Client: arrivals)
+  // SUBMENU 2: OPERATIONS -> TAB 3: ARRIVALS REGISTER (Client: arrivals)
   // =========================================================================
   renderArrivals(container) {
     let fCenter = '';
@@ -1203,7 +1229,7 @@ export const PurchaseView = {
             <div class="flex items-center gap-2">
               <button id="btn-create-arrival-open" class="px-4 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ New Arrival</span>
+                <span>New Arrival</span>
               </button>
               <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
                 ⬇ Download Excel
@@ -1262,7 +1288,7 @@ export const PurchaseView = {
   },
 
   // =========================================================================
-  // SUBMENU 2: OPERATIONS -> TAB 5: LOTTRACK (Client: lottrack)
+  // SUBMENU 2: OPERATIONS -> TAB 4: LOTTRACK (Client: lottrack)
   // =========================================================================
   renderLotTracking(container) {
     let selectedStation = '';
@@ -1350,10 +1376,10 @@ export const PurchaseView = {
               <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1 cursor-pointer">
                 ⧉ Copy TSV
               </button>
-              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
                 ⬇ Excel
               </button>
-              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
                 ⬇ PDF
               </button>
             </div>
@@ -1408,9 +1434,27 @@ export const PurchaseView = {
 
   // =========================================================================
   // SUBMENU 3: TRANSACTIONS & BILLS -> TAB 1: BILLS (Client: bills)
-  // Conditional UI rule: Checkbox column and PDF buttons appear ONLY when Status = 'Completed'
+  // Contextual behavior: Tapping any transaction row or clicking ✏️ opens RM Bill right here
   // =========================================================================
+  openRMBillEdit(billNo) {
+    const a = arrivals.find(x => x.no === billNo);
+    if (!a) {
+      Toast.show('Arrival record not found', 'error');
+      return;
+    }
+    activeBillForEdit = a;
+    const subContainer = document.getElementById('purchase-subpage-content');
+    if (subContainer) {
+      this.renderBills(subContainer);
+    }
+  },
+
   renderBills(container) {
+    if (activeBillForEdit) {
+      this.renderRMBill(container);
+      return;
+    }
+
     let fType = '';
     let fPlant = '';
     let fSupplier = '';
@@ -1450,8 +1494,8 @@ export const PurchaseView = {
           st === 'Partial' ? 'bg-[#E0F2FE] text-[#0369A1]' : 'bg-[#FFF9E6] text-[#824D00]';
 
         return `
-          <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
-            ${showCompletedActions ? `<td class="px-3.5 py-3"><input type="checkbox" class="bill-row-chk rounded text-[#006C7A]"></td>` : ''}
+          <tr onclick="PurchaseView.openRMBillEdit('${a.no}')" class="hover:bg-[#F0FAFC] transition-colors border-b border-[#F1F5F9] cursor-pointer" title="Click to view RM Bill info">
+            ${showCompletedActions ? `<td class="px-3.5 py-3" onclick="event.stopPropagation()"><input type="checkbox" class="bill-row-chk rounded text-[#006C7A]"></td>` : ''}
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${i + 1}</td>
             <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.date}</td>
@@ -1465,9 +1509,9 @@ export const PurchaseView = {
                 ${st}
               </span>
             </td>
-            <td class="px-3.5 py-3">
+            <td class="px-3.5 py-3" onclick="event.stopPropagation()">
               <div class="flex items-center gap-1.5">
-                <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="Edit RM Bill">
+                <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006C7A] hover:bg-[#E0F2FE]" title="View & Edit RM Bill">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </button>
                 <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#475569] hover:bg-[#F8FAFC]" title="Print">
@@ -1536,7 +1580,7 @@ export const PurchaseView = {
               </button>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs text-[#64748B]">Tip: Checkbox and bulk PDF exports appear when <b>Status = Completed</b>.</span>
+              <span class="text-xs text-[#64748B]">Tip: Tap any transaction row to view respective RM Bill info. Checkboxes & bulk PDF exports appear when <b>Status = Completed</b>.</span>
             </div>
           </div>
 
@@ -1577,23 +1621,13 @@ export const PurchaseView = {
   },
 
   // =========================================================================
-  // SUBMENU 3: TRANSACTIONS & BILLS -> TAB 2: RM BILL (Client: rmbill)
+  // RM BILL (Sub-Screen under Bills Tab)
   // Header frozen from Arrival · editable: Addition/Deduction per KG, Rate, Remarks
   // =========================================================================
-  openRMBillEdit(billNo) {
-    const a = arrivals.find(x => x.no === billNo);
-    if (!a) {
-      Toast.show('Arrival record not found', 'error');
-      return;
-    }
-    activeBillForEdit = a;
-    window.location.hash = '#/purchase/transactions-bills/rm-bill';
-  },
-
   renderRMBill(container) {
     const a = activeBillForEdit || arrivals[0];
     if (!a) {
-      container.innerHTML = '<div class="p-6 text-center text-xs text-[#94A3B8]">Select a bill from the Bills tab to edit</div>';
+      container.innerHTML = '<div class="p-6 text-center text-xs text-[#94A3B8]">Select a bill from the Bills table to edit</div>';
       return;
     }
 
@@ -1610,12 +1644,12 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-xs">
           <div class="flex items-center justify-between pb-4 border-b border-[#F1F5F9] mb-5">
             <div>
-              <h3 class="text-base font-bold text-[#0F172A]">RM Bill Editor</h3>
+              <h3 class="text-base font-bold text-[#0F172A]">RM Bill Details — ${a.no}</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Header frozen from Arrival · editable: Addition/Deduction per KG, Rate, Remarks</p>
             </div>
-            <a href="#/purchase/transactions-bills/bills" class="px-3 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
-              ← Back to Bills
-            </a>
+            <button id="btn-back-to-bills" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              ← Back to Bills Register
+            </button>
           </div>
 
           <!-- Frozen Header Grid -->
@@ -1680,9 +1714,9 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <a href="#/purchase/transactions-bills/bills" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
                 Cancel
-              </a>
+              </button>
               <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
                 Save Changes
               </button>
@@ -1691,6 +1725,14 @@ export const PurchaseView = {
         </div>
       </div>
     `;
+
+    const closeBillHandler = () => {
+      activeBillForEdit = null;
+      this.renderBills(container);
+    };
+
+    document.getElementById('btn-back-to-bills')?.addEventListener('click', closeBillHandler);
+    document.getElementById('btn-cancel-rm-bill')?.addEventListener('click', closeBillHandler);
 
     document.getElementById('rb-rate')?.addEventListener('input', calcTotal);
     document.getElementById('rb-addded')?.addEventListener('input', calcTotal);
@@ -1702,7 +1744,7 @@ export const PurchaseView = {
       a.remarks = document.getElementById('rb-remarks')?.value || '';
 
       Toast.show(`RM Bill ${a.no} revised! New Act Bill ₹${fmt(billAmtOf(a))}`, 'success');
-      window.location.hash = '#/purchase/transactions-bills/bills';
+      closeBillHandler();
     });
   },
 
@@ -1813,7 +1855,7 @@ export const PurchaseView = {
             <div class="flex items-center gap-2">
               <button id="btn-action-pay" disabled class="px-5 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 opacity-50 cursor-not-allowed">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                <span>+ Pay Selected Bills</span>
+                <span>Pay Selected Bills</span>
               </button>
             </div>
             <span class="text-xs text-[#64748B]">Act Bill = Gross − TDS (0.1%) · Select rows to activate payment disbursal</span>
