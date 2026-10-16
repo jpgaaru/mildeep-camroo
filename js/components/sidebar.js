@@ -580,9 +580,9 @@ export const Sidebar = {
 
         <!-- Scrollable Navigation Hierarchy -->
         <div class="f-sb-nav" id="sidebar-nav-groups">
-          <a class="f-sb-link ${this.activeModuleId === 'home' ? 'active' : ''}" href="#/home" title="Home">
-            <i data-lucide="home"></i>
-            <span>Home</span>
+          <a class="f-sb-link ${this.activeModuleId === 'home' ? 'active' : ''} ${isS01 && this.activeModuleId === 'home' ? 's01-active-pill' : ''}" href="#/home" title="Home" style="${isS01 && this.activeModuleId === 'home' ? 'background: #00A8B5 !important; color: #0F172A !important; font-weight: 700 !important; border-radius: 12px; margin: 3px 8px; box-shadow: 0 4px 12px rgba(0, 168, 181, 0.25);' : ''}">
+            <i data-lucide="home" style="${isS01 && this.activeModuleId === 'home' ? 'stroke: #0F172A !important; stroke-width: 2.2;' : ''}"></i>
+            <span style="${isS01 && this.activeModuleId === 'home' ? 'color: #0F172A !important;' : ''}">Home</span>
           </a>
 
           <span class="f-sb-sec">Core Modules</span>

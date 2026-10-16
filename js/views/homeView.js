@@ -4,10 +4,14 @@
 // - Quick Workflow Shortcuts grid with perfectly aligned responsive layout
 // - My Permissible Roles compact section with Manage Settings shortcut
 
+import { Environment } from '../framework/Environment.js';
+
 export const HomeView = {
   render(containerId) {
     const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
     if (!container) return;
+
+    const isS01 = Environment.isSitemap01();
 
     // Header action button
     const actionContainer = document.getElementById('section-action-btn-container');
@@ -110,50 +114,77 @@ export const HomeView = {
       <div class="space-y-6 animate-fade-in w-full pb-10">
         
         <!-- 1. Serene Coastal Sunrise Hero Banner -->
-        <div 
-          class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 p-7 sm:p-9 md:p-12 overflow-hidden shadow-xs w-full"
-          style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 45%, #D8F4F8 100%);"
-        >
-          <!-- Artistic Coastal Vector Graphic Background -->
-          <div class="absolute right-0 bottom-0 top-0 w-2/3 md:w-1/2 pointer-events-none select-none overflow-hidden">
-            <svg viewBox="0 0 420 200" fill="none" preserveAspectRatio="xMaxYMax meet" class="w-full h-full opacity-90">
-              <defs>
-                <linearGradient id="sunGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95" />
-                  <stop offset="100%" stop-color="#FDE047" stop-opacity="0.75" />
-                </linearGradient>
-                <linearGradient id="backHills" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.65" />
-                  <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.3" />
-                </linearGradient>
-                <linearGradient id="frontHills" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.9" />
-                  <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.6" />
-                </linearGradient>
-              </defs>
+        ${isS01 ? `
+          <!-- Sitemap 01: Welcome Devi Fisheries Banner with 20% Increased Height & mildeep-camaroo-illustration.png -->
+          <div 
+            class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 py-10 sm:py-12 md:py-14 px-7 sm:px-9 md:px-12 overflow-hidden shadow-xs w-full flex items-center min-h-[165px] md:min-h-[185px]"
+            style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 45%, #D8F4F8 100%);"
+          >
+            <!-- Illustration: mildeep-camaroo-illustration.png -->
+            <div class="absolute right-0 bottom-0 top-0 w-3/5 sm:w-1/2 md:w-3/5 lg:w-3/5 h-full pointer-events-none select-none overflow-hidden flex items-center justify-end">
+              <img 
+                src="assets/mildeep-camaroo-illustration.png" 
+                alt="Devi Fisheries Facility Illustration" 
+                class="w-full h-full object-cover object-right opacity-85 sm:opacity-95 md:opacity-100"
+                style="mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, black 45%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, black 45%);"
+              />
+            </div>
 
-              <!-- Warm Pastel Sun -->
-              <circle cx="370" cy="75" r="48" fill="url(#sunGlow)" />
-
-              <!-- Flying Birds Silhouettes -->
-              <path d="M310 88 Q315 82 320 88 Q325 82 330 88" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
-              <path d="M328 104 Q332 99 336 104 Q340 99 344 104" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
-
-              <!-- Layered Soft Rolling Waves / Coastal Dunes -->
-              <path d="M120 200 Q240 100 370 145 L420 200 Z" fill="url(#backHills)" />
-              <path d="M40 200 Q190 120 340 165 Q380 180 420 200 Z" fill="url(#frontHills)" />
-              <path d="M0 200 Q140 160 270 185 Q350 200 420 200 Z" fill="#F0F9FF" opacity="0.95" />
-            </svg>
+            <!-- Banner Foreground Content -->
+            <div class="relative z-10 max-w-2xl">
+              <!-- Main Title -->
+              <h1 class="text-3xl sm:text-4xl md:text-[38px] font-extrabold text-[#0F172A] tracking-tight leading-tight">
+                Welcome Devi Fisheries
+              </h1>
+            </div>
           </div>
+        ` : `
+          <!-- Sitemap 02 (Canonical Superadmin): Original Banner -->
+          <div 
+            class="relative rounded-2xl md:rounded-3xl border border-[#BAE6FD]/80 p-7 sm:p-9 md:p-12 overflow-hidden shadow-xs w-full"
+            style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 45%, #D8F4F8 100%);"
+          >
+            <!-- Artistic Coastal Vector Graphic Background -->
+            <div class="absolute right-0 bottom-0 top-0 w-2/3 md:w-1/2 pointer-events-none select-none overflow-hidden">
+              <svg viewBox="0 0 420 200" fill="none" preserveAspectRatio="xMaxYMax meet" class="w-full h-full opacity-90">
+                <defs>
+                  <linearGradient id="sunGlow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#FDE047" stop-opacity="0.75" />
+                  </linearGradient>
+                  <linearGradient id="backHills" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.65" />
+                    <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.3" />
+                  </linearGradient>
+                  <linearGradient id="frontHills" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.6" />
+                  </linearGradient>
+                </defs>
 
-          <!-- Banner Foreground Content -->
-          <div class="relative z-10 max-w-2xl">
-            <!-- Main Title -->
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
-              Welcome to Camaroo ERP
-            </h1>
+                <!-- Warm Pastel Sun -->
+                <circle cx="370" cy="75" r="48" fill="url(#sunGlow)" />
+
+                <!-- Flying Birds Silhouettes -->
+                <path d="M310 88 Q315 82 320 88 Q325 82 330 88" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
+                <path d="M328 104 Q332 99 336 104 Q340 99 344 104" fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" opacity="0.4" />
+
+                <!-- Layered Soft Rolling Waves / Coastal Dunes -->
+                <path d="M120 200 Q240 100 370 145 L420 200 Z" fill="url(#backHills)" />
+                <path d="M40 200 Q190 120 340 165 Q380 180 420 200 Z" fill="url(#frontHills)" />
+                <path d="M0 200 Q140 160 270 185 Q350 200 420 200 Z" fill="#F0F9FF" opacity="0.95" />
+              </svg>
+            </div>
+
+            <!-- Banner Foreground Content -->
+            <div class="relative z-10 max-w-2xl">
+              <!-- Main Title -->
+              <h1 class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
+                Welcome to Camaroo ERP
+              </h1>
+            </div>
           </div>
-        </div>
+        `}
 
         <!-- 2. Quick Workflow Shortcuts Section -->
         <div class="w-full">
