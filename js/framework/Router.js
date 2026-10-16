@@ -135,20 +135,36 @@ export const SECTION_METADATA_REGISTRY = {
   },
   sales: {
     dashboard: {
-      title: 'Sales & Export Executive Dashboard',
-      subtitle: 'International buyers, active orders, container voyages, and realization analytics'
+      title: 'Sales Dashboard',
+      subtitle: 'Executive overview, international buyers, active orders, container voyages, and realization analytics'
+    },
+    product: {
+      title: 'Product Master & Variety SKUs',
+      subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
     'master-data': {
       title: 'Product Master & Variety SKUs',
       subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
     buyers: {
-      title: 'Buyer & Entity Management',
-      subtitle: 'International buyers, consignees, destination notify parties, applicants, and export brands'
+      title: 'Buyers & Export Entities',
+      subtitle: 'International buyers, consignees, destination notify parties, applicants, and private-label export brands'
+    },
+    'sales-overview': {
+      title: 'Sales Overview',
+      subtitle: 'Executive sales module gateway, export milestones, and core operational workflows'
+    },
+    sales: {
+      title: 'Sales Overview',
+      subtitle: 'Executive sales module gateway, export milestones, and core operational workflows'
     },
     orders: {
       title: 'Orders, Customs & Shipping Execution',
       subtitle: 'Proforma invoices, custom invoices, US 10+2 ISF filing, shipping bills, commercial invoices, and FDA clearance'
+    },
+    payments: {
+      title: 'Export Finance & Payments',
+      subtitle: 'FX forward contracts, bank negotiations, invoice collections, and payment realization tracking'
     },
     finance: {
       title: 'Export Finance & Payments',
@@ -157,6 +173,14 @@ export const SECTION_METADATA_REGISTRY = {
     insurance: {
       title: 'Marine Cargo Insurance',
       subtitle: 'Pending ocean dispatches, marine declaration policies, and premium payment settlement'
+    },
+    reports: {
+      title: 'Sales & Export Reports',
+      subtitle: 'Delayed shipments, sales performance summaries, payment realization status, and finished goods inventory'
+    },
+    consumption: {
+      title: 'Product Consumption',
+      subtitle: 'Raw material intake consumption, plant pack-out yields, and export dispatch reconciliation'
     }
   },
   reports: {

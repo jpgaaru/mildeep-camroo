@@ -723,7 +723,125 @@ export const INITIAL_SALES_DATA = {
     ordersQueue: { count: 14, tons: 252, label: "Processing & Staging" },
     pendingPaymentsUsd: { amount: 527200, inrEquivalent: 44205720, label: "Outstanding Receivables" },
     paymentsRealizedMonth: { amount: 842000, inrEquivalent: 70601700, label: "Realized This Month" }
-  }
+  },
+
+  // 7. REPORTS & ANALYTICS
+  delayedShipments: [
+    {
+      id: "DSH-01",
+      orderNo: "PO-APX-2026-780",
+      invoiceNo: "DFL/EXP/2026-27/083",
+      buyer: "Apex Seafoods USA Inc.",
+      destinationPort: "Long Beach Port, CA",
+      scheduledShipDate: "2026-10-10",
+      currentEta: "2026-10-24",
+      daysDelayed: 6,
+      liner: "Maersk Line",
+      delayReason: "Vessel blank sailing / feeder connection delay at Colombo",
+      status: "Rescheduled"
+    },
+    {
+      id: "DSH-02",
+      orderNo: "PO-NIP-2026-192",
+      invoiceNo: "DFL/EXP/2026-27/081",
+      buyer: "Nippon Suisan Kaisha Ltd.",
+      destinationPort: "Yokohama Port, Japan",
+      scheduledShipDate: "2026-10-12",
+      currentEta: "2026-10-20",
+      daysDelayed: 4,
+      liner: "Ocean Network Express (ONE)",
+      delayReason: "Reefer container staging delay during typhoon advisory",
+      status: "In Transit"
+    }
+  ],
+
+  salesSummaries: [
+    {
+      id: "SS-01",
+      region: "North America (USA)",
+      destinationPorts: "Baltimore, Long Beach, Newark",
+      ordersCount: 38,
+      containersCount: 52,
+      volumeMt: 936,
+      fobUsd: 8424000,
+      realizedInr: 706017000,
+      realizationPct: 94.2
+    },
+    {
+      id: "SS-02",
+      region: "East Asia (Japan)",
+      destinationPorts: "Tokyo, Yokohama, Kobe",
+      ordersCount: 16,
+      containersCount: 22,
+      volumeMt: 396,
+      fobUsd: 3762000,
+      realizedInr: 315631800,
+      realizationPct: 96.5
+    },
+    {
+      id: "SS-03",
+      region: "European Union (EU)",
+      destinationPorts: "Rotterdam, Antwerp, Hamburg",
+      ordersCount: 12,
+      containersCount: 16,
+      volumeMt: 288,
+      fobUsd: 2592000,
+      realizedInr: 217209600,
+      realizationPct: 91.0
+    }
+  ],
+
+  // 8. PRODUCT CONSUMPTION LEDGER
+  consumptionLedger: [
+    {
+      id: "CSL-01",
+      batchNo: "BATCH-2026-0881",
+      date: "2026-10-14",
+      species: "Vannamei (Litopenaeus vannamei)",
+      gradeIntake: "30-40 Count",
+      rawMaterialIntakeKg: 12500,
+      peeledLossKg: 4250,
+      finishedProductForm: "HLSO 16/20 Block",
+      packOutCartons: 750,
+      finishedOutputKg: 7500,
+      actualYieldPct: 60.0,
+      standardYieldPct: 59.5,
+      variancePct: "+0.5%",
+      status: "Verified"
+    },
+    {
+      id: "CSL-02",
+      batchNo: "BATCH-2026-0882",
+      date: "2026-10-15",
+      species: "Black Tiger (Penaeus monodon)",
+      gradeIntake: "U/10 Jumbo",
+      rawMaterialIntakeKg: 8400,
+      peeledLossKg: 2940,
+      finishedProductForm: "PDTO IQF 10x2 LBS",
+      packOutCartons: 500,
+      finishedOutputKg: 5000,
+      actualYieldPct: 59.52,
+      standardYieldPct: 59.0,
+      variancePct: "+0.52%",
+      status: "Verified"
+    },
+    {
+      id: "CSL-03",
+      batchNo: "BATCH-2026-0883",
+      date: "2026-10-16",
+      species: "Vannamei (Litopenaeus vannamei)",
+      gradeIntake: "41-50 Small",
+      rawMaterialIntakeKg: 15200,
+      peeledLossKg: 6384,
+      finishedProductForm: "Cooked PUD IQF",
+      packOutCartons: 880,
+      finishedOutputKg: 8800,
+      actualYieldPct: 57.89,
+      standardYieldPct: 58.0,
+      variancePct: "-0.11%",
+      status: "In Progress"
+    }
+  ]
 };
 
 export const SalesDataStore = {

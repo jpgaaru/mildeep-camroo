@@ -35,6 +35,7 @@ export const SalesView = {
       case 'preparation-list':
         contentHtml = this.renderPreparationList();
         break;
+      case 'species':
       case 'species-master':
         contentHtml = this.renderSpeciesMaster();
         break;
@@ -65,7 +66,14 @@ export const SalesView = {
         contentHtml = this.renderBrandsList();
         break;
 
-      // 4. Orders Execution
+      // 4. Sales Overview
+      case 'sales-overview':
+      case 'sales-overview-tab':
+      case 'sales':
+        contentHtml = this.renderSalesOverview();
+        break;
+
+      // 5. Orders Execution
       case 'proforma-list':
         contentHtml = this.renderProformaList();
         break;
@@ -91,7 +99,7 @@ export const SalesView = {
         contentHtml = this.renderClearingAgent();
         break;
 
-      // 5. Export Finance
+      // 6. Export Finance & Payments
       case 'forward-contracts':
         contentHtml = this.renderForwardContracts();
         break;
@@ -108,7 +116,7 @@ export const SalesView = {
         contentHtml = this.renderRealizationDone();
         break;
 
-      // 6. Cargo Insurance
+      // 7. Cargo Insurance
       case 'pending-insurance':
         contentHtml = this.renderPendingInsurance();
         break;
@@ -117,6 +125,30 @@ export const SalesView = {
         break;
       case 'insurance-payments':
         contentHtml = this.renderInsurancePayments();
+        break;
+
+      // 8. Reports
+      case 'reports':
+      case 'reports-overview':
+        contentHtml = this.renderReportsOverview();
+        break;
+      case 'delayed-shipments':
+        contentHtml = this.renderDelayedShipmentsReport();
+        break;
+      case 'sales-summary':
+        contentHtml = this.renderSalesSummaryReport();
+        break;
+      case 'payment-status':
+        contentHtml = this.renderPaymentStatusReport();
+        break;
+      case 'inventory-report':
+        contentHtml = this.renderInventoryReport();
+        break;
+
+      // 9. Product Consumption
+      case 'consumption':
+      case 'consumption-ledger':
+        contentHtml = this.renderConsumptionLedger();
         break;
 
       default:
@@ -1808,6 +1840,434 @@ export const SalesView = {
   },
 
   // ==========================================
+  // 4. SALES OVERVIEW (Matching reference HTML page-sales)
+  // ==========================================
+  renderSalesOverview() {
+    const data = SalesDataStore.getAll();
+    const kpis = data.dashboardKpis || {};
+    return `
+      <div class="space-y-6">
+        <!-- Sales Overview Welcome Hero Card -->
+        <div class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0369A1] rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+          <div class="relative z-10 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs text-sky-200 text-xs font-semibold mb-3 border border-white/20">
+              <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+              Devi Fisheries Limited ERP &bull; Sales & Export Module
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-2">Sales Overview</h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Welcome to the Sales module. Use the sub-tabs above to navigate through Orders, Payments, and Insurance workflows. Seamlessly manage international buyers, customs documentation, USFDA compliance, forward contract hedging, and container tracking.
+            </p>
+          </div>
+          <div class="absolute right-6 -bottom-8 opacity-10 pointer-events-none hidden md:block">
+            <svg class="w-64 h-64 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+
+        <!-- Quick Access Workflow Hub -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="#/sales/orders/proforma-list" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-sky-500 hover:shadow-md transition-all group block">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-105 transition-transform">
+              📋
+            </div>
+            <h3 class="text-base font-black text-[#0F172A] group-hover:text-sky-600 transition-colors">Orders & Execution</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Proforma Invoices, Customs Invoices, US 10+2 ISF details, Shipping Bills, Commercial Invoices, and port clearances.
+            </p>
+            <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1">
+              <span>View Orders</span> &rarr;
+            </div>
+          </a>
+
+          <a href="#/sales/payments/forward-contracts" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-teal-500 hover:shadow-md transition-all group block">
+            <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-105 transition-transform">
+              💳
+            </div>
+            <h3 class="text-base font-black text-[#0F172A] group-hover:text-teal-600 transition-colors">Payments & Finance</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              FX Forward Contracts, bank collections, foreign exchange realization, margin deductions, and outstanding receivables.
+            </p>
+            <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1">
+              <span>View Payments</span> &rarr;
+            </div>
+          </a>
+
+          <a href="#/sales/insurance/pending-insurance" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-indigo-500 hover:shadow-md transition-all group block">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-105 transition-transform">
+              🛡️
+            </div>
+            <h3 class="text-base font-black text-[#0F172A] group-hover:text-indigo-600 transition-colors">Cargo Insurance</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Voyage insurance certificates, cargo declaration policies, open covers, and underwriter settlement tracking.
+            </p>
+            <div class="mt-4 text-xs font-bold text-indigo-600 flex items-center gap-1">
+              <span>View Insurance</span> &rarr;
+            </div>
+          </a>
+        </div>
+
+        <!-- Master Data & Operational Modules -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="#/sales/product/product-list" class="bg-white rounded-2xl p-5 border border-slate-200 hover:border-slate-400 transition-all block">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">🦐</span>
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Product Master & Varieties</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Species, preparations, grades, and SUPC SKUs</p>
+              </div>
+            </div>
+          </a>
+          <a href="#/sales/buyers/buyer-list" class="bg-white rounded-2xl p-5 border border-slate-200 hover:border-slate-400 transition-all block">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">🌍</span>
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Buyers & Consignees</h4>
+                <p class="text-xs text-slate-500 mt-0.5">International buyers, notify parties, and private labels</p>
+              </div>
+            </div>
+          </a>
+          <a href="#/sales/reports/reports-overview" class="bg-white rounded-2xl p-5 border border-slate-200 hover:border-slate-400 transition-all block">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">📊</span>
+              <div>
+                <h4 class="text-sm font-bold text-[#0F172A]">Reports & Analytics</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Delayed shipments, sales summaries, and finished inventory</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    `;
+  },
+
+  // ==========================================
+  // 8. REPORTS (Matching reference HTML page-reports)
+  // ==========================================
+  renderReportsOverview() {
+    return `
+      <div class="space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs">
+          <h2 class="text-xl font-bold text-[#0F172A] mb-1">Reports</h2>
+          <p class="text-xs text-slate-500 mb-6">Select from the available enterprise sales, logistics, and inventory reports below.</p>
+          
+          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Available Reports</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Delayed Shipments -->
+            <a href="#/sales/reports/delayed-shipments" class="bg-slate-50 hover:bg-white rounded-xl p-5 border border-slate-200 hover:border-rose-400 hover:shadow-md transition-all group block">
+              <div class="text-2xl mb-2">📋</div>
+              <h3 class="font-bold text-sm text-[#0F172A] group-hover:text-rose-600 transition-colors">Delayed Shipments</h3>
+              <p class="text-slate-500 text-xs mt-2 leading-relaxed">View shipments that are past their ship-by date and ocean liner schedule adjustments</p>
+              <div class="mt-4 text-xs font-bold text-rose-600">Open Report &rarr;</div>
+            </a>
+
+            <!-- Sales Summary -->
+            <a href="#/sales/reports/sales-summary" class="bg-slate-50 hover:bg-white rounded-xl p-5 border border-slate-200 hover:border-sky-400 hover:shadow-md transition-all group block">
+              <div class="text-2xl mb-2">📊</div>
+              <h3 class="font-bold text-sm text-[#0F172A] group-hover:text-sky-600 transition-colors">Sales Summary</h3>
+              <p class="text-slate-500 text-xs mt-2 leading-relaxed">Monthly and yearly sales performance, export destinations, and FOB value</p>
+              <div class="mt-4 text-xs font-bold text-sky-600">Open Report &rarr;</div>
+            </a>
+
+            <!-- Payment Status -->
+            <a href="#/sales/reports/payment-status" class="bg-slate-50 hover:bg-white rounded-xl p-5 border border-slate-200 hover:border-emerald-400 hover:shadow-md transition-all group block">
+              <div class="text-2xl mb-2">💳</div>
+              <h3 class="font-bold text-sm text-[#0F172A] group-hover:text-emerald-600 transition-colors">Payment Status</h3>
+              <p class="text-slate-500 text-xs mt-2 leading-relaxed">Track outstanding receivables, forward hedge rates, and realized payments</p>
+              <div class="mt-4 text-xs font-bold text-emerald-600">Open Report &rarr;</div>
+            </a>
+
+            <!-- Finished Goods Inventory -->
+            <a href="#/sales/reports/inventory-report" class="bg-slate-50 hover:bg-white rounded-xl p-5 border border-slate-200 hover:border-amber-400 hover:shadow-md transition-all group block">
+              <div class="text-2xl mb-2">📦</div>
+              <h3 class="font-bold text-sm text-[#0F172A] group-hover:text-amber-600 transition-colors">Finished Goods Inventory</h3>
+              <p class="text-slate-500 text-xs mt-2 leading-relaxed">Stock available for export dispatch across Block and IQF coldstore racks</p>
+              <div class="mt-4 text-xs font-bold text-amber-600">Open Report &rarr;</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  renderDelayedShipmentsReport() {
+    const shipments = SalesDataStore.getCollection('delayedShipments') || [];
+    return `
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-lg font-bold text-[#0F172A]">Delayed Shipments Report</h2>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">${shipments.length} Active Exceptions</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Shipments past their agreed ship-by date or experiencing feeder connection delays</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Export PDF</button>
+            <a href="#/sales/reports/reports-overview" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200 transition-colors">All Reports</a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">PO & Invoice No</th>
+                <th class="py-3 px-4">Buyer</th>
+                <th class="py-3 px-4">Destination Port</th>
+                <th class="py-3 px-4">Scheduled Ship Date</th>
+                <th class="py-3 px-4">Current ETA</th>
+                <th class="py-3 px-4">Days Delayed</th>
+                <th class="py-3 px-4">Ocean Liner</th>
+                <th class="py-3 px-4">Delay Reason</th>
+                <th class="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              ${shipments.map(s => `
+                <tr class="hover:bg-slate-50/70 transition-colors">
+                  <td class="py-3.5 px-4 font-mono font-bold text-[#0F172A]">${s.orderNo}<br><span class="text-slate-400 font-normal">${s.invoiceNo}</span></td>
+                  <td class="py-3.5 px-4 font-semibold">${s.buyer}</td>
+                  <td class="py-3.5 px-4 text-slate-600">${s.destinationPort}</td>
+                  <td class="py-3.5 px-4 text-slate-500">${s.scheduledShipDate}</td>
+                  <td class="py-3.5 px-4 font-semibold text-rose-700">${s.currentEta}</td>
+                  <td class="py-3.5 px-4 font-bold text-rose-600">+${s.daysDelayed} Days</td>
+                  <td class="py-3.5 px-4 font-semibold text-slate-700">${s.liner}</td>
+                  <td class="py-3.5 px-4 text-slate-600 max-w-xs truncate" title="${s.delayReason}">${s.delayReason}</td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">${s.status}</span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  renderSalesSummaryReport() {
+    const summaries = SalesDataStore.getCollection('salesSummaries') || [];
+    return `
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <h2 class="text-lg font-bold text-[#0F172A]">Sales & Export Performance Summary</h2>
+            <p class="text-xs text-slate-500 mt-1">Regional shipment volumes, container dispatches, FOB USD value, and bank realizations</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Export CSV</button>
+            <a href="#/sales/reports/reports-overview" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200 transition-colors">All Reports</a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">Region / Market</th>
+                <th class="py-3 px-4">Destination Ports</th>
+                <th class="py-3 px-4">Orders</th>
+                <th class="py-3 px-4">Containers (40ft)</th>
+                <th class="py-3 px-4">Volume (MT)</th>
+                <th class="py-3 px-4">FOB Value (USD)</th>
+                <th class="py-3 px-4">Realized Value (INR)</th>
+                <th class="py-3 px-4">Realization %</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              ${summaries.map(s => `
+                <tr class="hover:bg-slate-50/70 transition-colors">
+                  <td class="py-3.5 px-4 font-bold text-[#0F172A]">${s.region}</td>
+                  <td class="py-3.5 px-4 text-slate-600">${s.destinationPorts}</td>
+                  <td class="py-3.5 px-4 font-semibold">${s.ordersCount}</td>
+                  <td class="py-3.5 px-4 font-semibold text-sky-700">${s.containersCount} FCL</td>
+                  <td class="py-3.5 px-4 font-bold">${s.volumeMt.toLocaleString()} MT</td>
+                  <td class="py-3.5 px-4 font-bold font-mono text-[#0F172A]">$${(s.fobUsd / 1000000).toFixed(2)}M</td>
+                  <td class="py-3.5 px-4 font-bold font-mono text-emerald-700">₹${(s.realizedInr / 10000000).toFixed(2)} Cr</td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">${s.realizationPct}%</span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  renderPaymentStatusReport() {
+    const collections = SalesDataStore.getCollection('collections') || [];
+    return `
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <h2 class="text-lg font-bold text-[#0F172A]">Payment Status & Realization Report</h2>
+            <p class="text-xs text-slate-500 mt-1">Export invoice receivables, banking fees, and net foreign exchange realizations</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Export PDF</button>
+            <a href="#/sales/reports/reports-overview" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200 transition-colors">All Reports</a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">Invoice No</th>
+                <th class="py-3 px-4">Buyer</th>
+                <th class="py-3 px-4">Invoice Value (USD)</th>
+                <th class="py-3 px-4">Utilized FX Rate</th>
+                <th class="py-3 px-4">Bank Deductions</th>
+                <th class="py-3 px-4">Realized INR</th>
+                <th class="py-3 px-4">Balance USD</th>
+                <th class="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              ${collections.map(c => `
+                <tr class="hover:bg-slate-50/70 transition-colors">
+                  <td class="py-3.5 px-4 font-mono font-bold text-[#0F172A]">${c.invoiceNo}</td>
+                  <td class="py-3.5 px-4 font-semibold">${c.buyer}</td>
+                  <td class="py-3.5 px-4 font-mono font-bold text-slate-700">$${(c.invoiceValueUsd || 0).toLocaleString()}</td>
+                  <td class="py-3.5 px-4 font-mono text-slate-600">₹${c.collectionRate || 83.95}</td>
+                  <td class="py-3.5 px-4 font-mono text-rose-600">-$${(c.bankChargesUsd || 0) + (c.deductionsUsd || 0)}</td>
+                  <td class="py-3.5 px-4 font-bold font-mono text-emerald-700">₹${((c.totalValueInr || 23820812) / 100000).toFixed(2)} Lakhs</td>
+                  <td class="py-3.5 px-4 font-mono font-semibold ${c.balanceUsd > 0 ? 'text-amber-600' : 'text-slate-400'}">$${(c.balanceUsd || 0).toLocaleString()}</td>
+                  <td class="py-3.5 px-4">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${c.status === 'Fully Realized' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'}">${c.status}</span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  renderInventoryReport() {
+    const varieties = SalesDataStore.getCollection('varieties') || [];
+    return `
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <h2 class="text-lg font-bold text-[#0F172A]">Finished Goods Inventory (Export Dispatch)</h2>
+            <p class="text-xs text-slate-500 mt-1">Coldstore inventory staged and allocated for international export container stuffing</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Export CSV</button>
+            <a href="#/sales/reports/reports-overview" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-slate-200 transition-colors">All Reports</a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">Our SUPC</th>
+                <th class="py-3 px-4">Product Form & Description</th>
+                <th class="py-3 px-4">Species</th>
+                <th class="py-3 px-4">Grade</th>
+                <th class="py-3 px-4">Brand</th>
+                <th class="py-3 px-4">Packing Style</th>
+                <th class="py-3 px-4">Available Stock</th>
+                <th class="py-3 px-4">Total Net Wt</th>
+                <th class="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              ${varieties.map((v, i) => {
+                const cartons = (1200 + (i * 350));
+                const netKg = cartons * 10;
+                return `
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3.5 px-4 font-mono font-bold text-[#0F172A]">${v.supc}</td>
+                    <td class="py-3.5 px-4 font-semibold">${v.description || `${v.species} ${v.productForm}`}</td>
+                    <td class="py-3.5 px-4">${v.species}</td>
+                    <td class="py-3.5 px-4 font-bold text-slate-800">${v.grade}</td>
+                    <td class="py-3.5 px-4">${v.brand}</td>
+                    <td class="py-3.5 px-4 font-mono">${v.packingStyle}</td>
+                    <td class="py-3.5 px-4 font-bold text-sky-700">${cartons.toLocaleString()} Cartons</td>
+                    <td class="py-3.5 px-4 font-bold font-mono text-emerald-700">${netKg.toLocaleString()} KG</td>
+                    <td class="py-3.5 px-4">
+                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Export Ready</span>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  // ==========================================
+  // 9. PRODUCT CONSUMPTION (Matching reference HTML page-consumption)
+  // ==========================================
+  renderConsumptionLedger() {
+    const ledger = SalesDataStore.getCollection('consumptionLedger') || [];
+    return `
+      <div class="space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <h2 class="text-xl font-bold text-[#0F172A]">Product Consumption</h2>
+              <p class="text-xs text-slate-500 mt-1">Track raw material consumption, processing loss, and finished goods pack-out yield reconciliation.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Export Ledger</button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200/70 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                  <th class="py-3 px-4">Batch Number</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Species & Grade</th>
+                  <th class="py-3 px-4">RM Intake (KG)</th>
+                  <th class="py-3 px-4">Peeling/Cut Loss</th>
+                  <th class="py-3 px-4">Finished Form</th>
+                  <th class="py-3 px-4">Cartons</th>
+                  <th class="py-3 px-4">Finished Output (KG)</th>
+                  <th class="py-3 px-4">Actual Yield</th>
+                  <th class="py-3 px-4">Std Yield</th>
+                  <th class="py-3 px-4">Variance</th>
+                  <th class="py-3 px-4">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                ${ledger.map(item => `
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3.5 px-4 font-mono font-bold text-[#0F172A]">${item.batchNo}</td>
+                    <td class="py-3.5 px-4 text-slate-500">${item.date}</td>
+                    <td class="py-3.5 px-4 font-semibold">${item.species}<br><span class="text-[11px] text-slate-400">${item.gradeIntake}</span></td>
+                    <td class="py-3.5 px-4 font-bold font-mono text-[#0F172A]">${(item.rawMaterialIntakeKg || 0).toLocaleString()} KG</td>
+                    <td class="py-3.5 px-4 font-mono text-rose-600">-${(item.peeledLossKg || 0).toLocaleString()} KG</td>
+                    <td class="py-3.5 px-4 font-semibold text-slate-700">${item.finishedProductForm}</td>
+                    <td class="py-3.5 px-4 font-bold text-sky-700">${item.packOutCartons} Ctns</td>
+                    <td class="py-3.5 px-4 font-bold font-mono text-emerald-700">${(item.finishedOutputKg || 0).toLocaleString()} KG</td>
+                    <td class="py-3.5 px-4 font-bold text-[#0F172A]">${item.actualYieldPct}%</td>
+                    <td class="py-3.5 px-4 text-slate-500">${item.standardYieldPct}%</td>
+                    <td class="py-3.5 px-4 font-bold ${item.variancePct.startsWith('+') ? 'text-emerald-600' : 'text-rose-600'}">${item.variancePct}</td>
+                    <td class="py-3.5 px-4">
+                      <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'Verified' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-sky-50 text-sky-700 border border-sky-200'}">${item.status}</span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // ==========================================
   // EVENT BINDINGS & INTERACTION MODALS
   // ==========================================
   bindEvents() {
@@ -1941,7 +2401,7 @@ export const SalesView = {
 
             Modal.close();
             Toast.show(`Variety SKU #${supc} registered successfully!`, 'success');
-            this.render(document.getElementById('main-content-area'), 'variety-list', '#/sales/master-data/variety-list');
+            this.render(document.getElementById('main-content-area'), 'variety-list', '#/sales/product/variety-list');
           });
         }
       });
@@ -2038,7 +2498,7 @@ export const SalesView = {
 
           Modal.close();
           Toast.show(`Packing Style "${name}" added!`, 'success');
-          this.render(document.getElementById('main-content-area'), 'packing-style-list', '#/sales/master-data/packing-style-list');
+          this.render(document.getElementById('main-content-area'), 'packing-style-list', '#/sales/product/packing-style-list');
         });
       });
     }

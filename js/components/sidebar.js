@@ -329,7 +329,7 @@ export const NAV_HIERARCHY = [
   },
   {
     id: "sales",
-    title: "Sales & Exports",
+    title: "Sales",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
     submenus: [
       {
@@ -341,65 +341,93 @@ export const NAV_HIERARCHY = [
         ]
       },
       {
-        id: "master-data",
-        title: "Product Master",
+        id: "product",
+        title: "Product",
         defaultTab: "product-list",
         tabs: [
-          { id: "product-list", label: "Product List", hash: "#/sales/master-data/product-list" },
-          { id: "preparation-list", label: "Preparation List", hash: "#/sales/master-data/preparation-list" },
-          { id: "species-master", label: "Species Master", hash: "#/sales/master-data/species-master" },
-          { id: "grades-list", label: "Grades List", hash: "#/sales/master-data/grades-list" },
-          { id: "packing-style-list", label: "Packing Styles", hash: "#/sales/master-data/packing-style-list" },
-          { id: "variety-list", label: "Variety (SKU)", hash: "#/sales/master-data/variety-list" }
+          { id: "product-list", label: "Product List", hash: "#/sales/product/product-list" },
+          { id: "preparation-list", label: "Preparation List", hash: "#/sales/product/preparation-list" },
+          { id: "species", label: "Species", hash: "#/sales/product/species" },
+          { id: "grades-list", label: "Grades List", hash: "#/sales/product/grades-list" },
+          { id: "packing-style-list", label: "Packing Style List", hash: "#/sales/product/packing-style-list" },
+          { id: "variety-list", label: "Variety List", hash: "#/sales/product/variety-list" }
         ]
       },
       {
         id: "buyers",
-        title: "Buyer Management",
+        title: "Buyers",
         defaultTab: "buyer-list",
         tabs: [
           { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyers/buyer-list" },
-          { id: "consignee-list", label: "Consignees", hash: "#/sales/buyers/consignee-list" },
-          { id: "notify-party-list", label: "Notify Parties", hash: "#/sales/buyers/notify-party-list" },
-          { id: "applicant-list", label: "Applicants", hash: "#/sales/buyers/applicant-list" },
+          { id: "consignee-list", label: "Consignee List", hash: "#/sales/buyers/consignee-list" },
+          { id: "notify-party-list", label: "Notify Party List", hash: "#/sales/buyers/notify-party-list" },
+          { id: "applicant-list", label: "Applicant List", hash: "#/sales/buyers/applicant-list" },
           { id: "brands-list", label: "Brands List", hash: "#/sales/buyers/brands-list" }
         ]
       },
       {
+        id: "sales-overview",
+        title: "Sales",
+        defaultTab: "sales-overview-tab",
+        tabs: [
+          { id: "sales-overview-tab", label: "Sales Overview", hash: "#/sales/sales-overview/sales-overview-tab" }
+        ]
+      },
+      {
         id: "orders",
-        title: "Orders & Execution",
+        title: "Orders",
         defaultTab: "proforma-list",
         tabs: [
-          { id: "proforma-list", label: "Proforma Invoices", hash: "#/sales/orders/proforma-list" },
+          { id: "proforma-list", label: "Proforma List", hash: "#/sales/orders/proforma-list" },
           { id: "custom-invoices", label: "Custom Invoices", hash: "#/sales/orders/custom-invoices" },
-          { id: "isf-details", label: "ISF 10+2 Details", hash: "#/sales/orders/isf-details" },
+          { id: "isf-details", label: "ISF Details", hash: "#/sales/orders/isf-details" },
           { id: "shipping-bill", label: "Shipping Bill", hash: "#/sales/orders/shipping-bill" },
           { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
           { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
-          { id: "fda-status", label: "FDA Clearance", hash: "#/sales/orders/fda-status" },
+          { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
           { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" }
         ]
       },
       {
-        id: "finance",
-        title: "Export Finance",
+        id: "payments",
+        title: "Payments",
         defaultTab: "forward-contracts",
         tabs: [
-          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/finance/forward-contracts" },
-          { id: "collections", label: "Collections", hash: "#/sales/finance/collections" },
-          { id: "negotiations", label: "Negotiations", hash: "#/sales/finance/negotiations" },
-          { id: "realization", label: "Realization", hash: "#/sales/finance/realization" },
-          { id: "realization-done", label: "Realization Done", hash: "#/sales/finance/realization-done" }
+          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments/forward-contracts" },
+          { id: "collections", label: "Collections", hash: "#/sales/payments/collections" },
+          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments/negotiations" },
+          { id: "realization", label: "Realization", hash: "#/sales/payments/realization" },
+          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments/realization-done" }
         ]
       },
       {
         id: "insurance",
-        title: "Cargo Insurance",
+        title: "Insurance",
         defaultTab: "pending-insurance",
         tabs: [
           { id: "pending-insurance", label: "Pending Insurance", hash: "#/sales/insurance/pending-insurance" },
-          { id: "insurance-templates", label: "Insurance Policies", hash: "#/sales/insurance/insurance-templates" },
+          { id: "insurance-templates", label: "Insurance Templates", hash: "#/sales/insurance/insurance-templates" },
           { id: "insurance-payments", label: "Insurance Payments", hash: "#/sales/insurance/insurance-payments" }
+        ]
+      },
+      {
+        id: "reports",
+        title: "Reports",
+        defaultTab: "reports-overview",
+        tabs: [
+          { id: "reports-overview", label: "Available Reports", hash: "#/sales/reports/reports-overview" },
+          { id: "delayed-shipments", label: "Delayed Shipments", hash: "#/sales/reports/delayed-shipments" },
+          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/reports/sales-summary" },
+          { id: "payment-status", label: "Payment Status", hash: "#/sales/reports/payment-status" },
+          { id: "inventory-report", label: "Finished Goods Inventory", hash: "#/sales/reports/inventory-report" }
+        ]
+      },
+      {
+        id: "consumption",
+        title: "Product Consumption",
+        defaultTab: "consumption-ledger",
+        tabs: [
+          { id: "consumption-ledger", label: "Consumption Ledger", hash: "#/sales/consumption/consumption-ledger" }
         ]
       }
     ]

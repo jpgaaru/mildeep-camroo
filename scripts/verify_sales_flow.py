@@ -90,23 +90,36 @@ def test_sales_calculations():
     print(f"  ✓ Collections Realized INR exact: ({inv_c} - {chg_c} - {ded_c} + {extra_c}) × {rate_c} = ₹{val_inr:,.2f}")
 
 def test_tabs_coverage():
-    print("\n=== 3. SALES MODULE TAB COVERAGE AUDIT ===")
+    print("\n=== 3. SALES MODULE 9-SUBMENU & TAB COVERAGE AUDIT ===")
     with open('js/components/sidebar.js', 'r', encoding='utf-8') as f:
         sidebar_src = f.read()
 
+    expected_submenus = [
+        'dashboard', 'product', 'buyers', 'sales-overview', 'orders', 'payments', 'insurance', 'reports', 'consumption'
+    ]
+    for sm in expected_submenus:
+        assert f'id: "{sm}"' in sidebar_src or f"id: '{sm}'" in sidebar_src, f"Submenu {sm} missing from sidebar!"
+        print(f"  ✓ Submenu '{sm}' registered in sidebar navigation")
+
     expected_tabs = [
-        # Module 1
-        'product-list', 'preparation-list', 'species-master', 'grades-list', 'packing-style-list', 'variety-list',
-        # Module 2
+        # Submenu 1: dashboard
+        'overview',
+        # Submenu 2: product
+        'product-list', 'preparation-list', 'species', 'grades-list', 'packing-style-list', 'variety-list',
+        # Submenu 3: buyers
         'buyer-list', 'consignee-list', 'notify-party-list', 'applicant-list', 'brands-list',
-        # Module 3
+        # Submenu 4: sales-overview
+        'sales-overview-tab',
+        # Submenu 5: orders
         'proforma-list', 'custom-invoices', 'isf-details', 'shipping-bill', 'commercial-invoice', 'eta-status', 'fda-status', 'clearing-agent',
-        # Module 4
+        # Submenu 6: payments
         'forward-contracts', 'collections', 'negotiations', 'realization', 'realization-done',
-        # Module 5
+        # Submenu 7: insurance
         'pending-insurance', 'insurance-templates', 'insurance-payments',
-        # Module 6
-        'overview'
+        # Submenu 8: reports
+        'reports-overview', 'delayed-shipments', 'sales-summary', 'payment-status', 'inventory-report',
+        # Submenu 9: consumption
+        'consumption-ledger'
     ]
 
     for tab in expected_tabs:
