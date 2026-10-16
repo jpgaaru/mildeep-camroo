@@ -135,24 +135,28 @@ export const SECTION_METADATA_REGISTRY = {
   },
   sales: {
     dashboard: {
-      title: 'Sales & Export Shipments',
-      subtitle: 'International buyers, sales contracts, port dock dispatch, and container manifests'
+      title: 'Sales & Export Executive Dashboard',
+      subtitle: 'International buyers, active orders, container voyages, and realization analytics'
     },
     'master-data': {
-      title: 'Sales & Buyer Master Data',
-      subtitle: 'Export product catalog, international buyers & consignees, and private label brands'
+      title: 'Product Master & Variety SKUs',
+      subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
-    'contracts-pricing': {
-      title: 'Contracts & Export Pricing',
-      subtitle: 'International buyer price books, LC/TT sales contracts, and grade rate schedules'
+    buyers: {
+      title: 'Buyer & Entity Management',
+      subtitle: 'International buyers, consignees, destination notify parties, applicants, and export brands'
     },
-    'export-ops': {
-      title: 'Export Operations & Logistics',
-      subtitle: 'Bills of Lading, health certificates, customs clearing, container tracking, and marine insurance'
+    orders: {
+      title: 'Orders, Customs & Shipping Execution',
+      subtitle: 'Proforma invoices, custom invoices, US 10+2 ISF filing, shipping bills, commercial invoices, and FDA clearance'
     },
-    'export-finance': {
-      title: 'Export Finance & Realization',
-      subtitle: 'Bank document negotiations, export collections realization, and FX forward contracts'
+    finance: {
+      title: 'Export Finance & Payments',
+      subtitle: 'FX forward contracts, bank negotiations, invoice collections, and payment realization tracking'
+    },
+    insurance: {
+      title: 'Marine Cargo Insurance',
+      subtitle: 'Pending ocean dispatches, marine declaration policies, and premium payment settlement'
     }
   },
   reports: {

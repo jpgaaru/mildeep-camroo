@@ -337,47 +337,69 @@ export const NAV_HIERARCHY = [
         title: "Dashboard",
         defaultTab: "overview",
         tabs: [
-          { id: "overview", label: "Overview", hash: "#/sales/dashboard/overview" }
+          { id: "overview", label: "Executive Overview", hash: "#/sales/dashboard/overview" }
         ]
       },
       {
         id: "master-data",
-        title: "Master Data",
-        defaultTab: "product-catalog",
+        title: "Product Master",
+        defaultTab: "product-list",
         tabs: [
-          { id: "product-catalog", label: "Product Catalog", hash: "#/sales/master-data/product-catalog" },
-          { id: "customers-parties", label: "Customers & Parties", hash: "#/sales/master-data/customers-parties" },
-          { id: "brands", label: "Brands", hash: "#/sales/master-data/brands" }
+          { id: "product-list", label: "Product List", hash: "#/sales/master-data/product-list" },
+          { id: "preparation-list", label: "Preparation List", hash: "#/sales/master-data/preparation-list" },
+          { id: "species-master", label: "Species Master", hash: "#/sales/master-data/species-master" },
+          { id: "grades-list", label: "Grades List", hash: "#/sales/master-data/grades-list" },
+          { id: "packing-style-list", label: "Packing Styles", hash: "#/sales/master-data/packing-style-list" },
+          { id: "variety-list", label: "Variety (SKU)", hash: "#/sales/master-data/variety-list" }
         ]
       },
       {
-        id: "contracts-pricing",
-        title: "Contracts & Pricing",
-        defaultTab: "price-book",
+        id: "buyers",
+        title: "Buyer Management",
+        defaultTab: "buyer-list",
         tabs: [
-          { id: "price-book", label: "Price Book", hash: "#/sales/contracts-pricing/price-book" },
-          { id: "sales-contracts", label: "Sales Contracts", hash: "#/sales/contracts-pricing/sales-contracts" }
+          { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyers/buyer-list" },
+          { id: "consignee-list", label: "Consignees", hash: "#/sales/buyers/consignee-list" },
+          { id: "notify-party-list", label: "Notify Parties", hash: "#/sales/buyers/notify-party-list" },
+          { id: "applicant-list", label: "Applicants", hash: "#/sales/buyers/applicant-list" },
+          { id: "brands-list", label: "Brands List", hash: "#/sales/buyers/brands-list" }
         ]
       },
       {
-        id: "export-ops",
-        title: "Export Operations & Logistics",
-        defaultTab: "shipping-docs",
+        id: "orders",
+        title: "Orders & Execution",
+        defaultTab: "proforma-list",
         tabs: [
-          { id: "shipping-docs", label: "Shipping Documentation", hash: "#/sales/export-ops/shipping-docs" },
-          { id: "compliance-clearing", label: "Compliance & Clearing", hash: "#/sales/export-ops/compliance-clearing" },
-          { id: "shipments-tracking", label: "Shipments & Tracking", hash: "#/sales/export-ops/shipments-tracking" },
-          { id: "cargo-insurance", label: "Cargo Insurance", hash: "#/sales/export-ops/cargo-insurance" }
+          { id: "proforma-list", label: "Proforma Invoices", hash: "#/sales/orders/proforma-list" },
+          { id: "custom-invoices", label: "Custom Invoices", hash: "#/sales/orders/custom-invoices" },
+          { id: "isf-details", label: "ISF 10+2 Details", hash: "#/sales/orders/isf-details" },
+          { id: "shipping-bill", label: "Shipping Bill", hash: "#/sales/orders/shipping-bill" },
+          { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
+          { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
+          { id: "fda-status", label: "FDA Clearance", hash: "#/sales/orders/fda-status" },
+          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" }
         ]
       },
       {
-        id: "export-finance",
+        id: "finance",
         title: "Export Finance",
-        defaultTab: "bank-negotiations",
+        defaultTab: "forward-contracts",
         tabs: [
-          { id: "bank-negotiations", label: "Bank Negotiations", hash: "#/sales/export-finance/bank-negotiations" },
-          { id: "collections-realization", label: "Collections & Realization", hash: "#/sales/export-finance/collections-realization" },
-          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/export-finance/forward-contracts" }
+          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/finance/forward-contracts" },
+          { id: "collections", label: "Collections", hash: "#/sales/finance/collections" },
+          { id: "negotiations", label: "Negotiations", hash: "#/sales/finance/negotiations" },
+          { id: "realization", label: "Realization", hash: "#/sales/finance/realization" },
+          { id: "realization-done", label: "Realization Done", hash: "#/sales/finance/realization-done" }
+        ]
+      },
+      {
+        id: "insurance",
+        title: "Cargo Insurance",
+        defaultTab: "pending-insurance",
+        tabs: [
+          { id: "pending-insurance", label: "Pending Insurance", hash: "#/sales/insurance/pending-insurance" },
+          { id: "insurance-templates", label: "Insurance Policies", hash: "#/sales/insurance/insurance-templates" },
+          { id: "insurance-payments", label: "Insurance Payments", hash: "#/sales/insurance/insurance-payments" }
         ]
       }
     ]
