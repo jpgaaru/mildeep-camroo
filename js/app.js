@@ -16,7 +16,6 @@ import { AquaFramework, Router, ERPStore, Molecules, Organisms, Environment } fr
 import { LoginView } from './views/loginView.js';
 import { HomeView } from './views/homeView.js';
 import { PurchaseView } from './views/purchaseView.js';
-import { Client2026View } from './views/client2026View.js';
 import { PreprocessingView } from './views/preprocessingView.js';
 import { QCView } from './views/qcView.js';
 import { ProductionView } from './views/productionView.js';
@@ -140,11 +139,7 @@ export const App = {
     }
 
     // If empty hash, default to main dashboard
-    if (rawHash === '' || rawHash === '#' || rawHash === '#/' || (Environment.isClient2026() && rawHash === '#/home')) {
-      if (Environment.isClient2026()) {
-        window.location.hash = '#/client2026/operations/dashboard';
-        return;
-      }
+    if (rawHash === '' || rawHash === '#' || rawHash === '#/') {
       window.location.hash = '#/home';
       return;
     }
@@ -190,9 +185,6 @@ export const App = {
     switch (modObj.id) {
       case 'home':
         HomeView.render(mainContainer);
-        break;
-      case 'client2026':
-        Client2026View.render(mainContainer, tabName || 'dashboard', resolvedHash);
         break;
       case 'purchase':
         PurchaseView.render(mainContainer, tabName || 'purchase-dashboard', resolvedHash);

@@ -248,15 +248,11 @@ export const LoginView = {
       });
     }
 
-    // Client 2026 Button Click -> Client 2026 Operations & Purchase React Modules
+    // Client 2026 Button Click -> 100% Standalone Dedicated Page (client2026.html)
     if (btnClient2026) {
       btnClient2026.addEventListener('click', () => {
-        performLogin(
-          ENV_CLIENT_2026,
-          `Welcome to Client 2026 Operations Environment, ${ERP_DATA.currentUser.name}!`,
-          'Client 2026 Active',
-          '#/client2026/operations/dashboard'
-        );
+        Toast.show('Opening Client 2026 Operations Application...', 'info', 'Client 2026');
+        window.location.href = 'client2026.html';
       });
     }
 

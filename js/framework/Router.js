@@ -27,16 +27,6 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'Manage vendor payments, settled vouchers, and banking logs.'
     }
   },
-  client2026: {
-    operations: {
-      title: 'Client 2026 Operations',
-      subtitle: 'React Purchase Operations: Bookings, RM Arrivals, Lot Tracking, Bills & Payments'
-    },
-    payments: {
-      title: 'Client 2026 Payments',
-      subtitle: 'Supplier Settlements, Bank Wire References, and Payment Vouchers'
-    }
-  },
   preprocessing: {
     dashboard: {
       title: 'Pre-Processing Floor',

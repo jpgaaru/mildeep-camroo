@@ -131,21 +131,22 @@ export const Header = {
                 ${envMeta.id === 'sitemap02' ? '<span class="text-[9px] font-bold text-[#3B5AF6] bg-[#3B5AF6]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
               </button>
 
-              <!-- Option: Client 2026 -->
-              <button
-                type="button"
-                id="header-switch-client2026-btn"
-                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'client2026' ? 'bg-[#10B981]/5 font-bold text-[#10B981]' : 'text-[#334155]'}"
+              <!-- Option: Client 2026 Standalone App -->
+              <a
+                href="client2026.html"
+                id="header-link-client2026-btn"
+                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left text-[#334155] cursor-pointer"
+                title="Launch 100% Standalone Client 2026 Application"
               >
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
                   <div>
-                    <div class="font-semibold text-[#0F172A]">Client 2026</div>
-                    <div class="text-[10px] text-[#64748B]">Client React 2026 Operations & Purchase</div>
+                    <div class="font-semibold text-[#0F172A]">Client 2026 (Standalone)</div>
+                    <div class="text-[10px] text-[#64748B]">Dedicated Operations & Purchase App</div>
                   </div>
                 </div>
-                ${envMeta.id === 'client2026' ? '<span class="text-[9px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
-              </button>
+                <svg class="w-3.5 h-3.5 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
 
               <!-- Option: CDS Design System -->
               <a
@@ -338,14 +339,6 @@ export const Header = {
         e.stopPropagation();
         if (envDropdown) envDropdown.classList.add('hidden');
         Environment.switchEnvironment(ENV_SITEMAP_02);
-      };
-    }
-
-    if (switchClient2026Btn) {
-      switchClient2026Btn.onclick = (e) => {
-        e.stopPropagation();
-        if (envDropdown) envDropdown.classList.add('hidden');
-        Environment.switchEnvironment(ENV_CLIENT_2026);
       };
     }
 
