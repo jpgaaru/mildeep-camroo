@@ -3069,5 +3069,1509 @@ export const SalesView = {
         });
       });
     }
+
+    // 8. New Product Category Modal
+    const btnAddProduct = document.getElementById('btn-add-product');
+    if (btnAddProduct) {
+      btnAddProduct.addEventListener('click', () => {
+        Modal.open({
+          title: "Add Product Category",
+          size: "md",
+          content: `
+            <form id="form-new-product" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Short Name / Code *</label>
+                <input type="text" id="prod-code" placeholder="e.g. VM, TP, FW" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Full Product Name *</label>
+                <input type="text" id="prod-name" placeholder="e.g. Vannamei Shrimp, Black Tiger Prawns" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Description / Scientific Specs</label>
+                <textarea id="prod-desc" rows="2" placeholder="e.g. Pacific White Shrimp (Litopenaeus vannamei)" class="w-full p-2.5 rounded-lg border border-slate-300"></textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Product", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const code = document.getElementById('prod-code')?.value.trim().toUpperCase();
+          const name = document.getElementById('prod-name')?.value.trim();
+          const desc = document.getElementById('prod-desc')?.value.trim();
+
+          if (!code || !name) {
+            Toast.show('Please fill in both Code and Product Name.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('products', {
+            id: 'PROD-' + Date.now(),
+            code,
+            name,
+            description: desc || name,
+            active: true
+          });
+
+          Modal.close();
+          Toast.show(`Product "${name}" added successfully!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'product-list', '#/sales/product-management/product-list');
+        });
+      });
+    }
+
+    // 9. New Preparation Modal
+    const btnAddPrep = document.getElementById('btn-add-prep');
+    if (btnAddPrep) {
+      btnAddPrep.addEventListener('click', () => {
+        Modal.open({
+          title: "Add Preparation Type",
+          size: "md",
+          content: `
+            <form id="form-new-prep" class="space-y-4 text-xs">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Preparation Name *</label>
+                  <input type="text" id="prep-name" placeholder="e.g. HLSO, PDTO, EZ PEEL" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold uppercase" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Short Code *</label>
+                  <input type="text" id="prep-code" placeholder="e.g. HLSO, N2974" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Description *</label>
+                <input type="text" id="prep-desc" placeholder="e.g. Headless Shell-On" class="w-full p-2.5 rounded-lg border border-slate-300" />
+              </div>
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">HS Code *</label>
+                  <input type="text" id="prep-hscode" value="0306.17" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">QC Code</label>
+                  <input type="text" id="prep-qccode" placeholder="e.g. QC-255" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">GST Rate %</label>
+                  <input type="number" id="prep-gst" value="5" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Preparation", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const name = document.getElementById('prep-name')?.value.trim().toUpperCase();
+          const code = document.getElementById('prep-code')?.value.trim().toUpperCase();
+          const desc = document.getElementById('prep-desc')?.value.trim();
+          const hs = document.getElementById('prep-hscode')?.value.trim() || '0306.17';
+          const qc = document.getElementById('prep-qccode')?.value.trim() || `QC-${Math.floor(250 + Math.random() * 50)}`;
+          const gst = parseFloat(document.getElementById('prep-gst')?.value) || 5;
+
+          if (!name || !code) {
+            Toast.show('Please provide Preparation Name and Short Code.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('preparations', {
+            id: 'PREP-' + Date.now(),
+            name,
+            description: desc || name,
+            shortCode: code,
+            hsCode: hs,
+            qcCode: qc,
+            gstRate: gst,
+            fromDate: new Date().toISOString().split('T')[0]
+          });
+
+          Modal.close();
+          Toast.show(`Preparation "${name}" registered!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'preparation-list', '#/sales/product-management/preparation-list');
+        });
+      });
+    }
+
+    // 10. New Species Modal
+    const btnAddSpecies = document.getElementById('btn-add-species');
+    if (btnAddSpecies) {
+      btnAddSpecies.addEventListener('click', () => {
+        Modal.open({
+          title: "Add Raw Material Species",
+          size: "md",
+          content: `
+            <form id="form-new-species" class="space-y-4 text-xs">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Species Name *</label>
+                  <input type="text" id="sp-name" placeholder="e.g. Vannamei, Black Tiger" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Short Code *</label>
+                  <input type="text" id="sp-code" placeholder="e.g. VM, BT" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">QC Species Code</label>
+                <input type="text" id="sp-qccode" placeholder="e.g. QC-VM-01" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Description / Biological Spec *</label>
+                <textarea id="sp-desc" rows="2" placeholder="e.g. Litopenaeus vannamei, brackish water farmed" class="w-full p-2.5 rounded-lg border border-slate-300"></textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Species", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const name = document.getElementById('sp-name')?.value.trim();
+          const code = document.getElementById('sp-code')?.value.trim().toUpperCase();
+          const qc = document.getElementById('sp-qccode')?.value.trim() || `QC-${code}-01`;
+          const desc = document.getElementById('sp-desc')?.value.trim();
+
+          if (!name || !code) {
+            Toast.show('Please provide Species Name and Short Code.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('speciesMaster', {
+            id: 'SP-' + Date.now(),
+            name,
+            shortCode: code,
+            qcSpeciesCode: qc,
+            description: desc || name
+          });
+
+          Modal.close();
+          Toast.show(`Species "${name}" registered!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'species-master', '#/sales/product-management/species-master');
+        });
+      });
+    }
+
+    // 11. New Grade Modal
+    const btnAddGrade = document.getElementById('btn-add-grade');
+    if (btnAddGrade) {
+      btnAddGrade.addEventListener('click', () => {
+        Modal.open({
+          title: "Add Product Grade",
+          size: "md",
+          content: `
+            <form id="form-new-grade" class="space-y-4 text-xs">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Grade Type *</label>
+                  <select id="grd-type" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="Count">Count per lb / kg</option>
+                    <option value="Weight">Weight / Grams</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Grade Group / Range *</label>
+                  <input type="text" id="grd-group" placeholder="e.g. 16/20, 21/25, U/10" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Commercial Value / Name</label>
+                  <input type="text" id="grd-val" placeholder="e.g. Jumbo, Colossal, Large" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Short Code</label>
+                  <input type="text" id="grd-code" placeholder="e.g. 1620, 2125" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Description</label>
+                <input type="text" id="grd-desc" placeholder="e.g. 16 to 20 pieces per lb" class="w-full p-2.5 rounded-lg border border-slate-300" />
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Grade", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const type = document.getElementById('grd-type')?.value || 'Count';
+          const group = document.getElementById('grd-group')?.value.trim();
+          const val = document.getElementById('grd-val')?.value.trim() || group;
+          const code = document.getElementById('grd-code')?.value.trim() || group.replace(/[^a-zA-Z0-9]/g, '');
+          const desc = document.getElementById('grd-desc')?.value.trim() || `${group} pieces per lb`;
+
+          if (!group) {
+            Toast.show('Please provide Grade Group / Range.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('grades', {
+            id: 'GRD-' + Date.now(),
+            type,
+            group,
+            value: val,
+            shortCode: code,
+            description: desc
+          });
+
+          Modal.close();
+          Toast.show(`Grade "${group}" added!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'grades-list', '#/sales/product-management/grades-list');
+        });
+      });
+    }
+
+    // 12. New Consignee Modal
+    const btnAddConsignee = document.getElementById('btn-add-consignee');
+    if (btnAddConsignee) {
+      btnAddConsignee.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        Modal.open({
+          title: "Register Consignee",
+          size: "lg",
+          content: `
+            <form id="form-new-consignee" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Associated Buyer *</label>
+                  <select id="csg-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${buyers.map(b => `<option value="${b.name}">${b.name} (${b.country})</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Country *</label>
+                  <select id="csg-country" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="USA">USA</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                    <option value="EU">European Union</option>
+                    <option value="UK">United Kingdom</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Consignee Legal Name *</label>
+                  <input type="text" id="csg-name" placeholder="e.g. Americold Cold Storage - Baltimore Dock" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Short Code *</label>
+                  <input type="text" id="csg-code" placeholder="e.g. AMC-BAL" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Contact Person</label>
+                  <input type="text" id="csg-contact" placeholder="Marcus Vance" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Contact Phone</label>
+                  <input type="text" id="csg-phone" placeholder="+1 (410) 555-7382" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">IRS / Tax ID</label>
+                  <input type="text" id="csg-irs" placeholder="52-9981241" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Delivery Dock Address *</label>
+                <textarea id="csg-address" rows="2" placeholder="Dock 14, 2100 Broening Hwy, Baltimore, MD 21224" class="w-full p-2.5 rounded-lg border border-slate-300"></textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Consignee", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const name = document.getElementById('csg-name')?.value.trim();
+          const code = document.getElementById('csg-code')?.value.trim().toUpperCase() || 'CSG-' + Date.now().toString().slice(-4);
+          const country = document.getElementById('csg-country')?.value || 'USA';
+          const address = document.getElementById('csg-address')?.value.trim() || 'Cold Storage Logistics Terminal';
+          const contactPerson = document.getElementById('csg-contact')?.value.trim() || 'Operations Manager';
+          const phone = document.getElementById('csg-phone')?.value.trim() || '+1-000-000-0000';
+          const irsNumber = document.getElementById('csg-irs')?.value.trim() || 'N/A';
+
+          if (!name) {
+            Toast.show('Please enter Consignee Legal Name.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('consignees', {
+            id: 'CSG-' + Date.now(),
+            name,
+            code,
+            country,
+            address,
+            email: 'dock@' + (code.toLowerCase() || 'consignee') + '.com',
+            contactPerson,
+            phone,
+            irsNumber
+          });
+
+          Modal.close();
+          Toast.show(`Consignee "${name}" registered!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'consignee-list', '#/sales/buyer-management/consignee-list');
+        });
+      });
+    }
+
+    // 13. New Notify Party Modal
+    const btnAddNotify = document.getElementById('btn-add-notify');
+    if (btnAddNotify) {
+      btnAddNotify.addEventListener('click', () => {
+        Modal.open({
+          title: "Add Customs Notify Party",
+          size: "md",
+          content: `
+            <form id="form-new-notify" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Notify Party Legal Name *</label>
+                <input type="text" id="not-name" placeholder="e.g. Expeditors International Customs Brokerage" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Country *</label>
+                  <select id="not-country" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="USA">USA</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                    <option value="EU">European Union</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">SCAC / Broker Code *</label>
+                  <input type="text" id="not-scac" placeholder="e.g. EXPD, KHNN" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Contact Person</label>
+                  <input type="text" id="not-contact" placeholder="Emily Watson" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Email</label>
+                  <input type="email" id="not-email" placeholder="brokerage@expeditors.com" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Address *</label>
+                <textarea id="not-address" rows="2" placeholder="400 Continental Blvd, El Segundo, CA 90245" class="w-full p-2.5 rounded-lg border border-slate-300"></textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Notify Party", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const name = document.getElementById('not-name')?.value.trim();
+          const country = document.getElementById('not-country')?.value || 'USA';
+          const scacCode = document.getElementById('not-scac')?.value.trim().toUpperCase() || 'SCAC';
+          const contactPerson = document.getElementById('not-contact')?.value.trim() || 'Broker Agent';
+          const email = document.getElementById('not-email')?.value.trim() || 'brokerage@customs.com';
+          const address = document.getElementById('not-address')?.value.trim() || 'Customs Port Terminal';
+
+          if (!name) {
+            Toast.show('Please provide Notify Party Name.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('notifyParties', {
+            id: 'NOT-' + Date.now(),
+            name,
+            country,
+            address,
+            email,
+            contactPerson,
+            phone: "+1 (555) 019-2831",
+            scacCode
+          });
+
+          Modal.close();
+          Toast.show(`Notify Party "${name}" registered!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'notify-party-list', '#/sales/buyer-management/notify-party-list');
+        });
+      });
+    }
+
+    // 14. New Applicant Modal
+    const btnAddApplicant = document.getElementById('btn-add-applicant');
+    if (btnAddApplicant) {
+      btnAddApplicant.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        Modal.open({
+          title: "Add LC Applicant",
+          size: "md",
+          content: `
+            <form id="form-new-applicant" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Associated Buyer *</label>
+                <select id="app-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  ${buyers.map(b => `<option value="${b.name}">${b.name} (${b.country})</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Applicant Legal Entity Name *</label>
+                <input type="text" id="app-name" placeholder="e.g. Apex Global Holdings LLC" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Country *</label>
+                <input type="text" id="app-country" value="USA" class="w-full p-2.5 rounded-lg border border-slate-300" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Registered Address *</label>
+                <textarea id="app-address" rows="2" placeholder="1028 Harborview Blvd, Baltimore, MD" class="w-full p-2.5 rounded-lg border border-slate-300"></textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Applicant", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const buyerName = document.getElementById('app-buyer')?.value;
+          const applicantName = document.getElementById('app-name')?.value.trim();
+          const country = document.getElementById('app-country')?.value.trim() || 'USA';
+          const address = document.getElementById('app-address')?.value.trim() || 'Corporate Office';
+
+          if (!applicantName) {
+            Toast.show('Please provide Applicant Name.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('applicants', {
+            id: 'APP-' + Date.now(),
+            buyerName,
+            applicantName,
+            country,
+            address
+          });
+
+          Modal.close();
+          Toast.show(`Applicant "${applicantName}" added!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'applicant-list', '#/sales/buyer-management/applicant-list');
+        });
+      });
+    }
+
+    // 15. New Brand Modal
+    const btnAddBrand = document.getElementById('btn-add-brand');
+    if (btnAddBrand) {
+      btnAddBrand.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        Modal.open({
+          title: "Register Packaging Brand",
+          size: "md",
+          content: `
+            <form id="form-new-brand" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Brand Name *</label>
+                <input type="text" id="brd-name" placeholder="e.g. Devi Gold, Bay Gourmet, Black Pearl" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Brand Owner / Customer *</label>
+                <select id="brd-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  <option value="Devi Fisheries Corporate">Devi Fisheries Corporate (Own Brand)</option>
+                  ${buyers.map(b => `<option value="${b.name}">${b.name} (Private Label)</option>`).join('')}
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Brand Type *</label>
+                  <select id="brd-type" class="w-full p-2.5 rounded-lg border border-slate-300">
+                    <option value="Both">Both (Sales & Store)</option>
+                    <option value="Sale">Sale (Export Only)</option>
+                    <option value="Store">Store (Internal Stock)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Print Status *</label>
+                  <select id="brd-status" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="Approved for Print">Approved for Print</option>
+                    <option value="Pending Approval">Pending Approval</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Remarks / Artwork Specifications</label>
+                <input type="text" id="brd-remarks" placeholder="USFDA compliant master carton packaging" class="w-full p-2.5 rounded-lg border border-slate-300" />
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Brand", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const brandName = document.getElementById('brd-name')?.value.trim();
+          const buyer = document.getElementById('brd-buyer')?.value;
+          const brandType = document.getElementById('brd-type')?.value || 'Both';
+          const printStatus = document.getElementById('brd-status')?.value || 'Approved for Print';
+          const remarks = document.getElementById('brd-remarks')?.value.trim() || 'Seafood export master carton';
+
+          if (!brandName) {
+            Toast.show('Please provide Brand Name.', 'error');
+            return;
+          }
+
+          SalesDataStore.addItem('brands', {
+            id: 'BRD-' + Date.now(),
+            buyer,
+            brandName,
+            brandType,
+            printStatus,
+            remarks
+          });
+
+          Modal.close();
+          Toast.show(`Brand "${brandName}" registered!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'brands-list', '#/sales/buyer-management/brands-list');
+        });
+      });
+    }
+
+    // 16. New ISF Filing Modal
+    const btnAddIsf = document.getElementById('btn-add-isf');
+    if (btnAddIsf) {
+      btnAddIsf.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        const pis = SalesDataStore.getCollection('proformaInvoices');
+        Modal.open({
+          title: "New ISF 10+2 Customs Filing",
+          size: "lg",
+          content: `
+            <form id="form-new-isf" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Customs Invoice No *</label>
+                  <input type="text" id="isf-inv" value="DFL/EXP/2026-27/${Math.floor(86 + Math.random() * 20)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Proforma Ref *</label>
+                  <select id="isf-pi" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${pis.map(p => `<option value="${p.piNumber}">${p.piNumber}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Buyer *</label>
+                  <select id="isf-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${buyers.map(b => `<option value="${b.name}">${b.name}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Shipping Line *</label>
+                  <select id="isf-liner" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="Mediterranean Shipping Company (MSC)">MSC</option>
+                    <option value="Maersk Line">Maersk Line</option>
+                    <option value="Ocean Network Express (ONE)">ONE</option>
+                    <option value="Hapag-Lloyd">Hapag-Lloyd</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Container Number *</label>
+                  <input type="text" id="isf-cnt" placeholder="e.g. MSCU7397679" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Liner Seal Number *</label>
+                  <input type="text" id="isf-seal" placeholder="e.g. MSC-SL-901844" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono uppercase" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Ocean B/L Number *</label>
+                  <input type="text" id="isf-bl" placeholder="e.g. MEDUAPX2609918" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold uppercase" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Stuffing Location *</label>
+                  <select id="isf-stuff" class="w-full p-2.5 rounded-lg border border-slate-300">
+                    <option value="DFL Unit-1 VSP(853)">DFL Unit-1 VSP(853)</option>
+                    <option value="DFL Unit-2 KKD(412)">DFL Unit-2 KKD(412)</option>
+                    <option value="DFL Tuticorin Plant">DFL Tuticorin Plant</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">ISF Transaction Ref</label>
+                  <input type="text" id="isf-txn" value="ISF-2026-USCBP-${Math.floor(10000 + Math.random() * 90000)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save ISF Filing", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const inv = document.getElementById('isf-inv')?.value.trim();
+          const pi = document.getElementById('isf-pi')?.value;
+          const buyer = document.getElementById('isf-buyer')?.value;
+          const liner = document.getElementById('isf-liner')?.value;
+          const cnt = document.getElementById('isf-cnt')?.value.trim().toUpperCase() || 'MSCU' + Math.floor(1000000 + Math.random() * 9000000);
+          const seal = document.getElementById('isf-seal')?.value.trim().toUpperCase() || 'SL-' + Math.floor(100000 + Math.random() * 900000);
+          const bl = document.getElementById('isf-bl')?.value.trim().toUpperCase() || 'MEDU' + Math.floor(10000000 + Math.random() * 90000000);
+          const stuff = document.getElementById('isf-stuff')?.value;
+          const txn = document.getElementById('isf-txn')?.value.trim();
+
+          SalesDataStore.addItem('isfDetails', {
+            id: 'ISF-' + Date.now(),
+            customInvoiceNo: inv,
+            piNumber: pi,
+            poNumber: 'PO-' + buyer.slice(0, 3).toUpperCase() + '-2026',
+            buyer,
+            shippingLine: liner,
+            containerNumber: cnt,
+            linerSealNumber: seal,
+            blNumber: bl,
+            blDate: new Date().toISOString().split('T')[0],
+            shippingOnboardDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
+            stuffingLocation: stuff,
+            sizeType: "40 FT HC REEFER",
+            tempRecord: "-20 DEGREES CELSIUS",
+            isfTransactionNo: txn,
+            status: "Completed"
+          });
+
+          Modal.close();
+          Toast.show(`ISF Filing for Container ${cnt} recorded!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'isf-details', '#/sales/orders/isf-details');
+        });
+      });
+    }
+
+    // 17. New Shipping Bill Modal
+    const btnAddSb = document.getElementById('btn-add-sb');
+    if (btnAddSb) {
+      btnAddSb.addEventListener('click', () => {
+        const consignees = SalesDataStore.getCollection('consignees');
+        Modal.open({
+          title: "Record Customs Shipping Bill",
+          size: "lg",
+          content: `
+            <form id="form-new-sb" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Shipping Bill No *</label>
+                  <input type="text" id="sb-no" value="SB-${Math.floor(9840000 + Math.random() * 10000)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Number *</label>
+                  <input type="text" id="sb-inv" value="DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">LEO Date *</label>
+                  <input type="date" id="sb-leo" value="${new Date().toISOString().split('T')[0]}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Consignee *</label>
+                <select id="sb-consignee" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  ${consignees.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                </select>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice USD *</label>
+                  <input type="number" id="sb-invusd" value="342000" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Ocean Freight USD *</label>
+                  <input type="number" id="sb-freight" value="14000" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Deductions USD</label>
+                  <input type="number" id="sb-ded" value="1200" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Customs Rate (INR) *</label>
+                  <input type="number" id="sb-rate" value="83.85" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+              <div class="p-3 bg-teal-50 rounded-xl border border-teal-200 flex justify-between items-center">
+                <div>
+                  <span class="text-slate-600 font-bold">Auto Net FOB USD:</span>
+                  <span id="sb-autousd" class="font-mono font-black text-teal-800 ml-1.5">$326,800.00</span>
+                </div>
+                <div>
+                  <span class="text-slate-600 font-bold">Auto Net FOB INR:</span>
+                  <span id="sb-autoinr" class="font-mono font-black text-teal-800 ml-1.5">₹27,402,180.00</span>
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Shipping Bill", type: "primary" }
+          ]
+        });
+
+        const updateSbCalc = () => {
+          const inv = parseFloat(document.getElementById('sb-invusd')?.value) || 0;
+          const frt = parseFloat(document.getElementById('sb-freight')?.value) || 0;
+          const ded = parseFloat(document.getElementById('sb-ded')?.value) || 0;
+          const rate = parseFloat(document.getElementById('sb-rate')?.value) || 83.85;
+          const fobUsd = inv - frt - ded;
+          const fobInr = fobUsd * rate;
+          const elUsd = document.getElementById('sb-autousd');
+          const elInr = document.getElementById('sb-autoinr');
+          if (elUsd) elUsd.textContent = `$${fobUsd.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+          if (elInr) elInr.textContent = `₹${fobInr.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+        };
+
+        ['sb-invusd', 'sb-freight', 'sb-ded', 'sb-rate'].forEach(id => {
+          document.getElementById(id)?.addEventListener('input', updateSbCalc);
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const sbNo = document.getElementById('sb-no')?.value.trim();
+          const inv = document.getElementById('sb-inv')?.value.trim();
+          const leo = document.getElementById('sb-leo')?.value;
+          const csg = document.getElementById('sb-consignee')?.value;
+          const invUsd = parseFloat(document.getElementById('sb-invusd')?.value) || 342000;
+          const frt = parseFloat(document.getElementById('sb-freight')?.value) || 14000;
+          const ded = parseFloat(document.getElementById('sb-ded')?.value) || 1200;
+          const rate = parseFloat(document.getElementById('sb-rate')?.value) || 83.85;
+          const fobInr = (invUsd - frt - ded) * rate;
+
+          SalesDataStore.addItem('shippingBills', {
+            id: 'SB-' + Date.now(),
+            invoiceNo: inv,
+            shippingBillNo: sbNo,
+            shippingDate: leo,
+            leoDate: leo,
+            poNumber: "PO-DFL-2026",
+            consignee: csg,
+            invoiceValueUsd: invUsd,
+            freightUsd: frt,
+            otherDeductionsUsd: ded,
+            exchangeRate: rate,
+            fobInr,
+            sbFobUsd: invUsd - frt - ded,
+            sbFobInr: fobInr,
+            status: "Completed"
+          });
+
+          Modal.close();
+          Toast.show(`Shipping Bill ${sbNo} saved!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'shipping-bill', '#/sales/orders/shipping-bill');
+        });
+      });
+    }
+
+    // 18. New Commercial Invoice Modal
+    const btnAddCommInv = document.getElementById('btn-add-comminv');
+    if (btnAddCommInv) {
+      btnAddCommInv.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        const consignees = SalesDataStore.getCollection('consignees');
+        const pis = SalesDataStore.getCollection('proformaInvoices');
+        const autoInvNo = `DFL/EXP/2026-27/${Math.floor(86 + Math.random() * 20)}`;
+
+        Modal.open({
+          title: "Generate Commercial Invoice",
+          size: "lg",
+          content: `
+            <form id="form-new-comminv" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Number *</label>
+                  <input type="text" id="ci-no" value="${autoInvNo}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Date *</label>
+                  <input type="date" id="ci-date" value="${new Date().toISOString().split('T')[0]}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">PI Reference *</label>
+                  <select id="ci-pi" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${pis.map(p => `<option value="${p.piNumber}">${p.piNumber}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Buyer *</label>
+                  <select id="ci-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${buyers.map(b => `<option value="${b.name}">${b.name}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Consignee *</label>
+                  <select id="ci-consignee" class="w-full p-2.5 rounded-lg border border-slate-300">
+                    ${consignees.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Container Number *</label>
+                  <input type="text" id="ci-container" placeholder="MSCU7397679" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono uppercase" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Ocean B/L Number *</label>
+                  <input type="text" id="ci-bl" placeholder="MEDUAPX2609918" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono uppercase" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Temp Logger ID</label>
+                  <input type="text" id="ci-logger" value="LOG-SENSITECH-${Math.floor(1000 + Math.random() * 9000)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Shipment Terms *</label>
+                  <select id="ci-terms" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="CIF Baltimore">CIF Baltimore</option>
+                    <option value="FOB Visakhapatnam">FOB Visakhapatnam</option>
+                    <option value="CIF Long Beach">CIF Long Beach</option>
+                    <option value="CFR Shanghai">CFR Shanghai</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Value (USD) *</label>
+                  <input type="number" id="ci-val" value="342000" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold text-teal-800" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Exchange Rate (INR) *</label>
+                  <input type="number" id="ci-rate" value="83.85" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Generate Commercial Invoice", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const invNo = document.getElementById('ci-no')?.value.trim();
+          const invDate = document.getElementById('ci-date')?.value;
+          const pi = document.getElementById('ci-pi')?.value;
+          const buyer = document.getElementById('ci-buyer')?.value;
+          const csg = document.getElementById('ci-consignee')?.value;
+          const cnt = document.getElementById('ci-container')?.value.trim().toUpperCase() || 'MSCU7397679';
+          const bl = document.getElementById('ci-bl')?.value.trim().toUpperCase() || 'MEDUAPX2609918';
+          const logger = document.getElementById('ci-logger')?.value.trim();
+          const terms = document.getElementById('ci-terms')?.value;
+          const val = parseFloat(document.getElementById('ci-val')?.value) || 342000;
+          const rate = parseFloat(document.getElementById('ci-rate')?.value) || 83.85;
+
+          SalesDataStore.addItem('commercialInvoices', {
+            id: 'COMM-' + Date.now(),
+            invoiceNo: invNo,
+            invoiceDate: invDate,
+            piNumber: pi,
+            poNumber: "PO-" + buyer.slice(0, 3).toUpperCase() + "-881",
+            buyer,
+            consignee: csg,
+            paymentTerms: "LC at Sight 60 Days",
+            shipmentTerms: terms,
+            currency: "USD",
+            invoiceValue: val,
+            exchangeRate: rate,
+            blNumber: bl,
+            blDate: invDate,
+            containerNumber: cnt,
+            tempLoggerId: logger,
+            status: "Generated"
+          });
+
+          Modal.close();
+          Toast.show(`Commercial Invoice ${invNo} generated!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'commercial-invoice', '#/sales/orders/commercial-invoice');
+        });
+      });
+    }
+
+    // 19. New FDA Prior Notice Modal
+    const btnAddFda = document.getElementById('btn-add-fda');
+    if (btnAddFda) {
+      btnAddFda.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        Modal.open({
+          title: "File USFDA Prior Notice",
+          size: "md",
+          content: `
+            <form id="form-new-fda" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Invoice Number *</label>
+                <input type="text" id="fda-inv" value="DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Buyer *</label>
+                  <select id="fda-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${buyers.map(b => `<option value="${b.name}">${b.name}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Container Number *</label>
+                  <input type="text" id="fda-cnt" placeholder="MSCU7397679" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono uppercase" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Total Cartons *</label>
+                  <input type="number" id="fda-cartons" value="3600" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Net Weight (KG) *</label>
+                  <input type="number" id="fda-wt" value="36000" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">FDA Entry Confirmation Number *</label>
+                <input type="text" id="fda-no" value="FDA-2026-${Math.floor(10000 + Math.random() * 90000)}-BAL" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold text-teal-800" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">USFDA Review Status *</label>
+                <select id="fda-exam" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  <option value="Under Document Review">Under Document Review</option>
+                  <option value="Prior Notice Acknowledged">Prior Notice Acknowledged</option>
+                  <option value="Released for Delivery">Released for Delivery</option>
+                </select>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Submit Prior Notice", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const inv = document.getElementById('fda-inv')?.value.trim();
+          const buyer = document.getElementById('fda-buyer')?.value;
+          const cnt = document.getElementById('fda-cnt')?.value.trim().toUpperCase() || 'MSCU7397679';
+          const cartons = parseInt(document.getElementById('fda-cartons')?.value, 10) || 3600;
+          const wt = parseFloat(document.getElementById('fda-wt')?.value) || 36000;
+          const fdaNo = document.getElementById('fda-no')?.value.trim();
+          const exam = document.getElementById('fda-exam')?.value;
+
+          SalesDataStore.addItem('fdaStatus', {
+            id: 'FDA-' + Date.now(),
+            invoiceNo: inv,
+            poNumber: "PO-" + buyer.slice(0, 3).toUpperCase() + "-2026",
+            buyer,
+            shippingBillNo: "SB-9844210",
+            containerNumber: cnt,
+            blNumber: "MEDUAPX2609918",
+            cartons,
+            netWeightKg: wt,
+            fdaEntryNumber: fdaNo,
+            fdaEntryDate: new Date().toISOString().split('T')[0],
+            fdaExam: exam,
+            noticeDate1: new Date().toISOString().split('T')[0],
+            status: "Pending",
+            remarks: "Prior Notice filed and acknowledged by USFDA Port Director"
+          });
+
+          Modal.close();
+          Toast.show(`FDA Prior Notice ${fdaNo} filed!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'fda-status', '#/sales/orders/fda-status');
+        });
+      });
+    }
+
+    // 20. New Clearing Agent Modal
+    const btnAddAgent = document.getElementById('btn-add-agent');
+    if (btnAddAgent) {
+      btnAddAgent.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        const notifys = SalesDataStore.getCollection('notifyParties');
+        Modal.open({
+          title: "Assign Customs Clearing Agent (CHA)",
+          size: "md",
+          content: `
+            <form id="form-new-agent" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Export Consignment Invoice *</label>
+                <input type="text" id="cha-inv" value="DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Buyer *</label>
+                <select id="cha-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  ${buyers.map(b => `<option value="${b.name}">${b.name}</option>`).join('')}
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Port of Discharge *</label>
+                  <input type="text" id="cha-port" value="Baltimore Port" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Notify Party Broker *</label>
+                  <select id="cha-notify" class="w-full p-2.5 rounded-lg border border-slate-300">
+                    ${notifys.map(n => `<option value="${n.name}">${n.name}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Assigned Clearing Agent (Name & License) *</label>
+                <input type="text" id="cha-agent" placeholder="e.g. Expeditors USA (Agent: John Gallagher)" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Agent Contact Phone / Email *</label>
+                <input type="text" id="cha-phone" placeholder="+1 (410) 555-1200" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Assign Agent", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const inv = document.getElementById('cha-inv')?.value.trim();
+          const buyer = document.getElementById('cha-buyer')?.value;
+          const port = document.getElementById('cha-port')?.value.trim() || 'Baltimore Port';
+          const notify = document.getElementById('cha-notify')?.value;
+          const agent = document.getElementById('cha-agent')?.value.trim() || 'Customs Broker Agent';
+          const phone = document.getElementById('cha-phone')?.value.trim() || '+1-555-0192';
+
+          SalesDataStore.addItem('clearingAgents', {
+            id: 'CLR-' + Date.now(),
+            invoiceNo: inv,
+            buyer,
+            blNumber: "MEDUAPX2609918",
+            portOfDischarge: port,
+            notifyPartyName: notify,
+            agentName: agent,
+            contactPhone: phone,
+            status: "Assigned"
+          });
+
+          Modal.close();
+          Toast.show(`Clearing Agent assigned for ${inv}!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'clearing-agent', '#/sales/orders/clearing-agent');
+        });
+      });
+    }
+
+    // 21. New Forward Contract Modal
+    const btnAddFc = document.getElementById('btn-add-fc');
+    if (btnAddFc) {
+      btnAddFc.addEventListener('click', () => {
+        const nextFcNo = `FC-2026-${Math.floor(1092 + Math.random() * 20)}`;
+        Modal.open({
+          title: "Book Export Forward Exchange Contract",
+          size: "lg",
+          content: `
+            <form id="form-new-fc" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Contract Number *</label>
+                  <input type="text" id="fc-no" value="${nextFcNo}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold text-teal-800" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Authorized Dealer Bank *</label>
+                  <select id="fc-bank" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    <option value="State Bank of India - IFB Visakhapatnam">State Bank of India - IFB Visakhapatnam</option>
+                    <option value="HDFC Bank Treasury Branch">HDFC Bank Treasury Branch</option>
+                    <option value="ICICI Bank Global Trade Services">ICICI Bank Global Trade Services</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Contract Amount (USD) *</label>
+                  <input type="number" id="fc-amount" value="500000" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Spot Rate (INR) *</label>
+                  <input type="number" id="fc-spot" value="83.80" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Premium Rate *</label>
+                  <input type="number" id="fc-prem" value="0.55" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Branch Margin *</label>
+                  <input type="number" id="fc-margin" value="0.15" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Net Forward Rate *</label>
+                  <input type="text" id="fc-total" value="84.20" readonly class="w-full p-2.5 rounded-lg border border-slate-300 bg-slate-100 font-mono font-black text-teal-800" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Start Date *</label>
+                  <input type="date" id="fc-start" value="2026-11-01" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Maturity Date *</label>
+                  <input type="date" id="fc-end" value="2027-01-31" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Delivery Month *</label>
+                  <input type="text" id="fc-month" value="January 2027" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold" />
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Book Forward Contract", type: "primary" }
+          ]
+        });
+
+        const updateFcRate = () => {
+          const spot = parseFloat(document.getElementById('fc-spot')?.value) || 0;
+          const prem = parseFloat(document.getElementById('fc-prem')?.value) || 0;
+          const margin = parseFloat(document.getElementById('fc-margin')?.value) || 0;
+          const tot = SalesDataStore.calculateForwardContractRate(spot, prem, margin);
+          const el = document.getElementById('fc-total');
+          if (el) el.value = tot.toFixed(2);
+        };
+
+        ['fc-spot', 'fc-prem', 'fc-margin'].forEach(id => {
+          document.getElementById(id)?.addEventListener('input', updateFcRate);
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const fcNo = document.getElementById('fc-no')?.value.trim();
+          const amount = parseFloat(document.getElementById('fc-amount')?.value) || 500000;
+          const spot = parseFloat(document.getElementById('fc-spot')?.value) || 83.80;
+          const prem = parseFloat(document.getElementById('fc-prem')?.value) || 0.55;
+          const margin = parseFloat(document.getElementById('fc-margin')?.value) || 0.15;
+          const tot = SalesDataStore.calculateForwardContractRate(spot, prem, margin);
+          const start = document.getElementById('fc-start')?.value || '2026-11-01';
+          const end = document.getElementById('fc-end')?.value || '2027-01-31';
+          const month = document.getElementById('fc-month')?.value.trim() || 'January 2027';
+
+          SalesDataStore.addItem('forwardContracts', {
+            id: 'FC-' + Date.now(),
+            contractNumber: fcNo,
+            bookedDate: new Date().toISOString().split('T')[0],
+            company: "Devi Fisheries Limited Unit-1",
+            bookedValueUsd: amount,
+            utilizedValueUsd: 0,
+            balanceValueUsd: amount,
+            spotRate: spot,
+            premiumRate: prem,
+            branchMargin: margin,
+            totalRate: tot,
+            startDate: start,
+            endDate: end,
+            month,
+            status: "Active"
+          });
+
+          Modal.close();
+          Toast.show(`Forward Contract ${fcNo} booked successfully!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'forward-contracts', '#/sales/payments-financials/forward-contracts');
+        });
+      });
+    }
+
+    // 22. New Collection Modal
+    const btnAddCollection = document.getElementById('btn-add-collection');
+    if (btnAddCollection) {
+      btnAddCollection.addEventListener('click', () => {
+        const buyers = SalesDataStore.getCollection('buyers');
+        const fcs = SalesDataStore.getCollection('forwardContracts');
+        Modal.open({
+          title: "Record Export Collection Entry",
+          size: "lg",
+          content: `
+            <form id="form-new-collection" class="space-y-4 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Number *</label>
+                  <input type="text" id="col-inv" value="DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Buyer *</label>
+                  <select id="col-buyer" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                    ${buyers.map(b => `<option value="${b.name}">${b.name}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Bank Reference / Lodgement *</label>
+                  <input type="text" id="col-bankref" placeholder="e.g. HDFC/TT/EX/99214" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Invoice Value (USD) *</label>
+                  <input type="number" id="col-invusd" value="185200" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Utilized Value (USD) *</label>
+                  <input type="number" id="col-utilusd" value="185200" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Exchange Rate (INR) *</label>
+                  <input type="number" id="col-rate" value="84.20" step="0.01" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Bank Charges (USD)</label>
+                  <input type="number" id="col-chg" value="350" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Other Deductions (USD)</label>
+                  <input type="number" id="col-ded" value="0" class="w-full p-2.5 rounded-lg border border-slate-300" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Linked Forward Contract</label>
+                  <select id="col-fc" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono">
+                    ${fcs.map(f => `<option value="${f.contractNumber}">${f.contractNumber} (${f.month})</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+              <div class="p-3 bg-teal-50 rounded-xl border border-teal-200 flex justify-between items-center">
+                <span class="text-slate-600 font-bold">Estimated Realized Value INR:</span>
+                <span id="col-autoinr" class="font-mono font-black text-teal-800 text-sm">₹15,564,370.00</span>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Save Collection Record", type: "primary" }
+          ]
+        });
+
+        const updateColCalc = () => {
+          const invUsd = parseFloat(document.getElementById('col-invusd')?.value) || 0;
+          const chg = parseFloat(document.getElementById('col-chg')?.value) || 0;
+          const ded = parseFloat(document.getElementById('col-ded')?.value) || 0;
+          const rate = parseFloat(document.getElementById('col-rate')?.value) || 84.20;
+          const netInr = SalesDataStore.calculateCollectionValueInr(invUsd, chg, ded, 0, rate);
+          const el = document.getElementById('col-autoinr');
+          if (el) el.textContent = `₹${netInr.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+        };
+
+        ['col-invusd', 'col-chg', 'col-ded', 'col-rate'].forEach(id => {
+          document.getElementById(id)?.addEventListener('input', updateColCalc);
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const inv = document.getElementById('col-inv')?.value.trim();
+          const buyer = document.getElementById('col-buyer')?.value;
+          const bankRef = document.getElementById('col-bankref')?.value.trim() || 'HDFC/TT/EX/' + Math.floor(10000 + Math.random() * 90000);
+          const invUsd = parseFloat(document.getElementById('col-invusd')?.value) || 185200;
+          const utilUsd = parseFloat(document.getElementById('col-utilusd')?.value) || 185200;
+          const rate = parseFloat(document.getElementById('col-rate')?.value) || 84.20;
+          const chg = parseFloat(document.getElementById('col-chg')?.value) || 350;
+          const ded = parseFloat(document.getElementById('col-ded')?.value) || 0;
+          const fc = document.getElementById('col-fc')?.value;
+          const netInr = SalesDataStore.calculateCollectionValueInr(invUsd, chg, ded, 0, rate);
+
+          SalesDataStore.addItem('collections', {
+            id: 'COL-' + Date.now(),
+            invoiceNo: inv,
+            poNumber: "PO-" + buyer.slice(0, 3).toUpperCase() + "-2026",
+            buyer,
+            consigneeName: "Cold Storage Logistics Depot",
+            invoiceValueUsd: invUsd,
+            utilizedValueUsd: utilUsd,
+            balanceUsd: invUsd - utilUsd,
+            collectionRate: rate,
+            bankChargesUsd: chg,
+            deductionsUsd: ded,
+            extraAmountUsd: 0,
+            valueInr: netInr,
+            bankRefNo: bankRef,
+            collectionDate: new Date().toISOString().split('T')[0],
+            paymentMode: "TT Remittance",
+            forwardContractNo: fc,
+            status: "Fully Collected"
+          });
+
+          Modal.close();
+          Toast.show(`Collection record for ${inv} recorded!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'collections', '#/sales/payments-financials/collections');
+        });
+      });
+    }
+
+    // 23. New Negotiation Modal
+    const btnAddNeg = document.getElementById('btn-add-neg');
+    if (btnAddNeg) {
+      btnAddNeg.addEventListener('click', () => {
+        Modal.open({
+          title: "Submit Export LC Negotiation",
+          size: "md",
+          content: `
+            <form id="form-new-neg" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Invoice Number *</label>
+                <input type="text" id="neg-inv" value="DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Financing Bank *</label>
+                <select id="neg-bank" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  <option value="State Bank of India - IFB Visakhapatnam">State Bank of India - IFB Visakhapatnam</option>
+                  <option value="HDFC Bank Overseas Branch">HDFC Bank Overseas Branch</option>
+                  <option value="ICICI International Banking Branch">ICICI International Banking Branch</option>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Bank Reference / Bill No *</label>
+                  <input type="text" id="neg-ref" value="SBI-IFB-LC-${Math.floor(1000 + Math.random() * 9000)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Submission Date *</label>
+                  <input type="date" id="neg-date" value="${new Date().toISOString().split('T')[0]}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Document Set Description</label>
+                <textarea id="neg-docs" rows="2" class="w-full p-2.5 rounded-lg border border-slate-300">LC Document Set (Full Clean Onboard BL, CO, Lab Certificate, Health Certificate, Packing List)</textarea>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Submit Negotiation", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const inv = document.getElementById('neg-inv')?.value.trim();
+          const ref = document.getElementById('neg-ref')?.value.trim();
+          const date = document.getElementById('neg-date')?.value;
+          const docs = document.getElementById('neg-docs')?.value.trim();
+
+          SalesDataStore.addItem('negotiations', {
+            id: 'NEG-' + Date.now(),
+            invoiceNo: inv,
+            poNumber: "PO-DFL-2026",
+            consigneeName: "Americold Cold Storage - Baltimore",
+            bankRefNo: ref,
+            submissionDate: date,
+            docType: docs,
+            status: "Negotiated"
+          });
+
+          Modal.close();
+          Toast.show(`Negotiation bill ${ref} recorded!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'negotiations', '#/sales/payments-financials/negotiations');
+        });
+      });
+    }
+
+    // 24. New Insurance Payment Modal
+    const btnAddInsPay = document.getElementById('btn-add-inspay');
+    if (btnAddInsPay) {
+      btnAddInsPay.addEventListener('click', () => {
+        const nextPayNo = `INS-PAY-2026-0${Math.floor(2 + Math.random() * 8)}`;
+        Modal.open({
+          title: "Record Marine Insurance Premium Payment",
+          size: "md",
+          content: `
+            <form id="form-new-inspay" class="space-y-4 text-xs">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Voucher Number *</label>
+                  <input type="text" id="insp-no" value="${nextPayNo}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold text-teal-800" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Payment Date *</label>
+                  <input type="date" id="insp-date" value="${new Date().toISOString().split('T')[0]}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Insurance Underwriter *</label>
+                <select id="insp-underwriter" class="w-full p-2.5 rounded-lg border border-slate-300 font-semibold">
+                  <option value="The New India Assurance Co. Ltd">The New India Assurance Co. Ltd</option>
+                  <option value="National Insurance Company">National Insurance Company</option>
+                  <option value="United India Insurance Co.">United India Insurance Co.</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Covered Invoices (Comma-separated) *</label>
+                <input type="text" id="insp-invs" value="DFL/EXP/2026-27/083, DFL/EXP/2026-27/084, DFL/EXP/2026-27/085" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-semibold" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Total Premium Paid (INR) *</label>
+                  <input type="number" id="insp-prem" value="213750" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold text-teal-800" />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Cheque / UTR Ref *</label>
+                  <input type="text" id="insp-ref" value="CHQ-HDFC-${Math.floor(100000 + Math.random() * 900000)}" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold" />
+                </div>
+              </div>
+            </form>
+          `,
+          footerButtons: [
+            { label: "Cancel", type: "secondary" },
+            { label: "Record Payment", type: "primary" }
+          ]
+        });
+
+        document.getElementById('modal-btn-1')?.addEventListener('click', () => {
+          const payNo = document.getElementById('insp-no')?.value.trim();
+          const date = document.getElementById('insp-date')?.value;
+          const underwriter = document.getElementById('insp-underwriter')?.value;
+          const invsRaw = document.getElementById('insp-invs')?.value.trim();
+          const invs = invsRaw ? invsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+          const prem = parseFloat(document.getElementById('insp-prem')?.value) || 213750;
+          const ref = document.getElementById('insp-ref')?.value.trim();
+
+          SalesDataStore.addItem('insurancePayments', {
+            id: 'INSP-' + Date.now(),
+            insNo: payNo,
+            paymentDate: date,
+            invoicesList: invs,
+            invoicesCount: invs.length,
+            totalPremiumInr: prem,
+            underwriter,
+            chequeRef: ref
+          });
+
+          Modal.close();
+          Toast.show(`Insurance payment voucher ${payNo} recorded!`, 'success');
+          this.render(document.getElementById('main-content-area'), 'insurance-payments', '#/sales/insurance/insurance-payments');
+        });
+      });
+    }
+
+    // 25. Table Action Quick Handlers (Edit, View, Print, Download)
+    document.querySelectorAll('[class*="btn-edit-"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.getAttribute('data-id') || 'Item';
+        Toast.show(`Opening record editor for ${id}...`, 'info');
+      });
+    });
+
+    document.querySelectorAll('[class*="btn-view-"], [class*="btn-print-"], [class*="btn-download-"]').forEach(btn => {
+      if (!btn.classList.contains('btn-view-covered-invoices')) {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-id') || 'Record';
+          Toast.show(`Opening document preview for ${id}...`, 'info');
+        });
+      }
+    });
   }
 };
+

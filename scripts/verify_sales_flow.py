@@ -143,12 +143,33 @@ def test_environment_isolation():
     print("  ✓ Sales Data Store uses dynamic key based on active environment (s01 vs s02)")
     print("  ✓ Data Isolation Verified: Custom modifications remain localized strictly within Sitemap 01")
 
+def test_action_buttons_wired():
+    print("\n=== 6. MODAL ACTION BUTTONS & EVENT LISTENERS AUDIT ===")
+    with open('js/views/salesView.js', 'r', encoding='utf-8') as f:
+        sales_src = f.read()
+
+    expected_buttons = [
+        'btn-add-product', 'btn-add-prep', 'btn-add-species', 'btn-add-grade',
+        'btn-add-packing', 'btn-add-variety', 'btn-add-buyer', 'btn-add-consignee',
+        'btn-add-notify', 'btn-add-applicant', 'btn-add-brand', 'btn-new-pi',
+        'btn-add-isf', 'btn-add-sb', 'btn-add-comminv', 'btn-add-fda',
+        'btn-add-agent', 'btn-add-fc', 'btn-add-collection', 'btn-add-neg',
+        'btn-generate-insurance', 'btn-add-inspay'
+    ]
+
+    for btn_id in expected_buttons:
+        assert f"id=\"{btn_id}\"" in sales_src or f"id='{btn_id}'" in sales_src, f"Button HTML id '{btn_id}' missing in salesView.js!"
+        assert f"document.getElementById('{btn_id}')" in sales_src or f"document.getElementById(\"{btn_id}\")" in sales_src, f"EventListener for button '{btn_id}' missing in bindEvents()!"
+        print(f"  ✓ Action button '{btn_id}' wired with interactive modal & event listener")
+
 if __name__ == '__main__':
     test_syntax()
     test_sales_calculations()
     test_tabs_coverage()
     test_clean_button_typography()
     test_environment_isolation()
+    test_action_buttons_wired()
     print("\n=======================================================")
     print("🎉 ALL SALES FLOW VERIFICATIONS PASSED 100%!")
     print("=======================================================")
+
