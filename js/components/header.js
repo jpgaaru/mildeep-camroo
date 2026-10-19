@@ -3,7 +3,6 @@
 import { ERP_DATA } from '../data/mockData.js';
 import { Toast } from './toast.js';
 import { Modal } from './modal.js';
-import { TourGuide } from './tourGuide.js';
 import { Sidebar } from './sidebar.js';
 import { Accessibility } from './accessibility.js';
 import { NOTIFICATIONS_DATA } from '../views/notificationsView.js';
@@ -255,13 +254,6 @@ export const Header = {
                 </button>
               </div>
 
-              <div class="p-1 border-b border-[#EBECF0]">
-                <button id="start-tour-dropdown-btn" class="w-full text-left px-3 py-2 hover:bg-[#F0F9FF] text-[#0284C7] rounded font-semibold flex items-center gap-2 transition-colors cursor-pointer">
-                  <svg class="w-4 h-4 text-[#0284C7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  <span>Play Tour Guide Again</span>
-                </button>
-              </div>
-
               <div class="p-1">
                 <button id="logout-menu-btn" class="w-full text-left px-3 py-2 hover:bg-[#FFEBE6] text-[#BF2600] rounded-lg font-medium flex items-center gap-2 transition-colors cursor-pointer">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -446,16 +438,6 @@ export const Header = {
         e.stopPropagation();
         if (userMenu) userMenu.classList.add('hidden');
         Accessibility.openModal();
-      };
-    }
-
-    // Start Tour from user dropdown
-    const startTourBtn = document.getElementById('start-tour-dropdown-btn');
-    if (startTourBtn) {
-      startTourBtn.onclick = (e) => {
-        e.stopPropagation();
-        if (userMenu) userMenu.classList.add('hidden');
-        TourGuide.start(true);
       };
     }
 

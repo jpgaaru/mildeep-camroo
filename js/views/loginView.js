@@ -201,7 +201,6 @@ export const LoginView = {
     const performLogin = (envTarget, toastMessage, title) => {
       Environment.setActiveEnv(envTarget);
       sessionStorage.setItem('dfl_authenticated', 'true');
-      sessionStorage.setItem('trigger_tour_on_login', 'true');
       const existing = document.getElementById('erp-app-shell');
       if (existing) existing.remove();
 

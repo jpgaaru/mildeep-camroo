@@ -7,7 +7,6 @@ import { Header } from './components/header.js';
 import { Sidebar, NAV_HIERARCHY } from './components/sidebar.js';
 import { Breadcrumbs } from './components/breadcrumbs.js';
 import { TabBar } from './components/tabBar.js';
-import { TourGuide } from './components/tourGuide.js';
 import { Accessibility } from './components/accessibility.js';
 import { CalendarPicker } from './components/calendarPicker.js';
 import { SelectPicker } from './components/selectPicker.js';
@@ -228,14 +227,6 @@ export const App = {
     // Scroll to top of main content
     const mainEl = document.getElementById(mainContainer);
     if (mainEl) mainEl.scrollTop = 0;
-
-    // Check if Onboarding Tour should start (e.g. after login)
-    if (sessionStorage.getItem('trigger_tour_on_login') === 'true') {
-      sessionStorage.removeItem('trigger_tour_on_login');
-      setTimeout(() => {
-        TourGuide.start();
-      }, 500);
-    }
   },
 
   ensureShellMounted() {
