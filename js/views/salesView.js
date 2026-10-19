@@ -25,10 +25,11 @@ export const SalesView = {
     switch (this.activeTab) {
       // 1. Dashboard
       case 'overview':
+      case 'dashboard':
         contentHtml = this.renderDashboard();
         break;
 
-      // 2. Product Master
+      // 2. Product Management (Master Data)
       case 'product-list':
         contentHtml = this.renderProductList();
         break;
@@ -66,14 +67,7 @@ export const SalesView = {
         contentHtml = this.renderBrandsList();
         break;
 
-      // 4. Sales Overview
-      case 'sales-overview':
-      case 'sales-overview-tab':
-      case 'sales':
-        contentHtml = this.renderSalesOverview();
-        break;
-
-      // 5. Orders Execution
+      // 4. Orders Execution
       case 'proforma-list':
         contentHtml = this.renderProformaList();
         break;
@@ -99,7 +93,7 @@ export const SalesView = {
         contentHtml = this.renderClearingAgent();
         break;
 
-      // 6. Export Finance & Payments
+      // 5. Payments & Financials
       case 'forward-contracts':
         contentHtml = this.renderForwardContracts();
         break;
@@ -116,7 +110,7 @@ export const SalesView = {
         contentHtml = this.renderRealizationDone();
         break;
 
-      // 7. Cargo Insurance
+      // 6. Cargo Insurance
       case 'pending-insurance':
         contentHtml = this.renderPendingInsurance();
         break;
@@ -127,11 +121,9 @@ export const SalesView = {
         contentHtml = this.renderInsurancePayments();
         break;
 
-      // 8. Reports
+      // 7. Reports
       case 'reports':
       case 'reports-overview':
-        contentHtml = this.renderReportsOverview();
-        break;
       case 'delayed-shipments':
         contentHtml = this.renderDelayedShipmentsReport();
         break;
@@ -143,12 +135,6 @@ export const SalesView = {
         break;
       case 'inventory-report':
         contentHtml = this.renderInventoryReport();
-        break;
-
-      // 9. Product Consumption
-      case 'consumption':
-      case 'consumption-ledger':
-        contentHtml = this.renderConsumptionLedger();
         break;
 
       default:
@@ -165,7 +151,7 @@ export const SalesView = {
   },
 
   // ==========================================
-  // 1. DASHBOARD OVERVIEW
+  // MODULE 6.1: DASHBOARD & ANALYTICS
   // ==========================================
   renderDashboard() {
     const data = SalesDataStore.getAll();
@@ -173,13 +159,83 @@ export const SalesView = {
 
     return `
       <div class="space-y-6">
-        <!-- 6 KPI Metric Cards -->
+        <!-- Global Search & Filter Bar -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              <span class="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Sales Analytics & Global Filter Control</span>
+            </div>
+            <span class="text-[11px] text-slate-400">Live Production Telemetry &bull; FY 2026-27</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">Exporter</label>
+              <select id="filter-dash-exporter" class="w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-700 focus:outline-none focus:border-teal-500">
+                <option value="All">All Entities</option>
+                <option value="DFL-Unit-1" selected>Devi Fisheries Unit-1</option>
+                <option value="DFL-Unit-2">Devi Fisheries Unit-2</option>
+                <option value="DFL-Tuticorin">DFL Tuticorin Plant</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">Consignee</label>
+              <select id="filter-dash-consignee" class="w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-700 focus:outline-none focus:border-teal-500">
+                <option value="All">All Consignees</option>
+                <option value="Americold">Americold Baltimore</option>
+                <option value="Lineage">Lineage Long Beach</option>
+                <option value="Yangshan">Yangshan Shanghai</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">Brand</label>
+              <select id="filter-dash-brand" class="w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-700 focus:outline-none focus:border-teal-500">
+                <option value="All">All Brands</option>
+                <option value="Devi Gold">Devi Gold</option>
+                <option value="Black Pearl">Black Pearl</option>
+                <option value="Bay Fresh">Bay Fresh</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">Country</label>
+              <select id="filter-dash-country" class="w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-700 focus:outline-none focus:border-teal-500">
+                <option value="All">All Countries</option>
+                <option value="USA">United States</option>
+                <option value="China">China</option>
+                <option value="Japan">Japan</option>
+                <option value="EU">European Union</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">Fiscal Year</label>
+              <select id="filter-dash-year" class="w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-medium text-slate-700 focus:outline-none focus:border-teal-500">
+                <option value="2026-27" selected>2026 - 2027</option>
+                <option value="2025-26">2025 - 2026</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">From Date</label>
+              <div class="erp-date-wrapper relative">
+                <input type="text" id="filter-dash-from" value="01-10-2026" class="erp-date-input w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-mono text-slate-700 cursor-pointer text-xs" readonly />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-500 mb-1 text-[11px]">To Date</label>
+              <div class="erp-date-wrapper relative">
+                <input type="text" id="filter-dash-to" value="31-10-2026" class="erp-date-input w-full p-2 rounded-lg border border-slate-200 bg-slate-50 font-mono text-slate-700 cursor-pointer text-xs" readonly />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 KPI Metric Cards with Trend Indicators -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <!-- KPI 1: Pending Contracts -->
           <div class="bg-white rounded-2xl p-4 border border-sky-100 shadow-2xs hover:shadow-xs transition-all">
             <div class="flex items-center justify-between mb-2">
               <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pending Orders</span>
-              <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-sky-50 text-sky-700">${kpis.pendingContracts?.trend || '+12%'}</span>
+              <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-sky-50 text-sky-700">${kpis.pendingContracts?.trend || '+12.5%'}</span>
             </div>
             <div class="text-2xl font-black text-[#0F172A]">${kpis.pendingContracts?.count || 8}</div>
             <div class="text-xs text-slate-500 mt-1">${kpis.pendingContracts?.label || 'Active Contracts'}</div>
@@ -199,7 +255,7 @@ export const SalesView = {
           <div class="bg-white rounded-2xl p-4 border border-emerald-100 shadow-2xs hover:shadow-xs transition-all">
             <div class="flex items-center justify-between mb-2">
               <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Delivered</span>
-              <span class="text-emerald-600 font-bold text-xs">YTD</span>
+              <span class="text-emerald-600 font-bold text-xs">+18.4% YTD</span>
             </div>
             <div class="text-2xl font-black text-[#0F172A]">${kpis.deliveredShipments?.count || 24}</div>
             <div class="text-xs text-slate-500 mt-1">${kpis.deliveredShipments?.tons || 432} Metric Tons</div>
@@ -229,75 +285,241 @@ export const SalesView = {
           <div class="bg-white rounded-2xl p-4 border border-indigo-100 shadow-2xs hover:shadow-xs transition-all">
             <div class="flex items-center justify-between mb-2">
               <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Realized</span>
-              <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-indigo-50 text-indigo-700">MTD</span>
+              <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-indigo-50 text-indigo-700">+9.2% MTD</span>
             </div>
             <div class="text-xl font-black text-indigo-700">$${(kpis.paymentsRealizedMonth?.amount || 842000).toLocaleString()}</div>
             <div class="text-xs text-slate-500 mt-1">₹${((kpis.paymentsRealizedMonth?.inrEquivalent || 70601700) / 100000).toFixed(1)} Lakhs</div>
           </div>
         </div>
 
-        <!-- Visual Analytics Grid: 4 Interactive Visual Breakdown Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <!-- Chart 1: Export Revenue vs Shipments -->
-          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <h3 class="text-sm font-bold text-[#0F172A]">Monthly Export Revenue & Dispatch Volume</h3>
-                <p class="text-xs text-slate-400">Total value in USD vs completed 40FT reefer containers</p>
+        <!-- 6 Visual Analytics Charts Grid (Module 6.1) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Chart 1: Invoice Vs Shipments (Monthly Bar Chart) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">1. Invoice Vs Shipments</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600">Monthly</span>
               </div>
-              <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">FY 2026-27</span>
+              <p class="text-[11px] text-slate-400 mb-3">Invoiced value in USD vs completed container dispatches</p>
+              
+              <div class="space-y-2.5">
+                ${[
+                  { month: 'Jul 2026', usd: '$1,420K', ctns: 16, pct: 75 },
+                  { month: 'Aug 2026', usd: '$1,680K', ctns: 19, pct: 88 },
+                  { month: 'Sep 2026', usd: '$1,890K', ctns: 22, pct: 95 },
+                  { month: 'Oct 2026', usd: '$1,350K', ctns: 15, pct: 70 }
+                ].map(m => `
+                  <div>
+                    <div class="flex justify-between text-[11px] font-semibold mb-1">
+                      <span class="text-slate-600">${m.month}</span>
+                      <span class="text-[#0F172A] font-bold">${m.usd} <span class="text-slate-400 font-normal">(${m.ctns} FCL)</span></span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full rounded-full bg-gradient-to-r from-teal-500 to-[#00A8B5]" style="width: ${m.pct}%;"></div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
             </div>
-            
-            <div class="space-y-3 pt-2">
-              ${[
-                { month: 'Jul 2026', usd: '$1,420,000', containers: 16, pct: 75 },
-                { month: 'Aug 2026', usd: '$1,680,000', containers: 19, pct: 88 },
-                { month: 'Sep 2026', usd: '$1,890,000', containers: 22, pct: 95 },
-                { month: 'Oct 2026 (MTD)', usd: '$1,350,000', containers: 15, pct: 70 }
-              ].map(m => `
-                <div>
-                  <div class="flex justify-between text-xs font-semibold mb-1">
-                    <span class="text-slate-600">${m.month}</span>
-                    <span class="text-[#0F172A]">${m.usd} <span class="text-slate-400 font-normal">(${m.containers} Cont.)</span></span>
-                  </div>
-                  <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full bg-gradient-to-r from-teal-500 to-[#00A8B5]" style="width: ${m.pct}%;"></div>
-                  </div>
-                </div>
-              `).join('')}
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Total Oct Shipments: 15 FCL</span>
+              <span class="font-bold text-teal-700">Target Pace: 96%</span>
             </div>
           </div>
 
-          <!-- Chart 2: Destination Country Share -->
-          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <h3 class="text-sm font-bold text-[#0F172A]">Export Destination Market Share</h3>
-                <p class="text-xs text-slate-400">Consignment volume breakdown by destination country</p>
+          <!-- Chart 2: Plant Wise Orders (Grouped Bar Chart) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">2. Plant Wise Orders</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-sky-700">Unit Comparison</span>
               </div>
-              <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-teal-50 text-teal-700">Global Sales</span>
-            </div>
+              <p class="text-[11px] text-slate-400 mb-3">Total, Shipped, and Pending order allocation by facility</p>
 
-            <div class="space-y-3 pt-2">
-              ${[
-                { country: 'United States of America (USFDA)', share: '75.72%', tons: '327 MT', color: 'bg-sky-500', width: '75.7%' },
-                { country: 'People\'s Republic of China (GACC)', share: '14.92%', tons: '64 MT', color: 'bg-rose-500', width: '14.9%' },
-                { country: 'Japan (MHLW Approved)', share: '5.80%', tons: '25 MT', color: 'bg-amber-500', width: '5.8%' },
-                { country: 'European Union & UK', share: '3.56%', tons: '16 MT', color: 'bg-emerald-500', width: '3.6%' }
-              ].map(c => `
-                <div>
-                  <div class="flex justify-between text-xs font-semibold mb-1">
-                    <span class="flex items-center gap-2 text-slate-700">
-                      <span class="w-2 h-2 rounded-full ${c.color}"></span>
-                      ${c.country}
-                    </span>
-                    <span class="text-[#0F172A] font-bold">${c.share} <span class="text-slate-400 font-normal">(${c.tons})</span></span>
+              <div class="space-y-3">
+                ${[
+                  { plant: 'Unit-1 Visakhapatnam', total: 24, shipped: 18, pending: 6, pctShipped: 75 },
+                  { plant: 'Unit-2 Singarayakonda', total: 16, shipped: 11, pending: 5, pctShipped: 68.7 },
+                  { plant: 'Unit-3 Tuticorin', total: 8, shipped: 6, pending: 2, pctShipped: 75 }
+                ].map(p => `
+                  <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="flex justify-between text-[11px] font-bold text-[#0F172A] mb-1.5">
+                      <span>${p.plant}</span>
+                      <span class="text-teal-700">${p.shipped}/${p.total} Shipped</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden flex">
+                      <div class="h-full bg-teal-600" style="width: ${p.pctShipped}%;" title="Shipped"></div>
+                      <div class="h-full bg-amber-400" style="width: ${100 - p.pctShipped}%;" title="Pending"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                      <span>Shipped: <strong class="text-teal-700">${p.shipped}</strong></span>
+                      <span>Pending: <strong class="text-amber-600">${p.pending}</strong></span>
+                      <span>Total: <strong>${p.total}</strong></span>
+                    </div>
                   </div>
-                  <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full ${c.color}" style="width: ${c.width};"></div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center gap-3 text-[10px]">
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-teal-600"></span> Shipped</span>
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Pending Processing</span>
+            </div>
+          </div>
+
+          <!-- Chart 3: Country Wise Details (Donut / Market Share) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">3. Country Wise Details</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700">Market Share</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-3">Export consignment volume by destination country</p>
+
+              <div class="space-y-2.5">
+                ${[
+                  { country: 'United States (USFDA)', share: '75.72%', tons: '327 MT', color: 'bg-sky-500', width: '75.7%' },
+                  { country: 'China (GACC Registration)', share: '14.92%', tons: '64 MT', color: 'bg-rose-500', width: '14.9%' },
+                  { country: 'Japan (MHLW Tested)', share: '5.80%', tons: '25 MT', color: 'bg-amber-500', width: '5.8%' },
+                  { country: 'European Union & UK', share: '3.56%', tons: '16 MT', color: 'bg-emerald-500', width: '3.6%' }
+                ].map(c => `
+                  <div>
+                    <div class="flex justify-between text-[11px] font-semibold mb-1">
+                      <span class="flex items-center gap-1.5 text-slate-700">
+                        <span class="w-2 h-2 rounded-full ${c.color}"></span>
+                        ${c.country}
+                      </span>
+                      <span class="text-[#0F172A] font-bold">${c.share} <span class="text-slate-400 font-normal">(${c.tons})</span></span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full rounded-full ${c.color}" style="width: ${c.width};"></div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Primary Gateway: US East/West Coast</span>
+              <span class="font-bold text-sky-700">75.72% USA</span>
+            </div>
+          </div>
+
+          <!-- Chart 4: Shipped Containers (Port Wise) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">4. Shipped Containers (Port Wise)</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700">Discharge Ports</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-3">Volume allocation by destination ocean terminal</p>
+
+              <div class="space-y-2.5">
+                ${[
+                  { port: 'Baltimore Port, MD', share: '42.0%', fcl: '22 FCL', color: 'bg-indigo-600', width: '42%' },
+                  { port: 'Long Beach Port, CA', share: '28.0%', fcl: '15 FCL', color: 'bg-teal-500', width: '28%' },
+                  { port: 'Yokohama Port, Japan', share: '15.0%', fcl: '8 FCL', color: 'bg-amber-500', width: '15%' },
+                  { port: 'Rotterdam Port, Netherlands', share: '10.0%', fcl: '5 FCL', color: 'bg-rose-500', width: '10%' },
+                  { port: 'Others (Shanghai, Kobe)', share: '5.0%', fcl: '2 FCL', color: 'bg-slate-400', width: '5%' }
+                ].map(p => `
+                  <div>
+                    <div class="flex justify-between text-[11px] font-semibold mb-1">
+                      <span class="flex items-center gap-1.5 text-slate-700">
+                        <span class="w-2 h-2 rounded-full ${p.color}"></span>
+                        ${p.port}
+                      </span>
+                      <span class="text-[#0F172A] font-bold">${p.share} <span class="text-slate-400 font-normal">(${p.fcl})</span></span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full rounded-full ${p.color}" style="width: ${p.width};"></div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Total Dispatched: 52 Containers</span>
+              <span class="font-bold text-indigo-700">Top: Baltimore</span>
+            </div>
+          </div>
+
+          <!-- Chart 5: To be shipped Qty vs Shipped Qty (Scaled Bar) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">5. To be Shipped vs Shipped</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-teal-50 text-teal-700">Volume MT</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-3">Shipped volume against pending stage balance (scaled)</p>
+
+              <div class="space-y-4 pt-2">
+                <div>
+                  <div class="flex justify-between text-[11px] font-bold mb-1.5">
+                    <span class="text-teal-700 flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span> Shipped Quantity
+                    </span>
+                    <span class="text-teal-700 font-mono">432 MT (63.2%)</span>
+                  </div>
+                  <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full bg-teal-600" style="width: 63.2%;"></div>
                   </div>
                 </div>
-              `).join('')}
+
+                <div>
+                  <div class="flex justify-between text-[11px] font-bold mb-1.5">
+                    <span class="text-amber-600 flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> To Be Shipped
+                    </span>
+                    <span class="text-amber-600 font-mono">252 MT (36.8%)</span>
+                  </div>
+                  <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full bg-amber-500" style="width: 36.8%;"></div>
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-[11px] text-slate-600 flex justify-between items-center">
+                  <span>Total Order Commitments:</span>
+                  <span class="font-bold text-[#0F172A]">684 MT (38 FCL)</span>
+                </div>
+              </div>
+            </div>
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Fulfillment Velocity: Normal</span>
+              <span class="font-bold text-teal-700">63.2% Completed</span>
+            </div>
+          </div>
+
+          <!-- Chart 6: Freight Rates (Line / Route Trend) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xs font-bold text-[#0F172A]">6. Freight Rates</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700">Ocean Liners</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mb-3">Carrier spot rate benchmark per 40ft reefer container</p>
+
+              <div class="space-y-2.5">
+                ${[
+                  { liner: 'Maersk Line', route: 'Visakhapatnam &rarr; Baltimore', rate: '$4,200', trend: '-2.3%', status: 'Best Transit' },
+                  { liner: 'MSC (Mediterranean Shipping)', route: 'Visakhapatnam &rarr; Long Beach', rate: '$3,950', trend: '-4.1%', status: 'Lowest Cost' },
+                  { liner: 'Ocean Network Express (ONE)', route: 'Visakhapatnam &rarr; Yokohama', rate: '$2,850', trend: '+1.0%', status: 'Direct Weekly' },
+                  { liner: 'Hapag-Lloyd', route: 'Visakhapatnam &rarr; Rotterdam', rate: '$3,400', trend: 'Stable', status: 'Reefer Plus' }
+                ].map(f => `
+                  <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                    <div>
+                      <div class="text-[11px] font-bold text-[#0F172A]">${f.liner}</div>
+                      <div class="text-[10px] text-slate-500">${f.route}</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-xs font-black font-mono text-[#0F172A]">${f.rate}</div>
+                      <div class="text-[9.5px] font-semibold text-teal-700">${f.status}</div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Avg Spot Rate: $3,600 / FEU</span>
+              <span class="font-bold text-teal-700">Hedged Contracts Active</span>
             </div>
           </div>
         </div>
@@ -2401,7 +2623,7 @@ export const SalesView = {
 
             Modal.close();
             Toast.show(`Variety SKU #${supc} registered successfully!`, 'success');
-            this.render(document.getElementById('main-content-area'), 'variety-list', '#/sales/product/variety-list');
+            this.render(document.getElementById('main-content-area'), 'variety-list', '#/sales/product-management/variety-list');
           });
         }
       });
@@ -2498,7 +2720,7 @@ export const SalesView = {
 
           Modal.close();
           Toast.show(`Packing Style "${name}" added!`, 'success');
-          this.render(document.getElementById('main-content-area'), 'packing-style-list', '#/sales/product/packing-style-list');
+          this.render(document.getElementById('main-content-area'), 'packing-style-list', '#/sales/product-management/packing-style-list');
         });
       });
     }
@@ -2622,7 +2844,7 @@ export const SalesView = {
 
           Modal.close();
           Toast.show(`Buyer "${name}" registered successfully!`, 'success');
-          this.render(document.getElementById('main-content-area'), 'buyer-list', '#/sales/buyers/buyer-list');
+          this.render(document.getElementById('main-content-area'), 'buyer-list', '#/sales/buyer-management/buyer-list');
         });
       });
     }

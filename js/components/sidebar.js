@@ -337,40 +337,32 @@ export const NAV_HIERARCHY = [
         title: "Dashboard",
         defaultTab: "overview",
         tabs: [
-          { id: "overview", label: "Executive Overview", hash: "#/sales/dashboard/overview" }
+          { id: "overview", label: "Executive Dashboard", hash: "#/sales/dashboard/overview" }
         ]
       },
       {
-        id: "product",
-        title: "Product",
+        id: "product-management",
+        title: "Product Management",
         defaultTab: "product-list",
         tabs: [
-          { id: "product-list", label: "Product List", hash: "#/sales/product/product-list" },
-          { id: "preparation-list", label: "Preparation List", hash: "#/sales/product/preparation-list" },
-          { id: "species", label: "Species", hash: "#/sales/product/species" },
-          { id: "grades-list", label: "Grades List", hash: "#/sales/product/grades-list" },
-          { id: "packing-style-list", label: "Packing Style List", hash: "#/sales/product/packing-style-list" },
-          { id: "variety-list", label: "Variety List", hash: "#/sales/product/variety-list" }
+          { id: "product-list", label: "Product List", hash: "#/sales/product-management/product-list" },
+          { id: "preparation-list", label: "Preparation List", hash: "#/sales/product-management/preparation-list" },
+          { id: "species-master", label: "Species Master", hash: "#/sales/product-management/species-master" },
+          { id: "grades-list", label: "Grades List", hash: "#/sales/product-management/grades-list" },
+          { id: "packing-style-list", label: "Packing Style List", hash: "#/sales/product-management/packing-style-list" },
+          { id: "variety-list", label: "Variety List", hash: "#/sales/product-management/variety-list" }
         ]
       },
       {
-        id: "buyers",
-        title: "Buyers",
+        id: "buyer-management",
+        title: "Buyer Management",
         defaultTab: "buyer-list",
         tabs: [
-          { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyers/buyer-list" },
-          { id: "consignee-list", label: "Consignee List", hash: "#/sales/buyers/consignee-list" },
-          { id: "notify-party-list", label: "Notify Party List", hash: "#/sales/buyers/notify-party-list" },
-          { id: "applicant-list", label: "Applicant List", hash: "#/sales/buyers/applicant-list" },
-          { id: "brands-list", label: "Brands List", hash: "#/sales/buyers/brands-list" }
-        ]
-      },
-      {
-        id: "sales-overview",
-        title: "Sales",
-        defaultTab: "sales-overview-tab",
-        tabs: [
-          { id: "sales-overview-tab", label: "Sales Overview", hash: "#/sales/sales-overview/sales-overview-tab" }
+          { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyer-management/buyer-list" },
+          { id: "consignee-list", label: "Consignee List", hash: "#/sales/buyer-management/consignee-list" },
+          { id: "notify-party-list", label: "Notify Party List", hash: "#/sales/buyer-management/notify-party-list" },
+          { id: "applicant-list", label: "Applicant List", hash: "#/sales/buyer-management/applicant-list" },
+          { id: "brands-list", label: "Brands List", hash: "#/sales/buyer-management/brands-list" }
         ]
       },
       {
@@ -389,15 +381,15 @@ export const NAV_HIERARCHY = [
         ]
       },
       {
-        id: "payments",
-        title: "Payments",
+        id: "payments-financials",
+        title: "Payments & Financials",
         defaultTab: "forward-contracts",
         tabs: [
-          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments/forward-contracts" },
-          { id: "collections", label: "Collections", hash: "#/sales/payments/collections" },
-          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments/negotiations" },
-          { id: "realization", label: "Realization", hash: "#/sales/payments/realization" },
-          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments/realization-done" }
+          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments-financials/forward-contracts" },
+          { id: "collections", label: "Collections", hash: "#/sales/payments-financials/collections" },
+          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments-financials/negotiations" },
+          { id: "realization", label: "Realization", hash: "#/sales/payments-financials/realization" },
+          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments-financials/realization-done" }
         ]
       },
       {
@@ -413,21 +405,12 @@ export const NAV_HIERARCHY = [
       {
         id: "reports",
         title: "Reports",
-        defaultTab: "reports-overview",
+        defaultTab: "delayed-shipments",
         tabs: [
-          { id: "reports-overview", label: "Available Reports", hash: "#/sales/reports/reports-overview" },
-          { id: "delayed-shipments", label: "Delayed Shipments", hash: "#/sales/reports/delayed-shipments" },
-          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/reports/sales-summary" },
-          { id: "payment-status", label: "Payment Status", hash: "#/sales/reports/payment-status" },
-          { id: "inventory-report", label: "Finished Goods Inventory", hash: "#/sales/reports/inventory-report" }
-        ]
-      },
-      {
-        id: "consumption",
-        title: "Product Consumption",
-        defaultTab: "consumption-ledger",
-        tabs: [
-          { id: "consumption-ledger", label: "Consumption Ledger", hash: "#/sales/consumption/consumption-ledger" }
+          { id: "delayed-shipments", label: "Delayed Shipments Report", hash: "#/sales/reports/delayed-shipments" },
+          { id: "sales-summary", label: "Sales Reports", hash: "#/sales/reports/sales-summary" },
+          { id: "payment-status", label: "Payment Reports", hash: "#/sales/reports/payment-status" },
+          { id: "inventory-report", label: "Inventory Reports", hash: "#/sales/reports/inventory-report" }
         ]
       }
     ]

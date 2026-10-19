@@ -135,39 +135,43 @@ export const SECTION_METADATA_REGISTRY = {
   },
   sales: {
     dashboard: {
-      title: 'Sales Dashboard',
-      subtitle: 'Executive overview, international buyers, active orders, container voyages, and realization analytics'
+      title: 'Executive Sales Dashboard',
+      subtitle: 'Global buyers, active dispatches, revenue metrics, and container telemetry'
+    },
+    'product-management': {
+      title: 'Product Management (Master Data)',
+      subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
     product: {
-      title: 'Product Master & Variety SKUs',
+      title: 'Product Management (Master Data)',
       subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
     'master-data': {
-      title: 'Product Master & Variety SKUs',
+      title: 'Product Management (Master Data)',
       subtitle: 'Product categories, preparations, species master, grades, packing styles, and SUPC SKU creation'
     },
-    buyers: {
-      title: 'Buyers & Export Entities',
+    'buyer-management': {
+      title: 'Buyer Management',
       subtitle: 'International buyers, consignees, destination notify parties, applicants, and private-label export brands'
     },
-    'sales-overview': {
-      title: 'Sales Overview',
-      subtitle: 'Executive sales module gateway, export milestones, and core operational workflows'
-    },
-    sales: {
-      title: 'Sales Overview',
-      subtitle: 'Executive sales module gateway, export milestones, and core operational workflows'
+    buyers: {
+      title: 'Buyer Management',
+      subtitle: 'International buyers, consignees, destination notify parties, applicants, and private-label export brands'
     },
     orders: {
-      title: 'Orders, Customs & Shipping Execution',
+      title: 'Orders (Sales Execution)',
       subtitle: 'Proforma invoices, custom invoices, US 10+2 ISF filing, shipping bills, commercial invoices, and FDA clearance'
     },
+    'payments-financials': {
+      title: 'Payments & Financials',
+      subtitle: 'FX forward contracts, bank negotiations, invoice collections, and payment realization tracking'
+    },
     payments: {
-      title: 'Export Finance & Payments',
+      title: 'Payments & Financials',
       subtitle: 'FX forward contracts, bank negotiations, invoice collections, and payment realization tracking'
     },
     finance: {
-      title: 'Export Finance & Payments',
+      title: 'Payments & Financials',
       subtitle: 'FX forward contracts, bank negotiations, invoice collections, and payment realization tracking'
     },
     insurance: {
@@ -178,9 +182,9 @@ export const SECTION_METADATA_REGISTRY = {
       title: 'Sales & Export Reports',
       subtitle: 'Delayed shipments, sales performance summaries, payment realization status, and finished goods inventory'
     },
-    consumption: {
-      title: 'Product Consumption',
-      subtitle: 'Raw material intake consumption, plant pack-out yields, and export dispatch reconciliation'
+    'dashboard-reports': {
+      title: 'Sales & Export Reports',
+      subtitle: 'Delayed shipments, sales performance summaries, payment realization status, and finished goods inventory'
     }
   },
   reports: {
@@ -232,6 +236,24 @@ export const Router = {
     const moduleName = parts[0] || 'home';
     let submenuName = parts[1] || '';
     let tabName = parts[2] || '';
+
+    if (moduleName === 'sales') {
+      const SALES_ALIASES = {
+        'product': 'product-management',
+        'master-data': 'product-management',
+        'buyers': 'buyer-management',
+        'payments': 'payments-financials',
+        'finance': 'payments-financials',
+        'sales-overview': 'dashboard',
+        'dashboard-reports': 'reports'
+      };
+      if (SALES_ALIASES[submenuName]) {
+        submenuName = SALES_ALIASES[submenuName];
+      }
+      if (tabName === 'species') {
+        tabName = 'species-master';
+      }
+    }
 
     if (moduleName === 'home') {
       return {
