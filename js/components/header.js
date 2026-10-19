@@ -6,7 +6,7 @@ import { Modal } from './modal.js';
 import { Sidebar } from './sidebar.js';
 import { Accessibility } from './accessibility.js';
 import { NOTIFICATIONS_DATA } from '../views/notificationsView.js';
-import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02 } from '../framework/Environment.js';
+import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02, ENV_CLIENT_2026 } from '../framework/Environment.js';
 
 export const Header = {
   render(containerId) {
@@ -129,6 +129,22 @@ export const Header = {
                   </div>
                 </div>
                 ${envMeta.id === 'sitemap02' ? '<span class="text-[9px] font-bold text-[#3B5AF6] bg-[#3B5AF6]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
+              </button>
+
+              <!-- Option: Client 2026 -->
+              <button
+                type="button"
+                id="header-switch-client2026-btn"
+                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'client2026' ? 'bg-[#10B981]/5 font-bold text-[#10B981]' : 'text-[#334155]'}"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                  <div>
+                    <div class="font-semibold text-[#0F172A]">Client 2026</div>
+                    <div class="text-[10px] text-[#64748B]">Client React 2026 Operations & Purchase</div>
+                  </div>
+                </div>
+                ${envMeta.id === 'client2026' ? '<span class="text-[9px] font-bold text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
               </button>
 
               <!-- Option: CDS Design System -->
@@ -298,6 +314,7 @@ export const Header = {
     const envDropdown = document.getElementById('header-env-dropdown');
     const switchSitemap01Btn = document.getElementById('header-switch-sitemap01-btn');
     const switchSitemap02Btn = document.getElementById('header-switch-sitemap02-btn');
+    const switchClient2026Btn = document.getElementById('header-switch-client2026-btn');
 
     if (envBadgeBtn && envDropdown) {
       envBadgeBtn.onclick = (e) => {
@@ -321,6 +338,14 @@ export const Header = {
         e.stopPropagation();
         if (envDropdown) envDropdown.classList.add('hidden');
         Environment.switchEnvironment(ENV_SITEMAP_02);
+      };
+    }
+
+    if (switchClient2026Btn) {
+      switchClient2026Btn.onclick = (e) => {
+        e.stopPropagation();
+        if (envDropdown) envDropdown.classList.add('hidden');
+        Environment.switchEnvironment(ENV_CLIENT_2026);
       };
     }
 

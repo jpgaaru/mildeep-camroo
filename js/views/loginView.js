@@ -3,7 +3,7 @@
 
 import { ERP_DATA } from '../data/mockData.js';
 import { Toast } from '../components/toast.js';
-import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02 } from '../framework/Environment.js';
+import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02, ENV_CLIENT_2026 } from '../framework/Environment.js';
 
 export const LoginView = {
   render(containerId) {
@@ -110,8 +110,8 @@ export const LoginView = {
             </div>
           </div>
 
-          <!-- Three Distinct Action Buttons: Sitemap 01, Sitemap 02, CDS -->
-          <div class="grid grid-cols-3 gap-2">
+          <!-- Distinct Action Buttons: Sitemap 01, Sitemap 02, Client 2026, CDS -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <!-- Sitemap 01 Button -->
             <button
               type="button"
@@ -138,6 +138,20 @@ export const LoginView = {
               </div>
               <span class="text-xs font-bold text-[#0F172A] leading-tight">Sitemap 02</span>
               <span class="text-[9.5px] font-medium text-[#3B5AF6] mt-0.5 leading-tight">Superadmin</span>
+            </button>
+
+            <!-- Client 2026 Button -->
+            <button
+              type="button"
+              id="btn-env-client2026"
+              class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[#10B981]/30 hover:border-[#10B981] bg-[#10B981]/5 hover:bg-[#10B981]/12 transition-all group cursor-pointer text-center"
+              title="Client 2026 Operations & Purchase React Modules"
+            >
+              <div class="w-7 h-7 rounded-lg bg-[#10B981] text-white flex items-center justify-center mb-1 shadow-sm group-hover:scale-105 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-xs font-bold text-[#0F172A] leading-tight">Client 2026</span>
+              <span class="text-[9.5px] font-medium text-[#10B981] mt-0.5 leading-tight">Operations</span>
             </button>
 
             <!-- CDS Button -->
@@ -177,6 +191,7 @@ export const LoginView = {
 
     const btnSitemap01 = document.getElementById('btn-env-sitemap01');
     const btnSitemap02 = document.getElementById('btn-env-sitemap02');
+    const btnClient2026 = document.getElementById('btn-env-client2026');
     const btnCDS = document.getElementById('btn-env-cds');
 
     // Toggle password visibility
@@ -229,6 +244,17 @@ export const LoginView = {
           ENV_SITEMAP_02,
           `Welcome to Sitemap 02 (Client Superadmin), ${ERP_DATA.currentUser.name}!`,
           'Sitemap 02 Superadmin'
+        );
+      });
+    }
+
+    // Client 2026 Button Click -> Client 2026 Operations & Purchase React Modules
+    if (btnClient2026) {
+      btnClient2026.addEventListener('click', () => {
+        performLogin(
+          ENV_CLIENT_2026,
+          `Welcome to Client 2026 Operations Environment, ${ERP_DATA.currentUser.name}!`,
+          'Client 2026 Active'
         );
       });
     }

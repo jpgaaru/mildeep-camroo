@@ -6,10 +6,12 @@
 
 export const ENV_SITEMAP_01 = 'sitemap01';
 export const ENV_SITEMAP_02 = 'sitemap02';
+export const ENV_CLIENT_2026 = 'client2026';
 
 export const Environment = {
   ENV_SITEMAP_01,
   ENV_SITEMAP_02,
+  ENV_CLIENT_2026,
 
   // Read active environment from sessionStorage or default to sitemap01
   getActiveEnv() {
@@ -17,6 +19,7 @@ export const Environment = {
     try {
       const env = sessionStorage.getItem('dfl_active_env');
       if (env === ENV_SITEMAP_02) return ENV_SITEMAP_02;
+      if (env === ENV_CLIENT_2026) return ENV_CLIENT_2026;
       return ENV_SITEMAP_01;
     } catch {
       return ENV_SITEMAP_01;
@@ -24,7 +27,9 @@ export const Environment = {
   },
 
   setActiveEnv(env) {
-    const valid = env === ENV_SITEMAP_02 ? ENV_SITEMAP_02 : ENV_SITEMAP_01;
+    let valid = ENV_SITEMAP_01;
+    if (env === ENV_SITEMAP_02) valid = ENV_SITEMAP_02;
+    else if (env === ENV_CLIENT_2026) valid = ENV_CLIENT_2026;
     if (typeof window !== 'undefined') {
       try {
         sessionStorage.setItem('dfl_active_env', valid);
@@ -43,8 +48,25 @@ export const Environment = {
     return this.getActiveEnv() === ENV_SITEMAP_02;
   },
 
+  isClient2026() {
+    return this.getActiveEnv() === ENV_CLIENT_2026;
+  },
+
   getEnvMeta() {
     const env = this.getActiveEnv();
+    if (env === ENV_CLIENT_2026) {
+      return {
+        id: ENV_CLIENT_2026,
+        name: 'Client 2026',
+        role: 'Client React App',
+        badgeLabel: '⚡ Client 2026 · Operations',
+        shortLabel: 'Client 2026',
+        accentColor: '#10B981',
+        bgPill: 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]/30',
+        dotColor: 'bg-[#10B981]',
+        isClone: true
+      };
+    }
     if (env === ENV_SITEMAP_02) {
       return {
         id: ENV_SITEMAP_02,
