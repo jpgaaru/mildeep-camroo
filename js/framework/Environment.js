@@ -152,6 +152,11 @@ export const Environment = {
       if (window.Toast && typeof window.Toast.show === 'function') {
         window.Toast.show(`Switched to ${meta.name} (${meta.role})`, 'info', 'Environment Active');
       }
+      if (env === ENV_CLIENT_2026) {
+        window.location.hash = '#/client2026/operations/dashboard';
+      } else if (window.location.hash.includes('client2026')) {
+        window.location.hash = '#/home';
+      }
       // Re-route or refresh view
       if (window.App && typeof window.App.route === 'function') {
         const shell = document.getElementById('erp-app-shell');

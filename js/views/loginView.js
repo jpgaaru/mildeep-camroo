@@ -213,14 +213,14 @@ export const LoginView = {
       });
     }
 
-    const performLogin = (envTarget, toastMessage, title) => {
+    const performLogin = (envTarget, toastMessage, title, targetHash = '#/home') => {
       Environment.setActiveEnv(envTarget);
       sessionStorage.setItem('dfl_authenticated', 'true');
       const existing = document.getElementById('erp-app-shell');
       if (existing) existing.remove();
 
       Toast.show(toastMessage, 'success', title);
-      window.location.hash = '#/home';
+      window.location.hash = targetHash;
       if (window.App && typeof window.App.route === 'function') {
         window.App.route();
       }
@@ -254,7 +254,8 @@ export const LoginView = {
         performLogin(
           ENV_CLIENT_2026,
           `Welcome to Client 2026 Operations Environment, ${ERP_DATA.currentUser.name}!`,
-          'Client 2026 Active'
+          'Client 2026 Active',
+          '#/client2026/operations/dashboard'
         );
       });
     }

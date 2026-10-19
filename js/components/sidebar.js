@@ -48,6 +48,27 @@ export const NAV_HIERARCHY = [
     ]
   },
   {
+    id: "client2026",
+    title: "Client 2026",
+    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    submenus: [
+      {
+        id: "operations",
+        title: "Operations",
+        defaultTab: "dashboard",
+        tabs: [
+          { id: "dashboard", label: "Dashboard", hash: "#/client2026/operations/dashboard" },
+          { id: "bookings", label: "Booking", hash: "#/client2026/operations/bookings" },
+          { id: "raw-material-arrivals", label: "RM Arrivals", hash: "#/client2026/operations/raw-material-arrivals" },
+          { id: "arrivals", label: "Arrivals", hash: "#/client2026/operations/arrivals" },
+          { id: "lot-tracking", label: "Lot Tracking", hash: "#/client2026/operations/lot-tracking" },
+          { id: "transactions-bills", label: "Bills & Txns", hash: "#/client2026/operations/transactions-bills" },
+          { id: "payments", label: "Payments", hash: "#/client2026/operations/payments" }
+        ]
+      }
+    ]
+  },
+  {
     id: "preprocessing",
     title: "Pre-Processing",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>`,
@@ -523,6 +544,7 @@ export const NAV_HIERARCHY = [
 
 export const MODULE_LUCIDE_ICONS = {
   purchase: 'shopping-cart',
+  client2026: 'zap',
   preprocessing: 'layers',
   quality: 'microscope',
   production: 'factory',

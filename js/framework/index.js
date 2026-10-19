@@ -7,7 +7,7 @@ import { Router, SECTION_METADATA_REGISTRY } from './Router.js';
 import { Atoms } from './atoms/index.js';
 import { Molecules } from './molecules/index.js';
 import { Organisms } from './organisms/index.js';
-import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02 } from './Environment.js';
+import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02, ENV_CLIENT_2026 } from './Environment.js';
 
 export const AquaFramework = {
   Component,
@@ -20,7 +20,8 @@ export const AquaFramework = {
   Organisms,
   Environment,
   ENV_SITEMAP_01,
-  ENV_SITEMAP_02
+  ENV_SITEMAP_02,
+  ENV_CLIENT_2026
 };
 
 if (typeof window !== 'undefined') {
@@ -38,5 +39,6 @@ export {
   Organisms,
   Environment,
   ENV_SITEMAP_01,
-  ENV_SITEMAP_02
+  ENV_SITEMAP_02,
+  ENV_CLIENT_2026
 };
