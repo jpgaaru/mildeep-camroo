@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client 2026 — Purchase & Operations Suite | Devi Fisheries</title>
+  <title>Client 2026 — Purchase & Operations Suite | Devi Fisheries Limited</title>
   <link rel="icon" type="image/png" href="DEVI-FISHERIES-LOGO.png" />
   
   <!-- Inter Font -->
@@ -30,6 +30,9 @@
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <!-- Authentic Client 2026 Compiled Stylesheet -->
   <link rel="stylesheet" href="client-2026.css" />
 
@@ -40,101 +43,256 @@
       color: #152238;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
-    /* Client 2026 Dedicated Standalone Header */
-    .c26-standalone-header {
+    /* Client 2026 Dark Oceanic Sidebar */
+    .c26-sidebar {
+      background: #00161A !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      min-height: 100vh;
+      position: sticky;
+      top: 0;
+      transition: width 0.2s ease;
+    }
+
+    .c26-sidebar.collapsed {
+      width: 72px !important;
+    }
+
+    .c26-sidebar.collapsed .c26-hide-on-collapse {
+      display: none !important;
+    }
+
+    .c26-sidebar.collapsed .c26-center-on-collapse {
+      justify-content: center !important;
+    }
+
+    .c26-sb-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #C5D5D8;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+    }
+
+    .c26-sb-link:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #FFFFFF;
+    }
+
+    .c26-sb-link.active {
+      background: #00272E !important;
+      border: 1px solid rgba(79, 207, 224, 0.4) !important;
+      color: #FFFFFF !important;
+      font-weight: 700;
+    }
+
+    .c26-sb-link.active svg {
+      color: #4FCFE0 !important;
+      stroke: #4FCFE0 !important;
+    }
+
+    .c26-sb-sec {
+      display: block;
+      padding: 16px 14px 6px;
+      color: #5E858C;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    /* Standalone Header */
+    .c26-header {
       background: #FFFFFF;
       border-bottom: 1px solid #E2E8F0;
-      padding: 12px 24px;
+      padding: 14px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .c26-app-wrapper {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 20px 24px 60px;
+      z-index: 90;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
   </style>
 </head>
-<body>
+<body class="bg-[#F8FAFC]">
 
-  <!-- ==========================================
-       DEDICATED STANDALONE CLIENT 2026 TOP BAR
-       (100% Isolated - Zero Camaroo Sidebar/Shell)
-       ========================================== -->
-  <header class="c26-standalone-header">
-    <div class="flex items-center gap-3">
-      <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" class="w-9 h-9 rounded-lg object-cover shadow-sm border border-slate-200" />
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-sm text-[#0F172A] tracking-tight">Devi Fisheries Limited</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/30">
-            ⚡ Client 2026 Standalone
-          </span>
-        </div>
-        <div class="text-[11px] text-[#64748B]">Purchase &amp; Operations React Suite · Direct Dedicated App</div>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <div class="hidden sm:flex items-center gap-2 text-right">
-        <div class="flex flex-col">
-          <span class="text-xs font-bold text-[#0F172A]">Y. P. Rao</span>
-          <span class="text-[10px] text-[#64748B]">Procurement Director</span>
-        </div>
-        <div class="w-8 h-8 rounded-full bg-[#006C7A] text-white text-xs font-bold flex items-center justify-center">
-          YP
-        </div>
-      </div>
-
-      <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
-
-      <!-- Navigation Link Back to Main ERP -->
-      <a 
-        href="index.html#/login" 
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition-all"
-        title="Return to Devi Fisheries Main Login"
-      >
-        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        <span>Back to Login</span>
-      </a>
-    </div>
-  </header>
-
-  <!-- ==========================================
-       MAIN CLIENT 2026 OPERATIONS CONTAINER
-       ========================================== -->
-  <main class="c26-app-wrapper">
-    <section class="purchase-operations">
+  <div class="flex min-h-screen">
+    
+    <!-- ==========================================
+         CLIENT 2026 LEFT SIDEBAR
+         ========================================== -->
+    <aside class="c26-sidebar w-64 flex flex-col flex-shrink-0 z-50" id="c26-sidebar">
       
-      <!-- Operations Tabs Navigation Bar (Operations.tsx) -->
-      <nav class="purchase-operations-tabs" aria-label="Purchase Operations" id="c26-main-nav">
-        <button type="button" class="purchase-operations-tab active" data-tab="dashboard">Dashboard</button>
-        <button type="button" class="purchase-operations-tab" data-tab="bookings">Booking</button>
-        <button type="button" class="purchase-operations-tab" data-tab="raw-material-arrivals">Raw Material Arrivals</button>
-        <button type="button" class="purchase-operations-tab" data-tab="arrivals">Arrivals</button>
-        <button type="button" class="purchase-operations-tab" data-tab="lot-tracking">Lot Tracking</button>
-        <button type="button" class="purchase-operations-tab" data-tab="transactions-bills">Transactions &amp; Bills</button>
-        <button type="button" class="purchase-operations-tab" data-tab="payments">Payments</button>
-      </nav>
+      <!-- Brand Header -->
+      <div class="p-4 border-b border-white/10 flex items-center justify-between">
+        <a href="#dashboard" class="flex items-center gap-3 no-underline">
+          <img src="DEVI-FISHERIES-LOGO.png" alt="Devi Fisheries" class="w-9 h-9 rounded-lg object-cover flex-shrink-0 shadow-md border border-white/20" />
+          <div class="c26-hide-on-collapse flex flex-col">
+            <span class="font-bold text-sm text-white leading-tight">Devi Fisheries</span>
+            <span class="text-[10px] font-extrabold text-[#4FCFE0] tracking-wider uppercase mt-0.5">CLIENT 2026 SUITE</span>
+          </div>
+        </a>
 
-      <!-- Active Content View Mount Point -->
-      <div class="purchase-operation-content" id="c26-view-mount"></div>
+        <!-- Collapse Toggle -->
+        <button type="button" id="c26-sidebar-toggle" class="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 flex items-center justify-center transition-all cursor-pointer" title="Toggle Sidebar">
+          <svg class="w-4 h-4 transition-transform" id="c26-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+        </button>
+      </div>
 
-    </section>
-  </main>
+      <!-- Navigation Links -->
+      <div class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+        <span class="c26-sb-sec c26-hide-on-collapse">Purchase Operations</span>
+
+        <button type="button" class="c26-sb-link w-full text-left active" data-tab="dashboard">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Dashboard</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="bookings">
+          <i data-lucide="clipboard-list" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Booking</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="raw-material-arrivals">
+          <i data-lucide="truck" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">RM Arrivals</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="arrivals">
+          <i data-lucide="scale" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Arrivals Register</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="lot-tracking">
+          <i data-lucide="boxes" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Lot Tracking</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="transactions-bills">
+          <i data-lucide="file-text" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Transactions &amp; Bills</span>
+        </button>
+
+        <button type="button" class="c26-sb-link w-full text-left" data-tab="payments">
+          <i data-lucide="credit-card" class="w-4 h-4 text-[#6E969E] flex-shrink-0"></i>
+          <span class="c26-hide-on-collapse">Payments Ledger</span>
+        </button>
+
+        <!-- Environments Section -->
+        <span class="c26-sb-sec c26-hide-on-collapse mt-4">Switch Environments</span>
+
+        <a href="index.html#/home" class="c26-sb-link">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#006C7A] flex-shrink-0"></span>
+          <span class="c26-hide-on-collapse text-xs">Sitemap 01 (Custom ERP)</span>
+        </a>
+
+        <a href="index.html#/home" class="c26-sb-link">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#3B5AF6] flex-shrink-0"></span>
+          <span class="c26-hide-on-collapse text-xs">Sitemap 02 (Superadmin)</span>
+        </a>
+
+        <a href="designsystem.html" class="c26-sb-link">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#8B5CF6] flex-shrink-0"></span>
+          <span class="c26-hide-on-collapse text-xs">CDS (Design System)</span>
+        </a>
+      </div>
+
+      <!-- Footer User Profile -->
+      <div class="p-3 border-t border-white/10 bg-black/20">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#00A6B5] text-[#06212B] font-bold text-xs flex items-center justify-center flex-shrink-0">
+            YP
+          </div>
+          <div class="c26-hide-on-collapse flex flex-col flex-1 min-w-0">
+            <span class="text-xs font-bold text-white truncate">Y. P. Rao</span>
+            <span class="text-[10px] text-slate-400 truncate">Procurement Director</span>
+          </div>
+          <a href="index.html#/login" class="c26-hide-on-collapse text-slate-400 hover:text-white p-1" title="Sign Out">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         RIGHT MAIN CONTENT AREA
+         ========================================== -->
+    <div class="flex-1 flex flex-col min-w-0">
+      
+      <!-- Top Header -->
+      <header class="c26-header">
+        <div class="flex items-center gap-3">
+          <div>
+            <div class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+              <span>Client 2026</span>
+              <span>/</span>
+              <span>Operations</span>
+              <span>/</span>
+              <span class="text-slate-900 font-bold" id="c26-breadcrumb-current">Dashboard</span>
+            </div>
+            <h1 class="text-lg font-bold text-slate-900 mt-0.5" id="c26-header-title">Operations Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/30">
+            <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+            <span>⚡ Client 2026 Active</span>
+          </div>
+
+          <a 
+            href="index.html#/login" 
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition-all"
+            title="Return to Main ERP"
+          >
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span>Return to ERP</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Main Operations Container -->
+      <main class="flex-1 p-6 max-w-7xl w-full mx-auto">
+        <section class="purchase-operations">
+          
+          <!-- Operations Tabs Navigation Bar (Operations.tsx) -->
+          <nav class="purchase-operations-tabs" aria-label="Purchase Operations" id="c26-main-nav">
+            <button type="button" class="purchase-operations-tab active" data-tab="dashboard">Dashboard</button>
+            <button type="button" class="purchase-operations-tab" data-tab="bookings">Booking</button>
+            <button type="button" class="purchase-operations-tab" data-tab="raw-material-arrivals">Raw Material Arrivals</button>
+            <button type="button" class="purchase-operations-tab" data-tab="arrivals">Arrivals</button>
+            <button type="button" class="purchase-operations-tab" data-tab="lot-tracking">Lot Tracking</button>
+            <button type="button" class="purchase-operations-tab" data-tab="transactions-bills">Transactions &amp; Bills</button>
+            <button type="button" class="purchase-operations-tab" data-tab="payments">Payments</button>
+          </nav>
+
+          <!-- Active Content View Mount Point -->
+          <div class="purchase-operation-content" id="c26-view-mount"></div>
+
+        </section>
+      </main>
+
+    </div>
+
+  </div>
 
   <!-- Toast Notification Container -->
   <div id="c26-toast-container" class="fixed bottom-5 right-5 z-[200] space-y-2 pointer-events-none"></div>
 
-  <!-- Client 2026 Standalone Application Logic -->
+  <!-- Client 2026 Logic -->
   <script type="module">
     // Mock Datasets directly from Client 2026 source files
     const INITIAL_BOOKINGS = [
@@ -607,10 +765,34 @@
       bookingFilters: { purchaseType: '', arrivalPlant: '', date: '' }
     };
 
+    const TAB_TITLES = {
+      'dashboard': 'Operations Dashboard',
+      'bookings': 'Bookings Ledger',
+      'raw-material-arrivals': 'Raw Material Arrivals',
+      'arrivals': 'Arrivals Register',
+      'lot-tracking': 'Lot Tracking & Yield',
+      'transactions-bills': 'Transactions & Bills',
+      'payments': 'Supplier Payments'
+    };
+
     // Render Sub Tab
     function renderSubTab() {
       const mount = document.getElementById('c26-view-mount');
       if (!mount) return;
+
+      // Update header titles & breadcrumb
+      const headerTitle = document.getElementById('c26-header-title');
+      const breadcrumb = document.getElementById('c26-breadcrumb-current');
+      if (headerTitle) headerTitle.textContent = TAB_TITLES[AppState.activeTab] || 'Operations';
+      if (breadcrumb) breadcrumb.textContent = TAB_TITLES[AppState.activeTab] || 'Operations';
+
+      // Update active classes on both sidebar and top nav
+      document.querySelectorAll('#c26-main-nav .purchase-operations-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-tab') === AppState.activeTab);
+      });
+      document.querySelectorAll('#c26-sidebar .c26-sb-link[data-tab]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === AppState.activeTab);
+      });
 
       switch (AppState.activeTab) {
         case 'dashboard':
@@ -641,6 +823,10 @@
           initDashboardCharts();
           break;
       }
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
     }
 
     // DASHBOARD VIEW
@@ -667,7 +853,7 @@
       return `
         <div>
           <div class="flex justify-between items-center mb-3">
-            <h1 class="h4 fw-bold mb-0 text-[#0F172A] text-lg font-bold">Raw Material Dashboard</h1>
+            <h2 class="text-base font-bold text-[#0F172A]">Raw Material Intake Metrics</h2>
             <span class="text-xs text-[#64748B]">Live dock weighments & intake telemetry</span>
           </div>
 
@@ -819,7 +1005,7 @@
       return `
         <div>
           <div class="flex justify-between items-center mb-3">
-            <h1 class="h4 fw-bold mb-0 text-[#0F172A] text-lg font-bold">Commercial Dashboard</h1>
+            <h2 class="text-base font-bold text-[#0F172A]">Commercial Analytics</h2>
             <span class="text-xs text-[#64748B]">Procurement billing, batch reconciliation & status</span>
           </div>
 
@@ -1367,7 +1553,7 @@
       return `
         <div class="raw-material-arrivals-page">
           <div class="rma-page-heading flex justify-between items-center mb-3">
-            <h1 class="text-xl font-bold text-[#0F172A]">Raw Material Arrivals</h1>
+            <h2 class="text-xl font-bold text-[#0F172A]">Raw Material Arrivals</h2>
             <span class="text-xs text-slate-500">Plant intake and preliminary weighment verification</span>
           </div>
 
@@ -1423,7 +1609,7 @@
       return `
         <div class="py-2">
           <div class="flex justify-between items-center mb-3">
-            <h1 class="text-xl font-bold text-[#0F172A]">Arrivals Register</h1>
+            <h2 class="text-xl font-bold text-[#0F172A]">Arrivals Register</h2>
             <span class="text-xs text-slate-500">Complete dock weighment bills & crate records</span>
           </div>
 
@@ -1499,7 +1685,7 @@
       return `
         <div class="lot-tracking-page">
           <div class="lot-tracking-page-heading mb-3">
-            <h1 class="text-xl font-bold text-[#0F172A]">Lot Tracking</h1>
+            <h2 class="text-xl font-bold text-[#0F172A]">Lot Tracking</h2>
           </div>
 
           <div class="bg-white rounded-xl border border-[#DBE3ED] shadow-sm overflow-hidden">
@@ -1553,7 +1739,7 @@
       return `
         <div class="py-2">
           <div class="flex justify-between items-center mb-3">
-            <h1 class="text-xl font-bold text-[#0F172A]">Transactions &amp; Bills</h1>
+            <h2 class="text-xl font-bold text-[#0F172A]">Transactions &amp; Bills</h2>
             <span class="text-xs text-slate-500">Accounts payable, supplier invoices & settlement journal</span>
           </div>
 
@@ -1624,7 +1810,7 @@
     function renderPaymentsView() {
       return `
         <div class="purchase-payments-page">
-          <h1 class="purchase-payments-title text-xl font-bold text-[#0F172A] mb-3">Supplier Payments Ledger</h1>
+          <h2 class="purchase-payments-title text-xl font-bold text-[#0F172A] mb-3">Supplier Payments Ledger</h2>
 
           <div class="bg-white rounded-xl border border-[#DBE3ED] shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
@@ -1670,23 +1856,48 @@
       `;
     }
 
-    // Bind Top Tabs
-    function bindMainTabs() {
-      const tabs = document.querySelectorAll('#c26-main-nav .purchase-operations-tab');
-      tabs.forEach(tab => {
+    // Bind Top Tabs & Sidebar Clicks
+    function bindNavigation() {
+      // Top Horizontal Tabs
+      const topTabs = document.querySelectorAll('#c26-main-nav .purchase-operations-tab');
+      topTabs.forEach(tab => {
         tab.onclick = () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
           AppState.activeTab = tab.getAttribute('data-tab');
           renderSubTab();
         };
       });
+
+      // Sidebar Vertical Links
+      const sidebarLinks = document.querySelectorAll('#c26-sidebar .c26-sb-link[data-tab]');
+      sidebarLinks.forEach(link => {
+        link.onclick = () => {
+          AppState.activeTab = link.getAttribute('data-tab');
+          renderSubTab();
+        };
+      });
+
+      // Sidebar Collapse Toggle
+      const toggleBtn = document.getElementById('c26-sidebar-toggle');
+      const sidebar = document.getElementById('c26-sidebar');
+      const toggleIcon = document.getElementById('c26-toggle-icon');
+
+      if (toggleBtn && sidebar) {
+        toggleBtn.onclick = () => {
+          sidebar.classList.toggle('collapsed');
+          if (toggleIcon) {
+            toggleIcon.classList.toggle('rotate-180');
+          }
+        };
+      }
     }
 
     // App Init
     window.addEventListener('DOMContentLoaded', () => {
-      bindMainTabs();
+      bindNavigation();
       renderSubTab();
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
     });
   </script>
 </body>
