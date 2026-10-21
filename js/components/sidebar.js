@@ -7,13 +7,46 @@ export const NAV_HIERARCHY = [
     id: "sales",
     title: "Sales",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-    submenus: [
+        submenus: [
       {
         id: "dashboard",
         title: "DashBoard",
         defaultTab: "overview",
         tabs: [
           { id: "overview", label: "Overview", hash: "#/sales/dashboard/overview" }
+        ]
+      },
+      {
+        id: "product",
+        title: "Product",
+        defaultTab: "product-list",
+        tabs: [
+          { id: "product-list", label: "Product List", hash: "#/sales/product/product-list" },
+          { id: "preparation-list", label: "Preparation List", hash: "#/sales/product/preparation-list" },
+          { id: "species-master", label: "Species Master", hash: "#/sales/product/species-master" },
+          { id: "grades-list", label: "Grades List", hash: "#/sales/product/grades-list" },
+          { id: "packing-style-list", label: "Packing Style List", hash: "#/sales/product/packing-style-list" },
+          { id: "variety-list", label: "Variety List", hash: "#/sales/product/variety-list" }
+        ]
+      },
+      {
+        id: "buyers",
+        title: "Buyers",
+        defaultTab: "buyer-list",
+        tabs: [
+          { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyers/buyer-list" },
+          { id: "consignee-list", label: "Consignee List", hash: "#/sales/buyers/consignee-list" },
+          { id: "notify-party-list", label: "Notify Party List", hash: "#/sales/buyers/notify-party-list" },
+          { id: "applicant-list", label: "Applicant List", hash: "#/sales/buyers/applicant-list" },
+          { id: "brands-list", label: "Brands List", hash: "#/sales/buyers/brands-list" }
+        ]
+      },
+      {
+        id: "sales-ops",
+        title: "Sales",
+        defaultTab: "sales-summary",
+        tabs: [
+          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/sales-ops/sales-summary" }
         ]
       },
       {
@@ -28,8 +61,7 @@ export const NAV_HIERARCHY = [
           { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
           { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
           { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
-          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" },
-          { id: "delayed-shipments", label: "Delayed shipments", hash: "#/sales/orders/delayed-shipments" }
+          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" }
         ]
       },
       {
@@ -55,13 +87,21 @@ export const NAV_HIERARCHY = [
         ]
       },
       {
-        id: "report",
-        title: "Report",
+        id: "reports",
+        title: "Reports",
         defaultTab: "sales-summary",
         tabs: [
-          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/report/sales-summary" },
-          { id: "payment-status", label: "Payment Status", hash: "#/sales/report/payment-status" },
-          { id: "inventory-report", label: "Inventory Report", hash: "#/sales/report/inventory-report" }
+          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/reports/sales-summary" },
+          { id: "payment-status", label: "Payment Status", hash: "#/sales/reports/payment-status" },
+          { id: "inventory-report", label: "Inventory Report", hash: "#/sales/reports/inventory-report" }
+        ]
+      },
+      {
+        id: "product-connum",
+        title: "Product Connum",
+        defaultTab: "connum-list",
+        tabs: [
+          { id: "connum-list", label: "Product Connum List", hash: "#/sales/product-connum/connum-list" }
         ]
       }
     ]

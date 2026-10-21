@@ -1111,157 +1111,407 @@ export const SalesView = {
   },
 
   // ==========================================
-  // 2. ORDERS EXECUTION (FIXES IMAGE 2)
+  // ORDERS SUB-MENU ON-SCREEN TAB BAR
   // ==========================================
+  renderOrdersTabBar(activeTab = 'proforma-list') {
+    const tabs = [
+      { id: 'proforma-list', label: 'Proforma List', hash: '#/sales/orders/proforma-list' },
+      { id: 'custom-invoices', label: 'Custom Invoices', hash: '#/sales/orders/custom-invoices' },
+      { id: 'isf-details', label: 'ISF Details', hash: '#/sales/orders/isf-details' },
+      { id: 'shipping-bill', label: 'Shipping Bill', hash: '#/sales/orders/shipping-bill' },
+      { id: 'commercial-invoice', label: 'Commercial Invoice', hash: '#/sales/orders/commercial-invoice' },
+      { id: 'eta-status', label: 'ETA Status', hash: '#/sales/orders/eta-status' },
+      { id: 'fda-status', label: 'FDA Status', hash: '#/sales/orders/fda-status' },
+      { id: 'clearing-agent', label: 'Clearing Agent', hash: '#/sales/orders/clearing-agent' }
+    ];
+
+    return `
+      <div class="mb-4 select-none">
+        <div class="flex items-center gap-1.5 p-1 bg-[#F1F3F5] rounded-xl border border-[#DFE1E6] overflow-x-auto shadow-2xs">
+          ${tabs.map(t => {
+            const isActive = t.id === activeTab;
+            return `
+              <a 
+                href="${t.hash}"
+                class="px-4 py-2 text-xs font-bold rounded-lg transition-all whitespace-nowrap cursor-pointer select-none ${
+                  isActive 
+                    ? 'bg-white text-[#172B4D] shadow-xs border border-[#DFE1E6]' 
+                    : 'text-[#5E6C84] hover:text-[#172B4D] hover:bg-white/60 border border-transparent'
+                }"
+              >
+                ${t.label}
+              </a>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  // ==========================================
+  // 2. ORDERS EXECUTION: PROFORMA INVOICES LIST
+  // ==========================================
+  proformaDataset: [
+    { sNo: 1, id: '7393', processor: '857', piNumber: 'DFL/PI/1315/26-27', piDate: '21-10-2026', poNo: '111', buyer: 'EASTERN FISH COMPANY LLC', productionPlant: 'USHA', shipByDate: '--', status: 'Pi-Pending', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 189000 },
+    { sNo: 2, id: '7392', processor: '853', piNumber: 'DFL/PI/1314/26-27', piDate: '19-10-2026', poNo: 'test19', buyer: 'EASTERN FISH COMPANY LLC', productionPlant: 'VSP', shipByDate: '--', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 194500 },
+    { sNo: 3, id: '7391', processor: '853', piNumber: 'DFL/PI/1313/26-27', piDate: '14-10-2026', poNo: '111', buyer: 'EASTERN FISH COMPANY LLC', productionPlant: 'VSP', shipByDate: '--', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 191200 },
+    { sNo: 4, id: '7390', processor: '853', piNumber: 'DFL/PI/1312/26-27', piDate: '12-10-2026', poNo: '1234', buyer: 'PACIFIC SEAFOOD GROUP,', productionPlant: 'SATYA,VSP', shipByDate: '13-10-2026', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 3600, totalAmountUsd: 382000 },
+    { sNo: 5, id: '7389', processor: '1888', piNumber: 'DFL/PI/1311/26-27', piDate: '09-10-2026', poNo: 'DF/DF-567test', buyer: 'EASTERN FISH COMPANY LLC', productionPlant: 'JPT', shipByDate: '--', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 188500 },
+    { sNo: 6, id: '7388', processor: '24234236', piNumber: 'DFL/PI/1310/26-27', piDate: '06-10-2026', poNo: '500', buyer: 'ARISTA INDUSTRIES INC', productionPlant: 'JPT', shipByDate: '--', status: 'Pi-Pending', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 178000 },
+    { sNo: 7, id: '7387', processor: '853', piNumber: 'DFL/PI/1309/26-27', piDate: '05-10-2026', poNo: '568', buyer: 'EASTERN FISH COMPANY LLC', productionPlant: 'VSP', shipByDate: '--', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 1800, totalAmountUsd: 193400 },
+    { sNo: 8, id: '7386', processor: '853', piNumber: 'DFL/PI/1308/26-27', piDate: '05-10-2026', poNo: '897', buyer: 'PACIFIC SEAFOOD GROUP,', productionPlant: 'VSP', shipByDate: '--', status: 'Po Received', exporter: 'DEVI FISHERIES LIMITED', country: 'USA', cartons: 3600, totalAmountUsd: 379000 }
+  ],
+
   renderProformaList(container) {
-    const pis = SalesDataStore.getCollection('proformaInvoices');
-
     container.innerHTML = `
-      <div class="space-y-4 animate-fade-in">
-        ${UIBase.renderHeader(
-          'Proforma Invoices (PI Register)',
-          `<button id="btn-create-pi" class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="SalesView.openNewPiModal()">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Create Proforma Invoice</span>
-          </button>`
-        )}
+      <div class="space-y-4 animate-fade-in text-[#172B4D]">
+        <!-- 1. Orders Tab Menu Bar -->
+        ${this.renderOrdersTabBar('proforma-list')}
 
-        ${UIBase.renderFilterCard({
-          idPrefix: 'sales-pi-filter',
-          title: 'Search & Filters',
-          fields: [
-            {
-              label: 'SELECT BUYER',
-              html: `
-                <select id="sales-pi-buyer-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                  <option value="ALL">All Buyers (Select)</option>
-                  <option value="Apex Seafoods USA Inc.">Apex Seafoods USA Inc.</option>
-                  <option value="Maritime Gourmet Corp">Maritime Gourmet Corp</option>
-                  <option value="Shanghai Ocean Wealth Trade Ltd">Shanghai Ocean Wealth Trade Ltd</option>
-                  <option value="Tokyo Central Marine Co">Tokyo Central Marine Co</option>
+        <!-- 2. Page Title Header -->
+        <div class="pb-1">
+          <h1 class="text-sm font-bold text-[#172B4D] uppercase tracking-wider">PROFORMA LIST</h1>
+        </div>
+
+        <!-- 3. Top Filter Card (Standardized with Base Design System) -->
+        <div id="sales-pi-filter-card" class="sales-pi-filter bg-white rounded-lg border border-[#DFE1E6] p-4 shadow-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end mb-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1.5">SELECT EXPORTER :</label>
+              <div class="relative">
+                <select id="sales-pi-exporter-select" class="w-full text-xs px-3 py-2 bg-white border border-[#0284C7] rounded focus:outline-none focus:ring-1 focus:ring-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="DEVI FISHERIES LIMITED" selected>DEVI FISHERIES LIMITED</option>
+                  <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
                 </select>
-              `
-            },
-            {
-              label: 'SELECT PROCESSOR PLANT',
-              html: `
-                <select id="sales-pi-plant-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                  <option value="ALL">All Processor Plants (Select)</option>
-                  <option value="DFL Unit-1 Visakhapatnam">DFL Unit-1 Visakhapatnam</option>
-                  <option value="DFL Unit-2 Kakinada">DFL Unit-2 Kakinada</option>
-                  <option value="DFL Unit-3 Pydibhimavaram">DFL Unit-3 Pydibhimavaram</option>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1.5">SELECT CONSIGNEE :</label>
+              <div class="relative">
+                <select id="sales-pi-consignee-select" class="w-full text-xs px-3 py-2 bg-white border border-[#0284C7] rounded focus:outline-none focus:ring-1 focus:ring-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="ALL" selected>All</option>
+                  <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                  <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                  <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
                 </select>
-              `
-            },
-            {
-              label: 'STATUS',
-              html: `
-                <select id="sales-pi-status-select" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                  <option value="ALL">All Statuses (Select)</option>
-                  <option value="Approved">Approved</option>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1.5">SELECT COUNTRY:</label>
+              <div class="relative">
+                <select id="sales-pi-country-select" class="w-full text-xs px-3 py-2 bg-white border border-[#0284C7] rounded focus:outline-none focus:ring-1 focus:ring-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="ALL" selected>All</option>
+                  <option value="USA">U.S.A.</option>
+                  <option value="CHINA">CHINA</option>
+                  <option value="BELGIUM">BELGIUM</option>
+                  <option value="RUSSIA">RUSSIA</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1.5">STATUS:</label>
+              <div class="relative">
+                <select id="sales-pi-status-select" class="w-full text-xs px-3 py-2 bg-white border border-[#0284C7] rounded focus:outline-none focus:ring-1 focus:ring-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="ALL" selected>All</option>
+                  <option value="Pi-Pending">Pi-Pending</option>
                   <option value="Po Received">Po Received</option>
-                  <option value="Draft">Draft</option>
+                  <option value="Approved">Approved</option>
                 </select>
-              `
-            },
-            {
-              label: 'DATE RANGE',
-              html: `
-                <div class="erp-date-wrapper">
-                  <input type="date" id="sales-pi-date-input" value="2026-10-02" class="erp-date-input w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]" onclick="this.showPicker ? this.showPicker() : this.focus()">
-                </div>
-              `
-            }
-          ]
-        })}
+              </div>
+            </div>
+          </div>
 
-        <div id="sales-pi-table-container"></div>
-        <div id="sales-pi-totals-container" class="mt-4"></div>
+          <!-- Buttons centered matching screenshot -->
+          <div class="flex items-center justify-center gap-2.5 pt-1">
+            <button id="btn-pi-search" class="px-5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.filterProformaList()">
+              <span>Search</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <button id="btn-pi-new" class="px-5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.openNewPiModal()">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>+ New PI</span>
+            </button>
+            <button id="btn-pi-bulk-approval" class="px-5 py-2 bg-[#F59E0B] hover:bg-[#D97706] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.bulkApprovePis()">
+              <span>Bulk Approval</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Table Card -->
+        <div class="bg-white rounded-lg border border-[#DFE1E6] p-4 shadow-xs">
+          <!-- Table Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-[#EBECF0]">
+            <div class="relative flex-1 max-w-md">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+              <input 
+                type="text" 
+                id="sales-pi-search-input" 
+                placeholder="Search by PI, PO, Buyer, Plant..." 
+                class="w-full text-xs pl-9 pr-4 py-2 bg-[#F8FAFC] border border-[#DFE1E6] rounded-md focus:outline-none focus:border-[#0284C7] focus:bg-white text-[#172B4D] transition-colors"
+                oninput="SalesView.searchProformaList(this.value)"
+              />
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button class="px-3 py-1.5 bg-white border border-[#00875A] text-[#00875A] hover:bg-[#E3FCEF] text-xs font-semibold rounded flex items-center gap-1.5 shadow-2xs cursor-pointer transition-colors" onclick="SalesView.toggleMoreSearch()">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <span>More Search</span>
+              </button>
+              <button class="px-3 py-1.5 bg-white border border-[#00875A] text-[#00875A] hover:bg-[#E3FCEF] text-xs font-semibold rounded flex items-center gap-1.5 shadow-2xs cursor-pointer transition-colors" onclick="SalesView.loadAllProformaList()">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>Load All</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Container -->
+          <div id="sales-pi-table-container" class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-[#F8FAFC] border-b border-[#DFE1E6] text-[#5E6C84]">
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">S.No ▲</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">ID</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">Processor</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">PInv Number</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">PInv Date</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">Po No</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">Buyer</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">Production Plant</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider select-none">ShipBy Date</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider text-center select-none">Status</th>
+                  <th class="py-2.5 px-3 font-bold text-[11px] uppercase tracking-wider text-center select-none">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sales-pi-table-body" class="divide-y divide-[#EBECF0]">
+                <!-- Rows injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination & Totals Abstract -->
+          <div id="sales-pi-totals-container" class="mt-4"></div>
+        </div>
       </div>
     `;
 
-    const renderTotals = (list) => {
-      const count = list.length;
-      const totalAmount = list.reduce((sum, x) => sum + (parseFloat(x.totalAmountUsd) || 0), 0);
-      const totalCartons = list.reduce((sum, x) => sum + (parseInt(x.cartons || x.totalCartons) || 1800), 0);
-      const avgValue = count > 0 ? totalAmount / count : 0;
+    this.renderProformaRows(this.proformaDataset);
+    this.renderProformaTotals(this.proformaDataset);
+  },
 
-      const containerEl = document.getElementById('sales-pi-totals-container');
-      if (containerEl) {
-        containerEl.innerHTML = UIBase.renderTotals(
-          'Proforma Invoices Volume & Commercial Abstract',
-          count,
-          count === 1 ? 'PI Record' : 'PI Records',
-          [
-            { label: 'TOTAL INVOICES', value: `${count} Orders`, badge: 'Active PIs', badgeColor: 'text-[#0284C7] bg-[#F0F9FF]' },
-            { label: 'TOTAL EXPORT VALUE', value: `$${Math.round(totalAmount).toLocaleString()}`, badge: 'USD Target', badgeColor: 'text-[#006644] bg-[#E3FCEF]', color: 'text-[#006644]' },
-            { label: 'TOTAL CARTONS ALLOCATED', value: `${totalCartons.toLocaleString()} Ctns`, badge: 'Master Pack', badgeColor: 'text-[#0284C7] bg-[#F0F9FF]' },
-            { label: 'AVERAGE PI SIZE', value: `$${Math.round(avgValue).toLocaleString()}`, badge: 'Mean Order', badgeColor: 'text-[#006644] bg-[#E3FCEF]' }
-          ]
-        );
-      }
-    };
+  renderProformaRows(list) {
+    const tbody = document.getElementById('sales-pi-table-body');
+    if (!tbody) return;
 
-    const tableInstance = new DataTable({
-      containerId: 'sales-pi-table-container',
-      data: pis,
-      keyField: 'id',
-      tableTitle: 'Proforma Invoices Register',
-      searchable: false,
-      hideTopFilterBar: true,
-      showCopy: false,
-      onDataChange: (data) => renderTotals(data),
-      columns: [
-        { field: 'sNo', header: 'S.No', render: (v, row, index) => `<span class="font-bold text-[#5E6C84]">${index !== undefined ? index + 1 : 1}</span>` },
-        { field: 'piNumber', header: 'P.Inv Number', render: (v, r) => `<span class="font-bold text-[#17191c] hover:underline cursor-pointer" onclick="SalesView.viewPiDetails('${r.id}')">${v}</span>` },
-        { field: 'piDate', header: 'Date', render: (v) => `<span class="text-[#172B4D] font-medium">${v}</span>` },
-        { field: 'poNumber', header: 'PO Number', render: (v) => `<span class="font-bold text-[#006C7A] bg-[#E6FCFF] px-2 py-0.5 rounded text-[11px]">${v}</span>` },
-        { field: 'buyer', header: 'Buyer', render: (v) => `<span class="font-bold text-[#172B4D]">${v}</span>` },
-        { field: 'productionPlant', header: 'Processor Plant', render: (v) => `<span class="text-[#5E6C84]">${v}</span>` },
-        { field: 'portOfDischarge', header: 'Port of Discharge', render: (v) => `<span class="text-[#172B4D]">${v}</span>` },
-        { field: 'shipByWindow', header: 'ShipBy Window', render: (v) => `<span class="text-[#5E6C84]">${v}</span>` },
-        { field: 'totalAmountUsd', header: 'Total (USD)', render: (v) => `<span class="font-extrabold text-[#006644]">$${(v || 0).toLocaleString()}</span>` },
-        {
-          field: 'status',
-          header: 'Status',
-          render: (v) => {
-            const type = v === 'Approved' ? 'success' : v === 'Po Received' ? 'info' : 'default';
-            return UIBase.renderBadge(v, type);
-          }
-        },
-        {
-          field: 'actions',
-          header: 'Actions',
-          render: (v, r) => UIBase.renderActionButtons({
-            onView: `SalesView.viewPiDetails('${r.id}')`,
-            onDownload: `SalesView.printPi('${r.id}')`,
-            onDelete: `SalesView.deletePi('${r.id}')`
-          })
-        }
+    if (!list || list.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="11" class="py-8 text-center text-xs text-[#5E6C84]">
+            No Proforma Invoices found matching your search filters.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = list.map((r, idx) => {
+      const isPending = (r.status || '').toLowerCase().includes('pending');
+      const badgeHtml = isPending
+        ? `<span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-white bg-[#1E293B] shadow-2xs">Pi-Pending</span>`
+        : `<span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-white bg-[#006644] shadow-2xs">Po Received</span>`;
+
+      return `
+        <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#EBECF0]">
+          <td class="py-3 px-3 font-bold text-[#5E6C84]">${r.sNo || (idx + 1)}</td>
+          <td class="py-3 px-3 font-semibold text-[#172B4D]">${r.id}</td>
+          <td class="py-3 px-3 text-[#172B4D]">${r.processor}</td>
+          <td class="py-3 px-3 font-bold text-[#172B4D] hover:text-[#0284C7] hover:underline cursor-pointer" onclick="SalesView.viewPiDetails('${r.id}')">${r.piNumber}</td>
+          <td class="py-3 px-3 text-[#172B4D] whitespace-nowrap">${r.piDate}</td>
+          <td class="py-3 px-3 font-semibold text-[#172B4D]">${r.poNo || r.poNumber}</td>
+          <td class="py-3 px-3 font-bold text-[#172B4D]">${r.buyer}</td>
+          <td class="py-3 px-3 text-[#5E6C84] font-medium">${r.productionPlant}</td>
+          <td class="py-3 px-3 text-[#5E6C84] whitespace-nowrap">${r.shipByDate || '--'}</td>
+          <td class="py-3 px-3 text-center whitespace-nowrap">${badgeHtml}</td>
+          <td class="py-3 px-3 text-center whitespace-nowrap">
+            <div class="inline-flex items-center gap-1.5 justify-center">
+              <button class="text-[#2563EB] hover:text-[#1D4ED8] p-1 cursor-pointer transition-colors" title="Edit" onclick="SalesView.editPi('${r.id}')">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              </button>
+              <button class="text-[#2563EB] hover:text-[#1D4ED8] p-1 cursor-pointer transition-colors" title="Print" onclick="SalesView.printPi('${r.id}')">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+              </button>
+              <button class="text-[#2563EB] hover:text-[#1D4ED8] p-1 cursor-pointer transition-colors" title="Copy" onclick="SalesView.copyPi('${r.id}')">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              </button>
+              <button class="text-[#DC2626] hover:text-[#B91C1C] p-1 cursor-pointer transition-colors" title="Delete" onclick="SalesView.deletePi('${r.id}')">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  },
+
+  renderProformaTotals(list) {
+    const containerEl = document.getElementById('sales-pi-totals-container');
+    if (!containerEl) return;
+
+    const count = list.length;
+    const totalAmount = list.reduce((sum, x) => sum + (parseFloat(x.totalAmountUsd) || 190000), 0);
+    const totalCartons = list.reduce((sum, x) => sum + (parseInt(x.cartons) || 1800), 0);
+    const avgValue = count > 0 ? totalAmount / count : 0;
+
+    containerEl.innerHTML = UIBase.renderTotals(
+      'Proforma Invoices Volume & Commercial Abstract',
+      count,
+      count === 1 ? 'PI Record' : 'PI Records',
+      [
+        { label: 'TOTAL INVOICES', value: `${count} Orders`, badge: 'Active PIs', badgeColor: 'text-[#0284C7] bg-[#F0F9FF]' },
+        { label: 'TOTAL EXPORT VALUE', value: `$${Math.round(totalAmount).toLocaleString()}`, badge: 'USD Target', badgeColor: 'text-[#006644] bg-[#E3FCEF]', color: 'text-[#006644]' },
+        { label: 'TOTAL CARTONS ALLOCATED', value: `${totalCartons.toLocaleString()} Ctns`, badge: 'Master Pack', badgeColor: 'text-[#0284C7] bg-[#F0F9FF]' },
+        { label: 'AVERAGE PI SIZE', value: `$${Math.round(avgValue).toLocaleString()}`, badge: 'Mean Order', badgeColor: 'text-[#006644] bg-[#E3FCEF]' }
       ]
+    );
+  },
+
+  searchProformaList(term) {
+    const q = (term || '').toLowerCase().trim();
+    if (!q) {
+      this.renderProformaRows(this.proformaDataset);
+      this.renderProformaTotals(this.proformaDataset);
+      return;
+    }
+
+    const filtered = this.proformaDataset.filter(r => 
+      (r.id || '').toLowerCase().includes(q) ||
+      (r.piNumber || '').toLowerCase().includes(q) ||
+      (r.poNo || '').toLowerCase().includes(q) ||
+      (r.buyer || '').toLowerCase().includes(q) ||
+      (r.productionPlant || '').toLowerCase().includes(q) ||
+      (r.processor || '').toLowerCase().includes(q) ||
+      (r.status || '').toLowerCase().includes(q)
+    );
+
+    this.renderProformaRows(filtered);
+    this.renderProformaTotals(filtered);
+  },
+
+  filterProformaList() {
+    const consignee = document.getElementById('sales-pi-consignee-select')?.value || 'ALL';
+    const country = document.getElementById('sales-pi-country-select')?.value || 'ALL';
+    const status = document.getElementById('sales-pi-status-select')?.value || 'ALL';
+
+    const filtered = this.proformaDataset.filter(r => {
+      const matchConsignee = consignee === 'ALL' || r.buyer === consignee;
+      const matchCountry = country === 'ALL' || r.country === country;
+      const matchStatus = status === 'ALL' || (r.status || '').toLowerCase() === status.toLowerCase();
+      return matchConsignee && matchCountry && matchStatus;
     });
 
-    renderTotals(pis);
+    this.renderProformaRows(filtered);
+    this.renderProformaTotals(filtered);
 
-    UIBase.bindFilter('sales-pi-filter', () => {
-      const bVal = document.getElementById('sales-pi-buyer-select')?.value || 'ALL';
-      const pVal = document.getElementById('sales-pi-plant-select')?.value || 'ALL';
-      const sVal = document.getElementById('sales-pi-status-select')?.value || 'ALL';
-      let filtered = pis;
-      if (bVal !== 'ALL') filtered = filtered.filter(x => x.buyer === bVal);
-      if (pVal !== 'ALL') filtered = filtered.filter(x => x.productionPlant === pVal);
-      if (sVal !== 'ALL') filtered = filtered.filter(x => x.status === sVal);
-      tableInstance.setData(filtered);
-      renderTotals(filtered);
-      Toast.show(`Filtered ${filtered.length} Proforma Invoices`, 'info');
-    }, () => {
-      if (document.getElementById('sales-pi-buyer-select')) document.getElementById('sales-pi-buyer-select').value = 'ALL';
-      if (document.getElementById('sales-pi-plant-select')) document.getElementById('sales-pi-plant-select').value = 'ALL';
-      if (document.getElementById('sales-pi-status-select')) document.getElementById('sales-pi-status-select').value = 'ALL';
-      tableInstance.setData(pis);
-      renderTotals(pis);
-      Toast.show('Filters reset', 'info');
-    });
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Filtered Proforma List: ${filtered.length} records found`, 'info');
+    }
+  },
+
+  loadAllProformaList() {
+    const searchInput = document.getElementById('sales-pi-search-input');
+    if (searchInput) searchInput.value = '';
+    const consigneeSel = document.getElementById('sales-pi-consignee-select');
+    if (consigneeSel) consigneeSel.value = 'ALL';
+    const countrySel = document.getElementById('sales-pi-country-select');
+    if (countrySel) countrySel.value = 'ALL';
+    const statusSel = document.getElementById('sales-pi-status-select');
+    if (statusSel) statusSel.value = 'ALL';
+
+    this.renderProformaRows(this.proformaDataset);
+    this.renderProformaTotals(this.proformaDataset);
+
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show('Loaded all 8 Proforma Invoices', 'info');
+    }
+  },
+
+  toggleMoreSearch() {
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show('Advanced date & processor search filters active', 'info');
+    }
+  },
+
+  bulkApprovePis() {
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show('Initiated Bulk Approval workflow for pending Proforma Invoices', 'info');
+    }
+  },
+
+  viewPiDetails(id) {
+    const item = this.proformaDataset.find(x => x.id === id) || { piNumber: id, buyer: 'EASTERN FISH COMPANY LLC' };
+    if (typeof Modal !== 'undefined' && Modal.open) {
+      Modal.open({
+        title: `Proforma Invoice Details: ${item.piNumber}`,
+        size: 'lg',
+        content: `
+          <div class="space-y-4 text-xs text-[#172B4D]">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#F8FAFC] p-3 rounded-lg border border-[#DFE1E6]">
+              <div><span class="text-[#5E6C84] block font-bold text-[10px] uppercase">PI Number</span><span class="font-extrabold text-[#006C7A] text-sm">${item.piNumber}</span></div>
+              <div><span class="text-[#5E6C84] block font-bold text-[10px] uppercase">PO Number</span><span class="font-bold">${item.poNo || item.poNumber}</span></div>
+              <div><span class="text-[#5E6C84] block font-bold text-[10px] uppercase">PI Date</span><span class="font-medium">${item.piDate}</span></div>
+              <div><span class="text-[#5E6C84] block font-bold text-[10px] uppercase">Status</span><span class="font-bold text-[#006644]">${item.status}</span></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 bg-white rounded border border-[#DFE1E6]">
+                <span class="text-[#5E6C84] block font-bold text-[10px] uppercase mb-1">Buyer Details</span>
+                <p class="font-bold text-[#172B4D]">${item.buyer}</p>
+                <p class="text-[#5E6C84] mt-1">Country: ${item.country || 'USA'}</p>
+                <p class="text-[#5E6C84]">Processor ID: ${item.processor}</p>
+              </div>
+              <div class="p-3 bg-white rounded border border-[#DFE1E6]">
+                <span class="text-[#5E6C84] block font-bold text-[10px] uppercase mb-1">Manufacturing & Logistics</span>
+                <p class="font-semibold text-[#172B4D]">Plant: ${item.productionPlant}</p>
+                <p class="text-[#5E6C84] mt-1">ShipBy Date: ${item.shipByDate || '--'}</p>
+                <p class="text-[#5E6C84]">Cartons: ${(item.cartons || 1800).toLocaleString()} Ctns</p>
+              </div>
+            </div>
+          </div>
+        `
+      });
+    }
+  },
+
+  editPi(id) {
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Opening Editor for PI ID #${id}...`, 'info');
+    }
+  },
+
+  printPi(id) {
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Generating Printable Export Format for PI #${id}...`, 'info');
+    }
+  },
+
+  copyPi(id) {
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Duplicated PI #${id} as new draft`, 'info');
+    }
+  },
+
+  deletePi(id) {
+    if (confirm(`Are you sure you want to delete Proforma Invoice #${id}?`)) {
+      this.proformaDataset = this.proformaDataset.filter(x => x.id !== id);
+      this.renderProformaRows(this.proformaDataset);
+      this.renderProformaTotals(this.proformaDataset);
+      if (typeof Toast !== 'undefined' && Toast.show) {
+        Toast.show(`Proforma Invoice #${id} removed successfully`, 'info');
+      }
+    }
   },
 
   renderCustomInvoices(container) {
@@ -1269,6 +1519,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('custom-invoices')}
         ${UIBase.renderHeader(
           'Custom Invoices (Commercial Dispatch Ledger)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Generating custom invoice manifest', 'info')">
@@ -1336,6 +1587,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('isf-details')}
         ${UIBase.renderHeader(
           'ISF 10+2 Details (Importer Security Filing)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Opening ISF filing form', 'info')">
@@ -1372,6 +1624,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('shipping-bill')}
         ${UIBase.renderHeader(
           'Shipping Bill Register (Indian Customs EDI)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('File new Shipping Bill', 'info')">
@@ -1409,6 +1662,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('commercial-invoice')}
         ${UIBase.renderHeader(
           'Final Commercial Invoices (Bank Negotiation Set)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Opening Commercial Invoice Generator', 'info')">
@@ -1446,6 +1700,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('eta-status')}
         ${UIBase.renderHeader('Vessel Tracking & Live Ocean Transit Telemetry')}
         <div id="sales-eta-table-container"></div>
       </div>
@@ -1476,6 +1731,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('fda-status')}
         ${UIBase.renderHeader('US FDA Prior Notice & Port Regulatory Clearance')}
         <div id="sales-fda-table-container"></div>
       </div>
@@ -1505,6 +1761,7 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
+        ${this.renderOrdersTabBar('clearing-agent')}
         ${UIBase.renderHeader('Clearing & Forwarding (CHA) Agent Directory')}
         <div id="sales-cha-table-container"></div>
       </div>
