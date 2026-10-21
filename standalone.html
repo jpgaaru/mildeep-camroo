@@ -11549,12 +11549,12 @@ const TabBar = {
     const currentTabId = tabId || submenu.defaultTab;
 
     container.innerHTML = `
-      <nav aria-label="${submenu.title} tabs navigation" class="mb-4 select-none">
+      <nav aria-label="${submenu.title} tabs navigation" class="mb-4">
         <div 
           role="tablist" 
           aria-label="${submenu.title} views" 
           id="${containerId}-tablist"
-          class="flex items-center gap-1.5 p-1 bg-[#F1F3F5] rounded-xl border border-[#DFE1E6] overflow-x-auto shadow-2xs"
+          class="flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none overflow-x-auto"
         >
           ${submenu.tabs.map(tab => {
             const isActive = tab.id === currentTabId;
@@ -11566,13 +11566,13 @@ const TabBar = {
                 aria-selected="${isActive ? 'true' : 'false'}"
                 tabindex="${isActive ? '0' : '-1'}"
                 aria-controls="panel-${tab.id}"
-                class="px-4 py-2 text-xs font-bold rounded-lg transition-all whitespace-nowrap cursor-pointer select-none ${
+                class="select-none px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
                   isActive 
-                    ? 'bg-white text-[#172B4D] shadow-xs border border-[#DFE1E6]' 
-                    : 'text-[#5E6C84] hover:text-[#172B4D] hover:bg-white/60 border border-transparent'
+                    ? 'tab-active border-[#00A4B7] text-[#00A4B7] font-bold bg-transparent' 
+                    : 'border-transparent text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'
                 }"
               >
-                <span>${tab.label}</span>
+                <span class="select-none">${tab.label}</span>
               </a>
             `;
           }).join('')}
@@ -19521,16 +19521,16 @@ const SalesView = {
 
     return `
       <div class="mb-4 select-none">
-        <div class="flex items-center gap-1.5 p-1 bg-[#F1F3F5] rounded-xl border border-[#DFE1E6] overflow-x-auto shadow-2xs">
+        <div class="flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none overflow-x-auto">
           ${tabs.map(t => {
             const isActive = t.id === activeTab;
             return `
               <a 
                 href="${t.hash}"
-                class="px-4 py-2 text-xs font-bold rounded-lg transition-all whitespace-nowrap cursor-pointer select-none ${
+                class="select-none px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
                   isActive 
-                    ? 'bg-white text-[#172B4D] shadow-xs border border-[#DFE1E6]' 
-                    : 'text-[#5E6C84] hover:text-[#172B4D] hover:bg-white/60 border border-transparent'
+                    ? 'tab-active border-[#00A4B7] text-[#00A4B7] font-bold bg-transparent' 
+                    : 'border-transparent text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'
                 }"
               >
                 ${t.label}
