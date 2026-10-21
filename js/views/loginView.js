@@ -3,7 +3,7 @@
 
 import { ERP_DATA } from '../data/mockData.js';
 import { Toast } from '../components/toast.js';
-import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02, ENV_CLIENT_2026 } from '../framework/Environment.js';
+import { Environment, ENV_SITEMAP_01, ENV_SITEMAP_02 } from '../framework/Environment.js';
 
 export const LoginView = {
   render(containerId) {
@@ -110,7 +110,7 @@ export const LoginView = {
             </div>
           </div>
 
-          <!-- Distinct Action Buttons: Sitemap 01, Sitemap 02, Client 2026, CDS -->
+          <!-- Distinct Action Buttons: Sitemap 01, Sitemap 02, Miledeep Devi Fisheries, CDS -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <!-- Sitemap 01 Button -->
             <button
@@ -140,18 +140,18 @@ export const LoginView = {
               <span class="text-[9.5px] font-medium text-[#3B5AF6] mt-0.5 leading-tight">Superadmin</span>
             </button>
 
-            <!-- Client 2026 Button -->
+            <!-- Miledeep Devi Fisheries Button -->
             <button
               type="button"
-              id="btn-env-client2026"
-              class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[#10B981]/30 hover:border-[#10B981] bg-[#10B981]/5 hover:bg-[#10B981]/12 transition-all group cursor-pointer text-center"
-              title="Client 2026 Operations & Purchase React Modules"
+              id="btn-env-miledeep"
+              class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[#00A4B7]/30 hover:border-[#00A4B7] bg-[#00A4B7]/5 hover:bg-[#00A4B7]/12 transition-all group cursor-pointer text-center"
+              title="Launch Miledeep (Devi Fisheries) Standalone ERP"
             >
-              <div class="w-7 h-7 rounded-lg bg-[#10B981] text-white flex items-center justify-center mb-1 shadow-sm group-hover:scale-105 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <div class="w-7 h-7 rounded-lg bg-[#00A4B7] text-white flex items-center justify-center mb-1 shadow-sm group-hover:scale-105 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
               </div>
-              <span class="text-xs font-bold text-[#0F172A] leading-tight">Client 2026</span>
-              <span class="text-[9.5px] font-medium text-[#10B981] mt-0.5 leading-tight">Operations</span>
+              <span class="text-xs font-bold text-[#0F172A] leading-tight">Miledeep</span>
+              <span class="text-[9.5px] font-medium text-[#00A4B7] mt-0.5 leading-tight">Devi Fisheries</span>
             </button>
 
             <!-- CDS Button -->
@@ -191,7 +191,7 @@ export const LoginView = {
 
     const btnSitemap01 = document.getElementById('btn-env-sitemap01');
     const btnSitemap02 = document.getElementById('btn-env-sitemap02');
-    const btnClient2026 = document.getElementById('btn-env-client2026');
+    const btnMiledeep = document.getElementById('btn-env-miledeep');
     const btnCDS = document.getElementById('btn-env-cds');
 
     // Toggle password visibility
@@ -213,14 +213,14 @@ export const LoginView = {
       });
     }
 
-    const performLogin = (envTarget, toastMessage, title, targetHash = '#/home') => {
+    const performLogin = (envTarget, toastMessage, title) => {
       Environment.setActiveEnv(envTarget);
       sessionStorage.setItem('dfl_authenticated', 'true');
       const existing = document.getElementById('erp-app-shell');
       if (existing) existing.remove();
 
       Toast.show(toastMessage, 'success', title);
-      window.location.hash = targetHash;
+      window.location.hash = '#/home';
       if (window.App && typeof window.App.route === 'function') {
         window.App.route();
       }
@@ -248,11 +248,11 @@ export const LoginView = {
       });
     }
 
-    // Client 2026 Button Click -> 100% Standalone Dedicated Page (client2026.html)
-    if (btnClient2026) {
-      btnClient2026.addEventListener('click', () => {
-        Toast.show('Opening Client 2026 Operations Application...', 'info', 'Client 2026');
-        window.location.href = 'client2026.html';
+    // Miledeep Devi Fisheries Button Click -> Standalone Dedicated Page
+    if (btnMiledeep) {
+      btnMiledeep.addEventListener('click', () => {
+        Toast.show('Opening Miledeep Devi Fisheries Application...', 'info', 'Devi Fisheries ERP');
+        window.location.href = 'miledeep-devi-fisheries.html';
       });
     }
 

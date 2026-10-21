@@ -10,7 +10,7 @@ import { TabBar } from './components/tabBar.js';
 import { Accessibility } from './components/accessibility.js';
 import { CalendarPicker } from './components/calendarPicker.js';
 import { SelectPicker } from './components/selectPicker.js';
-import { AquaFramework, Router, ERPStore, Molecules, Organisms, Environment } from './framework/index.js';
+import { AquaFramework, Router, ERPStore, Molecules, Organisms } from './framework/index.js';
 
 // Views
 import { LoginView } from './views/loginView.js';
