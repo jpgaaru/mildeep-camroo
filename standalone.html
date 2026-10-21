@@ -10591,39 +10591,32 @@ const NAV_HIERARCHY = [
     submenus: [
       {
         id: "dashboard",
-        title: "Dashboard",
+        title: "DashBoard",
+        defaultTab: "overview",
+        tabs: [
+          { id: "overview", label: "Overview", hash: "#/purchase/dashboard/overview" }
+        ]
+      },
+      {
+        id: "purchase-ops",
+        title: "Purchase",
         defaultTab: "purchase-dashboard",
         tabs: [
-          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/dashboard/purchase-dashboard" },
-          { id: "rm-dashboard", label: "RM Dashboard", hash: "#/purchase/dashboard/rm-dashboard" }
+          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/purchase-ops/purchase-dashboard" },
+          { id: "rm-dashboard", label: "RM DashBoard", hash: "#/purchase/purchase-ops/rm-dashboard" }
         ]
       },
       {
-        id: "operations",
-        title: "Operations",
+        id: "pre-processing",
+        title: "Pre Processing",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Bookings List", hash: "#/purchase/operations/bookings" },
-          { id: "rm-arrivals", label: "RM Arrival", hash: "#/purchase/operations/rm-arrivals" },
-          { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
-          { id: "lot-tracking", label: "LotTrack", hash: "#/purchase/operations/lot-tracking" }
-        ]
-      },
-      {
-        id: "transactions-bills",
-        title: "Transactions & Bills",
-        defaultTab: "bills",
-        tabs: [
-          { id: "bills", label: "Bills", hash: "#/purchase/transactions-bills/bills" }
-        ]
-      },
-      {
-        id: "payments",
-        title: "Payments",
-        defaultTab: "payments",
-        tabs: [
-          { id: "payments", label: "Payments", hash: "#/purchase/payments/payments" },
-          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/payments/payment-summary" }
+          { id: "bookings", label: "Bookings", hash: "#/purchase/pre-processing/bookings" },
+          { id: "rm-arrivals", label: "Rm Arrival", hash: "#/purchase/pre-processing/rm-arrivals" },
+          { id: "arrivals", label: "Arrivals", hash: "#/purchase/pre-processing/arrivals" },
+          { id: "bills", label: "Bills", hash: "#/purchase/pre-processing/bills" },
+          { id: "payments", label: "Payments", hash: "#/purchase/pre-processing/payments" },
+          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/pre-processing/payment-summary" }
         ]
       }
     ]
@@ -14337,19 +14330,25 @@ const PurchaseView = {
   arrivals,
   payments,
 
-  render(containerId, subPage = 'purchase-dashboard', activeHash = '#/purchase/dashboard/purchase-dashboard') {
+  render(containerId, subPage = 'overview', activeHash = '#/purchase/dashboard/overview') {
     reloadPurchaseStore();
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = '<div id="purchase-subpage-content"></div>';
+    container.innerHTML = `
+      <div id="purchase-tab-bar-container"></div>
+      <div id="purchase-subpage-content"></div>
+    `;
+    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
+      TabBar.render('purchase-tab-bar-container', activeHash);
+    }
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Normalize route aliases
     const target = (subPage || '').toLowerCase();
     
     // Smooth transition
-    if (target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
+    if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
       subContainer.innerHTML = Skeleton.renderDashboard();
     } else {
       subContainer.innerHTML = Skeleton.renderTable(6, 6);
@@ -14358,6 +14357,7 @@ const PurchaseView = {
     setTimeout(() => {
       switch (target) {
         // Submenu: Dashboard
+        case 'overview':
         case 'purchase-dashboard':
           this.renderPurchaseDashboard(subContainer);
           break;
@@ -31673,7 +31673,7 @@ const App = {
         HomeView.render(mainContainer);
         break;
       case 'purchase':
-        PurchaseView.render(mainContainer, tabName || 'purchase-dashboard', resolvedHash);
+        PurchaseView.render(mainContainer, tabName || 'overview', resolvedHash);
         break;
       case 'preprocessing':
         PreprocessingView.render(mainContainer, tabName || 'overview', resolvedHash);

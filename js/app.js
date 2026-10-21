@@ -84,7 +84,7 @@ export const App = {
       // Section Navigation: Alt+1 through Alt+8
       if (e.altKey && !e.ctrlKey && !e.metaKey) {
         const keyMap = {
-          '1': '#/purchase/dashboard/rm-dashboard',
+          '1': '#/purchase/dashboard/overview',
           '2': '#/preprocessing/dashboard/floor-overview',
           '3': '#/quality/dashboard/qc-overview',
           '4': '#/production/dashboard/overview',
@@ -187,7 +187,7 @@ export const App = {
         HomeView.render(mainContainer);
         break;
       case 'purchase':
-        PurchaseView.render(mainContainer, tabName || 'purchase-dashboard', resolvedHash);
+        PurchaseView.render(mainContainer, tabName || 'overview', resolvedHash);
         break;
       case 'preprocessing':
         PreprocessingView.render(mainContainer, tabName || 'overview', resolvedHash);
@@ -220,7 +220,7 @@ export const App = {
         NotificationsView.render(mainContainer, tabName || 'all-notifications', resolvedHash);
         break;
       default:
-        PurchaseView.render(mainContainer, 'purchase-dashboard', '#/purchase/dashboard/purchase-dashboard');
+        PurchaseView.render(mainContainer, 'overview', '#/purchase/dashboard/overview');
         break;
     }
 

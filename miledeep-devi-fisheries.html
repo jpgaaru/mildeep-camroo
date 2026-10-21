@@ -6006,40 +6006,32 @@ const ADMIN_NAV_HIERARCHY = [
     submenus: [
       {
         id: "dashboard",
-        title: "Dashboard",
-        defaultTab: "rm-dashboard",
+        title: "DashBoard",
+        defaultTab: "overview",
         tabs: [
-          { id: "rm-dashboard", label: "Raw Material Dashboard", hash: "#/purchase/dashboard/rm-dashboard" },
-          { id: "commercial-dashboard", label: "Commercial Dashboard", hash: "#/purchase/dashboard/commercial-dashboard" }
+          { id: "overview", label: "Overview", hash: "#/purchase/dashboard/overview" }
         ]
       },
       {
-        id: "operations",
-        title: "Operations",
+        id: "purchase-ops",
+        title: "Purchase",
+        defaultTab: "purchase-dashboard",
+        tabs: [
+          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/purchase-ops/purchase-dashboard" },
+          { id: "rm-dashboard", label: "RM DashBoard", hash: "#/purchase/purchase-ops/rm-dashboard" }
+        ]
+      },
+      {
+        id: "pre-processing",
+        title: "Pre Processing",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Booking", hash: "#/purchase/operations/bookings" },
-          { id: "rm-arrivals", label: "Raw Material Arrivals", hash: "#/purchase/operations/rm-arrivals" },
-          { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
-          { id: "lot-tracking", label: "Lot Tracking", hash: "#/purchase/operations/lot-tracking" }
-        ]
-      },
-      {
-        id: "transactions-bills",
-        title: "Transactions & Bills",
-        defaultTab: "supplier-bills",
-        tabs: [
-          { id: "supplier-bills", label: "Supplier Bill Summary", hash: "#/purchase/transactions-bills/supplier-bills" },
-          { id: "commercial-txns", label: "Commercial Transactions", hash: "#/purchase/transactions-bills/commercial-txns" }
-        ]
-      },
-      {
-        id: "payments",
-        title: "Payments",
-        defaultTab: "payment-summary",
-        tabs: [
-          { id: "payment-summary", label: "Payment Summary", hash: "#/purchase/payments/payment-summary" },
-          { id: "bill-date-payment", label: "Bill & Date-Wise Payment", hash: "#/purchase/payments/bill-date-payment" }
+          { id: "bookings", label: "Bookings", hash: "#/purchase/pre-processing/bookings" },
+          { id: "rm-arrivals", label: "Rm Arrival", hash: "#/purchase/pre-processing/rm-arrivals" },
+          { id: "arrivals", label: "Arrivals", hash: "#/purchase/pre-processing/arrivals" },
+          { id: "bills", label: "Bills", hash: "#/purchase/pre-processing/bills" },
+          { id: "payments", label: "Payments", hash: "#/purchase/pre-processing/payments" },
+          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/pre-processing/payment-summary" }
         ]
       }
     ]
@@ -6514,7 +6506,7 @@ const Sidebar = {
   isCollapsed: localStorage.getItem('dfl_sidebar_collapsed') === 'true',
   activeModuleId: 'purchase',
   activeSubmenuId: 'dashboard',
-  activeTabId: 'rm-dashboard',
+  activeTabId: 'overview',
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
@@ -8117,21 +8109,21 @@ const PurchaseView = {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Render On-Screen Tabs Header (omitted for Payments submenu as requested)
-    const isPayments = (activeHash || '').includes('/payments') || subPage === 'payment-summary' || subPage === 'bill-date-payment';
-
+    // Render On-Screen Tabs Header and Content Container
     container.innerHTML = `
-      ${!isPayments ? '<div id="purchase-tab-bar-container"></div>' : ''}
+      <div id="purchase-tab-bar-container"></div>
       <div id="purchase-subpage-content"></div>
     `;
 
-    if (!isPayments) {
+    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
       TabBar.render('purchase-tab-bar-container', activeHash);
     }
     const subContainer = document.getElementById('purchase-subpage-content');
 
+    const target = (subPage || '').toLowerCase();
+
     // Display instant Skeleton Shimmer Placeholder matching the target tab
-    if (subPage === 'rm-dashboard' || subPage === 'commercial-dashboard') {
+    if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
       subContainer.innerHTML = Skeleton.renderDashboard();
     } else {
       subContainer.innerHTML = Skeleton.renderTable(6, 6);
@@ -8139,47 +8131,56 @@ const PurchaseView = {
 
     // Smoothly transition into loaded data
     setTimeout(() => {
-      switch (subPage) {
-        // 1. Sub Menu: Dashboard
-        case 'rm-dashboard':
-          this.renderRMDashboard(subContainer);
-          break;
+      switch (target) {
+        // 1. Sub Menu: DashBoard
+        case 'overview':
         case 'commercial-dashboard':
           this.renderCommercialDashboard(subContainer);
           break;
 
-        // 2. Sub Menu: Operations
+        // 2. Sub Menu: Purchase
+        case 'purchase-dashboard':
+          this.renderCommercialDashboard(subContainer);
+          break;
+        case 'rm-dashboard':
+          this.renderRMDashboard(subContainer);
+          break;
+
+        // 3. Sub Menu: Pre Processing
         case 'bookings':
           this.renderBookings(subContainer);
           break;
         case 'rm-arrivals':
+        case 'rm-arrival':
           this.renderRMArrivals(subContainer);
           break;
         case 'arrivals':
+        case 'arrival':
           this.renderArrivals(subContainer);
           break;
-        case 'lot-tracking':
-          this.renderLotTracking(subContainer);
-          break;
-
-        // 3. Sub Menu: Transactions & Bills
+        case 'bills':
         case 'supplier-bills':
           this.renderSupplierBills(subContainer);
+          break;
+        case 'payments':
+        case 'bill-date-payment':
+          this.renderBillDatePayment(subContainer);
+          break;
+        case 'payment-summary':
+        case 'payments-summary':
+          this.renderPaymentSummary(subContainer);
+          break;
+
+        // Legacy / contextual fallbacks
+        case 'lot-tracking':
+          this.renderLotTracking(subContainer);
           break;
         case 'commercial-txns':
           this.renderCommercialTransactions(subContainer);
           break;
 
-        // 4. Sub Menu: Payments
-        case 'payment-summary':
-          this.renderPaymentSummary(subContainer);
-          break;
-        case 'bill-date-payment':
-          this.renderBillDatePayment(subContainer);
-          break;
-
         default:
-          this.renderRMDashboard(subContainer);
+          this.renderCommercialDashboard(subContainer);
           break;
       }
     }, 140);
@@ -35276,7 +35277,7 @@ const App = {
 
       // Admin Operational Modules
       case 'purchase':
-        PurchaseView.render(mainContainer, tabName || 'rm-dashboard', resolvedHash);
+        PurchaseView.render(mainContainer, tabName || 'overview', resolvedHash);
         break;
       case 'preprocessing':
         PreprocessingView.render(mainContainer, tabName || 'overview', resolvedHash);

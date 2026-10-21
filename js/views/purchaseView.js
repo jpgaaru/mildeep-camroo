@@ -163,19 +163,25 @@ export const PurchaseView = {
   arrivals,
   payments,
 
-  render(containerId, subPage = 'purchase-dashboard', activeHash = '#/purchase/dashboard/purchase-dashboard') {
+  render(containerId, subPage = 'overview', activeHash = '#/purchase/dashboard/overview') {
     reloadPurchaseStore();
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = '<div id="purchase-subpage-content"></div>';
+    container.innerHTML = `
+      <div id="purchase-tab-bar-container"></div>
+      <div id="purchase-subpage-content"></div>
+    `;
+    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
+      TabBar.render('purchase-tab-bar-container', activeHash);
+    }
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Normalize route aliases
     const target = (subPage || '').toLowerCase();
     
     // Smooth transition
-    if (target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
+    if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
       subContainer.innerHTML = Skeleton.renderDashboard();
     } else {
       subContainer.innerHTML = Skeleton.renderTable(6, 6);
@@ -184,6 +190,7 @@ export const PurchaseView = {
     setTimeout(() => {
       switch (target) {
         // Submenu: Dashboard
+        case 'overview':
         case 'purchase-dashboard':
           this.renderPurchaseDashboard(subContainer);
           break;

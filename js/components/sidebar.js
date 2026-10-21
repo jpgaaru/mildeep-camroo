@@ -10,39 +10,32 @@ export const NAV_HIERARCHY = [
     submenus: [
       {
         id: "dashboard",
-        title: "Dashboard",
+        title: "DashBoard",
+        defaultTab: "overview",
+        tabs: [
+          { id: "overview", label: "Overview", hash: "#/purchase/dashboard/overview" }
+        ]
+      },
+      {
+        id: "purchase-ops",
+        title: "Purchase",
         defaultTab: "purchase-dashboard",
         tabs: [
-          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/dashboard/purchase-dashboard" },
-          { id: "rm-dashboard", label: "RM Dashboard", hash: "#/purchase/dashboard/rm-dashboard" }
+          { id: "purchase-dashboard", label: "Purchase Dashboard", hash: "#/purchase/purchase-ops/purchase-dashboard" },
+          { id: "rm-dashboard", label: "RM DashBoard", hash: "#/purchase/purchase-ops/rm-dashboard" }
         ]
       },
       {
-        id: "operations",
-        title: "Operations",
+        id: "pre-processing",
+        title: "Pre Processing",
         defaultTab: "bookings",
         tabs: [
-          { id: "bookings", label: "Bookings List", hash: "#/purchase/operations/bookings" },
-          { id: "rm-arrivals", label: "RM Arrival", hash: "#/purchase/operations/rm-arrivals" },
-          { id: "arrivals", label: "Arrivals", hash: "#/purchase/operations/arrivals" },
-          { id: "lot-tracking", label: "LotTrack", hash: "#/purchase/operations/lot-tracking" }
-        ]
-      },
-      {
-        id: "transactions-bills",
-        title: "Transactions & Bills",
-        defaultTab: "bills",
-        tabs: [
-          { id: "bills", label: "Bills", hash: "#/purchase/transactions-bills/bills" }
-        ]
-      },
-      {
-        id: "payments",
-        title: "Payments",
-        defaultTab: "payments",
-        tabs: [
-          { id: "payments", label: "Payments", hash: "#/purchase/payments/payments" },
-          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/payments/payment-summary" }
+          { id: "bookings", label: "Bookings", hash: "#/purchase/pre-processing/bookings" },
+          { id: "rm-arrivals", label: "Rm Arrival", hash: "#/purchase/pre-processing/rm-arrivals" },
+          { id: "arrivals", label: "Arrivals", hash: "#/purchase/pre-processing/arrivals" },
+          { id: "bills", label: "Bills", hash: "#/purchase/pre-processing/bills" },
+          { id: "payments", label: "Payments", hash: "#/purchase/pre-processing/payments" },
+          { id: "payment-summary", label: "Payments Summary", hash: "#/purchase/pre-processing/payment-summary" }
         ]
       }
     ]

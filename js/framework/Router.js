@@ -14,6 +14,14 @@ export const SECTION_METADATA_REGISTRY = {
       title: 'Purchase Dashboard',
       subtitle: 'Live procurement arrivals, telemetry metrics, and plant processing distribution.'
     },
+    'purchase-ops': {
+      title: 'Purchase',
+      subtitle: 'Procurement dashboard and raw material intake analytics.'
+    },
+    'pre-processing': {
+      title: 'Pre Processing',
+      subtitle: 'Manage bookings, arrivals, bills, and vendor payment vouchers.'
+    },
     operations: {
       title: 'Operations',
       subtitle: 'Manage bookings, dock arrivals, crate weighments, and lot tracking.'
