@@ -42,6 +42,12 @@ export const TabBar = {
       return null;
     }
     const { module, submenu, currentTabId } = ctx;
+
+    if (!submenu.tabs || submenu.tabs.length <= 1 || currentTabId === 'new-pi') {
+      container.innerHTML = '';
+      return null;
+    }
+
     const isPill = options && options.variant === 'pill';
 
     if (isPill) {

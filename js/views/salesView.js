@@ -1169,8 +1169,6 @@ export const SalesView = {
   renderProformaList(container) {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#172B4D]">
-        <!-- 1. Orders Tab Menu Bar -->
-        ${this.renderOrdersTabBar('proforma-list')}
 
         <!-- 2. Page Title Header -->
         <div class="pb-1">
@@ -1523,7 +1521,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('custom-invoices')}
         ${UIBase.renderHeader(
           'Custom Invoices (Commercial Dispatch Ledger)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Generating custom invoice manifest', 'info')">
@@ -1591,7 +1588,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('isf-details')}
         ${UIBase.renderHeader(
           'ISF 10+2 Details (Importer Security Filing)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Opening ISF filing form', 'info')">
@@ -1628,7 +1624,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('shipping-bill')}
         ${UIBase.renderHeader(
           'Shipping Bill Register (Indian Customs EDI)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('File new Shipping Bill', 'info')">
@@ -1666,7 +1661,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('commercial-invoice')}
         ${UIBase.renderHeader(
           'Final Commercial Invoices (Bank Negotiation Set)',
           `<button class="btn-primary px-3 py-1.5 rounded text-xs flex items-center gap-1.5 shadow-xs cursor-pointer" onclick="Toast.show('Opening Commercial Invoice Generator', 'info')">
@@ -1704,7 +1698,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('eta-status')}
         ${UIBase.renderHeader('Vessel Tracking & Live Ocean Transit Telemetry')}
         <div id="sales-eta-table-container"></div>
       </div>
@@ -1735,7 +1728,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('fda-status')}
         ${UIBase.renderHeader('US FDA Prior Notice & Port Regulatory Clearance')}
         <div id="sales-fda-table-container"></div>
       </div>
@@ -1765,7 +1757,6 @@ export const SalesView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in">
-        ${this.renderOrdersTabBar('clearing-agent')}
         ${UIBase.renderHeader('Clearing & Forwarding (CHA) Agent Directory')}
         <div id="sales-cha-table-container"></div>
       </div>
