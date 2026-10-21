@@ -190,7 +190,7 @@ export const App = {
         PurchaseView.render(mainContainer, tabName || 'purchase-dashboard', resolvedHash);
         break;
       case 'preprocessing':
-        PreprocessingView.render(mainContainer, tabName || 'floor-overview', resolvedHash);
+        PreprocessingView.render(mainContainer, tabName || 'overview', resolvedHash);
         break;
       case 'quality':
         QCView.render(mainContainer, tabName || 'qc-overview', resolvedHash);

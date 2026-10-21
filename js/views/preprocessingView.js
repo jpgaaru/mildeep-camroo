@@ -17,11 +17,18 @@ export const PreprocessingView = {
 
     this.updateHeaderAction(subPage);
 
-    container.innerHTML = `<div id="preproc-subpage-content" class="w-full"></div>`;
+    container.innerHTML = `
+      <div id="preprocessing-tab-bar-container"></div>
+      <div id="preproc-subpage-content" class="w-full"></div>
+    `;
+    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
+      TabBar.render('preprocessing-tab-bar-container', activeHash);
+    }
     const subContainer = document.getElementById('preproc-subpage-content');
 
     switch (subPage) {
       // 1. Dashboard
+      case 'overview':
       case 'floor-overview':
         this.renderFloorOverview(subContainer);
         break;

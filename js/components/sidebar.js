@@ -49,56 +49,56 @@ export const NAV_HIERARCHY = [
   },
   {
     id: "preprocessing",
-    title: "Pre-Processing",
+    title: "Pre Processing",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>`,
     submenus: [
       {
         id: "dashboard",
         title: "Dashboard",
-        defaultTab: "floor-overview",
+        defaultTab: "overview",
         tabs: [
-          { id: "floor-overview", label: "Floor Overview", hash: "#/preprocessing/dashboard/floor-overview" }
+          { id: "overview", label: "Overview", hash: "#/preprocessing/dashboard/overview" }
         ]
       },
       {
-        id: "floor-operations",
-        title: "Floor Operations",
-        defaultTab: "rm-received",
+        id: "pre-processing",
+        title: "Pre Processing",
+        defaultTab: "deheading",
         tabs: [
-          { id: "rm-received", label: "RM Received Trackid", hash: "#/preprocessing/floor-operations/rm-received" },
-          { id: "deheading", label: "Deheading", hash: "#/preprocessing/floor-operations/deheading" },
-          { id: "grading", label: "Grading", hash: "#/preprocessing/floor-operations/grading" },
-          { id: "deheading-trackid", label: "De-Heading Trackid", hash: "#/preprocessing/floor-operations/deheading-trackid" },
-          { id: "grading-trackid", label: "Grading Trackid", hash: "#/preprocessing/floor-operations/grading-trackid" },
-          { id: "value-addition", label: "Value Addition Trackid", hash: "#/preprocessing/floor-operations/value-addition" },
-          { id: "hon-qty-transfer", label: "Hon Qty Transfer", hash: "#/preprocessing/floor-operations/hon-qty-transfer" }
+          { id: "deheading", label: "Deheading", hash: "#/preprocessing/pre-processing/deheading" },
+          { id: "grading", label: "Grading", hash: "#/preprocessing/pre-processing/grading" },
+          { id: "rm-received", label: "Rm Received trackid", hash: "#/preprocessing/pre-processing/rm-received" },
+          { id: "deheading-trackid", label: "De-Heading trackid", hash: "#/preprocessing/pre-processing/deheading-trackid" },
+          { id: "grading-trackid", label: "Grading trackid", hash: "#/preprocessing/pre-processing/grading-trackid" },
+          { id: "value-addition", label: "Value Addition trackid", hash: "#/preprocessing/pre-processing/value-addition" },
+          { id: "hon-qty-transfer", label: "Hon Qty Transfer After VA", hash: "#/preprocessing/pre-processing/hon-qty-transfer" }
         ]
       },
       {
-        id: "chemical-inventory",
-        title: "Chemical Inventory & Usage",
-        defaultTab: "chemical-pos",
-        tabs: [
-          { id: "chemical-pos", label: "Chemical Pos", hash: "#/preprocessing/chemical-inventory/chemical-pos" },
-          { id: "received-chemicals", label: "Received Chemicals", hash: "#/preprocessing/chemical-inventory/received-chemicals" },
-          { id: "chemicals-consumption", label: "Consumption", hash: "#/preprocessing/chemical-inventory/chemicals-consumption" },
-          { id: "chemical-received-report", label: "Received Report", hash: "#/preprocessing/chemical-inventory/chemical-received-report" },
-          { id: "chemical-opening-balance", label: "Opening Balance", hash: "#/preprocessing/chemical-inventory/chemical-opening-balance" },
-          { id: "chemical-balance-report", label: "Balance Report", hash: "#/preprocessing/chemical-inventory/chemical-balance-report" },
-          { id: "chemical-payments-list", label: "Payments List", hash: "#/preprocessing/chemical-inventory/chemical-payments-list" }
-        ]
-      },
-      {
-        id: "traceability",
-        title: "Traceability",
+        id: "production-reports",
+        title: "Production Reports",
         defaultTab: "track-code-report",
         tabs: [
-          { id: "track-code-report", label: "Track Code Report", hash: "#/preprocessing/traceability/track-code-report" },
-          { id: "va-floor-balance", label: "VA Floor Balance", hash: "#/preprocessing/traceability/va-floor-balance" },
-          { id: "va-transfer", label: "VA Transfer Report", hash: "#/preprocessing/traceability/va-transfer" },
-          { id: "assumed-reports", label: "Assumed Reports", hash: "#/preprocessing/traceability/assumed-reports" },
-          { id: "consolidation-daily", label: "Consolidation Report", hash: "#/preprocessing/traceability/consolidation-daily" },
-          { id: "file-upload", label: "File Upload", hash: "#/preprocessing/traceability/file-upload" }
+          { id: "track-code-report", label: "Track Code Report", hash: "#/preprocessing/production-reports/track-code-report" },
+          { id: "va-floor-balance", label: "VA Floor Balance", hash: "#/preprocessing/production-reports/va-floor-balance" },
+          { id: "va-transfer", label: "VA Transfer Report", hash: "#/preprocessing/production-reports/va-transfer" },
+          { id: "assumed-reports", label: "Assumed Reports", hash: "#/preprocessing/production-reports/assumed-reports" },
+          { id: "consolidation-daily", label: "Consolidation Report", hash: "#/preprocessing/production-reports/consolidation-daily" },
+          { id: "file-upload", label: "File Upload", hash: "#/preprocessing/production-reports/file-upload" }
+        ]
+      },
+      {
+        id: "chemical-screens",
+        title: "Chemical Screens",
+        defaultTab: "chemical-pos",
+        tabs: [
+          { id: "chemical-pos", label: "Chemical Pos", hash: "#/preprocessing/chemical-screens/chemical-pos" },
+          { id: "received-chemicals", label: "Received Chemicals", hash: "#/preprocessing/chemical-screens/received-chemicals" },
+          { id: "chemicals-consumption", label: "Chemicals Consumption", hash: "#/preprocessing/chemical-screens/chemicals-consumption" },
+          { id: "chemical-received-report", label: "Chemical Received Report", hash: "#/preprocessing/chemical-screens/chemical-received-report" },
+          { id: "chemical-opening-balance", label: "Chemical Opening Balance Report", hash: "#/preprocessing/chemical-screens/chemical-opening-balance" },
+          { id: "chemical-balance-report", label: "Chemical Balance Report", hash: "#/preprocessing/chemical-screens/chemical-balance-report" },
+          { id: "chemical-payments-list", label: "Chemical Payments List", hash: "#/preprocessing/chemical-screens/chemical-payments-list" }
         ]
       }
     ]
