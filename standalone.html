@@ -12314,10 +12314,7 @@ const Header = {
         const existing = document.getElementById('erp-app-shell');
         if (existing) existing.remove();
         Toast.show('You have been signed out safely.', 'info');
-        window.location.hash = '#/login';
-        if (window.App && typeof window.App.route === 'function') {
-          window.App.route();
-        }
+        window.location.href = 'index.html#/login';
       };
     }
 

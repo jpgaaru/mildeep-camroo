@@ -6052,6 +6052,17 @@ const Header = {
                 </button>
               </div>
 
+              <!-- Switch to All Environments (4 Portals Screen) -->
+              <div class="p-1 border-b border-[#EBECF0]">
+                <a href="index.html#/login" class="w-full text-left px-3 py-2 hover:bg-[#F8FAFC] text-[#334155] rounded-lg font-medium flex items-center justify-between transition-colors cursor-pointer" title="Switch environment (Sitemap 01, Sitemap 02, Miledeep, CDS)">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    <span>All Environments</span>
+                  </div>
+                  <span class="text-[9.5px] font-bold text-[#00A4B7] bg-[#00A4B7]/10 px-1.5 py-0.5 rounded">4 Portals</span>
+                </a>
+              </div>
+
               <div class="p-1">
                 <button id="logout-menu-btn" class="w-full text-left px-3 py-2 hover:bg-[#FFEBE6] text-[#BF2600] rounded-lg font-medium flex items-center gap-2 transition-colors cursor-pointer">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -6214,13 +6225,16 @@ const Header = {
       });
     }
 
-    // Logout
+    // Logout -> Return to original login screen that has all 4 buttons
     const logoutBtn = document.getElementById('logout-menu-btn');
     if (logoutBtn) {
       logoutBtn.onclick = () => {
+        try {
+          sessionStorage.removeItem('dfl_authenticated');
+        } catch (_) {}
         const existing = document.getElementById('erp-app-shell');
         if (existing) existing.remove();
-        window.location.hash = '#/login';
+        window.location.href = 'index.html#/login';
       };
     }
 
@@ -6688,6 +6702,17 @@ const LoginView = {
                     <span id="login-btn-text">Sign In</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                   </button>
+                </div>
+
+                <div class="pt-1.5">
+                  <a 
+                    href="index.html#/login" 
+                    class="w-full py-2.5 rounded-full font-semibold text-xs flex items-center justify-center gap-2 border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] transition-all cursor-pointer"
+                    title="Return to original login page with all 4 environment buttons"
+                  >
+                    <svg class="w-4 h-4 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span>All Environments (4 Portals)</span>
+                  </a>
                 </div>
               </form>
             </div>
@@ -26401,10 +26426,12 @@ const App = {
 
   route() {
     const rawHash = window.location.hash || '';
-    // If explicitly on login page
+    // If explicitly on login page -> redirect to original main login screen with all 4 buttons
     if (rawHash === '#/login' || rawHash === '#/signin' || rawHash === '#login') {
-      document.getElementById('app-root').innerHTML = `<div id="login-view-container"></div>`;
-      LoginView.render('login-view-container');
+      try {
+        sessionStorage.removeItem('dfl_authenticated');
+      } catch (_) {}
+      window.location.href = 'index.html#/login';
       return;
     }
 
