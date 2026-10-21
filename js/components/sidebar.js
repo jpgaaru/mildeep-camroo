@@ -4,6 +4,69 @@ import { Environment } from '../framework/Environment.js';
 
 export const NAV_HIERARCHY = [
   {
+    id: "sales",
+    title: "Sales",
+    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+    submenus: [
+      {
+        id: "dashboard",
+        title: "DashBoard",
+        defaultTab: "overview",
+        tabs: [
+          { id: "overview", label: "Overview", hash: "#/sales/dashboard/overview" }
+        ]
+      },
+      {
+        id: "orders",
+        title: "Orders",
+        defaultTab: "proforma-list",
+        tabs: [
+          { id: "proforma-list", label: "Proforma List", hash: "#/sales/orders/proforma-list" },
+          { id: "custom-invoices", label: "Custom Invoices", hash: "#/sales/orders/custom-invoices" },
+          { id: "isf-details", label: "ISF Details", hash: "#/sales/orders/isf-details" },
+          { id: "shipping-bill", label: "Shipping Bill", hash: "#/sales/orders/shipping-bill" },
+          { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
+          { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
+          { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
+          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" },
+          { id: "delayed-shipments", label: "Delayed shipments", hash: "#/sales/orders/delayed-shipments" }
+        ]
+      },
+      {
+        id: "payments",
+        title: "Payments",
+        defaultTab: "forward-contracts",
+        tabs: [
+          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments/forward-contracts" },
+          { id: "collections", label: "Collections", hash: "#/sales/payments/collections" },
+          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments/negotiations" },
+          { id: "realization", label: "Realization", hash: "#/sales/payments/realization" },
+          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments/realization-done" }
+        ]
+      },
+      {
+        id: "insurance",
+        title: "Insurance",
+        defaultTab: "pending-insurance",
+        tabs: [
+          { id: "pending-insurance", label: "Pending Insurance", hash: "#/sales/insurance/pending-insurance" },
+          { id: "insurance-templates", label: "Insurance Templates", hash: "#/sales/insurance/insurance-templates" },
+          { id: "insurance-payments", label: "Insurance Payments", hash: "#/sales/insurance/insurance-payments" }
+        ]
+      },
+      {
+        id: "report",
+        title: "Report",
+        defaultTab: "sales-summary",
+        tabs: [
+          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/report/sales-summary" },
+          { id: "payment-status", label: "Payment Status", hash: "#/sales/report/payment-status" },
+          { id: "inventory-report", label: "Inventory Report", hash: "#/sales/report/inventory-report" }
+        ]
+      }
+    ]
+  },
+  {
     id: "purchase",
     title: "Purchase",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
@@ -321,69 +384,6 @@ export const NAV_HIERARCHY = [
     ]
   },
   {
-    id: "sales",
-    title: "Sales",
-    icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-    submenus: [
-      {
-        id: "dashboard",
-        title: "DashBoard",
-        defaultTab: "overview",
-        tabs: [
-          { id: "overview", label: "Overview", hash: "#/sales/dashboard/overview" }
-        ]
-      },
-      {
-        id: "orders",
-        title: "Orders",
-        defaultTab: "proforma-list",
-        tabs: [
-          { id: "proforma-list", label: "Proforma List", hash: "#/sales/orders/proforma-list" },
-          { id: "custom-invoices", label: "Custom Invoices", hash: "#/sales/orders/custom-invoices" },
-          { id: "isf-details", label: "ISF Details", hash: "#/sales/orders/isf-details" },
-          { id: "shipping-bill", label: "Shipping Bill", hash: "#/sales/orders/shipping-bill" },
-          { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
-          { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
-          { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
-          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" },
-          { id: "delayed-shipments", label: "Delayed shipments", hash: "#/sales/orders/delayed-shipments" }
-        ]
-      },
-      {
-        id: "payments",
-        title: "Payments",
-        defaultTab: "forward-contracts",
-        tabs: [
-          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments/forward-contracts" },
-          { id: "collections", label: "Collections", hash: "#/sales/payments/collections" },
-          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments/negotiations" },
-          { id: "realization", label: "Realization", hash: "#/sales/payments/realization" },
-          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments/realization-done" }
-        ]
-      },
-      {
-        id: "insurance",
-        title: "Insurance",
-        defaultTab: "pending-insurance",
-        tabs: [
-          { id: "pending-insurance", label: "Pending Insurance", hash: "#/sales/insurance/pending-insurance" },
-          { id: "insurance-templates", label: "Insurance Templates", hash: "#/sales/insurance/insurance-templates" },
-          { id: "insurance-payments", label: "Insurance Payments", hash: "#/sales/insurance/insurance-payments" }
-        ]
-      },
-      {
-        id: "report",
-        title: "Report",
-        defaultTab: "sales-summary",
-        tabs: [
-          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/report/sales-summary" },
-          { id: "payment-status", label: "Payment Status", hash: "#/sales/report/payment-status" },
-          { id: "inventory-report", label: "Inventory Report", hash: "#/sales/report/inventory-report" }
-        ]
-      }
-    ]
-  },
-  {
     id: "reports",
     title: "Reports",
     icon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`,
@@ -505,9 +505,9 @@ export const MODULE_LUCIDE_ICONS = {
 
 export const Sidebar = {
   isCollapsed: localStorage.getItem('dfl_sidebar_collapsed') === 'true',
-  activeModuleId: 'purchase',
+  activeModuleId: 'sales',
   activeSubmenuId: 'dashboard',
-  activeTabId: 'rm-dashboard',
+  activeTabId: 'overview',
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
