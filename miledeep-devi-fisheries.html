@@ -16061,6 +16061,9 @@ const PurchaseView = {
 // =========================================================================
 // PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
 // =========================================================================
+// =========================================================================
+// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
+// =========================================================================
 const PreprocessingView = {
   // Baseline Preprocessing Store Data
   chemicalPosList: [
@@ -17466,6 +17469,7 @@ const PreprocessingView = {
 
 
 
+
 // Global hook for inline handlers
 if (typeof window !== 'undefined') {
   window.PreprocessingView = PreprocessingView;
@@ -17632,6 +17636,9 @@ const InventoryView = {
 // =========================================================================
 // SALES & EXPORTS MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
 // =========================================================================
+// =========================================================================
+// SALES & EXPORTS MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
+// =========================================================================
 const SalesView = {
   activeTab: 'overview',
   activeHash: '#/sales/dashboard/overview',
@@ -17705,6 +17712,10 @@ const SalesView = {
       // 4. Orders Execution
       case 'proforma-list':
         this.renderProformaList(subContainer);
+        break;
+      case 'new-pi':
+      case 'create-pi':
+        this.renderNewPi(subContainer);
         break;
       case 'custom-invoices':
         this.renderCustomInvoices(subContainer);
@@ -18718,7 +18729,7 @@ const SalesView = {
               <span>Search</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </button>
-            <button id="btn-pi-new" class="px-5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.openNewPiModal()">
+            <button id="btn-pi-new" class="px-5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.openNewPi()">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>+ New PI</span>
             </button>
@@ -19522,6 +19533,581 @@ const SalesView = {
     }
   },
 
+  // ==========================================
+  // INTERNAL SCREEN: NEW PROFORMA INVOICE (IMAGE 1)
+  // ==========================================
+  openNewPi() {
+    window.location.hash = '#/sales/orders/new-pi';
+  },
+
+  renderNewPi(container) {
+    container.innerHTML = `
+      <div class="space-y-4 animate-fade-in text-[#172B4D]">
+        <!-- Breadcrumbs Navigation matching Image 1 -->
+        <div class="flex items-center gap-2 text-xs text-[#5E6C84] mb-1 select-none">
+          <span class="text-[#5E6C84]">Orders</span>
+          <span class="text-[#94A3B8]">&gt;</span>
+          <a href="#/sales/orders/proforma-list" class="text-[#0284C7] hover:underline font-medium">Proforma List</a>
+          <span class="text-[#94A3B8]">&gt;</span>
+          <span class="text-[#0284C7] font-semibold">New Proforma Invoice</span>
+        </div>
+
+        <!-- Section Title Header -->
+        <div class="pb-1 mb-2">
+          <h1 class="text-sm font-bold text-[#172B4D] uppercase tracking-wider">NEW PROFORMA INVOICE</h1>
+        </div>
+
+        <!-- Form Card Container -->
+        <div class="bg-white rounded-lg border border-[#DFE1E6] p-6 shadow-xs">
+          <form id="form-new-proforma" onsubmit="event.preventDefault(); SalesView.submitNewPi();">
+            <div class="space-y-4">
+              <!-- ROW 1 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SELECT EXPORTER<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-exporter" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Exporter</option>
+                    <option value="DEVI FISHERIES LIMITED">DEVI FISHERIES LIMITED</option>
+                    <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SELECT PROCESSOR<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-processor" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Processor</option>
+                    <option value="857">857 - USHA Processing Unit</option>
+                    <option value="853">853 - VSP Processing Unit</option>
+                    <option value="1888">1888 - JPT Processing Unit</option>
+                    <option value="24234236">24234236 - SATYA Processing Unit</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    NO OF CONTAINERS
+                  </label>
+                  <div class="flex items-center border border-[#CBD5E1] rounded bg-white overflow-hidden">
+                    <button type="button" class="px-3 py-1.5 text-sm font-bold text-[#5E6C84] hover:bg-[#F4F5F7] cursor-pointer" onclick="SalesView.adjustContainerCount(-1)">-</button>
+                    <input type="number" id="new-pi-containers" value="1" min="1" max="99" class="w-full text-center text-xs font-bold py-1.5 bg-transparent focus:outline-none text-[#172B4D]">
+                    <button type="button" class="px-3 py-1.5 text-sm font-bold text-[#5E6C84] hover:bg-[#F4F5F7] cursor-pointer" onclick="SalesView.adjustContainerCount(1)">+</button>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    REFERENCE NUMBER
+                  </label>
+                  <input type="text" id="new-pi-ref-no" placeholder="Enter Reference Number" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+              </div>
+
+              <!-- ROW 2 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PROFORMA INVOICE NO<span class="text-red-500">*</span>
+                  </label>
+                  <input type="text" id="new-pi-number" value="DFL/PI/1316/26-27" required placeholder="Enter Proforma Invoice No" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D] font-semibold">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PROFORMA INVOICE DATE<span class="text-red-500">*</span>
+                  </label>
+                  <input type="text" id="new-pi-date" value="21/10/2026" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    P.O NO
+                  </label>
+                  <input type="text" id="new-pi-po-no" placeholder="Enter P.O Number" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    P.O DATE
+                  </label>
+                  <input type="text" id="new-pi-po-date" placeholder="dd/mm/yyyy" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+              </div>
+
+              <!-- ROW 3 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    CONSIGNEE<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-consignee" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Consignee</option>
+                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                    <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    ULTIMATE CONSIGNEE
+                  </label>
+                  <select id="new-pi-ultimate-consignee" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" selected>Select</option>
+                    <option value="SAME AS CONSIGNEE">SAME AS CONSIGNEE</option>
+                    <option value="EASTERN COLD STORAGE LOGISTICS">EASTERN COLD STORAGE LOGISTICS</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    BUYER NAME
+                  </label>
+                  <select id="new-pi-buyer" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Buyer</option>
+                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                    <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    NOTIFY PARTY
+                  </label>
+                  <select id="new-pi-notify" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" selected>Select</option>
+                    <option value="SAME AS CONSIGNEE">SAME AS CONSIGNEE</option>
+                    <option value="APEX LOGISTICS USA INC">APEX LOGISTICS USA INC</option>
+                    <option value="C.H. ROBINSON WORLDWIDE">C.H. ROBINSON WORLDWIDE</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 4 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    IMPORTER OF RECORD<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-ior" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select</option>
+                    <option value="EASTERN FISH COMPANY LLC (IRS 22-984712)">EASTERN FISH COMPANY LLC (IRS 22-984712)</option>
+                    <option value="PACIFIC SEAFOOD GROUP (IRS 93-029481)">PACIFIC SEAFOOD GROUP (IRS 93-029481)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    AGENT
+                  </label>
+                  <select id="new-pi-agent" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" selected>Select</option>
+                    <option value="COASTAL MARINE AGENCY">COASTAL MARINE AGENCY</option>
+                    <option value="DIRECT SOURCE AGENTS">DIRECT SOURCE AGENTS</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    CERTIFICATION
+                  </label>
+                  <select id="new-pi-cert" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" selected>Select</option>
+                    <option value="BAP 4-STAR">BAP 4-STAR</option>
+                    <option value="ASC CERTIFIED">ASC CERTIFIED</option>
+                    <option value="BRCGS GRADE AA">BRCGS GRADE AA</option>
+                    <option value="HACCP COMPLIANT">HACCP COMPLIANT</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PORT OF LOADING<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-pol" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select</option>
+                    <option value="VISAKHAPATNAM (INVTZ1)">VISAKHAPATNAM (INVTZ1)</option>
+                    <option value="CHENNAI (INMAA1)">CHENNAI (INMAA1)</option>
+                    <option value="KRISHNAPATNAM (INKRI1)">KRISHNAPATNAM (INKRI1)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 5 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    DESTINATION COUNTRY<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-dest-country" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Country</option>
+                    <option value="USA">U.S.A.</option>
+                    <option value="CHINA">CHINA</option>
+                    <option value="BELGIUM">BELGIUM</option>
+                    <option value="RUSSIA">RUSSIA</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PORT OF DISCHARGE<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-pod" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Port</option>
+                    <option value="SAVANNAH">SAVANNAH</option>
+                    <option value="LOS ANGELES">LOS ANGELES</option>
+                    <option value="NEW YORK">NEW YORK</option>
+                    <option value="BALTIMORE">BALTIMORE</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    FINAL DESTINATION COUNTRY
+                  </label>
+                  <select id="new-pi-final-dest-country" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" selected>Select Country</option>
+                    <option value="USA">U.S.A.</option>
+                    <option value="CHINA">CHINA</option>
+                    <option value="BELGIUM">BELGIUM</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    FINAL DESTINATION<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-final-dest" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Final Destination</option>
+                    <option value="SAVANNAH, GA">SAVANNAH, GA</option>
+                    <option value="LOS ANGELES, CA">LOS ANGELES, CA</option>
+                    <option value="NEW YORK, NY">NEW YORK, NY</option>
+                    <option value="BALTIMORE, MD">BALTIMORE, MD</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 6 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SHIPBY DATE
+                  </label>
+                  <input type="text" id="new-pi-shipby" placeholder="dd/mm/yyyy" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SHIPBY DATE 2 (TEXT)
+                  </label>
+                  <input type="text" id="new-pi-shipby-text" placeholder="Enter ShipBy Date Text" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    BANK DETAILS<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-bank" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Bank</option>
+                    <option value="STATE BANK OF INDIA - OVERSEAS BRANCH">STATE BANK OF INDIA - OVERSEAS BRANCH</option>
+                    <option value="HDFC BANK LTD - FX TREASURY">HDFC BANK LTD - FX TREASURY</option>
+                    <option value="ICICI BANK - TRADE FINANCE">ICICI BANK - TRADE FINANCE</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SHOW BANK<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-show-bank" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="No" selected>No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 7 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PAYMENT TERMS<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-payment-terms" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Payment</option>
+                    <option value="LC AT SIGHT 60 DAYS">LC AT SIGHT 60 DAYS</option>
+                    <option value="TT 30 DAYS FROM BL">TT 30 DAYS FROM BL</option>
+                    <option value="100% ADVANCE TT">100% ADVANCE TT</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    SHIPMENT TERMS<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-shipment-terms" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Shipment Terms</option>
+                    <option value="CIF (COST INSURANCE FREIGHT)">CIF (COST INSURANCE FREIGHT)</option>
+                    <option value="FOB (FREE ON BOARD)">FOB (FREE ON BOARD)</option>
+                    <option value="C&F (COST & FREIGHT)">C&F (COST & FREIGHT)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    DELIVERY TERMS<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-delivery-terms" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select</option>
+                    <option value="PORT TO PORT">PORT TO PORT</option>
+                    <option value="DOOR TO DOOR">DOOR TO DOOR</option>
+                    <option value="CY TO CY">CY TO CY</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    QUANTITY UNITS<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-qty-units" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Quantity Units</option>
+                    <option value="LBS (POUNDS)">LBS (POUNDS)</option>
+                    <option value="KGS (KILOGRAMS)">KGS (KILOGRAMS)</option>
+                    <option value="MTONS (METRIC TONS)">MTONS (METRIC TONS)</option>
+                    <option value="CARTONS">CARTONS</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- ROW 8 (4 cols) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    CURRENCY<span class="text-red-500">*</span>
+                  </label>
+                  <select id="new-pi-currency" required class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                    <option value="" disabled selected>Select Currency</option>
+                    <option value="USD" selected>USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="JPY">JPY (¥)</option>
+                    <option value="INR">INR (₹)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    FREIGHT
+                  </label>
+                  <input type="text" id="new-pi-freight" placeholder="Enter Freight" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    CHARGE NAME
+                  </label>
+                  <input type="text" id="new-pi-charge-name" placeholder="Enter Charge Name" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    CHARGE AMOUNT
+                  </label>
+                  <input type="text" id="new-pi-charge-amount" placeholder="Enter Charge Amount" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+              </div>
+
+              <!-- ROW 9: PRODUCTION PLANT -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                    PRODUCTION PLANT
+                  </label>
+                  <input type="text" id="new-pi-plant" placeholder="e.g. USHA, VSP, JPT, SATYA" class="w-full text-xs px-3 py-2 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]">
+                </div>
+              </div>
+
+              <!-- ROW 10: REMARKS -->
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#172B4D] mb-1.5">
+                  REMARKS
+                </label>
+                <textarea id="new-pi-remarks" rows="3" placeholder="Enter Remarks" class="w-full text-xs p-3 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] text-[#172B4D]"></textarea>
+              </div>
+
+              <!-- BOTTOM ACTION BAR -->
+              <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#EBECF0]">
+                <button type="button" class="px-4 py-2 border border-[#DFE1E6] hover:bg-[#F4F5F7] rounded text-xs font-semibold text-[#5E6C84] cursor-pointer transition-colors" onclick="window.location.hash='#/sales/orders/proforma-list'">
+                  Cancel
+                </button>
+                <button type="submit" class="px-6 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded text-xs font-bold shadow-xs cursor-pointer transition-colors flex items-center gap-1.5">
+                  <span>Create Proforma Invoice</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    `;
+  },
+
+  adjustContainerCount(delta) {
+    const el = document.getElementById('new-pi-containers');
+    if (!el) return;
+    let val = parseInt(el.value, 10) || 1;
+    val = Math.max(1, Math.min(99, val + delta));
+    el.value = val;
+  },
+
+  submitNewPi() {
+    const piNumber = document.getElementById('new-pi-number')?.value || `DFL/PI/${Math.floor(1316 + Math.random() * 50)}/26-27`;
+    const piDate = document.getElementById('new-pi-date')?.value || '21/10/2026';
+    const poNo = document.getElementById('new-pi-po-no')?.value || 'PO-2026-NEW';
+    const buyer = document.getElementById('new-pi-consignee')?.value || 'EASTERN FISH COMPANY LLC';
+    const processor = document.getElementById('new-pi-processor')?.value || '853';
+    const productionPlant = document.getElementById('new-pi-plant')?.value || 'VSP';
+    const shipByDate = document.getElementById('new-pi-shipby')?.value || '--';
+    const containers = parseInt(document.getElementById('new-pi-containers')?.value, 10) || 1;
+
+    const newId = String(Math.floor(7394 + Math.random() * 100));
+
+    const newRecord = {
+      sNo: 1,
+      id: newId,
+      processor: processor,
+      piNumber: piNumber,
+      piDate: piDate,
+      poNo: poNo,
+      buyer: buyer,
+      productionPlant: productionPlant,
+      shipByDate: shipByDate,
+      status: 'Pi-Pending',
+      exporter: 'DEVI FISHERIES LIMITED',
+      country: 'USA',
+      cartons: containers * 1800,
+      totalAmountUsd: containers * 190000
+    };
+
+    // Re-index existing
+    this.proformaDataset.unshift(newRecord);
+    this.proformaDataset.forEach((r, idx) => {
+      r.sNo = idx + 1;
+    });
+
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Proforma Invoice ${piNumber} (ID #${newId}) created successfully!`, 'success');
+    }
+
+    // Navigate back to Proforma List
+    window.location.hash = '#/sales/orders/proforma-list';
+  },
+
+  // ==========================================
+  // BULK APPROVAL MODAL (IMAGE 2)
+  // ==========================================
+  bulkApprovePis() {
+    if (typeof Modal === 'undefined' || !Modal.open) {
+      alert('Modal dialog component not ready.');
+      return;
+    }
+
+    Modal.open({
+      title: 'Order Status Details',
+      size: 'md',
+      content: `
+        <div class="space-y-4 text-xs text-[#172B4D]">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+            <!-- Select PI -->
+            <div>
+              <label class="block text-[11px] font-bold text-[#172B4D] mb-1.5">Select PI:</label>
+              <div class="relative">
+                <select id="modal-bulk-pi-select" class="w-full text-xs px-3 py-2.5 bg-white border border-[#CBD5E1] rounded focus:outline-none focus:border-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="PENDING_ALL" selected>All Pending PIs (7393, 7388)</option>
+                  <option value="7393">7393 - DFL/PI/1315/26-27 (EASTERN FISH)</option>
+                  <option value="7388">7388 - DFL/PI/1310/26-27 (ARISTA INDUSTRIES)</option>
+                  <option value="ALL">Select All 8 PIs</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div>
+              <label class="block text-[11px] font-bold text-[#172B4D] mb-1.5">Status:</label>
+              <div class="relative">
+                <select id="modal-bulk-status-select" class="w-full text-xs px-3 py-2.5 bg-white border border-[#0284C7] rounded focus:outline-none focus:border-[#0284C7] font-semibold text-[#172B4D]">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Po Received">Po Received</option>
+                  <option value="Pi-Pending">Pi-Pending</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons matching Image 2 -->
+          <div class="flex items-center justify-end gap-2.5 pt-4 mt-2 border-t border-[#EBECF0]">
+            <button type="button" class="px-6 py-2 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded shadow-xs cursor-pointer transition-colors" onclick="Modal.close()">
+              Close
+            </button>
+            <button type="button" class="px-6 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-bold rounded shadow-xs cursor-pointer transition-colors" onclick="SalesView.submitBulkApproval()">
+              Submit
+            </button>
+          </div>
+        </div>
+      `
+    });
+  },
+
+  submitBulkApproval() {
+    const statusSelect = document.getElementById('modal-bulk-status-select');
+    const piSelect = document.getElementById('modal-bulk-pi-select');
+
+    const newStatus = statusSelect ? statusSelect.value : '';
+    const selectedPi = piSelect ? piSelect.value : 'PENDING_ALL';
+
+    if (!newStatus) {
+      if (typeof Toast !== 'undefined' && Toast.show) {
+        Toast.show('Please select a valid target Status', 'warning');
+      } else {
+        alert('Please select a valid target Status');
+      }
+      return;
+    }
+
+    let updatedCount = 0;
+    this.proformaDataset.forEach(r => {
+      let shouldUpdate = false;
+      if (selectedPi === 'ALL') {
+        shouldUpdate = true;
+      } else if (selectedPi === 'PENDING_ALL') {
+        shouldUpdate = (r.status || '').toLowerCase().includes('pending');
+      } else if (r.id === selectedPi) {
+        shouldUpdate = true;
+      }
+
+      if (shouldUpdate) {
+        r.status = newStatus;
+        updatedCount++;
+      }
+    });
+
+    if (typeof Modal !== 'undefined' && Modal.close) {
+      Modal.close();
+    }
+
+    this.renderProformaRows(this.proformaDataset);
+    this.renderProformaTotals(this.proformaDataset);
+
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Updated Order Status to '${newStatus}' for ${updatedCount} Proforma Invoice(s)`, 'success');
+    }
+  },
+
   openNewPiModal() {
     Modal.alert({
       title: 'Create Proforma Invoice',
@@ -19538,6 +20124,7 @@ const SalesView = {
 
   bindEvents() {}
 };
+
 
 
 
