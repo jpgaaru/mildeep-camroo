@@ -334,35 +334,10 @@ export const NAV_HIERARCHY = [
     submenus: [
       {
         id: "dashboard",
-        title: "Dashboard",
+        title: "DashBoard",
         defaultTab: "overview",
         tabs: [
-          { id: "overview", label: "Executive Dashboard", hash: "#/sales/dashboard/overview" }
-        ]
-      },
-      {
-        id: "product-management",
-        title: "Product Management",
-        defaultTab: "product-list",
-        tabs: [
-          { id: "product-list", label: "Product List", hash: "#/sales/product-management/product-list" },
-          { id: "preparation-list", label: "Preparation List", hash: "#/sales/product-management/preparation-list" },
-          { id: "species-master", label: "Species Master", hash: "#/sales/product-management/species-master" },
-          { id: "grades-list", label: "Grades List", hash: "#/sales/product-management/grades-list" },
-          { id: "packing-style-list", label: "Packing Style List", hash: "#/sales/product-management/packing-style-list" },
-          { id: "variety-list", label: "Variety List", hash: "#/sales/product-management/variety-list" }
-        ]
-      },
-      {
-        id: "buyer-management",
-        title: "Buyer Management",
-        defaultTab: "buyer-list",
-        tabs: [
-          { id: "buyer-list", label: "Buyer List", hash: "#/sales/buyer-management/buyer-list" },
-          { id: "consignee-list", label: "Consignee List", hash: "#/sales/buyer-management/consignee-list" },
-          { id: "notify-party-list", label: "Notify Party List", hash: "#/sales/buyer-management/notify-party-list" },
-          { id: "applicant-list", label: "Applicant List", hash: "#/sales/buyer-management/applicant-list" },
-          { id: "brands-list", label: "Brands List", hash: "#/sales/buyer-management/brands-list" }
+          { id: "overview", label: "Overview", hash: "#/sales/dashboard/overview" }
         ]
       },
       {
@@ -377,19 +352,20 @@ export const NAV_HIERARCHY = [
           { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
           { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
           { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
-          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" }
+          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" },
+          { id: "delayed-shipments", label: "Delayed shipments", hash: "#/sales/orders/delayed-shipments" }
         ]
       },
       {
-        id: "payments-financials",
-        title: "Payments & Financials",
+        id: "payments",
+        title: "Payments",
         defaultTab: "forward-contracts",
         tabs: [
-          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments-financials/forward-contracts" },
-          { id: "collections", label: "Collections", hash: "#/sales/payments-financials/collections" },
-          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments-financials/negotiations" },
-          { id: "realization", label: "Realization", hash: "#/sales/payments-financials/realization" },
-          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments-financials/realization-done" }
+          { id: "forward-contracts", label: "Forward Contracts", hash: "#/sales/payments/forward-contracts" },
+          { id: "collections", label: "Collections", hash: "#/sales/payments/collections" },
+          { id: "negotiations", label: "Negotiations", hash: "#/sales/payments/negotiations" },
+          { id: "realization", label: "Realization", hash: "#/sales/payments/realization" },
+          { id: "realization-done", label: "Realization Done", hash: "#/sales/payments/realization-done" }
         ]
       },
       {
@@ -403,14 +379,13 @@ export const NAV_HIERARCHY = [
         ]
       },
       {
-        id: "reports",
-        title: "Reports",
-        defaultTab: "delayed-shipments",
+        id: "report",
+        title: "Report",
+        defaultTab: "sales-summary",
         tabs: [
-          { id: "delayed-shipments", label: "Delayed Shipments Report", hash: "#/sales/reports/delayed-shipments" },
-          { id: "sales-summary", label: "Sales Reports", hash: "#/sales/reports/sales-summary" },
-          { id: "payment-status", label: "Payment Reports", hash: "#/sales/reports/payment-status" },
-          { id: "inventory-report", label: "Inventory Reports", hash: "#/sales/reports/inventory-report" }
+          { id: "sales-summary", label: "Sales Summary", hash: "#/sales/report/sales-summary" },
+          { id: "payment-status", label: "Payment Status", hash: "#/sales/report/payment-status" },
+          { id: "inventory-report", label: "Inventory Report", hash: "#/sales/report/inventory-report" }
         ]
       }
     ]
