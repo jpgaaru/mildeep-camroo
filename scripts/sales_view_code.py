@@ -1031,13 +1031,13 @@ const SalesView = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#172B4D]">
 
-                        <!-- 2. Page Title Header -->
+                                <!-- 2. Page Title Header -->
         <div class="flex items-center justify-between pb-1">
           <h1 class="text-xl font-extrabold text-[#0F172A] tracking-tight">Proforma Invoices</h1>
           <div class="flex items-center gap-2">
             <button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="SalesView.openNewPi()">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>+ New PI</span>
+              <span>New PI</span>
             </button>
             <button class="px-4 py-2 border border-[#006C7A] bg-[#F0FDF4] hover:bg-[#DCFCE7] text-[#006C7A] text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs cursor-pointer transition-all" onclick="SalesView.bulkApprovePis()">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1053,7 +1053,11 @@ const SalesView = {
               <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
               <h3 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider">Search & Filters</h3>
             </div>
-            <span class="text-[11px] text-[#64748B]">Filter proforma invoices by exporter, consignee, destination country, or status</span>
+            <div class="inline-flex items-center gap-2">
+              <button type="button" class="w-7 h-7 inline-flex items-center justify-center bg-white hover:bg-[#F0F9FF] border border-[#CBD5E1] hover:border-[#006C7A] text-[#475569] hover:text-[#006C7A] rounded transition-colors cursor-pointer" onclick="SalesView.loadAllProformaList()" title="Reset all filters">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </button>
+            </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end mb-4">
@@ -1098,18 +1102,10 @@ const SalesView = {
           </div>
 
           <!-- Buttons using Base Design System colors -->
-          <div class="flex items-center justify-center gap-3 pt-2 border-t border-[#F1F5F9]">
+          <div class="flex items-center justify-end gap-3 pt-2 border-t border-[#F1F5F9]">
             <button id="btn-pi-search" class="px-6 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="SalesView.filterProformaList()">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
               <span>Search</span>
-            </button>
-            <button id="btn-pi-new" class="px-5 py-2 bg-[#008DA6] hover:bg-[#007489] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="SalesView.openNewPi()">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>+ New PI</span>
-            </button>
-            <button id="btn-pi-bulk-approval" class="px-5 py-2 border border-[#006C7A] bg-[#F0FDF4] hover:bg-[#DCFCE7] text-[#006C7A] text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs cursor-pointer transition-all" onclick="SalesView.bulkApprovePis()">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Bulk Approval</span>
             </button>
           </div>
         </div>
@@ -1119,14 +1115,15 @@ const SalesView = {
           <!-- Table Toolbar -->
           <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-[#EBECF0]">
             <div class="relative flex-1 max-w-md">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]" style="width: 32px; display: flex; align-items: center; justify-content: center;">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
               </div>
               <input 
                 type="text" 
                 id="sales-pi-search-input" 
                 placeholder="Search by PI, PO, Buyer, Plant..." 
-                class="w-full text-xs pl-9 pr-4 py-2 bg-white border border-[#E2E8F0] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] text-[#0F172A] transition-colors"
+                class="w-full text-xs pr-4 py-2 bg-white border border-[#E2E8F0] rounded-lg focus:outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] text-[#0F172A] transition-colors"
+                style="padding-left: 36px !important;"
                 oninput="SalesView.searchProformaList(this.value)"
               />
             </div>
@@ -1192,7 +1189,7 @@ const SalesView = {
       return;
     }
 
-            tbody.innerHTML = list.map((r, idx) => {
+                tbody.innerHTML = list.map((r, idx) => {
       const isPending = (r.status || '').toLowerCase().includes('pending');
       const isRejected = (r.status || '').toLowerCase().includes('reject');
       
@@ -1908,7 +1905,7 @@ const SalesView = {
     }
   },
 
-      // ==========================================
+        // ==========================================
   // INTERNAL SCREEN: NEW PROFORMA INVOICE (IMAGE 2)
   // ==========================================
   openNewPi() {
@@ -2395,7 +2392,7 @@ const SalesView = {
     window.location.hash = '#/sales/orders/proforma-list';
   },
 
-      // ==========================================
+        // ==========================================
   // BULK APPROVAL MODAL (IMAGE 3)
   // ==========================================
   bulkApprovePis() {
