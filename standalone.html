@@ -14048,19 +14048,140 @@ const HomeView = {
   }
 };
 
-  // Real-World Production Fisheries ERP Purchase Module (Client v3 Final Specification)
+  // =========================================================================
+// AQUAPULSE / DEVI FISHERIES BASE DESIGN SYSTEM (STANDARDIZED FROM PURCHASE)
+// =========================================================================
+const UIBase = {
+  renderHeader(title, actionBtnHtml = '') {
+    return `
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-2 animate-fade-in">
+        <div>
+          <h1 class="text-xl font-extrabold text-[#172B4D]">${title}</h1>
+        </div>
+        ${actionBtnHtml ? `<div class="flex items-center gap-2">${actionBtnHtml}</div>` : ''}
+      </div>
+    `;
+  },
+
+  renderFilterCard(opts) {
+    const { idPrefix, title = 'Search & Filters', fields = [], searchBtnText = 'Search' } = opts;
+    return `
+      <div class="dt-top-filter-card bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-3 transition-all duration-200" style="margin-bottom: 12px !important;">
+        <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#F1F5F9]">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+            <h3 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider">${title}</h3>
+          </div>
+        </div>
+
+        <div id="${idPrefix}-filter-body" class="dt-top-filter-body mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs transition-all duration-200">
+          ${fields.map(f => `
+            <div>
+              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">${f.label}</label>
+              ${f.html}
+            </div>
+          `).join('')}
+
+          <div class="flex items-end">
+            <button type="button" id="${idPrefix}-search-btn" class="dt-top-filter-search-btn btn-primary px-5 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer h-[31px]">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <span>${searchBtnText}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  bindFilter(idPrefix, onSearch, onReset) {
+    const toggleBtn = document.getElementById(`${idPrefix}-toggle-btn`);
+    const filterBody = document.getElementById(`${idPrefix}-filter-body`);
+    const toggleIcon = document.getElementById(`${idPrefix}-toggle-icon`);
+    const resetBtn = document.getElementById(`${idPrefix}-reset-btn`);
+    const searchBtn = document.getElementById(`${idPrefix}-search-btn`);
+
+    if (toggleBtn && filterBody) {
+      let isCollapsed = false;
+      toggleBtn.onclick = () => {
+        isCollapsed = !isCollapsed;
+        if (isCollapsed) {
+          filterBody.classList.add('hidden');
+          if (toggleIcon) toggleIcon.classList.add('-rotate-90');
+          toggleBtn.title = 'Show Filter';
+        } else {
+          filterBody.classList.remove('hidden');
+          if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
+          toggleBtn.title = 'Hide Filter';
+        }
+      };
+    }
+
+    if (resetBtn && onReset) {
+      resetBtn.onclick = onReset;
+    }
+
+    if (searchBtn && onSearch) {
+      searchBtn.onclick = onSearch;
+    }
+  },
+
+  renderTotals(title, count, countUnit, metrics) {
+    return `
+      <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mt-4 animate-fade-in">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#EBECF0]">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#006644]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <h3 class="text-xs font-bold text-[#172B4D]">${title}</h3>
+          </div>
+          <span class="text-xs text-[#5E6C84]">Showing totals for <strong class="text-[#172B4D]">${count}</strong> ${countUnit}</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          ${metrics.map(m => `
+            <div class="p-3 bg-[#FAFBFC] rounded-lg border border-[#EBECF0]">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] block mb-1">${m.label}</span>
+              <div class="flex items-baseline justify-between">
+                <span class="text-lg font-extrabold ${m.color || 'text-[#172B4D]'}">${m.value}</span>
+                ${m.badge ? `<span class="text-[10px] ${m.badgeColor || 'text-[#0284C7] bg-[#F0F9FF]'} font-semibold px-1.5 py-0.5 rounded">${m.badge}</span>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  },
+
+  renderBadge(text, type = 'default') {
+    const map = {
+      default: 'bg-[#F4F5F7] text-[#172B4D] border-[#DFE1E6]',
+      success: 'bg-[#E3FCEF] text-[#006644] border-[#ABF5D1]',
+      warning: 'bg-[#FFF0B3] text-[#8F4D00] border-[#FFE380]',
+      danger: 'bg-[#FFEBE6] text-[#BF2600] border-[#FFBDAD]',
+      info: 'bg-[#F0F9FF] text-[#0284C7] border-[#BAE6FD]'
+    };
+    const cls = map[type] || map.default;
+    return `<span class="font-medium px-2 py-0.5 rounded text-[11px] border ${cls}">${text}</span>`;
+  },
+
+  renderActionButtons(opts = {}) {
+    const { onView, onEdit, onDownload, onDelete } = opts;
+    return `
+      <div class="flex items-center gap-1">
+        ${onView ? `<button onclick="${onView}" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="View Details"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>` : ''}
+        ${onEdit ? `<button onclick="${onEdit}" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="Edit"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>` : ''}
+        ${onDownload ? `<button onclick="${onDownload}" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="Download Document"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>` : ''}
+        ${onDelete ? `<button onclick="${onDelete}" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>` : ''}
+      </div>
+    `;
+  }
+};
+
+// =========================================================================
+// SALES & EXPORTS MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
+// =========================================================================
+
+// Real-World Production Fisheries ERP Purchase Module (Client v3 Final Specification)
 // DFL Production Architecture: Canonical Masters, Live 0.1% TDS Math, Dynamic Balance Consumption, Auto-Numbering, and Contextual Sub-Screens
-
-
-
-
-
-
-
-
-
-
-
 
 // ============================================================================
 // CONFIG & MASTERS
@@ -14205,138 +14326,6 @@ const nextArrivalNo = c => {
 // ============================================================================
 // MAIN EXPORT OBJECT
 // ============================================================================
-// =========================================================================
-// AQUAPULSE / DEVI FISHERIES BASE DESIGN SYSTEM (STANDARDIZED FROM PURCHASE)
-// =========================================================================
-const UIBase = {
-  renderHeader(title, actionBtnHtml = '') {
-    return `
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-2 animate-fade-in">
-        <div>
-          <h1 class="text-xl font-extrabold text-[#172B4D]">${title}</h1>
-        </div>
-        ${actionBtnHtml ? `<div class="flex items-center gap-2">${actionBtnHtml}</div>` : ''}
-      </div>
-    `;
-  },
-
-  renderFilterCard(opts) {
-    const { idPrefix, title = 'Search & Filters', fields = [], searchBtnText = 'Search' } = opts;
-    return `
-      <div class="dt-top-filter-card bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mb-3 transition-all duration-200" style="margin-bottom: 12px !important;">
-        <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#F1F5F9]">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-            <h3 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider">${title}</h3>
-          </div>
-        </div>
-
-        <div id="${idPrefix}-filter-body" class="dt-top-filter-body grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-xs items-end">
-          ${fields.map(f => `
-            <div>
-              <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1.5">${f.label}</label>
-              ${f.html}
-            </div>
-          `).join('')}
-
-          <div class="flex items-center gap-2 pt-2">
-            <button type="button" id="${idPrefix}-search-btn" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-              <span>${searchBtnText}</span>
-            </button>
-            <button type="button" id="${idPrefix}-reset-btn" class="px-4 py-2 bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1 shadow-xs hover:shadow transition-all cursor-pointer" title="Reset all filters">
-              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-              <span>Reset</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-  },
-
-  bindFilter(idPrefix, onSearch, onReset) {
-    const toggleBtn = document.getElementById(`${idPrefix}-toggle-btn`);
-    const filterBody = document.getElementById(`${idPrefix}-filter-body`);
-    const toggleIcon = document.getElementById(`${idPrefix}-toggle-icon`);
-    const resetBtn = document.getElementById(`${idPrefix}-reset-btn`);
-    const searchBtn = document.getElementById(`${idPrefix}-search-btn`);
-
-    if (toggleBtn && filterBody) {
-      let isCollapsed = false;
-      toggleBtn.onclick = () => {
-        isCollapsed = !isCollapsed;
-        if (isCollapsed) {
-          filterBody.classList.add('hidden');
-          if (toggleIcon) toggleIcon.classList.add('-rotate-90');
-          toggleBtn.title = 'Show Filter';
-        } else {
-          filterBody.classList.remove('hidden');
-          if (toggleIcon) toggleIcon.classList.remove('-rotate-90');
-          toggleBtn.title = 'Hide Filter';
-        }
-      };
-    }
-
-    if (resetBtn && onReset) {
-      resetBtn.onclick = onReset;
-    }
-
-    if (searchBtn && onSearch) {
-      searchBtn.onclick = onSearch;
-    }
-  },
-
-  renderTotals(title, count, countUnit, metrics) {
-    return `
-      <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs mt-4 animate-fade-in">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#EBECF0]">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#006644]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            <h3 class="text-xs font-bold text-[#172B4D]">${title}</h3>
-          </div>
-          <span class="text-xs text-[#5E6C84]">Showing totals for <strong class="text-[#172B4D]">${count}</strong> ${countUnit}</span>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
-          ${metrics.map(m => `
-            <div class="p-3 bg-[#FAFBFC] rounded-lg border border-[#EBECF0]">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] block mb-1">${m.label}</span>
-              <div class="flex items-baseline justify-between">
-                <span class="text-lg font-extrabold ${m.color || 'text-[#172B4D]'}">${m.value}</span>
-                ${m.badge ? `<span class="text-[10px] ${m.badgeColor || 'text-[#0284C7] bg-[#F0F9FF]'} font-semibold px-1.5 py-0.5 rounded">${m.badge}</span>` : ''}
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `;
-  },
-
-  renderBadge(text, type = 'default') {
-    const map = {
-      default: 'bg-[#F4F5F7] text-[#172B4D] border-[#DFE1E6]',
-      success: 'bg-[#E3FCEF] text-[#006644] border-[#ABF5D1]',
-      warning: 'bg-[#FFF0B3] text-[#8F4D00] border-[#FFE380]',
-      danger: 'bg-[#FFEBE6] text-[#BF2600] border-[#FFBDAD]',
-      info: 'bg-[#F0F9FF] text-[#0284C7] border-[#BAE6FD]'
-    };
-    const cls = map[type] || map.default;
-    return `<span class="font-medium px-2 py-0.5 rounded text-[11px] border ${cls}">${text}</span>`;
-  },
-
-  renderActionButtons(opts = {}) {
-    const { onView, onEdit, onDownload, onDelete } = opts;
-    return `
-      <div class="flex items-center gap-1">
-        ${onView ? `<button onclick="${onView}" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="View Details"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>` : ''}
-        ${onEdit ? `<button onclick="${onEdit}" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="Edit"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>` : ''}
-        ${onDownload ? `<button onclick="${onDownload}" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="Download Document"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>` : ''}
-        ${onDelete ? `<button onclick="${onDelete}" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>` : ''}
-      </div>
-    `;
-  }
-};
-
 const PurchaseView = {
   // Expose store references
   M,
@@ -14565,21 +14554,21 @@ const PurchaseView = {
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Purchase Station</label>
-              <select id="pdash-station-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-station-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="">All Purchase Station</option>
                 ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Year</label>
-              <select id="pdash-year-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-year-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="2026" selected>2026</option>
                 <option value="2025">2025</option>
               </select>
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Month</label>
-              <select id="pdash-month-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-month-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="October" selected>October</option>
                 <option value="September">September</option>
                 <option value="November">November</option>
@@ -14604,7 +14593,7 @@ const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
               <h3 class="text-sm font-bold text-[#0F172A]">Production Floor Details by Intake Lot</h3>
             </div>
             <span class="text-xs text-[#64748B]">Showing clean batches (AB- negative only)</span>
@@ -14649,7 +14638,7 @@ const PurchaseView = {
     let fPlant = '';
     let fFrom = '';
     let fTo = '';
-    const isS01 = typeof Environment !== 'undefined' && typeof Environment.isSitemap01 === 'function' ? Environment.isSitemap01() : false;
+    const isS01 = Environment.isSitemap01();
 
     const getFilteredArrivals = () => {
       return arrivals.filter(a => {
@@ -14696,7 +14685,7 @@ const PurchaseView = {
                     <span class="text-xs font-semibold text-[#64748B]">Kg</span>
                   </div>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-[#E0F7FA] text-[#00A8B5] flex items-center justify-center shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-[#F0FAFC] text-[#02a8b5] flex items-center justify-center shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
                 </div>
               </div>
@@ -14768,7 +14757,7 @@ const PurchaseView = {
                 ${Object.entries(sumPlant).map(([k, v]) => `
                   <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
                     <span class="font-medium text-[#334155]">${k}</span>
-                    <span class="font-bold text-[#006C7A]">${T(v)} T</span>
+                    <span class="font-bold text-[#02a8b5]">${T(v)} T</span>
                   </div>
                 `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
               </div>
@@ -14815,7 +14804,7 @@ const PurchaseView = {
           <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
             <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[#F1F5F9]">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#00A8B5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
                 <h3 class="text-sm font-bold text-[#0F172A]">Search & Filters</h3>
               </div>
 
@@ -14853,7 +14842,7 @@ const PurchaseView = {
                 </div>
               </div>
 
-              <!-- Row 2: To Date + Inline Search Button -->
+              <!-- Row 2: To Date + Inline Search & Reset Buttons -->
               <div class="flex items-end gap-3 text-xs">
                 <div class="w-full sm:w-1/4">
                   <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
@@ -14861,9 +14850,13 @@ const PurchaseView = {
                     <input type="text" id="rmdash-to-date" placeholder="06/10/2026" value="06/10/2026" class="erp-date-input w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white outline-none">
                   </div>
                 </div>
-                <button id="rmdash-search-btn" class="px-5 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
+                <button id="rmdash-search-btn" class="px-5 py-2.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   <span>Search</span>
+                </button>
+                <button id="rmdash-reset-btn" class="px-4 py-2.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Reset Filters">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span>Reset</span>
                 </button>
               </div>
             </div>
@@ -14907,21 +14900,21 @@ const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-6 gap-3.5 items-end text-xs">
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
-                <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Species</option>
                   ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
-                <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Centers</option>
                   ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
                 </select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant</label>
-                <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Plants</option>
                   ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
@@ -14957,7 +14950,7 @@ const PurchaseView = {
           <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
             <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Pending Intake Register</h3>
               </div>
               <span class="text-xs text-[#64748B]">Real-time lot status & QC screening</span>
@@ -15135,7 +15128,7 @@ const PurchaseView = {
         <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
           <td class="px-3.5 py-3 text-[#64748B] font-semibold">${i + 1}</td>
           <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${b.species}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${b.no}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${b.no}</td>
           <td class="px-3.5 py-3 text-[#334155]">${b.date}</td>
           <td class="px-3.5 py-3 text-[#475569]">${b.type}</td>
           <td class="px-3.5 py-3 text-[#475569]">${b.grader || '–'}</td>
@@ -15203,7 +15196,7 @@ const PurchaseView = {
                 <span>New Booking</span>
               </button>
             </div>
-            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -15288,7 +15281,7 @@ const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Station <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-station" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-station" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Center</option>
                   ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
                 </select>
@@ -15296,7 +15289,7 @@ const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Species <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-species" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-species" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Species</option>
                   ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
@@ -15304,7 +15297,7 @@ const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Purchase Type <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-type" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-type" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Type</option>
                   ${M.types.map(t => `<option value="${t}">${t}</option>`).join('')}
                 </select>
@@ -15313,39 +15306,39 @@ const PurchaseView = {
               <div>
                 <div class="flex justify-between items-center mb-1">
                   <label class="font-bold text-[#475569] uppercase tracking-wider">Booking Number <span class="text-[#FF5150]">*</span></label>
-                  <button type="button" id="btn-auto-booking-no" class="text-[11px] font-bold text-[#02a8b5] hover:underline cursor-pointer">⟳ Auto</button>
+                  <button type="button" id="btn-auto-booking-no" class="px-2 py-0.5 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-[11px] font-bold shadow-xs transition-all cursor-pointer">⟳ Auto</button>
                 </div>
-                <input id="cb-no" type="text" required placeholder="BK/XXX/2627/0001" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] outline-none focus:border-[#006C7A]">
+                <input id="cb-no" type="text" required placeholder="BK/XXX/2627/0001" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Vehicle Number <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-vehicle" list="dl-vehicles" required placeholder="e.g. AP05TM2628" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-vehicle" list="dl-vehicles" required placeholder="e.g. AP05TM2628" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-vehicles">${M.vehicles.map(v => `<option value="${v}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Driver Name <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-driver" list="dl-drivers" required placeholder="e.g. RAMU K" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-driver" list="dl-drivers" required placeholder="e.g. RAMU K" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-drivers">${M.drivers.map(d => `<option value="${d}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Grader Name <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-grader" list="dl-graders" required placeholder="e.g. K.PRASAD" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-grader" list="dl-graders" required placeholder="e.g. K.PRASAD" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-graders">${M.graders.map(g => `<option value="${g}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Date <span class="text-[#FF5150]">*</span></label>
                 <div class="erp-date-wrapper">
-                  <input id="cb-date" type="text" required value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                  <input id="cb-date" type="text" required value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 </div>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Agent Name</label>
-                <select id="cb-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Agent</option>
                   ${M.agents.map(a => `<option value="${a}">${a}</option>`).join('')}
                 </select>
@@ -15353,7 +15346,7 @@ const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Farm Location <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-farm" type="text" required placeholder="Pond / Village details" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-farm" type="text" required placeholder="Pond / Village details" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div class="col-span-2">
@@ -15361,7 +15354,7 @@ const PurchaseView = {
                   <label class="font-bold text-[#475569] uppercase tracking-wider">Suppliers <span class="text-[#FF5150]">*</span></label>
                   <button type="button" id="btn-new-supplier" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#02a8b5] hover:bg-[#008f9a] text-white shadow-xs cursor-pointer transition-all">New Supplier</button>
                 </div>
-                <select id="cb-supplier" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-supplier" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Supplier</option>
                   ${M.suppliers.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
@@ -15369,27 +15362,27 @@ const PurchaseView = {
 
               <div class="col-span-4">
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Remarks</label>
-                <textarea id="cb-remarks" rows="2" placeholder="Quality benchmark, count notes, harvest timing..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]"></textarea>
+                <textarea id="cb-remarks" rows="2" placeholder="Quality benchmark, count notes, harvest timing..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]"></textarea>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Count</label>
-                <input id="cb-count" type="number" step="any" placeholder="350" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-count" type="number" step="any" placeholder="350" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Weight (KGS)</label>
-                <input id="cb-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Rate (₹)</label>
-                <input id="cb-rate" type="number" step="any" placeholder="200" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-rate" type="number" step="any" placeholder="200" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Plant <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-plant" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-plant" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Plant</option>
                   ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
@@ -15497,7 +15490,7 @@ const PurchaseView = {
             <td class="px-3.5 py-3 text-[#334155] font-semibold">${r.center}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-semibold">${r.species}</td>
             <td class="px-3.5 py-3 font-bold text-[#0F172A]">${fmt(r.weight)} KG</td>
-            <td class="px-3.5 py-3 font-bold ${balW < 0 ? 'text-[#FF5150]' : 'text-[#006C7A]'}">${fmt(balW)} KG</td>
+            <td class="px-3.5 py-3 font-bold ${balW < 0 ? 'text-[#FF5150]' : 'text-[#02a8b5]'}">${fmt(balW)} KG</td>
             <td class="px-3.5 py-3">
               <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold border border-current ${stBadge}">
                 ${st}
@@ -15507,7 +15500,7 @@ const PurchaseView = {
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">₹${fmt(r.amount)}</td>
             <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(balAmt)}</td>
             <td class="px-3.5 py-3">
-              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="text-[#02a8b5] hover:underline font-bold text-xs">
+              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all">
                 ⬇ Report
               </button>
             </td>
@@ -15531,43 +15524,43 @@ const PurchaseView = {
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Intake Date</label>
               <div class="erp-date-wrapper">
-                <input id="ra-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="ra-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Company</label>
-              <select id="ra-company" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-company" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 ${M.companies.map(c => `<option value="${c}">${c}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
-              <select id="ra-species" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-species" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Species</option>
                 ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Processing Plant</label>
-              <select id="ra-plant" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-plant" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Plant</option>
                 ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Procurement Center</label>
-              <select id="ra-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Center</option>
                 ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Expected Weight (KG)</label>
-              <input id="ra-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <input id="ra-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Expected Amount (₹)</label>
-              <input id="ra-amount" type="number" step="any" placeholder="200000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <input id="ra-amount" type="number" step="any" placeholder="200000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
             </div>
             <div>
               <button type="submit" class="w-full h-9 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
@@ -15674,7 +15667,7 @@ const PurchaseView = {
       tb.innerHTML = rows.length ? rows.map((a, i) => `
         <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
           <td class="px-3.5 py-3 text-[#64748B] font-semibold">${i + 1}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
           <td class="px-3.5 py-3 text-[#334155]">${a.date}</td>
           <td class="px-3.5 py-3 text-[#334155]">${a.plant}</td>
           <td class="px-3.5 py-3 text-[#475569]">${a.type}</td>
@@ -15767,7 +15760,7 @@ const PurchaseView = {
                 ⬇ Download Excel
               </button>
             </div>
-            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -15865,7 +15858,7 @@ const PurchaseView = {
           <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${a.id}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.billDate}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-bold">${fmt(a.weight, 2)} KG</td>
             <td class="px-3.5 py-3">
               <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold border ${bdCls}">
@@ -15931,7 +15924,7 @@ const PurchaseView = {
                 ⬇ PDF
               </button>
             </div>
-            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -16047,9 +16040,9 @@ const PurchaseView = {
 
         return `
           <tr onclick="PurchaseView.openRMBillEdit('${a.no}')" class="hover:bg-[#F0FAFC] transition-colors border-b border-[#F1F5F9] cursor-pointer" title="Click to view RM Bill info">
-            ${showCompletedActions ? `<td class="px-3.5 py-3" onclick="event.stopPropagation()"><input type="checkbox" class="bill-row-chk rounded text-[#006C7A]"></td>` : ''}
+            ${showCompletedActions ? `<td class="px-3.5 py-3" onclick="event.stopPropagation()"><input type="checkbox" class="bill-row-chk rounded text-[#02a8b5]"></td>` : ''}
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${i + 1}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.date}</td>
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${a.supplier}</td>
             <td class="px-3.5 py-3 text-[#475569]">${a.agent || '–'}</td>
@@ -16066,7 +16059,7 @@ const PurchaseView = {
                 <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="View & Edit RM Bill">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </button>
-                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#02a8b5] hover:bg-[#F0FAFC]" title="Print">
+                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="Print">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 </button>
               </div>
@@ -16142,7 +16135,7 @@ const PurchaseView = {
               <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Commission Bills PDF
               </button>
-              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#02a8b5] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
+              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Bills PDF
               </button>
             </div>
@@ -16225,7 +16218,7 @@ const PurchaseView = {
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Purchase Station</span><p class="font-bold text-[#0F172A] mt-0.5">${a.center}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Processing Plant</span><p class="font-bold text-[#0F172A] mt-0.5">${a.plant}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Purchase Type</span><p class="font-bold text-[#0F172A] mt-0.5">${a.type}</p></div>
-            <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Bill / Arrival Number</span><p class="font-bold text-[#006C7A] mt-0.5">${a.no}</p></div>
+            <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Bill / Arrival Number</span><p class="font-bold text-[#02a8b5] mt-0.5">${a.no}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Vehicle Number</span><p class="font-semibold text-[#334155] mt-0.5">${a.vehicle || 'AP39UF7171'}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Driver Name</span><p class="font-semibold text-[#334155] mt-0.5">${a.driver || 'SOMU N'}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Grader Name</span><p class="font-semibold text-[#334155] mt-0.5">${a.grader || 'M.RAO'}</p></div>
@@ -16240,11 +16233,11 @@ const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Addition/Deduction Per KG (₹) <span class="text-[#FF5150]">*</span></label>
-                <input id="rb-addded" type="number" step="any" value="${a.addDed || 0}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="rb-addded" type="number" step="any" value="${a.addDed || 0}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Remarks</label>
-                <input id="rb-remarks" type="text" placeholder="Adjustment notes..." value="${a.remarks || ''}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="rb-remarks" type="text" placeholder="Adjustment notes..." value="${a.remarks || ''}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
             </div>
 
@@ -16272,7 +16265,7 @@ const PurchaseView = {
                     <td class="px-3.5 py-3 text-[#64748B]">₹${fmt(a.rate)}</td>
                     <td class="px-3.5 py-3 text-[#64748B]">₹${fmt(a.harvest || 0)}</td>
                     <td class="px-3.5 py-3">
-                      <input id="rb-rate" type="number" step="any" value="${a.rate}" class="w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#006C7A] outline-none focus:border-[#006C7A]">
+                      <input id="rb-rate" type="number" step="any" value="${a.rate}" class="w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#02a8b5] outline-none focus:border-[#02a8b5]">
                     </td>
                     <td id="rb-total-val" class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(grossOf(a))}</td>
                   </tr>
@@ -16347,10 +16340,10 @@ const PurchaseView = {
         return `
           <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
             <td class="px-3.5 py-3">
-              <input type="checkbox" data-bill-no="${a.no}" class="pay-bill-chk rounded text-[#006C7A]">
+              <input type="checkbox" data-bill-no="${a.no}" class="pay-bill-chk rounded text-[#02a8b5]">
             </td>
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${i + 1}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.billDate}</td>
             <td class="px-3.5 py-3 text-[#475569]">${a.agent || '–'}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-bold">₹${fmt(actBill)}</td>
@@ -16523,7 +16516,7 @@ const PurchaseView = {
           <td class="px-3.5 py-3 text-[#334155] font-semibold">${py.center}</td>
           <td class="px-3.5 py-3 text-[#475569]">${py.agent || '–'}</td>
           <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${py.mode}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${py.voucher}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${py.voucher}</td>
           <td class="px-3.5 py-3 text-[#475569]">${py.lines.map(l => l.no).join(', ')}</td>
           <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(py.total)}</td>
           <td class="px-3.5 py-3">
@@ -16645,19 +16638,19 @@ const PurchaseView = {
         <div class="space-y-4 text-xs">
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Supplier Name <span class="text-[#FF5150]">*</span></label>
-            <input id="modal-sp-name" type="text" placeholder="e.g. BALAJI AQUA FARMS" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-name" type="text" placeholder="e.g. BALAJI AQUA FARMS" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Vendor Code / GSTIN</label>
-            <input id="modal-sp-code" type="text" placeholder="e.g. 37AABCB1234F1Z1" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-code" type="text" placeholder="e.g. 37AABCB1234F1Z1" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Phone</label>
-            <input id="modal-sp-phone" type="text" placeholder="+91 98480 12345" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-phone" type="text" placeholder="+91 98480 12345" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Address</label>
-            <textarea id="modal-sp-addr" rows="2" placeholder="Center locality..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]"></textarea>
+            <textarea id="modal-sp-addr" rows="2" placeholder="Center locality..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]"></textarea>
           </div>
         </div>
       `,
@@ -16693,7 +16686,7 @@ const PurchaseView = {
 
       return `
         <tr data-bill-no="${a.no}" class="border-b border-[#F1F5F9]">
-          <td class="px-3 py-2 font-bold text-[#006C7A]">${a.no}</td>
+          <td class="px-3 py-2 font-bold text-[#02a8b5]">${a.no}</td>
           <td class="px-3 py-2 text-[#475569]">${a.billDate}</td>
           <td class="px-3 py-2 text-[#0F172A] font-semibold">${a.supplier}</td>
           <td class="px-3 py-2 text-[#334155]">₹${fmt(g)}</td>
@@ -16702,7 +16695,7 @@ const PurchaseView = {
           <td class="px-3 py-2 text-[#056A38]">₹${fmt(pd)}</td>
           <td class="px-3 py-2 font-bold text-[#B5152B]">₹${fmt(bal)}</td>
           <td class="px-3 py-2">
-            <input type="number" step="any" data-max-bal="${bal}" value="${bal}" class="modal-pay-input w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#006C7A] outline-none">
+            <input type="number" step="any" data-max-bal="${bal}" value="${bal}" class="modal-pay-input w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#02a8b5] outline-none">
           </td>
           <td class="modal-pay-rem px-3 py-2 font-semibold text-[#64748B]">₹0.00</td>
         </tr>
@@ -16724,7 +16717,7 @@ const PurchaseView = {
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Voucher Number</label>
-              <input id="modal-pay-voucher" readonly value="${voucherNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] font-bold text-[#006C7A]">
+              <input id="modal-pay-voucher" readonly value="${voucherNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] font-bold text-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Cheque / NEFT Ref No</label>
@@ -16845,7 +16838,7 @@ const PurchaseView = {
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Number <span class="text-[#FF5150]">*</span></label>
-              <input id="ma-no" value="${arrivalNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-bold text-[#006C7A]">
+              <input id="ma-no" value="${arrivalNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-bold text-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Date <span class="text-[#FF5150]">*</span></label>
@@ -16949,35 +16942,6 @@ const PurchaseView = {
   }
 };
 
-  // AquaOps Pre-Processing Module Controller — Camaroo ERP v3.0.0
-// Comprehensive implementation of all 21 screens across 4 submenus:
-// 1. Dashboard (Floor Overview with 8 KPIs & 3 native Canvas charts)
-// 2. Floor Operations (7 screens: RM Received, Deheading, Grading, De-heading Trackid, Grading Trackid, Value Addition, Hon Qty Transfer)
-// 3. Chemical Inventory & Usage (7 screens: Chemical POs, Received, Consumption, Received Report, Opening Balance, Balance Report, Payments)
-// 4. Traceability & Reconciliation (6 screens: Track Code Report, VA Floor Balance, VA Transfer, Assumed Reports, Consolidation Daily, File Upload)
-
-
-
-
-
-
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
-// =========================================================================
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
-// =========================================================================
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
-// =========================================================================
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
-// =========================================================================
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
-// =========================================================================
-// =========================================================================
-// PRE-PROCESSING MODULE (STANDARDIZED WITH PURCHASE BASE DESIGN SYSTEM)
 // =========================================================================
 const PreprocessingView = {
   // Baseline Preprocessing Store Data

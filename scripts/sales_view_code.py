@@ -1001,7 +1001,7 @@ const SalesView = {
                 href="${t.hash}"
                 class="select-none px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
                   isActive 
-                    ? 'tab-active border-[#00A4B7] text-[#00A4B7] font-bold bg-transparent' 
+                    ? 'tab-active border-[#02a8b5] text-[#02a8b5] font-bold bg-transparent' 
                     : 'border-transparent text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'
                 }"
               >

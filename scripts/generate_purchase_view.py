@@ -169,19 +169,25 @@ export const PurchaseView = {
   arrivals,
   payments,
 
-  render(containerId, subPage = 'purchase-dashboard', activeHash = '#/purchase/dashboard/purchase-dashboard') {
+  render(containerId, subPage = 'overview', activeHash = '#/purchase/dashboard/overview') {
     reloadPurchaseStore();
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = '<div id="purchase-subpage-content"></div>';
+    container.innerHTML = `
+      <div id="purchase-tab-bar-container"></div>
+      <div id="purchase-subpage-content"></div>
+    `;
+    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
+      TabBar.render('purchase-tab-bar-container', activeHash);
+    }
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Normalize route aliases
     const target = (subPage || '').toLowerCase();
     
     // Smooth transition
-    if (target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
+    if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
       subContainer.innerHTML = Skeleton.renderDashboard();
     } else {
       subContainer.innerHTML = Skeleton.renderTable(6, 6);
@@ -190,6 +196,7 @@ export const PurchaseView = {
     setTimeout(() => {
       switch (target) {
         // Submenu: Dashboard
+        case 'overview':
         case 'purchase-dashboard':
           this.renderPurchaseDashboard(subContainer);
           break;
@@ -382,28 +389,28 @@ export const PurchaseView = {
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Purchase Station</label>
-              <select id="pdash-station-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-station-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="">All Purchase Station</option>
                 ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Year</label>
-              <select id="pdash-year-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-year-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="2026" selected>2026</option>
                 <option value="2025">2025</option>
               </select>
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Month</label>
-              <select id="pdash-month-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+              <select id="pdash-month-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                 <option value="October" selected>October</option>
                 <option value="September">September</option>
                 <option value="November">November</option>
               </select>
             </div>
             <div>
-              <button id="pdash-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="pdash-search-btn" class="w-full h-9 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search Records</span>
               </button>
@@ -421,7 +428,7 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
               <h3 class="text-sm font-bold text-[#0F172A]">Production Floor Details by Intake Lot</h3>
             </div>
             <span class="text-xs text-[#64748B]">Showing clean batches (AB- negative only)</span>
@@ -513,7 +520,7 @@ export const PurchaseView = {
                     <span class="text-xs font-semibold text-[#64748B]">Kg</span>
                   </div>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-[#E0F7FA] text-[#00A8B5] flex items-center justify-center shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-[#F0FAFC] text-[#02a8b5] flex items-center justify-center shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
                 </div>
               </div>
@@ -585,7 +592,7 @@ export const PurchaseView = {
                 ${Object.entries(sumPlant).map(([k, v]) => `
                   <div class="flex justify-between items-center py-1 border-b border-[#F1F5F9]">
                     <span class="font-medium text-[#334155]">${k}</span>
-                    <span class="font-bold text-[#006C7A]">${T(v)} T</span>
+                    <span class="font-bold text-[#02a8b5]">${T(v)} T</span>
                   </div>
                 `).join('') || '<span class="text-[#94A3B8]">No arrivals</span>'}
               </div>
@@ -632,17 +639,10 @@ export const PurchaseView = {
           <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
             <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[#F1F5F9]">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#00A8B5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
                 <h3 class="text-sm font-bold text-[#0F172A]">Search & Filters</h3>
               </div>
-              <div class="flex items-center gap-2">
-                <button id="rmdash-reset-btn" class="w-7 h-7 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] flex items-center justify-center cursor-pointer transition-colors" title="Reset Filters">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                </button>
-                <button id="rmdash-accordion-btn" class="w-7 h-7 rounded-full border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#64748B] flex items-center justify-center cursor-pointer transition-colors" title="Toggle Filters">
-                  <svg id="rmdash-accordion-icon" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </button>
-              </div>
+
             </div>
 
             <div id="rmdash-filter-fields" class="space-y-3.5">
@@ -677,7 +677,7 @@ export const PurchaseView = {
                 </div>
               </div>
 
-              <!-- Row 2: To Date + Inline Search Button -->
+              <!-- Row 2: To Date + Inline Search & Reset Buttons -->
               <div class="flex items-end gap-3 text-xs">
                 <div class="w-full sm:w-1/4">
                   <label class="block text-[10.5px] font-bold text-[#475569] uppercase tracking-wider mb-1">To Date</label>
@@ -685,9 +685,13 @@ export const PurchaseView = {
                     <input type="text" id="rmdash-to-date" placeholder="06/10/2026" value="06/10/2026" class="erp-date-input w-full h-10 px-3 rounded-xl border border-[#CBD5E1] text-xs font-semibold text-[#0F172A] bg-white outline-none">
                   </div>
                 </div>
-                <button id="rmdash-search-btn" class="h-10 px-6 rounded-xl bg-[#00A8B5] hover:bg-[#008f9a] active:scale-[0.99] text-white text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mb-0.5">
+                <button id="rmdash-search-btn" class="px-5 py-2.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   <span>Search</span>
+                </button>
+                <button id="rmdash-reset-btn" class="px-4 py-2.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Reset Filters">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span>Reset</span>
                 </button>
               </div>
             </div>
@@ -731,21 +735,21 @@ export const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-6 gap-3.5 items-end text-xs">
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
-                <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-species-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Species</option>
                   ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Center</label>
-                <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-center-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Centers</option>
                   ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
                 </select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#475569] uppercase tracking-wider mb-1">Plant</label>
-                <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#006C7A] outline-none">
+                <select id="rmdash-plant-sel" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#0F172A] bg-white focus:border-[#02a8b5] outline-none">
                   <option value="">All Plants</option>
                   ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
@@ -763,11 +767,11 @@ export const PurchaseView = {
                 </div>
               </div>
               <div class="flex items-center gap-1.5">
-                <button id="rmdash-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                <button id="rmdash-search-btn" class="flex-1 h-9 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   <span>Filter</span>
                 </button>
-                <button id="rmdash-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+                <button id="rmdash-reset-btn" class="px-4 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Reset Filters">
                   ↺
                 </button>
               </div>
@@ -781,7 +785,7 @@ export const PurchaseView = {
           <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
             <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
               <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[#006C7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Pending Intake Register</h3>
               </div>
               <span class="text-xs text-[#64748B]">Real-time lot status & QC screening</span>
@@ -959,7 +963,7 @@ export const PurchaseView = {
         <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
           <td class="px-3.5 py-3 text-[#64748B] font-semibold">${i + 1}</td>
           <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${b.species}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${b.no}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${b.no}</td>
           <td class="px-3.5 py-3 text-[#334155]">${b.date}</td>
           <td class="px-3.5 py-3 text-[#475569]">${b.type}</td>
           <td class="px-3.5 py-3 text-[#475569]">${b.grader || '–'}</td>
@@ -969,7 +973,7 @@ export const PurchaseView = {
           <td class="px-3.5 py-3 text-[#056A38] font-bold">₹${fmt(b.rate)}</td>
           <td class="px-3.5 py-3">
             <div class="flex items-center gap-1.5">
-              <button onclick="window.Toast.show('Booking details: ${b.no} at ${b.station}', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="View">
+              <button onclick="window.Toast.show('Booking details: ${b.no} at ${b.station}', 'info')" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="View">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </button>
               <button onclick="if(confirm('Delete booking ${b.no}?')){ bookings = bookings.filter(x => x.no !== '${b.no}'); if (window.Environment) window.Environment.setStore('bookings', bookings); PurchaseView.renderBookings(document.getElementById('purchase-subpage-content')); Toast.show('Booking deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
@@ -1007,11 +1011,11 @@ export const PurchaseView = {
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button id="bk-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="bk-search-btn" class="flex-1 px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
-              <button id="bk-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+              <button id="bk-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1022,12 +1026,12 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2.5">
-              <button id="btn-open-create-booking" class="px-4 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer">
+              <button id="btn-open-create-booking" class="px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 <span>New Booking</span>
               </button>
             </div>
-            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -1103,7 +1107,7 @@ export const PurchaseView = {
               <h3 class="text-base font-bold text-[#0F172A]">Create Procurement Booking</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Booking Number manual (⟳ Auto available) with uniqueness check · Vehicle/Driver/Grader = free text with master suggestions</p>
             </div>
-            <button id="btn-back-to-bookings" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+            <button id="btn-back-to-bookings" class="px-3.5 py-1.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
               ← Back to Bookings List
             </button>
           </div>
@@ -1112,7 +1116,7 @@ export const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Station <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-station" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-station" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Center</option>
                   ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
                 </select>
@@ -1120,7 +1124,7 @@ export const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Species <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-species" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-species" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Species</option>
                   ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
@@ -1128,7 +1132,7 @@ export const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Purchase Type <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-type" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#006C7A]">
+                <select id="cb-type" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-medium outline-none focus:border-[#02a8b5]">
                   <option value="">Select Type</option>
                   ${M.types.map(t => `<option value="${t}">${t}</option>`).join('')}
                 </select>
@@ -1137,39 +1141,39 @@ export const PurchaseView = {
               <div>
                 <div class="flex justify-between items-center mb-1">
                   <label class="font-bold text-[#475569] uppercase tracking-wider">Booking Number <span class="text-[#FF5150]">*</span></label>
-                  <button type="button" id="btn-auto-booking-no" class="text-[11px] font-bold text-[#006C7A] hover:underline cursor-pointer">⟳ Auto</button>
+                  <button type="button" id="btn-auto-booking-no" class="px-2 py-0.5 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-[11px] font-bold shadow-xs transition-all cursor-pointer">⟳ Auto</button>
                 </div>
-                <input id="cb-no" type="text" required placeholder="BK/XXX/2627/0001" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] outline-none focus:border-[#006C7A]">
+                <input id="cb-no" type="text" required placeholder="BK/XXX/2627/0001" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-semibold text-[#0F172A] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Vehicle Number <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-vehicle" list="dl-vehicles" required placeholder="e.g. AP05TM2628" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-vehicle" list="dl-vehicles" required placeholder="e.g. AP05TM2628" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-vehicles">${M.vehicles.map(v => `<option value="${v}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Driver Name <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-driver" list="dl-drivers" required placeholder="e.g. RAMU K" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-driver" list="dl-drivers" required placeholder="e.g. RAMU K" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-drivers">${M.drivers.map(d => `<option value="${d}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Grader Name <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-grader" list="dl-graders" required placeholder="e.g. K.PRASAD" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-grader" list="dl-graders" required placeholder="e.g. K.PRASAD" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <datalist id="dl-graders">${M.graders.map(g => `<option value="${g}">`).join('')}</datalist>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Date <span class="text-[#FF5150]">*</span></label>
                 <div class="erp-date-wrapper">
-                  <input id="cb-date" type="text" required value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                  <input id="cb-date" type="text" required value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 </div>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Agent Name</label>
-                <select id="cb-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Agent</option>
                   ${M.agents.map(a => `<option value="${a}">${a}</option>`).join('')}
                 </select>
@@ -1177,15 +1181,15 @@ export const PurchaseView = {
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Farm Location <span class="text-[#FF5150]">*</span></label>
-                <input id="cb-farm" type="text" required placeholder="Pond / Village details" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-farm" type="text" required placeholder="Pond / Village details" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div class="col-span-2">
                 <div class="flex justify-between items-center mb-1">
                   <label class="font-bold text-[#475569] uppercase tracking-wider">Suppliers <span class="text-[#FF5150]">*</span></label>
-                  <button type="button" id="btn-new-supplier" class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#6366F1] text-white cursor-pointer">New Supplier</button>
+                  <button type="button" id="btn-new-supplier" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#02a8b5] hover:bg-[#008f9a] text-white shadow-xs cursor-pointer transition-all">New Supplier</button>
                 </div>
-                <select id="cb-supplier" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-supplier" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Supplier</option>
                   ${M.suppliers.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
@@ -1193,27 +1197,27 @@ export const PurchaseView = {
 
               <div class="col-span-4">
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Remarks</label>
-                <textarea id="cb-remarks" rows="2" placeholder="Quality benchmark, count notes, harvest timing..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]"></textarea>
+                <textarea id="cb-remarks" rows="2" placeholder="Quality benchmark, count notes, harvest timing..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]"></textarea>
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Count</label>
-                <input id="cb-count" type="number" step="any" placeholder="350" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-count" type="number" step="any" placeholder="350" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Weight (KGS)</label>
-                <input id="cb-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Booking Rate (₹)</label>
-                <input id="cb-rate" type="number" step="any" placeholder="200" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="cb-rate" type="number" step="any" placeholder="200" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
 
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Plant <span class="text-[#FF5150]">*</span></label>
-                <select id="cb-plant" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <select id="cb-plant" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                   <option value="">Select Plant</option>
                   ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
@@ -1221,13 +1225,13 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Close
               </button>
-              <button type="reset" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button type="reset" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Clear Form
               </button>
-              <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
+              <button type="submit" class="px-6 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs cursor-pointer">
                 Save Booking
               </button>
             </div>
@@ -1321,7 +1325,7 @@ export const PurchaseView = {
             <td class="px-3.5 py-3 text-[#334155] font-semibold">${r.center}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-semibold">${r.species}</td>
             <td class="px-3.5 py-3 font-bold text-[#0F172A]">${fmt(r.weight)} KG</td>
-            <td class="px-3.5 py-3 font-bold ${balW < 0 ? 'text-[#FF5150]' : 'text-[#006C7A]'}">${fmt(balW)} KG</td>
+            <td class="px-3.5 py-3 font-bold ${balW < 0 ? 'text-[#FF5150]' : 'text-[#02a8b5]'}">${fmt(balW)} KG</td>
             <td class="px-3.5 py-3">
               <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold border border-current ${stBadge}">
                 ${st}
@@ -1331,7 +1335,7 @@ export const PurchaseView = {
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">₹${fmt(r.amount)}</td>
             <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(balAmt)}</td>
             <td class="px-3.5 py-3">
-              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="text-[#006C7A] hover:underline font-bold text-xs">
+              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all">
                 ⬇ Report
               </button>
             </td>
@@ -1355,46 +1359,46 @@ export const PurchaseView = {
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Intake Date</label>
               <div class="erp-date-wrapper">
-                <input id="ra-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="ra-date" type="text" value="${TODAY}" class="erp-date-input w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Company</label>
-              <select id="ra-company" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-company" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 ${M.companies.map(c => `<option value="${c}">${c}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Species</label>
-              <select id="ra-species" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-species" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Species</option>
                 ${M.species.map(s => `<option value="${s}">${s}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Processing Plant</label>
-              <select id="ra-plant" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-plant" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Plant</option>
                 ${M.plants.map(p => `<option value="${p}">${p}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Procurement Center</label>
-              <select id="ra-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <select id="ra-center" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
                 <option value="">Select Center</option>
                 ${M.centers.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
               </select>
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Expected Weight (KG)</label>
-              <input id="ra-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <input id="ra-weight" type="number" step="any" placeholder="1000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Expected Amount (₹)</label>
-              <input id="ra-amount" type="number" step="any" placeholder="200000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+              <input id="ra-amount" type="number" step="any" placeholder="200000" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
             </div>
             <div>
-              <button type="submit" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
+              <button type="submit" class="w-full h-9 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
                 Submit RM Arrival
               </button>
             </div>
@@ -1406,7 +1410,7 @@ export const PurchaseView = {
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Expected vs Consumed Balances</h3>
             <div class="flex items-center gap-2">
-              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 ⬇ Download Table
               </button>
             </div>
@@ -1498,7 +1502,7 @@ export const PurchaseView = {
       tb.innerHTML = rows.length ? rows.map((a, i) => `
         <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
           <td class="px-3.5 py-3 text-[#64748B] font-semibold">${i + 1}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
           <td class="px-3.5 py-3 text-[#334155]">${a.date}</td>
           <td class="px-3.5 py-3 text-[#334155]">${a.plant}</td>
           <td class="px-3.5 py-3 text-[#475569]">${a.type}</td>
@@ -1511,7 +1515,7 @@ export const PurchaseView = {
           <td class="px-3.5 py-3 font-bold text-[#0F172A]">₹${fmt((a.weight || 0) * (a.rate || 0))}</td>
           <td class="px-3.5 py-3">
             <div class="flex items-center gap-1.5">
-              <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="Edit RM Bill">
+              <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="Edit RM Bill">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
               </button>
               <button onclick="if(confirm('Delete arrival ${a.no}?')){ arrivals = arrivals.filter(x => x.no !== '${a.no}'); if (window.Environment) window.Environment.setStore('arrivals', arrivals); PurchaseView.renderArrivals(document.getElementById('purchase-subpage-content')); Toast.show('Arrival deleted', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
@@ -1568,11 +1572,11 @@ export const PurchaseView = {
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button id="ar-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="ar-search-btn" class="flex-1 px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="ar-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+              <button id="ar-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1583,15 +1587,15 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
-              <button id="btn-create-arrival-open" class="px-4 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer">
+              <button id="btn-create-arrival-open" class="px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 <span>New Arrival</span>
               </button>
-              <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Download Excel
               </button>
             </div>
-            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -1689,7 +1693,7 @@ export const PurchaseView = {
           <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${a.id}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.billDate}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-bold">${fmt(a.weight, 2)} KG</td>
             <td class="px-3.5 py-3">
               <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold border ${bdCls}">
@@ -1733,7 +1737,7 @@ export const PurchaseView = {
               </select>
             </div>
             <div>
-              <button id="lt-search-btn" class="w-full h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="lt-search-btn" class="w-full h-9 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter Pipeline</span>
               </button>
@@ -1745,17 +1749,17 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
-              <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1 cursor-pointer">
+              <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⧉ Copy TSV
               </button>
-              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Excel
               </button>
-              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ PDF
               </button>
             </div>
-            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#006C7A]">
+            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -1793,7 +1797,7 @@ export const PurchaseView = {
       const table = document.getElementById('tbl-lot-table');
       if (!table) return;
       const rows = [...table.querySelectorAll('tr')];
-      const tsv = rows.map(r => [...r.cells].map(c => c.textContent.trim()).join('\\t')).join('\\n');
+      const tsv = rows.map(r => [...r.cells].map(c => c.textContent.trim()).join('\t')).join('\n');
       if (navigator.clipboard) {
         navigator.clipboard.writeText(tsv).then(() => {
           Toast.show('Table copied to clipboard (TSV format)!', 'success');
@@ -1871,9 +1875,9 @@ export const PurchaseView = {
 
         return `
           <tr onclick="PurchaseView.openRMBillEdit('${a.no}')" class="hover:bg-[#F0FAFC] transition-colors border-b border-[#F1F5F9] cursor-pointer" title="Click to view RM Bill info">
-            ${showCompletedActions ? `<td class="px-3.5 py-3" onclick="event.stopPropagation()"><input type="checkbox" class="bill-row-chk rounded text-[#006C7A]"></td>` : ''}
+            ${showCompletedActions ? `<td class="px-3.5 py-3" onclick="event.stopPropagation()"><input type="checkbox" class="bill-row-chk rounded text-[#02a8b5]"></td>` : ''}
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${i + 1}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.date}</td>
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${a.supplier}</td>
             <td class="px-3.5 py-3 text-[#475569]">${a.agent || '–'}</td>
@@ -1887,10 +1891,10 @@ export const PurchaseView = {
             </td>
             <td class="px-3.5 py-3" onclick="event.stopPropagation()">
               <div class="flex items-center gap-1.5">
-                <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006C7A] hover:bg-[#E0F2FE]" title="View & Edit RM Bill">
+                <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="View & Edit RM Bill">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </button>
-                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#475569] hover:bg-[#F8FAFC]" title="Print">
+                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="Print">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 </button>
               </div>
@@ -1948,11 +1952,11 @@ export const PurchaseView = {
                   <option value="Completed">Completed</option>
                 </select>
               </div>
-              <button id="bl-search-btn" class="h-9 px-3 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer" style="margin-top: 18px;" title="Filter Bills">
+              <button id="bl-search-btn" class="h-9 px-4 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1 cursor-pointer" style="margin-top: 18px;" title="Filter Bills">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="bl-reset-btn" class="h-9 px-2.5 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" style="margin-top: 18px;" title="Reset Filters">
+              <button id="bl-reset-btn" class="h-9 px-3.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" style="margin-top: 18px;" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1963,10 +1967,10 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div id="bills-pdf-btns" class="items-center gap-2" style="display:none;">
-              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3 py-1.5 rounded-lg bg-[#006C7A] text-white text-xs font-bold shadow-xs">
+              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Commission Bills PDF
               </button>
-              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Bills PDF
               </button>
             </div>
@@ -2038,7 +2042,7 @@ export const PurchaseView = {
               <h3 class="text-base font-bold text-[#0F172A]">RM Bill Details — ${a.no}</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Header frozen from Arrival · editable: Addition/Deduction per KG, Rate, Remarks</p>
             </div>
-            <button id="btn-back-to-bills" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+            <button id="btn-back-to-bills" class="px-3.5 py-1.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
               ← Back to Bills Register
             </button>
           </div>
@@ -2049,7 +2053,7 @@ export const PurchaseView = {
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Purchase Station</span><p class="font-bold text-[#0F172A] mt-0.5">${a.center}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Processing Plant</span><p class="font-bold text-[#0F172A] mt-0.5">${a.plant}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Purchase Type</span><p class="font-bold text-[#0F172A] mt-0.5">${a.type}</p></div>
-            <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Bill / Arrival Number</span><p class="font-bold text-[#006C7A] mt-0.5">${a.no}</p></div>
+            <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Bill / Arrival Number</span><p class="font-bold text-[#02a8b5] mt-0.5">${a.no}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Vehicle Number</span><p class="font-semibold text-[#334155] mt-0.5">${a.vehicle || 'AP39UF7171'}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Driver Name</span><p class="font-semibold text-[#334155] mt-0.5">${a.driver || 'SOMU N'}</p></div>
             <div><span class="text-[#64748B] font-bold uppercase text-[10.5px]">Grader Name</span><p class="font-semibold text-[#334155] mt-0.5">${a.grader || 'M.RAO'}</p></div>
@@ -2064,11 +2068,11 @@ export const PurchaseView = {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Addition/Deduction Per KG (₹) <span class="text-[#FF5150]">*</span></label>
-                <input id="rb-addded" type="number" step="any" value="${a.addDed || 0}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="rb-addded" type="number" step="any" value="${a.addDed || 0}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
               <div>
                 <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Remarks</label>
-                <input id="rb-remarks" type="text" placeholder="Adjustment notes..." value="${a.remarks || ''}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+                <input id="rb-remarks" type="text" placeholder="Adjustment notes..." value="${a.remarks || ''}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
               </div>
             </div>
 
@@ -2096,7 +2100,7 @@ export const PurchaseView = {
                     <td class="px-3.5 py-3 text-[#64748B]">₹${fmt(a.rate)}</td>
                     <td class="px-3.5 py-3 text-[#64748B]">₹${fmt(a.harvest || 0)}</td>
                     <td class="px-3.5 py-3">
-                      <input id="rb-rate" type="number" step="any" value="${a.rate}" class="w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#006C7A] outline-none focus:border-[#006C7A]">
+                      <input id="rb-rate" type="number" step="any" value="${a.rate}" class="w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#02a8b5] outline-none focus:border-[#02a8b5]">
                     </td>
                     <td id="rb-total-val" class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(grossOf(a))}</td>
                   </tr>
@@ -2105,10 +2109,10 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Cancel
               </button>
-              <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
+              <button type="submit" class="px-6 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs cursor-pointer">
                 Save Changes
               </button>
             </div>
@@ -2171,10 +2175,10 @@ export const PurchaseView = {
         return `
           <tr class="hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9]">
             <td class="px-3.5 py-3">
-              <input type="checkbox" data-bill-no="${a.no}" class="pay-bill-chk rounded text-[#006C7A]">
+              <input type="checkbox" data-bill-no="${a.no}" class="pay-bill-chk rounded text-[#02a8b5]">
             </td>
             <td class="px-3.5 py-3 font-semibold text-[#64748B]">${i + 1}</td>
-            <td class="px-3.5 py-3 font-bold text-[#006C7A]">${a.no}</td>
+            <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${a.no}</td>
             <td class="px-3.5 py-3 text-[#334155]">${a.billDate}</td>
             <td class="px-3.5 py-3 text-[#475569]">${a.agent || '–'}</td>
             <td class="px-3.5 py-3 text-[#0F172A] font-bold">₹${fmt(actBill)}</td>
@@ -2238,11 +2242,11 @@ export const PurchaseView = {
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button id="pay-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="pay-search-btn" class="flex-1 px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
-              <button id="pay-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+              <button id="pay-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -2253,7 +2257,7 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
-              <button id="btn-action-pay" disabled class="px-5 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 opacity-50 cursor-not-allowed">
+              <button id="btn-action-pay" disabled class="px-5 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 opacity-50 cursor-not-allowed">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                 <span>Pay Selected Bills</span>
               </button>
@@ -2347,12 +2351,12 @@ export const PurchaseView = {
           <td class="px-3.5 py-3 text-[#334155] font-semibold">${py.center}</td>
           <td class="px-3.5 py-3 text-[#475569]">${py.agent || '–'}</td>
           <td class="px-3.5 py-3 font-semibold text-[#0F172A]">${py.mode}</td>
-          <td class="px-3.5 py-3 font-bold text-[#006C7A]">${py.voucher}</td>
+          <td class="px-3.5 py-3 font-bold text-[#02a8b5]">${py.voucher}</td>
           <td class="px-3.5 py-3 text-[#475569]">${py.lines.map(l => l.no).join(', ')}</td>
           <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(py.total)}</td>
           <td class="px-3.5 py-3">
             <div class="flex items-center gap-1.5">
-              <button onclick="window.Toast.show('Voucher ${py.voucher} details loaded', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="View">
+              <button onclick="window.Toast.show('Voucher ${py.voucher} details loaded', 'info')" class="p-1 rounded text-[#0284C7] hover:bg-[#F0F9FF]" title="View">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </button>
               <button onclick="if(confirm('Delete voucher ${py.voucher}? Balances will be restored!')){ payments = payments.filter(p => p.voucher !== '${py.voucher}'); if (window.Environment) window.Environment.setStore('payments', payments); PurchaseView.renderPaymentSummary(document.getElementById('purchase-subpage-content')); Toast.show('Voucher deleted and balances restored', 'error'); }" class="p-1 rounded text-[#FF5150] hover:bg-[#FEF2F2]" title="Delete">
@@ -2405,11 +2409,11 @@ export const PurchaseView = {
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button id="ps-search-btn" class="flex-1 h-9 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button id="ps-search-btn" class="flex-1 px-4 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold transition-all shadow-xs hover:shadow flex items-center justify-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="ps-reset-btn" class="px-2.5 h-9 rounded-lg border border-[#CBD5E1] text-[#475569] hover:bg-[#F8FAFC] text-xs font-bold cursor-pointer" title="Reset Filters">
+              <button id="ps-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -2420,7 +2424,7 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <h3 class="text-sm font-bold text-[#0F172A]">Payment Vouchers Audit Register</h3>
-            <button onclick="window.Toast.show('Exporting Payment Summary...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+            <button onclick="window.Toast.show('Exporting Payment Summary...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
               ⬇ Download Excel
             </button>
           </div>
@@ -2469,19 +2473,19 @@ export const PurchaseView = {
         <div class="space-y-4 text-xs">
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Supplier Name <span class="text-[#FF5150]">*</span></label>
-            <input id="modal-sp-name" type="text" placeholder="e.g. BALAJI AQUA FARMS" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-name" type="text" placeholder="e.g. BALAJI AQUA FARMS" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Vendor Code / GSTIN</label>
-            <input id="modal-sp-code" type="text" placeholder="e.g. 37AABCB1234F1Z1" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-code" type="text" placeholder="e.g. 37AABCB1234F1Z1" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Phone</label>
-            <input id="modal-sp-phone" type="text" placeholder="+91 98480 12345" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]">
+            <input id="modal-sp-phone" type="text" placeholder="+91 98480 12345" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]">
           </div>
           <div>
             <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Address</label>
-            <textarea id="modal-sp-addr" rows="2" placeholder="Center locality..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#006C7A]"></textarea>
+            <textarea id="modal-sp-addr" rows="2" placeholder="Center locality..." class="w-full p-2.5 rounded-lg border border-[#E2E8F0] outline-none focus:border-[#02a8b5]"></textarea>
           </div>
         </div>
       `,
@@ -2517,7 +2521,7 @@ export const PurchaseView = {
 
       return `
         <tr data-bill-no="${a.no}" class="border-b border-[#F1F5F9]">
-          <td class="px-3 py-2 font-bold text-[#006C7A]">${a.no}</td>
+          <td class="px-3 py-2 font-bold text-[#02a8b5]">${a.no}</td>
           <td class="px-3 py-2 text-[#475569]">${a.billDate}</td>
           <td class="px-3 py-2 text-[#0F172A] font-semibold">${a.supplier}</td>
           <td class="px-3 py-2 text-[#334155]">₹${fmt(g)}</td>
@@ -2526,7 +2530,7 @@ export const PurchaseView = {
           <td class="px-3 py-2 text-[#056A38]">₹${fmt(pd)}</td>
           <td class="px-3 py-2 font-bold text-[#B5152B]">₹${fmt(bal)}</td>
           <td class="px-3 py-2">
-            <input type="number" step="any" data-max-bal="${bal}" value="${bal}" class="modal-pay-input w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#006C7A] outline-none">
+            <input type="number" step="any" data-max-bal="${bal}" value="${bal}" class="modal-pay-input w-24 h-8 px-2 rounded border border-[#E2E8F0] font-bold text-[#02a8b5] outline-none">
           </td>
           <td class="modal-pay-rem px-3 py-2 font-semibold text-[#64748B]">₹0.00</td>
         </tr>
@@ -2548,7 +2552,7 @@ export const PurchaseView = {
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Voucher Number</label>
-              <input id="modal-pay-voucher" readonly value="${voucherNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] font-bold text-[#006C7A]">
+              <input id="modal-pay-voucher" readonly value="${voucherNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] font-bold text-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Cheque / NEFT Ref No</label>
@@ -2669,7 +2673,7 @@ export const PurchaseView = {
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Number <span class="text-[#FF5150]">*</span></label>
-              <input id="ma-no" value="${arrivalNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-bold text-[#006C7A]">
+              <input id="ma-no" value="${arrivalNo}" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] font-bold text-[#02a8b5]">
             </div>
             <div>
               <label class="block font-bold text-[#475569] uppercase tracking-wider mb-1">Arrival Date <span class="text-[#FF5150]">*</span></label>
@@ -2773,6 +2777,7 @@ export const PurchaseView = {
   }
 };
 ''')
+    print("Regenerated js/views/purchaseView.js successfully")
 
 if __name__ == '__main__':
     main()
