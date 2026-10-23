@@ -41,8 +41,8 @@ const UIBase = {
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               <span>${searchBtnText}</span>
             </button>
-            <button type="button" id="${idPrefix}-reset-btn" class="px-4 py-2 bg-white border border-[#CBD5E1] text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer" title="Reset all filters">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <button type="button" id="${idPrefix}-reset-btn" class="px-4 py-2 bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1 shadow-xs hover:shadow transition-all cursor-pointer" title="Reset all filters">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
               <span>Reset</span>
             </button>
           </div>
@@ -1512,7 +1512,7 @@ export const PreprocessingView = {
           <p class="text-xs text-[#5E6C84] mt-1">Accepts .CSV, .XLSX files up to 25MB (Grading runs, intake scales, chemical orders)</p>
           <div class="mt-4 flex items-center justify-center gap-3">
             <button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastSuccess('Upload triggered')">Browse Files</button>
-            <button class="px-4 py-2 bg-white border border-[#CBD5E1] text-[#006C7A] hover:bg-[#F0FAFC] text-xs font-bold rounded-lg shadow-xs cursor-pointer transition-colors" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
+            <button class="px-4 py-2 bg-[#008DA6] hover:bg-[#006C7A] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
           </div>
         </div>
       </div>

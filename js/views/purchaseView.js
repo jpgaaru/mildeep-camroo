@@ -683,7 +683,7 @@ export const PurchaseView = {
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   <span>Search</span>
                 </button>
-                <button id="rmdash-reset-btn" class="px-4 py-2.5 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer" title="Reset Filters">
+                <button id="rmdash-reset-btn" class="px-4 py-2.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Reset Filters">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                   <span>Reset</span>
                 </button>
@@ -765,7 +765,7 @@ export const PurchaseView = {
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   <span>Filter</span>
                 </button>
-                <button id="rmdash-reset-btn" class="px-4 py-2 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer" title="Reset Filters">
+                <button id="rmdash-reset-btn" class="px-4 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Reset Filters">
                   ↺
                 </button>
               </div>
@@ -1009,7 +1009,7 @@ export const PurchaseView = {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
-              <button id="bk-reset-btn" class="px-3.5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold cursor-pointer transition-colors" title="Reset Filters">
+              <button id="bk-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1101,7 +1101,7 @@ export const PurchaseView = {
               <h3 class="text-base font-bold text-[#0F172A]">Create Procurement Booking</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Booking Number manual (⟳ Auto available) with uniqueness check · Vehicle/Driver/Grader = free text with master suggestions</p>
             </div>
-            <button id="btn-back-to-bookings" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
+            <button id="btn-back-to-bookings" class="px-3.5 py-1.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
               ← Back to Bookings List
             </button>
           </div>
@@ -1219,10 +1219,10 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
+              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Close
               </button>
-              <button type="reset" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
+              <button type="reset" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Clear Form
               </button>
               <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
@@ -1404,7 +1404,7 @@ export const PurchaseView = {
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Expected vs Consumed Balances</h3>
             <div class="flex items-center gap-2">
-              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 ⬇ Download Table
               </button>
             </div>
@@ -1570,7 +1570,7 @@ export const PurchaseView = {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="ar-reset-btn" class="px-3.5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold cursor-pointer transition-colors" title="Reset Filters">
+              <button id="ar-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1585,7 +1585,7 @@ export const PurchaseView = {
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 <span>New Arrival</span>
               </button>
-              <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
+              <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Download Excel
               </button>
             </div>
@@ -1743,13 +1743,13 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
-              <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1 cursor-pointer transition-colors">
+              <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⧉ Copy TSV
               </button>
-              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1 transition-colors cursor-pointer">
+              <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Excel
               </button>
-              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1 transition-colors cursor-pointer">
+              <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ PDF
               </button>
             </div>
@@ -1888,7 +1888,7 @@ export const PurchaseView = {
                 <button onclick="PurchaseView.openRMBillEdit('${a.no}')" class="p-1 rounded text-[#006644] hover:bg-[#E3FCEF]" title="View & Edit RM Bill">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 </button>
-                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#475569] hover:bg-[#F8FAFC]" title="Print">
+                <button onclick="window.Toast.show('Printing bill ${a.no}...', 'info')" class="p-1 rounded text-[#006C7A] hover:bg-[#F0FAFC]" title="Print">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 </button>
               </div>
@@ -1950,7 +1950,7 @@ export const PurchaseView = {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="bl-reset-btn" class="h-9 px-3.5 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold cursor-pointer transition-colors" style="margin-top: 18px;" title="Reset Filters">
+              <button id="bl-reset-btn" class="h-9 px-3.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" style="margin-top: 18px;" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -1961,10 +1961,10 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div id="bills-pdf-btns" class="items-center gap-2" style="display:none;">
-              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
+              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Commission Bills PDF
               </button>
-              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
+              <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#008DA6] hover:bg-[#006C7A] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
                 ⬇ Bills PDF
               </button>
             </div>
@@ -2036,7 +2036,7 @@ export const PurchaseView = {
               <h3 class="text-base font-bold text-[#0F172A]">RM Bill Details — ${a.no}</h3>
               <p class="text-xs text-[#64748B] mt-0.5">Header frozen from Arrival · editable: Addition/Deduction per KG, Rate, Remarks</p>
             </div>
-            <button id="btn-back-to-bills" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
+            <button id="btn-back-to-bills" class="px-3.5 py-1.5 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
               ← Back to Bills Register
             </button>
           </div>
@@ -2103,7 +2103,7 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
+              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
                 Cancel
               </button>
               <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
@@ -2240,7 +2240,7 @@ export const PurchaseView = {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
               </button>
-              <button id="pay-reset-btn" class="px-3.5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold cursor-pointer transition-colors" title="Reset Filters">
+              <button id="pay-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -2407,7 +2407,7 @@ export const PurchaseView = {
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Filter</span>
               </button>
-              <button id="ps-reset-btn" class="px-3.5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-[#475569] hover:bg-[#F1F5F9] text-xs font-semibold cursor-pointer transition-colors" title="Reset Filters">
+              <button id="ps-reset-btn" class="px-3.5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all" title="Reset Filters">
                 ↺
               </button>
             </div>
@@ -2418,7 +2418,7 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <h3 class="text-sm font-bold text-[#0F172A]">Payment Vouchers Audit Register</h3>
-            <button onclick="window.Toast.show('Exporting Payment Summary...', 'info')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
+            <button onclick="window.Toast.show('Exporting Payment Summary...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
               ⬇ Download Excel
             </button>
           </div>

@@ -394,16 +394,17 @@ body {
 }
 
 .btn-secondary {
-  background-color: #FFFFFF;
-  color: #1E293B;
-  font-weight: 600;
-  border: 1px solid #CBD5E1;
-  transition: all 0.15s ease;
+  background-color: #64748B !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border: 1px solid #475569 !important;
+  border-radius: 8px !important;
+  transition: all 0.15s ease !important;
 }
 .btn-secondary:hover {
-  background-color: #F8FAFD;
-  color: #0F172A;
-  border-color: #94A3B8;
+  background-color: #475569 !important;
+  border-color: #334155 !important;
+  color: #FFFFFF !important;
 }
 
 .btn-danger {

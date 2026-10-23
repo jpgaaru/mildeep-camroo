@@ -1380,7 +1380,7 @@ const PreprocessingView = {
           <p class="text-xs text-[#5E6C84] mt-1">Accepts .CSV, .XLSX files up to 25MB (Grading runs, intake scales, chemical orders)</p>
           <div class="mt-4 flex items-center justify-center gap-3">
             <button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastSuccess('Upload triggered')">Browse Files</button>
-            <button class="px-4 py-2 bg-white border border-[#CBD5E1] text-[#006C7A] hover:bg-[#F0FAFC] text-xs font-bold rounded-lg shadow-xs cursor-pointer transition-colors" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
+            <button class="px-4 py-2 bg-[#008DA6] hover:bg-[#006C7A] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
           </div>
         </div>
       </div>
