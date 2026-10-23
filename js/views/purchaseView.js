@@ -1219,10 +1219,10 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              <button type="button" id="btn-close-create-booking" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
                 Close
               </button>
-              <button type="reset" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC]">
+              <button type="reset" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
                 Clear Form
               </button>
               <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
@@ -1961,7 +1961,7 @@ export const PurchaseView = {
         <div class="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-xs">
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div id="bills-pdf-btns" class="items-center gap-2" style="display:none;">
-              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all">
+              <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
                 ⬇ Commission Bills PDF
               </button>
               <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-xs font-bold text-[#006C7A] hover:bg-[#F0FAFC] flex items-center gap-1.5 transition-colors cursor-pointer">
@@ -2103,7 +2103,7 @@ export const PurchaseView = {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
-              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg border border-[#CBD5E1] text-xs font-semibold text-[#475569] hover:bg-[#F8FAFC] cursor-pointer">
+              <button type="button" id="btn-cancel-rm-bill" class="px-5 py-2 rounded-lg border border-[#CBD5E1] bg-white text-xs font-semibold text-[#475569] hover:bg-[#F1F5F9] cursor-pointer transition-colors">
                 Cancel
               </button>
               <button type="submit" class="px-6 py-2 rounded-lg bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold shadow-xs cursor-pointer">
