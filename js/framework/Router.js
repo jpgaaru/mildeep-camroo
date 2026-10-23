@@ -35,32 +35,20 @@ export const SECTION_METADATA_REGISTRY = {
       subtitle: 'Manage vendor payments, settled vouchers, and banking logs.'
     }
   },
-  preprocessing: {
+    preprocessing: {
     dashboard: {
-      title: 'Pre-Processing Floor',
-      subtitle: 'De-heading, grading, peeling lines, and yield recovery telemetry'
+      title: 'Pre-Processing Dashboard',
+      subtitle: 'Summary telemetry, throughput metrics, recovery yields, and floor analytics'
+    },
+    operations: {
+      title: 'Operations',
+      subtitle: 'Intake sizing, roller grader lines, deheading yields, and inter-plant transfers'
     },
     'pre-processing': {
-      title: 'Pre Processing',
+      title: 'Operations',
       subtitle: 'Intake sizing, roller grader lines, deheading yields, and inter-plant transfers'
-    },
-    'floor-operations': {
-      title: 'Pre Processing',
-      subtitle: 'Intake sizing, roller grader lines, deheading yields, and inter-plant transfers'
-    },
-    'production-reports': {
-      title: 'Production Reports',
-      subtitle: 'Pond-to-pack genealogical audit, floor balance matrix, and packaging yield'
-    },
-    traceability: {
-      title: 'Production Reports',
-      subtitle: 'Pond-to-pack genealogical audit, floor balance matrix, and packaging yield'
     },
     'chemical-screens': {
-      title: 'Chemical Screens',
-      subtitle: 'Customs inward, STPP/non-phosphate bath dosage logs, and supplier settlements'
-    },
-    'chemical-inventory': {
       title: 'Chemical Screens',
       subtitle: 'Customs inward, STPP/non-phosphate bath dosage logs, and supplier settlements'
     }

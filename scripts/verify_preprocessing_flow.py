@@ -42,8 +42,7 @@ def test_tabs_coverage_sidebar():
 
     expected_submenus = [
         ('dashboard', 'Dashboard'),
-        ('pre-processing', 'Pre Processing'),
-        ('production-reports', 'Production Reports'),
+        ('operations', 'Operations'),
         ('chemical-screens', 'Chemical Screens')
     ]
     for sm_id, sm_title in expected_submenus:
@@ -54,11 +53,9 @@ def test_tabs_coverage_sidebar():
     expected_tabs = [
         # Submenu 1: Dashboard
         'overview',
-        # Submenu 2: Pre Processing
+        # Submenu 2: Operations
         'deheading', 'grading', 'rm-received', 'deheading-trackid', 'grading-trackid', 'value-addition', 'hon-qty-transfer',
-        # Submenu 3: Production Reports
-        'track-code-report', 'va-floor-balance', 'va-transfer', 'assumed-reports', 'consolidation-daily', 'file-upload',
-        # Submenu 4: Chemical Screens
+        # Submenu 3: Chemical Screens
         'chemical-pos', 'received-chemicals', 'chemicals-consumption', 'chemical-received-report', 'chemical-opening-balance', 'chemical-balance-report', 'chemical-payments-list'
     ]
 
@@ -81,11 +78,10 @@ def test_standalone_and_miledeep_html():
         assert 'title: "Pre Processing"' in content, f"Pre Processing title not exact in {filename}"
         print(f"  ✓ Main Menu 'Pre Processing' present")
 
-        # Check all 4 Submenus
+        # Check all 3 Submenus
         submenus = [
             ('dashboard', 'Dashboard'),
-            ('pre-processing', 'Pre Processing'),
-            ('production-reports', 'Production Reports'),
+            ('operations', 'Operations'),
             ('chemical-screens', 'Chemical Screens')
         ]
         for sid, stitle in submenus:
@@ -93,16 +89,15 @@ def test_standalone_and_miledeep_html():
             assert f'title: "{stitle}"' in content, f"Submenu title '{stitle}' missing in {filename}"
             print(f"  ✓ Submenu '{stitle}' ({sid}) verified")
 
-        # Check key tabs (all 21 tabs)
+        # Check key tabs (all 15 tabs across 3 submenus)
         key_tabs = [
             'overview',
             'deheading', 'grading', 'rm-received', 'deheading-trackid', 'grading-trackid', 'value-addition', 'hon-qty-transfer',
-            'track-code-report', 'va-floor-balance', 'va-transfer', 'assumed-reports', 'consolidation-daily', 'file-upload',
             'chemical-pos', 'received-chemicals', 'chemicals-consumption', 'chemical-received-report', 'chemical-opening-balance', 'chemical-balance-report', 'chemical-payments-list'
         ]
         for t in key_tabs:
             assert f'id: "{t}"' in content, f"Tab '{t}' missing in {filename}"
-        print(f"  ✓ All 21 required tabs present in navigation hierarchy")
+        print(f"  ✓ All 15 required tabs across 3 submenus present in navigation hierarchy")
 
         # Check PreprocessingView and Molecules exist
         assert 'const PreprocessingView =' in content, f"PreprocessingView missing in {filename}"

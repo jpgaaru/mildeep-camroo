@@ -107,30 +107,17 @@ export const NAV_HIERARCHY = [
         ]
       },
       {
-        id: "pre-processing",
-        title: "Pre Processing",
+        id: "operations",
+        title: "Operations",
         defaultTab: "deheading",
         tabs: [
-          { id: "deheading", label: "Deheading", hash: "#/preprocessing/pre-processing/deheading" },
-          { id: "grading", label: "Grading", hash: "#/preprocessing/pre-processing/grading" },
-          { id: "rm-received", label: "Rm Received trackid", hash: "#/preprocessing/pre-processing/rm-received" },
-          { id: "deheading-trackid", label: "De-Heading trackid", hash: "#/preprocessing/pre-processing/deheading-trackid" },
-          { id: "grading-trackid", label: "Grading trackid", hash: "#/preprocessing/pre-processing/grading-trackid" },
-          { id: "value-addition", label: "Value Addition trackid", hash: "#/preprocessing/pre-processing/value-addition" },
-          { id: "hon-qty-transfer", label: "Hon Qty Transfer After VA", hash: "#/preprocessing/pre-processing/hon-qty-transfer" }
-        ]
-      },
-      {
-        id: "production-reports",
-        title: "Production Reports",
-        defaultTab: "track-code-report",
-        tabs: [
-          { id: "track-code-report", label: "Track Code Report", hash: "#/preprocessing/production-reports/track-code-report" },
-          { id: "va-floor-balance", label: "VA Floor Balance", hash: "#/preprocessing/production-reports/va-floor-balance" },
-          { id: "va-transfer", label: "VA Transfer Report", hash: "#/preprocessing/production-reports/va-transfer" },
-          { id: "assumed-reports", label: "Assumed Reports", hash: "#/preprocessing/production-reports/assumed-reports" },
-          { id: "consolidation-daily", label: "Consolidation Report", hash: "#/preprocessing/production-reports/consolidation-daily" },
-          { id: "file-upload", label: "File Upload", hash: "#/preprocessing/production-reports/file-upload" }
+          { id: "deheading", label: "Deheading", hash: "#/preprocessing/operations/deheading" },
+          { id: "grading", label: "Grading", hash: "#/preprocessing/operations/grading" },
+          { id: "rm-received", label: "Rm Received trackid", hash: "#/preprocessing/operations/rm-received" },
+          { id: "deheading-trackid", label: "De-Heading trackid", hash: "#/preprocessing/operations/deheading-trackid" },
+          { id: "grading-trackid", label: "Grading trackid", hash: "#/preprocessing/operations/grading-trackid" },
+          { id: "value-addition", label: "Value Addition trackid", hash: "#/preprocessing/operations/value-addition" },
+          { id: "hon-qty-transfer", label: "Hon Qty Transfer After VA", hash: "#/preprocessing/operations/hon-qty-transfer" }
         ]
       },
       {

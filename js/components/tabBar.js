@@ -21,6 +21,9 @@ export const TabBar = {
         tabId = subId;
       }
     }
+    if (!submenu && modId === 'preprocessing' && (subId === 'pre-processing' || subId === 'floor-operations')) {
+      submenu = module.submenus.find(s => s.id === 'operations');
+    }
     if (!submenu) return null;
 
     const currentTabId = tabId || submenu.defaultTab;
