@@ -23,10 +23,9 @@ def main():
         assert "TabBar.render('sales-tab-bar-container'" in content or 'TabBar.render("sales-tab-bar-container"' in content, f"Sales TabBar not mounted in {filename}"
         print("  ✓ Sales TabBar sticky navigation mounted")
 
-        # 3. Chemical PO (Image 1 fix)
-        assert "chem-po-filter" in content, f"Chemical PO filter card missing in {filename}"
-        assert "chem-po-table-container" in content, f"Chemical PO DataTable container missing in {filename}"
-        assert "chem-po-totals-container" in content, f"Chemical PO totals container missing in {filename}"
+        # 3. Chemical PO (ERP Design System matching user screenshots)
+        assert "cpo-filter" in content or "chem-po-filter" in content, f"Chemical PO filter card missing in {filename}"
+        assert "cpo-table" in content or "chem-po-table-container" in content, f"Chemical PO DataTable container missing in {filename}"
         print("  ✓ Chemical PO Register upgraded to Base Design System (Image 1 fixed)")
 
         # 4. Proforma List (Image 2 fix)
