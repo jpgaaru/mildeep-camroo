@@ -678,8 +678,21 @@ export const App = {
   }
 };
 
-// Expose App globally
+// Expose App, Modal, and Views globally for inline HTML event handlers
 window.App = App;
+window.Modal = Modal;
+window.SalesView = SalesView;
+window.PurchaseView = PurchaseView;
+window.PreprocessingView = PreprocessingView;
+window.QCView = QCView;
+window.ProductionView = ProductionView;
+window.ColdstoreView = ColdstoreView;
+window.InventoryView = InventoryView;
+window.ReportsView = ReportsView;
+window.SetupView = SetupView;
+window.HelpView = HelpView;
+window.NotificationsView = NotificationsView;
+
 window.switchERPLayout = () => {
   localStorage.setItem('erp_layout_mode', 'option1');
   const shell = document.getElementById('erp-app-shell');

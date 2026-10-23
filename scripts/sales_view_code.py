@@ -1905,11 +1905,428 @@ const SalesView = {
     }
   },
 
-        // ==========================================
+          // ==========================================
   // INTERNAL SCREEN: NEW PROFORMA INVOICE (IMAGE 2)
   // ==========================================
   openNewPi() {
-    window.location.hash = '#/sales/orders/new-pi';
+    this.openNewPiModal();
+  },
+
+  openNewPiModal() {
+    if (typeof Modal === 'undefined' || !Modal.open) {
+      alert('Modal dialog component not ready.');
+      return;
+    }
+
+    Modal.open({
+      title: 'New Proforma Invoice',
+      size: 'xl',
+      content: `
+        <form id="form-new-proforma" onsubmit="event.preventDefault(); SalesView.submitNewPi();">
+          <div class="space-y-4 text-xs text-[#0F172A]">
+            <!-- ROW 1 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SELECT EXPORTER <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-exporter" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Exporter</option>
+                  <option value="DEVI FISHERIES LIMITED" selected>DEVI FISHERIES LIMITED</option>
+                  <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SELECT PROCESSOR <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-processor" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Processor</option>
+                  <option value="857">857 - USHA Processing Unit</option>
+                  <option value="853" selected>853 - VSP Processing Unit</option>
+                  <option value="1888">1888 - JPT Processing Unit</option>
+                  <option value="24234236">24234236 - SATYA Processing Unit</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  NO OF CONTAINERS
+                </label>
+                <div class="flex items-center h-9 border border-[#E2E8F0] rounded-lg overflow-hidden bg-white">
+                  <button type="button" class="w-9 h-full flex items-center justify-center text-[#475569] hover:bg-[#F1F5F9] font-bold cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(-1)">-</button>
+                  <input type="number" id="new-pi-containers" value="1" min="1" max="99" class="flex-1 text-center font-bold text-xs text-[#0F172A] outline-none border-x border-[#E2E8F0] h-full" />
+                  <button type="button" class="w-9 h-full flex items-center justify-center text-[#475569] hover:bg-[#F1F5F9] font-bold cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(1)">+</button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  REFERENCE NUMBER
+                </label>
+                <input type="text" id="new-pi-ref-no" placeholder="Enter Reference Number" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+            </div>
+
+            <!-- ROW 2 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PROFORMA INVOICE NO <span class="text-[#FF5150]">*</span>
+                </label>
+                <input type="text" id="new-pi-number" value="DFL/PI/1316/26-27" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PROFORMA INVOICE DATE <span class="text-[#FF5150]">*</span>
+                </label>
+                <input type="date" id="new-pi-date" value="2026-10-21" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  P.O NO
+                </label>
+                <input type="text" id="new-pi-po-no" placeholder="Enter P.O Number" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  P.O DATE
+                </label>
+                <input type="date" id="new-pi-po-date" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+            </div>
+
+            <!-- ROW 3 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  CONSIGNEE <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-consignee" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Consignee</option>
+                  <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
+                  <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                  <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                  <option value="RED CHAMBER CO.">RED CHAMBER CO.</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  ULTIMATE CONSIGNEE
+                </label>
+                <select id="new-pi-ultimate-consignee" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Ultimate Consignee</option>
+                  <option value="SAME AS CONSIGNEE">SAME AS CONSIGNEE</option>
+                  <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                  <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  BUYER NAME
+                </label>
+                <select id="new-pi-buyer" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Buyer</option>
+                  <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
+                  <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
+                  <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  NOTIFY PARTY
+                </label>
+                <select id="new-pi-notify" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Notify Party</option>
+                  <option value="SAME AS CONSIGNEE">SAME AS CONSIGNEE</option>
+                  <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                  <option value="EXPEDITORS INTL OF WASHINGTON">EXPEDITORS INTL OF WASHINGTON</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW 4 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  IMPORTER OF RECORD <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-importer" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Importer of Record</option>
+                  <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
+                  <option value="PACIFIC SEAFOOD GROUP">PACIFIC SEAFOOD GROUP</option>
+                  <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  AGENT
+                </label>
+                <select id="new-pi-agent" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Agent</option>
+                  <option value="COASTAL MARINE AGENCIES">COASTAL MARINE AGENCIES</option>
+                  <option value="SAGAR MARINE BROKERS">SAGAR MARINE BROKERS</option>
+                  <option value="DELTA SEAFOOD ASSOCIATES">DELTA SEAFOOD ASSOCIATES</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  CERTIFICATION
+                </label>
+                <select id="new-pi-cert" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Certification</option>
+                  <option value="BAP 4-Star">BAP 4-Star</option>
+                  <option value="BRCGS">BRCGS Grade A</option>
+                  <option value="ASC">ASC Certified</option>
+                  <option value="HACCP">HACCP Compliance</option>
+                  <option value="FSSC 22000">FSSC 22000</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PORT OF LOADING <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-pol" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Port of Loading</option>
+                  <option value="Visakhapatnam (INVTZ)" selected>Visakhapatnam (INVTZ)</option>
+                  <option value="Chennai (INMAA)">Chennai (INMAA)</option>
+                  <option value="Kolkata (INCCU)">Kolkata (INCCU)</option>
+                  <option value="Krishnapatnam (INKRI)">Krishnapatnam (INKRI)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW 5 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  DESTINATION COUNTRY <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-dest-country" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Country</option>
+                  <option value="USA" selected>USA</option>
+                  <option value="CHINA">CHINA</option>
+                  <option value="BELGIUM">BELGIUM</option>
+                  <option value="RUSSIA">RUSSIA</option>
+                  <option value="JAPAN">JAPAN</option>
+                  <option value="CANADA">CANADA</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PORT OF DISCHARGE <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-pod" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Port of Discharge</option>
+                  <option value="Los Angeles, USA" selected>Los Angeles, USA</option>
+                  <option value="New York, USA">New York, USA</option>
+                  <option value="Seattle, USA">Seattle, USA</option>
+                  <option value="Rotterdam, Netherlands">Rotterdam, Netherlands</option>
+                  <option value="Shanghai, China">Shanghai, China</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  FINAL DESTINATION COUNTRY
+                </label>
+                <select id="new-pi-final-dest-country" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" selected>Select Final Destination Country</option>
+                  <option value="USA" selected>USA</option>
+                  <option value="CHINA">CHINA</option>
+                  <option value="BELGIUM">BELGIUM</option>
+                  <option value="RUSSIA">RUSSIA</option>
+                  <option value="JAPAN">JAPAN</option>
+                  <option value="CANADA">CANADA</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  FINAL DESTINATION <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-final-dest" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Final Destination</option>
+                  <option value="Los Angeles, CA" selected>Los Angeles, CA</option>
+                  <option value="Elizabeth, NJ">Elizabeth, NJ</option>
+                  <option value="Seattle, WA">Seattle, WA</option>
+                  <option value="Rotterdam Port">Rotterdam Port</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW 6 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SHIPBY DATE
+                </label>
+                <input type="date" id="new-pi-shipby" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SHIPBY DATE 2 (TEXT)
+                </label>
+                <input type="text" id="new-pi-shipby-text" placeholder="Enter ShipBy Date Text (e.g. Prompt)" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  BANK DETAILS <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-bank" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Bank</option>
+                  <option value="HDFC BANK - VSP" selected>HDFC BANK - VSP (A/C #992019283)</option>
+                  <option value="STATE BANK OF INDIA - OVERSEAS">STATE BANK OF INDIA - OVERSEAS (A/C #001928392)</option>
+                  <option value="ICICI BANK LIMITED - EXPORT">ICICI BANK LIMITED - EXPORT (A/C #448291039)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SHOW BANK <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-show-bank" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="Yes">Yes</option>
+                  <option value="No" selected>No</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW 7 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PAYMENT TERMS <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-payment-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Payment</option>
+                  <option value="CAD (Cash Against Documents)" selected>CAD (Cash Against Documents)</option>
+                  <option value="100% LC at Sight">100% LC at Sight</option>
+                  <option value="30% Advance + 70% TT">30% Advance + 70% TT</option>
+                  <option value="DA 60 Days">DA 60 Days</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  SHIPMENT TERMS <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-shipment-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Shipment Terms</option>
+                  <option value="CIF" selected>CIF (Cost, Insurance & Freight)</option>
+                  <option value="FOB">FOB (Free on Board)</option>
+                  <option value="CFR">CFR (Cost & Freight)</option>
+                  <option value="DDP">DDP (Delivered Duty Paid)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  DELIVERY TERMS <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-delivery-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select</option>
+                  <option value="PORT_TO_PORT" selected>PORT TO PORT</option>
+                  <option value="DOOR_TO_DOOR">DOOR TO DOOR</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  QUANTITY UNITS <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-qty-units" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Quantity Units</option>
+                  <option value="LBS" selected>LBS (Pounds)</option>
+                  <option value="KGS">KGS (Kilograms)</option>
+                  <option value="CARTONS">CARTONS</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ROW 8 (4 cols) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  CURRENCY <span class="text-[#FF5150]">*</span>
+                </label>
+                <select id="new-pi-currency" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+                  <option value="" disabled selected>Select Currency</option>
+                  <option value="USD" selected>USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="JPY">JPY (¥)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  FREIGHT
+                </label>
+                <input type="text" id="new-pi-freight" placeholder="Enter Freight" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  CHARGE NAME
+                </label>
+                <input type="text" id="new-pi-charge-name" placeholder="Enter Charge Name" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  CHARGE AMOUNT
+                </label>
+                <input type="text" id="new-pi-charge-amount" placeholder="Enter Charge Amount" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+            </div>
+
+            <!-- ROW 9: PRODUCTION PLANT -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                  PRODUCTION PLANT
+                </label>
+                <input type="text" id="new-pi-plant" placeholder="e.g. USHA, VSP, JPT, SATYA" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
+              </div>
+            </div>
+
+            <!-- ROW 10: REMARKS -->
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
+                REMARKS
+              </label>
+              <textarea id="new-pi-remarks" rows="2" placeholder="Enter Remarks" class="w-full p-2.5 rounded-lg border border-[#E2E8F0] bg-white text-xs text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all"></textarea>
+            </div>
+          </div>
+        </form>
+      `,
+      footerButtons: [
+        {
+          label: 'Cancel',
+          type: 'secondary',
+          onClick: (m) => m.close()
+        },
+        {
+          label: 'Create Proforma Invoice',
+          type: 'primary',
+          onClick: () => SalesView.submitNewPi()
+        }
+      ]
+    });
   },
 
   renderNewPi(container) {
@@ -1936,7 +2353,7 @@ const SalesView = {
         <!-- Form Card Container (Base Design System with AquaPulse Colors) -->
         <div class="bg-white rounded-xl border border-[#DFE1E6] p-6 shadow-xs">
           <form id="form-new-proforma" onsubmit="event.preventDefault(); SalesView.submitNewPi();">
-            <div class="space-y-4">
+            <div class="space-y-4 text-xs text-[#0F172A]">
               <!-- ROW 1 (4 cols) -->
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
                 <div>
@@ -1945,7 +2362,7 @@ const SalesView = {
                   </label>
                   <select id="new-pi-exporter" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Exporter</option>
-                    <option value="DEVI FISHERIES LIMITED">DEVI FISHERIES LIMITED</option>
+                    <option value="DEVI FISHERIES LIMITED" selected>DEVI FISHERIES LIMITED</option>
                     <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
                   </select>
                 </div>
@@ -1957,7 +2374,7 @@ const SalesView = {
                   <select id="new-pi-processor" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Processor</option>
                     <option value="857">857 - USHA Processing Unit</option>
-                    <option value="853">853 - VSP Processing Unit</option>
+                    <option value="853" selected>853 - VSP Processing Unit</option>
                     <option value="1888">1888 - JPT Processing Unit</option>
                     <option value="24234236">24234236 - SATYA Processing Unit</option>
                   </select>
@@ -1967,10 +2384,10 @@ const SalesView = {
                   <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
                     NO OF CONTAINERS
                   </label>
-                  <div class="flex items-center border border-[#E2E8F0] rounded-lg bg-white overflow-hidden h-9">
-                    <button type="button" class="w-9 h-full flex items-center justify-center text-sm font-bold text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(-1)">−</button>
-                    <input type="number" id="new-pi-containers" value="1" min="1" max="99" class="w-full text-center text-xs font-bold bg-transparent border-0 outline-none focus:outline-none text-[#0F172A]">
-                    <button type="button" class="w-9 h-full flex items-center justify-center text-sm font-bold text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(1)">+</button>
+                  <div class="flex items-center h-9 border border-[#E2E8F0] rounded-lg overflow-hidden bg-white">
+                    <button type="button" class="w-9 h-full flex items-center justify-center text-[#475569] hover:bg-[#F1F5F9] font-bold cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(-1)">-</button>
+                    <input type="number" id="new-pi-containers" value="1" min="1" max="99" class="flex-1 text-center font-bold text-xs text-[#0F172A] outline-none border-x border-[#E2E8F0] h-full" />
+                    <button type="button" class="w-9 h-full flex items-center justify-center text-[#475569] hover:bg-[#F1F5F9] font-bold cursor-pointer transition-colors" onclick="SalesView.adjustContainerCount(1)">+</button>
                   </div>
                 </div>
 
@@ -1988,7 +2405,7 @@ const SalesView = {
                   <label class="block text-[11px] font-bold uppercase tracking-wider text-[#475569] mb-1.5">
                     PROFORMA INVOICE NO <span class="text-[#FF5150]">*</span>
                   </label>
-                  <input type="text" id="new-pi-number" value="DFL/PI/1316/26-27" required placeholder="Enter Proforma Invoice No" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all font-semibold">
+                  <input type="text" id="new-pi-number" value="DFL/PI/1316/26-27" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                 </div>
 
                 <div>
@@ -2021,9 +2438,10 @@ const SalesView = {
                   </label>
                   <select id="new-pi-consignee" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Consignee</option>
-                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
                     <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
                     <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
+                    <option value="RED CHAMBER CO.">RED CHAMBER CO.</option>
                   </select>
                 </div>
 
@@ -2034,7 +2452,8 @@ const SalesView = {
                   <select id="new-pi-ultimate-consignee" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" selected>Select Ultimate Consignee</option>
                     <option value="SAME AS CONSIGNEE">SAME AS CONSIGNEE</option>
-                    <option value="EASTERN COLD STORAGE LOGISTICS">EASTERN COLD STORAGE LOGISTICS</option>
+                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
                   </select>
                 </div>
 
@@ -2044,7 +2463,7 @@ const SalesView = {
                   </label>
                   <select id="new-pi-buyer" class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" selected>Select Buyer</option>
-                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
                     <option value="PACIFIC SEAFOOD GROUP,">PACIFIC SEAFOOD GROUP,</option>
                     <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
                   </select>
@@ -2071,7 +2490,7 @@ const SalesView = {
                   </label>
                   <select id="new-pi-importer" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Importer of Record</option>
-                    <option value="EASTERN FISH COMPANY LLC">EASTERN FISH COMPANY LLC</option>
+                    <option value="EASTERN FISH COMPANY LLC" selected>EASTERN FISH COMPANY LLC</option>
                     <option value="PACIFIC SEAFOOD GROUP">PACIFIC SEAFOOD GROUP</option>
                     <option value="ARISTA INDUSTRIES INC">ARISTA INDUSTRIES INC</option>
                   </select>
@@ -2199,9 +2618,9 @@ const SalesView = {
                   </label>
                   <select id="new-pi-bank" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Bank</option>
-                    <option value="HDFC Bank - Current A/c 502000123456" selected>HDFC Bank - Current A/c 502000123456</option>
-                    <option value="State Bank of India - A/c 3892019283">State Bank of India - A/c 3892019283</option>
-                    <option value="ICICI Bank Ltd - A/c 0012938472">ICICI Bank Ltd - A/c 0012938472</option>
+                    <option value="HDFC BANK - VSP" selected>HDFC BANK - VSP (A/C #992019283)</option>
+                    <option value="STATE BANK OF INDIA - OVERSEAS">STATE BANK OF INDIA - OVERSEAS (A/C #001928392)</option>
+                    <option value="ICICI BANK LIMITED - EXPORT">ICICI BANK LIMITED - EXPORT (A/C #448291039)</option>
                   </select>
                 </div>
 
@@ -2210,8 +2629,8 @@ const SalesView = {
                     SHOW BANK <span class="text-[#FF5150]">*</span>
                   </label>
                   <select id="new-pi-show-bank" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
-                    <option value="No" selected>No</option>
                     <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
                   </select>
                 </div>
               </div>
@@ -2223,11 +2642,11 @@ const SalesView = {
                     PAYMENT TERMS <span class="text-[#FF5150]">*</span>
                   </label>
                   <select id="new-pi-payment-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
-                    <option value="" disabled selected>Select Payment Terms</option>
-                    <option value="100% DP AT SIGHT" selected>100% DP AT SIGHT</option>
-                    <option value="CAD (CASH AGAINST DOCUMENTS)">CAD (CASH AGAINST DOCUMENTS)</option>
-                    <option value="LC 90 DAYS">LC 90 DAYS</option>
-                    <option value="30 DAYS NET">30 DAYS NET</option>
+                    <option value="" disabled selected>Select Payment</option>
+                    <option value="CAD (Cash Against Documents)" selected>CAD (Cash Against Documents)</option>
+                    <option value="100% LC at Sight">100% LC at Sight</option>
+                    <option value="30% Advance + 70% TT">30% Advance + 70% TT</option>
+                    <option value="DA 60 Days">DA 60 Days</option>
                   </select>
                 </div>
 
@@ -2237,9 +2656,10 @@ const SalesView = {
                   </label>
                   <select id="new-pi-shipment-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Shipment Terms</option>
-                    <option value="CIF (COST INSURANCE FREIGHT)" selected>CIF (COST INSURANCE FREIGHT)</option>
-                    <option value="FOB (FREE ON BOARD)">FOB (FREE ON BOARD)</option>
-                    <option value="C&F (COST & FREIGHT)">C&F (COST & FREIGHT)</option>
+                    <option value="CIF" selected>CIF (Cost, Insurance & Freight)</option>
+                    <option value="FOB">FOB (Free on Board)</option>
+                    <option value="CFR">CFR (Cost & Freight)</option>
+                    <option value="DDP">DDP (Delivered Duty Paid)</option>
                   </select>
                 </div>
 
@@ -2248,10 +2668,9 @@ const SalesView = {
                     DELIVERY TERMS <span class="text-[#FF5150]">*</span>
                   </label>
                   <select id="new-pi-delivery-terms" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
-                    <option value="" disabled selected>Select Delivery Terms</option>
-                    <option value="PORT TO PORT" selected>PORT TO PORT</option>
-                    <option value="DOOR TO DOOR">DOOR TO DOOR</option>
-                    <option value="CY TO CY">CY TO CY</option>
+                    <option value="" disabled selected>Select</option>
+                    <option value="PORT_TO_PORT" selected>PORT TO PORT</option>
+                    <option value="DOOR_TO_DOOR">DOOR TO DOOR</option>
                   </select>
                 </div>
 
@@ -2261,9 +2680,8 @@ const SalesView = {
                   </label>
                   <select id="new-pi-qty-units" required class="w-full h-9 px-3 rounded-lg border border-[#E2E8F0] bg-white text-xs font-semibold text-[#0F172A] outline-none focus:border-[#006C7A] focus:ring-1 focus:ring-[#006C7A] transition-all">
                     <option value="" disabled selected>Select Quantity Units</option>
-                    <option value="LBS (POUNDS)" selected>LBS (POUNDS)</option>
-                    <option value="KGS (KILOGRAMS)">KGS (KILOGRAMS)</option>
-                    <option value="MTONS (METRIC TONS)">MTONS (METRIC TONS)</option>
+                    <option value="LBS" selected>LBS (Pounds)</option>
+                    <option value="KGS">KGS (Kilograms)</option>
                     <option value="CARTONS">CARTONS</option>
                   </select>
                 </div>
@@ -2350,14 +2768,16 @@ const SalesView = {
   },
 
   submitNewPi() {
-    const piNumber = document.getElementById('new-pi-number')?.value || `DFL/PI/${Math.floor(1316 + Math.random() * 50)}/26-27`;
+    const piNumber = document.getElementById('new-pi-number')?.value.trim() || `DFL/PI/${Math.floor(1316 + Math.random() * 50)}/26-27`;
     const piDate = document.getElementById('new-pi-date')?.value || '21/10/2026';
-    const poNo = document.getElementById('new-pi-po-no')?.value || 'PO-2026-NEW';
+    const poNo = document.getElementById('new-pi-po-no')?.value.trim() || 'PO-2026-NEW';
     const buyer = document.getElementById('new-pi-consignee')?.value || 'EASTERN FISH COMPANY LLC';
     const processor = document.getElementById('new-pi-processor')?.value || '853';
-    const productionPlant = document.getElementById('new-pi-plant')?.value || 'VSP';
+    const productionPlant = document.getElementById('new-pi-plant')?.value.trim() || 'VSP';
     const shipByDate = document.getElementById('new-pi-shipby')?.value || '--';
     const containers = parseInt(document.getElementById('new-pi-containers')?.value, 10) || 1;
+    const country = document.getElementById('new-pi-dest-country')?.value || 'USA';
+    const exporter = document.getElementById('new-pi-exporter')?.value || 'DEVI FISHERIES LIMITED';
 
     const newId = String(Math.floor(7394 + Math.random() * 100));
 
@@ -2372,8 +2792,8 @@ const SalesView = {
       productionPlant: productionPlant,
       shipByDate: shipByDate,
       status: 'Pi-Pending',
-      exporter: 'DEVI FISHERIES LIMITED',
-      country: 'USA',
+      exporter: exporter,
+      country: country,
       cartons: containers * 1800,
       totalAmountUsd: containers * 190000
     };
@@ -2384,12 +2804,21 @@ const SalesView = {
       r.sNo = idx + 1;
     });
 
+    if (typeof Modal !== 'undefined' && Modal.close) {
+      Modal.close();
+    }
+
+    const tbody = document.getElementById('sales-pi-tbody');
+    if (tbody) {
+      this.renderProformaRows(this.proformaDataset);
+      this.renderProformaTotals(this.proformaDataset);
+    } else {
+      window.location.hash = '#/sales/orders/proforma-list';
+    }
+
     if (typeof Toast !== 'undefined' && Toast.show) {
       Toast.show(`Proforma Invoice ${piNumber} (ID #${newId}) created successfully!`, 'success');
     }
-
-    // Navigate back to Proforma List
-    window.location.hash = '#/sales/orders/proforma-list';
   },
 
         // ==========================================
@@ -2490,20 +2919,10 @@ const SalesView = {
     }
   },
 
-  openNewPiModal() {
-    Modal.alert({
-      title: 'Create Proforma Invoice',
-      message: `
-        <form id="new-pi-form" onsubmit="event.preventDefault(); Toast.show('Proforma Invoice draft created successfully', 'success'); Modal.closeAll();" class="space-y-3 text-xs">
-          <div><label class="block font-bold mb-1">BUYER ENTITY</label><input type="text" value="Apex Seafoods USA Inc." required class="w-full p-2 border rounded"></div>
-          <div><label class="block font-bold mb-1">PO NUMBER</label><input type="text" value="PO-APX-2026-990" required class="w-full p-2 border rounded"></div>
-          <div><label class="block font-bold mb-1">TOTAL USD</label><input type="number" value="480000" required class="w-full p-2 border rounded"></div>
-          <button type="submit" class="btn-primary w-full py-2 rounded text-xs font-bold mt-2">Submit Proforma Invoice</button>
-        </form>
-      `
-    });
-  },
-
   bindEvents() {}
 };
+
+if (typeof window !== "undefined") {
+  window.SalesView = SalesView;
+}
 '''
