@@ -17070,9 +17070,98 @@ const PreprocessingView = {
   ],
 
   gradingLogsList: [
-    { id: "GR-01", sNo: 1, date: "2026-10-14", lotCode: "VM-VSP-AMP-056", plant: "DFL UNIT-1 (VSP)", station: "Station 1", shift: "A SHIFT", supervisor: "K VENKATA VINAY", variety: "VM-HLSO", gradedWeight: 2840, primaryGrade: "16/20", dominantCount: "18.2", status: "Approved" },
-    { id: "GR-02", sNo: 2, date: "2026-10-14", lotCode: "BT-KKD-MKP-043", plant: "DFL UNIT-2 (KKD)", station: "Station 2", shift: "B SHIFT", supervisor: "T.VENKATESH", variety: "BT-HLSO", gradedWeight: 2060, primaryGrade: "21/25", dominantCount: "22.5", status: "Approved" },
-    { id: "GR-03", sNo: 3, date: "2026-10-13", lotCode: "VM-PSP-BVR-078", plant: "DFL UNIT-3 (PSP)", station: "Station 1", shift: "A SHIFT", supervisor: "D.SURYA NARAYANA", variety: "VM-HLSO", gradedWeight: 3795, primaryGrade: "26/30", dominantCount: "28.0", status: "Approved" }
+    {
+      id: "GR-01",
+      sNo: 1,
+      transactionDate: "23-03-2025",
+      date: "2025-03-23",
+      arrivalDate: "2025-03-23",
+      lotCode: "SKM/2425/1755",
+      plant: "DFL UNIT-6 [JPT-II]",
+      center: "",
+      station: "Own Center",
+      gradingMachine: "Unit -6 Laitram Grading Machine",
+      startTime: "",
+      endTime: "",
+      breakTime: "",
+      variety: "VM-HLSO",
+      hlCount: "18.00",
+      dominantCount: "18.00",
+      hlWeight: "1.00",
+      gradedWeight: 1.00,
+      noOfCrates: 1,
+      remarks: "",
+      status: "Approved"
+    },
+    {
+      id: "GR-02",
+      sNo: 2,
+      transactionDate: "23-03-2025",
+      date: "2025-03-23",
+      arrivalDate: "2025-03-23",
+      lotCode: "SKM/2425/1755",
+      plant: "DFL UNIT-6 [JPT-II]",
+      center: "",
+      station: "Own Center",
+      gradingMachine: "Unit -6 Laitram Grading Machine",
+      startTime: "",
+      endTime: "",
+      breakTime: "",
+      variety: "VM-HLSO",
+      hlCount: "23.00",
+      dominantCount: "23.00",
+      hlWeight: "347.00",
+      gradedWeight: 347.00,
+      noOfCrates: 13,
+      remarks: "",
+      status: "Approved"
+    },
+    {
+      id: "GR-03",
+      sNo: 3,
+      transactionDate: "23-03-2025",
+      date: "2025-03-23",
+      arrivalDate: "2025-03-23",
+      lotCode: "SKM/2425/1755",
+      plant: "DFL UNIT-6 [JPT-II]",
+      center: "",
+      station: "Own Center",
+      gradingMachine: "Unit -6 Laitram Grading Machine",
+      startTime: "",
+      endTime: "",
+      breakTime: "",
+      variety: "VM-HLSO",
+      hlCount: "28.00",
+      dominantCount: "28.00",
+      hlWeight: "989.00",
+      gradedWeight: 989.00,
+      noOfCrates: 37,
+      remarks: "",
+      status: "Approved"
+    },
+    {
+      id: "GR-04",
+      sNo: 4,
+      transactionDate: "23-03-2025",
+      date: "2025-03-23",
+      arrivalDate: "2025-03-23",
+      lotCode: "SKM/2425/1755",
+      plant: "DFL UNIT-6 [JPT-II]",
+      center: "",
+      station: "Own Center",
+      gradingMachine: "Unit -6 Laitram Grading Machine",
+      startTime: "",
+      endTime: "",
+      breakTime: "",
+      variety: "VM-HLSO",
+      hlCount: "34.00",
+      dominantCount: "34.00",
+      hlWeight: "694.00",
+      gradedWeight: 694.00,
+      noOfCrates: 26,
+      remarks: "",
+      status: "Approved"
+    }
   ],
 
   valueAdditionList: [
@@ -18890,112 +18979,480 @@ const PreprocessingView = {
     });
   },
 
+  initGradingStorage() {
+    try {
+      const stored = localStorage.getItem('dfl_grading_logs');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          this.gradingLogsList = parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Grading storage read error:', e);
+    }
+  },
+
   renderGrading(container) {
+    this.initGradingStorage();
+    let selectedRecordId = null;
+
     container.innerHTML = `
-      <div class="space-y-4 animate-fade-in">
-        ${UIBase.renderHeader('Grading & Sizing Floor Log & Size Distribution')}
+      <div class="space-y-4 animate-fade-in text-[#1E293B]">
+        <!-- Page Title -->
+        <div class="flex items-center justify-between pb-1">
+          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">GRADING</h2>
+          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Operations &bull; Grading Machine Run Log</span>
+        </div>
 
-        <div class="bg-white rounded-xl border border-[#DFE1E6] p-4 shadow-xs">
-          <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
-            <h3 class="text-xs font-bold text-[#172B4D]">Log Grading Run</h3>
-            <span class="text-[11px] text-[#5E6C84]">Automatic count classification</span>
-          </div>
+        <!-- Upper Card: Entry Form -->
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <form id="grading-form" class="space-y-4">
+            <!-- Row 1: 4 Columns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ARRIVAL DATE <span class="text-red-500 font-bold">*</span></label>
+                <input type="date" id="gr-arrival-date" value="2025-03-23" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ARRIVAL/LOT CODE <span class="text-red-500 font-bold">*</span></label>
+                <div class="relative">
+                  <select id="gr-lot-code" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                    <option value="SKM/2425/1755">SKM/2425/1755 - 47.00 - 87.000</option>
+                    <option value="VM-VSP-AMP-056">VM-VSP-AMP-056 - 48.00 - 67.000</option>
+                    <option value="BT-KKD-MKP-043">BT-KKD-MKP-043 - 52.00 - 65.000</option>
+                    <option value="VM-PSP-BVR-078">VM-PSP-BVR-078 - 44.00 - 68.000</option>
+                    <option value="LOT-2026-OCT-095">LOT-2026-OCT-095 - Fresh Harvest</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-red-500 font-bold">*</span></label>
+                <select id="gr-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="DFL UNIT-6 [JPT-II]" selected>JPT-II</option>
+                  <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
+                  <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
+                  <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
+                  <option value="DFL UNIT-5 (JPT)">DFL UNIT-5 (JPT)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">GRADING STATION <span class="text-red-500 font-bold">*</span></label>
+                <select id="gr-station" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="Own Center" selected>Own Center</option>
+                  <option value="Outside Center">Outside Center</option>
+                  <option value="Station 1">Station 1</option>
+                  <option value="Station 2">Station 2</option>
+                </select>
+              </div>
+            </div>
 
-          <form onsubmit="event.preventDefault(); window.PreprocessingView.toastSuccess('Grading record saved');" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">GRADING DATE</label>
-              <input type="date" value="2026-10-14" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+            <!-- Row 2: 4 Columns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">GRADING DATE <span class="text-red-500 font-bold">*</span></label>
+                <input type="date" id="gr-grading-date" value="2025-03-23" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">GRADING MACHINE <span class="text-red-500 font-bold">*</span></label>
+                <select id="gr-machine" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="Unit -6 Laitram Grading Machine" selected>Unit -6 Laitram Grading Machine</option>
+                  <option value="Unit -1 Sort-Rite Machine">Unit -1 Sort-Rite Machine</option>
+                  <option value="Unit -2 Key Tech Grader">Unit -2 Key Tech Grader</option>
+                  <option value="Station Grader 03">Station Grader 03</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">START TIME <span class="text-red-500 font-bold">*</span></label>
+                <input type="time" id="gr-start-time" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">END TIME <span class="text-red-500 font-bold">*</span></label>
+                <input type="time" id="gr-end-time" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
             </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">LOT CODE *</label>
-              <input type="text" value="VM-VSP-AMP-056" required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
+
+            <!-- Row 3: 4 Columns (Columns 3 & 4 empty) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BREAK TIME(MINUTES) <span class="text-red-500 font-bold">*</span></label>
+                <input type="number" id="gr-break-time" placeholder="Enter Break Time" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
+                <input type="text" id="gr-remarks" placeholder="Enter Remarks(Optional)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div class="hidden lg:block"></div>
+              <div class="hidden lg:block"></div>
             </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">VARIETY *</label>
-              <select required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option>VM-HLSO</option>
-                <option>BT-HLSO</option>
-              </select>
+
+            <!-- Row 4: 4 Columns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SELECT VARIETY <span class="text-red-500 font-bold">*</span></label>
+                <select id="gr-variety" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="">Select</option>
+                  <option value="VM-HLSO" selected>VM-HLSO</option>
+                  <option value="BT-HLSO">BT-HLSO</option>
+                  <option value="SEA-HLSO">SEA-HLSO</option>
+                  <option value="HOSO-GRADE">HOSO-GRADE</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">HL COUNT(PER LB)</label>
+                <input type="number" step="0.01" id="gr-hl-count" placeholder="Enter HL Count" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">HL WEIGHT(KGS)</label>
+                <input type="number" step="0.01" id="gr-hl-weight" placeholder="Enter HL Weight(Kgs)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">NO OF CRATES</label>
+                <input type="number" id="gr-no-crates" placeholder="Enter No Of Crates" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              </div>
             </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">GRADING STATION *</label>
-              <select required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option>Station 1</option>
-                <option>Station 2</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">GRADED WEIGHT (KG) *</label>
-              <input type="number" step="0.1" value="2840" required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">DOMINANT GRADE *</label>
-              <select required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option>16/20</option>
-                <option>21/25</option>
-                <option>26/30</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-[#5E6C84] uppercase tracking-wider mb-1">SUPERVISOR *</label>
-              <select required class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
-                <option>K VENKATA VINAY</option>
-                <option>T.VENKATESH</option>
-              </select>
-            </div>
-            <div class="flex items-end">
-              <button type="submit" class="w-full py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all">
-                Save Grading Run
+
+            <!-- Action Buttons: + New, Save, Delete -->
+            <div class="flex items-center justify-center gap-3 pt-3">
+              <button type="button" id="gr-btn-new" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                New
+              </button>
+              <button type="submit" id="gr-btn-save" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
+                Save
+              </button>
+              <button type="button" id="gr-btn-delete" class="px-5 py-2 bg-[#EF4444] hover:bg-[#DC2626] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                Delete
               </button>
             </div>
           </form>
         </div>
 
-        <div id="grading-table-container"></div>
-        <div id="grading-totals-container" class="mt-4"></div>
+        <!-- Lower Card: Register Table -->
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
+          <!-- Filter & Export Toolbar -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
+            <div class="relative w-full max-w-sm">
+              <input type="text" id="gr-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <button type="button" id="gr-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download Excel
+            </button>
+          </div>
+
+          <!-- Table Container with Horizontal Scroll -->
+          <div class="overflow-x-auto border border-[#CBD5E1] rounded-lg">
+            <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+              <thead>
+                <tr class="bg-[#F8FAFC] text-[11px] font-bold text-[#475569] uppercase tracking-wider border-b border-[#CBD5E1]">
+                  <th class="py-2.5 px-3">S.No</th>
+                  <th class="py-2.5 px-3">Transaction Date</th>
+                  <th class="py-2.5 px-3">Arrival Code</th>
+                  <th class="py-2.5 px-3">Production Plant</th>
+                  <th class="py-2.5 px-3">Center</th>
+                  <th class="py-2.5 px-3">Grading Machine</th>
+                  <th class="py-2.5 px-3">Start Time</th>
+                  <th class="py-2.5 px-3">End Time</th>
+                  <th class="py-2.5 px-3 text-right">Break Time(Minutes)</th>
+                  <th class="py-2.5 px-3 text-right">HL Count</th>
+                  <th class="py-2.5 px-3 text-right">HL Weight</th>
+                  <th class="py-2.5 px-3 text-right">No Of Crates</th>
+                  <th class="py-2.5 px-3">Remarks</th>
+                  <th class="py-2.5 px-3 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="gr-table-body" class="divide-y divide-[#E2E8F0] bg-white">
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Quick Totals Bar -->
+          <div id="gr-table-totals" class="mt-4 pt-3 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 text-xs text-[#64748B]">
+          </div>
+        </div>
       </div>
     `;
 
-    const renderTotals = (list) => {
-      const count = list.length;
-      const totalGraded = list.reduce((s, x) => s + (parseFloat(x.gradedWeight) || 0), 0);
-      const el = document.getElementById('grading-totals-container');
-      if (el) {
-        el.innerHTML = UIBase.renderTotals(
-          'Grading Recovery & Yield Abstract',
-          count, 'Runs',
-          [
-            { label: 'TOTAL GRADED MASS', value: `${totalGraded.toLocaleString()} KG`, badge: 'Sized Output', badgeColor: 'text-[#006644] bg-[#E3FCEF]', color: 'text-[#006644]' },
-            { label: 'DOMINANT GRADE', value: '16/20 Count', badge: 'Main Export Size', badgeColor: 'text-[#0284C7] bg-[#F0F9FF]' },
-            { label: 'FLOOR EFFICIENCY', value: '99.7 %', badge: 'High Precision', badgeColor: 'text-[#006644] bg-[#E3FCEF]' },
-            { label: 'LOGGED RUNS', value: `${count} Runs`, badge: 'Inspected', badgeColor: 'text-[#5E6C84] bg-[#F4F5F7]' }
-          ]
-        );
+    const form = document.getElementById('grading-form');
+    const tbody = document.getElementById('gr-table-body');
+    const totalsEl = document.getElementById('gr-table-totals');
+    const searchInput = document.getElementById('gr-table-search');
+    const saveBtn = document.getElementById('gr-btn-save');
+    const newBtn = document.getElementById('gr-btn-new');
+    const deleteBtn = document.getElementById('gr-btn-delete');
+    const exportBtn = document.getElementById('gr-btn-export-excel');
+
+    // Render Table Rows
+    const renderTable = (query = '') => {
+      const q = query.toLowerCase().trim();
+      const filtered = this.gradingLogsList.filter(r => {
+        if (!q) return true;
+        const text = `${r.lotCode || ''} ${r.plant || ''} ${r.center || r.station || ''} ${r.gradingMachine || ''} ${r.transactionDate || r.date || ''} ${r.remarks || ''}`.toLowerCase();
+        return text.includes(q);
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="14" class="text-center py-8 text-[#94A3B8] text-xs font-medium">No data available in table</td>
+          </tr>
+        `;
+        totalsEl.innerHTML = `<span>Showing 0 records</span>`;
+        return;
       }
+
+      let totalWeight = 0;
+      let totalCrates = 0;
+
+      tbody.innerHTML = filtered.map((r, idx) => {
+        const wt = parseFloat(r.hlWeight || r.gradedWeight || 0);
+        const crates = parseInt(r.noOfCrates || 0, 10);
+        totalWeight += wt;
+        totalCrates += crates;
+
+        return `
+          <tr class="hover:bg-[#F8FAFC] transition-colors cursor-pointer gr-table-row ${selectedRecordId === r.id ? 'bg-[#F0FDFA]' : ''}" data-id="${r.id}">
+            <td class="py-2.5 px-3 font-bold text-[#64748B]">${idx + 1}</td>
+            <td class="py-2.5 px-3 text-[#334155]">${r.transactionDate || r.date || '23-03-2025'}</td>
+            <td class="py-2.5 px-3 font-bold text-[#0F172A]">${r.lotCode || '-'}</td>
+            <td class="py-2.5 px-3 text-[#334155]">${r.plant || '-'}</td>
+            <td class="py-2.5 px-3 text-[#334155]">${r.center || ''}</td>
+            <td class="py-2.5 px-3 text-[#334155]">${r.gradingMachine || '-'}</td>
+            <td class="py-2.5 px-3 text-[#64748B]">${r.startTime || ''}</td>
+            <td class="py-2.5 px-3 text-[#64748B]">${r.endTime || ''}</td>
+            <td class="py-2.5 px-3 text-right text-[#64748B]">${r.breakTime || ''}</td>
+            <td class="py-2.5 px-3 text-right font-medium text-[#334155]">${Number(r.hlCount || 0).toFixed(2)}</td>
+            <td class="py-2.5 px-3 text-right font-bold text-[#006644]">${wt.toFixed(2)}</td>
+            <td class="py-2.5 px-3 text-right font-medium text-[#334155]">${crates}</td>
+            <td class="py-2.5 px-3 text-[#64748B]">${r.remarks || ''}</td>
+            <td class="py-2.5 px-3 text-center">
+              <button type="button" data-del-id="${r.id}" class="gr-row-del p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded cursor-pointer" title="Delete Row">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      totalsEl.innerHTML = `
+        <div class="flex items-center gap-4 flex-wrap">
+          <span>Total Records: <strong class="text-[#0F172A]">${filtered.length}</strong></span>
+          <span>Total HL Weight: <strong class="text-[#006644]">${totalWeight.toFixed(2)} KGS</strong></span>
+          <span>Total Crates: <strong class="text-[#0F172A]">${totalCrates}</strong></span>
+        </div>
+        <div class="text-[11px] text-[#94A3B8]">DFL Pre-Processing Unit &bull; Laitram Sizing Line</div>
+      `;
+
+      // Row Click -> Load into Form
+      tbody.querySelectorAll('.gr-table-row').forEach(tr => {
+        tr.addEventListener('click', (e) => {
+          if (e.target.closest('.gr-row-del')) return;
+          const id = tr.getAttribute('data-id');
+          const rec = this.gradingLogsList.find(x => x.id === id);
+          if (rec) {
+            selectedRecordId = rec.id;
+            document.getElementById('gr-arrival-date').value = rec.arrivalDate || '2025-03-23';
+            document.getElementById('gr-lot-code').value = rec.lotCode || '';
+            document.getElementById('gr-plant').value = rec.plant || 'DFL UNIT-6 [JPT-II]';
+            document.getElementById('gr-station').value = rec.station || 'Own Center';
+            document.getElementById('gr-grading-date').value = rec.date || '2025-03-23';
+            document.getElementById('gr-machine').value = rec.gradingMachine || 'Unit -6 Laitram Grading Machine';
+            document.getElementById('gr-start-time').value = rec.startTime || '';
+            document.getElementById('gr-end-time').value = rec.endTime || '';
+            document.getElementById('gr-break-time').value = rec.breakTime || '';
+            document.getElementById('gr-remarks').value = rec.remarks || '';
+            document.getElementById('gr-variety').value = rec.variety || 'VM-HLSO';
+            document.getElementById('gr-hl-count').value = rec.hlCount || '';
+            document.getElementById('gr-hl-weight').value = rec.hlWeight || rec.gradedWeight || '';
+            document.getElementById('gr-no-crates').value = rec.noOfCrates || '';
+
+            saveBtn.textContent = 'Update Entry';
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            renderTable(searchInput?.value || '');
+            if (window.Toast) window.Toast.show(`Loaded grading log #${rec.sNo}`, 'info');
+          }
+        });
+      });
+
+      // Row Delete
+      tbody.querySelectorAll('.gr-row-del').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute('data-del-id');
+          if (confirm('Are you sure you want to delete this grading record?')) {
+            this.gradingLogsList = this.gradingLogsList.filter(x => x.id !== id);
+            try {
+              localStorage.setItem('dfl_grading_logs', JSON.stringify(this.gradingLogsList));
+            } catch (err) {}
+            if (selectedRecordId === id) {
+              selectedRecordId = null;
+              form.reset();
+              saveBtn.textContent = 'Save';
+            }
+            renderTable(searchInput?.value || '');
+            if (window.Toast) window.Toast.show('Grading entry deleted', 'info');
+          }
+        });
+      });
     };
 
-    new DataTable({
-      containerId: 'grading-table-container',
-      data: this.gradingLogsList,
-      keyField: 'id',
-      tableTitle: 'Recent Sizing & Grading Operations',
-      searchable: false,
-      hideTopFilterBar: true,
-      columns: [
-        { field: 'sNo', header: 'S.No', render: (v, r, idx) => `<span class="font-bold text-[#5E6C84]">${idx + 1}</span>` },
-        { field: 'date', header: 'Date', render: (v) => `<span class="text-[#172B4D]">${v}</span>` },
-        { field: 'lotCode', header: 'Lot Code', render: (v) => `<span class="font-bold text-[#172B4D]">${v}</span>` },
-        { field: 'plant', header: 'Plant', render: (v) => `<span class="text-[#5E6C84]">${v}</span>` },
-        { field: 'station', header: 'Station', render: (v) => `<span class="text-[#172B4D]">${v}</span>` },
-        { field: 'variety', header: 'Variety', render: (v) => `<span class="font-bold text-[#006C7A]">${v}</span>` },
-        { field: 'primaryGrade', header: 'Primary Grade', render: (v) => `<span class="font-mono font-bold text-[#172B4D] bg-[#F4F5F7] px-2 py-0.5 rounded">${v}</span>` },
-        { field: 'dominantCount', header: 'Count', render: (v) => `<span class="text-[#5E6C84]">${v}</span>` },
-        { field: 'gradedWeight', header: 'Weight (KG)', render: (v) => `<span class="font-extrabold text-[#006644]">${v.toLocaleString()} KG</span>` },
-        { field: 'status', header: 'Status', render: (v) => UIBase.renderBadge(v, 'success') }
-      ]
+    renderTable();
+
+    // Search Filter
+    searchInput?.addEventListener('input', (e) => {
+      renderTable(e.target.value);
     });
 
-    renderTotals(this.gradingLogsList);
+    // Reset / + New button
+    newBtn?.addEventListener('click', () => {
+      form.reset();
+      selectedRecordId = null;
+      document.getElementById('gr-arrival-date').value = '2025-03-23';
+      document.getElementById('gr-grading-date').value = '2025-03-23';
+      document.getElementById('gr-plant').value = 'DFL UNIT-6 [JPT-II]';
+      document.getElementById('gr-station').value = 'Own Center';
+      document.getElementById('gr-machine').value = 'Unit -6 Laitram Grading Machine';
+      document.getElementById('gr-variety').value = 'VM-HLSO';
+      saveBtn.textContent = 'Save';
+      renderTable(searchInput?.value || '');
+      if (window.Toast) window.Toast.show('Ready to create new grading run', 'info');
+    });
+
+    // Delete button in Form
+    deleteBtn?.addEventListener('click', () => {
+      if (!selectedRecordId) {
+        if (window.Toast) window.Toast.show('Please select a row from the table to delete', 'warning');
+        return;
+      }
+      if (confirm('Are you sure you want to delete the selected grading record?')) {
+        this.gradingLogsList = this.gradingLogsList.filter(x => x.id !== selectedRecordId);
+        try {
+          localStorage.setItem('dfl_grading_logs', JSON.stringify(this.gradingLogsList));
+        } catch (err) {}
+        selectedRecordId = null;
+        form.reset();
+        saveBtn.textContent = 'Save';
+        renderTable(searchInput?.value || '');
+        if (window.Toast) window.Toast.show('Grading entry deleted', 'info');
+      }
+    });
+
+    // Form Submission: Save / Update
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const hlCount = parseFloat(document.getElementById('gr-hl-count').value) || 0;
+      const hlWeight = parseFloat(document.getElementById('gr-hl-weight').value) || 0;
+      const noOfCrates = parseInt(document.getElementById('gr-no-crates').value, 10) || 0;
+      const breakTime = document.getElementById('gr-break-time').value;
+      const remarks = document.getElementById('gr-remarks').value;
+      const startTime = document.getElementById('gr-start-time').value;
+      const endTime = document.getElementById('gr-end-time').value;
+
+      if (selectedRecordId) {
+        const item = this.gradingLogsList.find(x => x.id === selectedRecordId);
+        if (item) {
+          item.arrivalDate = document.getElementById('gr-arrival-date').value;
+          item.transactionDate = item.arrivalDate.split('-').reverse().join('-');
+          item.lotCode = document.getElementById('gr-lot-code').value;
+          item.plant = document.getElementById('gr-plant').value;
+          item.station = document.getElementById('gr-station').value;
+          item.date = document.getElementById('gr-grading-date').value;
+          item.gradingMachine = document.getElementById('gr-machine').value;
+          item.startTime = startTime;
+          item.endTime = endTime;
+          item.breakTime = breakTime;
+          item.variety = document.getElementById('gr-variety').value;
+          item.hlCount = hlCount.toFixed(2);
+          item.dominantCount = item.hlCount;
+          item.hlWeight = hlWeight.toFixed(2);
+          item.gradedWeight = hlWeight;
+          item.noOfCrates = noOfCrates;
+          item.remarks = remarks;
+        }
+        selectedRecordId = null;
+        saveBtn.textContent = 'Save';
+        if (window.Toast) window.Toast.show('Grading entry updated successfully!', 'success');
+      } else {
+        const rawDate = document.getElementById('gr-grading-date').value || '2025-03-23';
+        const formattedDate = rawDate.split('-').reverse().join('-');
+        const newRecord = {
+          id: 'GR-' + String(Date.now()).slice(-6),
+          sNo: this.gradingLogsList.length + 1,
+          transactionDate: formattedDate,
+          date: rawDate,
+          arrivalDate: document.getElementById('gr-arrival-date').value,
+          lotCode: document.getElementById('gr-lot-code').value,
+          plant: document.getElementById('gr-plant').value,
+          center: '',
+          station: document.getElementById('gr-station').value,
+          gradingMachine: document.getElementById('gr-machine').value,
+          startTime: startTime,
+          endTime: endTime,
+          breakTime: breakTime,
+          variety: document.getElementById('gr-variety').value,
+          hlCount: hlCount.toFixed(2),
+          dominantCount: hlCount.toFixed(2),
+          hlWeight: hlWeight.toFixed(2),
+          gradedWeight: hlWeight,
+          noOfCrates: noOfCrates,
+          remarks: remarks,
+          status: 'Approved'
+        };
+        this.gradingLogsList.push(newRecord);
+        if (window.Toast) window.Toast.show(`Grading entry for ${newRecord.lotCode} saved successfully!`, 'success');
+      }
+
+      try {
+        localStorage.setItem('dfl_grading_logs', JSON.stringify(this.gradingLogsList));
+      } catch (err) {}
+
+      form.reset();
+      document.getElementById('gr-arrival-date').value = '2025-03-23';
+      document.getElementById('gr-grading-date').value = '2025-03-23';
+      document.getElementById('gr-plant').value = 'DFL UNIT-6 [JPT-II]';
+      document.getElementById('gr-station').value = 'Own Center';
+      document.getElementById('gr-machine').value = 'Unit -6 Laitram Grading Machine';
+      document.getElementById('gr-variety').value = 'VM-HLSO';
+      renderTable(searchInput?.value || '');
+    });
+
+    // Excel Export
+    exportBtn?.addEventListener('click', () => {
+      const headers = [
+        "S.No", "Transaction Date", "Arrival Code", "Production Plant", "Center",
+        "Grading Machine", "Start Time", "End Time", "Break Time(Minutes)", "HL Count",
+        "HL Weight", "No Of Crates", "Remarks"
+      ];
+      const rows = this.gradingLogsList.map((r, i) => [
+        i + 1,
+        `"${r.transactionDate || r.date || ''}"`,
+        `"${r.lotCode || ''}"`,
+        `"${r.plant || ''}"`,
+        `"${r.center || ''}"`,
+        `"${r.gradingMachine || ''}"`,
+        `"${r.startTime || ''}"`,
+        `"${r.endTime || ''}"`,
+        `"${r.breakTime || ''}"`,
+        `"${r.hlCount || ''}"`,
+        `"${r.hlWeight || r.gradedWeight || ''}"`,
+        `"${r.noOfCrates || ''}"`,
+        `"${(r.remarks || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(e => e.join(','))].join(String.fromCharCode(10));
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `grading_operations_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      if (window.Toast) window.Toast.show('Excel CSV export downloaded!', 'success');
+    });
   },
 
   renderDeheadingTrackid(container) {
