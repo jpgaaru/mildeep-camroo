@@ -80,39 +80,17 @@ export const TabBar = {
         </nav>
       `;
     } else {
-      const isS01 = Environment.isSitemap01();
-      const activeTabObj = submenu.tabs.find(t => t.id === currentTabId);
-
-      // Clean full-width underline tabs for full page section switching across all submenus
+      // Clean full-width underline tabs for full page section switching across all submenus (matching Sales sub-menu standard)
       container.innerHTML = `
-        <nav aria-label="${submenu.title} tabs navigation" class="mb-3">
+        <nav aria-label="${submenu.title} tabs navigation" class="mb-4">
           <div 
             role="tablist" 
             aria-label="${submenu.title} views" 
             id="${containerId}-tablist"
-            class="${isS01 ? 'flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none' : 'tabs-line'}"
+            class="flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none overflow-x-auto"
           >
             ${submenu.tabs.map(tab => {
               const isActive = tab.id === currentTabId;
-              const displayLabel = (isS01 && tab.id === 'rm-dashboard') ? 'Raw Material Dashboard' : ((isS01 && tab.id === 'purchase-dashboard') ? 'Commercial Dashboard' : tab.label);
-              
-              if (isS01) {
-                return `
-                  <a 
-                    id="tab-${tab.id}"
-                    role="tab"
-                    href="${tab.hash}" 
-                    aria-selected="${isActive ? 'true' : 'false'}"
-                    tabindex="${isActive ? '0' : '-1'}"
-                    aria-controls="panel-${tab.id}"
-                    class="text-xs font-semibold py-2.5 transition-all relative ${isActive ? 'text-[#00A8B5] font-bold' : 'text-[#64748B] hover:text-[#0F172A]'}"
-                    style="${isActive ? 'border-bottom: 2.5px solid #00A8B5; margin-bottom: -1px;' : ''}"
-                  >
-                    <span>${displayLabel}</span>
-                  </a>
-                `;
-              }
-
               return `
                 <a 
                   id="tab-${tab.id}"
@@ -121,18 +99,17 @@ export const TabBar = {
                   aria-selected="${isActive ? 'true' : 'false'}"
                   tabindex="${isActive ? '0' : '-1'}"
                   aria-controls="panel-${tab.id}"
-                  class="${isActive ? 'active tab-active' : ''} inline-flex items-center"
+                  class="select-none px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
+                    isActive 
+                      ? 'tab-active border-[#00A4B7] text-[#00A4B7] font-bold bg-transparent' 
+                      : 'border-transparent text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'
+                  }"
                 >
-                  <span>${tab.label}</span>
+                  <span class="select-none">${tab.label}</span>
                 </a>
               `;
             }).join('')}
           </div>
-          ${isS01 && activeTabObj ? `
-            <div class="pt-3 pb-1">
-              <h1 class="text-2xl font-bold text-[#0F172A] tracking-tight">${activeTabObj.id === 'rm-dashboard' ? 'Raw Material Dashboard' : activeTabObj.label}</h1>
-            </div>
-          ` : ''}
         </nav>
       `;
     }
