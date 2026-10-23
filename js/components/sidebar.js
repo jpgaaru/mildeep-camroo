@@ -28,7 +28,8 @@ export const NAV_HIERARCHY = [
           { id: "commercial-invoice", label: "Commercial Invoice", hash: "#/sales/orders/commercial-invoice" },
           { id: "eta-status", label: "ETA Status", hash: "#/sales/orders/eta-status" },
           { id: "fda-status", label: "FDA Status", hash: "#/sales/orders/fda-status" },
-          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" }
+          { id: "clearing-agent", label: "Clearing Agent", hash: "#/sales/orders/clearing-agent" },
+          { id: "delayed-shipments", label: "Delayed Shipments", hash: "#/sales/orders/delayed-shipments" }
         ]
       },
       {
