@@ -200,7 +200,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Pre-Processing Operations & Live Telemetry',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPOModal()">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPOModal()">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Log RM Intake</span>
           </button>`
@@ -355,7 +355,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Chemical Purchase Orders (PO Register)',
-          `<button id="btn-add-chem-po" class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPOModal()">
+          `<button id="btn-add-chem-po" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPOModal()">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Create Chemical PO</span>
           </button>`
@@ -500,7 +500,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Received Chemicals (Dock Intake Register)',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemOrderModal()">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemOrderModal()">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Record Dock Intake</span>
           </button>`
@@ -618,7 +618,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Chemicals Daily Floor Consumption',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemConsumptionModal()">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemConsumptionModal()">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Log Daily Consumption</span>
           </button>`
@@ -858,7 +858,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Chemical Vendor Payments Ledger',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPaymentModal()">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPaymentModal()">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Record Vendor Payment</span>
           </button>`
@@ -916,7 +916,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Raw Material Received Register',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Create Inward batch modal')">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Create Inward batch modal')">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Log RM Intake</span>
           </button>`
@@ -1032,7 +1032,7 @@ const PreprocessingView = {
               <input type="text" placeholder="Shift observations or count variations" class="w-full text-xs px-2.5 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7]">
             </div>
             <div class="flex items-end">
-              <button type="submit" class="w-full py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all">
+              <button type="submit" class="w-full py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all">
                 Save Deheading Batch
               </button>
             </div>
@@ -1143,7 +1143,7 @@ const PreprocessingView = {
               </select>
             </div>
             <div class="flex items-end">
-              <button type="submit" class="w-full py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all">
+              <button type="submit" class="w-full py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all">
                 Save Grading Run
               </button>
             </div>
@@ -1256,7 +1256,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Value Addition Floor Processing Log',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Log Value Addition Run')">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Log Value Addition Run')">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Log Value Addition</span>
           </button>`
@@ -1290,7 +1290,7 @@ const PreprocessingView = {
       <div class="space-y-4 animate-fade-in">
         ${UIBase.renderHeader(
           'Head-On Quantity Inter-Plant Transfer Register',
-          `<button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Create Transfer Manifest')">
+          `<button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Create Transfer Manifest')">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Dispatch HON Transfer</span>
           </button>`
@@ -1379,8 +1379,8 @@ const PreprocessingView = {
           <h3 class="text-sm font-bold text-[#172B4D]">Drag and drop your spreadsheet here</h3>
           <p class="text-xs text-[#5E6C84] mt-1">Accepts .CSV, .XLSX files up to 25MB (Grading runs, intake scales, chemical orders)</p>
           <div class="mt-4 flex items-center justify-center gap-3">
-            <button class="px-4 py-2 bg-[#006C7A] hover:bg-[#005662] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastSuccess('Upload triggered')">Browse Files</button>
-            <button class="px-4 py-2 bg-[#008DA6] hover:bg-[#006C7A] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
+            <button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastSuccess('Upload triggered')">Browse Files</button>
+            <button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#02a8b5] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.toastInfo('Downloading CSV template')">Download Template</button>
           </div>
         </div>
       </div>

@@ -201,19 +201,19 @@ body {
 
 /* Accessible Action Buttons */
 .btn-primary {
-  background-color: #006C7A !important;
+  background-color: #02a8b5 !important;
   color: #ffffff !important;
   font-weight: 700 !important;
-  border: 1px solid #005662 !important;
+  border: 1px solid #008f9a !important;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 .btn-primary:hover {
-  background-color: #005662 !important;
-  border-color: #005662 !important;
+  background-color: #008f9a !important;
+  border-color: #007d87 !important;
   color: #ffffff !important;
 }
 .btn-primary:active {
-  background-color: #00404A !important;
+  background-color: #007d87 !important;
   color: #ffffff !important;
 }
 
@@ -790,21 +790,20 @@ input::-webkit-calendar-picker-indicator {
 
 
 .btn-primary {
-  background-color: #006C7A !important;
-  background-image: none !important;
-  color: #FFFFFF !important;
+  background-color: #02a8b5 !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
-  border: 1px solid #005662 !important;
-  border-radius: 6px !important;
-  box-shadow: none !important;
+  border: 1px solid #008f9a !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 .btn-primary:hover {
-  background-color: #005662 !important;
-  border-color: #005662 !important;
+  background-color: #008f9a !important;
+  border-color: #007d87 !important;
+  color: #ffffff !important;
 }
 .btn-primary:active {
-  background-color: #00404A !important;
-  border-color: #00404A !important;
+  background-color: #007d87 !important;
+  color: #ffffff !important;
 }
 
 /* Filter Bar Action Buttons — Clean AquaPulse Interactive Controls */
