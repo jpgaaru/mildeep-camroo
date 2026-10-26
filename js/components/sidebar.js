@@ -154,14 +154,14 @@ export const NAV_HIERARCHY = [
       {
         id: "lab",
         title: "Lab",
-        defaultTab: "incoming-lots",
+        defaultTab: "lots-list",
         tabs: [
-          { id: "incoming-lots", label: "Incoming Lots", hash: "#/quality/lab/incoming-lots" },
-          { id: "antibiotic-testing", label: "Antibiotic Testing", hash: "#/quality/lab/antibiotic-testing" },
-          { id: "rm-testing", label: "Raw Material Testing", hash: "#/quality/lab/rm-testing" },
-          { id: "microbiology", label: "Microbiology Testing", hash: "#/quality/lab/microbiology" },
-          { id: "in-house-lab", label: "In-House Lab", hash: "#/quality/lab/in-house-lab" },
-          { id: "external-lab", label: "External Lab", hash: "#/quality/lab/external-lab" }
+          { id: "lots-list", label: "LotsList", hash: "#/quality/lab/lots-list" },
+          { id: "ab-report", label: "AB Report", hash: "#/quality/lab/ab-report" },
+          { id: "rm-report", label: "RM Report", hash: "#/quality/lab/rm-report" },
+          { id: "mb-report", label: "MB Report", hash: "#/quality/lab/mb-report" },
+          { id: "lab-report", label: "Lab Report", hash: "#/quality/lab/lab-report" },
+          { id: "external-lab-report", label: "External Lab Report", hash: "#/quality/lab/external-lab-report" }
         ]
       },
       {
