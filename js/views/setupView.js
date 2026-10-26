@@ -3646,7 +3646,7 @@ const DEFAULT_SUBMENUS_CONFIG = {
   "chemical-screens": [
     {
       "id": "chemical-payments-list",
-      "title": "Chemical Payments List",
+      "title": "Payments List",
       "tabs": [
         {
           "id": "chemical-payments-list",
@@ -3737,7 +3737,7 @@ const DEFAULT_SUBMENUS_CONFIG = {
     },
     {
       "id": "chemical-opening-balance-report",
-      "title": "Chemical Opening Balance Report",
+      "title": "Opening Balance Report",
       "tabs": [
         {
           "id": "chemical-opening-balance-report",
@@ -3750,7 +3750,7 @@ const DEFAULT_SUBMENUS_CONFIG = {
     },
     {
       "id": "chemical-balance-report",
-      "title": "Chemical Balance Report",
+      "title": "Balance Report",
       "tabs": [
         {
           "id": "chemical-balance-report",
@@ -3763,7 +3763,7 @@ const DEFAULT_SUBMENUS_CONFIG = {
     },
     {
       "id": "chemical-received-report",
-      "title": "Chemical Received Report",
+      "title": "Received Report",
       "tabs": [
         {
           "id": "gs-chem-orders-create",

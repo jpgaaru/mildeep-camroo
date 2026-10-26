@@ -11326,7 +11326,7 @@ const PreprocessingView = {
               <span class="text-xl font-extrabold text-[#0F172A]">${baseIntake.toLocaleString('en-IN', { maximumFractionDigits: 1 })} <span class="text-xs font-semibold text-[#64748B]">KG</span></span>
               <span class="text-[11px] font-bold text-[#006644] flex items-center gap-0.5">↑ 12.4%</span>
             </div>
-            <span class="text-[11px] text-[#64748B] mt-1 block">Live intake across VSP, KKD & PSP docks</span>
+            
           </div>
 
           <!-- 2. Deheaded Weight -->
@@ -11339,7 +11339,7 @@ const PreprocessingView = {
               <span class="text-xl font-extrabold text-[#006644]">${baseDeheaded.toLocaleString('en-IN', { maximumFractionDigits: 1 })} <span class="text-xs font-semibold text-[#64748B]">KG</span></span>
               <span class="text-[11px] font-bold text-[#006644]">Benchmark ≥ 65%</span>
             </div>
-            <span class="text-[11px] text-[#64748B] mt-1 block">33.1% head waste recovered for byproduct meal</span>
+            
           </div>
 
           <!-- 3. Graded Output -->
@@ -11352,7 +11352,7 @@ const PreprocessingView = {
               <span class="text-xl font-extrabold text-[#0284C7]">${baseGraded.toLocaleString('en-IN', { maximumFractionDigits: 1 })} <span class="text-xs font-semibold text-[#64748B]">KG</span></span>
               <span class="text-[11px] font-bold text-[#0284C7]">99.7% Sized</span>
             </div>
-            <span class="text-[11px] text-[#64748B] mt-1 block">Roller grader lines active in Unit-1 and Unit-2</span>
+            
           </div>
 
           <!-- 4. Value Addition -->
@@ -11365,7 +11365,7 @@ const PreprocessingView = {
               <span class="text-xl font-extrabold text-[#0F172A]">${baseVa.toLocaleString('en-IN', { maximumFractionDigits: 1 })} <span class="text-xs font-semibold text-[#64748B]">KG</span></span>
               <span class="text-[11px] font-bold text-[#8F4D00]">67.2% Direct</span>
             </div>
-            <span class="text-[11px] text-[#64748B] mt-1 block">Skewer, Nobashi, and EZ-peel specialty lines</span>
+            
           </div>
 
           <!-- 5. HON Qty Transfer -->
@@ -11378,7 +11378,7 @@ const PreprocessingView = {
               <span class="text-xl font-extrabold text-[#0F172A]">${baseHonTransfer.toLocaleString('en-IN', { maximumFractionDigits: 1 })} <span class="text-xs font-semibold text-[#64748B]">KG</span></span>
               <span class="text-[11px] font-bold text-[#02a8b5]">Dispatched</span>
             </div>
-            <span class="text-[11px] text-[#64748B] mt-1 block">Transferred to Contact plate & IQF tunnels</span>
+            
           </div>
 
           <!-- 6. Chemical Inventory -->
@@ -11459,7 +11459,7 @@ const PreprocessingView = {
         </div>
 
         <!-- 3. 6 KPI Metric Cards Grid -->
-        <div id="preproc-kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3"></div>
+        <div id="preproc-kpi-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
 
         <!-- 4. Data Visualizations Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -11965,91 +11965,17 @@ const PreprocessingView = {
           </form>
         </div>
 
-        <!-- Create/Edit Form Card: GS CHEM PO CREATE (Matching Screenshot 2) -->
-        <div id="cpo-create-card" class="hidden bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all animate-fade-in">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#E2E8F0]">
-            <h3 id="cpo-create-title" class="text-xs md:text-sm font-bold text-[#1E293B] uppercase tracking-wide">GS CHEM PO CREATE</h3>
-            <button type="button" id="cpo-card-close-x" class="text-[#64748B] hover:text-[#1E293B] text-lg font-bold cursor-pointer transition-colors">&times;</button>
-          </div>
-          <form id="cpo-create-form" class="space-y-4">
-            <input type="hidden" id="cpo-edit-id" value="">
-            <!-- Row 1: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SUPPLIER <span class="text-red-500 font-bold">*</span></label>
-                <select id="cpo-create-supplier" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="KPL INTERNATIONAL LTD" selected>KPL INTERNATIONAL LTD</option>
-                  <option value="ADWIK IMPEX,">ADWIK IMPEX,</option>
-                  <option value="PRAYON PHOSPHATES">PRAYON PHOSPHATES</option>
-                  <option value="ICL FOOD SPECIALTIES">ICL FOOD SPECIALTIES</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PORT NAME</label>
-                <select id="cpo-create-port" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="">Select</option>
-                  <option value="INPRT - PARADIP GARH" selected>INPRT - PARADIP GARH</option>
-                  <option value="INKAK1 - KAKINADA">INKAK1 - KAKINADA</option>
-                  <option value="INVTZ1 - VISAKHAPATNAM">INVTZ1 - VISAKHAPATNAM</option>
-                  <option value="INMAA1 - CHENNAI">INMAA1 - CHENNAI</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">MODE OF IMPORT <span class="text-red-500 font-bold">*</span></label>
-                <select id="cpo-create-mode" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="">Select</option>
-                  <option value="HSS" selected>HSS</option>
-                  <option value="HSS_BOND">HSS_BOND</option>
-                  <option value="DIRECT IMPORT">DIRECT IMPORT</option>
-                  <option value="BOND TRANSFER">BOND TRANSFER</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PO NO <span class="text-red-500 font-bold">*</span></label>
-                <input type="text" id="cpo-create-pono" placeholder="Enter Po NO" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Row 2: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PO DATE <span class="text-red-500 font-bold">*</span></label>
-                <input type="date" id="cpo-create-podate" required value="2026-10-23" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ETA DATE</label>
-                <input type="date" id="cpo-create-etadate" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ETD DATE</label>
-                <input type="date" id="cpo-create-etddate" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
-                <input type="text" id="cpo-create-remarks" placeholder="Enter Remarks" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Centered Buttons: Close & Save (Matching Screenshot 2) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
-              <button type="button" id="cpo-btn-close-form" class="px-6 py-2 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Close
-              </button>
-              <button type="submit" id="cpo-btn-save-form" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+        
 
         <!-- Lower Card: Register Table with Search & Excel Export (Matching Screenshot 1) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="cpo-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="cpo-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="cpo-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -12221,38 +12147,9 @@ const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.chemicalPosList.find(x => x.id === id);
           if (!rec) return;
-          createTitle.textContent = `GS CHEM PO EDIT - ${rec.poNo}`;
-          editIdInput.value = rec.id;
-          document.getElementById('cpo-create-supplier').value = rec.supplierName || 'All';
-          document.getElementById('cpo-create-port').value = rec.portName || '';
-          document.getElementById('cpo-create-mode').value = rec.modeOfImport || 'HSS';
-          document.getElementById('cpo-create-pono').value = rec.poNo || '';
-          document.getElementById('cpo-create-remarks').value = rec.remarks || '';
-          
-          // Format date to yyyy-mm-dd for input[type=date]
-          if (rec.poDate && rec.poDate.includes('-')) {
-            const parts = rec.poDate.split('-');
-            if (parts[0].length === 2) {
-              document.getElementById('cpo-create-podate').value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            } else {
-              document.getElementById('cpo-create-podate').value = rec.poDate;
-            }
+          if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
+            window.PreprocessingView.openChemPOModal(rec);
           }
-          if (rec.etaDate && rec.etaDate.includes('-')) {
-            const parts = rec.etaDate.split('-');
-            if (parts[0].length === 2) {
-              document.getElementById('cpo-create-etadate').value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            }
-          }
-          if (rec.etdDate && rec.etdDate.includes('-')) {
-            const parts = rec.etdDate.split('-');
-            if (parts[0].length === 2) {
-              document.getElementById('cpo-create-etddate').value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            }
-          }
-
-          createCard.classList.remove('hidden');
-          createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       });
 
@@ -12301,12 +12198,9 @@ const PreprocessingView = {
 
     // Toggle GS CHEM PO CREATE card
     btnAddPo?.addEventListener('click', () => {
-      createTitle.textContent = 'GS CHEM PO CREATE';
-      editIdInput.value = '';
-      createForm.reset();
-      document.getElementById('cpo-create-podate').value = new Date().toISOString().slice(0, 10);
-      createCard.classList.remove('hidden');
-      createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
+        window.PreprocessingView.openChemPOModal();
+      }
     });
 
     const hideCreateCard = () => {
@@ -12502,95 +12396,7 @@ const PreprocessingView = {
           </form>
         </div>
 
-        <!-- Create/Edit Form Card: GS CHEM ORDERS CREATE (Matching Screenshot 2) -->
-        <div id="rc-create-card" class="hidden bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all animate-fade-in">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#E2E8F0]">
-            <h3 id="rc-create-title" class="text-xs md:text-sm font-bold text-[#1E293B] uppercase tracking-wide">GS CHEM ORDERS CREATE</h3>
-            <button type="button" id="rc-card-close-x" class="text-[#64748B] hover:text-[#1E293B] text-lg font-bold cursor-pointer transition-colors">&times;</button>
-          </div>
-          <form id="rc-create-form" class="space-y-4">
-            <input type="hidden" id="rc-edit-id" value="">
-            <!-- Row 1: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PROCESSING PLANT <span class="text-red-500 font-bold">*</span></label>
-                <select id="rc-create-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="VSP-DFL UNIT-1 (VSP)" selected>VSP-DFL UNIT-1 (VSP)</option>
-                  <option value="KKD-DFL UNIT-2 (KKD)">KKD-DFL UNIT-2 (KKD)</option>
-                  <option value="PSP-DFL UNIT-3 (PSP)">PSP-DFL UNIT-3 (PSP)</option>
-                  <option value="JPT-DFL UNIT-5 (JPT)">JPT-DFL UNIT-5 (JPT)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PONO <span class="text-red-500 font-bold">*</span></label>
-                <select id="rc-create-pono" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="DFL/CFB/2627/003" selected>DFL/CFB/2627/003</option>
-                  <option value="DFL/CFB/2627/002">DFL/CFB/2627/002</option>
-                  <option value="DFL/KPL/2627/004">DFL/KPL/2627/004</option>
-                  <option value="DFL/2627/003">DFL/2627/003</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CHEMICAL <span class="text-red-500 font-bold">*</span></label>
-                <select id="rc-create-chem" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="">Select</option>
-                  <option value="CARNAL 659 S ADVANCED (STPP)" selected>CARNAL 659 S ADVANCED (STPP)</option>
-                  <option value="ALTESA NEO S100 (NP)">ALTESA NEO S100 (NP)</option>
-                  <option value="CARFOSEL B 940 (STPP)">CARFOSEL B 940 (STPP)</option>
-                  <option value="BEKAPLUS FS (BLEND)">BEKAPLUS FS (BLEND)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BL NO</label>
-                <input type="text" id="rc-create-blno" placeholder="Enter BL No" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Row 2: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CONTAINER NO</label>
-                <input type="text" id="rc-create-containerno" placeholder="Enter Container No" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RECEIVED BAGS <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="rc-create-bags" placeholder="Enter Received Bags" required value="800" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RECEIVED QTY IN KGS <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="rc-create-qty" placeholder="Enter Quantity Received" required value="20000" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BILL OF ENTRY NO</label>
-                <input type="text" id="rc-create-boeno" placeholder="Enter Bill of Entry No" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Row 3: 4 Columns (First 2 occupied) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BILL OF ENTRY DATE</label>
-                <input type="date" id="rc-create-boedate" value="2026-09-04" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CLEARED DATE</label>
-                <input type="date" id="rc-create-cleardate" value="2026-09-04" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Centered Buttons: Close & Save (Matching Screenshot 2) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
-              <button type="button" id="rc-btn-close-form" class="px-6 py-2 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Close
-              </button>
-              <button type="submit" id="rc-btn-save-form" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+        
 
         <!-- Lower Card: Register Table with Toolbar (Matching Screenshot 1) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
@@ -12598,9 +12404,11 @@ const PreprocessingView = {
             <div class="flex items-center flex-wrap gap-2.5 w-full sm:w-auto">
               <!-- Search Input with Magnifier -->
               <div class="relative w-full sm:w-64">
-                <input type="text" id="rc-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="rc-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
               <!-- More Search Button -->
               <button type="button" id="rc-btn-more-search" class="px-3 py-1.5 bg-white border border-[#10B981] text-[#10B981] hover:bg-[#F0FDF4] text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -12746,37 +12554,9 @@ const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.receivedChemicalsList.find(x => x.id === id);
           if (!rec) return;
-          createTitle.textContent = `GS CHEM ORDERS EDIT - ${rec.poNo}`;
-          editIdInput.value = rec.id;
-          document.getElementById('rc-create-plant').value = rec.plant || 'VSP-DFL UNIT-1 (VSP)';
-          document.getElementById('rc-create-pono').value = rec.poNo || 'All';
-          document.getElementById('rc-create-chem').value = rec.chemical || '';
-          document.getElementById('rc-create-blno').value = rec.blNo || '';
-          document.getElementById('rc-create-containerno').value = rec.containerNo || '';
-          document.getElementById('rc-create-bags').value = rec.receivedBags || '';
-          document.getElementById('rc-create-qty').value = rec.receivedQty || '';
-          document.getElementById('rc-create-boeno').value = rec.boeNo || '';
-
-          // Format date to yyyy-mm-dd for input[type=date]
-          if (rec.boeDate && rec.boeDate.includes('-')) {
-            const parts = rec.boeDate.split('-');
-            if (parts[0].length === 2) {
-              document.getElementById('rc-create-boedate').value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            } else {
-              document.getElementById('rc-create-boedate').value = rec.boeDate;
-            }
+          if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
+            window.PreprocessingView.openChemOrderModal(rec);
           }
-          if (rec.clearedDate && rec.clearedDate.includes('-')) {
-            const parts = rec.clearedDate.split('-');
-            if (parts[0].length === 2) {
-              document.getElementById('rc-create-cleardate').value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            } else {
-              document.getElementById('rc-create-cleardate').value = rec.clearedDate;
-            }
-          }
-
-          createCard.classList.remove('hidden');
-          createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       });
     };
@@ -12809,13 +12589,9 @@ const PreprocessingView = {
 
     // Toggle GS CHEM ORDERS CREATE card
     btnAddOrder?.addEventListener('click', () => {
-      createTitle.textContent = 'GS CHEM ORDERS CREATE';
-      editIdInput.value = '';
-      createForm.reset();
-      document.getElementById('rc-create-boedate').value = '2026-09-04';
-      document.getElementById('rc-create-cleardate').value = '2026-09-04';
-      createCard.classList.remove('hidden');
-      createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
+        window.PreprocessingView.openChemOrderModal();
+      }
     });
 
     const hideCreateCard = () => {
@@ -13005,98 +12781,17 @@ const PreprocessingView = {
           </form>
         </div>
 
-        <!-- Create/Edit Form Card: GS CHEM CONSUMPTION CREATE (Matching Screenshot 2) -->
-        <div id="cc-create-card" class="hidden bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all animate-fade-in">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#E2E8F0]">
-            <div>
-              <div class="text-[11px] text-[#64748B] font-medium">Chemical Screens &gt; Chemicals Consumption &gt; <span class="text-[#02a8b5]">Gs Chem Consumption Create</span></div>
-              <h3 id="cc-create-title" class="text-xs md:text-sm font-bold text-[#1E293B] uppercase tracking-wide mt-0.5">GS CHEM CONSUMPTION CREATE</h3>
-            </div>
-            <button type="button" id="cc-card-close-x" class="text-[#64748B] hover:text-[#1E293B] text-lg font-bold cursor-pointer transition-colors">&times;</button>
-          </div>
-          <form id="cc-create-form" class="space-y-4">
-            <input type="hidden" id="cc-edit-id" value="">
-            <!-- Row 1: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PLANT NAME <span class="text-red-500 font-bold">*</span></label>
-                <select id="cc-create-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="DFL UNIT-5 (JPT)" selected>DFL UNIT-5 (JPT)</option>
-                  <option value="DFL UNIT-1 (VSP)">DFL UNIT-1 (VSP)</option>
-                  <option value="DFL UNIT-2 (KKD)">DFL UNIT-2 (KKD)</option>
-                  <option value="DFL UNIT-3 (PSP)">DFL UNIT-3 (PSP)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">USAGE TYPE <span class="text-red-500 font-bold">*</span></label>
-                <select id="cc-create-usage" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="Consumption" selected>Consumption</option>
-                  <option value="Transfer Out">Transfer Out</option>
-                  <option value="Transfer In">Transfer In</option>
-                  <option value="Loss / Adjustment">Loss / Adjustment</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CHEMICAL NAME <span class="text-red-500 font-bold">*</span></label>
-                <select id="cc-create-chem" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="CARNAL 659 S ADVANCED (STPP)" selected>CARNAL 659 S ADVANCED (STPP)</option>
-                  <option value="ALTESA NEO S100 (NP)">ALTESA NEO S100 (NP)</option>
-                  <option value="CARFOSEL B 940 (STPP)">CARFOSEL B 940 (STPP)</option>
-                  <option value="BEKAPLUS FS (BLEND)">BEKAPLUS FS (BLEND)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BAGS QUANTITY <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="cc-create-bags" placeholder="Enter Chemical Bags Quantity" required value="10" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Row 2: 3 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">QUANTITY IN KGS <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="cc-create-qty" placeholder="Enter Chemical Quantity in KGs" required value="250" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">DATE <span class="text-red-500 font-bold">*</span></label>
-                <input type="date" id="cc-create-date" required value="2025-04-10" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SEND TO <span class="text-red-500 font-bold">*</span></label>
-                <select id="cc-create-sendto" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="">Select</option>
-                  <option value="Processing Line 1" selected>Processing Line 1</option>
-                  <option value="Processing Line 2">Processing Line 2</option>
-                  <option value="Deheading Bath">Deheading Bath</option>
-                  <option value="Soaking Bath">Soaking Bath</option>
-                  <option value="VSP-DFL UNIT-1 (VSP)">VSP-DFL UNIT-1 (VSP)</option>
-                  <option value="KKD-DFL UNIT-2 (KKD)">KKD-DFL UNIT-2 (KKD)</option>
-                  <option value="PSP-DFL UNIT-3 (PSP)">PSP-DFL UNIT-3 (PSP)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Centered Buttons: Close & Save (Matching Screenshot 2) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
-              <button type="button" id="cc-btn-close-form" class="px-6 py-2 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Close
-              </button>
-              <button type="submit" id="cc-btn-save-form" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+        
 
         <!-- Lower Card: Register Table with Search & Excel Export (Matching Screenshot 1) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="cc-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="cc-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="cc-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -13215,10 +12910,9 @@ const PreprocessingView = {
 
     // Toggle Create Card
     btnAddConsumption?.addEventListener('click', () => {
-      createForm.reset();
-      document.getElementById('cc-create-date').value = new Date().toISOString().slice(0, 10);
-      createCard.classList.remove('hidden');
-      createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (window.PreprocessingView && window.PreprocessingView.openChemConsumptionModal) {
+        window.PreprocessingView.openChemConsumptionModal();
+      }
     });
 
     const hideCreateCard = () => {
@@ -13385,9 +13079,11 @@ const PreprocessingView = {
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="flex items-center flex-wrap gap-2.5 w-full sm:w-auto">
               <div class="relative w-full sm:w-64">
-                <input type="text" id="crr-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="crr-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
               <button type="button" id="crr-btn-more-search" class="px-3 py-1.5 bg-white border border-[#10B981] text-[#10B981] hover:bg-[#F0FDF4] text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>More Search</span>
@@ -13576,9 +13272,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="cob-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="cob-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="cob-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -13927,80 +13625,18 @@ const PreprocessingView = {
           </form>
         </div>
 
-        <!-- Create/Edit Form Card: GS CHEM PO PAYMENT CREATE (Matching Screenshot 5) -->
-        <div id="cp-create-card" class="hidden bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all animate-fade-in">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#E2E8F0]">
-            <h3 id="cp-create-title" class="text-xs md:text-sm font-bold text-[#1E293B] uppercase tracking-wide">GS CHEM PO PAYMENT CREATE</h3>
-            <button type="button" id="cp-card-close-x" class="text-[#64748B] hover:text-[#1E293B] text-lg font-bold cursor-pointer transition-colors">&times;</button>
-          </div>
-          <form id="cp-create-form" class="space-y-4">
-            <input type="hidden" id="cp-edit-id" value="">
-            <!-- Row 1: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PONO <span class="text-red-500 font-bold">*</span></label>
-                <select id="cp-create-pono" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                  <option value="All">All</option>
-                  <option value="DFL/KPL/2627/004" selected>DFL/KPL/2627/004</option>
-                  <option value="DFL/CFB/2627/003">DFL/CFB/2627/003</option>
-                  <option value="DFL/CFB/2627/002">DFL/CFB/2627/002</option>
-                  <option value="DFL/PT/2627/014">DFL/PT/2627/014</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CHEMICAL NAME <span class="text-red-500 font-bold">*</span></label>
-                <input type="text" id="cp-create-chem" placeholder="Enter Chemical Name" required value="ALTESA NEO S100 (NP)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PARTY NAME <span class="text-red-500 font-bold">*</span></label>
-                <input type="text" id="cp-create-party" placeholder="Enter Party Name" required value="KPL INTERNATIONAL LTD" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RECIEVED QUANTITY <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="cp-create-qty" placeholder="Enter Quantity" required value="6400" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Row 2: 4 Columns -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AMOUNT <span class="text-red-500 font-bold">*</span></label>
-                <input type="number" id="cp-create-amount" placeholder="Enter Amount" required value="1152000" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BANK REFERENCE NO <span class="text-red-500 font-bold">*</span></label>
-                <input type="text" id="cp-create-bankref" placeholder="Enter Invoice No" required value="HDFC-RTGS-98214" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PAYMENT DATE <span class="text-red-500 font-bold">*</span></label>
-                <input type="date" id="cp-create-date" required value="2025-10-24" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
-                <input type="text" id="cp-create-remarks" placeholder="Enter Remarks" value="Full settlement against delivery" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              </div>
-            </div>
-
-            <!-- Centered Buttons: Close & Save (Matching Screenshot 5) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
-              <button type="button" id="cp-btn-close-form" class="px-6 py-2 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Close
-              </button>
-              <button type="submit" id="cp-btn-save-form" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all cursor-pointer">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+        
 
         <!-- Lower Card: Table with Toolbar (Matching Screenshot 4) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="flex items-center flex-wrap gap-2.5 w-full sm:w-auto">
               <div class="relative w-full sm:w-64">
-                <input type="text" id="cp-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-                <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="cp-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
               <button type="button" id="cp-btn-more-search" class="px-3 py-1.5 bg-white border border-[#10B981] text-[#10B981] hover:bg-[#F0FDF4] text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>More Search</span>
@@ -14103,18 +13739,9 @@ const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.chemicalPaymentsList.find(x => x.id === id);
           if (!rec) return;
-          createTitle.textContent = `GS CHEM PO PAYMENT EDIT - ${rec.poNo}`;
-          editIdInput.value = rec.id;
-          document.getElementById('cp-create-pono').value = rec.poNo || 'All';
-          document.getElementById('cp-create-chem').value = rec.chemicalName || '';
-          document.getElementById('cp-create-party').value = rec.partyName || '';
-          document.getElementById('cp-create-qty').value = rec.receivedQty || '';
-          document.getElementById('cp-create-amount').value = rec.amount || '';
-          document.getElementById('cp-create-bankref').value = rec.bankRefNo || '';
-          document.getElementById('cp-create-date').value = rec.paymentDate || '2025-10-24';
-          document.getElementById('cp-create-remarks').value = rec.remarks || '';
-          createCard.classList.remove('hidden');
-          createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
+            window.PreprocessingView.openChemPaymentModal(rec);
+          }
         });
       });
     };
@@ -14137,12 +13764,9 @@ const PreprocessingView = {
     });
 
     btnAddPayment?.addEventListener('click', () => {
-      createTitle.textContent = 'GS CHEM PO PAYMENT CREATE';
-      editIdInput.value = '';
-      createForm.reset();
-      document.getElementById('cp-create-date').value = new Date().toISOString().slice(0, 10);
-      createCard.classList.remove('hidden');
-      createCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
+        window.PreprocessingView.openChemPaymentModal();
+      }
     });
 
     const hideCreateCard = () => {
@@ -14319,9 +13943,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="rm-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="rm-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="rm-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -14641,9 +14267,11 @@ const PreprocessingView = {
           <!-- Filter & Export Toolbar -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="dh-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="dh-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="dh-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -15129,9 +14757,11 @@ const PreprocessingView = {
           <!-- Filter & Export Toolbar -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="gr-table-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="gr-table-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="gr-btn-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -15537,9 +15167,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="dht-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="dht-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="dht-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -15787,9 +15419,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="gt-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="gt-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="gt-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -16101,9 +15735,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="va-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="va-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="va-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -16365,9 +16001,11 @@ const PreprocessingView = {
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 transition-all">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
             <div class="relative w-full max-w-sm">
-              <input type="text" id="ht-search" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
-              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            </div>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#94A3B8]">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+  </div>
+  <input type="text" id="ht-search" placeholder="Search..." style="padding-left: 36px !important;" class="w-full pr-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+</div>
             <button type="button" id="ht-export-excel" class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-semibold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto whitespace-nowrap">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download Excel
@@ -16611,7 +16249,7 @@ const PreprocessingView = {
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ENTER PO NO <span class="text-red-500 font-bold">*</span></label>
-              <input type="text" id="modal-cpo-pono" value="${editItem?.poNo || 'DFL/KPL/2627/005'}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <input type="text" id="modal-cpo-pono" placeholder="Enter Po NO" value="${editItem?.poNo || 'DFL/KPL/2627/005'}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PO DATE</label>
@@ -16997,7 +16635,7 @@ const PreprocessingView = {
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">BANK REFERENCE NO <span class="text-red-500 font-bold">*</span></label>
-              <input type="text" id="modal-cp-bankref" value="${editItem?.bankRefNo || 'NEFT2627001'}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <input type="text" id="modal-cp-bankref" placeholder="Enter Invoice No" value="${editItem?.bankRefNo || 'NEFT2627001'}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
             <div>
               <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PAYMENT DATE</label>

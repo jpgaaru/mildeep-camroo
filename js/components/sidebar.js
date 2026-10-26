@@ -1,3 +1,4 @@
+try { localStorage.removeItem('dfl_cached_submenus'); } catch (e) {}
 // Navigation Hierarchy: Main Menu -> Sub Menu -> On-Screen Tabs
 import { LOGO_COLOR, LOGO_WHITE } from '../data/logos.js';
 import { Environment } from '../framework/Environment.js';
