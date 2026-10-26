@@ -7136,8 +7136,15 @@ const Sidebar = {
 
 const TabBar = {
   render(containerId, activeHash) {
-    const container = document.getElementById(containerId);
-    if (!container) return null;
+    const stickyContainer = document.getElementById('sticky-tabs-container');
+    const targetContainer = stickyContainer || document.getElementById(containerId);
+    if (!targetContainer) return null;
+
+    // Clear any inline tab container in page body to prevent duplicate rendering
+    if (stickyContainer && containerId && containerId !== 'sticky-tabs-container') {
+      const inlineEl = document.getElementById(containerId);
+      if (inlineEl) inlineEl.innerHTML = '';
+    }
 
     const clean = (activeHash || '').replace(/^#\/?/, '').replace(/^\/+/, '');
     const parts = clean.split('/');
@@ -7146,7 +7153,13 @@ const TabBar = {
     let tabId = parts[2] || '';
 
     const module = NAV_HIERARCHY.find(m => m.id === modId);
-    if (!module) return null;
+    if (!module) {
+      if (stickyContainer) {
+        stickyContainer.innerHTML = '';
+        stickyContainer.classList.add('hidden');
+      }
+      return null;
+    }
 
     let submenu = module.submenus.find(s => s.id === subId);
     if (!submenu) {
@@ -7155,26 +7168,33 @@ const TabBar = {
         tabId = subId;
       }
     }
-    if (!submenu) return null;
 
-    // Suppress tab bar if only 1 tab (e.g. Dashboard Overview) or if on new-pi form
-    if (!submenu.tabs || submenu.tabs.length <= 1 || tabId === 'new-pi') {
-      container.innerHTML = '';
+    // Suppress tab bar if only 1 tab or if on new-pi form
+    if (!submenu || !submenu.tabs || submenu.tabs.length <= 1 || tabId === 'new-pi') {
+      if (stickyContainer) {
+        stickyContainer.innerHTML = '';
+        stickyContainer.classList.add('hidden');
+      }
       return null;
     }
 
-    const currentTabId = tabId || submenu.defaultTab;
+    // Reveal sticky tab bar container
+    if (stickyContainer) {
+      stickyContainer.classList.remove('hidden');
+    }
 
-    container.innerHTML = `
-      <nav aria-label="${submenu.title} tabs navigation" class="mb-4">
+    const currentTabId = tabId || submenu.defaultTab || submenu.tabs[0]?.id;
+
+    targetContainer.innerHTML = `
+      <nav aria-label="${submenu.title} tabs navigation" class="pt-0.5">
         <div 
           role="tablist" 
           aria-label="${submenu.title} views" 
-          id="${containerId}-tablist"
-          class="flex items-center gap-6 border-b border-[#E2E8F0] pt-1 pb-0 select-none overflow-x-auto"
+          id="${targetContainer.id}-tablist"
+          class="flex items-center gap-6 select-none overflow-x-auto"
         >
           ${submenu.tabs.map(tab => {
-            const isActive = tab.id === currentTabId;
+            const isActive = tab.id === currentTabId || (tab.id === 'overview' && (currentTabId === 'qc-overview' || currentTabId === 'overview'));
             return `
               <a 
                 id="tab-${tab.id}"
@@ -7183,7 +7203,7 @@ const TabBar = {
                 aria-selected="${isActive ? 'true' : 'false'}"
                 tabindex="${isActive ? '0' : '-1'}"
                 aria-controls="panel-${tab.id}"
-                class="select-none px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
+                class="select-none py-2 text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 border-b-2 -mb-[1px] outline-none ${
                   isActive 
                     ? 'tab-active border-[#00A4B7] text-[#00A4B7] font-bold bg-transparent' 
                     : 'border-transparent text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1] bg-transparent'
@@ -7197,7 +7217,7 @@ const TabBar = {
       </nav>
     `;
 
-    this.bindKeyboardNav(containerId);
+    this.bindKeyboardNav(targetContainer.id);
 
     return { module, submenu, currentTabId };
   },
@@ -41249,6 +41269,11 @@ const App = {
     // Route to Home if empty hash or #/home
     if (!clean || clean === 'home' || parts[0] === 'home') {
       const resolvedHash = '#/home';
+      const stickyTabs = document.getElementById('sticky-tabs-container');
+      if (stickyTabs) {
+        stickyTabs.innerHTML = '';
+        stickyTabs.classList.add('hidden');
+      }
       Sidebar.render('sidebar-container', resolvedHash);
       Breadcrumbs.render('breadcrumbs-container', resolvedHash);
       HomeView.render('main-content-container');
@@ -41293,9 +41318,10 @@ const App = {
 
     const resolvedHash = `#/${modObj.id}/${subObj.id}/${tabName}`;
 
-    // Render Navigation & Breadcrumbs (Standard Option 1: Floating Sidebar)
+    // Render Navigation, Breadcrumbs & Sticky Tab Menu
     Sidebar.render('sidebar-container', resolvedHash);
     Breadcrumbs.render('breadcrumbs-container', resolvedHash);
+    TabBar.render('sticky-tabs-container', resolvedHash);
 
     const mainContainer = 'main-content-container';
 
@@ -41373,17 +41399,21 @@ const App = {
 
           <!-- Main Layout Wrapper (offset by floating sidebar width + margins) -->
           <div id="main-layout-wrapper" class="${collapsedClass} flex flex-col min-h-screen">
-            <!-- Fixed / Sticky Top Header & Breadcrumbs Wrapper (Option 1) -->
-            <div class="sticky top-3 z-30 mt-3 rounded-2xl border border-[#E2E8F0] bg-white">
-              <div id="header-container" class="bg-white rounded-t-2xl"></div>
-              <!-- Breadcrumbs Bar (Fixed in position right below Header) -->
-              <div class="px-6 py-2 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-between rounded-b-2xl">
-                <div id="breadcrumbs-container"></div>
+            <!-- Unified Sticky Top Navigation: Header + Breadcrumbs + Tab Menu (Locks cleanly at top-0 with background mask) -->
+            <div id="sticky-top-nav-wrapper" class="sticky top-0 z-30 pt-3 pb-1 bg-[#F8FAFC]">
+              <div class="rounded-2xl border border-[#E2E8F0] bg-white shadow-xs overflow-hidden">
+                <div id="header-container" class="bg-white"></div>
+                <!-- Breadcrumbs Bar -->
+                <div id="sticky-breadcrumbs-bar" class="px-6 py-2 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-between">
+                  <div id="breadcrumbs-container"></div>
+                </div>
+                <!-- Underline Tab Menu Bar (Sticky directly below Breadcrumbs) -->
+                <div id="sticky-tabs-container" class="px-6 bg-white border-t border-[#E2E8F0] hidden"></div>
               </div>
             </div>
 
             <!-- Module Subview Injected Here (Full-Width Responsive UI) -->
-            <main id="main-content-container" class="py-4 flex-1 w-full"></main>
+            <main id="main-content-container" class="py-3 flex-1 w-full"></main>
           </div>
         </div>
       `;
