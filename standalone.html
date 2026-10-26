@@ -11006,9 +11006,9 @@ const NAV_HIERARCHY = [
       {
         id: "dashboard",
         title: "Dashboard",
-        defaultTab: "qc-overview",
+        defaultTab: "overview",
         tabs: [
-          { id: "qc-overview", label: "QC Overview", hash: "#/quality/dashboard/qc-overview" },
+          { id: "overview", label: "Overview", hash: "#/quality/dashboard/overview" },
           { id: "daily-qc-ops", label: "Daily QC Operations", hash: "#/quality/dashboard/daily-qc-ops" }
         ]
       },
@@ -24825,7 +24825,11 @@ const QCView = {
     });
   }
 };
-\n\nconst ProductionView = {
+
+if (typeof window !== 'undefined') { window.QCView = QCView; }
+
+
+const ProductionView = {
   render(containerId, subPage = 'overview', activeHash = '#/production/dashboard/overview') {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -42341,7 +42345,7 @@ const App = {
         PreprocessingView.render(mainContainer, tabName || 'overview', resolvedHash);
         break;
       case 'quality':
-        QCView.render(mainContainer, tabName || 'qc-overview', resolvedHash);
+        QCView.render(mainContainer, (tabName === 'qc-overview' ? 'overview' : (tabName || 'overview')), resolvedHash);
         break;
       case 'production':
         ProductionView.render(mainContainer, tabName || 'overview', resolvedHash);
