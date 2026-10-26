@@ -217,3 +217,8 @@ export const Modal = {
     });
   }
 };
+
+
+if (typeof window !== 'undefined') {
+  window.Modal = Modal;
+}

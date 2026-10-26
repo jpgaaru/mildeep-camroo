@@ -603,7 +603,7 @@ export const PreprocessingView = {
             <p class="text-xs text-[#5E6C84] mt-0.5 font-medium">Real-time floor summary, recovery telemetry, multi-plant sizing metrics & chemical balances</p>
           </div>
           <div class="flex items-center gap-2">
-            <button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="window.PreprocessingView.openChemPOModal()">
+            <button class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-xs hover:shadow cursor-pointer transition-all" onclick="(window.PreprocessingView || PreprocessingView).openChemPOModal()">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Create Chemical PO</span>
             </button>
@@ -1080,7 +1080,7 @@ export const PreprocessingView = {
             <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Purchase Order Tracking</span>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="cpo-btn-add-po" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="cpo-btn-add-po" onclick="(window.PreprocessingView || PreprocessingView).openChemPOModal()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
               <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add PO</span>
             </button>
@@ -1344,7 +1344,11 @@ export const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.chemicalPosList.find(x => x.id === id);
           if (!rec) return;
-          if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
+          if (typeof this !== 'undefined' && this.openChemPOModal) {
+            this.openChemPOModal(rec);
+          } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemPOModal) {
+            PreprocessingView.openChemPOModal(rec);
+          } else if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
             window.PreprocessingView.openChemPOModal(rec);
           }
         });
@@ -1395,7 +1399,11 @@ export const PreprocessingView = {
 
     // Toggle GS CHEM PO CREATE card
     btnAddPo?.addEventListener('click', () => {
-      if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
+      if (typeof this !== 'undefined' && this.openChemPOModal) {
+        this.openChemPOModal();
+      } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemPOModal) {
+        PreprocessingView.openChemPOModal();
+      } else if (window.PreprocessingView && window.PreprocessingView.openChemPOModal) {
         window.PreprocessingView.openChemPOModal();
       }
     });
@@ -1535,7 +1543,7 @@ export const PreprocessingView = {
             <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Inward Orders & Dock Clearance</span>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="rc-btn-add-order" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="rc-btn-add-order" onclick="(window.PreprocessingView || PreprocessingView).openChemOrderModal()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
               <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add Order</span>
             </button>
@@ -1751,7 +1759,11 @@ export const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.receivedChemicalsList.find(x => x.id === id);
           if (!rec) return;
-          if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
+          if (typeof this !== 'undefined' && this.openChemOrderModal) {
+            this.openChemOrderModal(rec);
+          } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemOrderModal) {
+            PreprocessingView.openChemOrderModal(rec);
+          } else if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
             window.PreprocessingView.openChemOrderModal(rec);
           }
         });
@@ -1786,7 +1798,11 @@ export const PreprocessingView = {
 
     // Toggle GS CHEM ORDERS CREATE card
     btnAddOrder?.addEventListener('click', () => {
-      if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
+      if (typeof this !== 'undefined' && this.openChemOrderModal) {
+        this.openChemOrderModal();
+      } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemOrderModal) {
+        PreprocessingView.openChemOrderModal();
+      } else if (window.PreprocessingView && window.PreprocessingView.openChemOrderModal) {
         window.PreprocessingView.openChemOrderModal();
       }
     });
@@ -1920,7 +1936,7 @@ export const PreprocessingView = {
             <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Floor Usage & Transfer Register</span>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="cc-btn-add-consumption" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="cc-btn-add-consumption" onclick="(window.PreprocessingView || PreprocessingView).openChemConsumptionModal()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
               <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add Consumption</span>
             </button>
@@ -2107,7 +2123,11 @@ export const PreprocessingView = {
 
     // Toggle Create Card
     btnAddConsumption?.addEventListener('click', () => {
-      if (window.PreprocessingView && window.PreprocessingView.openChemConsumptionModal) {
+      if (typeof this !== 'undefined' && this.openChemConsumptionModal) {
+        this.openChemConsumptionModal();
+      } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemConsumptionModal) {
+        PreprocessingView.openChemConsumptionModal();
+      } else if (window.PreprocessingView && window.PreprocessingView.openChemConsumptionModal) {
         window.PreprocessingView.openChemConsumptionModal();
       }
     });
@@ -2773,7 +2793,7 @@ export const PreprocessingView = {
             <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Vendor Disbursals & Clearance Register</span>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" id="cp-btn-add-payment" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+            <button type="button" id="cp-btn-add-payment" onclick="(window.PreprocessingView || PreprocessingView).openChemPaymentModal()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
               <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <span>Add Payment</span>
             </button>
@@ -2936,7 +2956,11 @@ export const PreprocessingView = {
           const id = e.currentTarget.getAttribute('data-id');
           const rec = this.chemicalPaymentsList.find(x => x.id === id);
           if (!rec) return;
-          if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
+          if (typeof this !== 'undefined' && this.openChemPaymentModal) {
+            this.openChemPaymentModal(rec);
+          } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemPaymentModal) {
+            PreprocessingView.openChemPaymentModal(rec);
+          } else if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
             window.PreprocessingView.openChemPaymentModal(rec);
           }
         });
@@ -2961,7 +2985,11 @@ export const PreprocessingView = {
     });
 
     btnAddPayment?.addEventListener('click', () => {
-      if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
+      if (typeof this !== 'undefined' && this.openChemPaymentModal) {
+        this.openChemPaymentModal();
+      } else if (typeof PreprocessingView !== 'undefined' && PreprocessingView.openChemPaymentModal) {
+        PreprocessingView.openChemPaymentModal();
+      } else if (window.PreprocessingView && window.PreprocessingView.openChemPaymentModal) {
         window.PreprocessingView.openChemPaymentModal();
       }
     });
@@ -5423,8 +5451,12 @@ export const PreprocessingView = {
 
   openChemPOModal(editItem = null) {
     const isEdit = Boolean(editItem);
-    const m = typeof Modal !== 'undefined' ? Modal : window.Modal;
-    if (!m) return;
+    const m = (typeof Modal !== 'undefined' && Modal.open) ? Modal : (typeof window !== 'undefined' && window.Modal && window.Modal.open) ? window.Modal : null;
+    if (!m) {
+      console.error('Modal system unavailable');
+      if (typeof Toast !== 'undefined') Toast.show('Modal system unavailable', 'error');
+      return;
+    }
 
     m.open({
       title: isEdit ? 'GS CHEM PO EDIT' : 'GS CHEM PO CREATE',
@@ -5562,15 +5594,19 @@ export const PreprocessingView = {
       }
 
       Modal.close();
-      const subContainer = document.getElementById('preprocessing-content');
+      const subContainer = document.getElementById('preproc-subpage-content') || document.getElementById('preprocessing-content');
       if (subContainer) this.renderChemicalPos(subContainer);
     });
   },
 
   openChemOrderModal(editItem = null) {
     const isEdit = Boolean(editItem);
-    const m = typeof Modal !== 'undefined' ? Modal : window.Modal;
-    if (!m) return;
+    const m = (typeof Modal !== 'undefined' && Modal.open) ? Modal : (typeof window !== 'undefined' && window.Modal && window.Modal.open) ? window.Modal : null;
+    if (!m) {
+      console.error('Modal system unavailable');
+      if (typeof Toast !== 'undefined') Toast.show('Modal system unavailable', 'error');
+      return;
+    }
 
     m.open({
       title: isEdit ? 'GS CHEM ORDERS EDIT' : 'GS CHEM ORDERS CREATE',
@@ -5685,15 +5721,19 @@ export const PreprocessingView = {
       }
 
       Modal.close();
-      const subContainer = document.getElementById('preprocessing-content');
+      const subContainer = document.getElementById('preproc-subpage-content') || document.getElementById('preprocessing-content');
       if (subContainer) this.renderReceivedChemicals(subContainer);
     });
   },
 
   openChemConsumptionModal(editItem = null) {
     const isEdit = Boolean(editItem);
-    const m = typeof Modal !== 'undefined' ? Modal : window.Modal;
-    if (!m) return;
+    const m = (typeof Modal !== 'undefined' && Modal.open) ? Modal : (typeof window !== 'undefined' && window.Modal && window.Modal.open) ? window.Modal : null;
+    if (!m) {
+      console.error('Modal system unavailable');
+      if (typeof Toast !== 'undefined') Toast.show('Modal system unavailable', 'error');
+      return;
+    }
 
     m.open({
       title: isEdit ? 'GS CHEM CONSUMPTION EDIT' : 'GS CHEM CONSUMPTION CREATE',
@@ -5786,15 +5826,19 @@ export const PreprocessingView = {
       if (window.Toast) window.Toast.show('Chemical floor consumption recorded', 'success');
 
       Modal.close();
-      const subContainer = document.getElementById('preprocessing-content');
+      const subContainer = document.getElementById('preproc-subpage-content') || document.getElementById('preprocessing-content');
       if (subContainer) this.renderChemicalsConsumption(subContainer);
     });
   },
 
   openChemPaymentModal(editItem = null) {
     const isEdit = Boolean(editItem);
-    const m = typeof Modal !== 'undefined' ? Modal : window.Modal;
-    if (!m) return;
+    const m = (typeof Modal !== 'undefined' && Modal.open) ? Modal : (typeof window !== 'undefined' && window.Modal && window.Modal.open) ? window.Modal : null;
+    if (!m) {
+      console.error('Modal system unavailable');
+      if (typeof Toast !== 'undefined') Toast.show('Modal system unavailable', 'error');
+      return;
+    }
 
     m.open({
       title: isEdit ? 'GS CHEM PO PAYMENT EDIT' : 'GS CHEM PO PAYMENT CREATE',
@@ -5892,8 +5936,13 @@ export const PreprocessingView = {
       }
 
       Modal.close();
-      const subContainer = document.getElementById('preprocessing-content');
+      const subContainer = document.getElementById('preproc-subpage-content') || document.getElementById('preprocessing-content');
       if (subContainer) this.renderChemicalPaymentsList(subContainer);
     });
   }
 };
+
+
+if (typeof window !== 'undefined') {
+  window.PreprocessingView = PreprocessingView;
+}
