@@ -164,21 +164,23 @@ export const NAV_HIERARCHY = [
           { id: "external-lab-report", label: "External Lab Report", hash: "#/quality/lab/external-lab-report" }
         ]
       },
-      {
+            {
         id: "qc-operations",
         title: "QC Operations",
-        defaultTab: "qc-orders",
+        defaultTab: "documentation",
         tabs: [
-          { id: "qc-orders", label: "QC Orders", hash: "#/quality/qc-operations/qc-orders" },
-          { id: "documentation", label: "Documentation", hash: "#/quality/qc-operations/documentation" }
+          { id: "documentation", label: "Documentation", hash: "#/quality/qc-operations/documentation" },
+          { id: "qc-orders", label: "QC Orders", hash: "#/quality/qc-operations/qc-orders" }
         ]
       },
       {
         id: "chemical-screening",
         title: "Chemical Screening",
-        defaultTab: "screening-records",
+        defaultTab: "food-social-audit",
         tabs: [
-          { id: "screening-records", label: "Screening Records", hash: "#/quality/chemical-screening/screening-records" }
+          { id: "food-social-audit", label: "Food & Social Audit", hash: "#/quality/chemical-screening/food-social-audit" },
+          { id: "farm-mill-hatchery-audit", label: "Farm/Mill/Hatchery Audit", hash: "#/quality/chemical-screening/farm-mill-hatchery-audit" },
+          { id: "hatchery-list", label: "Hatchery List", hash: "#/quality/chemical-screening/hatchery-list" }
         ]
       },
       {
