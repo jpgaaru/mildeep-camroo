@@ -78,93 +78,7 @@ export const Header = {
 
         <!-- Right: Actions & User Profile Block -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <!-- Environment Indicator & Quick Switcher Badge -->
-          <div class="relative" id="header-env-container">
-            <button
-              id="header-env-badge-btn"
-              class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${envMeta.bgPill} border transition-all cursor-pointer hover:shadow-sm"
-              title="Active Environment: ${envMeta.name} (${envMeta.role}). Click to switch."
-            >
-              <span class="w-2 h-2 rounded-full ${envMeta.dotColor} animate-pulse"></span>
-              <span>${envMeta.badgeLabel}</span>
-              <svg class="w-3.5 h-3.5 opacity-60 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
-            </button>
 
-            <!-- Environment Dropdown -->
-            <div id="header-env-dropdown" class="hidden absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-2 z-[90] text-xs">
-              <div class="px-3 py-2 border-b border-[#F1F5F9] mb-1">
-                <div class="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider">Select Active Environment</div>
-                <div class="text-[11px] text-[#475569] mt-0.5">Data stores are completely segregated.</div>
-              </div>
-
-              <!-- Option: Sitemap 01 -->
-              <button
-                type="button"
-                id="header-switch-sitemap01-btn"
-                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'sitemap01' ? 'bg-[#006C7A]/5 font-bold text-[#006C7A]' : 'text-[#334155]'}"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-[#006C7A]"></span>
-                  <div>
-                    <div class="font-semibold text-[#0F172A]">Sitemap 01 (Custom)</div>
-                    <div class="text-[10px] text-[#64748B]">Client-specific custom ERP clone</div>
-                  </div>
-                </div>
-                ${envMeta.id === 'sitemap01' ? '<span class="text-[9px] font-bold text-[#006C7A] bg-[#006C7A]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
-              </button>
-
-              <!-- Option: Sitemap 02 -->
-              <button
-                type="button"
-                id="header-switch-sitemap02-btn"
-                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left cursor-pointer ${envMeta.id === 'sitemap02' ? 'bg-[#3B5AF6]/5 font-bold text-[#3B5AF6]' : 'text-[#334155]'}"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-[#3B5AF6]"></span>
-                  <div>
-                    <div class="font-semibold text-[#0F172A]">Sitemap 02 (Superadmin)</div>
-                    <div class="text-[10px] text-[#64748B]">Original pristine Superadmin ERP</div>
-                  </div>
-                </div>
-                ${envMeta.id === 'sitemap02' ? '<span class="text-[9px] font-bold text-[#3B5AF6] bg-[#3B5AF6]/10 px-2 py-0.5 rounded-full">ACTIVE</span>' : ''}
-              </button>
-
-              <!-- Option: Miledeep (Devi Fisheries) Standalone App -->
-              <a
-                href="miledeep-devi-fisheries.html"
-                id="header-link-miledeep-btn"
-                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left text-[#334155] cursor-pointer"
-                title="Launch Miledeep (Devi Fisheries) Standalone ERP"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-[#00A4B7]"></span>
-                  <div>
-                    <div class="font-semibold text-[#0F172A]">Miledeep Devi Fisheries</div>
-                    <div class="text-[10px] text-[#64748B]">Devi Fisheries ERP Suite</div>
-                  </div>
-                </div>
-                <svg class="w-3.5 h-3.5 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-              </a>
-
-              <!-- Option: CDS Design System -->
-              <a
-                href="designsystem.html"
-                id="header-link-cds-btn"
-                class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-[#F8FAFC] transition-colors text-left text-[#334155] cursor-pointer"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-[#8B5CF6]"></span>
-                  <div>
-                    <div class="font-semibold text-[#0F172A]">CDS (Design System)</div>
-                    <div class="text-[10px] text-[#64748B]">Component catalogue & specs</div>
-                  </div>
-                </div>
-                <svg class="w-3.5 h-3.5 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-              </a>
-            </div>
-          </div>
 
           <!-- Help Button (?) -->
           <button
@@ -310,36 +224,7 @@ export const Header = {
       };
     }
 
-    // Environment Dropdown & Switcher
-    const envBadgeBtn = document.getElementById('header-env-badge-btn');
-    const envDropdown = document.getElementById('header-env-dropdown');
-    const switchSitemap01Btn = document.getElementById('header-switch-sitemap01-btn');
-    const switchSitemap02Btn = document.getElementById('header-switch-sitemap02-btn');
 
-    if (envBadgeBtn && envDropdown) {
-      envBadgeBtn.onclick = (e) => {
-        e.stopPropagation();
-        envDropdown.classList.toggle('hidden');
-        if (userMenu) userMenu.classList.add('hidden');
-        if (notifMenu) notifMenu.classList.add('hidden');
-      };
-    }
-
-    if (switchSitemap01Btn) {
-      switchSitemap01Btn.onclick = (e) => {
-        e.stopPropagation();
-        if (envDropdown) envDropdown.classList.add('hidden');
-        Environment.switchEnvironment(ENV_SITEMAP_01);
-      };
-    }
-
-    if (switchSitemap02Btn) {
-      switchSitemap02Btn.onclick = (e) => {
-        e.stopPropagation();
-        if (envDropdown) envDropdown.classList.add('hidden');
-        Environment.switchEnvironment(ENV_SITEMAP_02);
-      };
-    }
 
     // User Dropdown
     const userBtn = document.getElementById('user-menu-btn');
@@ -348,7 +233,6 @@ export const Header = {
       userBtn.onclick = (e) => {
         e.stopPropagation();
         userMenu.classList.toggle('hidden');
-        if (envDropdown) envDropdown.classList.add('hidden');
       };
     }
 
@@ -356,7 +240,6 @@ export const Header = {
     document.addEventListener('click', () => {
       if (notifMenu) notifMenu.classList.add('hidden');
       if (userMenu) userMenu.classList.add('hidden');
-      if (envDropdown) envDropdown.classList.add('hidden');
     });
 
     // Inline Live Search in Header (Direct input, no popup modal)

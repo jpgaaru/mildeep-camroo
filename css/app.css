@@ -2104,7 +2104,7 @@ table.matrix-table td {
 }
 
 /* ==========================================================
-   AquaPulse Design System — Pill-Rounded Buttons
+   AquaPulse Design System — Global Button Consistency & Pill Sizing
    ========================================================== */
 button:not(.sidebar-mod-btn):not(.f-sb-sub-link):not(.tabs-line button):not([role="tab"]):not(.rs-trigger):not(.custom-select-trigger):not(.calendar-day-btn):not(.calendar-nav-btn):not(.calendar-title-btn):not(.calendar-view-btn):not(.rs-option):not(#sidebar-edge-toggle-btn):not(.f-sb-grp-btn):not(#erp-modal-close-btn),
 .btn,
@@ -2120,4 +2120,77 @@ button:not(.sidebar-mod-btn):not(.f-sb-sub-link):not(.tabs-line button):not([rol
 [id^="modal-btn-"] {
   border-radius: 9999px !important;
 }
+
+/* Action & Submit Buttons Standard Sizing (Height: 38px, Font: 13px, Gap: 8px) */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.action-btn,
+[id^="modal-btn-"],
+#erp-modal-root button[type="submit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 38px !important;
+  padding: 0 18px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap !important;
+  border-radius: 9999px !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Secondary & Modal Close Buttons */
+.btn-secondary,
+#erp-modal-root button[type="button"]:not(#erp-modal-close-btn) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 38px !important;
+  padding: 0 18px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  background: #ffffff !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  border-radius: 9999px !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+.btn-secondary:hover,
+#erp-modal-root button[type="button"]:not(#erp-modal-close-btn):hover {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  border-color: #94A3B8 !important;
+}
+
+/* Filter & Compact Buttons */
+.dt-top-filter-toggle-btn,
+.dt-top-filter-reset-btn,
+.btn-sm {
+  height: 32px !important;
+  padding: 0 14px !important;
+  font-size: 12px !important;
+  gap: 6px !important;
+  border-radius: 9999px !important;
+}
+
+/* Modal Form Inputs Consistency (Height: 38px, Font: 13px) */
+#erp-modal-root input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+#erp-modal-root select,
+#erp-modal-root .rich-select .rs-trigger {
+  height: 38px !important;
+  min-height: 38px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #0F172A !important;
+  border-radius: 8px !important;
+}
+
 

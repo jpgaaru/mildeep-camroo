@@ -3,33 +3,33 @@
 export const Modal = {
   activeModal: null,
 
-  open({ title, content, footerButtons = [], size = 'md' }) {
+  open({ title = '', content = '', footerButtons = [], confirmText = null, onConfirm = null, cancelText = 'Close', size = 'md' } = {}) {
     this.close();
 
     const sizeClasses = {
-      sm: 'max-w-md',
-      md: 'max-w-xl',
-      lg: 'max-w-3xl',
-      xl: 'max-w-5xl',
-      '2xl': 'max-w-6xl',
-      '3xl': 'max-w-7xl',
-      '4xl': 'max-w-7xl',
-      '5xl': 'max-w-[1240px]',
-      '6xl': 'max-w-[1360px]',
-      full: 'max-w-[96vw]'
+      sm: 'max-w-[22.5rem]',
+      md: 'max-w-[29rem]',
+      lg: 'max-w-[38.5rem]',
+      xl: 'max-w-[51rem]',
+      '2xl': 'max-w-[58rem]',
+      '3xl': 'max-w-[64rem]',
+      '4xl': 'max-w-[67rem]',
+      '5xl': 'max-w-[992px]',
+      '6xl': 'max-w-[1088px]',
+      full: 'max-w-[80vw]'
     };
 
     const sizeMaxStyles = {
-      sm: 'max-width: 28rem;',
-      md: 'max-width: 36rem;',
-      lg: 'max-width: 48rem;',
-      xl: 'max-width: 64rem;',
-      '2xl': 'max-width: 72rem;',
-      '3xl': 'max-width: 80rem;',
-      '4xl': 'max-width: 84rem;',
-      '5xl': 'max-width: 1240px;',
-      '6xl': 'max-width: 1360px;',
-      full: 'max-width: 96vw;'
+      sm: 'max-width: 22.5rem;',
+      md: 'max-width: 29rem;',
+      lg: 'max-width: 38.5rem;',
+      xl: 'max-width: 51rem;',
+      '2xl': 'max-width: 58rem;',
+      '3xl': 'max-width: 64rem;',
+      '4xl': 'max-width: 67rem;',
+      '5xl': 'max-width: 992px;',
+      '6xl': 'max-width: 1088px;',
+      full: 'max-width: 80vw;'
     };
 
     const modalEl = document.createElement('div');
