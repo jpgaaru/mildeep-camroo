@@ -24855,17 +24855,35 @@ const QCView = {
 
   renderLotsList(container, activeHash) {
     container.innerHTML = `
-      <div class="space-y-6 w-full animate-fade-in pb-12">
-        <!-- Top Purchase Details Filter Card -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs">
-          <div class="mb-4">
-            <h2 class="text-xs font-extrabold text-[#0F172A] uppercase tracking-wider">PURCHASE DETAILS</h2>
+      <div class="space-y-4 animate-fade-in text-[#1E293B] pb-12">
+        <!-- Page Title Header -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">LOTS LIST REGISTER</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Lab Operations &bull; Raw Material Incoming Lots &amp; AB Status</span>
           </div>
-          <div class="flex flex-col sm:flex-row items-center gap-4">
-            <!-- Purchase Station Dropdown -->
-            <div class="w-full sm:flex-1">
-              <div class="relative">
-                <select id="lots-station-select" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+          <div class="flex items-center gap-2">
+            <button type="button" id="lots-btn-export" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-[#1E293B] border border-[#CBD5E1] text-xs font-bold rounded-lg shadow-2xs hover:shadow-xs transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
+          <form id="lots-filter-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Purchase Station Dropdown -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PURCHASE STATION</label>
+                <select id="lots-station-select" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   <option value="All Purchase Station" ${this.lotsStationFilter === 'All Purchase Station' ? 'selected' : ''}>All Purchase Station</option>
                   <option value="Bhimavaram (BVRM)" ${this.lotsStationFilter === 'Bhimavaram (BVRM)' ? 'selected' : ''}>Bhimavaram (BVRM)</option>
                   <option value="Kakinada (KKD)" ${this.lotsStationFilter === 'Kakinada (KKD)' ? 'selected' : ''}>Kakinada (KKD)</option>
@@ -24875,80 +24893,66 @@ const QCView = {
                   <option value="Balsore (BLS)" ${this.lotsStationFilter === 'Balsore (BLS)' ? 'selected' : ''}>Balsore (BLS)</option>
                   <option value="Annavaram (AVN)" ${this.lotsStationFilter === 'Annavaram (AVN)' ? 'selected' : ''}>Annavaram (AVN)</option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
-            </div>
 
-            <!-- Month Dropdown -->
-            <div class="w-full sm:flex-1">
-              <div class="relative">
-                <select id="lots-month-select" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+              <!-- Month Dropdown -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">MONTH</label>
+                <select id="lots-month-select" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => `
                     <option value="${m}" ${this.lotsMonthFilter === m ? 'selected' : ''}>${m}</option>
                   `).join('')}
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
-            </div>
 
-            <!-- Year Dropdown -->
-            <div class="w-full sm:flex-1">
-              <div class="relative">
-                <select id="lots-year-select" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+              <!-- Year Dropdown -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">YEAR</label>
+                <select id="lots-year-select" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   ${['2027', '2026', '2025', '2024', '2023', '2022'].map(y => `
                     <option value="${y}" ${this.lotsYearFilter === y ? 'selected' : ''}>${y}</option>
                   `).join('')}
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Search Button -->
-          <div class="mt-4 flex justify-center">
-            <button type="button" id="lots-btn-search" class="px-7 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-semibold rounded-xl shadow-xs flex items-center gap-2 transition-all cursor-pointer">
-              <span>Search</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button>
-          </div>
+            <!-- Buttons Row -->
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#F1F5F9]">
+              <button type="button" id="lots-btn-reset" class="px-4 py-2 bg-white hover:bg-slate-50 text-[#64748B] text-xs font-bold rounded-lg border border-[#CBD5E1] transition-all cursor-pointer">
+                Reset
+              </button>
+              <button type="button" id="lots-btn-search" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <span>Search</span>
+              </button>
+            </div>
+          </form>
         </div>
 
         <!-- Main Data Card & Table -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs">
-          <!-- Search Bar -->
-          <div class="mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="relative w-full max-w-sm">
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs overflow-hidden">
+          <!-- Table Toolbar -->
+          <div class="p-4 border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 bg-[#FAFBFC]">
+            <div class="relative w-full sm:w-72">
               <input
                 type="text"
                 id="lots-search-input"
-                placeholder="Search..."
+                placeholder="Search by Lot No, Grader, Agent, ID..."
                 value="${this.lotsSearchQuery}"
-                class="w-full text-xs pl-9 pr-4 py-2.5 bg-[#FAFBFC] border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/10 text-slate-700"
+                class="w-full pl-9 pr-4 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all"
               />
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
+              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
             <div class="flex items-center gap-2">
-              <span id="lots-row-count-badge" class="text-xs font-semibold text-slate-500"></span>
-              <button type="button" id="lots-btn-export" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#02a8b5] hover:bg-[#00929e] shadow-xs flex items-center gap-1.5 transition-all cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                <span>Export CSV</span>
-              </button>
+              <span id="lots-row-count-badge" class="text-xs font-semibold text-[#64748B]"></span>
             </div>
           </div>
 
           <!-- Table Container -->
-          <div class="overflow-x-auto rounded-xl border border-slate-100">
+          <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold text-slate-700 uppercase tracking-wider select-none">
+                <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider select-none">
                   <th class="py-3 px-4 cursor-pointer hover:bg-slate-100/80" onclick="QCView.sortLots('id')">
                     <div class="flex items-center gap-1.5"><span>ID</span><span class="text-slate-400">⇅</span></div>
                   </th>
@@ -24976,12 +24980,10 @@ const QCView = {
                   <th class="py-3 px-4 text-center cursor-pointer hover:bg-slate-100/80" onclick="QCView.sortLots('abStatus')">
                     <div class="flex items-center justify-center gap-1.5"><span>AB Status</span><span class="text-slate-400">⇅</span></div>
                   </th>
-                  <th class="py-3 px-4 text-center">
-                    <div class="flex items-center justify-center gap-1.5"><span>Actions</span><span class="text-slate-400">⇅</span></div>
-                  </th>
+                  <th class="py-3 px-4 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody id="lots-table-tbody" class="divide-y divide-slate-100 text-slate-700 font-medium"></tbody>
+              <tbody id="lots-table-tbody" class="divide-y divide-[#F1F5F9] text-xs text-[#1E293B]"></tbody>
             </table>
           </div>
         </div>
@@ -24993,58 +24995,56 @@ const QCView = {
   },
 
   bindLotsEvents() {
-    const stationSel = document.getElementById('lots-station-select');
-    if (stationSel) {
-      stationSel.addEventListener('change', (e) => {
-        this.lotsStationFilter = e.target.value;
-      });
-    }
+    document.getElementById('lots-station-select')?.addEventListener('change', (e) => {
+      this.lotsStationFilter = e.target.value;
+    });
 
-    const monthSel = document.getElementById('lots-month-select');
-    if (monthSel) {
-      monthSel.addEventListener('change', (e) => {
-        this.lotsMonthFilter = e.target.value;
-      });
-    }
+    document.getElementById('lots-month-select')?.addEventListener('change', (e) => {
+      this.lotsMonthFilter = e.target.value;
+    });
 
-    const yearSel = document.getElementById('lots-year-select');
-    if (yearSel) {
-      yearSel.addEventListener('change', (e) => {
-        this.lotsYearFilter = e.target.value;
-      });
-    }
+    document.getElementById('lots-year-select')?.addEventListener('change', (e) => {
+      this.lotsYearFilter = e.target.value;
+    });
 
-    const searchBtn = document.getElementById('lots-btn-search');
-    if (searchBtn) {
-      searchBtn.addEventListener('click', () => {
-        this.renderLotsTableRows();
-      });
-    }
+    document.getElementById('lots-btn-reset')?.addEventListener('click', () => {
+      this.lotsStationFilter = 'All Purchase Station';
+      this.lotsMonthFilter = 'October';
+      this.lotsYearFilter = '2026';
+      this.lotsSearchQuery = '';
+      const st = document.getElementById('lots-station-select');
+      if (st) st.value = 'All Purchase Station';
+      const m = document.getElementById('lots-month-select');
+      if (m) m.value = 'October';
+      const y = document.getElementById('lots-year-select');
+      if (y) y.value = '2026';
+      const s = document.getElementById('lots-search-input');
+      if (s) s.value = '';
+      this.renderLotsTableRows();
+    });
 
-    const searchInput = document.getElementById('lots-search-input');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        this.lotsSearchQuery = e.target.value.trim();
-        this.renderLotsTableRows();
-      });
-    }
+    document.getElementById('lots-btn-search')?.addEventListener('click', () => {
+      this.renderLotsTableRows();
+    });
 
-    const exportBtn = document.getElementById('lots-btn-export');
-    if (exportBtn) {
-      exportBtn.addEventListener('click', () => {
-        const data = this.getLotsData();
-        const headers = ["ID", "LOT", "Rm Date", "Type", "Grader", "Agent", "Count", "Weight", "AB Status", "Station"];
-        const rows = data.map(l => [l.id, l.lot, l.rmDate, l.type, l.grader, l.agent, l.count, l.weight, l.abStatus, l.station]);
-        const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(e => e.map(v => `"${v}"`).join(','))].join('\n');
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", `LotsList_${this.lotsMonthFilter}_${this.lotsYearFilter}.csv`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
+    document.getElementById('lots-search-input')?.addEventListener('input', (e) => {
+      this.lotsSearchQuery = e.target.value.trim();
+      this.renderLotsTableRows();
+    });
+
+    document.getElementById('lots-btn-export')?.addEventListener('click', () => {
+      const data = this.getLotsData();
+      const headers = ["ID", "LOT", "Rm Date", "Type", "Grader", "Agent", "Count", "Weight", "AB Status", "Station"];
+      const rows = data.map(l => [l.id, l.lot, l.rmDate, l.type, l.grader, l.agent, l.count, l.weight, l.abStatus, l.station]);
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(e => e.map(v => `"${v}"`).join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `LotsList_${this.lotsMonthFilter}_${this.lotsYearFilter}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   },
 
   sortLots(field) {
@@ -25063,12 +25063,10 @@ const QCView = {
 
     let rows = this.getLotsData();
 
-    // Filter by station
     if (this.lotsStationFilter && this.lotsStationFilter !== 'All Purchase Station') {
       rows = rows.filter(r => r.station === this.lotsStationFilter);
     }
 
-    // Filter by search query
     if (this.lotsSearchQuery) {
       const q = this.lotsSearchQuery.toLowerCase();
       rows = rows.filter(r => 
@@ -25082,7 +25080,6 @@ const QCView = {
       );
     }
 
-    // Sort rows
     rows.sort((a, b) => {
       let va = a[this.lotsSortField];
       let vb = b[this.lotsSortField];
@@ -25100,9 +25097,9 @@ const QCView = {
     if (rows.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="10" class="py-12 text-center text-slate-400">
-            <svg class="w-10 h-10 mx-auto text-slate-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            No matching Lots found for the selected station and search criteria.
+          <td colspan="10" class="py-12 text-center text-[#94A3B8]">
+            <svg class="w-10 h-10 mx-auto text-[#CBD5E1] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            No matching Lots found for the selected station and criteria.
           </td>
         </tr>
       `;
@@ -25110,18 +25107,25 @@ const QCView = {
     }
 
     tbody.innerHTML = rows.map((lot, idx) => {
+      let statusBadgeClass = 'bg-[#006C7A]/10 text-[#006C7A] border border-[#00A4B7]/30';
+      if (lot.abStatus === 'POSITIVE') {
+        statusBadgeClass = 'bg-rose-50 text-rose-700 border border-rose-200';
+      } else if (lot.abStatus === 'NEGATIVE') {
+        statusBadgeClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      }
+
       return `
-        <tr class="hover:bg-slate-50/70 transition-colors ${idx % 2 === 1 ? 'bg-slate-50/30' : ''}">
-          <td class="py-3 px-4 font-bold text-slate-900">${lot.id}</td>
-          <td class="py-3 px-4 font-bold text-slate-900">${lot.lot}</td>
-          <td class="py-3 px-4 text-slate-600 whitespace-nowrap">${lot.rmDate}</td>
-          <td class="py-3 px-4 text-slate-600">${lot.type}</td>
-          <td class="py-3 px-4 text-slate-700">${lot.grader}</td>
-          <td class="py-3 px-4 text-slate-700">${lot.agent}</td>
-          <td class="py-3 px-4 text-right font-medium text-slate-800">${Number(lot.count).toFixed(2)}</td>
-          <td class="py-3 px-4 text-right font-medium text-slate-800">${Number(lot.weight).toFixed(2)}</td>
+        <tr class="hover:bg-[#F8FAFC] transition-colors ${idx % 2 === 1 ? 'bg-slate-50/40' : ''}">
+          <td class="py-3 px-4 font-bold text-[#1E293B]">${lot.id}</td>
+          <td class="py-3 px-4 font-bold text-[#006C7A] hover:underline cursor-pointer" onclick="QCView.openLotDetailModal('${lot.id}')">${lot.lot}</td>
+          <td class="py-3 px-4 text-[#64748B] whitespace-nowrap">${lot.rmDate}</td>
+          <td class="py-3 px-4 text-[#334155]">${lot.type}</td>
+          <td class="py-3 px-4 text-[#334155]">${lot.grader}</td>
+          <td class="py-3 px-4 text-[#334155]">${lot.agent}</td>
+          <td class="py-3 px-4 text-right font-medium text-[#1E293B]">${Number(lot.count).toFixed(2)}</td>
+          <td class="py-3 px-4 text-right font-medium text-[#1E293B]">${Number(lot.weight).toFixed(2)}</td>
           <td class="py-3 px-4 text-center">
-            <span class="inline-flex items-center px-3.5 py-1 rounded-full text-[11px] font-semibold bg-[#00c08b] text-white shadow-2xs">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${statusBadgeClass}">
               ${lot.abStatus}
             </span>
           </td>
@@ -25129,7 +25133,7 @@ const QCView = {
             <button 
               type="button" 
               onclick="QCView.openLotDetailModal('${lot.id}')" 
-              class="p-1.5 text-indigo-500 hover:text-indigo-700 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center" 
+              class="p-1.5 text-[#02a8b5] hover:text-[#006C7A] hover:bg-[#02a8b5]/10 rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center" 
               title="View Lot & Lab Details"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -25151,16 +25155,16 @@ const QCView = {
       title: `LOT LAB & TESTING RECORD — ${lot.lot}`,
       size: 'lg',
       content: `
-        <div class="space-y-5 text-xs text-slate-700">
+        <div class="space-y-4 text-xs text-[#1E293B]">
           <!-- Summary Header Banner -->
-          <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-xl">
+          <div class="flex items-center justify-between p-4 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl">
             <div>
-              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Lot Identifier</div>
-              <div class="text-base font-extrabold text-slate-900">${lot.lot} <span class="text-xs font-semibold text-slate-500">(ID: ${lot.id})</span></div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Lot Identifier</div>
+              <div class="text-base font-extrabold text-[#1E293B]">${lot.lot} <span class="text-xs font-semibold text-[#64748B]">(ID: ${lot.id})</span></div>
             </div>
             <div class="text-right">
-              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Antibiotic Status</div>
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#00c08b] text-white">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Antibiotic Status</div>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${lot.abStatus === 'POSITIVE' ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-[#006C7A]/10 text-[#006C7A] border border-[#00A4B7]/30'}">
                 ${lot.abStatus}
               </span>
             </div>
@@ -25168,65 +25172,65 @@ const QCView = {
 
           <!-- 2-Column Info Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-white border border-slate-200 rounded-xl space-y-2.5">
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#006C7A] pb-1 border-b border-slate-100">
+            <div class="p-4 bg-white border border-[#CBD5E1] rounded-xl space-y-2.5">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#006C7A] pb-1 border-b border-[#F1F5F9]">
                 Purchase & Receiving Details
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">RM Receiving Date:</span>
-                <span class="font-semibold text-slate-900">${lot.rmDate}</span>
+                <span class="text-[#64748B]">RM Receiving Date:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.rmDate}</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Weighment Station:</span>
-                <span class="font-semibold text-slate-900">${lot.station}</span>
+                <span class="text-[#64748B]">Weighment Station:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.station}</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Purchase Type:</span>
-                <span class="font-semibold text-slate-900">${lot.type}</span>
+                <span class="text-[#64748B]">Purchase Type:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.type}</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Grader Name:</span>
-                <span class="font-semibold text-slate-900">${lot.grader}</span>
+                <span class="text-[#64748B]">Grader Name:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.grader}</span>
               </div>
               <div class="flex justify-between py-1">
-                <span class="text-slate-500">Agent / Farmer:</span>
-                <span class="font-semibold text-slate-900">${lot.agent}</span>
+                <span class="text-[#64748B]">Agent / Farmer:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.agent}</span>
               </div>
             </div>
 
-            <div class="p-4 bg-white border border-slate-200 rounded-xl space-y-2.5">
-              <div class="text-[11px] font-bold uppercase tracking-wider text-[#006C7A] pb-1 border-b border-slate-100">
+            <div class="p-4 bg-white border border-[#CBD5E1] rounded-xl space-y-2.5">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#006C7A] pb-1 border-b border-[#F1F5F9]">
                 Quantity & Lab Testing Protocol
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Pcs / Count:</span>
-                <span class="font-bold text-slate-900">${Number(lot.count).toFixed(2)}</span>
+                <span class="text-[#64748B]">Pcs / Count:</span>
+                <span class="font-bold text-[#1E293B]">${Number(lot.count).toFixed(2)}</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Total Weight:</span>
-                <span class="font-bold text-slate-900">${Number(lot.weight).toFixed(2)} Kg</span>
+                <span class="text-[#64748B]">Total Weight:</span>
+                <span class="font-bold text-[#1E293B]">${Number(lot.weight).toFixed(2)} Kg</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Testing Method:</span>
-                <span class="font-semibold text-slate-900">${lot.testDetails.method}</span>
+                <span class="text-[#64748B]">Testing Method:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.testDetails.method}</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-50">
-                <span class="text-slate-500">Lab & Technician:</span>
-                <span class="font-semibold text-slate-900">${lot.testDetails.lab} (${lot.testDetails.collectedBy})</span>
+                <span class="text-[#64748B]">Lab & Technician:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.testDetails.lab} (${lot.testDetails.collectedBy})</span>
               </div>
               <div class="flex justify-between py-1">
-                <span class="text-slate-500">Sampling Timestamp:</span>
-                <span class="font-semibold text-slate-900">${lot.testDetails.testTime}</span>
+                <span class="text-[#64748B]">Sampling Timestamp:</span>
+                <span class="font-semibold text-[#1E293B]">${lot.testDetails.testTime}</span>
               </div>
             </div>
           </div>
 
           <!-- Antibiotic Test Breakdown -->
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2">
+          <div class="p-4 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-[#006C7A] mb-1.5">
               Antibiotic Residue Screening Summary
             </div>
-            <p class="text-xs text-slate-700 leading-relaxed">
+            <p class="text-xs text-[#334155] leading-relaxed">
               ${lot.testDetails.antibiotics}. Testing conducted strictly according to MPEDA & EIC export standards.
             </p>
           </div>
@@ -25301,94 +25305,100 @@ const QCView = {
 
   renderABReportList(container, activeHash) {
     container.innerHTML = `
-      <div class="space-y-6 w-full animate-fade-in pb-12">
-        <!-- Top Antibiotic Reports List Filter Card -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs">
-          <div class="mb-4">
-            <h2 class="text-xs font-extrabold text-[#0F172A] uppercase tracking-wider">ANTIBIOTIC REPORTS LIST</h2>
+      <div class="space-y-4 animate-fade-in text-[#1E293B] pb-12">
+        <!-- Page Title Header with Right-Aligned Action Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">ANTIBIOTIC REPORTS LIST</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Lab Operations &bull; Daily Antibiotic (AB) Testing Register</span>
           </div>
-          <div class="flex flex-col sm:flex-row items-center gap-4">
-            <!-- Select Year -->
-            <div class="w-full sm:flex-1">
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Select Year</label>
-              <div class="relative">
-                <select id="ab-filter-year" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+          <div class="flex items-center gap-2">
+            <button type="button" id="ab-btn-create-report" onclick="QCView.openCreateDailyABReport()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add Report</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
+          <form id="ab-filter-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Select Year -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">YEAR</label>
+                <select id="ab-filter-year" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   ${['2026', '2025', '2024', '2023', '2022'].map(y => `<option value="${y}" ${this.abSelectedYear === y ? 'selected' : ''}>${y}</option>`).join('')}
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
-            </div>
 
-            <!-- Select Month -->
-            <div class="w-full sm:flex-1">
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Select Month</label>
-              <div class="relative">
-                <select id="ab-filter-month" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+              <!-- Select Month -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">MONTH</label>
+                <select id="ab-filter-month" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => `<option value="${m}" ${this.abSelectedMonth === m ? 'selected' : ''}>${m}</option>`).join('')}
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
-            </div>
 
-            <!-- Plant -->
-            <div class="w-full sm:flex-1">
-              <label class="block text-[11px] font-bold text-slate-600 mb-1">Plant</label>
-              <div class="relative">
-                <select id="ab-filter-plant" class="w-full h-11 text-xs font-semibold text-slate-700 bg-white border border-[#3B82F6] rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+              <!-- Plant -->
+              <div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PLANT</label>
+                <select id="ab-filter-plant" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   <option value="DEVI FISHERIES LIMITED (UNIT-5)" selected>DEVI FISHERIES LIMITED (UNIT-5)</option>
                   <option value="DEVI FISHERIES LIMITED (UNIT-1)">DEVI FISHERIES LIMITED (UNIT-1)</option>
                   <option value="DEVI FISHERIES LIMITED (UNIT-2)">DEVI FISHERIES LIMITED (UNIT-2)</option>
                   <option value="DEVI FISHERIES LIMITED (UNIT-3)">DEVI FISHERIES LIMITED (UNIT-3)</option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Buttons Row -->
-          <div class="mt-5 flex items-center justify-center gap-3">
-            <button type="button" id="ab-btn-search" class="px-6 py-2.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-xs font-semibold rounded-xl shadow-xs flex items-center gap-2 transition-all cursor-pointer">
-              <span>Search</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button>
-            <button type="button" id="ab-btn-create-report" onclick="QCView.openCreateDailyABReport()" class="px-6 py-2.5 bg-[#6366F1] hover:bg-[#4F46E5] text-white text-xs font-semibold rounded-xl shadow-xs flex items-center gap-2 transition-all cursor-pointer">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              <span>Create Report</span>
-            </button>
-          </div>
+            <!-- Filter Card Footer Buttons -->
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#F1F5F9]">
+              <button type="button" id="ab-btn-reset" class="px-4 py-2 bg-white hover:bg-slate-50 text-[#64748B] text-xs font-bold rounded-lg border border-[#CBD5E1] transition-all cursor-pointer">
+                Reset
+              </button>
+              <button type="button" id="ab-btn-search" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <span>Search</span>
+              </button>
+            </div>
+          </form>
         </div>
 
         <!-- Main Data Card & Table -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs">
-          <div class="mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="relative w-full max-w-sm">
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs overflow-hidden">
+          <!-- Table Toolbar -->
+          <div class="p-4 border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 bg-[#FAFBFC]">
+            <div class="relative w-full sm:w-72">
               <input
                 type="text"
                 id="ab-search-input"
-                placeholder="Search..."
+                placeholder="Search by Report ID, date, plant..."
                 value="${this.abSearchQuery}"
-                class="w-full text-xs pl-9 pr-4 py-2.5 bg-[#FAFBFC] border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/10 text-slate-700"
+                class="w-full pl-9 pr-4 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all"
               />
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              </div>
+              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
             <div class="flex items-center gap-2">
-              <span id="ab-row-count-badge" class="text-xs font-semibold text-slate-500"></span>
+              <span id="ab-row-count-badge" class="text-xs font-semibold text-[#64748B]"></span>
+              <button type="button" id="ab-btn-export-csv" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-[#1E293B] border border-[#CBD5E1] text-xs font-bold rounded-lg shadow-2xs hover:shadow-xs transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Export</span>
+              </button>
             </div>
           </div>
 
           <!-- Table -->
-          <div class="overflow-x-auto rounded-xl border border-slate-100">
+          <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold text-slate-700 uppercase tracking-wider select-none">
+                <tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-bold text-[#475569] uppercase tracking-wider select-none">
                   <th class="py-3 px-4 cursor-pointer hover:bg-slate-100/80" onclick="QCView.sortABReports('reportId')">
                     <div class="flex items-center gap-1.5"><span>Report ID</span><span class="text-slate-400">⇅</span></div>
                   </th>
@@ -25407,12 +25417,10 @@ const QCView = {
                   <th class="py-3 px-4 text-right cursor-pointer hover:bg-slate-100/80" onclick="QCView.sortABReports('nightTotal')">
                     <div class="flex items-center justify-end gap-1.5"><span>Night Total</span><span class="text-slate-400">⇅</span></div>
                   </th>
-                  <th class="py-3 px-4 text-center">
-                    <div class="flex items-center justify-center gap-1.5"><span>Actions</span><span class="text-slate-400">⇅</span></div>
-                  </th>
+                  <th class="py-3 px-4 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody id="ab-reports-tbody" class="divide-y divide-slate-100 text-slate-700 font-medium"></tbody>
+              <tbody id="ab-reports-tbody" class="divide-y divide-[#F1F5F9] text-xs text-[#1E293B]"></tbody>
             </table>
           </div>
         </div>
@@ -25424,41 +25432,55 @@ const QCView = {
   },
 
   bindABListEvents() {
-    const yearSel = document.getElementById('ab-filter-year');
-    if (yearSel) {
-      yearSel.addEventListener('change', (e) => {
-        this.abSelectedYear = e.target.value;
-      });
-    }
+    document.getElementById('ab-filter-year')?.addEventListener('change', (e) => {
+      this.abSelectedYear = e.target.value;
+    });
 
-    const monthSel = document.getElementById('ab-filter-month');
-    if (monthSel) {
-      monthSel.addEventListener('change', (e) => {
-        this.abSelectedMonth = e.target.value;
-      });
-    }
+    document.getElementById('ab-filter-month')?.addEventListener('change', (e) => {
+      this.abSelectedMonth = e.target.value;
+    });
 
-    const plantSel = document.getElementById('ab-filter-plant');
-    if (plantSel) {
-      plantSel.addEventListener('change', (e) => {
-        this.abSelectedPlant = e.target.value;
-      });
-    }
+    document.getElementById('ab-filter-plant')?.addEventListener('change', (e) => {
+      this.abSelectedPlant = e.target.value;
+    });
 
-    const searchBtn = document.getElementById('ab-btn-search');
-    if (searchBtn) {
-      searchBtn.addEventListener('click', () => {
-        this.renderABTableRows();
-      });
-    }
+    document.getElementById('ab-btn-reset')?.addEventListener('click', () => {
+      this.abSelectedYear = '2026';
+      this.abSelectedMonth = 'October';
+      this.abSelectedPlant = 'DEVI FISHERIES LIMITED (UNIT-5)';
+      this.abSearchQuery = '';
+      const y = document.getElementById('ab-filter-year');
+      if (y) y.value = '2026';
+      const m = document.getElementById('ab-filter-month');
+      if (m) m.value = 'October';
+      const p = document.getElementById('ab-filter-plant');
+      if (p) p.value = 'DEVI FISHERIES LIMITED (UNIT-5)';
+      const s = document.getElementById('ab-search-input');
+      if (s) s.value = '';
+      this.renderABTableRows();
+    });
 
-    const searchInput = document.getElementById('ab-search-input');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        this.abSearchQuery = e.target.value.trim();
-        this.renderABTableRows();
-      });
-    }
+    document.getElementById('ab-btn-search')?.addEventListener('click', () => {
+      this.renderABTableRows();
+    });
+
+    document.getElementById('ab-search-input')?.addEventListener('input', (e) => {
+      this.abSearchQuery = e.target.value.trim();
+      this.renderABTableRows();
+    });
+
+    document.getElementById('ab-btn-export-csv')?.addEventListener('click', () => {
+      const headers = ["Report ID", "Analysis Date", "Report Date", "Total Reports", "Day Total", "Night Total", "Plant"];
+      const rows = this.abReportsData.map(r => [r.reportId, r.analysisDate, r.reportDate, r.totalReports, r.dayTotal, r.nightTotal, r.plant]);
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(e => e.map(v => `"${v}"`).join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Antibiotic_Reports_${this.abSelectedMonth}_${this.abSelectedYear}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   },
 
   sortABReports(field) {
@@ -25477,7 +25499,6 @@ const QCView = {
 
     let rows = [...this.abReportsData];
 
-    // Filter by query
     if (this.abSearchQuery) {
       const q = this.abSearchQuery.toLowerCase();
       rows = rows.filter(r => 
@@ -25488,7 +25509,6 @@ const QCView = {
       );
     }
 
-    // Sort rows
     rows.sort((a, b) => {
       let va = a[this.abSortField];
       let vb = b[this.abSortField];
@@ -25506,7 +25526,8 @@ const QCView = {
     if (rows.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="7" class="py-12 text-center text-slate-400">
+          <td colspan="7" class="py-12 text-center text-[#94A3B8]">
+            <svg class="w-10 h-10 mx-auto text-[#CBD5E1] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             No data available in table
           </td>
         </tr>
@@ -25516,18 +25537,18 @@ const QCView = {
 
     tbody.innerHTML = rows.map((r, idx) => {
       return `
-        <tr class="hover:bg-slate-50/70 transition-colors ${idx % 2 === 1 ? 'bg-slate-50/30' : ''}">
-          <td class="py-3 px-4 font-bold text-slate-900">${r.reportId}</td>
-          <td class="py-3 px-4 text-slate-600 whitespace-nowrap">${r.analysisDate}</td>
-          <td class="py-3 px-4 text-slate-600 whitespace-nowrap">${r.reportDate}</td>
-          <td class="py-3 px-4 text-right font-bold text-slate-800">${r.totalReports}</td>
-          <td class="py-3 px-4 text-right font-medium text-slate-700">${r.dayTotal}</td>
-          <td class="py-3 px-4 text-right font-medium text-slate-700">${r.nightTotal}</td>
+        <tr class="hover:bg-[#F8FAFC] transition-colors ${idx % 2 === 1 ? 'bg-slate-50/40' : ''}">
+          <td class="py-3 px-4 font-bold text-[#006C7A] hover:underline cursor-pointer" onclick="QCView.openABReportDetailModal('${r.reportId}')">${r.reportId}</td>
+          <td class="py-3 px-4 text-[#64748B] whitespace-nowrap">${r.analysisDate}</td>
+          <td class="py-3 px-4 text-[#64748B] whitespace-nowrap">${r.reportDate}</td>
+          <td class="py-3 px-4 text-right font-bold text-[#1E293B]">${r.totalReports}</td>
+          <td class="py-3 px-4 text-right font-medium text-[#334155]">${r.dayTotal}</td>
+          <td class="py-3 px-4 text-right font-medium text-[#334155]">${r.nightTotal}</td>
           <td class="py-3 px-4 text-center">
             <button 
               type="button" 
               onclick="QCView.openABReportDetailModal('${r.reportId}')" 
-              class="p-1.5 text-indigo-500 hover:text-indigo-700 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center" 
+              class="p-1.5 text-[#02a8b5] hover:text-[#006C7A] hover:bg-[#02a8b5]/10 rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center" 
               title="View Daily Breakdown"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -25551,31 +25572,31 @@ const QCView = {
       title: `DAILY ANTIBIOTIC TEST BREAKDOWN — ${report.reportId}`,
       size: 'xl',
       content: `
-        <div class="space-y-4 text-xs text-slate-700">
-          <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-xl">
+        <div class="space-y-4 text-xs text-[#1E293B]">
+          <div class="flex items-center justify-between p-4 bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl">
             <div>
-              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Daily Summary Batch</div>
-              <div class="text-sm font-extrabold text-slate-900">${report.reportId} • ${report.analysisDate}</div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Daily Summary Batch</div>
+              <div class="text-sm font-extrabold text-[#1E293B]">${report.reportId} • ${report.analysisDate}</div>
             </div>
             <div class="flex items-center gap-4 text-right">
               <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block">Day Shift</span>
-                <span class="font-bold text-slate-900 text-xs">${report.dayTotal} Tests</span>
+                <span class="text-[#64748B] text-[10px] uppercase font-bold block">Day Shift</span>
+                <span class="font-bold text-[#1E293B] text-xs">${report.dayTotal} Tests</span>
               </div>
               <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block">Night Shift</span>
-                <span class="font-bold text-slate-900 text-xs">${report.nightTotal} Tests</span>
+                <span class="text-[#64748B] text-[10px] uppercase font-bold block">Night Shift</span>
+                <span class="font-bold text-[#1E293B] text-xs">${report.nightTotal} Tests</span>
               </div>
               <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block">Total Tests</span>
-                <span class="font-bold text-emerald-700 text-xs">${report.totalReports} Samples</span>
+                <span class="text-[#64748B] text-[10px] uppercase font-bold block">Total Tests</span>
+                <span class="font-bold text-[#006C7A] text-xs">${report.totalReports} Samples</span>
               </div>
             </div>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <div class="overflow-x-auto rounded-xl border border-[#CBD5E1]">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-100/80 text-[11px] font-bold text-slate-700 uppercase">
+              <thead class="bg-[#F8FAFC] border-b border-[#CBD5E1] text-[11px] font-bold text-[#475569] uppercase">
                 <tr>
                   <th class="py-2.5 px-3">Lot No</th>
                   <th class="py-2.5 px-3">Sample Type</th>
@@ -25588,26 +25609,26 @@ const QCView = {
                   <th class="py-2.5 px-3">Result</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-100">
+              <tbody class="divide-y divide-[#F1F5F9]">
                 ${lines.length > 0 ? lines.map(l => `
-                  <tr class="hover:bg-slate-50">
-                    <td class="py-2 px-3 font-bold text-slate-900">${l.lotNo}</td>
-                    <td class="py-2 px-3">${l.sampleType}</td>
-                    <td class="py-2 px-3 font-semibold">${l.shift}</td>
-                    <td class="py-2 px-3 font-medium">${Number(l.count).toFixed(2)}</td>
-                    <td class="py-2 px-3 font-medium">${Number(l.quantity).toFixed(2)}</td>
-                    <td class="py-2 px-3 font-mono text-[11px]">${l.aoz}</td>
-                    <td class="py-2 px-3 font-mono text-[11px]">${l.sem}</td>
-                    <td class="py-2 px-3 font-mono text-[11px]">${l.cap}</td>
+                  <tr class="hover:bg-[#F8FAFC]">
+                    <td class="py-2 px-3 font-bold text-[#1E293B]">${l.lotNo}</td>
+                    <td class="py-2 px-3 text-[#334155]">${l.sampleType}</td>
+                    <td class="py-2 px-3 font-semibold text-[#1E293B]">${l.shift}</td>
+                    <td class="py-2 px-3 font-medium text-[#1E293B]">${Number(l.count).toFixed(2)}</td>
+                    <td class="py-2 px-3 font-medium text-[#1E293B]">${Number(l.quantity).toFixed(2)}</td>
+                    <td class="py-2 px-3 font-mono text-[11px] text-[#334155]">${l.aoz}</td>
+                    <td class="py-2 px-3 font-mono text-[11px] text-[#334155]">${l.sem}</td>
+                    <td class="py-2 px-3 font-mono text-[11px] text-[#334155]">${l.cap}</td>
                     <td class="py-2 px-3">
-                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${l.result.includes('Positive') ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-emerald-100 text-emerald-700 border border-emerald-200'}">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${l.result.includes('Positive') ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}">
                         ${l.result}
                       </span>
                     </td>
                   </tr>
                 `).join('') : `
                   <tr>
-                    <td colspan="9" class="py-6 text-center text-slate-400">All samples in this batch passed rapid standard screen.</td>
+                    <td colspan="9" class="py-6 text-center text-[#94A3B8]">All samples in this batch passed rapid standard screen.</td>
                   </tr>
                 `}
               </tbody>
@@ -25634,235 +25655,205 @@ const QCView = {
 
   renderCreateDailyABReport(container, activeHash) {
     container.innerHTML = `
-      <div class="space-y-6 w-full animate-fade-in pb-12">
-        <!-- Breadcrumbs Navigation -->
-        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <span>Lab</span>
-          <span>&gt;</span>
-          <button type="button" onclick="QCView.closeCreateDailyABReport()" class="hover:text-[#02a8b5] cursor-pointer">AB Report</button>
-          <span>&gt;</span>
-          <span class="text-[#3B82F6] font-bold">Daily Lab AB Report</span>
+      <div class="space-y-4 animate-fade-in text-[#1E293B] pb-12">
+        <!-- Top Navigation & Action Header -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <div class="flex items-center gap-1.5 text-xs text-[#64748B] mb-1">
+              <span>Lab</span>
+              <span>&bull;</span>
+              <button type="button" onclick="QCView.closeCreateDailyABReport()" class="hover:text-[#02a8b5] font-medium cursor-pointer">AB Report</button>
+              <span>&bull;</span>
+              <span class="text-[#02a8b5] font-bold">Daily Lab AB Report</span>
+            </div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">DAILY LAB AB REPORT</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="QCView.closeCreateDailyABReport()" class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-slate-50 text-[#64748B] text-xs font-bold rounded-lg transition-all cursor-pointer">
+              Cancel
+            </button>
+            <button type="button" onclick="document.getElementById('daily-ab-report-form').requestSubmit()" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span>Save Report</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Form Card -->
-        <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-2xs">
-          <div class="mb-6 pb-2 border-b border-slate-100">
-            <h2 class="text-xs font-extrabold text-[#0F172A] uppercase tracking-wider">DAILY LAB AB REPORT</h2>
+        <!-- Form Card in Camaroo Preprocessing Style -->
+        <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-4 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SAMPLE REGISTRATION &amp; TEST METRICS</h3>
           </div>
 
-          <form id="daily-ab-report-form" class="space-y-5" onsubmit="event.preventDefault(); QCView.handleDailyABSubmit();">
+          <form id="daily-ab-report-form" class="space-y-4" onsubmit="event.preventDefault(); QCView.handleDailyABSubmit();">
             <!-- Row 1: LOT NO, ANALYSIS DATE, REPORT DATE, SAMPLE TYPE -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">LOT NO</label>
-                <div class="relative">
-                  <select id="form-ab-lot" required class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="">Select Lot</option>
-                    <option value="BLS/2627/0143">BLS/2627/0143 (Balsore - 400 Kg)</option>
-                    <option value="NLR/2627/0256">NLR/2627/0256 (Nellore - 40000 Kg)</option>
-                    <option value="AVN/2627/1234">AVN/2627/1234 (Annavaram - 50 Kg)</option>
-                    <option value="ADP/2627/0019">ADP/2627/0019 (Amalapuram - 500 Kg)</option>
-                    <option value="ADP/2627/0020">ADP/2627/0020 (Amalapuram - 150 Kg)</option>
-                    <option value="ADP/2627/0021">ADP/2627/0021 (Amalapuram - 350 Kg)</option>
-                    <option value="AVN/2627/1235">AVN/2627/1235 (Annavaram - 150 Kg)</option>
-                    <option value="BLS/2627/0145">BLS/2627/0145 (Balsore - 15 Kg)</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">LOT NO <span class="text-rose-500">*</span></label>
+                <select id="form-ab-lot" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="">Select Lot</option>
+                  <option value="BLS/2627/0143">BLS/2627/0143 (Balsore - 400 Kg)</option>
+                  <option value="NLR/2627/0256">NLR/2627/0256 (Nellore - 40000 Kg)</option>
+                  <option value="AVN/2627/1234">AVN/2627/1234 (Annavaram - 50 Kg)</option>
+                  <option value="ADP/2627/0019">ADP/2627/0019 (Amalapuram - 500 Kg)</option>
+                  <option value="ADP/2627/0020">ADP/2627/0020 (Amalapuram - 150 Kg)</option>
+                  <option value="ADP/2627/0021">ADP/2627/0021 (Amalapuram - 350 Kg)</option>
+                  <option value="AVN/2627/1235">AVN/2627/1235 (Annavaram - 150 Kg)</option>
+                  <option value="BLS/2627/0145">BLS/2627/0145 (Balsore - 15 Kg)</option>
+                </select>
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">ANALYSIS DATE</label>
-                <div class="relative">
-                  <input type="text" id="form-ab-analysis-date" value="26/10/2026" required class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">ANALYSIS DATE <span class="text-rose-500">*</span></label>
+                <input type="text" id="form-ab-analysis-date" value="26/10/2026" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">REPORT DATE</label>
-                <div class="relative">
-                  <input type="text" id="form-ab-report-date" value="27/10/2026" required class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REPORT DATE <span class="text-rose-500">*</span></label>
+                <input type="text" id="form-ab-report-date" value="27/10/2026" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">SAMPLE TYPE</label>
-                <div class="relative">
-                  <select id="form-ab-sample-type" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="Harvest" selected>Harvest</option>
-                    <option value="Pre-Harvest">Pre-Harvest</option>
-                    <option value="Plant Receiving">Plant Receiving</option>
-                    <option value="Finished Goods">Finished Goods</option>
-                    <option value="Water">Water</option>
-                    <option value="Ice">Ice</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SAMPLE TYPE</label>
+                <select id="form-ab-sample-type" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="Harvest" selected>Harvest</option>
+                  <option value="Pre-Harvest">Pre-Harvest</option>
+                  <option value="Plant Receiving">Plant Receiving</option>
+                  <option value="Finished Goods">Finished Goods</option>
+                  <option value="Water">Water</option>
+                  <option value="Ice">Ice</option>
+                </select>
               </div>
             </div>
 
             <!-- Row 2: SAMPLE DETAILS, COUNT, QUANTITY, PARAMETER -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">SAMPLE DETAILS</label>
-                <input type="text" id="form-ab-sample-details" placeholder="Enter Sample Details" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SAMPLE DETAILS</label>
+                <input type="text" id="form-ab-sample-details" placeholder="Enter Sample Details" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">COUNT</label>
-                <input type="number" step="0.01" id="form-ab-count" placeholder="Enter Count" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">COUNT</label>
+                <input type="number" step="0.01" id="form-ab-count" placeholder="Enter Count" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">QUANTITY</label>
-                <input type="number" step="0.01" id="form-ab-quantity" placeholder="Enter Quantity" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">QUANTITY (KG)</label>
+                <input type="number" step="0.01" id="form-ab-quantity" placeholder="Enter Quantity" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">PARAMETER</label>
-                <div class="relative">
-                  <select id="form-ab-parameter" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="NA" selected>NA</option>
-                    <option value="Rapid ELISA">Rapid ELISA</option>
-                    <option value="LC-MS/MS">LC-MS/MS</option>
-                    <option value="Rapid Strip">Rapid Strip</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PARAMETER</label>
+                <select id="form-ab-parameter" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="NA" selected>NA</option>
+                  <option value="Rapid ELISA">Rapid ELISA</option>
+                  <option value="LC-MS/MS">LC-MS/MS</option>
+                  <option value="Rapid Strip">Rapid Strip</option>
+                </select>
               </div>
             </div>
 
             <!-- Row 3: LOADING STATUS, SHIFT, TESTED BY, VERIFIED BY -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">LOADING STATUS</label>
-                <div class="relative">
-                  <select id="form-ab-loading-status" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="">Select</option>
-                    <option value="Loaded">Loaded</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Direct To Plant">Direct To Plant</option>
-                    <option value="Hold">Hold</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">LOADING STATUS</label>
+                <select id="form-ab-loading-status" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="Loaded" selected>Loaded</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Direct To Plant">Direct To Plant</option>
+                  <option value="Hold">Hold</option>
+                </select>
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">SHIFT</label>
-                <div class="relative">
-                  <select id="form-ab-shift" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="DAY" selected>DAY</option>
-                    <option value="NIGHT">NIGHT</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SHIFT</label>
+                <select id="form-ab-shift" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="DAY" selected>DAY</option>
+                  <option value="NIGHT">NIGHT</option>
+                </select>
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">TESTED BY</label>
-                <div class="relative">
-                  <select id="form-ab-tested-by" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="CH.SWATHI PADMA" selected>CH.SWATHI PADMA</option>
-                    <option value="Dr. Rajesh K. Varma">Dr. Rajesh K. Varma</option>
-                    <option value="K. Srinivas">K. Srinivas</option>
-                    <option value="M. S. Prasad">M. S. Prasad</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">TESTED BY</label>
+                <select id="form-ab-tested-by" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="CH.SWATHI PADMA" selected>CH.SWATHI PADMA</option>
+                  <option value="Dr. Rajesh K. Varma">Dr. Rajesh K. Varma</option>
+                  <option value="K. Srinivas">K. Srinivas</option>
+                  <option value="M. S. Prasad">M. S. Prasad</option>
+                </select>
               </div>
 
               <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">VERIFIED BY</label>
-                <div class="relative">
-                  <select id="form-ab-verified-by" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-                    <option value="CH.SWATHI PADMA" selected>CH.SWATHI PADMA</option>
-                    <option value="Dr. Rajesh K. Varma">Dr. Rajesh K. Varma</option>
-                    <option value="Dr. Y.S. Prasad">Dr. Y.S. Prasad</option>
-                    <option value="Plant QC Head">Plant QC Head</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">VERIFIED BY</label>
+                <select id="form-ab-verified-by" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="CH.SWATHI PADMA" selected>CH.SWATHI PADMA</option>
+                  <option value="Dr. Rajesh K. Varma">Dr. Rajesh K. Varma</option>
+                  <option value="Dr. Y.S. Prasad">Dr. Y.S. Prasad</option>
+                  <option value="Plant QC Head">Plant QC Head</option>
+                </select>
               </div>
             </div>
 
             <!-- Row 4: PLANT, SULPHITE, REMARKS -->
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
               <div class="sm:col-span-3">
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">PLANT</label>
-                <div class="relative">
-                  <select id="form-ab-plant" class="w-full h-10 text-xs font-medium text-slate-700 bg-slate-50 border border-[#CBD5E1] rounded-xl px-3 py-2 appearance-none focus:outline-none">
-                    <option value="DEVI FISHERIES LIMITED (UNIT-5)" selected>DEVI FISHERIES LIMITED (UNIT-5)</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                  </div>
-                </div>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PLANT</label>
+                <select id="form-ab-plant" class="w-full px-3 py-2 bg-slate-50 border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none">
+                  <option value="DEVI FISHERIES LIMITED (UNIT-5)" selected>DEVI FISHERIES LIMITED (UNIT-5)</option>
+                </select>
               </div>
 
               <div class="sm:col-span-3">
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">SULPHITE</label>
-                <input type="text" id="form-ab-sulphite" placeholder="Enter Quantity" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SULPHITE (PPM)</label>
+                <input type="text" id="form-ab-sulphite" placeholder="Enter Sulphite Quantity" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
 
               <div class="sm:col-span-6">
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">REMARKS</label>
-                <input type="text" id="form-ab-remarks" placeholder="Enter Remarks" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
+                <input type="text" id="form-ab-remarks" placeholder="Enter Remarks" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
               </div>
             </div>
 
-            <!-- Row 5: AOZ, SEM, CAP, AHD, AMOZ, RESULT -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-2">
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">AOZ</label>
-                <input type="text" id="form-ab-aoz" placeholder="Enter AOZ" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+            <!-- Row 5: Antibiotic Residue Parameters -->
+            <div class="pt-3 border-t border-[#F1F5F9]">
+              <div class="text-[11px] font-bold text-[#006C7A] uppercase tracking-wider mb-2.5">
+                ANTIBIOTIC RESIDUE SCREENING (PPB / RESULT)
               </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">SEM</label>
-                <input type="text" id="form-ab-sem" placeholder="Enter SEM" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">CAP</label>
-                <input type="text" id="form-ab-cap" placeholder="Enter CAP" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">AHD</label>
-                <input type="text" id="form-ab-ahd" placeholder="Enter AHD" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">AMOZ</label>
-                <input type="text" id="form-ab-amoz" placeholder="Enter AMOZ" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-600 mb-1.5">RESULT</label>
-                <input type="text" id="form-ab-result" placeholder="Enter Result" class="w-full h-10 text-xs font-medium text-slate-800 bg-white border border-[#3B82F6] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20">
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AOZ</label>
+                  <input type="text" id="form-ab-aoz" placeholder="e.g. ND (<0.1)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SEM</label>
+                  <input type="text" id="form-ab-sem" placeholder="e.g. ND (<0.1)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">CAP</label>
+                  <input type="text" id="form-ab-cap" placeholder="e.g. ND (<0.1)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AHD</label>
+                  <input type="text" id="form-ab-ahd" placeholder="e.g. ND (<0.1)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AMOZ</label>
+                  <input type="text" id="form-ab-amoz" placeholder="e.g. ND (<0.1)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RESULT</label>
+                  <input type="text" id="form-ab-result" placeholder="e.g. Negative (Pass)" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                </div>
               </div>
             </div>
 
-            <!-- Action Buttons Row -->
-            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
-              <button type="button" onclick="QCView.closeCreateDailyABReport()" class="px-6 py-2.5 bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer">
+            <!-- Action Buttons -->
+            <div class="pt-4 flex items-center justify-end gap-2 border-t border-[#F1F5F9]">
+              <button type="button" onclick="QCView.closeCreateDailyABReport()" class="px-5 py-2 border border-[#CBD5E1] bg-white hover:bg-slate-50 text-[#64748B] text-xs font-bold rounded-lg transition-all cursor-pointer">
                 Close
               </button>
-              <button type="submit" class="px-7 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer">
-                Submit
+              <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span>Submit Daily Report</span>
               </button>
             </div>
           </form>
@@ -25899,12 +25890,10 @@ const QCView = {
     const amoz = document.getElementById('form-ab-amoz')?.value || 'ND (<0.1)';
     const result = document.getElementById('form-ab-result')?.value || 'Negative (Pass)';
 
-    // 1. Generate Report ID based on date
     const dateParts = analysisDate.split('/');
     const dateKey = dateParts.length === 3 ? `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}` : '2026-10-26';
     const reportId = `AB-${dateKey}`;
 
-    // 2. Add test line
     this.abTestLines.unshift({
       id: `TL-${Date.now()}`,
       reportId,
@@ -25931,7 +25920,6 @@ const QCView = {
       result
     });
 
-    // 3. Update or add report batch
     const existing = this.abReportsData.find(r => r.reportId === reportId);
     if (existing) {
       existing.totalReports += 1;
@@ -25957,7 +25945,7 @@ const QCView = {
     }
 
     this.closeCreateDailyABReport();
-  },
+  }
 
 };
 
