@@ -128,10 +128,10 @@ export const NAV_HIERARCHY = [
           { id: "chemical-pos", label: "Chemical Pos", hash: "#/preprocessing/chemical-screens/chemical-pos" },
           { id: "received-chemicals", label: "Received Chemicals", hash: "#/preprocessing/chemical-screens/received-chemicals" },
           { id: "chemicals-consumption", label: "Chemicals Consumption", hash: "#/preprocessing/chemical-screens/chemicals-consumption" },
-          { id: "chemical-received-report", label: "Chemical Received Report", hash: "#/preprocessing/chemical-screens/chemical-received-report" },
-          { id: "chemical-opening-balance", label: "Chemical Opening Balance Report", hash: "#/preprocessing/chemical-screens/chemical-opening-balance" },
-          { id: "chemical-balance-report", label: "Chemical Balance Report", hash: "#/preprocessing/chemical-screens/chemical-balance-report" },
-          { id: "chemical-payments-list", label: "Chemical Payments List", hash: "#/preprocessing/chemical-screens/chemical-payments-list" }
+          { id: "chemical-received-report", label: "Received Report", hash: "#/preprocessing/chemical-screens/chemical-received-report" },
+          { id: "chemical-opening-balance", label: "Opening Balance Report", hash: "#/preprocessing/chemical-screens/chemical-opening-balance" },
+          { id: "chemical-balance-report", label: "Balance Report", hash: "#/preprocessing/chemical-screens/chemical-balance-report" },
+          { id: "chemical-payments-list", label: "Payments List", hash: "#/preprocessing/chemical-screens/chemical-payments-list" }
         ]
       }
     ]

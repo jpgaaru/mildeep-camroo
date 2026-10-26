@@ -12,8 +12,8 @@ TARGET_FILES = [
 ]
 
 REQUIRED_NEEDLES = [
-    # Tab 4: Chemical Received Report
-    'CHEMICAL RECEIVED REPORT',
+    # Tab 4: Received Report
+    'RECEIVED REPORT',
     'Received Bags',
     'Received Quantity',
     'Balance Bags',
@@ -22,8 +22,8 @@ REQUIRED_NEEDLES = [
     'DFL/KPL/2627/002',
     'DFL/PT/2627/014',
     
-    # Tab 5: Chemical Opening Balance Report
-    'CHEMICAL OPENING BALANCE REPORT',
+    # Tab 5: Opening Balance Report
+    'OPENING BALANCE REPORT',
     'KGs per Bag',
     'Total Bags',
     'Total KGs',
@@ -31,8 +31,8 @@ REQUIRED_NEEDLES = [
     '21900',
     '3220',
     
-    # Tab 6: Chemical Balance Report
-    'CHEMICAL BALANCE REPORT',
+    # Tab 6: Balance Report
+    'BALANCE REPORT',
     'April-2024 to March-2025',
     'Opening KGs',
     'Total Purchase KGs',
@@ -43,8 +43,8 @@ REQUIRED_NEEDLES = [
     '4600',
     '1680',
     
-    # Tab 7: Chemical Payments List & GS CHEM PO PAYMENT CREATE
-    'CHEMICAL PAYMENTS LIST',
+    # Tab 7: Payments List & GS CHEM PO PAYMENT CREATE
+    'PAYMENTS LIST',
     'GS CHEM PO PAYMENT CREATE',
     'Party Name',
     'Amount (Rupees)',
