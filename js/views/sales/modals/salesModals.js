@@ -956,7 +956,7 @@ export const salesModals = {
           </div>
 
           <!-- Action Buttons using Base Design System colors -->
-          <div class="flex items-center justify-end gap-2.5 pt-4 mt-2 border-t border-[#F1F5F9]">
+          <div class="flex items-center justify-end gap-2.5 pt-4">
             <button type="button" class="px-5 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all" onclick="Modal.close()">
               Close
             </button>

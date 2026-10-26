@@ -1196,7 +1196,7 @@ export const qcLab = {
               </div>
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
+            <div class="flex items-center justify-end gap-3 pt-4">
               <button type="button" onclick="const m = (typeof Modal !== 'undefined' && Modal.close) ? Modal : window.Modal; if (m && m.close) m.close();" class="px-5 py-2.5 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#475569] font-bold text-xs rounded-lg transition-colors cursor-pointer">
                 Cancel
               </button>
@@ -1782,7 +1782,7 @@ export const qcLab = {
             </div>
 
             <!-- Modal Footer Buttons -->
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#F1F5F9]">
+            <div class="flex items-center justify-end gap-3 pt-4">
               <button type="button" onclick="const m = (typeof Modal !== 'undefined' && Modal.close) ? Modal : window.Modal; if (m && m.close) m.close();" class="px-5 py-2.5 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#475569] font-bold text-xs rounded-lg transition-colors cursor-pointer">
                 Close
               </button>

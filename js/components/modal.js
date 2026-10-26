@@ -36,15 +36,52 @@ export const Modal = {
     modalEl.id = 'erp-modal-root';
     modalEl.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 drawer-backdrop';
     
+    const effectiveButtons = [...footerButtons];
+    if (confirmText && effectiveButtons.length === 0) {
+      effectiveButtons.push({
+        label: cancelText,
+        type: 'secondary',
+        onClick: (m) => m.close()
+      });
+      effectiveButtons.push({
+        label: confirmText,
+        type: 'primary',
+        onClick: async (m) => {
+          if (onConfirm) {
+            const res = await onConfirm(m);
+            if (res !== false) m.close();
+          } else {
+            m.close();
+          }
+        }
+      });
+    }
+
     let buttonsHtml = '';
-    footerButtons.forEach((btn, idx) => {
-      const cls = btn.type === 'primary' 
-        ? 'btn-primary px-4 py-2 rounded text-sm' 
-        : btn.type === 'danger'
-        ? 'btn-danger px-4 py-2 rounded text-sm font-medium'
-        : 'btn-secondary px-4 py-2 rounded text-sm';
-      buttonsHtml += `<button id="modal-btn-${idx}" class="${cls}">${btn.label}</button>`;
+    effectiveButtons.forEach((btn, idx) => {
+      const isPrimary = btn.type === 'primary';
+      const isDanger = btn.type === 'danger';
+      const cls = isPrimary 
+        ? 'btn-primary px-5 py-2 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 shadow-xs hover:shadow transition-all' 
+        : isDanger
+        ? 'btn-danger px-5 py-2 rounded-lg text-xs font-bold inline-flex items-center gap-1.5'
+        : 'btn-secondary px-5 py-2 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 border border-[#CBD5E1] bg-white text-[#334155] hover:bg-[#F8FAFC]';
+
+      let label = (btn.label || '').replace(/💾\s*/g, '');
+      const isSaveBtn = isPrimary && /save|confirm|submit/i.test(label);
+      const iconHtml = isSaveBtn 
+        ? `<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>`
+        : '';
+
+      buttonsHtml += `<button id="modal-btn-${idx}" class="${cls}">${iconHtml}<span>${label}</span></button>`;
     });
+
+    const footerHtml = effectiveButtons.length > 0 ? `
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 bg-[#FAFBFC] flex items-center justify-end gap-2.5">
+        ${buttonsHtml}
+      </div>
+    ` : '';
 
     modalEl.innerHTML = `
       <div class="bg-white rounded-lg shadow-2xl border border-[#DFE1E6] w-full ${sizeClasses[size] || 'max-w-xl'} flex flex-col max-h-[90vh] animate-fade-in overflow-hidden" style="${sizeMaxStyles[size] || ''}">
@@ -63,10 +100,7 @@ export const Modal = {
           ${content}
         </div>
 
-        <!-- Modal Footer -->
-        <div class="px-6 py-3.5 border-t border-[#DFE1E6] bg-[#FAFBFC] flex items-center justify-end gap-2.5">
-          ${buttonsHtml}
-        </div>
+        ${footerHtml}
       </div>
     `;
 
@@ -80,7 +114,7 @@ export const Modal = {
     });
 
     // Attach Footer Handlers
-    footerButtons.forEach((btn, idx) => {
+    effectiveButtons.forEach((btn, idx) => {
       const btnEl = modalEl.querySelector(`#modal-btn-${idx}`);
       if (btnEl && btn.onClick) {
         btnEl.addEventListener('click', () => btn.onClick(this));

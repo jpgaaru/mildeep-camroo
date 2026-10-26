@@ -64,9 +64,9 @@ export const preprocessingModals = {
               <input type="text" id="modal-gt-tub" value="${editItem?.tubWeight || ''}" placeholder="Enter Crate Qty" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Line</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Line</span></button>
           </div>
         </form>
       `
@@ -174,9 +174,9 @@ export const preprocessingModals = {
               <input type="text" id="modal-dht-remarks" value="${editItem?.remarks || ''}" placeholder="Enter remarks" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Record</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Record</span></button>
           </div>
         </form>
       `
@@ -266,9 +266,9 @@ export const preprocessingModals = {
               <input type="number" id="modal-dh-ice" value="${editItem?.iceConsumption || '1800'}" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Log</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Log</span></button>
           </div>
         </form>
       `
@@ -351,9 +351,9 @@ export const preprocessingModals = {
               <input type="number" id="modal-gr-crates" value="${editItem?.noOfCrates || '120'}" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Run Log</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Run Log</span></button>
           </div>
         </form>
       `
@@ -430,9 +430,9 @@ export const preprocessingModals = {
               <input type="number" id="modal-va-crates" value="${editItem?.crates || '1'}" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Batch</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Batch</span></button>
           </div>
         </form>
       `
@@ -562,17 +562,16 @@ export const preprocessingModals = {
             <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
             <input type="text" id="modal-cpo-remarks" value="${editItem?.remarks || ''}" placeholder="Enter remarks" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save PO</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save PO</span></button>
           </div>
         </form>
       `
     });
-    setTimeout(() => CamarooControls.upgrade(document.getElementById('erp-modal-root')), 20);
-    setTimeout(() => CamarooControls.upgrade(document.getElementById('erp-modal-root')), 20);
-    setTimeout(() => CamarooControls.upgrade(document.getElementById('erp-modal-root')), 20);
-    setTimeout(() => CamarooControls.upgrade(document.getElementById('erp-modal-root')), 20);
+    setTimeout(() => {
+      if (window.CamarooControls) window.CamarooControls.upgrade(document.getElementById('erp-modal-root'));
+    }, 20);
 
     document.getElementById('modal-cpo-form')?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -692,9 +691,9 @@ export const preprocessingModals = {
               </select>
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Order</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Order</span></button>
           </div>
         </form>
       `
@@ -810,9 +809,9 @@ export const preprocessingModals = {
               <input type="text" id="modal-cc-sendto" value="${editItem?.sendedTo || 'Chilled Bath Tank S-1'}" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
             </div>
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Consumption</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Consumption</span></button>
           </div>
         </form>
       `
@@ -910,9 +909,9 @@ export const preprocessingModals = {
             <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
             <input type="text" id="modal-cp-remarks" value="${editItem?.remarks || ''}" placeholder="Enter remarks" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
-          <div class="flex justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
+          <div class="flex justify-end gap-3 pt-4">
             <button type="button" class="px-5 py-2 bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#F8FAFC] hover:text-[#0F172A] rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer" onclick="Modal.close()">Close</button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer">💾 Save Payment</button>
+            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white rounded-lg text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Payment</span></button>
           </div>
         </form>
       `
