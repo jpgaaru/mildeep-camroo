@@ -167,8 +167,19 @@ export const SelectPicker = {
 
   startObserver() {
     if (this.observer) return;
-    this.observer = new MutationObserver(() => {
-      this.upgradeAllSelects();
+    this.observer = new MutationObserver((mutations) => {
+      const hasRelevantMutation = mutations.some(m => {
+        return Array.from(m.addedNodes).some(node => {
+          if (node.nodeType !== 1) return false;
+          if (node.classList && (node.classList.contains('rich-select') || node.classList.contains('custom-select') || node.classList.contains('calendar-popover') || node.classList.contains('rs-menu'))) {
+            return false;
+          }
+          return node.tagName === 'SELECT' || (typeof node.querySelector === 'function' && node.querySelector('select'));
+        });
+      });
+      if (hasRelevantMutation) {
+        this.upgradeAllSelects();
+      }
     });
     this.observer.observe(document.body, {
       childList: true,
@@ -177,7 +188,7 @@ export const SelectPicker = {
   },
 
   upgradeAllSelects(root = document) {
-    const selects = root.querySelectorAll('select:not([multiple])');
+    const selects = (root || document).querySelectorAll('select:not([multiple])');
     selects.forEach(selectEl => {
       if ((selectEl.size || 0) > 1) return;
       if (selectEl.dataset.aquaUpgraded === 'true') {
@@ -196,8 +207,12 @@ export const SelectPicker = {
     selectEl.setAttribute('aria-hidden', 'true');
     selectEl.tabIndex = -1;
 
-    if (selectEl.nextElementSibling && selectEl.nextElementSibling.classList.contains('rich-select')) {
-      selectEl.nextElementSibling.remove();
+    // Clean up any existing duplicate custom-select or rich-select adjacent to this select
+    let sibling = selectEl.nextElementSibling;
+    while (sibling && (sibling.classList.contains('rich-select') || sibling.classList.contains('custom-select'))) {
+      const toRemove = sibling;
+      sibling = sibling.nextElementSibling;
+      toRemove.remove();
     }
 
     const isCompact =

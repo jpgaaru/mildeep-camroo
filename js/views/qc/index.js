@@ -18,13 +18,8 @@ export const QCView = {
 
     // Standardized Camaroo Shell Container
     container.innerHTML = `
-      <div id="qc-tab-bar-container"></div>
       <div id="qc-subpage-content" class="w-full"></div>
     `;
-
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('qc-tab-bar-container', activeHash);
-    }
 
     const subContainer = document.getElementById('qc-subpage-content');
     if (!subContainer) return;

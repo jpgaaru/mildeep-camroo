@@ -635,7 +635,6 @@ export const Sidebar = {
                     data-submenu-id="${sub.id}"
                     style="${isSubActive ? 'background: #00B4D8 !important; color: #0F172A !important; font-weight: 700; border-radius: 8px; margin: 2px 4px; padding: 7px 12px;' : 'color: #94A3B8; padding: 6px 12px; margin: 1px 4px;'}"
                   >
-                    <span style="font-size: 11px; margin-right: 6px; opacity: ${isSubActive ? '1' : '0.6'};">•</span>
                     <span>${sub.title}</span>
                   </a>
                 `;

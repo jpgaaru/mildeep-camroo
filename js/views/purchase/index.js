@@ -26,12 +26,8 @@ export const PurchaseView = {
     if (!container) return;
 
     container.innerHTML = `
-      <div id="purchase-tab-bar-container"></div>
       <div id="purchase-subpage-content"></div>
     `;
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('purchase-tab-bar-container', activeHash);
-    }
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Normalize route aliases

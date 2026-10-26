@@ -2102,3 +2102,22 @@ table.matrix-table td {
   color: #006C7A;
   font-weight: 700;
 }
+
+/* ==========================================================
+   AquaPulse Design System — Pill-Rounded Buttons
+   ========================================================== */
+button:not(.sidebar-mod-btn):not(.f-sb-sub-link):not(.tabs-line button):not([role="tab"]):not(.rs-trigger):not(.custom-select-trigger):not(.calendar-day-btn):not(.calendar-nav-btn):not(.calendar-title-btn):not(.calendar-view-btn):not(.rs-option):not(#sidebar-edge-toggle-btn):not(.f-sb-grp-btn):not(#erp-modal-close-btn),
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-outline,
+.btn-light,
+.btn-subtle,
+.dt-top-filter-toggle-btn,
+.dt-top-filter-reset-btn,
+.action-btn,
+[id^="modal-btn-"] {
+  border-radius: 9999px !important;
+}
+

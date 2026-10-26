@@ -154,15 +154,10 @@ export const SalesView = {
     this.activeTab = tabName || 'overview';
     this.activeHash = activeHash;
 
-    // Standard Option 1 Floating / Sticky TabBar Mounting
+    // Subpage container (TabBar is managed globally by AppShell)
     container.innerHTML = `
-      <div id="sales-tab-bar-container"></div>
       <div id="sales-subpage-content" class="w-full"></div>
     `;
-
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('sales-tab-bar-container', this.activeHash);
-    }
 
     const subContainer = document.getElementById('sales-subpage-content');
     if (!subContainer) return;

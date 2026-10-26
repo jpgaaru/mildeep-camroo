@@ -6015,6 +6015,25 @@ table.matrix-table td {
   font-weight: 700;
 }
 
+/* ==========================================================
+   AquaPulse Design System — Pill-Rounded Buttons
+   ========================================================== */
+button:not(.sidebar-mod-btn):not(.f-sb-sub-link):not(.tabs-line button):not([role="tab"]):not(.rs-trigger):not(.custom-select-trigger):not(.calendar-day-btn):not(.calendar-nav-btn):not(.calendar-title-btn):not(.calendar-view-btn):not(.rs-option):not(#sidebar-edge-toggle-btn):not(.f-sb-grp-btn):not(#erp-modal-close-btn),
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-outline,
+.btn-light,
+.btn-subtle,
+.dt-top-filter-toggle-btn,
+.dt-top-filter-reset-btn,
+.action-btn,
+[id^="modal-btn-"] {
+  border-radius: 9999px !important;
+}
+
+
   </style>
 </head>
 <body class="bg-[#F2F5F9] text-[#0F172A] antialiased overflow-x-hidden min-h-screen">
@@ -9469,7 +9488,6 @@ const Sidebar = {
                     data-submenu-id="${sub.id}"
                     style="${isSubActive ? 'background: #00B4D8 !important; color: #0F172A !important; font-weight: 700; border-radius: 8px; margin: 2px 4px; padding: 7px 12px;' : 'color: #94A3B8; padding: 6px 12px; margin: 1px 4px;'}"
                   >
-                    <span style="font-size: 11px; margin-right: 6px; opacity: ${isSubActive ? '1' : '0.6'};">•</span>
                     <span>${sub.title}</span>
                   </a>
                 `;
@@ -11634,8 +11652,19 @@ const SelectPicker = {
 
   startObserver() {
     if (this.observer) return;
-    this.observer = new MutationObserver(() => {
-      this.upgradeAllSelects();
+    this.observer = new MutationObserver((mutations) => {
+      const hasRelevantMutation = mutations.some(m => {
+        return Array.from(m.addedNodes).some(node => {
+          if (node.nodeType !== 1) return false;
+          if (node.classList && (node.classList.contains('rich-select') || node.classList.contains('custom-select') || node.classList.contains('calendar-popover') || node.classList.contains('rs-menu'))) {
+            return false;
+          }
+          return node.tagName === 'SELECT' || (typeof node.querySelector === 'function' && node.querySelector('select'));
+        });
+      });
+      if (hasRelevantMutation) {
+        this.upgradeAllSelects();
+      }
     });
     this.observer.observe(document.body, {
       childList: true,
@@ -11644,7 +11673,7 @@ const SelectPicker = {
   },
 
   upgradeAllSelects(root = document) {
-    const selects = root.querySelectorAll('select:not([multiple])');
+    const selects = (root || document).querySelectorAll('select:not([multiple])');
     selects.forEach(selectEl => {
       if ((selectEl.size || 0) > 1) return;
       if (selectEl.dataset.aquaUpgraded === 'true') {
@@ -11663,8 +11692,12 @@ const SelectPicker = {
     selectEl.setAttribute('aria-hidden', 'true');
     selectEl.tabIndex = -1;
 
-    if (selectEl.nextElementSibling && selectEl.nextElementSibling.classList.contains('rich-select')) {
-      selectEl.nextElementSibling.remove();
+    // Clean up any existing duplicate custom-select or rich-select adjacent to this select
+    let sibling = selectEl.nextElementSibling;
+    while (sibling && (sibling.classList.contains('rich-select') || sibling.classList.contains('custom-select'))) {
+      const toRemove = sibling;
+      sibling = sibling.nextElementSibling;
+      toRemove.remove();
     }
 
     const isCompact =
@@ -16203,12 +16236,8 @@ const PurchaseView = {
     if (!container) return;
 
     container.innerHTML = `
-      <div id="purchase-tab-bar-container"></div>
       <div id="purchase-subpage-content"></div>
     `;
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('purchase-tab-bar-container', activeHash);
-    }
     const subContainer = document.getElementById('purchase-subpage-content');
 
     // Normalize route aliases
@@ -16845,84 +16874,17 @@ const CamarooControls = {
   select: {
     upgradeContainer(container) {
       if (!container) return;
-      const selects = container.querySelectorAll('select:not([data-camaroo-select])');
-      selects.forEach((sel) => {
-        if (sel.classList.contains('gt-inline') || sel.closest('table')) return;
-
-        sel.setAttribute('data-camaroo-select', 'true');
-        sel.style.display = 'none';
-
-        const wrap = document.createElement('div');
-        wrap.className = 'custom-select';
-
-        const selectedOpt = sel.options[sel.selectedIndex] || sel.options[0];
-        const initialText = selectedOpt ? selectedOpt.textContent : 'Select...';
-
-        const trigger = document.createElement('div');
-        trigger.className = 'custom-select-trigger';
-        trigger.setAttribute('tabindex', '0');
-        trigger.innerHTML = `
-          <span class="custom-select-current"><span>${initialText}</span></span>
-          <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        `;
-
-        const menu = document.createElement('div');
-        menu.className = 'custom-select-menu';
-        const list = document.createElement('div');
-        list.className = 'custom-select-list';
-
-        Array.from(sel.options).forEach((opt, idx) => {
-          const item = document.createElement('div');
-          item.className = `custom-select-option ${idx === sel.selectedIndex ? 'selected' : ''}`;
-          item.innerHTML = `
-            <span>${opt.textContent}</span>
-            <svg class="custom-select-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          `;
-          item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            sel.selectedIndex = idx;
-            sel.value = opt.value;
-            sel.dispatchEvent(new Event('change', { bubbles: true }));
-            sel.dispatchEvent(new Event('input', { bubbles: true }));
-
-            trigger.querySelector('.custom-select-current span').textContent = opt.textContent;
-            list.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
-            item.classList.add('selected');
-            wrap.classList.remove('open');
-          });
-          list.appendChild(item);
-        });
-
-        menu.appendChild(list);
-        wrap.appendChild(trigger);
-        wrap.appendChild(menu);
-
-        trigger.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const isOpen = wrap.classList.contains('open');
-          document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
-          if (!isOpen) {
-            wrap.classList.add('open');
-          }
-        });
-
-        sel.addEventListener('change', () => {
-          const opt = sel.options[sel.selectedIndex];
-          if (opt) {
-            trigger.querySelector('.custom-select-current span').textContent = opt.textContent;
-            list.querySelectorAll('.custom-select-option').forEach((o, i) => {
-              o.classList.toggle('selected', i === sel.selectedIndex);
-            });
-          }
-        });
-
-        sel.parentNode.insertBefore(wrap, sel.nextSibling);
-      });
+      if (typeof window !== 'undefined' && window.SelectPicker && typeof window.SelectPicker.upgradeAllSelects === 'function') {
+        window.SelectPicker.upgradeAllSelects(container);
+        return;
+      }
     }
   },
 
   upgrade(container) {
-    this.calendar.init();
+    if (typeof window !== 'undefined' && window.CalendarPicker && typeof window.CalendarPicker.init === 'function') {
+      window.CalendarPicker.init();
+    }
     this.select.upgradeContainer(container);
   }
 };
@@ -23121,13 +23083,8 @@ const PreprocessingView = {
     this.updateHeaderAction(subPage);
 
     container.innerHTML = `
-      <div id="preprocessing-tab-bar-container"></div>
       <div id="preproc-subpage-content" class="w-full"></div>
     `;
-
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('preprocessing-tab-bar-container', activeHash);
-    }
     const subContainer = document.getElementById('preproc-subpage-content');
     if (!subContainer) return;
 
@@ -27462,13 +27419,8 @@ const QCView = {
 
     // Standardized Camaroo Shell Container
     container.innerHTML = `
-      <div id="qc-tab-bar-container"></div>
       <div id="qc-subpage-content" class="w-full"></div>
     `;
-
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('qc-tab-bar-container', activeHash);
-    }
 
     const subContainer = document.getElementById('qc-subpage-content');
     if (!subContainer) return;
@@ -38197,15 +38149,10 @@ const SalesView = {
     this.activeTab = tabName || 'overview';
     this.activeHash = activeHash;
 
-    // Standard Option 1 Floating / Sticky TabBar Mounting
+    // Subpage container (TabBar is managed globally by AppShell)
     container.innerHTML = `
-      <div id="sales-tab-bar-container"></div>
       <div id="sales-subpage-content" class="w-full"></div>
     `;
-
-    if (typeof TabBar !== 'undefined' && typeof TabBar.render === 'function') {
-      TabBar.render('sales-tab-bar-container', this.activeHash);
-    }
 
     const subContainer = document.getElementById('sales-subpage-content');
     if (!subContainer) return;
