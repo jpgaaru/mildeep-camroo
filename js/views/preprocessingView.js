@@ -1073,14 +1073,28 @@ export const PreprocessingView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#1E293B]">
-        <!-- Page Title -->
-        <div class="flex items-center justify-between pb-1">
-          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICAL POS</h2>
-          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Purchase Order Tracking</span>
+        <!-- Page Title Header with Right-Aligned Action Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICAL POS</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Purchase Order Tracking</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="cpo-btn-add-po" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add PO</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Upper Card: Filters Card (Matching Screenshot 1) -->
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="cpo-filter-form" class="space-y-4">
             <!-- Row 1: 4 Dropdowns -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1138,15 +1152,11 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Buttons (Matching Screenshot 1) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
+            <!-- Bottom-Right Search Button -->
+            <div class="flex justify-end pt-1">
               <button type="button" id="cpo-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-              </button>
-              <button type="button" id="cpo-btn-add-po" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ Add PO</span>
               </button>
             </div>
           </form>
@@ -1624,14 +1634,28 @@ export const PreprocessingView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#1E293B]">
-        <!-- Page Title -->
-        <div class="flex items-center justify-between pb-1">
-          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">RECEIVED CHEMICALS</h2>
-          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Inward Orders & Dock Clearance</span>
+        <!-- Page Title Header with Right-Aligned Action Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">RECEIVED CHEMICALS</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Inward Orders & Dock Clearance</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="rc-btn-add-order" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add Order</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Upper Card: Filters Card (Matching Screenshot 1) -->
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="rc-filter-form" class="space-y-4">
             <!-- Row 1: 3 Dropdowns -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -1663,15 +1687,13 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Buttons (Matching Screenshot 1) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
+            <!-- Bottom-Right Action Buttons -->
+            <div class="flex justify-end items-center gap-2 pt-1">
+              <button type="button" id="rc-btn-more-search" class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#475569] text-xs font-bold rounded-lg shadow-xs transition-all cursor-pointer">More Search</button>
+              <button type="button" id="rc-btn-load-all" class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#475569] text-xs font-bold rounded-lg shadow-xs transition-all cursor-pointer">Load All</button>
               <button type="button" id="rc-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
-              </button>
-              <button type="button" id="rc-btn-add-order" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ Add Order</span>
               </button>
             </div>
           </form>
@@ -2115,14 +2137,28 @@ export const PreprocessingView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#1E293B]">
-        <!-- Page Title -->
-        <div class="flex items-center justify-between pb-1">
-          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICALS CONSUMPTION</h2>
-          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Daily Running Inventory Ledger</span>
+        <!-- Page Title Header with Right-Aligned Action Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICALS CONSUMPTION</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Floor Usage & Transfer Register</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="cc-btn-add-consumption" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add Consumption</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Upper Card: Filters Card (Matching Screenshot 1) -->
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="cc-filter-form" class="space-y-4">
             <!-- Row 1: 4 Columns -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -2156,15 +2192,11 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Buttons (Matching Screenshot 1) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
+            <!-- Bottom-Right Search Button -->
+            <div class="flex justify-end pt-1">
               <button type="button" id="cc-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
-              </button>
-              <button type="button" id="cc-btn-add-consumption" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ Add Consumption</span>
               </button>
             </div>
           </form>
@@ -2508,6 +2540,12 @@ export const PreprocessingView = {
 
         <!-- Upper Card: Filters Card (Matching Screenshot 1) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="crr-filter-form" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
               <div>
@@ -2530,11 +2568,10 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Button -->
-            <div class="flex items-center justify-center pt-2">
-              <button type="button" id="crr-btn-search" class="px-7 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+            <div class="flex justify-end pt-1">
+              <button type="button" id="crr-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
               </button>
             </div>
           </form>
@@ -2690,6 +2727,12 @@ export const PreprocessingView = {
 
         <!-- Upper Card: Filters Card (Matching Screenshot 2) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="cob-filter-form" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
               <div>
@@ -2717,11 +2760,10 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Button -->
-            <div class="flex items-center justify-center pt-2">
-              <button type="button" id="cob-btn-search" class="px-7 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+            <div class="flex justify-end pt-1">
+              <button type="button" id="cob-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
               </button>
             </div>
           </form>
@@ -2843,6 +2885,12 @@ export const PreprocessingView = {
 
         <!-- Upper Card: Filters Card (Matching Screenshot 3) -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="cbr-filter-form" class="space-y-4">
             <!-- Row 1: 4 Columns -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -2905,11 +2953,10 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Button -->
-            <div class="flex items-center justify-center pt-2">
-              <button type="button" id="cbr-btn-search" class="px-7 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+            <div class="flex justify-end pt-1">
+              <button type="button" id="cbr-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
               </button>
             </div>
           </form>
@@ -3021,14 +3068,28 @@ export const PreprocessingView = {
 
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#1E293B]">
-        <!-- Page Title -->
-        <div class="flex items-center justify-between pb-1">
-          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICAL PAYMENTS LIST</h2>
-          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Supplier Payments & Settlement</span>
+        <!-- Page Title Header with Right-Aligned Action Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">CHEMICAL PAYMENTS LIST</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Chemical Screens &bull; Vendor Disbursals & Clearance Register</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="cp-btn-add-payment" class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add Payment</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Upper Card: Filters Card (Matching Screenshot 4) -->
+        <!-- Upper Card: Filters Card with SEARCH & FILTERS Header -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
           <form id="cp-filter-form" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
               <div>
@@ -3051,15 +3112,13 @@ export const PreprocessingView = {
               </div>
             </div>
 
-            <!-- Centered Action Buttons (Matching Screenshot 4) -->
-            <div class="flex items-center justify-center gap-3 pt-2">
+            <!-- Bottom-Right Action Buttons -->
+            <div class="flex justify-end items-center gap-2 pt-1">
+              <button type="button" id="cp-btn-more-search" class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#475569] text-xs font-bold rounded-lg shadow-xs transition-all cursor-pointer">More Search</button>
+              <button type="button" id="cp-btn-load-all" class="px-4 py-2 border border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#475569] text-xs font-bold rounded-lg shadow-xs transition-all cursor-pointer">Load All</button>
               <button type="button" id="cp-btn-search" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <span>Search</span>
-                <span>&rarr;</span>
-              </button>
-              <button type="button" id="cp-btn-add-payment" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer">
-                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>+ Add Payment</span>
               </button>
             </div>
           </form>

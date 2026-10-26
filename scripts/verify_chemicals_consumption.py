@@ -17,7 +17,7 @@ REQUIRED_NEEDLES = [
     'DFL UNIT-5 (JPT)',
     'CARNAL 659 S ADVANCED (STPP)',
     'Search',
-    '+ Add Consumption',
+    'Add Consumption',
     'PLANT NAME',
     'USAGE TYPE',
     'CHEMICAL NAME',

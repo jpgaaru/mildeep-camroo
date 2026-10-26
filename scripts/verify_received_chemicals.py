@@ -18,7 +18,7 @@ REQUIRED_NEEDLES = [
     'STATUS',
     'YEAR',
     'Search',
-    '+ Add Order',
+    'Add Order',
     'PROCESSING PLANT',
     'PONO',
     'BL NO',

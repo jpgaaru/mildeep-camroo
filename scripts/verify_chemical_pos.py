@@ -20,7 +20,7 @@ REQUIRED_NEEDLES = [
     'PORT',
     'YEAR',
     'Search',
-    '+ Add PO',
+    'Add PO',
     'MODE OF IMPORT',
     'Enter Po NO',
     'Download Excel',
