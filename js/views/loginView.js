@@ -250,11 +250,14 @@ export const LoginView = {
       });
     }
 
-    // Miledeep Devi Fisheries Button Click -> Standalone Dedicated Page
+    // Miledeep Devi Fisheries Button Click -> Direct Enterprise Login
     if (btnMiledeep) {
       btnMiledeep.addEventListener('click', () => {
-        Toast.show('Opening Miledeep Devi Fisheries Application...', 'info', 'Devi Fisheries ERP');
-        window.location.href = 'miledeep-devi-fisheries.html';
+        performLogin(
+          ENV_SITEMAP_01,
+          `Welcome to Miledeep Devi Fisheries ERP, ${ERP_DATA.currentUser.name}!`,
+          'Devi Fisheries ERP'
+        );
       });
     }
 
