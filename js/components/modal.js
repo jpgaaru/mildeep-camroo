@@ -11,7 +11,25 @@ export const Modal = {
       md: 'max-w-xl',
       lg: 'max-w-3xl',
       xl: 'max-w-5xl',
-      full: 'max-w-[95vw]'
+      '2xl': 'max-w-6xl',
+      '3xl': 'max-w-7xl',
+      '4xl': 'max-w-7xl',
+      '5xl': 'max-w-[1240px]',
+      '6xl': 'max-w-[1360px]',
+      full: 'max-w-[96vw]'
+    };
+
+    const sizeMaxStyles = {
+      sm: 'max-width: 28rem;',
+      md: 'max-width: 36rem;',
+      lg: 'max-width: 48rem;',
+      xl: 'max-width: 64rem;',
+      '2xl': 'max-width: 72rem;',
+      '3xl': 'max-width: 80rem;',
+      '4xl': 'max-width: 84rem;',
+      '5xl': 'max-width: 1240px;',
+      '6xl': 'max-width: 1360px;',
+      full: 'max-width: 96vw;'
     };
 
     const modalEl = document.createElement('div');
@@ -29,7 +47,7 @@ export const Modal = {
     });
 
     modalEl.innerHTML = `
-      <div class="bg-white rounded-lg shadow-2xl border border-[#DFE1E6] w-full ${sizeClasses[size] || 'max-w-xl'} flex flex-col max-h-[90vh] animate-fade-in overflow-hidden">
+      <div class="bg-white rounded-lg shadow-2xl border border-[#DFE1E6] w-full ${sizeClasses[size] || 'max-w-xl'} flex flex-col max-h-[90vh] animate-fade-in overflow-hidden" style="${sizeMaxStyles[size] || ''}">
         <!-- Modal Header -->
         <div class="px-6 py-4 border-b border-[#DFE1E6] flex items-center justify-between bg-[#FAFBFC]">
           <h3 class="text-base font-semibold text-[#172B4D] flex items-center gap-2">
@@ -77,6 +95,10 @@ export const Modal = {
       }
     };
     document.addEventListener('keydown', escHandler);
+  },
+
+  show(title, content, size = '3xl') {
+    return this.open({ title, content, size });
   },
 
   close() {

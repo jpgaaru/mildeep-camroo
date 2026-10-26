@@ -37,15 +37,44 @@ const fwOrganisms = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'org
 const fwIndex = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'index.js'), 'utf-8');
 
 const loginView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'loginView.js'), 'utf-8');
-const purchaseView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchaseView.js'), 'utf-8');
-const preprocessingView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessingView.js'), 'utf-8');
-const qcView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qcView.js'), 'utf-8');
+const purchaseState = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'state', 'purchaseState.js'), 'utf-8');
+const purchaseDashboard = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'dashboard', 'purchaseDashboard.js'), 'utf-8');
+const purchaseOperations = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'operations', 'purchaseOperations.js'), 'utf-8');
+const purchaseTransactions = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'transactions', 'purchaseTransactions.js'), 'utf-8');
+const purchasePayments = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'payments', 'purchasePayments.js'), 'utf-8');
+const purchaseModals = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'modals', 'purchaseModals.js'), 'utf-8');
+const purchaseView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'index.js'), 'utf-8');
+const preprocessingBase = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'base', 'preprocessingBase.js'), 'utf-8');
+const preprocessingOverview = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'overview', 'preprocessingOverview.js'), 'utf-8');
+const preprocessingChemicals = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'chemicals', 'preprocessingChemicals.js'), 'utf-8');
+const preprocessingOperations = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'operations', 'preprocessingOperations.js'), 'utf-8');
+const preprocessingTraceability = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'traceability', 'preprocessingTraceability.js'), 'utf-8');
+const preprocessingModals = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'modals', 'preprocessingModals.js'), 'utf-8');
+const preprocessingView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'preprocessing', 'index.js'), 'utf-8');
+const qcOverview = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'overview', 'qcOverview.js'), 'utf-8');
+const qcLab = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'lab', 'qcLab.js'), 'utf-8');
+const qcOperations = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'operations', 'qcOperations.js'), 'utf-8');
+const qcScreening = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'screening', 'qcScreening.js'), 'utf-8');
+const qcView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'index.js'), 'utf-8');
 const productionView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'productionView.js'), 'utf-8');
 const coldstoreView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'coldstoreView.js'), 'utf-8');
 const inventoryView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'inventoryView.js'), 'utf-8');
-const salesView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'salesView.js'), 'utf-8');
+const salesDashboard = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'dashboard', 'salesDashboard.js'), 'utf-8');
+const salesOrders = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'orders', 'salesOrders.js'), 'utf-8');
+const salesShipments = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'shipments', 'salesShipments.js'), 'utf-8');
+const salesFinancials = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'financials', 'salesFinancials.js'), 'utf-8');
+const salesReports = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'reports', 'salesReports.js'), 'utf-8');
+const salesModals = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'modals', 'salesModals.js'), 'utf-8');
+const salesView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'sales', 'index.js'), 'utf-8');
 const reportsView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'reportsView.js'), 'utf-8');
-const setupView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setupView.js'), 'utf-8');
+const setupState = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'state', 'setupState.js'), 'utf-8');
+const setupCompany = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'company', 'setupCompany.js'), 'utf-8');
+const setupUsers = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'users', 'setupUsers.js'), 'utf-8');
+const setupRoles = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'roles', 'setupRoles.js'), 'utf-8');
+const setupStudio = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'studio', 'setupStudio.js'), 'utf-8');
+const setupForms = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'forms', 'setupForms.js'), 'utf-8');
+const setupLogs = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'logs', 'setupLogs.js'), 'utf-8');
+const setupView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'setup', 'index.js'), 'utf-8');
 const helpView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'helpView.js'), 'utf-8');
 const notificationsView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'notificationsView.js'), 'utf-8');
 const app = fs.readFileSync(path.join(__dirname, 'js', 'app.js'), 'utf-8');
@@ -96,14 +125,47 @@ const combinedJS = `
 
   // Views
   ${cleanCode(loginView)}
+  // Purchase Domain Modules (Enterprise Structured)
+  ${cleanCode(purchaseState)}
+  ${cleanCode(purchaseDashboard)}
+  ${cleanCode(purchaseOperations)}
+  ${cleanCode(purchaseTransactions)}
+  ${cleanCode(purchasePayments)}
+  ${cleanCode(purchaseModals)}
   ${cleanCode(purchaseView)}
+  // Pre-processing Domain Modules (Enterprise Structured)
+  ${cleanCode(preprocessingBase)}
+  ${cleanCode(preprocessingOverview)}
+  ${cleanCode(preprocessingChemicals)}
+  ${cleanCode(preprocessingOperations)}
+  ${cleanCode(preprocessingTraceability)}
+  ${cleanCode(preprocessingModals)}
   ${cleanCode(preprocessingView)}
+  ${cleanCode(qcOverview)}
+  ${cleanCode(qcLab)}
+  ${cleanCode(qcOperations)}
+  ${cleanCode(qcScreening)}
   ${cleanCode(qcView)}
   ${cleanCode(productionView)}
   ${cleanCode(coldstoreView)}
   ${cleanCode(inventoryView)}
+  // Sales & Exports Domain Modules (Enterprise Structured)
+  ${cleanCode(salesDashboard)}
+  ${cleanCode(salesOrders)}
+  ${cleanCode(salesShipments)}
+  ${cleanCode(salesFinancials)}
+  ${cleanCode(salesReports)}
+  ${cleanCode(salesModals)}
   ${cleanCode(salesView)}
   ${cleanCode(reportsView)}
+  // Setup & Master Data Domain Modules (Enterprise Structured)
+  ${cleanCode(setupState)}
+  ${cleanCode(setupCompany)}
+  ${cleanCode(setupUsers)}
+  ${cleanCode(setupRoles)}
+  ${cleanCode(setupStudio)}
+  ${cleanCode(setupForms)}
+  ${cleanCode(setupLogs)}
   ${cleanCode(setupView)}
   ${cleanCode(helpView)}
   ${cleanCode(notificationsView)}
@@ -181,4 +243,5 @@ const html = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync(path.join(__dirname, 'standalone.html'), html, 'utf-8');
-console.log('standalone.html rebuilt with Lottie animations successfully!');
+fs.writeFileSync(path.join(__dirname, 'miledeep-devi-fisheries.html'), html, 'utf-8');
+console.log('standalone.html and miledeep-devi-fisheries.html rebuilt with Lottie animations successfully!');

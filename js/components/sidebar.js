@@ -186,13 +186,13 @@ export const NAV_HIERARCHY = [
       {
         id: "qc-audits",
         title: "QC Audits",
-        defaultTab: "food-audits",
+        defaultTab: "food-audit-list",
         tabs: [
-          { id: "food-audits", label: "Food Audits", hash: "#/quality/qc-audits/food-audits" },
-          { id: "social-audits", label: "Social Audits", hash: "#/quality/qc-audits/social-audits" },
-          { id: "farm-audits", label: "Farm Audits", hash: "#/quality/qc-audits/farm-audits" },
-          { id: "hatchery-audits", label: "Hatchery Audits", hash: "#/quality/qc-audits/hatchery-audits" },
-          { id: "feed-mill-audits", label: "Feed Mill Audits", hash: "#/quality/qc-audits/feed-mill-audits" }
+          { id: "food-audit-list", label: "Food Audit List", hash: "#/quality/qc-audits/food-audit-list" },
+          { id: "social-audit-list", label: "Social Audit List", hash: "#/quality/qc-audits/social-audit-list" },
+          { id: "farm-audit-list", label: "Farm Audit List", hash: "#/quality/qc-audits/farm-audit-list" },
+          { id: "hatchery-audit-list", label: "Hatchery Audit List", hash: "#/quality/qc-audits/hatchery-audit-list" },
+          { id: "feed-mill-audit-list", label: "Feed Mill Audit List", hash: "#/quality/qc-audits/feed-mill-audit-list" }
         ]
       }
     ]
