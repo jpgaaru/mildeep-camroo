@@ -11,7 +11,7 @@ export const HomeView = {
     const container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
     if (!container) return;
 
-    const isS01 = Environment.isSitemap01();
+    const isS01 = (typeof Environment !== 'undefined' && Environment.isSitemap01) ? Environment.isSitemap01() : true;
 
     // Header action button
     const actionContainer = document.getElementById('section-action-btn-container');

@@ -6,7 +6,7 @@ import { Modal } from '../../../components/modal.js';
 // =========================================================================
 // AQUAPULSE / DEVI FISHERIES BASE DESIGN SYSTEM (STANDARDIZED FROM PURCHASE)
 // =========================================================================
-const UIBase = {
+var UIBase = window.UIBase = window.UIBase || {
   renderHeader(title, actionBtnHtml = '') {
     return `
       <div class="flex flex-wrap items-center justify-between gap-3 mb-2 animate-fade-in">

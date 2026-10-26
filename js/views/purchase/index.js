@@ -1,4 +1,5 @@
 // Purchase Module — Master Domain Controller & Orchestrator
+import { Skeleton } from '../../components/skeleton.js';
 import {
   M, bookings, rmArrivals, arrivals, payments,
   isCreatingBooking, activeBillForEdit,
@@ -37,10 +38,12 @@ export const PurchaseView = {
     const target = (subPage || '').toLowerCase();
     
     // Smooth transition
-    if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
-      subContainer.innerHTML = Skeleton.renderDashboard();
-    } else {
-      subContainer.innerHTML = Skeleton.renderTable(6, 6);
+    if (typeof Skeleton !== 'undefined' && Skeleton.renderDashboard) {
+      if (target === 'overview' || target === 'purchase-dashboard' || target === 'rm-dashboard' || target === 'commercial-dashboard') {
+        subContainer.innerHTML = Skeleton.renderDashboard();
+      } else {
+        subContainer.innerHTML = Skeleton.renderTable(6, 6);
+      }
     }
 
     setTimeout(() => {

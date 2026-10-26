@@ -214,7 +214,9 @@ export const LoginView = {
     }
 
     const performLogin = (envTarget, toastMessage, title) => {
-      Environment.setActiveEnv(envTarget);
+      if (typeof Environment !== 'undefined' && Environment.setActiveEnv) {
+        Environment.setActiveEnv(envTarget);
+      }
       sessionStorage.setItem('dfl_authenticated', 'true');
       const existing = document.getElementById('erp-app-shell');
       if (existing) existing.remove();

@@ -28,6 +28,7 @@ const accessibility = fs.readFileSync(path.join(__dirname, 'js', 'components', '
 const calendarPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'calendarPicker.js'), 'utf-8');
 const selectPicker = fs.readFileSync(path.join(__dirname, 'js', 'components', 'selectPicker.js'), 'utf-8');
 
+const fwEnvironment = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Environment.js'), 'utf-8');
 const fwComponent = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Component.js'), 'utf-8');
 const fwStore = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Store.js'), 'utf-8');
 const fwRouter = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'Router.js'), 'utf-8');
@@ -37,6 +38,7 @@ const fwOrganisms = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'org
 const fwIndex = fs.readFileSync(path.join(__dirname, 'js', 'framework', 'index.js'), 'utf-8');
 
 const loginView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'loginView.js'), 'utf-8');
+const homeView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'homeView.js'), 'utf-8');
 const purchaseState = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'state', 'purchaseState.js'), 'utf-8');
 const purchaseDashboard = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'dashboard', 'purchaseDashboard.js'), 'utf-8');
 const purchaseOperations = fs.readFileSync(path.join(__dirname, 'js', 'views', 'purchase', 'operations', 'purchaseOperations.js'), 'utf-8');
@@ -84,8 +86,11 @@ function cleanCode(code) {
     .replace(/import\s+[\s\S]*?from\s+['"].*?['"];?/g, '')
     .replace(/export\s*\{[\s\S]*?\};?/g, '')
     .replace(/export\s+const\s+/g, 'const ')
+    .replace(/export\s+let\s+/g, 'let ')
+    .replace(/export\s+var\s+/g, 'var ')
     .replace(/export\s+class\s+/g, 'class ')
     .replace(/export\s+function\s+/g, 'function ')
+    .replace(/export\s+async\s+function\s+/g, 'async function ')
     .replace(/export\s+default\s+/g, '');
 }
 
@@ -114,7 +119,8 @@ const combinedJS = `
   ${cleanCode(calendarPicker)}
   ${cleanCode(selectPicker)}
 
-  // AquaPulse Component Framework (BaseComponent, Store, Router, Atoms, Molecules, Organisms)
+  // AquaPulse Component Framework (BaseComponent, Store, Router, Atoms, Molecules, Organisms, Environment)
+  ${cleanCode(fwEnvironment)}
   ${cleanCode(fwComponent)}
   ${cleanCode(fwStore)}
   ${cleanCode(fwRouter)}
@@ -125,6 +131,7 @@ const combinedJS = `
 
   // Views
   ${cleanCode(loginView)}
+  ${cleanCode(homeView)}
   // Purchase Domain Modules (Enterprise Structured)
   ${cleanCode(purchaseState)}
   ${cleanCode(purchaseDashboard)}

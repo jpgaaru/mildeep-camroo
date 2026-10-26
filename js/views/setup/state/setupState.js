@@ -8,7 +8,7 @@ import { Toast } from '../../../components/toast.js';
 import { Modal } from '../../../components/modal.js';
 import { renderEmptyState } from '../../../components/emptyState.js';
 
-const STUDIO_STORAGE_KEY = 'dfl_erp_master_studio_state_v3';
+export const STUDIO_STORAGE_KEY = 'dfl_erp_master_studio_state_v3';
 
 const DEFAULT_MODULES_CONFIG = [
   {

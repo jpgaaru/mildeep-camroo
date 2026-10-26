@@ -541,7 +541,7 @@ export const Sidebar = {
     this.activeTabId = tabId;
 
     const collapsedClass = this.isCollapsed ? 'collapsed' : '';
-    const isS01 = Environment.isSitemap01();
+    const isS01 = (typeof Environment !== 'undefined' && Environment.isSitemap01) ? Environment.isSitemap01() : true;
 
     container.innerHTML = `
       <aside class="f-sidebar ${collapsedClass} ${isS01 ? 'sitemap01-sidebar' : ''}" id="erp-sidebar" style="${isS01 ? 'border-radius: 0 16px 16px 0; border-right: 1px solid #1E293B;' : ''}">
