@@ -57,6 +57,7 @@ const qcOverview = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'ov
 const qcLab = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'lab', 'qcLab.js'), 'utf-8');
 const qcOperations = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'operations', 'qcOperations.js'), 'utf-8');
 const qcScreening = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'screening', 'qcScreening.js'), 'utf-8');
+const qcAudits = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'audits', 'qcAudits.js'), 'utf-8');
 const qcView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'qc', 'index.js'), 'utf-8');
 const productionView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'productionView.js'), 'utf-8');
 const coldstoreView = fs.readFileSync(path.join(__dirname, 'js', 'views', 'coldstoreView.js'), 'utf-8');
@@ -152,6 +153,7 @@ const combinedJS = `
   ${cleanCode(qcLab)}
   ${cleanCode(qcOperations)}
   ${cleanCode(qcScreening)}
+  ${cleanCode(qcAudits)}
   ${cleanCode(qcView)}
   ${cleanCode(productionView)}
   ${cleanCode(coldstoreView)}

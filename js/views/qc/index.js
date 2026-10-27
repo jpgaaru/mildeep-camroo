@@ -3,6 +3,7 @@ import { qcOverview } from './overview/qcOverview.js';
 import { qcLab } from './lab/qcLab.js';
 import { qcOperations } from './operations/qcOperations.js';
 import { qcScreening } from './screening/qcScreening.js';
+import { qcAudits } from './audits/qcAudits.js';
 
 export const QCView = {
   activeTab: 'qc-overview',
@@ -87,7 +88,8 @@ Object.assign(
   qcOverview,
   qcLab,
   qcOperations,
-  qcScreening
+  qcScreening,
+  qcAudits
 );
 
 if (typeof window !== 'undefined') {
