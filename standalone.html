@@ -28130,179 +28130,636 @@ const qcAudits = {
   // ADD & EDIT MODALS
   // =========================================================================
 
+  currentModalPayments: [],
+
   openAddAuditModal(type) {
     const m = (typeof Modal !== 'undefined' && Modal.open) ? Modal : (typeof window !== 'undefined' && window.Modal && window.Modal.open) ? window.Modal : null;
     if (!m) return;
 
+    this.currentModalPayments = [];
     const todayStr = new Date().toISOString().slice(0, 10);
     const plants = this.auditPlants;
 
-    let title = '';
+    let breadcrumbList = '';
+    let breadcrumbCreate = '';
+    let formTitle = '';
     let formFields = '';
 
-    if (type === 'food' || type === 'social') {
-      const isFood = type === 'food';
-      title = isFood ? 'ADD FOOD AUDIT' : 'ADD SOCIAL AUDIT';
+    const certifyingBodies = ['Select', 'BAP (Global Seafood Alliance)', 'SGS India', 'Bureau Veritas', 'DNV GL', 'TUV India', 'MPEDA', 'CAA Certified'];
+    const checkedByList = ['Select', 'Dr. P. Sundaram (QC Lead)', 'R. Venkat (Senior QA Officer)', 'K. Ramesh (Lab Incharge)', 'A. Srinivasa Rao (Auditor)'];
+    const verifiedByList = ['Select', 'V. Mohan Rao (QA Head)', 'S. Ramakrishna (Plant Manager)', 'Director Technical', 'Executive VP Operations'];
+    const auditStatusList = ['Select', 'Approved', 'Scheduled', 'Completed', 'In Progress', 'Under Review'];
+
+    if (type === 'feedmill') {
+      breadcrumbList = 'Feed Mill Audit List';
+      breadcrumbCreate = 'Feed Mill Audit Create';
+      formTitle = 'FEED MILL AUDIT CREATE';
       formFields = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500">*</span></label>
-            <select id="modal-audit-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-plant" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
               ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
             </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT NAME <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-audit-name" placeholder="e.g. ${isFood ? 'Food Safety & Hygiene' : 'SMETA 4-Pillar'}" value="${isFood ? 'Food Audit' : 'SMETA Social Audit'}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">GRADE / SCORE</label>
-            <input type="text" id="modal-audit-grade" placeholder="e.g. 125 or Grade A" value="125" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PAYMENT STATUS</label>
-            <select id="modal-audit-payment" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
-              <option value="-" selected>-</option>
-              <option value="Paid">Paid</option>
-              <option value="Pending">Pending</option>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">NAME OF AUDIT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-name" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="BAP Feed Mill Verification" selected>BAP Feed Mill Verification</option>
+              <option value="Aquafeed Quality Inspection">Aquafeed Quality Inspection</option>
+              <option value="HACCP Feed Mill Audit">HACCP Feed Mill Audit</option>
+              <option value="ISO 22000 Feed Safety">ISO 22000 Feed Safety</option>
             </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT START DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-start" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">FARMER NAME <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-farmer" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Bhimavaram Feed Processing Plant" selected>Bhimavaram Feed Processing Plant</option>
+              <option value="Avanti Feeds Unit 2">Avanti Feeds Unit 2</option>
+              <option value="Nellore Feeds Cluster">Nellore Feeds Cluster</option>
+              <option value="Godrej Agrovet Mill">Godrej Agrovet Mill</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT END DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-end" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFYING BODY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-certbody" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${certifyingBodies.map(c => `<option value="${c}" ${c === 'BAP (Global Seafood Alliance)' ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
-            <input type="date" id="modal-audit-renewal" value="" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">GOVT REGISTRATION NO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-govtreg" placeholder="Enter Govt Register Number" value="GOV-FEED-AP-8841" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">VALIDITY DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFICATION NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-certno" placeholder="Enter Certification Number" value="CERT-BAP-2026-904" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">BAP NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-bapno" placeholder="Enter BAP Number" value="BAP-M-74921" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">ISSUED ON <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-issued" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VALIDITY UPTO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
+            <input type="date" id="modal-audit-renewal" value="" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-status-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${auditStatusList.map(s => `<option value="${s}" ${s === 'Approved' ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CHECKED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-checkedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${checkedByList.map(c => `<option value="${c}" ${c.includes('Lead') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VERIFIED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-verifiedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${verifiedByList.map(v => `<option value="${v}" ${v.includes('QA Head') ? 'selected' : ''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REMARKS</label>
+            <input type="text" id="modal-audit-remarks" placeholder="Enter Remarks" value="All feed ingredients verified free of banned substances" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">UPLOAD FILE</label>
+            <input type="file" id="modal-audit-file" class="w-full h-[38px] px-2 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-active-status" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
           </div>
         </div>
       `;
-    } else if (type === 'farm') {
-      title = 'ADD FARM AUDIT';
+    } else if (type === 'social') {
+      breadcrumbList = 'Social Audit List';
+      breadcrumbCreate = 'Social Audit Create';
+      formTitle = 'SOCIAL AUDIT CREATE';
       formFields = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500">*</span></label>
-            <select id="modal-audit-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-plant" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
               ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
             </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">FARM NAME <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-farm-name" placeholder="e.g. Coastal Aqua Farm" value="Devi Coastal Farm A-1" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">NAME OF THE AUDIT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-name" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="SMETA 4-Pillar Social Audit" selected>SMETA 4-Pillar Social Audit</option>
+              <option value="BSCI Code of Conduct Audit">BSCI Code of Conduct Audit</option>
+              <option value="SA8000 Social Accountability">SA8000 Social Accountability</option>
+              <option value="Sedex Ethical Trade Audit">Sedex Ethical Trade Audit</option>
+              <option value="WRAP Compliance Audit">WRAP Compliance Audit</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">FARMER NAME <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-farmer-name" placeholder="e.g. P. Venkateswara Rao" value="P. Venkateswara Rao" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">TYPE OF AUDIT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-type-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Initial Full Audit" selected>Initial Full Audit</option>
+              <option value="Periodic Surveillance">Periodic Surveillance</option>
+              <option value="Follow-up Audit">Follow-up Audit</option>
+              <option value="Unannounced Desktop Audit">Unannounced Desktop Audit</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFICATION BODY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-certbody" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${certifyingBodies.map(c => `<option value="${c}" ${c === 'SGS India' ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
-            <input type="date" id="modal-audit-renewal" value="" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">WINDOW PERIOD <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-window" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">VALIDITY DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">GRADE/SCORE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-grade" placeholder="Enter Grade/Score" value="Grade A (98%)" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">SITE ID</label>
+            <input type="text" id="modal-audit-siteid" placeholder="Enter Site ID" value="SEDEX-ZS-40912" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT START DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-start" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT END DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-end" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">ISSUED ON <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-issued" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VALIDITY UPTO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
+            <input type="date" id="modal-audit-renewal" value="" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-status-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${auditStatusList.map(s => `<option value="${s}" ${s === 'Approved' ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CHECKED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-checkedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${checkedByList.map(c => `<option value="${c}" ${c.includes('Lead') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VERIFIED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-verifiedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${verifiedByList.map(v => `<option value="${v}" ${v.includes('QA Head') ? 'selected' : ''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REMARKS</label>
+            <input type="text" id="modal-audit-remarks" placeholder="Enter Remarks" value="Ethical standards and labor compliance audited" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">UPLOAD FILE</label>
+            <input type="file" id="modal-audit-file" class="w-full h-[38px] px-2 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-active-status" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
           </div>
         </div>
       `;
     } else if (type === 'hatchery') {
-      title = 'ADD HATCHERY AUDIT';
+      breadcrumbList = 'Hatchery Audit List';
+      breadcrumbCreate = 'Hatchery Audit Create';
+      formTitle = 'HATCHERY AUDIT CREATE';
       formFields = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500">*</span></label>
-            <select id="modal-audit-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-plant" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
               ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
             </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">HATCHERY NAME <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-hatchery-name" placeholder="e.g. Devi Fisheries Hatchery-3" value="Devi Fisheries Hatchery-3" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">NAME OF HATCHERY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-hatchery" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Devi Hatchery Unit-1 (Bapatla)" selected>Devi Hatchery Unit-1 (Bapatla)</option>
+              <option value="Devi Coastal SPF Hatchery (Kakinada)">Devi Coastal SPF Hatchery (Kakinada)</option>
+              <option value="Sagar Aqua Hatchery (Marakanam)">Sagar Aqua Hatchery (Marakanam)</option>
+              <option value="Royal Blue Hatcheries (Nellore)">Royal Blue Hatcheries (Nellore)</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">HATCHERY LOCATION <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-hatchery-loc" placeholder="e.g. Kakinada Coastal" value="Kakinada Coast" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">HATCHERY LOCATION <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-hatcheryloc" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Kakinada Coastal Zone" selected>Kakinada Coastal Zone</option>
+              <option value="Bapatla Hatchery Belt">Bapatla Hatchery Belt</option>
+              <option value="Marakanam Coastal Area">Marakanam Coastal Area</option>
+              <option value="Nellore Seafront">Nellore Seafront</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFICATION BODY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-certbody" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${certifyingBodies.map(c => `<option value="${c}" ${c.includes('CAA') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">VALIDITY DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REGISTRATION NO</label>
+            <input type="text" id="modal-audit-regno" placeholder="Enter Registration Number" value="CAA-HATCH-2026-042" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">REMARKS</label>
-            <input type="text" id="modal-hatchery-remarks" placeholder="Audit remarks..." value="SPF Broodstock Compliant" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">BAP NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-bapno" placeholder="Enter BAP Number" value="BAP-H-3910" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PER CYCLE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-production" placeholder="Enter Production Per Cycle" value="25 Million PL" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">ISSUED ON <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-issued" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VALIDITY UPTO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
+            <input type="date" id="modal-audit-renewal" value="" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-status-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${auditStatusList.map(s => `<option value="${s}" ${s === 'Approved' ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CHECKED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-checkedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${checkedByList.map(c => `<option value="${c}" ${c.includes('Lead') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VERIFIED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-verifiedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${verifiedByList.map(v => `<option value="${v}" ${v.includes('QA Head') ? 'selected' : ''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REMARKS</label>
+            <input type="text" id="modal-audit-remarks" placeholder="Enter Remarks" value="SPF Broodstock quarantine and PCR screening passed" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">UPLOAD FILE</label>
+            <input type="file" id="modal-audit-file" class="w-full h-[38px] px-2 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-active-status" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
           </div>
         </div>
       `;
-    } else if (type === 'feedmill') {
-      title = 'ADD FEED MILL AUDIT';
+    } else if (type === 'farm') {
+      breadcrumbList = 'Farm Audit List';
+      breadcrumbCreate = 'Farm Audit Create';
+      formTitle = 'FARM AUDIT CREATE';
       formFields = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500">*</span></label>
-            <select id="modal-audit-plant" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-plant" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
               ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
             </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT NAME <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-audit-name" placeholder="e.g. Certified Feed Mill Inspection" value="BAP Feed Mill Verification" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">FARM NAME <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-farmname" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Balaji Aqua Farm Cluster 1" selected>Balaji Aqua Farm Cluster 1</option>
+              <option value="Devi Coastal Farm A-1">Devi Coastal Farm A-1</option>
+              <option value="Godavari Delta Farm Cluster 4">Godavari Delta Farm Cluster 4</option>
+              <option value="Krishna Estuary Farm B-2">Krishna Estuary Farm B-2</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">FARMER / MILL LOCATION <span class="text-rose-500">*</span></label>
-            <input type="text" id="modal-mill-loc" placeholder="e.g. Bhimavaram Mill Site" value="Bhimavaram Feed Zone" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">FARMER NAME <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-farmer" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="M. Satyanarayana" selected>M. Satyanarayana</option>
+              <option value="P. Venkateswara Rao">P. Venkateswara Rao</option>
+              <option value="K. Srinivasa Rao">K. Srinivasa Rao</option>
+              <option value="T. Appala Raju">T. Appala Raju</option>
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFYING BODY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-certbody" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${certifyingBodies.map(c => `<option value="${c}" ${c.includes('BAP Farm') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">VALIDITY DATE <span class="text-rose-500">*</span></label>
-            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">GOVT REGISTRATION NO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-govtreg" placeholder="Enter Govt Register Number" value="CAA-AP-WEST-4019" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PAYMENT STATUS</label>
-            <select id="modal-audit-payment" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
-              <option value="Paid" selected>Paid</option>
-              <option value="Pending">Pending</option>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFICATION NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-certno" placeholder="Enter Certification Number" value="BAP-FARM-9024" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">BAP NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-bapno" placeholder="Enter BAP Number" value="BAP-F-20188" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-date" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">ISSUED ON <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-issued" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VALIDITY UPTO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
+            <input type="date" id="modal-audit-renewal" value="" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-status-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${auditStatusList.map(s => `<option value="${s}" ${s === 'Approved' ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CHECKED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-checkedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${checkedByList.map(c => `<option value="${c}" ${c.includes('Lead') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VERIFIED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-verifiedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${verifiedByList.map(v => `<option value="${v}" ${v.includes('QA Head') ? 'selected' : ''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REMARKS</label>
+            <input type="text" id="modal-audit-remarks" placeholder="Enter Remarks" value="Water chemistry and harvest biosecurity protocols compliant" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">UPLOAD FILE</label>
+            <input type="file" id="modal-audit-file" class="w-full h-[38px] px-2 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-active-status" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+      `;
+    } else {
+      // Food Audit
+      breadcrumbList = 'Food Audit List';
+      breadcrumbCreate = 'Food Audit Create';
+      formTitle = 'FOOD AUDIT CREATE';
+      formFields = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PRODUCTION PLANT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-plant" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">NAME OF AUDIT <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-name" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="">Select</option>
+              <option value="Food Audit" selected>Food Audit</option>
+              <option value="BRCGS Global Food Safety Standard">BRCGS Global Food Safety Standard</option>
+              <option value="IFS Food Standard Audit">IFS Food Standard Audit</option>
+              <option value="FSSC 22000 Food Safety System">FSSC 22000 Food Safety System</option>
+              <option value="USFDA GMP & HACCP Verification">USFDA GMP & HACCP Verification</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">GRADE/SCORE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-grade" placeholder="Enter Grade/Score" value="125 (Grade AA)" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFYING BODY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-certbody" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${certifyingBodies.map(c => `<option value="${c}" ${c === 'DNV GL' ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">GOVT REGISTRATION NO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-govtreg" placeholder="Enter Govt Register Number" value="EIA-PLANT-5-883" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CERTIFICATION NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-certno" placeholder="Enter Certification Number" value="BRCGS-IND-2026-441" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">BAP NUMBER <span class="text-rose-500 font-bold">*</span></label>
+            <input type="text" id="modal-audit-bapno" placeholder="Enter BAP Number" value="BAP-P-44910" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT START DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-start" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT END DATE <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-end" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">ISSUED ON <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-issued" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VALIDITY UPTO <span class="text-rose-500 font-bold">*</span></label>
+            <input type="date" id="modal-audit-validity" value="${todayStr}" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">RENEWAL DATE</label>
+            <input type="date" id="modal-audit-renewal" value="" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">AUDIT STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-status-select" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${auditStatusList.map(s => `<option value="${s}" ${s === 'Approved' ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">CHECKED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-checkedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${checkedByList.map(c => `<option value="${c}" ${c.includes('Lead') ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">VERIFIED BY <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-verifiedby" required class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              ${verifiedByList.map(v => `<option value="${v}" ${v.includes('QA Head') ? 'selected' : ''}>${v}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">REMARKS</label>
+            <input type="text" id="modal-audit-remarks" placeholder="Enter Remarks" value="Hygiene, pest control, and cold chain documentation fully approved" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">UPLOAD FILE</label>
+            <input type="file" id="modal-audit-file" class="w-full h-[38px] px-2 py-1.5 bg-white border border-[#CBD5E1] rounded-lg text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">STATUS <span class="text-rose-500 font-bold">*</span></label>
+            <select id="modal-audit-active-status" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
             </select>
           </div>
         </div>
       `;
     }
 
-    m.open({
-      title: title,
-      size: '2xl',
-      content: `
-        <form id="modal-audit-form" class="space-y-4" onsubmit="event.preventDefault(); QCView.handleAuditFormSubmit('${type}');">
+    const modalContent = `
+      <div class="max-h-[82vh] overflow-y-auto px-1 pr-2 text-slate-800">
+        <!-- Breadcrumb & Title Matching Reference Screenshots -->
+        <div class="mb-5 pb-3 border-b border-slate-100">
+          <div class="text-xs font-medium text-slate-500 flex items-center gap-1.5 mb-2">
+            <span>QC Audit</span>
+            <span>&gt;</span>
+            <span class="hover:text-blue-600 cursor-pointer">${breadcrumbList}</span>
+            <span>&gt;</span>
+            <span class="text-blue-600 font-semibold">${breadcrumbCreate}</span>
+          </div>
+          <h3 class="text-sm font-extrabold text-[#1E293B] uppercase tracking-wide">${formTitle}</h3>
+        </div>
+
+        <form id="modal-audit-form" onsubmit="event.preventDefault(); QCView.handleAuditFormSubmit('${type}');">
+          <!-- 4-Column Audit Specification Grid -->
           ${formFields}
-          <div class="flex items-center justify-end gap-3 pt-4">
-            <button type="button" onclick="Modal.close()" class="px-5 py-2 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#475569] font-bold text-xs rounded-full transition-colors cursor-pointer">
+
+          <!-- Centered Action Buttons for Main Audit Form -->
+          <div class="flex items-center justify-center gap-3 pt-6 pb-6">
+            <button type="button" onclick="Modal.close()" class="h-[38px] px-7 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
               Close
             </button>
-            <button type="submit" class="px-6 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white font-bold text-xs rounded-full shadow-xs hover:shadow transition-all inline-flex items-center gap-1.5 cursor-pointer">
-              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              <span>Save Audit</span>
+            <button type="submit" class="h-[38px] px-7 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
+              Submit
             </button>
           </div>
+
+          <!-- Bottom Section: Payment Details (Underline Header) -->
+          <div class="pt-5 border-t border-slate-200">
+            <div class="mb-4">
+              <span class="text-sm font-bold text-[#1E293B] border-b-2 border-slate-800 pb-1 inline-block">Payment Details</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PURPOSE OF INVOICE <span class="text-rose-500 font-bold">*</span></label>
+                <input type="text" id="modal-pay-purpose" placeholder="Enter Purpose of Invoice" value="Audit Certification & Inspection Fee" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">TYPE OF PAYMENT <span class="text-rose-500 font-bold">*</span></label>
+                <select id="modal-pay-type" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                  <option value="">Select</option>
+                  <option value="Full Payment" selected>Full Payment</option>
+                  <option value="Advance">Advance</option>
+                  <option value="Milestone 1">Milestone 1</option>
+                  <option value="Balance">Balance</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE NO <span class="text-rose-500 font-bold">*</span></label>
+                <input type="text" id="modal-pay-inv-no" placeholder="Enter Invoice No" value="INV-QC-${Date.now().toString().slice(-4)}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE DATE <span class="text-rose-500 font-bold">*</span></label>
+                <input type="date" id="modal-pay-inv-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE VALUE <span class="text-rose-500 font-bold">*</span></label>
+                <input type="number" id="modal-pay-inv-val" placeholder="Enter Invoice value" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]" oninput="const t = document.getElementById('modal-pay-total'); if(t) t.value = this.value;">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">OTHERS</label>
+                <input type="text" id="modal-pay-others" placeholder="Enter Payment Remarks" value="Auditor travel & laboratory charges included" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE DUE DATE <span class="text-rose-500 font-bold">*</span></label>
+                <input type="date" id="modal-pay-due-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">TOTAL AMOUNT <span class="text-rose-500 font-bold">*</span></label>
+                <input type="number" id="modal-pay-total" placeholder="Enter Total Amount" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+              </div>
+            </div>
+
+            <!-- Add Payments Centered Button -->
+            <div class="flex items-center justify-center pt-5 pb-3">
+              <button type="button" onclick="QCView.handleAddAuditPayment('${type}')" class="h-[38px] px-7 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
+                Add Payments
+              </button>
+            </div>
+
+            <!-- Dynamic Added Payments Table Container -->
+            <div id="modal-audit-payments-container" class="mt-2"></div>
+          </div>
         </form>
-      `
+      </div>
+    `;
+
+    m.open({
+      title: '',
+      size: '5xl',
+      content: modalContent
     });
 
     setTimeout(() => {
@@ -28312,80 +28769,117 @@ const qcAudits = {
     }, 20);
   },
 
+  handleAddAuditPayment(type) {
+    const purpose = document.getElementById('modal-pay-purpose')?.value.trim();
+    const payType = document.getElementById('modal-pay-type')?.value;
+    const invNo = document.getElementById('modal-pay-inv-no')?.value.trim();
+    const invDate = document.getElementById('modal-pay-inv-date')?.value;
+    const invVal = document.getElementById('modal-pay-inv-val')?.value;
+    const others = document.getElementById('modal-pay-others')?.value.trim() || '-';
+    const dueDate = document.getElementById('modal-pay-due-date')?.value;
+    const totalAmount = document.getElementById('modal-pay-total')?.value;
+
+    if (!purpose || !invNo || !totalAmount) {
+      if (typeof Toast !== 'undefined' && Toast.show) {
+        Toast.show('Please fill in required payment details (Purpose, Invoice No, Total Amount)', 'warning');
+      }
+      return;
+    }
+
+    const paymentItem = {
+      id: Date.now(),
+      purpose,
+      type: payType || 'Full Payment',
+      invoiceNo: invNo,
+      invoiceDate: invDate,
+      invoiceValue: invVal,
+      others,
+      dueDate,
+      totalAmount
+    };
+
+    if (!this.currentModalPayments) this.currentModalPayments = [];
+    this.currentModalPayments.push(paymentItem);
+
+    this.renderModalPaymentList();
+
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show(`Payment voucher ${invNo} (₹${Number(totalAmount).toLocaleString('en-IN')}) added!`, 'success');
+    }
+  },
+
+  renderModalPaymentList() {
+    const container = document.getElementById('modal-audit-payments-container');
+    if (!container) return;
+
+    if (!this.currentModalPayments || this.currentModalPayments.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="mt-3 bg-slate-50 border border-slate-200 rounded-lg p-3">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-slate-700">Added Payment Vouchers (${this.currentModalPayments.length})</span>
+          <span class="text-xs font-bold text-emerald-700">Total: ₹${this.currentModalPayments.reduce((acc, p) => acc + (Number(p.totalAmount) || 0), 0).toLocaleString('en-IN')}</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200 pb-1">
+                <th class="py-1 px-2">Invoice No</th>
+                <th class="py-1 px-2">Purpose</th>
+                <th class="py-1 px-2">Type</th>
+                <th class="py-1 px-2">Date</th>
+                <th class="py-1 px-2 text-right">Amount (₹)</th>
+                <th class="py-1 px-2 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              ${this.currentModalPayments.map(p => `
+                <tr class="hover:bg-white transition-colors">
+                  <td class="py-1.5 px-2 font-mono font-bold text-blue-600">${p.invoiceNo}</td>
+                  <td class="py-1.5 px-2 text-slate-800">${p.purpose}</td>
+                  <td class="py-1.5 px-2"><span class="inline-flex px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700">${p.type}</span></td>
+                  <td class="py-1.5 px-2 text-slate-500 font-mono">${p.invoiceDate || '-'}</td>
+                  <td class="py-1.5 px-2 text-right font-mono font-bold text-slate-900">${Number(p.totalAmount || 0).toLocaleString('en-IN')}</td>
+                  <td class="py-1.5 px-2 text-center">
+                    <button type="button" onclick="QCView.removeModalPayment(${p.id})" class="text-rose-500 hover:text-rose-700 p-0.5 cursor-pointer" title="Remove Payment">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  removeModalPayment(id) {
+    if (!this.currentModalPayments) return;
+    this.currentModalPayments = this.currentModalPayments.filter(p => p.id !== id);
+    this.renderModalPaymentList();
+    if (typeof Toast !== 'undefined' && Toast.show) {
+      Toast.show('Payment voucher removed', 'info');
+    }
+  },
+
   handleAuditFormSubmit(type) {
     const plant = document.getElementById('modal-audit-plant')?.value || 'DFL UNIT-5 (JPT)';
     const list = this.getAuditDataList(type);
+    const payments = this.currentModalPayments ? [...this.currentModalPayments] : [];
+    const hasPaidPayments = payments.length > 0;
+    const paymentStatusVal = hasPaidPayments ? 'Paid' : 'Pending';
 
-    if (type === 'food' || type === 'social') {
-      const auditName = document.getElementById('modal-audit-name')?.value || 'Food Audit';
-      const grade = document.getElementById('modal-audit-grade')?.value || '';
-      const paymentStatus = document.getElementById('modal-audit-payment')?.value || '-';
-      const startDate = document.getElementById('modal-audit-start')?.value || '';
-      const endDate = document.getElementById('modal-audit-end')?.value || '';
-      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
-      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
-
-      list.unshift({
-        id: `${type.toUpperCase()}-${Date.now()}`,
-        sNo: list.length + 1,
-        plant,
-        auditName,
-        grade,
-        startDate,
-        endDate,
-        renewalDate,
-        validityDate,
-        paymentStatus,
-        status: 'Active',
-        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-      });
-    } else if (type === 'farm') {
-      const farmName = document.getElementById('modal-farm-name')?.value || 'Devi Aqua Farm';
-      const farmerName = document.getElementById('modal-farmer-name')?.value || 'Farmer';
-      const auditDate = document.getElementById('modal-audit-date')?.value || '';
-      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
-      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
-
-      list.unshift({
-        id: `FARM-${Date.now()}`,
-        sNo: list.length + 1,
-        plant,
-        farmName,
-        farmerName,
-        auditDate,
-        renewalDate,
-        validityDate,
-        paymentStatus: 'Paid',
-        status: 'Active',
-        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-      });
-    } else if (type === 'hatchery') {
-      const hatcheryName = document.getElementById('modal-hatchery-name')?.value || 'Hatchery';
-      const hatcheryLocation = document.getElementById('modal-hatchery-loc')?.value || 'Kakinada Coast';
-      const auditDate = document.getElementById('modal-audit-date')?.value || '';
-      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
-      const remarks = document.getElementById('modal-hatchery-remarks')?.value || 'Compliant';
-
-      list.unshift({
-        id: `HATCH-${Date.now()}`,
-        sNo: list.length + 1,
-        plant,
-        hatcheryName,
-        hatcheryLocation,
-        auditDate,
-        renewalDate: '',
-        validityDate,
-        remarks,
-        paymentStatus: 'Paid',
-        status: 'Active',
-        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-      });
-    } else if (type === 'feedmill') {
+    if (type === 'feedmill') {
       const auditName = document.getElementById('modal-audit-name')?.value || 'Feed Mill Inspection';
-      const farmerLocation = document.getElementById('modal-mill-loc')?.value || 'Bhimavaram Feed Zone';
+      const farmerLocation = document.getElementById('modal-audit-farmer')?.value || 'Bhimavaram Feed Processing Plant';
       const auditDate = document.getElementById('modal-audit-date')?.value || '';
       const validityDate = document.getElementById('modal-audit-validity')?.value || '';
-      const paymentStatus = document.getElementById('modal-audit-payment')?.value || 'Paid';
+      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
+      const remarks = document.getElementById('modal-audit-remarks')?.value || '';
 
       list.unshift({
         id: `MILL-${Date.now()}`,
@@ -28393,12 +28887,111 @@ const qcAudits = {
         plant,
         auditName,
         farmerLocation,
-        auditDate,
-        renewalDate: '',
-        validityDate,
-        paymentStatus,
-        status: 'Active',
-        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+        auditDate: auditDate ? auditDate.split('-').reverse().join('-') : '27-10-2026',
+        renewalDate: renewalDate ? renewalDate.split('-').reverse().join('-') : '',
+        validityDate: validityDate ? validityDate.split('-').reverse().join('-') : '27-10-2027',
+        paymentStatus: paymentStatusVal,
+        status: document.getElementById('modal-audit-active-status')?.value || 'Active',
+        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
+        remarks,
+        payments
+      });
+    } else if (type === 'social') {
+      const auditName = document.getElementById('modal-audit-name')?.value || 'SMETA 4-Pillar Social Audit';
+      const grade = document.getElementById('modal-audit-grade')?.value || 'Grade A';
+      const startDate = document.getElementById('modal-audit-start')?.value || '';
+      const endDate = document.getElementById('modal-audit-end')?.value || '';
+      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
+      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
+      const remarks = document.getElementById('modal-audit-remarks')?.value || '';
+
+      list.unshift({
+        id: `SA-${Date.now()}`,
+        sNo: list.length + 1,
+        plant,
+        auditName,
+        grade,
+        startDate: startDate ? startDate.split('-').reverse().join('-') : '27-10-2026',
+        endDate: endDate ? endDate.split('-').reverse().join('-') : '27-10-2026',
+        renewalDate: renewalDate ? renewalDate.split('-').reverse().join('-') : '',
+        validityDate: validityDate ? validityDate.split('-').reverse().join('-') : '27-10-2027',
+        paymentStatus: paymentStatusVal,
+        status: document.getElementById('modal-audit-active-status')?.value || 'Active',
+        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
+        remarks,
+        payments
+      });
+    } else if (type === 'hatchery') {
+      const hatcheryName = document.getElementById('modal-audit-hatchery')?.value || 'Devi Hatchery Unit-1';
+      const hatcheryLocation = document.getElementById('modal-audit-hatcheryloc')?.value || 'Kakinada Coastal Zone';
+      const auditDate = document.getElementById('modal-audit-date')?.value || '';
+      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
+      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
+      const remarks = document.getElementById('modal-audit-remarks')?.value || 'Compliant';
+
+      list.unshift({
+        id: `HA-${Date.now()}`,
+        sNo: list.length + 1,
+        plant,
+        hatcheryName,
+        hatcheryLocation,
+        auditDate: auditDate ? auditDate.split('-').reverse().join('-') : '27-10-2026',
+        renewalDate: renewalDate ? renewalDate.split('-').reverse().join('-') : '',
+        validityDate: validityDate ? validityDate.split('-').reverse().join('-') : '27-10-2027',
+        remarks,
+        paymentStatus: paymentStatusVal,
+        status: document.getElementById('modal-audit-active-status')?.value || 'Active',
+        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
+        payments
+      });
+    } else if (type === 'farm') {
+      const farmName = document.getElementById('modal-audit-farmname')?.value || 'Balaji Aqua Farm';
+      const farmerName = document.getElementById('modal-audit-farmer')?.value || 'M. Satyanarayana';
+      const auditDate = document.getElementById('modal-audit-date')?.value || '';
+      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
+      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
+      const remarks = document.getElementById('modal-audit-remarks')?.value || '';
+
+      list.unshift({
+        id: `FMA-${Date.now()}`,
+        sNo: list.length + 1,
+        plant,
+        farmName,
+        farmerName,
+        auditDate: auditDate ? auditDate.split('-').reverse().join('-') : '27-10-2026',
+        renewalDate: renewalDate ? renewalDate.split('-').reverse().join('-') : '',
+        validityDate: validityDate ? validityDate.split('-').reverse().join('-') : '27-10-2027',
+        paymentStatus: paymentStatusVal,
+        status: document.getElementById('modal-audit-active-status')?.value || 'Active',
+        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
+        remarks,
+        payments
+      });
+    } else {
+      // Food Audit
+      const auditName = document.getElementById('modal-audit-name')?.value || 'Food Audit';
+      const grade = document.getElementById('modal-audit-grade')?.value || '125';
+      const startDate = document.getElementById('modal-audit-start')?.value || '';
+      const endDate = document.getElementById('modal-audit-end')?.value || '';
+      const validityDate = document.getElementById('modal-audit-validity')?.value || '';
+      const renewalDate = document.getElementById('modal-audit-renewal')?.value || '';
+      const remarks = document.getElementById('modal-audit-remarks')?.value || '';
+
+      list.unshift({
+        id: `FA-${Date.now()}`,
+        sNo: list.length + 1,
+        plant,
+        auditName,
+        grade,
+        startDate: startDate ? startDate.split('-').reverse().join('-') : '27-10-2026',
+        endDate: endDate ? endDate.split('-').reverse().join('-') : '27-10-2026',
+        renewalDate: renewalDate ? renewalDate.split('-').reverse().join('-') : '',
+        validityDate: validityDate ? validityDate.split('-').reverse().join('-') : '27-10-2027',
+        paymentStatus: paymentStatusVal,
+        status: document.getElementById('modal-audit-active-status')?.value || 'Active',
+        statusClass: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
+        remarks,
+        payments
       });
     }
 
@@ -28406,7 +28999,7 @@ const qcAudits = {
     this.refreshAuditTable(type, list);
 
     if (typeof Toast !== 'undefined' && Toast.show) {
-      Toast.show('New audit record created successfully!', 'success');
+      Toast.show('New audit record created successfully with payment register!', 'success');
     }
   },
 
