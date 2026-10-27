@@ -27821,7 +27821,7 @@ const qcAudits = {
   },
 
   // =========================================================================
-  // SHARED VIEW BUILDER
+  // SHARED VIEW BUILDER (STANDARDIZED CAMAROO ENTERPRISE LAYOUT)
   // =========================================================================
   buildAuditViewTemplate({ title, type, addBtnLabel, onAdd, tableHeaders, dataLength }) {
     const plants = this.auditPlants;
@@ -27829,98 +27829,100 @@ const qcAudits = {
 
     return `
       <div class="space-y-4 animate-fade-in text-[#1E293B] pb-12 font-sans">
-        <!-- Breadcrumb / Header Title -->
-        <div class="pb-1">
-          <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">${title}</h2>
+        <!-- Page Header Row: Title & Subtitle (Left) + Action Buttons (Right) -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-1">
+          <div>
+            <h2 class="text-sm md:text-base font-bold text-[#1E293B] tracking-wide uppercase">${title}</h2>
+            <span class="text-xs text-[#64748B] font-medium hidden sm:inline">Quality Control &bull; Audit Registry &amp; Compliance Logs</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              onclick="QCView.exportAuditExcel('${type}')"
+              class="px-3.5 py-2 bg-white hover:bg-slate-50 text-[#1E293B] border border-[#CBD5E1] text-xs font-bold rounded-lg shadow-2xs hover:shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Export CSV</span>
+            </button>
+            <button
+              type="button"
+              onclick="${onAdd}"
+              class="px-4 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>
+              <span>${addBtnLabel}</span>
+            </button>
+          </div>
         </div>
 
-        <!-- TOP CARD: FILTER BAR -->
+        <!-- SEARCH & FILTERS CARD -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs p-5 md:p-6 transition-all">
-          <form class="space-y-4" onsubmit="event.preventDefault(); QCView.handleAuditFilterSubmit('${type}');">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex items-center gap-2 pb-2.5 mb-3.5 border-b border-[#F1F5F9]">
+            <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+            <h3 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">SEARCH &amp; FILTERS</h3>
+          </div>
+          <form id="audit-filter-form" class="space-y-4" onsubmit="event.preventDefault(); QCView.handleAuditFilterSubmit('${type}');">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-2">PRODUCTION PLANT</label>
-                <select id="audit-filter-plant" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
-                  <option value="">Select</option>
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">PRODUCTION PLANT</label>
+                <select id="audit-filter-plant" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
+                  <option value="">All Production Plants</option>
                   ${plants.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
               </div>
               <div>
-                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-2">SELECT YEAR</label>
-                <select id="audit-filter-year" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <label class="block text-[11px] font-bold text-[#334155] uppercase tracking-wider mb-1.5">SELECT YEAR</label>
+                <select id="audit-filter-year" class="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all">
                   ${years.map(y => `<option value="${y}" ${y === '2026-2027' ? 'selected' : ''}>${y}</option>`).join('')}
                 </select>
               </div>
             </div>
-
-            <!-- Filter Buttons: Search -> & + Add Audit -->
-            <div class="flex items-center justify-center gap-3 pt-3">
-              <button
-                type="submit"
-                class="px-6 py-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-full shadow-xs hover:shadow transition-all inline-flex items-center gap-2 cursor-pointer"
-              >
-                <span>Search</span>
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-              </button>
-
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#F1F5F9]">
               <button
                 type="button"
-                onclick="${onAdd}"
-                class="px-6 py-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-full shadow-xs hover:shadow transition-all inline-flex items-center gap-1.5 cursor-pointer"
+                onclick="QCView.handleAuditLoadAll('${type}')"
+                class="px-4 py-2 bg-white hover:bg-slate-50 text-[#64748B] text-xs font-bold rounded-lg border border-[#CBD5E1] transition-all cursor-pointer"
               >
-                <span>${addBtnLabel}</span>
+                Reset
+              </button>
+              <button
+                type="submit"
+                class="px-5 py-2 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg shadow-xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <span>Search</span>
               </button>
             </div>
           </form>
         </div>
 
-        <!-- BOTTOM CARD: DATA TABLE & ACTIONS -->
+        <!-- TABLE CARD -->
         <div class="bg-white rounded-xl border border-[#CBD5E1] shadow-xs overflow-hidden">
           <!-- Table Toolbar -->
           <div class="p-4 border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 bg-[#FAFBFC]">
-            <!-- Left: Search & Toggles -->
-            <div class="flex flex-wrap items-center gap-2.5 flex-1 max-w-2xl">
-              <div class="relative flex-1 min-w-[200px]">
-                <input
-                  type="text"
-                  id="audit-live-search"
-                  onkeyup="QCView.handleAuditLiveSearch('${type}', this.value)"
-                  placeholder="Search..."
-                  class="w-full pl-9 pr-4 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] transition-all"
-                />
-                <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              </div>
+            <!-- Search bar -->
+            <div class="relative w-72 sm:w-80">
+              <input
+                type="text"
+                id="audit-live-search"
+                onkeyup="QCView.handleAuditLiveSearch('${type}', this.value)"
+                placeholder="Search audits..."
+                class="w-full pl-9 pr-4 py-2 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5] transition-all"
+              />
+              <svg class="w-4 h-4 text-[#94A3B8] absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
 
-              <!-- More Search Toggle Button -->
-              <button
-                type="button"
-                onclick="QCView.toggleAuditMoreSearch()"
-                class="px-3.5 py-1.5 rounded-lg border border-[#10B981] bg-white text-[#10B981] hover:bg-[#10B981]/5 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <span>More Search</span>
-              </button>
-
-              <!-- Load All Button -->
+            <!-- Toolbar actions -->
+            <div class="flex items-center gap-2">
               <button
                 type="button"
                 onclick="QCView.handleAuditLoadAll('${type}')"
-                class="px-3.5 py-1.5 rounded-lg border border-[#10B981] bg-white text-[#10B981] hover:bg-[#10B981]/5 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                class="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] bg-white text-[#64748B] hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
-                <span>Load All</span>
+                <span>Refresh / Load All</span>
               </button>
             </div>
-
-            <!-- Right: Download Excel Button -->
-            <button
-              type="button"
-              onclick="QCView.exportAuditExcel('${type}')"
-              class="px-4 py-1.5 rounded-lg border border-[#10B981] bg-white text-[#10B981] hover:bg-[#10B981]/5 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-            >
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>Download Excel</span>
-            </button>
           </div>
 
           <!-- Table Container -->
@@ -27947,7 +27949,7 @@ const qcAudits = {
           <div class="p-4 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 bg-[#FAFBFC] text-xs text-[#64748B]">
             <span id="audit-table-counter" class="font-medium">Showing 1 to ${dataLength} out of ${dataLength} entries</span>
             <div class="flex items-center gap-1">
-              <button type="button" class="w-7 h-7 rounded-full bg-[#3B82F6] text-white font-bold flex items-center justify-center text-xs shadow-xs">1</button>
+              <button type="button" class="w-7 h-7 rounded-full bg-[#02a8b5] text-white font-bold flex items-center justify-center text-xs shadow-xs">1</button>
             </div>
           </div>
         </div>
@@ -28617,46 +28619,52 @@ const qcAudits = {
 
     const modalContent = `
       <div class="max-h-[82vh] overflow-y-auto px-1 pr-2 text-slate-800">
-        <!-- Breadcrumb & Title Matching Reference Screenshots -->
-        <div class="mb-5 pb-3 border-b border-slate-100">
-          <div class="text-xs font-medium text-slate-500 flex items-center gap-1.5 mb-2">
-            <span>QC Audit</span>
-            <span>&gt;</span>
-            <span class="hover:text-blue-600 cursor-pointer">${breadcrumbList}</span>
-            <span>&gt;</span>
-            <span class="text-blue-600 font-semibold">${breadcrumbCreate}</span>
+        <!-- Camaroo Modal Header -->
+        <div class="flex items-center justify-between pb-3.5 mb-5 border-b border-[#E2E8F0]">
+          <div class="flex items-center gap-2.5">
+            <div class="w-3 h-3 rounded-full bg-[#02a8b5]"></div>
+            <h3 class="text-sm font-bold text-[#1E293B] uppercase tracking-wider">${formTitle}</h3>
           </div>
-          <h3 class="text-sm font-extrabold text-[#1E293B] uppercase tracking-wide">${formTitle}</h3>
+          <span class="text-xs text-[#64748B] font-medium hidden sm:inline">${breadcrumbList} &bull; ${breadcrumbCreate}</span>
         </div>
 
         <form id="modal-audit-form" onsubmit="event.preventDefault(); QCView.handleAuditFormSubmit('${type}');">
           <!-- 4-Column Audit Specification Grid -->
           ${formFields}
 
-          <!-- Centered Action Buttons for Main Audit Form -->
-          <div class="flex items-center justify-center gap-3 pt-6 pb-6">
-            <button type="button" onclick="Modal.close()" class="h-[38px] px-7 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
+          <!-- Form Action Buttons Aligned with Camaroo Theme -->
+          <div class="flex items-center justify-end gap-3 pt-5 pb-5 border-b border-[#F1F5F9]">
+            <button
+              type="button"
+              onclick="Modal.close()"
+              class="h-[38px] px-5 bg-white border border-[#CBD5E1] hover:bg-slate-50 text-[#475569] font-bold text-xs rounded-lg transition-colors cursor-pointer"
+            >
               Close
             </button>
-            <button type="submit" class="h-[38px] px-7 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
-              Submit
+            <button
+              type="submit"
+              class="h-[38px] px-6 bg-[#02a8b5] hover:bg-[#008f9a] text-white font-bold text-xs rounded-lg shadow-xs hover:shadow transition-all inline-flex items-center gap-1.5 cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span>Save Audit</span>
             </button>
           </div>
 
-          <!-- Bottom Section: Payment Details (Underline Header) -->
-          <div class="pt-5 border-t border-slate-200">
-            <div class="mb-4">
-              <span class="text-sm font-bold text-[#1E293B] border-b-2 border-slate-800 pb-1 inline-block">Payment Details</span>
+          <!-- Bottom Section: Payment Details (Camaroo Standard Subheader) -->
+          <div class="pt-4">
+            <div class="flex items-center gap-2 pb-2 mb-3.5 border-b border-[#F1F5F9]">
+              <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <h4 class="text-xs font-bold text-[#1E293B] uppercase tracking-wider">PAYMENT DETAILS</h4>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">PURPOSE OF INVOICE <span class="text-rose-500 font-bold">*</span></label>
-                <input type="text" id="modal-pay-purpose" placeholder="Enter Purpose of Invoice" value="Audit Certification & Inspection Fee" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="text" id="modal-pay-purpose" placeholder="Enter Purpose of Invoice" value="Audit Certification & Inspection Fee" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">TYPE OF PAYMENT <span class="text-rose-500 font-bold">*</span></label>
-                <select id="modal-pay-type" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <select id="modal-pay-type" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
                   <option value="">Select</option>
                   <option value="Full Payment" selected>Full Payment</option>
                   <option value="Advance">Advance</option>
@@ -28666,34 +28674,39 @@ const qcAudits = {
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE NO <span class="text-rose-500 font-bold">*</span></label>
-                <input type="text" id="modal-pay-inv-no" placeholder="Enter Invoice No" value="INV-QC-${Date.now().toString().slice(-4)}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="text" id="modal-pay-inv-no" placeholder="Enter Invoice No" value="INV-QC-${Date.now().toString().slice(-4)}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE DATE <span class="text-rose-500 font-bold">*</span></label>
-                <input type="date" id="modal-pay-inv-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="date" id="modal-pay-inv-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE VALUE <span class="text-rose-500 font-bold">*</span></label>
-                <input type="number" id="modal-pay-inv-val" placeholder="Enter Invoice value" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]" oninput="const t = document.getElementById('modal-pay-total'); if(t) t.value = this.value;">
+                <input type="number" id="modal-pay-inv-val" placeholder="Enter Invoice value" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]" oninput="const t = document.getElementById('modal-pay-total'); if(t) t.value = this.value;">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">OTHERS</label>
-                <input type="text" id="modal-pay-others" placeholder="Enter Payment Remarks" value="Auditor travel & laboratory charges included" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="text" id="modal-pay-others" placeholder="Enter Payment Remarks" value="Auditor travel & laboratory charges included" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">INVOICE DUE DATE <span class="text-rose-500 font-bold">*</span></label>
-                <input type="date" id="modal-pay-due-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="date" id="modal-pay-due-date" value="${todayStr}" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-[#1E293B] uppercase tracking-wider mb-1.5">TOTAL AMOUNT <span class="text-rose-500 font-bold">*</span></label>
-                <input type="number" id="modal-pay-total" placeholder="Enter Total Amount" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5]">
+                <input type="number" id="modal-pay-total" placeholder="Enter Total Amount" value="45000" class="w-full h-[38px] px-3 bg-white border border-[#CBD5E1] rounded-lg text-xs text-[#1E293B] focus:outline-none focus:border-[#02a8b5] focus:ring-1 focus:ring-[#02a8b5]">
               </div>
             </div>
 
-            <!-- Add Payments Centered Button -->
-            <div class="flex items-center justify-center pt-5 pb-3">
-              <button type="button" onclick="QCView.handleAddAuditPayment('${type}')" class="h-[38px] px-7 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs">
-                Add Payments
+            <!-- Add Payments Button -->
+            <div class="flex items-center justify-end pt-4 pb-2">
+              <button
+                type="button"
+                onclick="QCView.handleAddAuditPayment('${type}')"
+                class="h-[38px] px-5 bg-[#02a8b5] hover:bg-[#008f9a] text-white font-bold text-xs rounded-lg shadow-xs hover:shadow transition-all inline-flex items-center gap-1.5 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"/></svg>
+                <span>Add Payment</span>
               </button>
             </div>
 
