@@ -13048,36 +13048,8 @@ const LoginView = {
             </div>
           </div>
 
-          <!-- Distinct Action Buttons: Sitemap 01, Sitemap 02, Miledeep Devi Fisheries, CDS -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <!-- Sitemap 01 Button -->
-            <button
-              type="button"
-              id="btn-env-sitemap01"
-              class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[#006C7A]/30 hover:border-[#006C7A] bg-[#006C7A]/5 hover:bg-[#006C7A]/12 transition-all group cursor-pointer text-center"
-              title="Dedicated Custom Client ERP (Sitemap 01)"
-            >
-              <div class="w-7 h-7 rounded-lg bg-[#006C7A] text-white flex items-center justify-center mb-1 shadow-sm group-hover:scale-105 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-              </div>
-              <span class="text-xs font-bold text-[#0F172A] leading-tight">Sitemap 01</span>
-              <span class="text-[9.5px] font-medium text-[#006C7A] mt-0.5 leading-tight">Custom ERP</span>
-            </button>
-
-            <!-- Sitemap 02 Button -->
-            <button
-              type="button"
-              id="btn-env-sitemap02"
-              class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-[#3B5AF6]/30 hover:border-[#3B5AF6] bg-[#3B5AF6]/5 hover:bg-[#3B5AF6]/12 transition-all group cursor-pointer text-center"
-              title="Original Client Superadmin Environment (Sitemap 02)"
-            >
-              <div class="w-7 h-7 rounded-lg bg-[#3B5AF6] text-white flex items-center justify-center mb-1 shadow-sm group-hover:scale-105 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              </div>
-              <span class="text-xs font-bold text-[#0F172A] leading-tight">Sitemap 02</span>
-              <span class="text-[9.5px] font-medium text-[#3B5AF6] mt-0.5 leading-tight">Superadmin</span>
-            </button>
-
+          <!-- Distinct Action Buttons: Miledeep Devi Fisheries & CDS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <!-- Miledeep Devi Fisheries Button -->
             <button
               type="button"
@@ -13127,8 +13099,6 @@ const LoginView = {
     const submitBtn = document.getElementById('submit-login-btn');
     const btnText = document.getElementById('login-btn-text');
 
-    const btnSitemap01 = document.getElementById('btn-env-sitemap01');
-    const btnSitemap02 = document.getElementById('btn-env-sitemap02');
     const btnMiledeep = document.getElementById('btn-env-miledeep');
     const btnCDS = document.getElementById('btn-env-cds');
 
@@ -13166,28 +13136,6 @@ const LoginView = {
       }
     };
 
-    // Sitemap 01 Button Click -> Dedicated Custom Client ERP
-    if (btnSitemap01) {
-      btnSitemap01.addEventListener('click', () => {
-        performLogin(
-          ENV_SITEMAP_01,
-          `Welcome to Sitemap 01 (Custom Client ERP), ${ERP_DATA.currentUser.name}!`,
-          'Sitemap 01 Active'
-        );
-      });
-    }
-
-    // Sitemap 02 Button Click -> Original Pristine Client Superadmin
-    if (btnSitemap02) {
-      btnSitemap02.addEventListener('click', () => {
-        performLogin(
-          ENV_SITEMAP_02,
-          `Welcome to Sitemap 02 (Client Superadmin), ${ERP_DATA.currentUser.name}!`,
-          'Sitemap 02 Superadmin'
-        );
-      });
-    }
-
     // Miledeep Devi Fisheries Button Click -> Direct Enterprise Login
     if (btnMiledeep) {
       btnMiledeep.addEventListener('click', () => {
@@ -13207,7 +13155,7 @@ const LoginView = {
       });
     }
 
-    // Form Submit (Direct Login -> Defaults to Sitemap 01 Custom Environment)
+    // Form Submit (Direct Login -> Defaults to Devi Fisheries Enterprise)
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -13225,7 +13173,7 @@ const LoginView = {
         setTimeout(() => {
           performLogin(
             ENV_SITEMAP_01,
-            `Welcome to Devi Fisheries ERP (Sitemap 01 Custom), ${ERP_DATA.currentUser.name}!`,
+            `Welcome to Devi Fisheries ERP, ${ERP_DATA.currentUser.name}!`,
             'Signed In'
           );
         }, 400);
