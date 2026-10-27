@@ -47,7 +47,7 @@ export const setupForms = {
                             <span class="font-bold text-[#172B4D]">${f.label} ${f.required ? '<span class="text-[#BF2600]">*</span>' : ''}</span>
                             <div class="text-[10px] text-[#5E6C84] font-mono">${f.key} • [${f.type}]</div>
                           </div>
-                          <button data-action="del-field" data-sec-id="${sec.id}" data-field-id="${f.id}" class="p-1 hover:bg-[#EBECF0] rounded text-[#BF2600] cursor-pointer" title="Remove Field">✕</button>
+                          <button data-action="del-field" data-sec-id="${sec.id}" data-field-id="${f.id}" class="p-1 hover:bg-[#EBECF0] rounded text-[#BF2600] cursor-pointer flex items-center justify-center" title="Remove Field"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
                         </div>
                       `).join('')}
                     </div>

@@ -147,7 +147,7 @@ export const NotificationsView = {
               class="w-full h-10 pl-9 pr-8 text-[13px] bg-white border border-slate-200/80 rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/15 text-slate-800 placeholder-slate-400 transition-all font-normal shadow-xs"
             />
             ${this.searchQuery ? `
-              <button id="notif-search-clear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 text-xs cursor-pointer">✕</button>
+              <button id="notif-search-clear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             ` : ''}
           </div>
 

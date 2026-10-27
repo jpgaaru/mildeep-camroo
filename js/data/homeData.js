@@ -49,7 +49,7 @@ export const HOME_DATA = {
       title: "New RM Booking",
       desc: "Lock farmer count & rate",
       module: "Purchase",
-      icon: "📋",
+      icon: `<svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
       color: "bg-teal-50 text-teal-700 border-teal-200",
       hash: "#/purchase/operations/bookings"
     },
@@ -58,7 +58,7 @@ export const HOME_DATA = {
       title: "Record Gate Arrival",
       desc: "Weighbridge & truck intake",
       module: "Purchase",
-      icon: "🚚",
+      icon: `<svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 17H5a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v9m-4 4h4m4-4h1a2 2 0 002-2v-3.5a1.5 1.5 0 00-1.5-1.5H18V6a2 2 0 00-2-2h-3m-3 13a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
       color: "bg-sky-50 text-sky-700 border-sky-200",
       hash: "#/purchase/operations/rm-arrivals"
     },
@@ -67,7 +67,7 @@ export const HOME_DATA = {
       title: "Start Deheading Batch",
       desc: "HON to HL shift yield",
       module: "Pre-Processing",
-      icon: "⚡",
+      icon: `<svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
       color: "bg-indigo-50 text-indigo-700 border-indigo-200",
       hash: "#/preprocessing/floor-operations/deheading-peeling"
     },
@@ -76,7 +76,7 @@ export const HOME_DATA = {
       title: "Log Chemical Soaking",
       desc: "STPP / non-phosphate dosage",
       module: "Pre-Processing",
-      icon: "🧪",
+      icon: `<svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`,
       color: "bg-purple-50 text-purple-700 border-purple-200",
       hash: "#/preprocessing/chemical-inventory/daily-usage"
     },
@@ -85,7 +85,7 @@ export const HOME_DATA = {
       title: "Antibiotic Testing",
       desc: "ELISA test release",
       module: "Quality",
-      icon: "🔬",
+      icon: `<svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>`,
       color: "bg-emerald-50 text-emerald-700 border-emerald-200",
       hash: "#/quality/lab/antibiotic-testing"
     },
@@ -94,7 +94,7 @@ export const HOME_DATA = {
       title: "Pallet Inward",
       desc: "Master carton chamber intake",
       module: "Cold Storage",
-      icon: "❄️",
+      icon: `<svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v18m0-18l-3 3m3-3l3 3m-3 15l-3-3m3 3l3-3M3 12h18m-18 0l3-3m-3 3l3 3m15-3l-3-3m3 3l3 3"/></svg>`,
       color: "bg-cyan-50 text-cyan-700 border-cyan-200",
       hash: "#/coldstore/inward-intake"
     },
@@ -103,7 +103,7 @@ export const HOME_DATA = {
       title: "Export Contract",
       desc: "International buyer booking",
       module: "Sales",
-      icon: "🚢",
+      icon: `<svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>`,
       color: "bg-amber-50 text-amber-700 border-amber-200",
       hash: "#/sales/contracts-pricing"
     },
@@ -112,7 +112,7 @@ export const HOME_DATA = {
       title: "Allocate User Roles",
       desc: "RBAC permissible controls",
       module: "Admin Studio",
-      icon: "🛡️",
+      icon: `<svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
       color: "bg-rose-50 text-rose-700 border-rose-200",
       hash: "#/home/admin-controls/user-allocation"
     }

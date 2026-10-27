@@ -95,7 +95,7 @@ export const purchaseOperations = {
                 <span>New Booking</span>
               </button>
             </div>
-            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="bk-search-input" type="text" placeholder="Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -399,8 +399,9 @@ export const purchaseOperations = {
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">₹${fmt(r.amount)}</td>
             <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(balAmt)}</td>
             <td class="px-3.5 py-3">
-              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all">
-                ⬇ Report
+              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all inline-flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Report</span>
               </button>
             </td>
           </tr>
@@ -474,8 +475,9 @@ export const purchaseOperations = {
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Expected vs Consumed Balances</h3>
             <div class="flex items-center gap-2">
-              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
-                ⬇ Download Table
+              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all inline-flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Download Table</span>
               </button>
             </div>
           </div>
@@ -656,10 +658,11 @@ export const purchaseOperations = {
                 <span>New Arrival</span>
               </button>
               <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Download Excel
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Download Excel</span>
               </button>
             </div>
-            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="ar-search-input" type="text" placeholder="Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -814,16 +817,19 @@ export const purchaseOperations = {
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
               <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⧉ Copy TSV
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>Copy TSV</span>
               </button>
               <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Excel
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Excel</span>
               </button>
               <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ PDF
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>PDF</span>
               </button>
             </div>
-            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="lt-search-input" type="text" placeholder="Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -874,7 +880,7 @@ export const purchaseOperations = {
 
   // =========================================================================
   // SUBMENU 3: TRANSACTIONS & BILLS -> TAB 1: BILLS (Client: bills)
-  // Contextual behavior: Tapping any transaction row or clicking ✏️ opens RM Bill right here
+  // Contextual behavior: Tapping any transaction row opens RM Bill right here
   // =========================================================================
   openRMBillEdit(billNo) {
     const a = arrivals.find(x => x.no === billNo);

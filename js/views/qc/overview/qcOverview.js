@@ -143,7 +143,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">TOTAL PO</span>
-              <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-xs">📋</span>
+              <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">563</span>
@@ -155,7 +155,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC COMPLETED</span>
-              <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">✓</span>
+              <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-emerald-600 tracking-tight">126</span>
@@ -167,7 +167,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC PENDING</span>
-              <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs">⏳</span>
+              <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-amber-600 tracking-tight">437</span>
@@ -179,7 +179,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC COMPLETED %</span>
-              <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xs">%</span>
+              <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 5L5 19M6.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm11 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-purple-700 tracking-tight">22.4%</span>
@@ -191,7 +191,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">INTERNAL SAMPLES</span>
-              <span class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-xs">🧪</span>
+              <span class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-[#006C7A] tracking-tight">77</span>
@@ -203,7 +203,7 @@ export const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">EXTERNAL SAMPLES</span>
-              <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs">🏢</span>
+              <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-indigo-600 tracking-tight">6</span>
@@ -685,7 +685,9 @@ export const qcOverview = {
           <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs flex flex-col justify-between">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-4">Simp Doc By Plant</h3>
             <div class="h-56 flex flex-col items-center justify-center text-center p-4">
-              <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-2">📄</div>
+              <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-2">
+                <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
               <span class="text-xs font-bold text-slate-600">All Shipping Documents Cleared</span>
               <span class="text-[10.5px] text-slate-400 mt-1">Zero pending export certificates across operating plants.</span>
             </div>

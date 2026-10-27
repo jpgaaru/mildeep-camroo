@@ -44,7 +44,7 @@ export const Header = {
               placeholder="Search ERP records..." 
               class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-full focus:outline-none focus:border-[#00A8B5] focus:ring-2 focus:ring-[#00A8B5]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
             />
-            <button id="header-search-clear-btn" class="hidden absolute right-3 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+            <button id="header-search-clear-btn" class="hidden absolute right-3 top-2.5 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" title="Clear search"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
 
             <!-- Live Search Results Dropdown -->
             <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
@@ -66,7 +66,7 @@ export const Header = {
                 placeholder="Search ERP records..." 
                 class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
               />
-              <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+              <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" title="Clear search"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
 
               <!-- Live Search Results Dropdown -->
               <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">

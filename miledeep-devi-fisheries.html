@@ -10212,7 +10212,7 @@ const Header = {
               placeholder="Search ERP records..." 
               class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-full focus:outline-none focus:border-[#00A8B5] focus:ring-2 focus:ring-[#00A8B5]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
             />
-            <button id="header-search-clear-btn" class="hidden absolute right-3 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+            <button id="header-search-clear-btn" class="hidden absolute right-3 top-2.5 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" title="Clear search"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
 
             <!-- Live Search Results Dropdown -->
             <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
@@ -10234,7 +10234,7 @@ const Header = {
                 placeholder="Search ERP records..." 
                 class="w-full text-xs sm:text-[13px] pl-9 pr-8 py-2 bg-white border border-[#CBD5E1] rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/20 transition-all text-[#0F172A] placeholder-[#94A3B8]"
               />
-              <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] text-xs font-bold cursor-pointer" title="Clear search">✕</button>
+              <button id="header-search-clear-btn" class="hidden absolute right-2.5 top-2.5 text-[#94A3B8] hover:text-[#0F172A] cursor-pointer" title="Clear search"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
 
               <!-- Live Search Results Dropdown -->
               <div id="header-search-dropdown" class="hidden absolute left-0 top-full mt-2 w-full sm:w-96 md:w-[480px] bg-white rounded-xl shadow-2xl border border-[#E2E8F0] p-3 z-[80] text-xs">
@@ -11911,7 +11911,7 @@ const Environment = {
         id: ENV_SITEMAP_02,
         name: 'Sitemap 02',
         role: 'Client Superadmin',
-        badgeLabel: '👑 Sitemap 02 · Superadmin',
+        badgeLabel: 'Sitemap 02 · Superadmin',
         shortLabel: 'Sitemap 02',
         accentColor: '#3B5AF6',
         bgPill: 'bg-[#3B5AF6]/10 text-[#3B5AF6] border-[#3B5AF6]/30',
@@ -11923,7 +11923,7 @@ const Environment = {
       id: ENV_SITEMAP_01,
       name: 'Sitemap 01',
       role: 'Custom Client ERP',
-      badgeLabel: '🏢 Sitemap 01 · Custom',
+      badgeLabel: 'Sitemap 01 · Custom',
       shortLabel: 'Sitemap 01',
       accentColor: '#006C7A',
       bgPill: 'bg-[#006C7A]/10 text-[#006C7A] border-[#006C7A]/30',
@@ -14385,7 +14385,7 @@ const purchaseOperations = {
                 <span>New Booking</span>
               </button>
             </div>
-            <input id="bk-search-input" type="text" placeholder="🔍 Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="bk-search-input" type="text" placeholder="Search Bookings..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -14689,8 +14689,9 @@ const purchaseOperations = {
             <td class="px-3.5 py-3 font-semibold text-[#0F172A]">₹${fmt(r.amount)}</td>
             <td class="px-3.5 py-3 font-bold text-[#056A38]">₹${fmt(balAmt)}</td>
             <td class="px-3.5 py-3">
-              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all">
-                ⬇ Report
+              <button onclick="window.Toast.show('RM Arrival Report Downloaded', 'success')" class="px-2.5 py-1 rounded bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold shadow-xs hover:shadow cursor-pointer transition-all inline-flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Report</span>
               </button>
             </td>
           </tr>
@@ -14764,8 +14765,9 @@ const purchaseOperations = {
           <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
             <h3 class="text-sm font-bold text-[#0F172A]">Raw Material Expected vs Consumed Balances</h3>
             <div class="flex items-center gap-2">
-              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all">
-                ⬇ Download Table
+              <button onclick="window.Toast.show('Downloading RM Table...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow cursor-pointer transition-all inline-flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Download Table</span>
               </button>
             </div>
           </div>
@@ -14946,10 +14948,11 @@ const purchaseOperations = {
                 <span>New Arrival</span>
               </button>
               <button onclick="window.Toast.show('Exporting Arrivals to Excel...', 'info')" class="px-3.5 py-2 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Download Excel
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Download Excel</span>
               </button>
             </div>
-            <input id="ar-search-input" type="text" placeholder="🔍 Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="ar-search-input" type="text" placeholder="Search receipts..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -15104,16 +15107,19 @@ const purchaseOperations = {
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div class="flex items-center gap-2">
               <button id="btn-lt-copy" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⧉ Copy TSV
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>Copy TSV</span>
               </button>
               <button onclick="window.Toast.show('Downloading Excel...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Excel
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Excel</span>
               </button>
               <button onclick="window.Toast.show('Downloading PDF...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ PDF
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>PDF</span>
               </button>
             </div>
-            <input id="lt-search-input" type="text" placeholder="🔍 Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
+            <input id="lt-search-input" type="text" placeholder="Search pipeline..." class="w-64 h-9 px-3 rounded-lg border border-[#E2E8F0] text-xs outline-none focus:border-[#02a8b5]">
           </div>
 
           <div class="overflow-x-auto border border-[#E2E8F0] rounded-xl">
@@ -15164,7 +15170,7 @@ const purchaseOperations = {
 
   // =========================================================================
   // SUBMENU 3: TRANSACTIONS & BILLS -> TAB 1: BILLS (Client: bills)
-  // Contextual behavior: Tapping any transaction row or clicking ✏️ opens RM Bill right here
+  // Contextual behavior: Tapping any transaction row opens RM Bill right here
   // =========================================================================
   openRMBillEdit(billNo) {
     const a = arrivals.find(x => x.no === billNo);
@@ -15327,10 +15333,12 @@ const purchaseTransactions = {
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <div id="bills-pdf-btns" class="items-center gap-2" style="display:none;">
               <button onclick="window.Toast.show('Downloading Commission Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Commission Bills PDF
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Commission Bills PDF</span>
               </button>
               <button onclick="window.Toast.show('Downloading Consolidated Bills PDF...', 'success')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-                ⬇ Bills PDF
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Bills PDF</span>
               </button>
             </div>
             <div class="flex items-center gap-2">
@@ -15789,7 +15797,8 @@ const purchasePayments = {
           <div class="flex items-center justify-between pb-4 mb-3 border-b border-[#F1F5F9] flex-wrap gap-3">
             <h3 class="text-sm font-bold text-[#0F172A]">Payment Vouchers Audit Register</h3>
             <button onclick="window.Toast.show('Exporting Payment Summary...', 'info')" class="px-3.5 py-1.5 rounded-lg bg-[#02a8b5] hover:bg-[#008f9a] text-xs font-bold text-white shadow-xs hover:shadow flex items-center gap-1.5 cursor-pointer transition-all">
-              ⬇ Download Excel
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Download Excel</span>
             </button>
           </div>
 
@@ -23276,7 +23285,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">TOTAL PO</span>
-              <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-xs">📋</span>
+              <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">563</span>
@@ -23288,7 +23297,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC COMPLETED</span>
-              <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">✓</span>
+              <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-emerald-600 tracking-tight">126</span>
@@ -23300,7 +23309,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC PENDING</span>
-              <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs">⏳</span>
+              <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-amber-600 tracking-tight">437</span>
@@ -23312,7 +23321,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">QC COMPLETED %</span>
-              <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xs">%</span>
+              <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 5L5 19M6.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm11 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-purple-700 tracking-tight">22.4%</span>
@@ -23324,7 +23333,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">INTERNAL SAMPLES</span>
-              <span class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-xs">🧪</span>
+              <span class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-[#006C7A] tracking-tight">77</span>
@@ -23336,7 +23345,7 @@ const qcOverview = {
           <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">EXTERNAL SAMPLES</span>
-              <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs">🏢</span>
+              <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></span>
             </div>
             <div class="mt-2.5 mb-1">
               <span class="text-2xl sm:text-3xl font-black text-indigo-600 tracking-tight">6</span>
@@ -23818,7 +23827,9 @@ const qcOverview = {
           <div class="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs flex flex-col justify-between">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-4">Simp Doc By Plant</h3>
             <div class="h-56 flex flex-col items-center justify-center text-center p-4">
-              <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-2">📄</div>
+              <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-2">
+                <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
               <span class="text-xs font-bold text-slate-600">All Shipping Documents Cleared</span>
               <span class="text-[10.5px] text-slate-400 mt-1">Zero pending export certificates across operating plants.</span>
             </div>
@@ -29550,12 +29561,12 @@ const salesDashboard = {
             <!-- Active filter chips -->
             <div class="flex flex-wrap items-center gap-2">
               <span class="text-[11px] font-bold text-[#5E6C84] uppercase">Liner:</span>
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]">✕ MAERSK LINE</span>
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]">✕ MSC LINE</span>
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]">✕ CMA CGM</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]"><svg class="w-2.5 h-2.5 text-[#5E6C84]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>MAERSK LINE</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]"><svg class="w-2.5 h-2.5 text-[#5E6C84]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>MSC LINE</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]"><svg class="w-2.5 h-2.5 text-[#5E6C84]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>CMA CGM</span>
 
               <span class="text-[11px] font-bold text-[#5E6C84] uppercase ml-2">Destination Port:</span>
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]">✕ SAVANNAH</span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#F4F5F7] text-xs font-medium text-[#172B4D] border border-[#DFE1E6]"><svg class="w-2.5 h-2.5 text-[#5E6C84]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>SAVANNAH</span>
 
               <span class="text-[11px] text-[#5E6C84] ml-2 font-medium">From: <strong class="text-[#172B4D]">21/08/2026</strong></span>
               <span class="text-[11px] text-[#5E6C84] font-medium">To: <strong class="text-[#172B4D]">21/10/2026</strong></span>
@@ -44905,7 +44916,7 @@ const setupRoles = {
               <span class="text-xs font-bold text-[#172B4D]">Permissions Matrix for:</span>
               <select id="role-matrix-selector" class="px-2.5 py-1 border border-[#DFE1E6] rounded-lg text-xs font-bold text-[#172B4D] bg-white cursor-pointer hover:border-[#0369A1] focus:outline-none">
                 ${this.state.roles.map(r => `
-                  <option value="${r.id}" ${r.id === selectedRole.id ? 'selected' : ''}>${r.name} ${r.isProtected ? '(🔒 Protected)' : `(${r.usersCount} Users)`}</option>
+                  <option value="${r.id}" ${r.id === selectedRole.id ? 'selected' : ''}>${r.name} ${r.isProtected ? '(Protected)' : `(${r.usersCount} Users)`}</option>
                 `).join('')}
               </select>
               ${isAdmin ? `<span class="lozenge lozenge-inprogress text-[10px]">Full Access Locked</span>` : ''}
@@ -45424,7 +45435,7 @@ const setupForms = {
                             <span class="font-bold text-[#172B4D]">${f.label} ${f.required ? '<span class="text-[#BF2600]">*</span>' : ''}</span>
                             <div class="text-[10px] text-[#5E6C84] font-mono">${f.key} • [${f.type}]</div>
                           </div>
-                          <button data-action="del-field" data-sec-id="${sec.id}" data-field-id="${f.id}" class="p-1 hover:bg-[#EBECF0] rounded text-[#BF2600] cursor-pointer" title="Remove Field">✕</button>
+                          <button data-action="del-field" data-sec-id="${sec.id}" data-field-id="${f.id}" class="p-1 hover:bg-[#EBECF0] rounded text-[#BF2600] cursor-pointer flex items-center justify-center" title="Remove Field"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
                         </div>
                       `).join('')}
                     </div>
@@ -46383,7 +46394,7 @@ const NotificationsView = {
               class="w-full h-10 pl-9 pr-8 text-[13px] bg-white border border-slate-200/80 rounded-xl focus:outline-none focus:border-[#006C7A] focus:ring-2 focus:ring-[#006C7A]/15 text-slate-800 placeholder-slate-400 transition-all font-normal shadow-xs"
             />
             ${this.searchQuery ? `
-              <button id="notif-search-clear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 text-xs cursor-pointer">✕</button>
+              <button id="notif-search-clear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             ` : ''}
           </div>
 

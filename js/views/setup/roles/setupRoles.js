@@ -27,7 +27,7 @@ export const setupRoles = {
               <span class="text-xs font-bold text-[#172B4D]">Permissions Matrix for:</span>
               <select id="role-matrix-selector" class="px-2.5 py-1 border border-[#DFE1E6] rounded-lg text-xs font-bold text-[#172B4D] bg-white cursor-pointer hover:border-[#0369A1] focus:outline-none">
                 ${this.state.roles.map(r => `
-                  <option value="${r.id}" ${r.id === selectedRole.id ? 'selected' : ''}>${r.name} ${r.isProtected ? '(🔒 Protected)' : `(${r.usersCount} Users)`}</option>
+                  <option value="${r.id}" ${r.id === selectedRole.id ? 'selected' : ''}>${r.name} ${r.isProtected ? '(Protected)' : `(${r.usersCount} Users)`}</option>
                 `).join('')}
               </select>
               ${isAdmin ? `<span class="lozenge lozenge-inprogress text-[10px]">Full Access Locked</span>` : ''}
