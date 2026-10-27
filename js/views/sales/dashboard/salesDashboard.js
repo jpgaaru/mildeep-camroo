@@ -26,25 +26,25 @@ export const salesDashboard = {
     container.innerHTML = `
       <div class="space-y-4 animate-fade-in text-[#172B4D]">
         <!-- Top Filter Bar -->
-        <div class="bg-white rounded-lg border border-[#DFE1E6] p-3.5 shadow-xs">
-          <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
-            <h2 class="text-sm font-bold text-[#172B4D] tracking-tight flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#008DA6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs mb-4">
+          <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#F1F5F9]">
+            <h2 class="text-sm font-bold text-[#0F172A] tracking-tight flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#02a8b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
               <span>Dashboard Filters</span>
             </h2>
-            <span class="text-[11px] text-[#5E6C84]">Real-time Export Order & Shipment Analytics</span>
+            <span class="text-[11px] text-[#64748B]">Real-time Export Order & Shipment Analytics</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 items-end">
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">Exporter</label>
-              <select id="sales-filter-exporter" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] truncate font-medium">
+              <select id="sales-filter-exporter" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] truncate font-medium">
                 <option value="DEVI FISHERIES LIMITED" selected>DEVI FISHERIES LIMITED</option>
                 <option value="DEVI AQUA FEEDS">DEVI AQUA FEEDS</option>
               </select>
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">Consignee</label>
-              <select id="sales-filter-consignee" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] truncate font-medium">
+              <select id="sales-filter-consignee" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] truncate font-medium">
                 <option value="ALL" selected>All</option>
                 <option value="APEX">Apex Seafoods USA</option>
                 <option value="DIRECT_SOURCE">Direct Source Seafood LLC</option>
@@ -54,7 +54,7 @@ export const salesDashboard = {
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">Brand</label>
-              <select id="sales-filter-brand" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] truncate font-medium">
+              <select id="sales-filter-brand" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] truncate font-medium">
                 <option value="ALL" selected>All</option>
                 <option value="DEVI_CROWN">Devi Crown</option>
                 <option value="DEVI_GOLD">Devi Gold</option>
@@ -64,7 +64,7 @@ export const salesDashboard = {
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">Country</label>
-              <select id="sales-filter-country" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] truncate font-medium">
+              <select id="sales-filter-country" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] truncate font-medium">
                 <option value="ALL" selected>All</option>
                 <option value="USA">U.S.A.</option>
                 <option value="CHINA">CHINA</option>
@@ -77,7 +77,7 @@ export const salesDashboard = {
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">Year</label>
-              <select id="sales-filter-year" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] font-medium">
+              <select id="sales-filter-year" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] font-medium">
                 <option value="2026-27" selected>2026-27</option>
                 <option value="2025-26">2025-26</option>
                 <option value="2024-25">2024-25</option>
@@ -85,14 +85,14 @@ export const salesDashboard = {
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">From Date</label>
-              <input type="text" id="sales-filter-from-date" value="01/04/2026" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] font-medium">
+              <input type="text" id="sales-filter-from-date" value="01/04/2026" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] font-medium">
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] mb-1">To Date</label>
-              <input type="text" id="sales-filter-to-date" value="31/03/2027" class="w-full text-xs px-2 py-1.5 bg-white border border-[#DFE1E6] rounded focus:outline-none focus:border-[#0284C7] font-medium">
+              <input type="text" id="sales-filter-to-date" value="31/03/2027" class="w-full text-xs px-2 h-9 bg-white border border-[#CBD5E1] rounded-lg focus:outline-none focus:border-[#02a8b5] font-medium">
             </div>
             <div>
-              <button id="btn-sales-filter-search" class="w-full h-[32px] px-3 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.refreshDashboard()">
+              <button id="btn-sales-filter-search" class="w-full h-9 px-3 bg-[#02a8b5] hover:bg-[#008f9a] text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1.5 shadow-xs cursor-pointer transition-colors" onclick="SalesView.refreshDashboard()">
                 <span>Search</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </button>
@@ -101,79 +101,97 @@ export const salesDashboard = {
         </div>
 
         <!-- Row 1: 6 Metric KPI Cards -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
           <!-- Pending Contracts -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">Pending Contracts</span>
-              <span class="w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">PENDING CONTRACTS</span>
+              <span class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.pendingContracts}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">${kpis.pendingContracts}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Buyer bookings pending</span>
           </div>
 
           <!-- On Water -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">On Water</span>
-              <span class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">ON WATER</span>
+              <span class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.onWater}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-sky-600 tracking-tight">${kpis.onWater}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Containers in transit</span>
           </div>
 
           <!-- Delivered -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">Delivered</span>
-              <span class="w-7 h-7 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">DELIVERED</span>
+              <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.delivered}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-emerald-600 tracking-tight">${kpis.delivered}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Destination received</span>
           </div>
 
           <!-- Orders -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">Orders</span>
-              <span class="w-7 h-7 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">ORDERS</span>
+              <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.orders}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-indigo-600 tracking-tight">${kpis.orders}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Total active contracts</span>
           </div>
 
           <!-- Pending Payments -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">Pending Payments</span>
-              <span class="w-7 h-7 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">PENDING PAYMENTS</span>
+              <span class="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.pendingPayments}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-rose-600 tracking-tight">${kpis.pendingPayments}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Awaiting LC / Wire</span>
           </div>
 
           <!-- Payments Received -->
-          <div class="p-3.5 bg-white rounded-lg border border-[#DFE1E6] shadow-xs hover:border-[#B3BAC5] transition-all">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-[#5E6C84] truncate">Payments Received</span>
-              <span class="w-7 h-7 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <div class="rounded-2xl p-4 bg-white border border-slate-200/80 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-[10.5px] font-bold uppercase tracking-wider text-slate-500 truncate">PAYMENTS RCVD</span>
+              <span class="w-7 h-7 rounded-lg bg-teal-50 text-[#02a8b5] flex items-center justify-center text-xs">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
               </span>
             </div>
-            <div class="text-2xl font-extrabold text-[#172B4D] tracking-tight">${kpis.paymentsReceived}</div>
+            <div class="mt-2.5 mb-1">
+              <span class="text-2xl sm:text-3xl font-black text-[#006C7A] tracking-tight">${kpis.paymentsReceived}</span>
+            </div>
+            <span class="text-[10px] font-medium text-slate-400">Realized commercial</span>
           </div>
         </div>
 
         <!-- Row 2: Dual Bar Charts -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <!-- Left: Invoice Vs Shipments -->
-          <div class="bg-white rounded-lg border border-[#DFE1E6] p-4 shadow-xs">
-            <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs">
+            <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#F1F5F9]">
               <h3 class="text-xs font-bold text-[#172B4D] uppercase tracking-wider">Invoice Vs Shipments</h3>
               <span class="text-[11px] text-[#5E6C84]">Monthly Comparison (FY 2026-27)</span>
             </div>
@@ -187,8 +205,8 @@ export const salesDashboard = {
           </div>
 
           <!-- Right: Plant Wise Orders -->
-          <div class="bg-white rounded-lg border border-[#DFE1E6] p-4 shadow-xs">
-            <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#EBECF0]">
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs">
+            <div class="flex items-center justify-between pb-2 mb-3 border-b border-[#F1F5F9]">
               <h3 class="text-xs font-bold text-[#172B4D] uppercase tracking-wider">Plant Wise Orders</h3>
               <span class="text-[11px] text-[#5E6C84]">Unit Capacity & Fulfillment</span>
             </div>
